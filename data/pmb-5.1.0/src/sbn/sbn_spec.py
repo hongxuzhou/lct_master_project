@@ -73,6 +73,7 @@ class SBNSpec:
         "SOURCE",
         "CONJUNCTION",
         "ELABORATION"
+        "CORRECTION" # Add new separator
     }
 
     DRS_OPERATORS = {
