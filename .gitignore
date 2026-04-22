@@ -1,1 +1,4 @@
-data/pmb-5.10/data
+data/pmb-5.1.0/data/
+data/pmb-5.1.0/src/ccg/standard/
+data/pmb-5.1.0/split
+.DS_Store

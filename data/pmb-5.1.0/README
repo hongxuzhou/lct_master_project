@@ -1,0 +1,283 @@
+Parallel Meaning Bank 5.1.0
+============================
+
+
+Introduction
+------------
+
+The Parallel Meaning Bank (PMB) is a parallel corpus of sentences and short texts
+with formal semantic annotations for four languages: English, German, Dutch
+and Italian. The meaning representations are based on Discourse Representation
+Theory (DRT), and combine logical with lexical approaches to linguistic meaning.
+The representations comprise:
+
+* logical symbols (boolean operators and comparison operators)
+* non-logical symbols (WordNet synsets and VerbNet roles)
+
+Following DRT, we call the meaning representations Discourse Representation
+Structures (DRSs). The DRSs are provided in simplified box notation (SBN).
+The flat clause format is used for evaluation purposes and also contains
+alignment with the words of the input sentence. In contrast to DRT, we adopt
+a neo-Davidsonian analysis of events, using the thematic roles of VerbNet as
+relations between individual entities, and the synsets of WordNet to denote
+individual concepts.
+
+Data Statement
+------------
+This data set can be characterised as follows. The meta data of each document gives
+information about the source. There is a high gender imbalance: there are approximately
+twice as many male as female named entities. The documents in the gold part are on average
+shorter than in the silver part of the corpus. Some of the texts might contain offensive
+language. The current release comprises examples that are certainly not representative for 
+the entire corpus. This is because of the way they were selected: not randomly, but on the 
+basis of quality of the semantic analysis. Nevertheless, this selection contains a diverse 
+set of semantic phenomena, including: quantification, negation, modal operators, scope, 
+tense, and referring expressions.
+
+About this release
+----------------
+
+This release is a frozen snapshot of a subset of PMB documents that are marked as gold,
+silver or bronze standard in the current development version. The gold folder contains all
+documents that are fully manually checked, while the silver contains documents
+that are only partially manually checked. Bronze documents do not have any manual
+annotations. WARNING: use silver, bronze or copper documents at your own risk!
+
+The current development version itself is made available via a wiki-like Web interface
+called PMB Explorer. Semantic annotation is a very hard task and despite thorough manual
+checking can still contain mistakes. If you find any errors in the annotation, you can
+either let us know (via the website) or, if you feel sure, you can correct them yourself,
+and thus contribute directly to the PMB. To do so or get more information about the
+project, visit http://pmb.let.rug.nl
+
+Directory Layout
+----------------
+
+The PMB is partitioned into 100 parts. Each part is identified by a
+two-digit number. A part contains up to 10,000 documents. Within a part,
+each document is identified by a four-digit number. The ID of a
+document consists of the part number, followed by a slash, followed by
+the document number, e.g. 00/0030.
+
+pmb-5.1.0
+   data/                               contains the gold, silver and bronze data
+       gold/                           contains the gold data
+           p00/                        contains the gold data for part 00
+               d0030/                  contains the files for document 00/0030
+               ...                                 (see next section)
+               ...
+       silver/                         contains the silver data
+           p00/                        contains the silver data for part 00
+               d0704/                  contains the files for document 00/0704
+               ...                                 (see next section)
+               ...
+       bronze/                         contains the bronze data
+           p00/                        contains the bronze data for part 00
+               d0066/                  contains the files for document 00/0066
+               ...                                 (see next section)
+   doc/                                contains papers describing the PMB
+
+   split/                              contains the split sets for en, de, nl, it and zh
+       en/                             contains the split sets for en
+           train/                      contains the train sets for en
+               gold.sbn                contains gold-sbn, for train
+               silver.sbn              contains silver-sbn, for train
+               bronze.sbn              contains bronze-sbn, for train
+           dev/
+               standard.sbn            contains gold-sbn, for dev
+           test/
+               standard.sbn            contains gold-sbn, for test
+               long.sbn                contains gold/silver-long-text-sbn, for test
+       de/
+           train/
+               gold.sbn                contains gold-sbn, for train
+               silver.sbn              contains silver-sbn, for train
+               copper.sbn              contains de-text with en-sbn, for train (replace bronze-sbn with en-sbn)
+           dev/
+               standard.sbn            contains gold-sbn, for dev
+           test/
+               standard.sbn            contains gold-sbn, for test
+       nl/
+           train/
+               gold.sbn                contains gold-sbn, for train
+               silver.sbn              contains silver-sbn, for train
+               copper.sbn              contains nl-text with en-sbn, for train (replace bronze-sbn with en-sbn)
+           dev/
+               standard.sbn            contains gold-sbn, for dev
+           test/
+               standard.sbn            contains gold-sbn, for test
+       it/
+           train/
+               gold.sbn                contains gold-sbn, for train
+               silver.sbn              contains silver-sbn, for train
+               copper.sbn              contains it-text with en-sbn, for train (replace bronze-sbn with en-sbn)
+           dev/
+               standard.sbn            contains gold-sbn, for dev
+           test/
+               standard.sbn            contains gold-sbn, for test
+
+   src/                                contains the scripts
+        split/                         contains the scripts for splitting the data
+            extract.sh                 script to automatically to run all split work for all languages(excl.zh)
+            check_duplicates.py        script to automatically check the duplicates between two files
+            standard_split.py          script to automatically split the data into train/test/dev sets
+            shuffle.py                 script to automatically shuffle the dataset
+	    copper.py                  script to automatically transfrom bronze set to copper set
+        penman/                        contains the scripts for converting sbn to penman
+            sbn2penman.py              script to automatically convert sbn to penman
+            sbn_template.txt           contains the sbn template
+
+   licenses/                           contains license statements for subcorpora used
+        ...
+
+   README                              this file
+
+   NEWS                                list of major changes between releases
+
+Hidden Files
+------------
+
+Due the spit is based on the length distribution, we provide the length distribution in each
+file in split. To increase the readability, we hide these distributions, but they can easily
+be reached with command "ls -al"
+
+
+File Formats
+------------
+
+Every document directory contains several files with the raw texts and resulting analyses.
+They are all encoded in UTF-8 with Unix-style line endings. Each file starts with a
+two-letter language identifier (ISO-639-1).
+
+ *.met       Meta data about the document, such as language, title, data, source, genre, and
+             subcorpus. The format is one key: value pair per line.
+
+ *.raw       The raw text of the document. The standoff annotation (see below) refers to
+             character offsets (not byte offsets) within this document.
+ 
+ *.status    Contains eight rows, indicating the status (gold, silver, bronze) of each
+             tagging layer (tok, sem, sym, cat, sns, rol). For gold documents the
+             status is gold for each layer, for silver there can be differences. You can
+             have a more detailed look at the tagging layers here:
+             http://pmb.let.rug.nl/explorer/explore.php
+
+ *.drs.sbn   Contains DRS in simplified box notation.
+
+Semantic Parsing
+------------
+
+For people interested in semantic parsing, we added a script (src/split/extract.sh) to help
+with automatically creating train/dev/test splits. It will create the recommended splits for
+each language, storing them in split/. It creates a *.sbn file containing the ID, raw
+sentences and corresponding sbn.
+
+Simply run the following command from the main release directory:
+
+bash ./src/split/extract.sh
+
+Note that this script might take some time. Likely, for your purposes it makes more sense
+to download the data directly from here: https://pmb.let.rug.nl/releases/split-5.1.0.zip
+
+The train/dev/split is created by length distribution and differs per language:
+    en:
+        train - gold, silver, bronze
+        dev   - standard(gold)
+        test  - standard(gold), long
+    de:
+        train - gold, silver, copper
+        dev   - standard(gold)
+        test  - standard(gold)
+    it:
+        train - gold, silver, copper
+        dev   - standard(gold)
+        test  - standard(gold)
+    nl:
+        train - gold, silver, copper
+        dev   - standard(gold)
+        test  - standard(gold)
+
+Note that these are our suggested splits, to make comparing approaches easier, but you are
+free to create different splits if they fit your own needs better.
+
+
+Statistics gold
+----------
+
+Number of documents, sentences and tokens per language:
+
+    Documents  Sentences  Tokens 
+en  11987      12117      79863  
+nl  1557       1558       9614   
+de  3179       3186       18721  
+it  1958       1960       10964  
+
+Number of documents per subcorpus per language:
+
+    Tatoeba  Questions  RTE  GMB  SICK  Incidents  INTERSECT  UD-GUM  UCL 
+en  10983    396        277  2    101   4          179        28      17  
+nl  1369     60         128  0    0     0          0          0       0   
+de  2998     15         117  0    0     0          49         0       0   
+it  1786     64         108  0    0     0          0          0       0   
+
+Statistics silver
+----------
+
+Number of documents, sentences and tokens per language:
+
+    Documents  Sentences  Tokens  
+en  147511     164575     1818047 
+nl  1684       1988       19116   
+de  7024       7410       68969   
+it  4372       4667       39342   
+
+Number of documents per subcorpus per language:
+
+    Tatoeba  Questions  RTE   GMB  SICK  Incidents  INTERSECT  UD-GUM  UCL 
+en  115037   934        1920  745  5942  2761       18597      1404    171 
+nl  1416     81         100   0    0     87         0          0       0   
+de  5765     29         237   0    0     0          993        0       0   
+it  3867     166        234   0    0     105        0          0       0   
+
+Statistics bronze
+----------
+
+Number of documents, sentences and tokens per language:
+
+    Documents  Sentences  Tokens  
+en  142138     146670     1262659 
+nl  29116      32682      309986  
+de  155974     162474     1535785 
+it  94648      98065      759608  
+
+Number of documents per subcorpus per language:
+
+    Tatoeba  Questions  RTE   GMB  SICK  Incidents  INTERSECT  UD-GUM  UCL 
+en  127776   273        409   16   19    1053       11319      1273    0   
+nl  25488    320        1805  0    0     1503       0          0       0   
+de  132326   105        1374  0    0     0          22169      0       0   
+it  91131    961        1282  0    0     1274       0          0       0   
+
+
+Disclaimer
+----------
+The creators and annotators of the PMB do not necessarily share all views found in the text.
+Indeed, some of the views in the texts of the PMB might be offensive to readers.
+We do think including such texts from the corpus is beneficial for researchers working on hate-speech.
+
+References
+----------
+
+We hope you find this release of the PMB useful for your research. If you want to
+refer to the PMB in your work please cite the following paper (for your convenience,
+a bibtex entry is provided as well within this release):
+
+ Lasha Abzianidze, Johannes Bjerva, Kilian Evang, Hessel Haagsma, Rik van Noord,
+ Pierre Ludmann, Duc-Duy Nguyen, Johan Bos (2017): The Parallel Meaning Bank:
+ Towards a Multilingual Corpus of Translations Annotated with Compositional
+ Meaning Representations. Proceedings of the 15th Conference of the European
+ Chapter of the Association for Computational Linguistics (EACL), pp 242–247,
+ Valencia, Spain.
+
+The Parallel Meaning Bank website is at http://pmb.let.rug.nl.
+For contact, use the following email address: johan.bos@rug.nl.
+

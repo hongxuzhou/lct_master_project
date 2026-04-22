@@ -1,0 +1,9 @@
+cat << 'EOF' > load_3models.sh
+#!/bin/bash
+
+# 2. 激活你的Conda环境 (使用source激活比直接使用绝对路径调用python更安全，能确保环境变量正确)
+source /nethome/honzhou/miniconda3/bin/activate agentic_llm_env
+
+# 3. 运行你的Python脚本
+python /nethome/honzhou/model_load.py
+EOF

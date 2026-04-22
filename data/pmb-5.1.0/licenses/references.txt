@@ -1,0 +1,19 @@
+The 'Questions' subcorpus of the PMB contains the corpora used at QA@CLEF-2004 (http://clef-qa.fbk.eu/2004/resources.html):
+* DISEQuA corpus
+  B. Magnini, S. Romagnoli, A. Vallin, J. Herrera, A. Peñas, V. Peinado, F. Verdejo, M. de Rijke, Creating the DISEQuA Corpus: a Test Set for Multilingual Question Answering, in Carol Peters, editor, Working Notes for the CLEF 2003 Workshop, 21-22 August, Trondheim, Norway, 2003
+* Multisix corpus
+  B. Magnini, S. Romagnoli, A. Vallin, J. Herrera, A. Peñas, V. Peinado, F. Verdejo, M. de Rijke, The Multiple Language Question Answering Track at CLEF 2003. (see chapter "Gold Standard for the Cross-Language Tasks"), in Carol Peters, editor, Working Notes for the CLEF 2003 Workshop, 21-22 August, Trondheim, Norway, 2003.
+* TREC 2002 QA Data (https://trec.nist.gov/data/qa/t2002_qadata.html)
+  The questions for the main task were taken from MSNSearch logs donated by Microsoft and AskJeeves logs donated by Ask Jeeves. The questions for the list task were created by the TREC assessors.
+* TREC 2003 QA Data (https://trec.nist.gov/data/qa/t2003_qadata.html)
+  Factoid and definition questions were taken from search logs donated by Microsoft and AOL. The questions for the list task were created by the TREC assessors.
+* Italian Translation of the TREC 2002 and 2003 QA Data
+  Translated by ITC-irst
+
+The 'INTERSECT' subcorpus of the PMB contains the texts from the INTERSECT corpus at the University of Brighton. For more details about the corpus see:
+* http://arts.brighton.ac.uk/staff/raf-salkie/intersect
+* Salkie, R. INTERSECT: a parallel corpus project at Brighton University. Computers & Texts 9 (May 1995), pp. 4-5
+
+The 'GMB' subcorpus of the PMB contains documents from the Groningen Meaning Bank (GMB).
+These documents are included in the GMB from the following corpora: Voice of America, fables, CIA World Factbook, and MASC Full.
+More details about these corpora can be found in the accompanying .met files of the corresponding documents.

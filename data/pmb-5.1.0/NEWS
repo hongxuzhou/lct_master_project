@@ -1,0 +1,69 @@
+PMB release 5.1.0. Compared to release 5.0.1, the following addition/changes have been made:
+
+* updating the data, note the train, test, validation sets are different from previous releases.
+* removing Japanese data
+* manually correcting long documents and changing the strategy for generating long test set
+
+PMB release 5.0.1. Compared to release 5.0.0, the following addition/changes have been made:
+
+* removing the ill-formed long documents
+* fixing the problem with newline symbols
+
+PMB release 5.0.0. Compared to release 4.0.0, the following addition/changes have been made:
+
+* Switching from clause notation to sequence notation (SBN) for meaning representation
+* Adding Japanese and Chinese data to the existing languages
+* Replacing Bronze data with Copper data for nl, de, it and ja
+* Reorganizing the train/development/test sets based on length distribution
+* Reconstruct the structure of split sets and reformat the .sbn file in the format of ID/raw/sbn
+
+PMB release 4.0.0. Compared to release 3.0.0, the following additions/changes have been made:
+
+* Substantially more gold annotated meaning representations (DRSs): +2300 for English, +1000 for German, +700 for Italian and +450 for Dutch
+* Substantially more silver/bronze DRSs: +30k/10k for English, +1k/30k for German, +1.3k/36k for Italian and +0.15k/7k for Dutch
+* Inclusion of SBN format (simplified box notation) for each document
+* Dutch and Italian now also have a gold standard training set for semantic parsing, instead of only a dev and test set
+* Propositional complements have a slightly different representation than in previous releases. The thematic role referring to the proposition directly denotes the box label of the proposition, and the proposition is not embedded anymore.
+
+PMB release 3.0.0. Compared to release 2.2.0, the following additions/changes have been made:
+
+* Substantially more (ca. 3500) gold annotated meaning representations (DRSs): +2400 for English, +500 for German, +300 for Italian, +300 for Dutch.
+* The way discourse relations are represented has changed significantly. Instead of {B REL B1 B2, B DRS B1, B DRS B2} we have now the simpler B1 REL B2.
+* Explicit presupposition discourse relations are now included in DRS clause notation (PRESUPPOSITION)
+* Propositional complements are now represented by the ATTRIBUTION discourse relation in DRS clause notation. Instead of {B PRP P B1} we have now {B proposition n.01 P, B ATTRIBUTION B1}.
+* Many new documents added from three corpora: SICK, GMB (subset of actual GMB release), and Incidents.
+* The .drs.box files are not included in this release.
+* Documents come with Combinatory Categorial Grammar (CCG)-style derivations. The derivations are presented in .der.xml and .parse.tags files
+* A script has been added that can extract individual layers with desired statuses (e.g. gold and silver semtags) and put them in CoNLL format. For details see src/extract_conll.py.
+* German has a train/dev/test split for semantic parsing, instead of only dev/test
+* The data in data/ is split by language (e.g. data/en/gold/..)
+
+PMB release 2.2.0. Compared to release 2.1.0, the following additions/changes have been made:
+
+* The addition of documents that are not manually checked, but fully automatically produced (bronze, 120622 en, 102998 de, 60209 it, 20554 nl)
+* More documents that are fully manually checked (gold, 1374 en, 299 de, 139 it, 47 nl)
+* Fewer documents that are partially manually checked for English (silver, 3343) due to a more strict selection process
+* More documents that are partially manually checked for non-English (silver, 3433 de, 2070 it, 718 nl)
+* There was a bug in resolving tense for multi-sentence documents. Now each sentence has its own tense.
+* The CCG categories are included in the sentence derivation
+* Spatial relations are added in the DRS; see: http://pmb.let.rug.nl/drs.php
+
+PMB release 2.1.0. Compared to release 2.0.0, the following additions/changes have been made:
+
+* More documents that are fully manually checked (gold, 630 en, 127 de, 67 it, 59 nl)
+* More documents that are partially manually checked (silver, 5010 en, 77 de, 40 it, 15 nl)
+* All DRSs in clause format are checked by a format checker (referee) and are in valid format, 
+  there were 2 invalid gold DRSs in 2.0.0
+* The recommendation to use part 00, 10, 20 and 30 as development set
+* Naming of box-variables is made more consistent
+
+PMB release 2.0.0. Compared to release 1.0.0, the following additions/changes have been made:
+
+* More documents that are fully manually checked (1876 en, 407 de, 181 it, 133 nl)
+* Documents are added from "Questions", the corpora used at QA@CLEF-2004 (http://clef-qa.fbk.eu/2004/resources.html)
+* Addition of "silver data", documents that are partially manually checked (66693 en, 611 de, 266 it, 192 nl)
+* Changes in general non-logical symbols (entity.n.01 instead of thing.n.12)
+* Tuples are now called clauses
+* Order of clauses in the DRSs is better aligned with the surface text
+* Improved analysis of copula, wh-questions, intensifiers, vague quantifiers
+* Proper names in DRSs keep their language-specific forms

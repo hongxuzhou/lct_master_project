@@ -1,0 +1,140 @@
+Traceback (most recent call last):
+  File "/net/gsb/pmb/releases/pmb-5.1.0/src/split/standard_split.py", line 248, in <module>
+    with open(skip_file, "r", encoding="utf-8") as f:
+TypeError: expected str, bytes or os.PathLike object, not NoneType
+Traceback (most recent call last):
+  File "/net/gsb/pmb/releases/pmb-5.1.0/src/split/standard_split.py", line 248, in <module>
+    with open(skip_file, "r", encoding="utf-8") as f:
+TypeError: expected str, bytes or os.PathLike object, not NoneType
+en gold running...
+51 duplicates cluster have been found:
+['p37/d0950', 'p82/d0783']
+['p06/d0764', 'p08/d0765']
+['p06/d0947', 'p54/d3130']
+['p06/d0951', 'p00/d0959']
+['p06/d0956', 'p46/d0876']
+['p10/d0959', 'p34/d0834']
+['p10/d0958', 'p07/d0949']
+['p10/d0891', 'p04/d0960']
+['p10/d0956', 'p00/d0931']
+['p02/d0716', 'p53/d0764', 'p55/d0764', 'p03/d0716']
+['p02/d0712', 'p00/d0712']
+['p93/d1391', 'p46/d1388']
+['p93/d0762', 'p00/d0715']
+['p05/d1089', 'p53/d1111', 'p75/d1580']
+['p31/d0715', 'p32/d0715']
+['p31/d0764', 'p32/d0764']
+['p31/d0951', 'p75/d0921']
+['p09/d0716', 'p90/d0763']
+['p28/d0951', 'p24/d0884']
+['p83/d0716', 'p46/d0765']
+['p63/d0828', 'p73/d0956']
+['p63/d0764', 'p14/d0716', 'p61/d0764']
+['p63/d0955', 'p21/d0867']
+['p82/d0716', 'p18/d0764']
+['p82/d0763', 'p38/d0764']
+['p18/d0958', 'p13/d0913']
+['p18/d0951', 'p68/d0956', 'p36/d0942']
+['p19/d0952', 'p34/d0888']
+['p90/d0952', 'p71/d0869']
+['p58/d0765', 'p99/d0716']
+['p58/d0715', 'p60/d0715']
+['p21/d0763', 'p20/d0762']
+['p77/d3018', 'p61/d1111']
+['p77/d0911', 'p14/d0951']
+['p25/d0835', 'p17/d3099']
+['p48/d0764', 'p00/d0716']
+['p86/d0909', 'p11/d0951']
+['p14/d0953', 'p55/d0931']
+['p50/d0765', 'p49/d0765']
+['p50/d0837', 'p49/d0954']
+['p00/d0827', 'p49/d0959']
+['p00/d0957', 'p13/d0950', 'p16/d0875']
+['p92/d0762', 'p40/d0762']
+['p13/d2271', 'p56/d0949']
+['p13/d0874', 'p23/d0954']
+['p47/d0945', 'p24/d3251']
+['p75/d0716', 'p40/d0765']
+['p46/d0762', 'p73/d0762']
+['p32/d0959', 'p80/d0836']
+['p34/d0764', 'p33/d0764']
+['p03/d0925', 'p95/d0953']
+language: en    data_type: gold    test length: 30 
+
+en gold total number of instances: 11966
+en gold number of train, dev, test: 9568 1196 1196
+language: en    data_type: gold    train length: 9568 
+
+language: en    data_type: gold    dev length: 1196 
+
+language: en    data_type: gold    test length: 1196 
+
+Generate distribution...
+Generate distribution...
+Generate distribution...
+en gold running...
+51 duplicates cluster have been found:
+['p37/d0950', 'p82/d0783']
+['p06/d0764', 'p08/d0765']
+['p06/d0947', 'p54/d3130']
+['p06/d0951', 'p00/d0959']
+['p06/d0956', 'p46/d0876']
+['p10/d0959', 'p34/d0834']
+['p10/d0958', 'p07/d0949']
+['p10/d0891', 'p04/d0960']
+['p10/d0956', 'p00/d0931']
+['p02/d0716', 'p53/d0764', 'p55/d0764', 'p03/d0716']
+['p02/d0712', 'p00/d0712']
+['p93/d1391', 'p46/d1388']
+['p93/d0762', 'p00/d0715']
+['p05/d1089', 'p53/d1111', 'p75/d1580']
+['p31/d0715', 'p32/d0715']
+['p31/d0764', 'p32/d0764']
+['p31/d0951', 'p75/d0921']
+['p09/d0716', 'p90/d0763']
+['p28/d0951', 'p24/d0884']
+['p83/d0716', 'p46/d0765']
+['p63/d0828', 'p73/d0956']
+['p63/d0764', 'p14/d0716', 'p61/d0764']
+['p63/d0955', 'p21/d0867']
+['p82/d0716', 'p18/d0764']
+['p82/d0763', 'p38/d0764']
+['p18/d0958', 'p13/d0913']
+['p18/d0951', 'p68/d0956', 'p36/d0942']
+['p19/d0952', 'p34/d0888']
+['p90/d0952', 'p71/d0869']
+['p58/d0765', 'p99/d0716']
+['p58/d0715', 'p60/d0715']
+['p21/d0763', 'p20/d0762']
+['p77/d3018', 'p61/d1111']
+['p77/d0911', 'p14/d0951']
+['p25/d0835', 'p17/d3099']
+['p48/d0764', 'p00/d0716']
+['p86/d0909', 'p11/d0951']
+['p14/d0953', 'p55/d0931']
+['p50/d0765', 'p49/d0765']
+['p50/d0837', 'p49/d0954']
+['p00/d0827', 'p49/d0959']
+['p00/d0957', 'p13/d0950', 'p16/d0875']
+['p92/d0762', 'p40/d0762']
+['p13/d2271', 'p56/d0949']
+['p13/d0874', 'p23/d0954']
+['p47/d0945', 'p24/d3251']
+['p75/d0716', 'p40/d0765']
+['p46/d0762', 'p73/d0762']
+['p32/d0959', 'p80/d0836']
+['p34/d0764', 'p33/d0764']
+['p03/d0925', 'p95/d0953']
+language: en    data_type: gold    test length: 50 
+
+en gold total number of instances: 11946
+en gold number of train, dev, test: 9552 1194 1194
+language: en    data_type: gold    train length: 9552 
+
+language: en    data_type: gold    dev length: 1194 
+
+language: en    data_type: gold    test length: 1194 
+
+Generate distribution...
+Generate distribution...
+Generate distribution...
