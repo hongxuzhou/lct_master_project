@@ -72,7 +72,7 @@ class SBNSpec:
         "RESULT",
         "SOURCE",
         "CONJUNCTION",
-        "ELABORATION"
+        "ELABORATION",
         "CORRECTION" # Add new separator
     }
 
@@ -115,6 +115,10 @@ class SBNSpec:
         "ContentOf",
         "PartOf",
         "SubOf",
+        "ThemeOf", # Add new role
+        "TimeOf", # Add new role
+        "AgentOf", # Add new role
+        "MannerOf" # Add new
     }
 
     ROLES = {
@@ -126,6 +130,7 @@ class SBNSpec:
         "Name",
         # Event roles
         "Agent",
+        "AgentOf",
         "Asset",
         "Attribute",
         "AttributeOf",
@@ -146,6 +151,7 @@ class SBNSpec:
         "Instance",
         "Location",
         "Manner",
+        "MannerOf", #Add new role
         "Material",
         "Path",
         "Patient",
@@ -157,7 +163,9 @@ class SBNSpec:
         "Start",
         "Stimulus",
         "Theme",
+        "ThemeOf", # Add new role
         "Time",
+        "TimeOf", # Add new role
         "Topic",
         "Value",
         # Concept roles
