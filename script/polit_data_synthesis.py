@@ -62,6 +62,12 @@ The injected structure must consist of a reparandum immediately followed by the 
 2. INFORMATION DENSITY: The reparandum and repair must contain roughly the same amount of information and belong to the same syntactic category.
    - Correct: "When travelling in Rome, Seville, Joe has the best orange juice he ever had."
    - Wrong: "When travelling in Rome with his husband as part of their honeymoon vacation, Seville, Joe has the best orange juice he ever had." (Reparandum is too heavy).
+3. VERBATIM PRESERVATION: After removing the reparandum and the comma immediately following it from your output, the remaining string must be identical to the input sentence, character by character.
+   - Input: "I used to run a small bookstore in a shopping centre."
+   - Correct: "Jason, I used to run a small bookstore in a shopping centre."
+     → Remove "Jason, " → "I used to run a small bookstore in a shopping centre." ✓ Matches input exactly.
+   - Wrong: "Café, bookstore in a shopping centre."
+     → Remove "Café, " → "bookstore in a shopping centre." ✗ Does not match input.
 
 [STRICT RULES: DON'Ts]
 1. NO INTERREGNUMS: You must NEVER add metalinguistic expressions (e.g., "actually", "I mean", "no", "hold on", "uh", "um") between the reparandum and the repair. It must be a direct replacement.
@@ -102,6 +108,9 @@ The injected structure must consist of a reparandum immediately followed by the 
 2. INFORMATION DENSITY: The reparandum and repair must contain roughly the same amount of information and belong to the same syntactic category.
    - Correct: "When travelling in Seville, Joe has the best apple, orange juice he ever had."
    - Wrong: "When travelling in Seville, Joe has the best organic and environment-friendly apple, orange juice he ever had." (Reparandum is too heavy).
+   The reparandum must mirror the grammatical form of the constituent it replaces, including articles and determiners where present.
+    - Correct: "The soldier, the sailor was awarded a medal." (definite NP replaces definite NP)
+    - Wrong: "Soldier, the sailor was awarded a medal." (bare noun replacing definite NP)
 
 [STRICT RULES: DON'Ts]
 1. NO INTERREGNUMS: You must NEVER add metalinguistic expressions (e.g., "actually", "I mean", "no", "hold on", "uh", "um") between the reparandum and the repair. It must be a direct replacement.
@@ -115,6 +124,13 @@ The injected structure must consist of a reparandum immediately followed by the 
    - Correct: "Linda stole, robbed the kiosk"
    - Wrong: "Linda has stolen, stole the kiosk"
 
+3. NO NON-COMPETING ADDITIONS: The reparandum must replace a constituent already present in the input sentence. It must NOT be an element that could be read as a vocative, appositive, or any additive construction.
+   - Input: "I met a friend of mine at the airport."
+   - Wrong: "Tom, I met a friend of mine at the airport." 
+     (Tom reads as a vocative; it does not compete with any constituent in the original sentence)
+   - Correct: "She, I met a friend of mine at the airport." 
+     (She competes with I in the subject slot)
+     
 [OUTPUT FORMAT]
 You must output ONLY the modified sentence. Do not include any explanations, greetings, or quotation marks. 
 
