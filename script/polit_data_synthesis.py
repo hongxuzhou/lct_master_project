@@ -280,6 +280,7 @@ def generate_one(model, tokenizer, prompt_type, sentence,
         messages,
         tokenize=False,
         add_generation_prompt=True,
+        enable_thinking=False,
     )
     model_inputs = tokenizer([text], return_tensors="pt").to(model.device)
 
