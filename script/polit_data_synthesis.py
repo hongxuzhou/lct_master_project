@@ -288,10 +288,10 @@ def generate_one(model, tokenizer, prompt_type, sentence,
         generated_ids = model.generate(
             **model_inputs,
             max_new_tokens=max_new_tokens,
-            temperature=temperature,
-            top_p=top_p,
-            top_k=top_k,
-            do_sample=False,
+            #temperature=temperature,
+            #top_p=top_p,
+            #top_k=top_k,
+            do_sample=False, # Greedy decoding
         )
 
     new_ids = generated_ids[0][len(model_inputs.input_ids[0]):]
@@ -398,8 +398,8 @@ def main():
                 repair_nl = generate_one(
                     model, tokenizer,
                     args.prompt_type, input_sent,
-                    args.max_new_tokens, args.temperature,
-                    args.top_p, args.top_k,
+                    args.max_new_tokens, #args.temperature,
+                    #args.top_p, args.top_k,
                 )
             except Exception as e:
                 print(f"[{i+1}/{len(remaining)}] ERROR {sample_id}: {e}", flush=True)
