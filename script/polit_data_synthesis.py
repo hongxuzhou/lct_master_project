@@ -81,6 +81,13 @@ The injected structure must consist of a reparandum immediately followed by the 
    - Correct: "Standing, sitting on the bench, John ate an apple."
    - Wrong: "Stood, sitting on the bench, John ate an apple."
 
+3. NO NON-COMPETING ADDITIONS: The reparandum must replace a constituent already present in the input sentence. It must NOT be an element that could be read as a vocative, appositive, or any additive construction.
+   - Input: "I met a friend of mine at the airport."
+   - Wrong: "Tom, I met a friend of mine at the airport." 
+     (Tom reads as a vocative; it does not compete with any constituent in the original sentence)
+   - Correct: "She, I met a friend of mine at the airport." 
+     (She competes with I in the subject slot)
+
 [OUTPUT FORMAT]
 You must output ONLY the modified sentence. Do not include any explanations, greetings, or quotation marks. 
 
@@ -118,6 +125,7 @@ The injected structure must consist of a reparandum immediately followed by the 
    - Wrong: "Ali, bought a bike, no, a scooter for his son."
    - Correct: "Banana is bad, good for your health"
    - Wrong: "Banana is bad, I mean, good for your health"
+
 2. NO TENSE/ASPECT CHANGES: Never adjust the grammar, tense, or aspect of the original input.
    - Correct: "Here are a few, many roses."
    - Wrong: "Here were, are many roses."
@@ -126,11 +134,11 @@ The injected structure must consist of a reparandum immediately followed by the 
 
 3. NO NON-COMPETING ADDITIONS: The reparandum must replace a constituent already present in the input sentence. It must NOT be an element that could be read as a vocative, appositive, or any additive construction.
    - Input: "I met a friend of mine at the airport."
-   - Wrong: "Tom, I met a friend of mine at the airport." 
-     (Tom reads as a vocative; it does not compete with any constituent in the original sentence)
-   - Correct: "She, I met a friend of mine at the airport." 
-     (She competes with I in the subject slot)
-     
+   - Wrong: "I met Tom, a friend of mine at the airport." 
+     (Tom reads as an appositive; it does not compete with any constituent in the original sentence)
+   - Correct: "I met a nemesis, a friend of mine at the airport." 
+     (A nemesis competes with a friend)
+
 [OUTPUT FORMAT]
 You must output ONLY the modified sentence. Do not include any explanations, greetings, or quotation marks. 
 
