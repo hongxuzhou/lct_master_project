@@ -239,7 +239,7 @@ def load_tsv_samples(tsv_path: str) -> list:
     with open(tsv_path, "r", encoding="utf-8") as f:
         reader = csv.DictReader(f, delimiter="\t")
         for row in reader:
-            samples.append({"id": row["id"], "nl": row["nl"]})
+            samples.append({"id": row["<built-in function id>"], "nl": row["nl"]})
     return samples
 
 
@@ -274,7 +274,7 @@ def build_prompt(prompt_type: str, sentence: str) -> str:
 
 
 def generate_one(model, tokenizer, prompt_type, sentence,
-                 max_new_tokens, temperature, top_p, top_k) -> str:
+                 max_new_tokens,) -> str:
     messages = [{"role": "user", "content": build_prompt(prompt_type, sentence)}]
     text = tokenizer.apply_chat_template(
         messages,
@@ -398,8 +398,7 @@ def main():
                 repair_nl = generate_one(
                     model, tokenizer,
                     args.prompt_type, input_sent,
-                    args.max_new_tokens, #args.temperature,
-                    #args.top_p, args.top_k,
+                    args.max_new_tokens,
                 )
             except Exception as e:
                 print(f"[{i+1}/{len(remaining)}] ERROR {sample_id}: {e}", flush=True)
