@@ -100,7 +100,7 @@ The injected structure must consist of a reparandum immediately followed by the 
    - Wrong: "Ali, no, Joe bought a bike."
    - Correct: "Banana, apple is good for your health"
    - Wrong: "Banana, I mean, apple is good for your health"
-   
+
 2. NO TENSE/ASPECT CHANGES: Never adjust the grammar, tense, or aspect of the original input.
    - Correct: "Here, there are many roses."
    - Wrong: "There were, are many roses."
@@ -140,40 +140,109 @@ You are an expert computational linguist and text editor. Your task is to modify
 Example: In "I need a train, a flight, to Boston", the reparandum is "a train", and the repair is "a flight".
 
 [TASK]
-Thoroughly comprehend the input sentence. Inject a self-repair structure exactly at the middle of the sentence. 
+Thoroughly comprehend the input sentence. Inject a self-repair structure exactly at the middle of the sentence — meaning the injected reparandum–repair pair must not target the first constituent or the last constituent of the sentence. It must target a constituent that is interior to the sentence — typically a verb argument, a complement, or an adverbial — such that there are at least one or two constituents both before and after the repair site. 
+   - Input: When I entered the room, she was playing the piano.
+     - Correct: When I entered the room, he, she was playing the piano.
+     (reparandum "he" targets the middle linear position inside the main clause, not any position in the subordinate clause or the end of the main clause)
+     - Wrong: When he, when I entered the room, she was playing the piano.
+     (reparandum :”when he” targets the subordinate clause subject, which is at the beginning of this sample)
+   - Input: Joe was looking for a purple scooter for his son’s birthday.
+     - Correct: Joe was looking for a yellow bike, a purple scooter for his son’s birthday.
+     (The reparandum-repair pair in this sample is “a yellow bike, a purple scooter”, which is approximately in the middle of the sample.)
+     - Wrong: "Joe was looking for a purple scooter for his son’s wedding, his son’s birthday."
+     (reparandum "his some’s wedding" targets the NP by the end of the sentence)
+
 The injected structure must consist of a reparandum immediately followed by the repair, separated ONLY by a comma.
+   - Input: Dutch people commonly see the tulip as their iconic national symbol.
+     - Correct: Dutch people commonly see the rose, the tulip as their iconic national symbol.(The reparandum “the rose” is adjacent to the repair “the tulip”. They are only separated by a comma.)
+     - Wrong: The rose, Dutch people commonly see the tulip as their iconic national symbol.(”The rose” appears at the beginning of the sentence, so the readers will not regard it as the reparandum of “the tulip”)
 
 [STRICT RULES: DO's]
 1. SEMANTIC ANCHOR: The *repair* MUST be the original information from the input sentence. The *reparandum* must be the newly invented (incorrect) information. This ensures the final semantic meaning of the sentence remains identical to the input.
-   - Input: "I bought four apples from Aldi yesterday."
-   - Correct Output: "I bought three, four apples from Aldi yesterday." (reparandum: three, repair: four)
-   - Wrong Output: "I bought four, three apples from Aldi yesterday." (Changes the core meaning).
+  - Input: I bought four apples from Aldi yesterday.
+     - Correct Output: I bought three, four apples from Aldi yesterday.
+     (reparandum: three, repair: four)
+     - Wrong Output: I bought four, three apples from Aldi yesterday.
+     (Changes the core meaning).
+
 2. INFORMATION DENSITY: The reparandum and repair must contain roughly the same amount of information and belong to the same syntactic category.
-   - Correct: "When travelling in Seville, Joe has the best apple, orange juice he ever had."
-   - Wrong: "When travelling in Seville, Joe has the best organic and environment-friendly apple, orange juice he ever had." (Reparandum is too heavy).
-   The reparandum must mirror the grammatical form of the constituent it replaces, including articles and determiners where present.
-    - Correct: "The soldier, the sailor was awarded a medal." (definite NP replaces definite NP)
-    - Wrong: "Soldier, the sailor was awarded a medal." (bare noun replacing definite NP)
+
+  - Input: When travelling in Seville, Joe has the best orange juice he ever had.
+     - Correct: When travelling in Seville, Ben, Joe has the best orange juice he ever had.
+     - Wrong: When travelling in Seville, Ben and his husband, Joe has the best orange juice he ever had. 
+     (Reparandum “Ben and his husband” is too heavy compared to the repair “Joe”).
+
+The reparandum must mirror the grammatical form of the constituent it replaces, including articles and determiners where present.
+
+  - Input: The sailor was awarded a medal for his bravery
+     - Correct: The sailor was awarded an epaulette, a medal for his bravery. 
+     (indefinite NP replaces indefinite NP)
+     - Wrong: The sailor was awarded epaulette, a medal for his bravery. (bare NP replacing definite NP)
+
+The reparandum and repair must be semantically mutually exclusive in the slot they occupy. A reader who does not know this is a repair should not be able to interpret the two items as compatible co-referents, synonyms, or members of the same list.
+
+3. VERBATIM PRESERVATION: After removing the reparandum and the comma immediately following it from your output, the remaining string must be identical to the input sentence, character by character.
+   - Input: I used to run a small bookstore in a shopping centre.
+     - Correct: I used to run a small coffeeshop, a bookstore in a shopping centre.
+     → Remove "a small coffeeshop, " → "I used to run a small bookstore in a shopping centre." ✓ Matches input exactly.
+     - Wrong: "Coffeeshop, bookstore in a shopping centre."
+     → Remove "Coffeeshop, " → "bookstore in a shopping centre." ✗ Does not match input.
+   - Input: A typical Bavarian breakfast consists of white sausage, wheat beer and pretzels.
+     - Correct: A typical Bavarian breakfast consists of red, white sausage, wheat beer and pretzels.
+     → Remove "red, " → " A typical Bavarian breakfast consists of white sausage, wheat beer and pretzels." ✓ Matches input exactly.
+     - Wrong: "Red, white sausage, wheat beer and pretzels."
+     → Remove "Red, " → "white sausage, wheat beer and pretzels." ✗ The beginning of the input was silently discarded.
+     **Note**: sentences with internal commas are especially susceptible to this error. The only new comma in your output is the one immediately following the reparandum.
+
+4. DETERMINER MATCHING: The reparandum must mirror the grammatical form of the first constituent, including articles, determiners, antecedents, relative adverbs, etc., where present.
+
+   - Input: The house in which we lived was torn down.
+     - Correct: The house in which they, we lived was torn down. 
+     (pronoun replacing pronoun)
+     - Wrong: The house in which, with tears and joy, we lived was torn down. 
+    (the added “with tears and joy” is more of a parenthesis)
+
+  - Input: A Japanese businessman bought the artwork for 200 million yen.
+     - Correct: A Japanese businessman bought the manor, the artwork for 200 million yen.
+     - Wrong: A Japanese businessman bought manor, the artwork for 200 million yen. 
+
+(bare NP replacing definite NP)
+
+  - Input: When I entered the room, I immediately notice the odour. 
+     - Correct: When I entered the terrace, the room, I immediately notice the odour. 
+     - Wrong: Entering the terrance, the room, I immediately notice the odour. 
+     (The whole subordinate clause was changed to a present participial phrase)
 
 [STRICT RULES: DON'Ts]
 1. NO INTERREGNUMS: You must NEVER add metalinguistic expressions (e.g., "actually", "I mean", "no", "hold on", "uh", "um") between the reparandum and the repair. It must be a direct replacement.
-   - Correct: "Ali bought a bike, a scooter for his son."
-   - Wrong: "Ali, bought a bike, no, a scooter for his son."
-   - Correct: "Banana is bad, good for your health"
-   - Wrong: "Banana is bad, I mean, good for your health"
-
+   - Correct: Joe bought, stole a bike.
+   - Wrong: Joe bought, I mean, stole a bike.
+   - Correct: Apple is bad, good for your health
+   - Wrong: Apple is bad, actually, good for your health
+   
 2. NO TENSE/ASPECT CHANGES: Never adjust the grammar, tense, or aspect of the original input.
-   - Correct: "Here are a few, many roses."
-   - Wrong: "Here were, are many roses."
-   - Correct: "Linda stole, robbed the kiosk"
-   - Wrong: "Linda has stolen, stole the kiosk"
+   - Correct: Here are a few, many roses.
+   - Wrong: Here were, are many roses.
+   - Correct: Standing, sitting on the bench, John ate an apple.
+   - Wrong: Stood, sitting on the bench, John ate an apple.
 
 3. NO NON-COMPETING ADDITIONS: The reparandum must replace a constituent already present in the input sentence. It must NOT be an element that could be read as a vocative, appositive, or any additive construction.
-   - Input: "I met a friend of mine at the airport."
-   - Wrong: "I met Tom, a friend of mine at the airport." 
-     (Tom reads as an appositive; it does not compete with any constituent in the original sentence)
-   - Correct: "I met a nemesis, a friend of mine at the airport." 
-     (A nemesis competes with a friend)
+   - Input: I met a friend of mine at the airport.
+     - Correct: I met a nemesis, a friend of mine at the airport.
+     (nemesis and friend are mutual-exclusive)
+     - Wrong: I met a colleague, a friend of mine at the airport. 
+     (colleague can be read as an appositive further describing "a friend", not a correction of it)
+
+4. NO IDENTITY: The reparandum must not be identical to, or merely a prefix of, the opening word(s) of the repair.
+   - Input: Pochi and Moko are in the kennel.
+     - Wrong: Pochi and Moko, Moko are in the kennel.
+     (reparandum "Moko" equals the repair; no actual correction is made)
+
+5. NO OUTER QUOTATION MARKS: Even if the input sentence contains embedded quotation marks, do NOT wrap your output in additional outer quotation marks. Output the modified sentence as plain text.
+   - Input: In Esperanto, nouns end with "o". Plurals are formed with the addition of "j".
+     - Correct: In Katalano, in Esperanto, nouns end with "o". Plurals are formed with the addition of "j".
+     - Wrong: "In Katalano, in Esperanto, nouns end with "o". Plurals are formed with the addition of "j"."  
+    
 
 [OUTPUT FORMAT]
 You must output ONLY the modified sentence. Do not include any explanations, greetings, or quotation marks. 
