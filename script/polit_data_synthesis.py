@@ -51,13 +51,18 @@ You are an expert computational linguist and text editor. Your task is to modify
 Example: In "I need a train, a flight, to Boston", the reparandum is "a train", and the repair is "a flight".
 
 [TASK]
-[TASK]
 Thoroughly comprehend the input sentence. Inject a self-repair structure exactly at the beginning of the sentence — meaning within the first few words of the linear string. This may be a constituent inside an opening subordinate clause rather than the subject of the main clause.
    - Input: "When I entered the room, she was playing the piano."
      Correct: "When I left, entered the room, she was playing the piano."
      (reparandum "left" targets the early linear position inside the opening clause, not the main-clause subject "she")
      Wrong: "He, when I entered the room, she was playing the piano."
      (reparandum targets the main-clause subject, which is mid-sentence in linear order)
+   - Input: "Joe was looking for a purple scooter."
+     Correct: "Kevin, Joe was looking for a purple scooter."
+     (reparandum "Joe" targets the first NP of the sentence)
+     Wrong: "Joe was looking for a yellow bike, a purple scooter."
+     (reparandum "a yellow bike" targets the NP by the end of the sentence)
+
 The injected structure must consist of a reparandum immediately followed by the repair, separated ONLY by a comma.
 
 [STRICT RULES: DO's]
@@ -81,13 +86,13 @@ The injected structure must consist of a reparandum immediately followed by the 
      → Remove "Ham, " → "white sausage, wheat beer and pretzels." ✗ The beginning of the input was silently discarded.
      **Note**: sentences with internal commas are especially susceptible to this error. The only new comma in your output is the one immediately following the reparandum.
 
-4. DETERMINER MATCHING: The reparandum must mirror the grammatical form of the first constituent, including articles, determiners, antecedents, relative adverbs where present.
-   - Correct: "The apartment, the house in which we lived was torn down." (definite NP replaces definite NP)
+4. DETERMINER MATCHING: The reparandum must mirror the grammatical form of the first constituent, including articles, determiners, antecedents, relative adverbs, etc., where present.
+   - Correct: "The apartment, the house in which we lived was torn down." (definite NP replacing definite NP)
    - Wrong: "Apartment, the house in which we lived was torn down." (bare noun replacing definite NP)
    - Correct: "An American businessman, a Japanese businessman bought the artwork for 200 million yen."
    - Wrong: "Chinese, a Japanese businessman bought the artwork for 200 million yen." (bare adjective replacing full indefinite NP)
-   - Correct: When I left, when I entered the room, I immediately notice the odour. 
-   - Wrong: Leaving, when I entered the room, I immediately notice the odour. 
+   - Correct: "When I left, when I entered the room, I immediately notice the odour." 
+   - Wrong: "Leaving, when I entered the room, I immediately notice the odour." (non-finite verb replacing subordinate clause)
 
 [STRICT RULES: DON'Ts]
 1. NO INTERREGNUMS: You must NEVER add metalinguistic expressions (e.g., "actually", "I mean", "no", "hold on", "uh", "um") between the reparandum and the repair. It must be a direct replacement.
@@ -95,6 +100,7 @@ The injected structure must consist of a reparandum immediately followed by the 
    - Wrong: "Ali, no, Joe bought a bike."
    - Correct: "Banana, apple is good for your health"
    - Wrong: "Banana, I mean, apple is good for your health"
+   
 2. NO TENSE/ASPECT CHANGES: Never adjust the grammar, tense, or aspect of the original input.
    - Correct: "Here, there are many roses."
    - Wrong: "There were, are many roses."
