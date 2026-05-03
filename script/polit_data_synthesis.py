@@ -51,7 +51,13 @@ You are an expert computational linguist and text editor. Your task is to modify
 Example: In "I need a train, a flight, to Boston", the reparandum is "a train", and the repair is "a flight".
 
 [TASK]
-Thoroughly comprehend the input sentence. Inject a self-repair structure exactly at the beginning of the sentence. 
+[TASK]
+Thoroughly comprehend the input sentence. Inject a self-repair structure exactly at the beginning of the sentence — meaning within the first few words of the linear string. This may be a constituent inside an opening subordinate clause rather than the subject of the main clause.
+   - Input: "When I entered the room, she was playing the piano."
+     Correct: "When I left, entered the room, she was playing the piano."
+     (reparandum "left" targets the early linear position inside the opening clause, not the main-clause subject "she")
+     Wrong: "He, when I entered the room, she was playing the piano."
+     (reparandum targets the main-clause subject, which is mid-sentence in linear order)
 The injected structure must consist of a reparandum immediately followed by the repair, separated ONLY by a comma.
 
 [STRICT RULES: DO's]
@@ -64,10 +70,24 @@ The injected structure must consist of a reparandum immediately followed by the 
    - Wrong: "When travelling in Rome with his husband as part of their honeymoon vacation, Seville, Joe has the best orange juice he ever had." (Reparandum is too heavy).
 3. VERBATIM PRESERVATION: After removing the reparandum and the comma immediately following it from your output, the remaining string must be identical to the input sentence, character by character.
    - Input: "I used to run a small bookstore in a shopping centre."
-   - Correct: "Jason, I used to run a small bookstore in a shopping centre."
-     → Remove "Jason, " → "I used to run a small bookstore in a shopping centre." ✓ Matches input exactly.
+     - Correct: "My mom, I used to run a small bookstore in a shopping centre."
+     → Remove "My mom, " → "I used to run a small bookstore in a shopping centre." ✓ Matches input exactly.
    - Wrong: "Café, bookstore in a shopping centre."
      → Remove "Café, " → "bookstore in a shopping centre." ✗ Does not match input.
+   - Input: "A typical Bavarian breakfast consists of white sausage, wheat beer and pretzels."
+     - Correct: "A Hungarian breakfast, a typical Bavarian breakfast consists of white sausage, wheat beer and pretzels."
+     → Remove "A Hungarian breakfast, " → "A typical Bavarian breakfast consists of white sausage, wheat beer and pretzels." ✓
+     - Wrong: "Ham, white sausage, wheat beer and pretzels."
+     → Remove "Ham, " → "white sausage, wheat beer and pretzels." ✗ The beginning of the input was silently discarded.
+     **Note**: sentences with internal commas are especially susceptible to this error. The only new comma in your output is the one immediately following the reparandum.
+
+4. DETERMINER MATCHING: The reparandum must mirror the grammatical form of the first constituent, including articles, determiners, antecedents, relative adverbs where present.
+   - Correct: "The apartment, the house in which we lived was torn down." (definite NP replaces definite NP)
+   - Wrong: "Apartment, the house in which we lived was torn down." (bare noun replacing definite NP)
+   - Correct: "An American businessman, a Japanese businessman bought the artwork for 200 million yen."
+   - Wrong: "Chinese, a Japanese businessman bought the artwork for 200 million yen." (bare adjective replacing full indefinite NP)
+   - Correct: When I left, when I entered the room, I immediately notice the odour. 
+   - Wrong: Leaving, when I entered the room, I immediately notice the odour. 
 
 [STRICT RULES: DON'Ts]
 1. NO INTERREGNUMS: You must NEVER add metalinguistic expressions (e.g., "actually", "I mean", "no", "hold on", "uh", "um") between the reparandum and the repair. It must be a direct replacement.
@@ -87,6 +107,16 @@ The injected structure must consist of a reparandum immediately followed by the 
      (Tom reads as a vocative; it does not compete with any constituent in the original sentence)
    - Correct: "She, I met a friend of mine at the airport." 
      (She competes with I in the subject slot)
+
+4. NO IDENTITY: The reparandum must not be identical to, or merely a prefix of, the opening word(s) of the repair.
+   - Input: "Pochi and Moko are in the kennel."
+   - Wrong: "Pochi, Pochi and Moko are in the kennel." (reparandum "Pochi" equals the first word of the repair; no actual correction is made)
+
+5. NO OUTER QUOTATION MARKS: Even if the input sentence contains embedded quotation marks, do NOT wrap your output in additional outer quotation marks. Output the modified sentence as plain text.
+   - Input: In Esperanto, nouns end with "o". Plurals are formed with the addition of "j".
+   - Correct: In Katalano, in Esperanto, nouns end with "o". Plurals are formed with the addition of "j".
+   - Wrong: "In Katalano, in Esperanto, nouns end with "o". Plurals are formed with the addition of "j"."  
+    
 
 [OUTPUT FORMAT]
 You must output ONLY the modified sentence. Do not include any explanations, greetings, or quotation marks. 
@@ -361,7 +391,7 @@ def parse_args():
         required=True,
         help="Path to checkpoint file (records completed IDs for resume).",
     )
-    parser.add_argument("--max_new_tokens", type=int,   default=128)
+    parser.add_argument("--max_new_tokens", type=int,   default=256)
     #parser.add_argument("--temperature",    type=float, default=0.7)
     #parser.add_argument("--top_p",          type=float, default=0.8)
     #parser.add_argument("--top_k",          type=int,   default=20)
