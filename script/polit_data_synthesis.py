@@ -146,11 +146,11 @@ Thoroughly comprehend the input sentence. Inject a self-repair structure exactly
      (reparandum "he" targets the middle linear position inside the main clause, not any position in the subordinate clause or the end of the main clause)
      - Wrong: When he, when I entered the room, she was playing the piano.
      (reparandum :”when he” targets the subordinate clause subject, which is at the beginning of this sample)
-   - Input: Joe was looking for a purple scooter for his son’s birthday.
-     - Correct: Joe was looking for a yellow bike, a purple scooter for his son’s birthday.
+   - Input: Joe was looking for a purple scooter for his son's birthday.
+     - Correct: Joe was looking for a yellow bike, a purple scooter for his son's birthday.
      (The reparandum-repair pair in this sample is “a yellow bike, a purple scooter”, which is approximately in the middle of the sample.)
-     - Wrong: "Joe was looking for a purple scooter for his son’s wedding, his son’s birthday."
-     (reparandum "his some’s wedding" targets the NP by the end of the sentence)
+     - Wrong: "Joe was looking for a purple scooter for his son's wedding, his son's birthday."
+     (reparandum "his some's wedding" targets the NP by the end of the sentence)
 
 The injected structure must consist of a reparandum immediately followed by the repair, separated ONLY by a comma.
    - Input: Dutch people commonly see the tulip as their iconic national symbol.
@@ -260,77 +260,112 @@ You are an expert computational linguist and text editor. Your task is to modify
 Example: In "I need a train, a flight, to Boston", the reparandum is "a train", and the repair is "a flight".
 
 [TASK]
-Thoroughly comprehend the input sentence. Inject a self-repair structure exactly at the ending part of the sentence. 
+Thoroughly comprehend the input sample. Inject a self-repair structure exactly at the ending part of the sample. One sample can contain at least one sentence. If the sample contains only one sentence, the injected reparandum–repair pair must target the constituent or constituents at the ending of the sentence, typically an object, a complement, or an adverbial. If the sample contains more than one sentence, then the injected reparandum–repair pair should target the constituent or constituents at the ending of the final sentence. 
+   - Input: When I entered the room, she was playing the piano.
+     - Correct: When I entered the room, she was playing the violin, the piano.
+     (reparandum "the violin" targets the ending linear position in the main clause, not any position in the subordinate clause or the beginning-middle part of the main clause)
+     - Wrong: When he, when I entered the room, she was playing the piano.
+     (reparandum :”when he” targets the subordinate clause subject, which is at the beginning of this sample)
+   - Input: Joe was looking for a purple scooter for his son's birthday.
+     - Correct: Joe was looking for a a purple scooter for his son’s wedding, his son's birthday.
+     (The reparandum-repair pair in this sample is “wedding, birthday”, which is at the end of the sample.)
+     - Wrong: "Joe was looking for a yellow bike, a purple scooter for his son’s birthday."
+     (reparandum "a yellow bike" targets the NP in the middle of the sentence)
+  - Input: \"Terrible weather,\" said Baron von S. His wife looked nervous.
+     - Correct: \"Terrible weather,\" said Baron von S. His wife looked cheerful, nervous.
+     (The reparandum-repair pair is cheerful-nervous. It is positioned in the ending part of the final sentence, that is, the ending part of the whole sample.)
+     - Wrong: \"Terrible condition, weather,\" said Baron von S. His wife looked nervous.
+     (The reparandum-repair pair is condition-weather. It is positioned in the ending part of the FIRST sentence of the whole sample. Thus, it is wrong.)
+
 The injected structure must consist of a reparandum immediately followed by the repair, separated ONLY by a comma.
+   - Input: Dutch people commonly see the tulip as their iconic national symbol.
+     - Correct: Dutch people commonly see the tulip as their iconic national fruit, symbol.(The reparandum "fruit" is adjacent to the repair "symbol". They are only separated by a comma.)
+     - Wrong: Fruit, Dutch people commonly see the tulip as their iconic national symbol.(The reparandum "fruit" appears at the beginning of the sentence, so the readers will not regard it as the reparandum of "symbol")
 
 [STRICT RULES: DO's]
 1. SEMANTIC ANCHOR: The *repair* MUST be the original information from the input sentence. The *reparandum* must be the newly invented (incorrect) information. This ensures the final semantic meaning of the sentence remains identical to the input.
-   - Input: "I bought four apples from Aldi yesterday."
-   - Correct Output: "I bought four apples from Lidl, Aldi yesterday." (reparandum: Lidl, repair: Aldi)
-   - Wrong Output: "I bought four  apples from Aldi, Lidl yesterday." (Changes the core meaning).
+  - Input: I bought four apples from Aldi yesterday.
+     - Correct Output: I bought four apples from Lidl, Aldi yesterday.
+     (reparandum: Lidl, repair: Aldi)
+     - Wrong Output: I bought four apples from Aldi, Lidl yesterday.
+     (Changes the core meaning).
+
 2. INFORMATION DENSITY: The reparandum and repair must contain roughly the same amount of information and belong to the same syntactic category.
-   - Correct: "When travelling in Seville, Joe has the best orange juice she, he ever had."
-   - Wrong: "When travelling in Seville, Joe has the best orange juice she and her girlfriend along with their families, he ever had." (Reparandum is too heavy).
+
+  - Input: When travelling in Seville, Joe has the best paella he ever had.
+     - Correct: When travelling in Seville, Joe has the best pizza, paella he ever had.
+     - Wrong: When travelling in Seville, Joe has the best pizza with truffles and hams, paella he ever had. 
+     (Reparandum “pizza with truffles and hams” is too heavy compared to the repair “paella”).
+
+The reparandum must mirror the grammatical form of the constituent it replaces, including articles and determiners where present.
+
+  - Input: The sailor was awarded a medal for his bravery.
+     - Correct: The sailor was awarded a medal for his alertness, his bravery. 
+     (Possessive adjective + NP replaces possessive adjective + NP)
+     - Wrong: The sailor was awarded a medal for alertness, his bravery. (bare NP replacing possessive adjective + NP)
+
+The reparandum and repair must be semantically mutually exclusive in the slot they occupy. A reader who does not know this is a repair should not be able to interpret the two items as compatible co-referents, synonyms, or members of the same list.
+
+3. VERBATIM PRESERVATION: After removing the reparandum and the comma immediately following it from your output, the remaining string must be identical to the input sentence, character by character.
+   - Input: I used to run a small bookstore in a shopping centre.
+     - Correct: I used to run a small bookstore in a swimming pool, a shopping centre.
+     → Remove "a swimming pool, " → "I used to run a small bookstore in a shopping centre." ✓ Matches input exactly.
+     - Wrong: "A small bookstore in a swimming pool, a shopping centre."
+     → Remove "a swimming pool, " → "A small bookstore in a shopping centre." ✗ Does not match input.
+   - Input: A typical Bavarian breakfast consists of white sausage, wheat beer and pretzels.
+     - Correct: A typical Bavarian breakfast consists of white sausage, wheat beer and pickles, pretzels.
+     → Remove "pickles, " → " A typical Bavarian breakfast consists of white sausage, wheat beer and pretzels." ✓ Matches input exactly.
+     - Wrong: "white sausage, wheat beer and pickles, pretzels."
+     → Remove "pickles," → "white sausage, wheat beer and pretzels." ✗ The beginning of the input was silently discarded.
+     **Note**: sentences with internal commas are especially susceptible to this error. The only new comma in your output is the one immediately following the reparandum.
+
+4. DETERMINER MATCHING: The reparandum must mirror the grammatical form of the targeted repair, including articles, determiners, antecedents, relative adverbs, etc., where present.
+
+   - Input: The house in which we lived was torn down.
+     - Correct: The house in which we lived was watered, torn down. 
+     (Verb replacing verb)
+     - Wrong: The house in which, with tears and joy, we lived was torn down. 
+     (the added "with tears and joy" is more of a parenthesis)
+
+  - Input: A Japanese businessman bought the artwork for 200 million yen.
+     - Correct: A Japanese businessman bought the manor, the artwork for 200 million yen.
+     - Wrong: A Japanese businessman bought manor, the artwork for 200 million yen. 
+     (bare NP replacing definite NP)
+
 
 [STRICT RULES: DON'Ts]
 1. NO INTERREGNUMS: You must NEVER add metalinguistic expressions (e.g., "actually", "I mean", "no", "hold on", "uh", "um") between the reparandum and the repair. It must be a direct replacement.
-   - Correct: "Ali bought a bike for his son's birthday, school return day."
-   - Wrong: "Ali bought a bike for his son's birthday, actually, school return day."
-   - Correct: "Banana is good for your body shape, health."
-   - Wrong: "Banana is good for your body shape, I mean, health."
+   - Correct: Joe stole a scooter, a bike.
+   - Wrong: Joe stole a scooter, I mean, a bike.
+   - Correct: Apple is good for everyone's, your health.
+   - Wrong: Apple is good for everyone's, actually, your health. 
+   
 2. NO TENSE/ASPECT CHANGES: Never adjust the grammar, tense, or aspect of the original input.
-   - Correct: "The kiosk around the corner was robbed by Mary, Linda."
-   - Wrong: "The kiosk around the corner was robbed, is being robbed by Linda."
+   - Correct: Here are a few, many roses.
+   - Wrong: Here were, are many roses.
+   - Correct: Sitting on the bench, John lost, ate an apple.
+   - Wrong: Sitting on the bench, John has eaten, ate an apple.
+
+3. NO NON-COMPETING ADDITIONS: The reparandum must replace a constituent already present in the input sentence. It must NOT be an element that could be read as a vocative, appositive, or any additive construction.
+   - Input: I met a friend of mine at the airport.
+     - Correct: I met a friend of mine at the train station, the airport.
+     ("The train station" and "the airport" are mutually exclusive. A person cannot be at two places at the same time.)
+     - Wrong: I met a friend of mine in the toilet, at the airport. 
+     (It is very reasonable to have toilets in an airport. Therefore, this does not construct a valid reparandum-repair pair.)
+
+4. NO IDENTITY: The reparandum must not be identical to, or merely a prefix of, the opening word(s) of the repair.
+   - Input: Pochi and Moko are in the kennel.
+     - Wrong: Pochi and Moko are in the kennel, the kennel.
+     (reparandum "the kennel" equals the repair; no actual correction is made)
+
+5. NO OUTER QUOTATION MARKS: Even if the input sentence contains embedded quotation marks, do NOT wrap your output in additional outer quotation marks. Output the modified sentence as plain text.
+   - Input: In Esperanto, nouns end with "o". Plurals are formed with the addition of "j".
+     - Correct: In Esperanto, nouns end with "o". Plurals are formed with the attribution, the addition of "j".
+     - Wrong: "In Katalano, in Esperanto, nouns end with "o". Plurals are formed with the attribution, the addition of "j"."  
+    
 
 [OUTPUT FORMAT]
 You must output ONLY the modified sentence. Do not include any explanations, greetings, or quotation marks. 
-
-Input Sentence: "{sentence}"
-Output:""",
-
-    "interregnum": """\
-You are an expert computational linguist and text editor. Your task is to process English sentences that ALREADY contain a self-repair structure by injecting a specific interregnum, for an NLP parser evaluation experiment.
-
-[DEFINITIONS]
-
-    - Self-repair: A structure containing a reparandum (abandoned info) followed by a repair (new info).
-
-    - Interregnum: A metalinguistic editing phrase that signals the speaker is making a correction. For this experiment, the ONLY allowed interregnum is "I mean".
-
-[TASK]
-Thoroughly comprehend the input sentence. The input sentence already contains a self-repair exactly at the middle part, separated by a comma (e.g., "... reparandum, repair ...").
-Your task is to locate the exact boundary between the reparandum and the repair, and insert the interregnum "I mean" at that boundary.
-The final structure MUST be formatted exactly as: [reparandum], I mean, [repair]
-
-[STRICT RULES: DO's]
-
-1. EXACT PRESERVATION: You must keep every single word, grammar, tense, and punctuation mark of the input sentence exactly the same, except for the insertion of ", I mean,". You are NOT allowed to invent new reparandums or repairs.
-
-    - Input: "I bought three, four apples from Aldi yesterday."
-
-    - Correct Output: "I bought three, I mean, four apples from Aldi yesterday."
-
-    - Wrong Output: "I bought three, I mean, five apples from Aldi yesterday." (Changed the repair information).
-
-2. BOUNDARY ACCURACY: Only insert the interregnum at the self-repair boundary. Do not insert it at regular syntactic commas.
-
-    - Input: "When travelling in Seville, Joe has the best apple, orange juice he ever had."
-
-    - Correct Output: "When travelling in Seville, Joe has the best apple, I mean, orange juice he ever had."
-
-    - Wrong Output: "When travelling in Seville, I mean, Joe has the best apple, orange juice he ever had." (Inserted at the wrong comma).
-
-[STRICT RULES: DON'Ts]
-
-1. NO OTHER INTERREGNUMS: You must NEVER use any other metalinguistic expressions (e.g., "actually", "no", "hold on", "uh", "um"). ONLY use "I mean".
-
-    - Correct: "Banana is bad, I mean, good for your health."
-
-    - Wrong: "Banana is bad, uh, good for your health."
-
-[OUTPUT FORMAT]
-You must output ONLY the modified sentence. Do not include any explanations, greetings, or quotation marks.
-
 
 Input Sentence: "{sentence}"
 Output:""",
