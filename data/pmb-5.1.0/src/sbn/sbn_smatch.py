@@ -853,9 +853,11 @@ def ill_form_checker(sbn):
         print(e)
         return False
 
-#from smatch import score_amr_pairs
+from smatch import score_amr_pairs
 # For single sbn sequence -> dag generation, i commented out this line, but it can be useful for large-scale generation 
 # - Hongxu Zhou, 21/Apr/2026
+# I downloaded amr.pr from smatch repo to this dir, then returned the line back to code. 
+# - Hongxu Zhou, 12/May/2026
 
 
 if __name__ == '__main__':
