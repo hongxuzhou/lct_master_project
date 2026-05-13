@@ -1,0 +1,1 @@
+company.n.01 Name "RJ Reynolds" company.n.01 Name "Philip Morris" Source -1 say.v.01 Proposition >1 Agent -1 Time +1 time.n.08 TPR now CONTINUATION <0 entity.n.01 sell.v.01 Agent -1 Time +1 Theme +3 Manner +4 Duration +5 time.n.08 TPR now quantity.n.01 EQU 20

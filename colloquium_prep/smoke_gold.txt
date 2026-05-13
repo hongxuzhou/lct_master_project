@@ -1,0 +1,1 @@
+p17/d075	Philip Morris said it sold 201 bn cigarettes world-wide during the quarter. 	company.n.01 Name "Philip Morris" say.v.02 Proposition >1 Agent -1 Time +1 time.n.08 TPR now CONTINUATION <0 entity.n.01 ANA -3 sell.v.01 Agent -1 Time +1 Theme +3 Manner +4 Duration +5 time.n.08 TPR now quantity.n.01 EQU 201000000000 cigarette.n.01 Quantity -1 world-wide.a.01 quarter.n.06
