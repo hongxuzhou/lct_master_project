@@ -1,5 +1,0 @@
-Variant,N,Success (n),Success (%),ill_formed,parse_error,gold_error,smatch_error,F1 mean (A: success),F1 median (A),F1 mean (B: pen.)
-Head,865,591,68.3,50,220,4,0,0.7830,0.8000,0.5375
-Mid,865,642,74.2,67,152,4,0,0.8063,0.8142,0.6012
-Tail,865,659,76.2,30,172,4,0,0.8346,0.8571,0.6388
-Interrug,865,325,37.6,32,504,4,0,0.6088,0.5763,0.2298
