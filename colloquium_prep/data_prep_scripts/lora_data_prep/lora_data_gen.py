@@ -39,7 +39,7 @@ what TRL's SFTTrainer expects when you set
 The instruction string can be adjusted here before training if needed.
 
 Usage:
-    python prepare_pmb_data.py --pmb_en /path/to/split/en \
+    python lora_data_gen.py --pmb_en /path/to/split/en \
                                --out_dir ./processed
 """
 
@@ -85,40 +85,46 @@ class ValidationResult:
 # Parsing
 # ─────────────────────────────────────────────────────────────────
 
-def parse_sbn_file(path: Path) -> list[Record]:
+def parse_sbn_file(path: Path) -> tuple[list[Record], list[dict]]:
     """
-    Read a .sbn file and return a list of (doc_id, sentence, sbn) records.
+    Read a .sbn file and return (records, parse_warnings).
 
-    The file format is strict 3-line groups:
+    Actual PMB 5.1.0 format — records are separated by blank lines:
         p50/d0779
         The movie starts at ten o'clock.
         movie.n.01 start.v.01 Theme -1 ...
+                                          ← blank line between records
         p36/d2375
         ...
 
-    Raises ValueError if the total line count is not a multiple of 3
-    (after stripping trailing blank lines).
+    The last record has no trailing blank line.
+    Splitting by blank lines makes this robust to that asymmetry.
+
+    Any chunk that does not decompose into exactly 3 non-empty lines is
+    reported in parse_warnings but not returned as a Record.
     """
-    raw_lines = path.read_text(encoding="utf-8").splitlines()
+    text = path.read_text(encoding="utf-8")
 
-    # Drop trailing empty lines (common in Unix text files)
-    while raw_lines and raw_lines[-1].strip() == "":
-        raw_lines.pop()
+    # Normalise line endings, then split into chunks on blank lines.
+    # re.split handles lines that are blank but contain spaces/tabs.
+    text = text.replace("\r\n", "\n").replace("\r", "\n")
+    raw_chunks = re.split(r"\n[ \t]*\n", text.strip())
 
-    if len(raw_lines) % 3 != 0:
-        raise ValueError(
-            f"{path}: line count {len(raw_lines)} is not a multiple of 3. "
-            "Check for unexpected blank lines or truncated records."
-        )
+    records: list[Record] = []
+    parse_warnings: list[dict] = []
 
-    records = []
-    for i in range(0, len(raw_lines), 3):
-        doc_id   = raw_lines[i].strip()
-        sentence = raw_lines[i + 1].strip()
-        sbn      = raw_lines[i + 2].strip()
-        records.append(Record(doc_id=doc_id, sentence=sentence, sbn=sbn))
+    for i, chunk in enumerate(raw_chunks):
+        lines = [l.strip() for l in chunk.splitlines() if l.strip()]
+        if len(lines) == 3:
+            records.append(Record(doc_id=lines[0], sentence=lines[1], sbn=lines[2]))
+        else:
+            parse_warnings.append({
+                "chunk_idx": i,
+                "line_count": len(lines),
+                "preview": chunk[:120].replace("\n", " | "),
+            })
 
-    return records
+    return records, parse_warnings
 
 
 # ─────────────────────────────────────────────────────────────────
@@ -320,13 +326,21 @@ def main():
 
         # 1. Parse
         try:
-            records = parse_sbn_file(src)
-        except ValueError as e:
+            records, parse_warnings = parse_sbn_file(src)
+        except Exception as e:
             print(f"  [ERROR] {e}")
             total_issues += 1
             continue
 
         print(f"  Parsed {len(records):,} raw records")
+        if parse_warnings:
+            print(f"  [!] {len(parse_warnings)} chunk(s) skipped during parsing "
+                  f"(wrong line count):")
+            for w in parse_warnings[:5]:
+                print(f"      chunk #{w['chunk_idx']} ({w['line_count']} lines): "
+                      f"{w['preview']}")
+            if len(parse_warnings) > 5:
+                print(f"      ... and {len(parse_warnings) - 5} more")
 
         # 2. Validate
         vr = validate_records(records, stem)
