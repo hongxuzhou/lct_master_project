@@ -31,8 +31,13 @@ def main():
 
     print(f"\nFirst example id = {ds[0]['id']}")
 
+    commit_message = (
+        "Fix 7 defective augmentations: 3 head no-ops (repair_head_nl == nl) "
+        "+ 4 pure substitutions diverging from gold; restated to gold-preserving "
+        "self-repairs, interregna regenerated"
+    )
     print(f"\nPushing to https://huggingface.co/datasets/{HF_REPO_ID} ...")
-    ds.push_to_hub(HF_REPO_ID)
+    ds.push_to_hub(HF_REPO_ID, commit_message=commit_message)
     print("Done. Pull on the HPC with:")
     print(f'  load_dataset("{HF_REPO_ID}")')
 

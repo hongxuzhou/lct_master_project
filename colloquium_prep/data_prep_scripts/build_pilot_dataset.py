@@ -72,6 +72,30 @@ def insert_interregnum(original, repaired, interregnum="I mean,"):
 
     return " ".join(result_tokens)
 
+# Manually authored repairs that override defective Qwen augmentations. Each entry
+# maps id -> {column: surface}. Only the plain repair cell is set; the matching
+# *_interrug_nl is regenerated downstream by insert_interregnum() like every other
+# row. All surfaces follow the corpus convention "<reparandum>, <gold-restatement>
+# <rest>" so the retained (post-repair) reading equals the gold `mr`.
+#
+# Two defect classes, both from the original augmentation:
+#   (a) head no-op: Qwen emitted repair_head_nl == nl (3 rows). An emptiness audit
+#       misses these because the cell is non-empty.
+#   (b) pure substitution: Qwen replaced a content word WITHOUT restating the gold
+#       token (no reparandum kept), so the surface carried no self-repair and its
+#       meaning diverged from gold (4 rows, e.g. all->none).
+MANUAL_REPAIRS = {
+    # (a) head no-op rows
+    "p90/d2399": {"repair_head_nl": "I walked, ran away from home when I was thirteen."},
+    "p67/d2005": {"repair_head_nl": "Wealth, money and I are strangers; in other words, I am poor."},
+    "p16/d1602": {"repair_head_nl": "It took my ears, my eyes a moment to adjust to the darkness."},
+    # (b) pure-substitution rows
+    "p72/d2539": {"repair_head_nl": "There was, is a pond in the middle of the park."},
+    "p36/d3158": {"repair_head_nl": "One, some of the apples in the box were rotten."},
+    "p01/d1880": {"repair_mid_nl": "Two small squirrels, small rabbits, a white rabbit and a black rabbit, lived in a large forest."},
+    "p41/d3041": {"repair_mid_nl": "Then Robert woke up again, and none, all of his limbs were hurting."},
+}
+
 REPO = Path("/Users/hongxuzhou/Documents/GitHub/lct_master_project")
 SRC_TSV = REPO / "pilot_dataset_cleaned.tsv"
 MULTI_MD = REPO / "colloquium_prep" / "multi_sentence_candidates.md"
@@ -110,6 +134,23 @@ def main():
     # 1. strip escaping artifacts across every string cell
     df = df.map(strip_escaping)
     print("  backslash artifacts stripped")
+
+    # 1b. inject manually authored repairs overriding defective augmentations.
+    # Applied before interregnum regen so the editing-phrase variant is produced
+    # by the same code path as every other row (no hand-written interregnum).
+    n_cells = 0
+    for rid, overrides in MANUAL_REPAIRS.items():
+        sel = df["id"] == rid
+        assert sel.sum() == 1, f"expected exactly 1 row for {rid}, got {sel.sum()}"
+        for col, surface in overrides.items():
+            current = df.loc[sel, col].iloc[0].strip()
+            assert current != surface.strip(), (
+                f"{rid}/{col}: already equals the manual surface -- upstream data "
+                "changed, re-verify this override is still needed"
+            )
+            df.loc[sel, col] = surface
+            n_cells += 1
+    print(f"  injected {n_cells} manual repair overrides across {len(MANUAL_REPAIRS)} rows")
 
     # 2. regenerate all three interregnum variants from cleaned repair columns
     df["repair_head_interrug_nl"] = df.apply(

@@ -1,0 +1,20 @@
+universe = vanilla
+initialdir = /nethome/honzhou
+
+executable = /nethome/honzhou/thesis_zone/pilot/script/pilot_eval/hpc/infer.sh
+
+# Full run: all 5852 (id, condition) rows.
+environment = "OUTFILE=preds_long.parquet BATCH=8 MAXNEW=1024"
+
+output = /scratch/hongxuzhou/logs/pilot_infer/full.$(ClusterId).out
+error  = /scratch/hongxuzhou/logs/pilot_infer/full.$(ClusterId).err
+log    = /scratch/hongxuzhou/logs/pilot_infer/full.$(ClusterId).log
+
+request_CPUs   = 4
+request_memory = 32G
+request_GPUs   = 1
+requirements = (GPUs_Capability >= 8.0) && (GPUs_GlobalMemoryMb > 40000)
+
++MaxWallTime = 172800
+
+queue 1

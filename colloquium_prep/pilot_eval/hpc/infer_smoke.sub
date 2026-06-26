@@ -1,0 +1,20 @@
+universe = vanilla
+initialdir = /nethome/honzhou
+
+executable = /nethome/honzhou/thesis_zone/pilot/script/pilot_eval/hpc/infer.sh
+
+# Smoke test: 16 long rows only, output to a separate file.
+environment = "LIMIT=16 OUTFILE=preds_smoke.parquet BATCH=8 MAXNEW=1024"
+
+output = /scratch/hongxuzhou/logs/pilot_infer/smoke.$(ClusterId).out
+error  = /scratch/hongxuzhou/logs/pilot_infer/smoke.$(ClusterId).err
+log    = /scratch/hongxuzhou/logs/pilot_infer/smoke.$(ClusterId).log
+
+request_CPUs   = 4
+request_memory = 32G
+request_GPUs   = 1
+requirements = (GPUs_Capability >= 8.0) && (GPUs_GlobalMemoryMb > 40000)
+
++MaxWallTime = 3600
+
+queue 1

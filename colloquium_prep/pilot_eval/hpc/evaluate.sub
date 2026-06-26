@@ -1,0 +1,18 @@
+universe = vanilla
+initialdir = /nethome/honzhou
+
+executable = /nethome/honzhou/thesis_zone/pilot/script/pilot_eval/hpc/evaluate.sh
+
+# CPU-only scoring. No GPU.
+environment = "INFILE=preds_long.parquet OUTFILE=preds_long_scored.parquet"
+
+output = /scratch/hongxuzhou/logs/pilot_eval/eval.$(ClusterId).out
+error  = /scratch/hongxuzhou/logs/pilot_eval/eval.$(ClusterId).err
+log    = /scratch/hongxuzhou/logs/pilot_eval/eval.$(ClusterId).log
+
+request_CPUs   = 4
+request_memory = 16G
+
++MaxWallTime = 14400
+
+queue 1
