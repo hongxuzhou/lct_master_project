@@ -128,12 +128,14 @@ def main():
         "{% if (message['role'] == 'user') != (loop.index0 % 2 == 0) %}{{ raise_exception('Conversation roles must alternate user/assistant/user/assistant/...') }}{% endif %}"
         "{% if (message['role'] == 'assistant') %}{% set role = 'model' %}{% else %}{% set role = message['role'] %}{% endif %}"
         "{{ '<start_of_turn>' + role + '\n' }}"
+        # <end_of_turn> MUST sit inside {% generation %} for assistant turns,
+        # otherwise assistant_only_loss masks it (-100) and the model never
+        # learns to terminate -> runaway generation at inference. - Hongxu Zhou 27/Jun
         "{% if message['role'] == 'assistant' %}"
-            "{% generation %}{{ message['content'] | trim }}{% endgeneration %}"
+            "{% generation %}{{ message['content'] | trim }}{{ '<end_of_turn>\n' }}{% endgeneration %}"
         "{% else %}"
-            "{{ message['content'] | trim }}"
+            "{{ message['content'] | trim }}{{ '<end_of_turn>\n' }}"
         "{% endif %}"
-        "{{ '<end_of_turn>\n' }}"
         "{% endfor %}"
         "{% if add_generation_prompt %}{{'<start_of_turn>model\n'}}{% endif %}"
     )
