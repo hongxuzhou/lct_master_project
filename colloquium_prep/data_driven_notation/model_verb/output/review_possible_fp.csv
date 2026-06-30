@@ -1,0 +1,5 @@
+id,sentence,token,lemma,reason,sbn
+p50/d2550,Tom told me that he'd lost his watch.,'d,had?,'d+VBN/better -> had (excluded),"male.n.02 Name ""Tom"" tell.v.02 Proposition >1 Agent -1 Time +1 Recipient +2 time.n.08 TPR now person.n.01 EQU speaker CONTINUATION <0 male.n.02 ANA -4 lose.v.05 Agent -1 Time +1 Theme +3 time.n.08 TPR now male.n.02 ANA -7 watch.n.01 User -1"
+p04/d2502,This can is leaking.,can,can,"kept, but no P/N/TSU in SBN (possible noun homograph)",can.n.01 time.n.08 EQU now leak.v.04 Source -2 Time -1
+p73/d2958,That's thieves' cant.,ca,can,"kept, but no P/N/TSU in SBN (possible noun homograph)",entity.n.01 be.v.01 Theme -1 Time +1 Co-Theme +4 time.n.08 EQU now person.n.01 Role +1 thief.n.01 cant.n.03 Creator -2
+p40/d1464,Tom told Mary something he'd never told anyone.,'d,had?,'d+VBN/better -> had (excluded),"male.n.02 Name ""Tom"" tell.v.02 Agent -1 Time +1 Recipient +2 Topic +3 time.n.08 TPR now female.n.02 Name ""Mary"" entity.n.01 male.n.02 ANA -5 NEGATION <1 tell.v.02 Topic -2 Agent -1 Time +1 Recipient +2 time.n.08 TPR now person.n.01"

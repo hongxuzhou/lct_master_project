@@ -1,0 +1,44 @@
+id,sentence,match,sbn
+p47/d2658,I used to live in a village.,used to,person.n.01 EQU speaker time.n.08 TPR now live.v.01 Theme -2 Time -1 Location +1 village.n.02
+p91/d3518,I used to be a dancer.,used to,person.n.01 EQU speaker time.n.08 TPR now be.v.08 Theme -2 Time -1 Co-Theme +1 person.n.01 Role +1 dancer.n.01
+p52/d3204,Tom used to be a soldier.,used to,"male.n.02 Name ""Tom"" time.n.08 TPR now be.v.08 Theme -2 Time -1 Co-Theme +1 person.n.01 Role +1 soldier.n.01"
+p49/d3554,She used to live in Tel Aviv.,used to,"female.n.02 time.n.08 TPR now live.v.01 Theme -2 Time -1 Location +1 city.n.01 Name ""Tel Aviv"""
+p34/d3238,Tom used to be a long distance truck driver.,used to,"male.n.02 Name ""Tom"" time.n.08 TPR now be.v.08 Theme -2 Time -1 Co-Theme +3 long.a.01 Value + distance.n.01 person.n.01 Goal -2 Role +1 truck_driver.n.01 Theme -2"
+p12/d3297,He used to drink beer.,used to,male.n.02 time.n.08 TPR now drink.v.01 Agent -2 Time -1 Patient +1 beer.n.01
+p88/d2105,There used to be a lot of frogs in this pond.,used to,entity.n.01 time.n.08 TPR now be.v.03 Time -1 EQU -2 Theme +1 Location +3 entity.n.01 Quantity + EQU +1 frog.n.01 pond.n.01
+p70/d2278,The voyage from England to India used to take 6 months.,used to,"voyage.n.01 Source +1 Destination +2 country.n.02 Name ""England"" country.n.02 Name ""India"" time.n.08 TPR now take.v.02 Theme -4 Time -1 Value +2 quantity.n.01 EQU 6 month.n.01 Quantity -1"
+p63/d3424,He need not have called a taxi.,need not,male.n.02 NEGATION <1 NECESSITY <1 call.v.05 Agent -1 Time +1 Theme +2 time.n.08 TPR now taxi.n.01
+p99/d1413,I used to be fat.,used to,person.n.01 EQU speaker time.n.08 TPR now fat.a.01 Theme -2 Time -1
+p18/d0828,I used to drink beer.,used to,person.n.01 EQU speaker time.n.08 TPR now drink.v.01 Agent -2 Time -1 Patient +1 beer.n.01
+p00/d0850,She used to play tennis every Sunday.,used to,NEGATION <1 NEGATION <1 female.n.02 time.n.08 TPR now play.v.01 Agent -2 Time -1 Theme +1 Time +2 tennis.n.01 CONJUNCTION <2 time.n.08 DayOfWeek sunday
+p12/d2274,Mary is used to Tom's moods.,used to,"female.n.02 Name ""Mary"" time.n.08 EQU now used_to.a.01 Agent -2 Time -1 Theme +2 male.n.02 Name ""Tom"" mood.n.01 Creator -1"
+p56/d1961,I'm used to the noise.,used to,person.n.01 EQU speaker time.n.08 EQU now used_to.a.01 Agent -2 Time -1 Theme +1 noise.n.02
+p01/d1775,She used to love him.,used to,female.n.02 time.n.08 TPR now love.v.03 Experiencer -2 Time -1 Stimulus +1 male.n.02
+p59/d3193,Mary used to be a hairdresser.,used to,"female.n.02 Name ""Mary"" time.n.08 TPR now be.v.08 Theme -2 Time -1 Co-Theme +1 person.n.01 Role +1 hairdresser.n.01"
+p02/d1539,The weather is clearing up. I needn't have brought an umbrella.,needn't,weather.n.01 time.n.08 EQU now clear_up.v.04 Source -2 Time -1 CONTINUATION <1 person.n.01 EQU speaker NEGATION <1 NECESSITY <1 bring.v.01 Agent -1 Time +1 Theme +2 time.n.08 TPR now umbrella.n.01
+p07/d2341,I'm used to the dark.,used to,person.n.01 EQU speaker time.n.08 EQU now used_to.a.01 Agent -2 Time -1 Theme +1 dark.n.01
+p42/d2759,I used to love Mary.,used to,"person.n.01 EQU speaker time.n.08 TPR now love.v.01 Experiencer -2 Time -1 Stimulus +1 female.n.02 Name ""Mary"""
+p37/d3230,Tom used to bake us cookies.,used to,"male.n.02 Name ""Tom"" time.n.08 TPR now bake.v.02 Agent -2 Time -1 Beneficiary +1 Product +2 person.n.01 Sub speaker cookie.n.01"
+p39/d3005,Tom used to write poems.,used to,"male.n.02 Name ""Tom"" time.n.08 TPR now write.v.01 Agent -2 Time -1 Result +1 poem.n.01"
+p91/d3417,Tom used to have a sports car.,used to,"male.n.02 Name ""Tom"" time.n.08 TPR now have.v.04 Pivot -2 Time -1 Theme +1 sports_car.n.01"
+p37/d2103,I used to live in Kobe.,used to,"person.n.01 EQU speaker time.n.08 TPR now live.v.01 Theme -2 Time -1 Location +1 city.n.01 Name ""Kobe"""
+p70/d0762,Robots are used to find missing victims.,used to,robot.n.01 time.n.08 EQU now use.v.01 Instrument -2 Time -1 Theme +1 find.v.01 Agent -3 Theme +2 missing.a.01 AttributeOf +1 person.n.01 Role +1 victim.n.01
+p01/d2762,He used to love her.,used to,male.n.02 time.n.08 TPR now love.v.03 Experiencer -2 Time -1 Stimulus +1 female.n.02
+p64/d3403,I used to play the trombone.,used to,person.n.01 EQU speaker time.n.08 TPR now play.v.03 Agent -2 Time -1 Theme +1 trombone.n.01
+p73/d3197,Tom reminds me of someone I used to know in high school.,used to,"male.n.02 Name ""Tom"" remind.v.01 Stimulus -1 Time +1 Experiencer +2 Theme +3 time.n.08 EQU now person.n.01 EQU speaker person.n.01 person.n.01 EQU speaker time.n.08 TPR now know.v.04 Stimulus -3 Experiencer -2 Time -1 Context +1 high_school.n.01"
+p04/d1717,The voyage to America used to take many weeks.,used to,"voyage.n.01 Destination +1 country.n.02 Name ""America"" time.n.08 TPR now take.v.02 Theme -3 Time -1 Value +1 week.n.01 Quantity +"
+p37/d2324,Mary's grandfather used to harvest by scythe.,used to,"female.n.02 Name ""Mary"" person.n.01 Role +1 grandfather.n.01 Of -2 time.n.08 TPR now harvest.v.01 Agent -3 Time -1 Instrument +1 scythe.n.01"
+p78/d2628,Tom used to eat a lot of meat.,used to,"male.n.02 Name ""Tom"" time.n.08 TPR now eat.v.01 Agent -2 Time -1 Patient +1 entity.n.01 Quantity + EQU +1 meat.n.01"
+p40/d3528,We used to play in the park.,used to,person.n.01 Sub speaker time.n.08 TPR now play.v.05 Agent -2 Time -1 Location +1 park.n.02
+p34/d0821,I was used to the heat.,used to,person.n.01 EQU speaker time.n.08 TPR now used_to.a.01 Agent -2 Time -1 Theme +1 heat.n.02
+p89/d2268,Tom used to hate Boston.,used to,"male.n.02 Name ""Tom"" time.n.08 TPR now hate.v.01 Experiencer -2 Time -1 Stimulus +1 city.n.01 Name ""Boston"""
+p70/d3448,I used to be a cop.,used to,person.n.01 EQU speaker time.n.08 TPR now be.v.08 Theme -2 Time -1 Co-Theme +1 person.n.01 Role +1 cop.n.01
+p76/d3270,There used to be a coffee shop near the school.,used to,entity.n.01 time.n.08 TPR now be.v.03 Time -1 EQU -2 Theme +1 Location +2 coffee_shop.n.01 location.n.01 APX +1 school.n.02
+p71/d3203,I used to swim in this river.,used to,person.n.01 EQU speaker time.n.08 TPR now swim.v.01 Theme -2 Time -1 Location +1 river.n.01
+p45/d2102,Tom used to be shy.,used to,"male.n.02 Name ""Tom"" time.n.08 TPR now shy.a.01 Theme -2 Time -1"
+p31/d2713,Tom used to live in Boston.,used to,"male.n.02 Name ""Tom"" time.n.08 TPR now live.v.01 Theme -2 Time -1 Location +1 city.n.01 Name ""Boston"""
+p72/d1176,"The main product is polyphosphoric acid, which is used to manufacture gasoline in South Africa.",used to,"main.a.01 AttributeOf +1 product.n.02 be.v.01 Co-Theme -1 Time +1 Theme +2 time.n.08 EQU now polyphosphoric_acid.n.01 entity.n.01 EQU -1 time.n.08 EQU now use.v.01 Theme -2 Time -1 Goal +1 manufacture.v.01 Theme -3 Result +1 Location +2 gasoline.n.01 country.n.02 Name ""South Africa"""
+p64/d1593,Tom used to be a mama's boy.,used to,"male.n.02 Name ""Tom"" time.n.08 TPR now be.v.01 Theme -2 Time -1 Co-Theme +1 person.n.01 Role +1 mama's_boy.n.01"
+p23/d2041,There used to be a castle on this hill.,used to,entity.n.01 time.n.08 TPR now be.v.03 Time -1 EQU -2 Theme +1 Location +2 castle.n.02 hill.n.01
+p99/d2718,I used to run a small bookstore in a shopping centre.,used to,person.n.01 EQU speaker time.n.08 TPR now run.v.04 Agent -2 Time -1 Theme +2 small.a.01 Value + bookstore.n.01 Attribute -1 Location +1 shopping_centre.n.01
+p29/d1795,I used to keep a diary.,used to,person.n.01 EQU speaker time.n.08 TPR now keep.v.08 Agent -2 Time -1 Theme +1 diary.n.01
