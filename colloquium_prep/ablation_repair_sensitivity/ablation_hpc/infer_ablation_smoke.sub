@@ -1,0 +1,20 @@
+universe = vanilla
+initialdir = /nethome/honzhou
+
+executable = /nethome/honzhou/thesis_zone/pilot/script/ablation_repair_sensitivity/hpc/infer_ablation.sh
+
+# Smoke test: 35 long rows (5 sentences x 7 conditions), output to a separate file.
+environment = "LIMIT=35 OUTFILE=preds_ablation_smoke.parquet BATCH=16 MAXNEW=200"
+
+output = /scratch/hongxuzhou/logs/ablation_infer/smoke.$(ClusterId).out
+error  = /scratch/hongxuzhou/logs/ablation_infer/smoke.$(ClusterId).err
+log    = /scratch/hongxuzhou/logs/ablation_infer/smoke.$(ClusterId).log
+
+request_CPUs   = 4
+request_memory = 32G
+request_GPUs   = 1
+requirements = (GPUs_Capability >= 8.0) && (GPUs_GlobalMemoryMb > 40000)
+
++MaxWallTime = 3600
+
+queue 1

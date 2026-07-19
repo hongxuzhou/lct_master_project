@@ -1,0 +1,25 @@
+universe = vanilla
+initialdir = /nethome/honzhou
+
+executable = /nethome/honzhou/thesis_zone/pilot/script/ablation_repair_sensitivity/hpc/infer_ablation.sh
+
+# Full run: all 5852 (id, condition) rows, single knowledge-injection prompt
+# (design decision 7 — no with/without-definition pair, so half the row
+# count of the main pilot's 2-variant equivalent would have been).
+environment = "OUTFILE=preds_ablation.parquet BATCH=16 MAXNEW=200"
+
+output = /scratch/hongxuzhou/logs/ablation_infer/full.$(ClusterId).out
+error  = /scratch/hongxuzhou/logs/ablation_infer/full.$(ClusterId).err
+log    = /scratch/hongxuzhou/logs/ablation_infer/full.$(ClusterId).log
+
+request_CPUs   = 4
+request_memory = 32G
+request_GPUs   = 1
+requirements = (GPUs_Capability >= 8.0) && (GPUs_GlobalMemoryMb > 40000)
+
+# Short structured output (<=200 new tokens) with no adapter-loading overhead
+# is much cheaper per-row than the main pilot's full SBN generation
+# (up to 1024 tokens) — 12h is a conservative ceiling, not an estimate.
++MaxWallTime = 43200
+
+queue 1
