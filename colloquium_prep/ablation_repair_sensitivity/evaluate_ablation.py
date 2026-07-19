@@ -221,17 +221,20 @@ def run_group(scored: pd.DataFrame, conditions, label):
 
     # Tier 2: localization F1 among clean true positives
     tp = sub[sub["detected"] & sub["gt_positive"] & ~sub["suspect"]]
-    wide_f1 = tp.pivot(index="id", columns="condition", values="reparandum_f1")
-    wide_f1 = wide_f1[[c for c in conditions if c in wide_f1.columns]].dropna()
-    if len(wide_f1) >= 3 and wide_f1.shape[1] >= 2:
-        stat_fr, p_fr = friedmanchisquare(*[wide_f1[c] for c in wide_f1.columns])
-        print(f"=== {label}: Tier 2 reparandum F1 among clean TPs (N={len(wide_f1)}) ===")
-        print(wide_f1.mean().round(4).to_string())
-        print(f"Friedman chi2 = {stat_fr:.2f}, p = {p_fr:.3g}\n")
-    else:
-        print(f"=== {label}: Tier 2 — not enough paired clean TPs to test (N={len(wide_f1)}) ===\n")
+    f1_means = {}
+    for metric in ("reparandum_f1", "repair_f1"):
+        wide_f1 = tp.pivot(index="id", columns="condition", values=metric)
+        wide_f1 = wide_f1[[c for c in conditions if c in wide_f1.columns]].dropna()
+        if len(wide_f1) >= 3 and wide_f1.shape[1] >= 2:
+            stat_fr, p_fr = friedmanchisquare(*[wide_f1[c] for c in wide_f1.columns])
+            print(f"=== {label}: Tier 2 {metric} among clean TPs (N={len(wide_f1)}) ===")
+            print(wide_f1.mean().round(4).to_string())
+            print(f"Friedman chi2 = {stat_fr:.2f}, p = {p_fr:.3g}\n")
+        else:
+            print(f"=== {label}: Tier 2 {metric} — not enough paired clean TPs to test (N={len(wide_f1)}) ===\n")
+        f1_means[metric] = wide_f1.mean() if len(wide_f1) else None
 
-    return dict(det_rate=wide_det.mean(), det_pairwise=det_pairwise, f1_mean=wide_f1.mean() if len(wide_f1) else None)
+    return dict(det_rate=wide_det.mean(), det_pairwise=det_pairwise, **f1_means)
 
 
 def parse_args():

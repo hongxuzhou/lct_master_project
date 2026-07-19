@@ -36,6 +36,24 @@ insertion — which turned out to catch a genuine data defect (p40/d1979,
 repair_tail[_interrug]: two separate insertions land in what should be a
 single-repair condition, one of them an empty-string artifact). Downstream
 scoring should exclude `suspect` rows from Tier-2 (localization) comparisons.
+
+Repair span (revised post-ablation-run): `GroundTruth.repair` used to be
+defined as the *entire* gold_nl sentence (original design decision 5). Once
+the actual model outputs came back, it was clear the model never restates the
+whole sentence in its REPAIR field — it consistently gives just the minimal
+token span that stands in contrast with the reparandum (e.g. reparandum "199
+bn," -> repair "201 bn", not the 12-word sentence). Scoring the whole sentence
+against that made repair_p/r/f1 uninterpretable regardless of whether the
+model's answer was linguistically right. Since this dataset's construction
+always preserves gold verbatim inside the variant (the reparandum is pure
+insertion), difflib never actually emits a "replace" opcode here, only
+"insert" — so there is no directly-aligned gold-side span to lift. The fix
+takes the gold tokens immediately following the insertion point, length-
+matched to the inserted (reparandum) span, as the local repair proxy. This is
+the same move as treating restart/replacement boundary cases as replacement
+(the repair-sensitivity ablation's advisor-approved boundary-case decision):
+whatever comes right after the discarded material, for as many tokens as the
+discarded material took up, is what the reparandum got replaced by.
 """
 
 import difflib
@@ -78,11 +96,23 @@ def _strip_edges(text: str) -> str:
     return text.strip()
 
 
-def diff_inserted_span(gold_nl: str, variety_nl: str):
-    """Return (inserted_text, n_blocks): the text inserted in `variety_nl`
-    relative to `gold_nl`, aligning on lowercased tokens but returning
-    original-case text, plus how many non-contiguous insert/replace opcodes
-    contributed to it (>1 signals a likely data anomaly)."""
+def diff_spans(gold_nl: str, variety_nl: str):
+    """Return (inserted_text, repair_text, n_blocks).
+
+    inserted_text: the material inserted in `variety_nl` relative to
+    `gold_nl` (the reparandum) — aligns on lowercased tokens, returns
+    original-case text. Unchanged from the original diff_inserted_span.
+
+    repair_text: the LOCAL gold-side counterpart of the reparandum — see
+    module docstring ("Repair span (revised post-ablation-run)"). For a true
+    "replace" opcode this is the directly-aligned gold[i1:i2] span; in
+    practice this dataset only ever produces "insert" opcodes (gold is always
+    preserved verbatim), so this is the gold tokens starting right where the
+    insertion happened, length-matched to the inserted span.
+
+    n_blocks: how many non-contiguous insert/replace opcodes contributed to
+    the reparandum (>1 signals a likely data anomaly, same as before).
+    """
     gold_tokens = _tokenize(gold_nl)
     var_tokens = _tokenize(variety_nl)
     gold_key = [_alignment_key(t) for t in gold_tokens]
@@ -90,12 +120,17 @@ def diff_inserted_span(gold_nl: str, variety_nl: str):
 
     sm = difflib.SequenceMatcher(None, gold_key, var_key, autojunk=False)
     inserted = []
+    repair_tokens = []
     n_blocks = 0
     for tag, i1, i2, j1, j2 in sm.get_opcodes():
         if tag in ("insert", "replace"):
             n_blocks += 1
             inserted.extend(var_tokens[j1:j2])
-    return " ".join(inserted), n_blocks
+            if tag == "replace":
+                repair_tokens = gold_tokens[i1:i2]
+            else:
+                repair_tokens = gold_tokens[i2:i2 + (j2 - j1)]
+    return " ".join(inserted), " ".join(repair_tokens), n_blocks
 
 
 def extract_ground_truth(gold_nl: str, variety_nl: str, condition: str) -> GroundTruth:
@@ -118,9 +153,9 @@ def extract_ground_truth(gold_nl: str, variety_nl: str, condition: str) -> Groun
         # which is exactly what we want to diff against gold.
         reparandum_source = variety_nl.replace(_INTERRUG_LITERAL, "")
 
-    span, n_blocks = diff_inserted_span(gold_nl, reparandum_source)
+    span, repair_span, n_blocks = diff_spans(gold_nl, reparandum_source)
     return GroundTruth(reparandum=_strip_edges(span), interregnum=interregnum,
-                        repair=gold_nl, suspect=(n_blocks > 1))
+                        repair=_strip_edges(repair_span), suspect=(n_blocks > 1))
 
 
 if __name__ == "__main__":
@@ -149,4 +184,4 @@ if __name__ == "__main__":
     ]
     for gold, variety, cond in cases:
         gt = extract_ground_truth(gold, variety, cond)
-        print(f"[{cond:20s}] reparandum={gt.reparandum!r:30s} interregnum={gt.interregnum!r}")
+        print(f"[{cond:20s}] reparandum={gt.reparandum!r:30s} interregnum={gt.interregnum!r:12s} repair={gt.repair!r}")
