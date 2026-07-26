@@ -1,0 +1,6563 @@
+[
+ {
+  "doc": "p17/d0758",
+  "sent": "Philip Morris said it sold 201 bn cigarettes world-wide during the quarter.",
+  "sbn": "company.n.01 Name \"Philip Morris\" say.v.02 Proposition >1 Agent -1 Time +1 time.n.08 TPR now CONTINUATION <0 entity.n.01 ANA -3 sell.v.01 Agent -1 Time +1 Theme +3 Manner +4 Duration +5 time.n.08 TPR now quantity.n.01 EQU 201000000000 cigarette.n.01 Quantity -1 world-wide.a.01 quarter.n.06",
+  "role": "ANA",
+  "raw": "-3",
+  "src": 3,
+  "src_tok": "entity.n.01",
+  "src_box": 1,
+  "lin": 0,
+  "lin_tok": "company.n.01",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "company.n.01",
+    0
+   ],
+   [
+    1,
+    "say.v.02",
+    0
+   ],
+   [
+    2,
+    "time.n.08",
+    0
+   ],
+   [
+    3,
+    "entity.n.01",
+    1
+   ],
+   [
+    4,
+    "sell.v.01",
+    1
+   ],
+   [
+    5,
+    "time.n.08",
+    1
+   ],
+   [
+    6,
+    "quantity.n.01",
+    1
+   ],
+   [
+    7,
+    "cigarette.n.01",
+    1
+   ],
+   [
+    8,
+    "world-wide.a.01",
+    1
+   ],
+   [
+    9,
+    "quarter.n.06",
+    1
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    1,
+    "CONTINUATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p50/d2550",
+  "sent": "Tom told me that he'd lost his watch.",
+  "sbn": "male.n.02 Name \"Tom\" tell.v.02 Proposition >1 Agent -1 Time +1 Recipient +2 time.n.08 TPR now person.n.01 EQU speaker CONTINUATION <0 male.n.02 ANA -4 lose.v.05 Agent -1 Time +1 Theme +3 time.n.08 TPR now male.n.02 ANA -7 watch.n.01 User -1",
+  "role": "ANA",
+  "raw": "-4",
+  "src": 4,
+  "src_tok": "male.n.02",
+  "src_box": 1,
+  "lin": 0,
+  "lin_tok": "male.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "male.n.02",
+    0
+   ],
+   [
+    1,
+    "tell.v.02",
+    0
+   ],
+   [
+    2,
+    "time.n.08",
+    0
+   ],
+   [
+    3,
+    "person.n.01",
+    0
+   ],
+   [
+    4,
+    "male.n.02",
+    1
+   ],
+   [
+    5,
+    "lose.v.05",
+    1
+   ],
+   [
+    6,
+    "time.n.08",
+    1
+   ],
+   [
+    7,
+    "male.n.02",
+    1
+   ],
+   [
+    8,
+    "watch.n.01",
+    1
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    1,
+    "CONTINUATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p50/d2550",
+  "sent": "Tom told me that he'd lost his watch.",
+  "sbn": "male.n.02 Name \"Tom\" tell.v.02 Proposition >1 Agent -1 Time +1 Recipient +2 time.n.08 TPR now person.n.01 EQU speaker CONTINUATION <0 male.n.02 ANA -4 lose.v.05 Agent -1 Time +1 Theme +3 time.n.08 TPR now male.n.02 ANA -7 watch.n.01 User -1",
+  "role": "ANA",
+  "raw": "-7",
+  "src": 7,
+  "src_tok": "male.n.02",
+  "src_box": 1,
+  "lin": 0,
+  "lin_tok": "male.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "male.n.02",
+    0
+   ],
+   [
+    1,
+    "tell.v.02",
+    0
+   ],
+   [
+    2,
+    "time.n.08",
+    0
+   ],
+   [
+    3,
+    "person.n.01",
+    0
+   ],
+   [
+    4,
+    "male.n.02",
+    1
+   ],
+   [
+    5,
+    "lose.v.05",
+    1
+   ],
+   [
+    6,
+    "time.n.08",
+    1
+   ],
+   [
+    7,
+    "male.n.02",
+    1
+   ],
+   [
+    8,
+    "watch.n.01",
+    1
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    1,
+    "CONTINUATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p78/d2341",
+  "sent": "Tom flipped over the card and saw that it was the ace of spades.",
+  "sbn": "male.n.02 Name \"Tom\" flip_over.v.01 Agent -1 Time +1 Theme +2 time.n.08 TPR now card.n.01 see.v.01 Proposition >1 Experiencer -4 Time +1 time.n.08 TPR now CONTINUATION <0 entity.n.01 ANA -3 be.v.02 Theme -1 Time +1 Co-Theme +2 time.n.08 TPR now ace.n.02 SubOf +1 spade.n.01",
+  "role": "ANA",
+  "raw": "-3",
+  "src": 6,
+  "src_tok": "entity.n.01",
+  "src_box": 1,
+  "lin": 3,
+  "lin_tok": "card.n.01",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "male.n.02",
+    0
+   ],
+   [
+    1,
+    "flip_over.v.01",
+    0
+   ],
+   [
+    2,
+    "time.n.08",
+    0
+   ],
+   [
+    3,
+    "card.n.01",
+    0
+   ],
+   [
+    4,
+    "see.v.01",
+    0
+   ],
+   [
+    5,
+    "time.n.08",
+    0
+   ],
+   [
+    6,
+    "entity.n.01",
+    1
+   ],
+   [
+    7,
+    "be.v.02",
+    1
+   ],
+   [
+    8,
+    "time.n.08",
+    1
+   ],
+   [
+    9,
+    "ace.n.02",
+    1
+   ],
+   [
+    10,
+    "spade.n.01",
+    1
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    1,
+    "CONTINUATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p00/d3233",
+  "sent": "The doctor told Tom that he should eat a lot of vegetables.",
+  "sbn": "person.n.01 Role +1 doctor.n.01 tell.v.02 Proposition >1 Agent -2 Time +1 Recipient +2 time.n.08 TPR now male.n.02 Name \"Tom\" CONTINUATION <0 male.n.02 ANA -1 NECESSITY <1 eat.v.01 Agent -1 Patient +1 entity.n.01 Quantity + EQU +1 vegetable.n.01",
+  "role": "ANA",
+  "raw": "-1",
+  "src": 5,
+  "src_tok": "male.n.02",
+  "src_box": 1,
+  "lin": 4,
+  "lin_tok": "male.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "person.n.01",
+    0
+   ],
+   [
+    1,
+    "doctor.n.01",
+    0
+   ],
+   [
+    2,
+    "tell.v.02",
+    0
+   ],
+   [
+    3,
+    "time.n.08",
+    0
+   ],
+   [
+    4,
+    "male.n.02",
+    0
+   ],
+   [
+    5,
+    "male.n.02",
+    1
+   ],
+   [
+    6,
+    "eat.v.01",
+    2
+   ],
+   [
+    7,
+    "entity.n.01",
+    2
+   ],
+   [
+    8,
+    "vegetable.n.01",
+    2
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    1,
+    "CONTINUATION"
+   ],
+   [
+    2,
+    1,
+    "NECESSITY"
+   ]
+  ]
+ },
+ {
+  "doc": "p71/d2285",
+  "sent": "Tom didn't realize he had his sweater on inside out.",
+  "sbn": "male.n.02 Name \"Tom\" NEGATION <1 time.n.08 TPR now realize.v.01 Time -1 Proposition >1 Experiencer -2 CONTINUATION <0 male.n.02 ANA -3 have_on.v.01 Agent -1 Time +1 Theme +3 Manner +4 time.n.08 TPR now male.n.02 ANA -6 sweater.n.01 User -1 inside_out.r.01",
+  "role": "ANA",
+  "raw": "-3",
+  "src": 3,
+  "src_tok": "male.n.02",
+  "src_box": 2,
+  "lin": 0,
+  "lin_tok": "male.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "male.n.02",
+    0
+   ],
+   [
+    1,
+    "time.n.08",
+    1
+   ],
+   [
+    2,
+    "realize.v.01",
+    1
+   ],
+   [
+    3,
+    "male.n.02",
+    2
+   ],
+   [
+    4,
+    "have_on.v.01",
+    2
+   ],
+   [
+    5,
+    "time.n.08",
+    2
+   ],
+   [
+    6,
+    "male.n.02",
+    2
+   ],
+   [
+    7,
+    "sweater.n.01",
+    2
+   ],
+   [
+    8,
+    "inside_out.r.01",
+    2
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    0,
+    "NEGATION"
+   ],
+   [
+    2,
+    2,
+    "CONTINUATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p71/d2285",
+  "sent": "Tom didn't realize he had his sweater on inside out.",
+  "sbn": "male.n.02 Name \"Tom\" NEGATION <1 time.n.08 TPR now realize.v.01 Time -1 Proposition >1 Experiencer -2 CONTINUATION <0 male.n.02 ANA -3 have_on.v.01 Agent -1 Time +1 Theme +3 Manner +4 time.n.08 TPR now male.n.02 ANA -6 sweater.n.01 User -1 inside_out.r.01",
+  "role": "ANA",
+  "raw": "-6",
+  "src": 6,
+  "src_tok": "male.n.02",
+  "src_box": 2,
+  "lin": 0,
+  "lin_tok": "male.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "male.n.02",
+    0
+   ],
+   [
+    1,
+    "time.n.08",
+    1
+   ],
+   [
+    2,
+    "realize.v.01",
+    1
+   ],
+   [
+    3,
+    "male.n.02",
+    2
+   ],
+   [
+    4,
+    "have_on.v.01",
+    2
+   ],
+   [
+    5,
+    "time.n.08",
+    2
+   ],
+   [
+    6,
+    "male.n.02",
+    2
+   ],
+   [
+    7,
+    "sweater.n.01",
+    2
+   ],
+   [
+    8,
+    "inside_out.r.01",
+    2
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    0,
+    "NEGATION"
+   ],
+   [
+    2,
+    2,
+    "CONTINUATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p47/d2958",
+  "sent": "He's happy that he passed that exam.",
+  "sbn": "male.n.02 time.n.08 EQU now happy.a.01 Time -1 Proposition >1 Experiencer -2 CONTINUATION <0 male.n.02 ANA -3 pass.v.14 Agent -1 Time +1 Theme +2 time.n.08 TPR now exam.n.01",
+  "role": "ANA",
+  "raw": "-3",
+  "src": 3,
+  "src_tok": "male.n.02",
+  "src_box": 1,
+  "lin": 0,
+  "lin_tok": "male.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "male.n.02",
+    0
+   ],
+   [
+    1,
+    "time.n.08",
+    0
+   ],
+   [
+    2,
+    "happy.a.01",
+    0
+   ],
+   [
+    3,
+    "male.n.02",
+    1
+   ],
+   [
+    4,
+    "pass.v.14",
+    1
+   ],
+   [
+    5,
+    "time.n.08",
+    1
+   ],
+   [
+    6,
+    "exam.n.01",
+    1
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    1,
+    "CONTINUATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p88/d2319",
+  "sent": "He who risks not gains not.",
+  "sbn": "NEGATION <1 person.n.01 EQU +1 entity.n.01 NEGATION <1 NEGATION <1 risk.v.01 Agent -1 NEGATION <2 gain.v.01 Agent -2",
+  "role": "Agent",
+  "raw": "-2",
+  "src": 3,
+  "src_tok": "gain.v.01",
+  "src_box": 4,
+  "lin": 1,
+  "lin_tok": "entity.n.01",
+  "reg": 0,
+  "reg_tok": "person.n.01",
+  "concepts": [
+   [
+    0,
+    "person.n.01",
+    1
+   ],
+   [
+    1,
+    "entity.n.01",
+    1
+   ],
+   [
+    2,
+    "risk.v.01",
+    3
+   ],
+   [
+    3,
+    "gain.v.01",
+    4
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    0,
+    "NEGATION"
+   ],
+   [
+    2,
+    1,
+    "NEGATION"
+   ],
+   [
+    3,
+    2,
+    "NEGATION"
+   ],
+   [
+    4,
+    2,
+    "NEGATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p42/d1416",
+  "sent": "She is convinced that her son is still alive.",
+  "sbn": "female.n.02 time.n.08 EQU now convinced.a.02 Time -1 Proposition >1 Experiencer -2 CONTINUATION <0 female.n.02 ANA -3 person.n.01 Role +1 son.n.01 Of -2 time.n.08 EQU now alive.a.01 AttributeOf -3 Time -1",
+  "role": "ANA",
+  "raw": "-3",
+  "src": 3,
+  "src_tok": "female.n.02",
+  "src_box": 1,
+  "lin": 0,
+  "lin_tok": "female.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "female.n.02",
+    0
+   ],
+   [
+    1,
+    "time.n.08",
+    0
+   ],
+   [
+    2,
+    "convinced.a.02",
+    0
+   ],
+   [
+    3,
+    "female.n.02",
+    1
+   ],
+   [
+    4,
+    "person.n.01",
+    1
+   ],
+   [
+    5,
+    "son.n.01",
+    1
+   ],
+   [
+    6,
+    "time.n.08",
+    1
+   ],
+   [
+    7,
+    "alive.a.01",
+    1
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    1,
+    "CONTINUATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p42/d3251",
+  "sent": "Either you or he is wrong.",
+  "sbn": "entity.n.01 time.n.08 EQU now wrong.a.01 AttributeOf -2 Time -1 NEGATION <1 NEGATION <1 person.n.01 EQU hearer EQU -3 NEGATION <2 male.n.02 EQU -4",
+  "role": "EQU",
+  "raw": "-4",
+  "src": 4,
+  "src_tok": "male.n.02",
+  "src_box": 3,
+  "lin": 0,
+  "lin_tok": "entity.n.01",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "entity.n.01",
+    0
+   ],
+   [
+    1,
+    "time.n.08",
+    0
+   ],
+   [
+    2,
+    "wrong.a.01",
+    0
+   ],
+   [
+    3,
+    "person.n.01",
+    2
+   ],
+   [
+    4,
+    "male.n.02",
+    3
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    0,
+    "NEGATION"
+   ],
+   [
+    2,
+    1,
+    "NEGATION"
+   ],
+   [
+    3,
+    1,
+    "NEGATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p65/d1457",
+  "sent": "He is either in London or in Paris.",
+  "sbn": "male.n.02 be.v.03 Theme -1 Time +1 Location +1 time.n.08 EQU now city.n.01 NEGATION <1 NEGATION <1 city.n.01 Name \"London\" EQU -1 NEGATION <2 city.n.01 Name \"Paris\" EQU -2",
+  "role": "EQU",
+  "raw": "-2",
+  "src": 5,
+  "src_tok": "city.n.01",
+  "src_box": 3,
+  "lin": 3,
+  "lin_tok": "city.n.01",
+  "reg": 2,
+  "reg_tok": "time.n.08",
+  "concepts": [
+   [
+    0,
+    "male.n.02",
+    0
+   ],
+   [
+    1,
+    "be.v.03",
+    0
+   ],
+   [
+    2,
+    "time.n.08",
+    0
+   ],
+   [
+    3,
+    "city.n.01",
+    0
+   ],
+   [
+    4,
+    "city.n.01",
+    2
+   ],
+   [
+    5,
+    "city.n.01",
+    3
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    0,
+    "NEGATION"
+   ],
+   [
+    2,
+    1,
+    "NEGATION"
+   ],
+   [
+    3,
+    1,
+    "NEGATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p12/d2239",
+  "sent": "She admits that she stole the jewels.",
+  "sbn": "female.n.02 admit.v.01 Proposition >1 Agent -1 Time +1 time.n.08 EQU now CONTINUATION <0 female.n.02 ANA -3 steal.v.01 Agent -1 Time +1 Theme +2 time.n.08 TPR now jewel.n.01",
+  "role": "ANA",
+  "raw": "-3",
+  "src": 3,
+  "src_tok": "female.n.02",
+  "src_box": 1,
+  "lin": 0,
+  "lin_tok": "female.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "female.n.02",
+    0
+   ],
+   [
+    1,
+    "admit.v.01",
+    0
+   ],
+   [
+    2,
+    "time.n.08",
+    0
+   ],
+   [
+    3,
+    "female.n.02",
+    1
+   ],
+   [
+    4,
+    "steal.v.01",
+    1
+   ],
+   [
+    5,
+    "time.n.08",
+    1
+   ],
+   [
+    6,
+    "jewel.n.01",
+    1
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    1,
+    "CONTINUATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p73/d3107",
+  "sent": "Tom claimed he saw a UFO.",
+  "sbn": "male.n.02 Name \"Tom\" claim.v.01 Proposition >1 Agent -1 Time +1 time.n.08 TPR now CONTINUATION <0 male.n.02 ANA -3 see.v.01 Experiencer -1 Time +1 Stimulus +2 time.n.08 TPR now ufo.n.01",
+  "role": "ANA",
+  "raw": "-3",
+  "src": 3,
+  "src_tok": "male.n.02",
+  "src_box": 1,
+  "lin": 0,
+  "lin_tok": "male.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "male.n.02",
+    0
+   ],
+   [
+    1,
+    "claim.v.01",
+    0
+   ],
+   [
+    2,
+    "time.n.08",
+    0
+   ],
+   [
+    3,
+    "male.n.02",
+    1
+   ],
+   [
+    4,
+    "see.v.01",
+    1
+   ],
+   [
+    5,
+    "time.n.08",
+    1
+   ],
+   [
+    6,
+    "ufo.n.01",
+    1
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    1,
+    "CONTINUATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p07/d2196",
+  "sent": "Tom isn't sure whether he locked the door.",
+  "sbn": "male.n.02 Name \"Tom\" NEGATION <1 time.n.08 EQU now sure.a.01 Time -1 Proposition >1 Experiencer -2 CONTINUATION <0 male.n.02 ANA -3 lock.v.01 Agent -1 Time +1 Patient +2 time.n.08 TPR now door.n.01",
+  "role": "ANA",
+  "raw": "-3",
+  "src": 3,
+  "src_tok": "male.n.02",
+  "src_box": 2,
+  "lin": 0,
+  "lin_tok": "male.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "male.n.02",
+    0
+   ],
+   [
+    1,
+    "time.n.08",
+    1
+   ],
+   [
+    2,
+    "sure.a.01",
+    1
+   ],
+   [
+    3,
+    "male.n.02",
+    2
+   ],
+   [
+    4,
+    "lock.v.01",
+    2
+   ],
+   [
+    5,
+    "time.n.08",
+    2
+   ],
+   [
+    6,
+    "door.n.01",
+    2
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    0,
+    "NEGATION"
+   ],
+   [
+    2,
+    2,
+    "CONTINUATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p98/d2653",
+  "sent": "Samuel helps everyone who asks him.",
+  "sbn": "male.n.02 Name \"Samuel\" NEGATION <1 NEGATION <1 help.v.01 Agent -1 Time +1 Beneficiary +2 time.n.08 EQU now CONJUNCTION <2 person.n.03 ask.v.02 Agent -1 Time +1 Patient +2 time.n.08 EQU now male.n.02 ANA -6",
+  "role": "ANA",
+  "raw": "-6",
+  "src": 6,
+  "src_tok": "male.n.02",
+  "src_box": 3,
+  "lin": 0,
+  "lin_tok": "male.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "male.n.02",
+    0
+   ],
+   [
+    1,
+    "help.v.01",
+    2
+   ],
+   [
+    2,
+    "time.n.08",
+    2
+   ],
+   [
+    3,
+    "person.n.03",
+    3
+   ],
+   [
+    4,
+    "ask.v.02",
+    3
+   ],
+   [
+    5,
+    "time.n.08",
+    3
+   ],
+   [
+    6,
+    "male.n.02",
+    3
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    0,
+    "NEGATION"
+   ],
+   [
+    2,
+    1,
+    "NEGATION"
+   ],
+   [
+    3,
+    1,
+    "CONJUNCTION"
+   ]
+  ]
+ },
+ {
+  "doc": "p25/d1536",
+  "sent": "He likes neither baseball nor football.",
+  "sbn": "male.n.02 NEGATION <1 like.v.02 Experiencer -1 Time +1 Stimulus +2 time.n.08 EQU now entity.n.01 NEGATION <1 NEGATION <1 baseball.n.01 EQU -1 NEGATION <2 football.n.01 EQU -2",
+  "role": "EQU",
+  "raw": "-2",
+  "src": 5,
+  "src_tok": "football.n.01",
+  "src_box": 4,
+  "lin": 3,
+  "lin_tok": "entity.n.01",
+  "reg": 2,
+  "reg_tok": "time.n.08",
+  "concepts": [
+   [
+    0,
+    "male.n.02",
+    0
+   ],
+   [
+    1,
+    "like.v.02",
+    1
+   ],
+   [
+    2,
+    "time.n.08",
+    1
+   ],
+   [
+    3,
+    "entity.n.01",
+    1
+   ],
+   [
+    4,
+    "baseball.n.01",
+    3
+   ],
+   [
+    5,
+    "football.n.01",
+    4
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    0,
+    "NEGATION"
+   ],
+   [
+    2,
+    1,
+    "NEGATION"
+   ],
+   [
+    3,
+    2,
+    "NEGATION"
+   ],
+   [
+    4,
+    2,
+    "NEGATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p65/d1574",
+  "sent": "Tom told me that he had been skydiving since he was sixteen.",
+  "sbn": "male.n.02 Name \"Tom\" tell.v.01 Proposition >1 Agent -1 Time +1 Recipient +2 time.n.08 TPR now person.n.01 EQU speaker CONTINUATION <0 male.n.02 ANA -4 time.n.08 TPR now skydive.v.01 Theme -2 Time -1 Start +1 entity.n.01 male.n.02 ANA -8 time.n.08 TPR now old.a.01 Participant -3 AttributeOf -2 Time -1 Value +1 measure.n.02 Quantity 16 Unit +1 year.n.01",
+  "role": "ANA",
+  "raw": "-4",
+  "src": 4,
+  "src_tok": "male.n.02",
+  "src_box": 1,
+  "lin": 0,
+  "lin_tok": "male.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "male.n.02",
+    0
+   ],
+   [
+    1,
+    "tell.v.01",
+    0
+   ],
+   [
+    2,
+    "time.n.08",
+    0
+   ],
+   [
+    3,
+    "person.n.01",
+    0
+   ],
+   [
+    4,
+    "male.n.02",
+    1
+   ],
+   [
+    5,
+    "time.n.08",
+    1
+   ],
+   [
+    6,
+    "skydive.v.01",
+    1
+   ],
+   [
+    7,
+    "entity.n.01",
+    1
+   ],
+   [
+    8,
+    "male.n.02",
+    1
+   ],
+   [
+    9,
+    "time.n.08",
+    1
+   ],
+   [
+    10,
+    "old.a.01",
+    1
+   ],
+   [
+    11,
+    "measure.n.02",
+    1
+   ],
+   [
+    12,
+    "year.n.01",
+    1
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    1,
+    "CONTINUATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p65/d1574",
+  "sent": "Tom told me that he had been skydiving since he was sixteen.",
+  "sbn": "male.n.02 Name \"Tom\" tell.v.01 Proposition >1 Agent -1 Time +1 Recipient +2 time.n.08 TPR now person.n.01 EQU speaker CONTINUATION <0 male.n.02 ANA -4 time.n.08 TPR now skydive.v.01 Theme -2 Time -1 Start +1 entity.n.01 male.n.02 ANA -8 time.n.08 TPR now old.a.01 Participant -3 AttributeOf -2 Time -1 Value +1 measure.n.02 Quantity 16 Unit +1 year.n.01",
+  "role": "ANA",
+  "raw": "-8",
+  "src": 8,
+  "src_tok": "male.n.02",
+  "src_box": 1,
+  "lin": 0,
+  "lin_tok": "male.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "male.n.02",
+    0
+   ],
+   [
+    1,
+    "tell.v.01",
+    0
+   ],
+   [
+    2,
+    "time.n.08",
+    0
+   ],
+   [
+    3,
+    "person.n.01",
+    0
+   ],
+   [
+    4,
+    "male.n.02",
+    1
+   ],
+   [
+    5,
+    "time.n.08",
+    1
+   ],
+   [
+    6,
+    "skydive.v.01",
+    1
+   ],
+   [
+    7,
+    "entity.n.01",
+    1
+   ],
+   [
+    8,
+    "male.n.02",
+    1
+   ],
+   [
+    9,
+    "time.n.08",
+    1
+   ],
+   [
+    10,
+    "old.a.01",
+    1
+   ],
+   [
+    11,
+    "measure.n.02",
+    1
+   ],
+   [
+    12,
+    "year.n.01",
+    1
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    1,
+    "CONTINUATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p60/d2812",
+  "sent": "I convinced him that he was wrong.",
+  "sbn": "person.n.01 EQU speaker convince.v.01 Proposition >1 Agent -1 Time +1 Recipient +2 time.n.08 TPR now male.n.02 CONTINUATION <0 male.n.02 ANA -1 time.n.08 TPR now wrong.a.01 AttributeOf -2 Time -1",
+  "role": "ANA",
+  "raw": "-1",
+  "src": 4,
+  "src_tok": "male.n.02",
+  "src_box": 1,
+  "lin": 3,
+  "lin_tok": "male.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "person.n.01",
+    0
+   ],
+   [
+    1,
+    "convince.v.01",
+    0
+   ],
+   [
+    2,
+    "time.n.08",
+    0
+   ],
+   [
+    3,
+    "male.n.02",
+    0
+   ],
+   [
+    4,
+    "male.n.02",
+    1
+   ],
+   [
+    5,
+    "time.n.08",
+    1
+   ],
+   [
+    6,
+    "wrong.a.01",
+    1
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    1,
+    "CONTINUATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p70/d1634",
+  "sent": "Mary senses the aliens are watching her.",
+  "sbn": "female.n.02 Name \"Mary\" sense.v.03 Proposition >1 Experiencer -1 Time +1 time.n.08 EQU now CONTINUATION <0 alien.n.03 time.n.08 EQU now watch.v.02 Agent -2 Time -1 Theme +1 female.n.02 ANA -6",
+  "role": "ANA",
+  "raw": "-6",
+  "src": 6,
+  "src_tok": "female.n.02",
+  "src_box": 1,
+  "lin": 0,
+  "lin_tok": "female.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "female.n.02",
+    0
+   ],
+   [
+    1,
+    "sense.v.03",
+    0
+   ],
+   [
+    2,
+    "time.n.08",
+    0
+   ],
+   [
+    3,
+    "alien.n.03",
+    1
+   ],
+   [
+    4,
+    "time.n.08",
+    1
+   ],
+   [
+    5,
+    "watch.v.02",
+    1
+   ],
+   [
+    6,
+    "female.n.02",
+    1
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    1,
+    "CONTINUATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p51/d2927",
+  "sent": "Camels have either one or two humps.",
+  "sbn": "camel.n.01 have.v.02 Pivot -1 Time +1 Theme +2 time.n.08 EQU now entity.n.01 NEGATION <1 NEGATION <1 quantity.n.01 EQU 1 hump.n.01 EQU -2 Quantity -1 NEGATION <2 quantity.n.01 EQU 2 hump.n.01 EQU -4 Quantity -1",
+  "role": "EQU",
+  "raw": "-4",
+  "src": 7,
+  "src_tok": "hump.n.01",
+  "src_box": 3,
+  "lin": 3,
+  "lin_tok": "entity.n.01",
+  "reg": 1,
+  "reg_tok": "have.v.02",
+  "concepts": [
+   [
+    0,
+    "camel.n.01",
+    0
+   ],
+   [
+    1,
+    "have.v.02",
+    0
+   ],
+   [
+    2,
+    "time.n.08",
+    0
+   ],
+   [
+    3,
+    "entity.n.01",
+    0
+   ],
+   [
+    4,
+    "quantity.n.01",
+    2
+   ],
+   [
+    5,
+    "hump.n.01",
+    2
+   ],
+   [
+    6,
+    "quantity.n.01",
+    3
+   ],
+   [
+    7,
+    "hump.n.01",
+    3
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    0,
+    "NEGATION"
+   ],
+   [
+    2,
+    1,
+    "NEGATION"
+   ],
+   [
+    3,
+    1,
+    "NEGATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p10/d2815",
+  "sent": "Tom suspected that his father was dyslexic.",
+  "sbn": "male.n.02 Name \"Tom\" suspect.v.01 Proposition >1 Agent -1 Time +1 time.n.08 TPR now CONTINUATION <0 male.n.02 ANA -3 person.n.01 Role +1 father.n.01 Of -2 time.n.08 TPR now dyslexic.a.01 AttributeOf -3 Time -1",
+  "role": "ANA",
+  "raw": "-3",
+  "src": 3,
+  "src_tok": "male.n.02",
+  "src_box": 1,
+  "lin": 0,
+  "lin_tok": "male.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "male.n.02",
+    0
+   ],
+   [
+    1,
+    "suspect.v.01",
+    0
+   ],
+   [
+    2,
+    "time.n.08",
+    0
+   ],
+   [
+    3,
+    "male.n.02",
+    1
+   ],
+   [
+    4,
+    "person.n.01",
+    1
+   ],
+   [
+    5,
+    "father.n.01",
+    1
+   ],
+   [
+    6,
+    "time.n.08",
+    1
+   ],
+   [
+    7,
+    "dyslexic.a.01",
+    1
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    1,
+    "CONTINUATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p84/d0920",
+  "sent": "She promised me that she would clean my room.",
+  "sbn": "female.n.02 promise.v.01 Proposition >1 Agent -1 Time +1 Recipient +2 time.n.08 TPR now person.n.01 EQU speaker CONTINUATION <0 female.n.02 ANA -4 time.n.08 TSU now clean.v.02 Agent -2 Time -1 Source +2 person.n.01 EQU speaker room.n.01 User -1",
+  "role": "ANA",
+  "raw": "-4",
+  "src": 4,
+  "src_tok": "female.n.02",
+  "src_box": 1,
+  "lin": 0,
+  "lin_tok": "female.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "female.n.02",
+    0
+   ],
+   [
+    1,
+    "promise.v.01",
+    0
+   ],
+   [
+    2,
+    "time.n.08",
+    0
+   ],
+   [
+    3,
+    "person.n.01",
+    0
+   ],
+   [
+    4,
+    "female.n.02",
+    1
+   ],
+   [
+    5,
+    "time.n.08",
+    1
+   ],
+   [
+    6,
+    "clean.v.02",
+    1
+   ],
+   [
+    7,
+    "person.n.01",
+    1
+   ],
+   [
+    8,
+    "room.n.01",
+    1
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    1,
+    "CONTINUATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p04/d2865",
+  "sent": "I don't have the time or the money.",
+  "sbn": "person.n.01 EQU speaker NEGATION <1 time.n.08 EQU now have.v.01 Pivot -2 Time -1 Theme +1 entity.n.01 NEGATION <1 NEGATION <1 time.n.02 EQU -1 NEGATION <2 money.n.02 EQU -2",
+  "role": "EQU",
+  "raw": "-2",
+  "src": 5,
+  "src_tok": "money.n.02",
+  "src_box": 4,
+  "lin": 3,
+  "lin_tok": "entity.n.01",
+  "reg": 2,
+  "reg_tok": "have.v.01",
+  "concepts": [
+   [
+    0,
+    "person.n.01",
+    0
+   ],
+   [
+    1,
+    "time.n.08",
+    1
+   ],
+   [
+    2,
+    "have.v.01",
+    1
+   ],
+   [
+    3,
+    "entity.n.01",
+    1
+   ],
+   [
+    4,
+    "time.n.02",
+    3
+   ],
+   [
+    5,
+    "money.n.02",
+    4
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    0,
+    "NEGATION"
+   ],
+   [
+    2,
+    1,
+    "NEGATION"
+   ],
+   [
+    3,
+    2,
+    "NEGATION"
+   ],
+   [
+    4,
+    2,
+    "NEGATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p64/d1787",
+  "sent": "Tom managed to carry everything himself.",
+  "sbn": "male.n.02 Name \"Tom\" NEGATION <1 NEGATION <1 manage.v.01 Agent -1 Time +1 Topic +2 time.n.08 TPR now carry.v.01 Agent -3 Theme +1 CONJUNCTION <2 entity.n.01 CONJUNCTION <2 male.n.02 EQU -5",
+  "role": "EQU",
+  "raw": "-5",
+  "src": 5,
+  "src_tok": "male.n.02",
+  "src_box": 4,
+  "lin": 0,
+  "lin_tok": "male.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "male.n.02",
+    0
+   ],
+   [
+    1,
+    "manage.v.01",
+    2
+   ],
+   [
+    2,
+    "time.n.08",
+    2
+   ],
+   [
+    3,
+    "carry.v.01",
+    2
+   ],
+   [
+    4,
+    "entity.n.01",
+    3
+   ],
+   [
+    5,
+    "male.n.02",
+    4
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    0,
+    "NEGATION"
+   ],
+   [
+    2,
+    1,
+    "NEGATION"
+   ],
+   [
+    3,
+    1,
+    "CONJUNCTION"
+   ],
+   [
+    4,
+    2,
+    "CONJUNCTION"
+   ]
+  ]
+ },
+ {
+  "doc": "p65/d2231",
+  "sent": "Tom says that he's allergic to school.",
+  "sbn": "male.n.02 Name \"Tom\" say.v.01 Proposition >1 Agent -1 Time +1 time.n.08 EQU now CONTINUATION <0 male.n.02 ANA -3 time.n.08 EQU now allergic.a.02 Experiencer -2 Time -1 Stimulus +1 school.n.01",
+  "role": "ANA",
+  "raw": "-3",
+  "src": 3,
+  "src_tok": "male.n.02",
+  "src_box": 1,
+  "lin": 0,
+  "lin_tok": "male.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "male.n.02",
+    0
+   ],
+   [
+    1,
+    "say.v.01",
+    0
+   ],
+   [
+    2,
+    "time.n.08",
+    0
+   ],
+   [
+    3,
+    "male.n.02",
+    1
+   ],
+   [
+    4,
+    "time.n.08",
+    1
+   ],
+   [
+    5,
+    "allergic.a.02",
+    1
+   ],
+   [
+    6,
+    "school.n.01",
+    1
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    1,
+    "CONTINUATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p47/d1463",
+  "sent": "Either you or I am wrong.",
+  "sbn": "entity.n.01 time.n.08 EQU now wrong.a.01 AttributeOf -2 Time -1 NEGATION <1 NEGATION <1 person.n.01 EQU hearer EQU -3 NEGATION <2 person.n.01 EQU -4 EQU speaker",
+  "role": "EQU",
+  "raw": "-4",
+  "src": 4,
+  "src_tok": "person.n.01",
+  "src_box": 3,
+  "lin": 0,
+  "lin_tok": "entity.n.01",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "entity.n.01",
+    0
+   ],
+   [
+    1,
+    "time.n.08",
+    0
+   ],
+   [
+    2,
+    "wrong.a.01",
+    0
+   ],
+   [
+    3,
+    "person.n.01",
+    2
+   ],
+   [
+    4,
+    "person.n.01",
+    3
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    0,
+    "NEGATION"
+   ],
+   [
+    2,
+    1,
+    "NEGATION"
+   ],
+   [
+    3,
+    1,
+    "NEGATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p87/d2746",
+  "sent": "He is now either in Rome or in Paris.",
+  "sbn": "male.n.02 be.v.03 Theme -1 Time +1 Location +2 time.n.08 EQU now city.n.01 NEGATION <1 NEGATION <1 city.n.01 Name \"Rome\" EQU -1 NEGATION <2 city.n.01 Name \"Paris\" EQU -2",
+  "role": "EQU",
+  "raw": "-2",
+  "src": 5,
+  "src_tok": "city.n.01",
+  "src_box": 3,
+  "lin": 3,
+  "lin_tok": "city.n.01",
+  "reg": 2,
+  "reg_tok": "time.n.08",
+  "concepts": [
+   [
+    0,
+    "male.n.02",
+    0
+   ],
+   [
+    1,
+    "be.v.03",
+    0
+   ],
+   [
+    2,
+    "time.n.08",
+    0
+   ],
+   [
+    3,
+    "city.n.01",
+    0
+   ],
+   [
+    4,
+    "city.n.01",
+    2
+   ],
+   [
+    5,
+    "city.n.01",
+    3
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    0,
+    "NEGATION"
+   ],
+   [
+    2,
+    1,
+    "NEGATION"
+   ],
+   [
+    3,
+    1,
+    "NEGATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p01/d2312",
+  "sent": "He put all his money in the box.",
+  "sbn": "male.n.02 time.n.08 TPR now NEGATION <1 NEGATION <1 put.v.01 Agent -2 Time -1 Theme +1 Destination +4 CONJUNCTION <2 entity.n.01 SubOf +2 male.n.02 ANA -4 money.n.01 User -1 CONJUNCTION <4 box.n.01",
+  "role": "ANA",
+  "raw": "-4",
+  "src": 4,
+  "src_tok": "male.n.02",
+  "src_box": 3,
+  "lin": 0,
+  "lin_tok": "male.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "male.n.02",
+    0
+   ],
+   [
+    1,
+    "time.n.08",
+    0
+   ],
+   [
+    2,
+    "put.v.01",
+    2
+   ],
+   [
+    3,
+    "entity.n.01",
+    3
+   ],
+   [
+    4,
+    "male.n.02",
+    3
+   ],
+   [
+    5,
+    "money.n.01",
+    3
+   ],
+   [
+    6,
+    "box.n.01",
+    4
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    0,
+    "NEGATION"
+   ],
+   [
+    2,
+    1,
+    "NEGATION"
+   ],
+   [
+    3,
+    1,
+    "CONJUNCTION"
+   ],
+   [
+    4,
+    0,
+    "CONJUNCTION"
+   ]
+  ]
+ },
+ {
+  "doc": "p83/d1653",
+  "sent": "She cabled us that she was coming.",
+  "sbn": "female.n.02 cable.v.01 Proposition >1 Agent -1 Time +1 Recipient +2 time.n.08 TPR now person.n.01 Sub speaker CONTINUATION <0 female.n.02 ANA -4 time.n.08 TPR now come.v.01 Theme -2 Time -1",
+  "role": "ANA",
+  "raw": "-4",
+  "src": 4,
+  "src_tok": "female.n.02",
+  "src_box": 1,
+  "lin": 0,
+  "lin_tok": "female.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "female.n.02",
+    0
+   ],
+   [
+    1,
+    "cable.v.01",
+    0
+   ],
+   [
+    2,
+    "time.n.08",
+    0
+   ],
+   [
+    3,
+    "person.n.01",
+    0
+   ],
+   [
+    4,
+    "female.n.02",
+    1
+   ],
+   [
+    5,
+    "time.n.08",
+    1
+   ],
+   [
+    6,
+    "come.v.01",
+    1
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    1,
+    "CONTINUATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p39/d3455",
+  "sent": "She said she was happy.",
+  "sbn": "female.n.02 say.v.01 Proposition >1 Agent -1 Time +1 time.n.08 TPR now CONTINUATION <0 female.n.02 ANA -3 time.n.08 TPR now happy.a.01 Experiencer -2 Time -1",
+  "role": "ANA",
+  "raw": "-3",
+  "src": 3,
+  "src_tok": "female.n.02",
+  "src_box": 1,
+  "lin": 0,
+  "lin_tok": "female.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "female.n.02",
+    0
+   ],
+   [
+    1,
+    "say.v.01",
+    0
+   ],
+   [
+    2,
+    "time.n.08",
+    0
+   ],
+   [
+    3,
+    "female.n.02",
+    1
+   ],
+   [
+    4,
+    "time.n.08",
+    1
+   ],
+   [
+    5,
+    "happy.a.01",
+    1
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    1,
+    "CONTINUATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p44/d0783",
+  "sent": "Maria knew neither his name nor his phone number.",
+  "sbn": "female.n.02 Name \"Maria\" NEGATION <1 know.v.01 Experiencer -1 Time +1 Stimulus +3 time.n.08 TPR now male.n.02 name.n.01 Bearer -1 NEGATION <2 know.v.01 Experiencer -5 Time +1 Stimulus +3 time.n.08 TPR now male.n.02 phone_number.n.01 User -1",
+  "role": "Experiencer",
+  "raw": "-5",
+  "src": 5,
+  "src_tok": "know.v.01",
+  "src_box": 2,
+  "lin": 0,
+  "lin_tok": "female.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "female.n.02",
+    0
+   ],
+   [
+    1,
+    "know.v.01",
+    1
+   ],
+   [
+    2,
+    "time.n.08",
+    1
+   ],
+   [
+    3,
+    "male.n.02",
+    1
+   ],
+   [
+    4,
+    "name.n.01",
+    1
+   ],
+   [
+    5,
+    "know.v.01",
+    2
+   ],
+   [
+    6,
+    "time.n.08",
+    2
+   ],
+   [
+    7,
+    "male.n.02",
+    2
+   ],
+   [
+    8,
+    "phone_number.n.01",
+    2
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    0,
+    "NEGATION"
+   ],
+   [
+    2,
+    0,
+    "NEGATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p27/d1630",
+  "sent": "Tom said he wouldn't shoot an unarmed man.",
+  "sbn": "male.n.02 Name \"Tom\" say.v.01 Proposition >1 Agent -1 Time +1 time.n.08 TPR now CONTINUATION <0 male.n.02 ANA -3 NEGATION <1 time.n.08 TSU now shoot.v.01 Agent -2 Time -1 Patient +2 unarmed.a.01 AttributeOf +1 man.n.01",
+  "role": "ANA",
+  "raw": "-3",
+  "src": 3,
+  "src_tok": "male.n.02",
+  "src_box": 1,
+  "lin": 0,
+  "lin_tok": "male.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "male.n.02",
+    0
+   ],
+   [
+    1,
+    "say.v.01",
+    0
+   ],
+   [
+    2,
+    "time.n.08",
+    0
+   ],
+   [
+    3,
+    "male.n.02",
+    1
+   ],
+   [
+    4,
+    "time.n.08",
+    2
+   ],
+   [
+    5,
+    "shoot.v.01",
+    2
+   ],
+   [
+    6,
+    "unarmed.a.01",
+    2
+   ],
+   [
+    7,
+    "man.n.01",
+    2
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    1,
+    "CONTINUATION"
+   ],
+   [
+    2,
+    1,
+    "NEGATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p04/d1518",
+  "sent": "Tom asked Mary if she knew John.",
+  "sbn": "male.n.02 Name \"Tom\" ask.v.01 Proposition >1 Agent -1 Time +1 Recipient +2 time.n.08 TPR now female.n.02 Name \"Mary\" CONTINUATION <0 female.n.02 ANA -1 know.v.04 Experiencer -1 Time +1 Stimulus +2 time.n.08 TPR now male.n.02 Name \"John\"",
+  "role": "ANA",
+  "raw": "-1",
+  "src": 4,
+  "src_tok": "female.n.02",
+  "src_box": 1,
+  "lin": 3,
+  "lin_tok": "female.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "male.n.02",
+    0
+   ],
+   [
+    1,
+    "ask.v.01",
+    0
+   ],
+   [
+    2,
+    "time.n.08",
+    0
+   ],
+   [
+    3,
+    "female.n.02",
+    0
+   ],
+   [
+    4,
+    "female.n.02",
+    1
+   ],
+   [
+    5,
+    "know.v.04",
+    1
+   ],
+   [
+    6,
+    "time.n.08",
+    1
+   ],
+   [
+    7,
+    "male.n.02",
+    1
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    1,
+    "CONTINUATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p44/d3239",
+  "sent": "Tom is hoping that he can hitch a ride to Boston.",
+  "sbn": "male.n.02 Name \"Tom\" time.n.08 EQU now hope.v.01 Time -1 Proposition >1 Agent -2 CONTINUATION <0 male.n.02 ANA -3 POSSIBILITY <1 hitch.v.04 Agent -1 Theme +1 ride.n.01 Destination +1 city.n.01 Name \"Boston\"",
+  "role": "ANA",
+  "raw": "-3",
+  "src": 3,
+  "src_tok": "male.n.02",
+  "src_box": 1,
+  "lin": 0,
+  "lin_tok": "male.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "male.n.02",
+    0
+   ],
+   [
+    1,
+    "time.n.08",
+    0
+   ],
+   [
+    2,
+    "hope.v.01",
+    0
+   ],
+   [
+    3,
+    "male.n.02",
+    1
+   ],
+   [
+    4,
+    "hitch.v.04",
+    2
+   ],
+   [
+    5,
+    "ride.n.01",
+    2
+   ],
+   [
+    6,
+    "city.n.01",
+    2
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    1,
+    "CONTINUATION"
+   ],
+   [
+    2,
+    1,
+    "POSSIBILITY"
+   ]
+  ]
+ },
+ {
+  "doc": "p17/d3548",
+  "sent": "Bob waved to everyone he saw.",
+  "sbn": "male.n.02 Name \"Bob\" NEGATION <1 NEGATION <1 wave.v.01 Agent -1 Time +1 Recipient +2 time.n.08 TPR now CONJUNCTION <2 person.n.01 male.n.02 ANA -4 see.v.01 Stimulus -2 Experiencer -1 Time +1 time.n.08 TPR now",
+  "role": "ANA",
+  "raw": "-4",
+  "src": 4,
+  "src_tok": "male.n.02",
+  "src_box": 3,
+  "lin": 0,
+  "lin_tok": "male.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "male.n.02",
+    0
+   ],
+   [
+    1,
+    "wave.v.01",
+    2
+   ],
+   [
+    2,
+    "time.n.08",
+    2
+   ],
+   [
+    3,
+    "person.n.01",
+    3
+   ],
+   [
+    4,
+    "male.n.02",
+    3
+   ],
+   [
+    5,
+    "see.v.01",
+    3
+   ],
+   [
+    6,
+    "time.n.08",
+    3
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    0,
+    "NEGATION"
+   ],
+   [
+    2,
+    1,
+    "NEGATION"
+   ],
+   [
+    3,
+    1,
+    "CONJUNCTION"
+   ]
+  ]
+ },
+ {
+  "doc": "p65/d2845",
+  "sent": "Tom began to suspect that Mary was cheating on him.",
+  "sbn": "male.n.02 Name \"Tom\" begin.v.01 Time +1 PartOf +2 time.n.08 TPR now suspect.v.01 Proposition >1 Agent -3 CONTINUATION <0 female.n.02 Name \"Mary\" time.n.08 TPR now cheat.v.04 Agent -2 Time -1 Patient +1 male.n.02 ANA -7",
+  "role": "ANA",
+  "raw": "-7",
+  "src": 7,
+  "src_tok": "male.n.02",
+  "src_box": 1,
+  "lin": 0,
+  "lin_tok": "male.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "male.n.02",
+    0
+   ],
+   [
+    1,
+    "begin.v.01",
+    0
+   ],
+   [
+    2,
+    "time.n.08",
+    0
+   ],
+   [
+    3,
+    "suspect.v.01",
+    0
+   ],
+   [
+    4,
+    "female.n.02",
+    1
+   ],
+   [
+    5,
+    "time.n.08",
+    1
+   ],
+   [
+    6,
+    "cheat.v.04",
+    1
+   ],
+   [
+    7,
+    "male.n.02",
+    1
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    1,
+    "CONTINUATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p02/d0847",
+  "sent": "She knew that John loved her.",
+  "sbn": "female.n.02 know.v.01 Proposition >1 Experiencer -1 Time +1 time.n.08 TPR now CONTINUATION <0 male.n.02 Name \"John\" love.v.03 Experiencer -1 Time +1 Stimulus +2 time.n.08 TPR now female.n.02 ANA -6",
+  "role": "ANA",
+  "raw": "-6",
+  "src": 6,
+  "src_tok": "female.n.02",
+  "src_box": 1,
+  "lin": 0,
+  "lin_tok": "female.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "female.n.02",
+    0
+   ],
+   [
+    1,
+    "know.v.01",
+    0
+   ],
+   [
+    2,
+    "time.n.08",
+    0
+   ],
+   [
+    3,
+    "male.n.02",
+    1
+   ],
+   [
+    4,
+    "love.v.03",
+    1
+   ],
+   [
+    5,
+    "time.n.08",
+    1
+   ],
+   [
+    6,
+    "female.n.02",
+    1
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    1,
+    "CONTINUATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p32/d2452",
+  "sent": "Tom saved every letter that Mary sent him.",
+  "sbn": "male.n.02 Name \"Tom\" NEGATION <1 NEGATION <1 save.v.02 Agent -1 Time +1 Theme +2 time.n.08 TPR now CONJUNCTION <2 letter.n.01 female.n.02 Name \"Mary\" send.v.03 Theme -2 Agent -1 Time +1 Destination +2 time.n.08 TPR now male.n.02 ANA -7",
+  "role": "ANA",
+  "raw": "-7",
+  "src": 7,
+  "src_tok": "male.n.02",
+  "src_box": 3,
+  "lin": 0,
+  "lin_tok": "male.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "male.n.02",
+    0
+   ],
+   [
+    1,
+    "save.v.02",
+    2
+   ],
+   [
+    2,
+    "time.n.08",
+    2
+   ],
+   [
+    3,
+    "letter.n.01",
+    3
+   ],
+   [
+    4,
+    "female.n.02",
+    3
+   ],
+   [
+    5,
+    "send.v.03",
+    3
+   ],
+   [
+    6,
+    "time.n.08",
+    3
+   ],
+   [
+    7,
+    "male.n.02",
+    3
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    0,
+    "NEGATION"
+   ],
+   [
+    2,
+    1,
+    "NEGATION"
+   ],
+   [
+    3,
+    1,
+    "CONJUNCTION"
+   ]
+  ]
+ },
+ {
+  "doc": "p23/d3033",
+  "sent": "Mr Briggs is not a doctor, he is a vet.",
+  "sbn": "mr.n.01 male.n.02 Name \"Briggs\" Title -1 NEGATION <1 be.v.08 Theme -1 Time +1 Co-Theme +2 time.n.08 EQU now doctor.n.01 CONTRAST <2 male.n.02 ANA -4 be.v.08 Theme -1 Time +1 Co-Theme +2 time.n.08 EQU now vet.n.01",
+  "role": "ANA",
+  "raw": "-4",
+  "src": 5,
+  "src_tok": "male.n.02",
+  "src_box": 2,
+  "lin": 1,
+  "lin_tok": "male.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "mr.n.01",
+    0
+   ],
+   [
+    1,
+    "male.n.02",
+    0
+   ],
+   [
+    2,
+    "be.v.08",
+    1
+   ],
+   [
+    3,
+    "time.n.08",
+    1
+   ],
+   [
+    4,
+    "doctor.n.01",
+    1
+   ],
+   [
+    5,
+    "male.n.02",
+    2
+   ],
+   [
+    6,
+    "be.v.08",
+    2
+   ],
+   [
+    7,
+    "time.n.08",
+    2
+   ],
+   [
+    8,
+    "vet.n.01",
+    2
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    0,
+    "NEGATION"
+   ],
+   [
+    2,
+    0,
+    "CONTRAST"
+   ]
+  ]
+ },
+ {
+  "doc": "p00/d1580",
+  "sent": "She never told me she had a cat.",
+  "sbn": "female.n.02 NEGATION <1 tell.v.02 Proposition >1 Agent -1 Time +1 Recipient +2 time.n.08 TPR now person.n.01 EQU speaker CONTINUATION <0 female.n.02 ANA -4 have.v.04 Pivot -1 Time +1 Theme +2 time.n.08 TPR now cat.n.01",
+  "role": "ANA",
+  "raw": "-4",
+  "src": 4,
+  "src_tok": "female.n.02",
+  "src_box": 2,
+  "lin": 0,
+  "lin_tok": "female.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "female.n.02",
+    0
+   ],
+   [
+    1,
+    "tell.v.02",
+    1
+   ],
+   [
+    2,
+    "time.n.08",
+    1
+   ],
+   [
+    3,
+    "person.n.01",
+    1
+   ],
+   [
+    4,
+    "female.n.02",
+    2
+   ],
+   [
+    5,
+    "have.v.04",
+    2
+   ],
+   [
+    6,
+    "time.n.08",
+    2
+   ],
+   [
+    7,
+    "cat.n.01",
+    2
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    0,
+    "NEGATION"
+   ],
+   [
+    2,
+    2,
+    "CONTINUATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p65/d1491",
+  "sent": "Tom asked Mary if he could kiss her.",
+  "sbn": "male.n.02 Name \"Tom\" ask.v.02 Proposition >1 Agent -1 Time +1 Recipient +2 time.n.08 TPR now female.n.02 Name \"Mary\" CONTINUATION <0 male.n.02 ANA -4 POSSIBILITY <1 kiss.v.01 Agent -1 Co-Agent +1 female.n.02 ANA -3",
+  "role": "ANA",
+  "raw": "-4",
+  "src": 4,
+  "src_tok": "male.n.02",
+  "src_box": 1,
+  "lin": 0,
+  "lin_tok": "male.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "male.n.02",
+    0
+   ],
+   [
+    1,
+    "ask.v.02",
+    0
+   ],
+   [
+    2,
+    "time.n.08",
+    0
+   ],
+   [
+    3,
+    "female.n.02",
+    0
+   ],
+   [
+    4,
+    "male.n.02",
+    1
+   ],
+   [
+    5,
+    "kiss.v.01",
+    2
+   ],
+   [
+    6,
+    "female.n.02",
+    2
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    1,
+    "CONTINUATION"
+   ],
+   [
+    2,
+    1,
+    "POSSIBILITY"
+   ]
+  ]
+ },
+ {
+  "doc": "p65/d1491",
+  "sent": "Tom asked Mary if he could kiss her.",
+  "sbn": "male.n.02 Name \"Tom\" ask.v.02 Proposition >1 Agent -1 Time +1 Recipient +2 time.n.08 TPR now female.n.02 Name \"Mary\" CONTINUATION <0 male.n.02 ANA -4 POSSIBILITY <1 kiss.v.01 Agent -1 Co-Agent +1 female.n.02 ANA -3",
+  "role": "ANA",
+  "raw": "-3",
+  "src": 6,
+  "src_tok": "female.n.02",
+  "src_box": 2,
+  "lin": 3,
+  "lin_tok": "female.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "male.n.02",
+    0
+   ],
+   [
+    1,
+    "ask.v.02",
+    0
+   ],
+   [
+    2,
+    "time.n.08",
+    0
+   ],
+   [
+    3,
+    "female.n.02",
+    0
+   ],
+   [
+    4,
+    "male.n.02",
+    1
+   ],
+   [
+    5,
+    "kiss.v.01",
+    2
+   ],
+   [
+    6,
+    "female.n.02",
+    2
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    1,
+    "CONTINUATION"
+   ],
+   [
+    2,
+    1,
+    "POSSIBILITY"
+   ]
+  ]
+ },
+ {
+  "doc": "p44/d2063",
+  "sent": "He pretended that he was a lawyer.",
+  "sbn": "male.n.02 pretend.v.01 Proposition >1 Agent -1 Time +1 time.n.08 TPR now CONTINUATION <0 male.n.02 ANA -3 EQU +2 time.n.08 TPR now person.n.01 Role +1 lawyer.n.01 Time -2",
+  "role": "ANA",
+  "raw": "-3",
+  "src": 3,
+  "src_tok": "male.n.02",
+  "src_box": 1,
+  "lin": 0,
+  "lin_tok": "male.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "male.n.02",
+    0
+   ],
+   [
+    1,
+    "pretend.v.01",
+    0
+   ],
+   [
+    2,
+    "time.n.08",
+    0
+   ],
+   [
+    3,
+    "male.n.02",
+    1
+   ],
+   [
+    4,
+    "time.n.08",
+    1
+   ],
+   [
+    5,
+    "person.n.01",
+    1
+   ],
+   [
+    6,
+    "lawyer.n.01",
+    1
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    1,
+    "CONTINUATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p86/d2401",
+  "sent": "Tom says he doesn't like air conditioning.",
+  "sbn": "male.n.02 Name \"Tom\" say.v.01 Proposition >1 Agent -1 Time +1 time.n.08 EQU now CONTINUATION <0 male.n.02 ANA -3 NEGATION <1 time.n.08 EQU now like.v.02 Experiencer -2 Time -1 Stimulus +1 air_conditioning.n.01",
+  "role": "ANA",
+  "raw": "-3",
+  "src": 3,
+  "src_tok": "male.n.02",
+  "src_box": 1,
+  "lin": 0,
+  "lin_tok": "male.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "male.n.02",
+    0
+   ],
+   [
+    1,
+    "say.v.01",
+    0
+   ],
+   [
+    2,
+    "time.n.08",
+    0
+   ],
+   [
+    3,
+    "male.n.02",
+    1
+   ],
+   [
+    4,
+    "time.n.08",
+    2
+   ],
+   [
+    5,
+    "like.v.02",
+    2
+   ],
+   [
+    6,
+    "air_conditioning.n.01",
+    2
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    1,
+    "CONTINUATION"
+   ],
+   [
+    2,
+    1,
+    "NEGATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p57/d0862",
+  "sent": "I found a note on my desk, but I don't know whose it is.",
+  "sbn": "person.n.01 EQU speaker find.v.01 Agent -1 Time +1 Theme +2 Location +4 time.n.08 TPR now note.n.01 person.n.01 EQU speaker desk.n.01 User -1 CONTRAST <1 person.n.01 EQU speaker NEGATION <1 time.n.08 EQU now know.v.01 Time -1 Proposition >1 Experiencer -2 CONTINUATION <0 person.n.01 Name ? entity.n.01 User -1 entity.n.01 ANA -8 be.v.02 Co-Theme -2 Theme -1 Time +1 time.n.08 EQU now",
+  "role": "ANA",
+  "raw": "-8",
+  "src": 11,
+  "src_tok": "entity.n.01",
+  "src_box": 3,
+  "lin": 3,
+  "lin_tok": "note.n.01",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "person.n.01",
+    0
+   ],
+   [
+    1,
+    "find.v.01",
+    0
+   ],
+   [
+    2,
+    "time.n.08",
+    0
+   ],
+   [
+    3,
+    "note.n.01",
+    0
+   ],
+   [
+    4,
+    "person.n.01",
+    0
+   ],
+   [
+    5,
+    "desk.n.01",
+    0
+   ],
+   [
+    6,
+    "person.n.01",
+    1
+   ],
+   [
+    7,
+    "time.n.08",
+    2
+   ],
+   [
+    8,
+    "know.v.01",
+    2
+   ],
+   [
+    9,
+    "person.n.01",
+    3
+   ],
+   [
+    10,
+    "entity.n.01",
+    3
+   ],
+   [
+    11,
+    "entity.n.01",
+    3
+   ],
+   [
+    12,
+    "be.v.02",
+    3
+   ],
+   [
+    13,
+    "time.n.08",
+    3
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    0,
+    "CONTRAST"
+   ],
+   [
+    2,
+    1,
+    "NEGATION"
+   ],
+   [
+    3,
+    3,
+    "CONTINUATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p01/d0210",
+  "sent": "Samuel helps anyone that asks him.",
+  "sbn": "male.n.02 Name \"Samuel\" NEGATION <1 NEGATION <1 help.v.01 Agent -1 Time +1 Beneficiary +2 time.n.08 EQU now CONJUNCTION <2 person.n.01 entity.n.01 EQU -1 ask.v.02 Agent -1 Time +1 Recipient +2 time.n.08 EQU now male.n.02 ANA -7",
+  "role": "ANA",
+  "raw": "-7",
+  "src": 7,
+  "src_tok": "male.n.02",
+  "src_box": 3,
+  "lin": 0,
+  "lin_tok": "male.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "male.n.02",
+    0
+   ],
+   [
+    1,
+    "help.v.01",
+    2
+   ],
+   [
+    2,
+    "time.n.08",
+    2
+   ],
+   [
+    3,
+    "person.n.01",
+    3
+   ],
+   [
+    4,
+    "entity.n.01",
+    3
+   ],
+   [
+    5,
+    "ask.v.02",
+    3
+   ],
+   [
+    6,
+    "time.n.08",
+    3
+   ],
+   [
+    7,
+    "male.n.02",
+    3
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    0,
+    "NEGATION"
+   ],
+   [
+    2,
+    1,
+    "NEGATION"
+   ],
+   [
+    3,
+    1,
+    "CONJUNCTION"
+   ]
+  ]
+ },
+ {
+  "doc": "p02/d3082",
+  "sent": "The thief told the police he hadn't stolen anything.",
+  "sbn": "person.n.01 Role +1 thief.n.01 tell.v.01 Proposition >1 Agent -2 Time +1 Recipient +2 time.n.08 TPR now police.n.01 CONTINUATION <0 male.n.02 ANA -5 NEGATION <1 steal.v.01 Agent -1 Time +1 Theme +2 time.n.08 TPR now entity.n.01",
+  "role": "ANA",
+  "raw": "-5",
+  "src": 5,
+  "src_tok": "male.n.02",
+  "src_box": 1,
+  "lin": 0,
+  "lin_tok": "person.n.01",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "person.n.01",
+    0
+   ],
+   [
+    1,
+    "thief.n.01",
+    0
+   ],
+   [
+    2,
+    "tell.v.01",
+    0
+   ],
+   [
+    3,
+    "time.n.08",
+    0
+   ],
+   [
+    4,
+    "police.n.01",
+    0
+   ],
+   [
+    5,
+    "male.n.02",
+    1
+   ],
+   [
+    6,
+    "steal.v.01",
+    2
+   ],
+   [
+    7,
+    "time.n.08",
+    2
+   ],
+   [
+    8,
+    "entity.n.01",
+    2
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    1,
+    "CONTINUATION"
+   ],
+   [
+    2,
+    1,
+    "NEGATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p07/d1900",
+  "sent": "He eats neither meat nor fish.",
+  "sbn": "male.n.02 NEGATION <1 eat.v.01 Agent -1 Time +1 Patient +2 time.n.08 EQU now entity.n.01 NEGATION <1 NEGATION <1 meat.n.01 EQU -1 NEGATION <2 fish.n.02 EQU -2",
+  "role": "EQU",
+  "raw": "-2",
+  "src": 5,
+  "src_tok": "fish.n.02",
+  "src_box": 4,
+  "lin": 3,
+  "lin_tok": "entity.n.01",
+  "reg": 2,
+  "reg_tok": "time.n.08",
+  "concepts": [
+   [
+    0,
+    "male.n.02",
+    0
+   ],
+   [
+    1,
+    "eat.v.01",
+    1
+   ],
+   [
+    2,
+    "time.n.08",
+    1
+   ],
+   [
+    3,
+    "entity.n.01",
+    1
+   ],
+   [
+    4,
+    "meat.n.01",
+    3
+   ],
+   [
+    5,
+    "fish.n.02",
+    4
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    0,
+    "NEGATION"
+   ],
+   [
+    2,
+    1,
+    "NEGATION"
+   ],
+   [
+    3,
+    2,
+    "NEGATION"
+   ],
+   [
+    4,
+    2,
+    "NEGATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p00/d1761",
+  "sent": "Tom says he's busy.",
+  "sbn": "male.n.02 Name \"Tom\" say.v.01 Proposition >1 Agent -1 Time +1 time.n.08 EQU now CONTINUATION <0 male.n.02 ANA -3 time.n.08 EQU now busy.a.01 AttributeOf -2 Time -1",
+  "role": "ANA",
+  "raw": "-3",
+  "src": 3,
+  "src_tok": "male.n.02",
+  "src_box": 1,
+  "lin": 0,
+  "lin_tok": "male.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "male.n.02",
+    0
+   ],
+   [
+    1,
+    "say.v.01",
+    0
+   ],
+   [
+    2,
+    "time.n.08",
+    0
+   ],
+   [
+    3,
+    "male.n.02",
+    1
+   ],
+   [
+    4,
+    "time.n.08",
+    1
+   ],
+   [
+    5,
+    "busy.a.01",
+    1
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    1,
+    "CONTINUATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p10/d1901",
+  "sent": "Maybe he is Italian or Spanish.",
+  "sbn": "POSSIBILITY <1 male.n.02 ALTERNATION <1 time.n.08 EQU now be.v.03 Theme -2 Time -1 Source +1 country.n.02 Name \"italy\" ALTERNATION <2 time.n.08 EQU now be.v.03 Theme -5 Time -1 Source +1 country.n.02 Name \"spain\"",
+  "role": "Theme",
+  "raw": "-5",
+  "src": 5,
+  "src_tok": "be.v.03",
+  "src_box": 3,
+  "lin": 0,
+  "lin_tok": "male.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "male.n.02",
+    1
+   ],
+   [
+    1,
+    "time.n.08",
+    2
+   ],
+   [
+    2,
+    "be.v.03",
+    2
+   ],
+   [
+    3,
+    "country.n.02",
+    2
+   ],
+   [
+    4,
+    "time.n.08",
+    3
+   ],
+   [
+    5,
+    "be.v.03",
+    3
+   ],
+   [
+    6,
+    "country.n.02",
+    3
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    0,
+    "POSSIBILITY"
+   ],
+   [
+    2,
+    1,
+    "ALTERNATION"
+   ],
+   [
+    3,
+    1,
+    "ALTERNATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p06/d3114",
+  "sent": "Dan confessed to Linda that he was dying.",
+  "sbn": "male.n.02 Name \"Dan\" confess.v.02 Proposition >1 Agent -1 Time +1 Recipient +2 time.n.08 TPR now female.n.02 Name \"Linda\" CONTINUATION <0 male.n.02 ANA -4 time.n.08 TPR now die.v.01 Patient -2 Time -1",
+  "role": "ANA",
+  "raw": "-4",
+  "src": 4,
+  "src_tok": "male.n.02",
+  "src_box": 1,
+  "lin": 0,
+  "lin_tok": "male.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "male.n.02",
+    0
+   ],
+   [
+    1,
+    "confess.v.02",
+    0
+   ],
+   [
+    2,
+    "time.n.08",
+    0
+   ],
+   [
+    3,
+    "female.n.02",
+    0
+   ],
+   [
+    4,
+    "male.n.02",
+    1
+   ],
+   [
+    5,
+    "time.n.08",
+    1
+   ],
+   [
+    6,
+    "die.v.01",
+    1
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    1,
+    "CONTINUATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p60/d2992",
+  "sent": "Anyone who is not shocked by quantum theory has not understood it.",
+  "sbn": "NEGATION <1 person.n.01 EQU +1 entity.n.01 time.n.08 EQU now NEGATION <1 shocked.a.01 Experiencer -2 Time -1 Stimulus +1 CONJUNCTION <3 quantum_theory.n.01 NEGATION <3 time.n.08 TPR now NEGATION <1 understand.v.01 Experiencer -6 Time -1 Stimulus +1 entity.n.01 ANA -3",
+  "role": "Experiencer",
+  "raw": "-6",
+  "src": 6,
+  "src_tok": "understand.v.01",
+  "src_box": 5,
+  "lin": 0,
+  "lin_tok": "person.n.01",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "person.n.01",
+    1
+   ],
+   [
+    1,
+    "entity.n.01",
+    1
+   ],
+   [
+    2,
+    "time.n.08",
+    1
+   ],
+   [
+    3,
+    "shocked.a.01",
+    2
+   ],
+   [
+    4,
+    "quantum_theory.n.01",
+    3
+   ],
+   [
+    5,
+    "time.n.08",
+    4
+   ],
+   [
+    6,
+    "understand.v.01",
+    5
+   ],
+   [
+    7,
+    "entity.n.01",
+    5
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    0,
+    "NEGATION"
+   ],
+   [
+    2,
+    1,
+    "NEGATION"
+   ],
+   [
+    3,
+    0,
+    "CONJUNCTION"
+   ],
+   [
+    4,
+    1,
+    "NEGATION"
+   ],
+   [
+    5,
+    4,
+    "NEGATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p60/d2992",
+  "sent": "Anyone who is not shocked by quantum theory has not understood it.",
+  "sbn": "NEGATION <1 person.n.01 EQU +1 entity.n.01 time.n.08 EQU now NEGATION <1 shocked.a.01 Experiencer -2 Time -1 Stimulus +1 CONJUNCTION <3 quantum_theory.n.01 NEGATION <3 time.n.08 TPR now NEGATION <1 understand.v.01 Experiencer -6 Time -1 Stimulus +1 entity.n.01 ANA -3",
+  "role": "ANA",
+  "raw": "-3",
+  "src": 7,
+  "src_tok": "entity.n.01",
+  "src_box": 5,
+  "lin": 4,
+  "lin_tok": "quantum_theory.n.01",
+  "reg": 2,
+  "reg_tok": "time.n.08",
+  "concepts": [
+   [
+    0,
+    "person.n.01",
+    1
+   ],
+   [
+    1,
+    "entity.n.01",
+    1
+   ],
+   [
+    2,
+    "time.n.08",
+    1
+   ],
+   [
+    3,
+    "shocked.a.01",
+    2
+   ],
+   [
+    4,
+    "quantum_theory.n.01",
+    3
+   ],
+   [
+    5,
+    "time.n.08",
+    4
+   ],
+   [
+    6,
+    "understand.v.01",
+    5
+   ],
+   [
+    7,
+    "entity.n.01",
+    5
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    0,
+    "NEGATION"
+   ],
+   [
+    2,
+    1,
+    "NEGATION"
+   ],
+   [
+    3,
+    0,
+    "CONJUNCTION"
+   ],
+   [
+    4,
+    1,
+    "NEGATION"
+   ],
+   [
+    5,
+    4,
+    "NEGATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p26/d0887",
+  "sent": "Oleg is happy that someone loves him.",
+  "sbn": "male.n.02 Name \"Oleg\" time.n.08 EQU now happy.a.01 Time -1 Proposition >1 Experiencer -2 CONTINUATION <0 person.n.01 love.v.03 Experiencer -1 Time +1 Stimulus +2 time.n.08 EQU now male.n.02 ANA -6",
+  "role": "ANA",
+  "raw": "-6",
+  "src": 6,
+  "src_tok": "male.n.02",
+  "src_box": 1,
+  "lin": 0,
+  "lin_tok": "male.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "male.n.02",
+    0
+   ],
+   [
+    1,
+    "time.n.08",
+    0
+   ],
+   [
+    2,
+    "happy.a.01",
+    0
+   ],
+   [
+    3,
+    "person.n.01",
+    1
+   ],
+   [
+    4,
+    "love.v.03",
+    1
+   ],
+   [
+    5,
+    "time.n.08",
+    1
+   ],
+   [
+    6,
+    "male.n.02",
+    1
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    1,
+    "CONTINUATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p69/d0337",
+  "sent": "Bake for 20 to 25 minutes.",
+  "sbn": "person.n.01 EQU hearer bake.v.01 Agent -1 Duration +1 minute.n.01 NEGATION <1 NEGATION <1 quantity.n.01 EQU 20 minute.n.01 EQU -2 Quantity -1 NEGATION <2 quantity.n.01 EQU 25 minute.n.01 EQU -4 Quantity -1",
+  "role": "EQU",
+  "raw": "-4",
+  "src": 6,
+  "src_tok": "minute.n.01",
+  "src_box": 3,
+  "lin": 2,
+  "lin_tok": "minute.n.01",
+  "reg": 0,
+  "reg_tok": "person.n.01",
+  "concepts": [
+   [
+    0,
+    "person.n.01",
+    0
+   ],
+   [
+    1,
+    "bake.v.01",
+    0
+   ],
+   [
+    2,
+    "minute.n.01",
+    0
+   ],
+   [
+    3,
+    "quantity.n.01",
+    2
+   ],
+   [
+    4,
+    "minute.n.01",
+    2
+   ],
+   [
+    5,
+    "quantity.n.01",
+    3
+   ],
+   [
+    6,
+    "minute.n.01",
+    3
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    0,
+    "NEGATION"
+   ],
+   [
+    2,
+    1,
+    "NEGATION"
+   ],
+   [
+    3,
+    1,
+    "NEGATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p40/d2795",
+  "sent": "She's maxed out all her credit cards.",
+  "sbn": "female.n.02 NEGATION <1 NEGATION <1 max_out.v.01 Agent -1 Time +1 Theme +2 time.n.08 TPR now CONJUNCTION <2 entity.n.01 SubOf +2 CONJUNCTION <4 female.n.02 ANA -4 credit_card.n.01 User -1",
+  "role": "ANA",
+  "raw": "-4",
+  "src": 4,
+  "src_tok": "female.n.02",
+  "src_box": 4,
+  "lin": 0,
+  "lin_tok": "female.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "female.n.02",
+    0
+   ],
+   [
+    1,
+    "max_out.v.01",
+    2
+   ],
+   [
+    2,
+    "time.n.08",
+    2
+   ],
+   [
+    3,
+    "entity.n.01",
+    3
+   ],
+   [
+    4,
+    "female.n.02",
+    4
+   ],
+   [
+    5,
+    "credit_card.n.01",
+    4
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    0,
+    "NEGATION"
+   ],
+   [
+    2,
+    1,
+    "NEGATION"
+   ],
+   [
+    3,
+    1,
+    "CONJUNCTION"
+   ],
+   [
+    4,
+    0,
+    "CONJUNCTION"
+   ]
+  ]
+ },
+ {
+  "doc": "p09/d1616",
+  "sent": "Tom was surprised the police knew his name.",
+  "sbn": "male.n.02 Name \"Tom\" time.n.08 TPR now surprised.a.01 Time -1 Proposition >1 Experiencer -2 CONTINUATION <0 police.n.01 know.v.01 Experiencer -1 Time +1 Stimulus +3 time.n.08 TPR now male.n.02 ANA -6 name.n.01 Bearer -1",
+  "role": "ANA",
+  "raw": "-6",
+  "src": 6,
+  "src_tok": "male.n.02",
+  "src_box": 1,
+  "lin": 0,
+  "lin_tok": "male.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "male.n.02",
+    0
+   ],
+   [
+    1,
+    "time.n.08",
+    0
+   ],
+   [
+    2,
+    "surprised.a.01",
+    0
+   ],
+   [
+    3,
+    "police.n.01",
+    1
+   ],
+   [
+    4,
+    "know.v.01",
+    1
+   ],
+   [
+    5,
+    "time.n.08",
+    1
+   ],
+   [
+    6,
+    "male.n.02",
+    1
+   ],
+   [
+    7,
+    "name.n.01",
+    1
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    1,
+    "CONTINUATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p83/d3087",
+  "sent": "Dan realized he was in love with Linda.",
+  "sbn": "male.n.02 Name \"Dan\" realize.v.01 Proposition >1 Experiencer -1 Time +1 time.n.08 TPR now CONTINUATION <0 male.n.02 ANA -3 time.n.08 TPR now in_love.a.01 Experiencer -2 Time -1 Stimulus +1 female.n.02 Name \"Linda\"",
+  "role": "ANA",
+  "raw": "-3",
+  "src": 3,
+  "src_tok": "male.n.02",
+  "src_box": 1,
+  "lin": 0,
+  "lin_tok": "male.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "male.n.02",
+    0
+   ],
+   [
+    1,
+    "realize.v.01",
+    0
+   ],
+   [
+    2,
+    "time.n.08",
+    0
+   ],
+   [
+    3,
+    "male.n.02",
+    1
+   ],
+   [
+    4,
+    "time.n.08",
+    1
+   ],
+   [
+    5,
+    "in_love.a.01",
+    1
+   ],
+   [
+    6,
+    "female.n.02",
+    1
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    1,
+    "CONTINUATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p34/d0790",
+  "sent": "Is it sweet or sour?",
+  "sbn": "entity.n.01 ALTERNATION <1 time.n.08 EQU now sweet.a.01 AttributeOf -2 Time -1 ALTERNATION <2 time.n.08 EQU now sour.a.02 AttributeOf -4 Time -1",
+  "role": "AttributeOf",
+  "raw": "-4",
+  "src": 4,
+  "src_tok": "sour.a.02",
+  "src_box": 2,
+  "lin": 0,
+  "lin_tok": "entity.n.01",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "entity.n.01",
+    0
+   ],
+   [
+    1,
+    "time.n.08",
+    1
+   ],
+   [
+    2,
+    "sweet.a.01",
+    1
+   ],
+   [
+    3,
+    "time.n.08",
+    2
+   ],
+   [
+    4,
+    "sour.a.02",
+    2
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    0,
+    "ALTERNATION"
+   ],
+   [
+    2,
+    0,
+    "ALTERNATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p26/d2094",
+  "sent": "Tom asked Mary if she had been to Boston.",
+  "sbn": "male.n.02 Name \"Tom\" ask.v.01 Proposition >1 Agent -1 Time +1 Recipient +2 time.n.08 TPR now female.n.02 Name \"Mary\" CONTINUATION <0 female.n.02 ANA -1 be.v.03 Theme -1 Time +1 Location +2 time.n.08 TPR now city.n.01 Name \"Boston\"",
+  "role": "ANA",
+  "raw": "-1",
+  "src": 4,
+  "src_tok": "female.n.02",
+  "src_box": 1,
+  "lin": 3,
+  "lin_tok": "female.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "male.n.02",
+    0
+   ],
+   [
+    1,
+    "ask.v.01",
+    0
+   ],
+   [
+    2,
+    "time.n.08",
+    0
+   ],
+   [
+    3,
+    "female.n.02",
+    0
+   ],
+   [
+    4,
+    "female.n.02",
+    1
+   ],
+   [
+    5,
+    "be.v.03",
+    1
+   ],
+   [
+    6,
+    "time.n.08",
+    1
+   ],
+   [
+    7,
+    "city.n.01",
+    1
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    1,
+    "CONTINUATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p03/d2307",
+  "sent": "Tom admitted he was afraid.",
+  "sbn": "male.n.02 Name \"Tom\" admit.v.01 Proposition >1 Agent -1 Time +1 time.n.08 TPR now CONTINUATION <0 male.n.02 ANA -3 time.n.08 TPR now afraid.a.01 Experiencer -2 Time -1",
+  "role": "ANA",
+  "raw": "-3",
+  "src": 3,
+  "src_tok": "male.n.02",
+  "src_box": 1,
+  "lin": 0,
+  "lin_tok": "male.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "male.n.02",
+    0
+   ],
+   [
+    1,
+    "admit.v.01",
+    0
+   ],
+   [
+    2,
+    "time.n.08",
+    0
+   ],
+   [
+    3,
+    "male.n.02",
+    1
+   ],
+   [
+    4,
+    "time.n.08",
+    1
+   ],
+   [
+    5,
+    "afraid.a.01",
+    1
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    1,
+    "CONTINUATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p45/d1861",
+  "sent": "Is this baby a he or a she?",
+  "sbn": "be.v.01 Time +1 Theme +2 Co-Theme +3 time.n.08 EQU now baby.n.01 entity.n.01 NEGATION <1 NEGATION <1 male.n.02 EQU -1 NEGATION <2 female.n.02 EQU -2",
+  "role": "EQU",
+  "raw": "-2",
+  "src": 5,
+  "src_tok": "female.n.02",
+  "src_box": 3,
+  "lin": 3,
+  "lin_tok": "entity.n.01",
+  "reg": 2,
+  "reg_tok": "baby.n.01",
+  "concepts": [
+   [
+    0,
+    "be.v.01",
+    0
+   ],
+   [
+    1,
+    "time.n.08",
+    0
+   ],
+   [
+    2,
+    "baby.n.01",
+    0
+   ],
+   [
+    3,
+    "entity.n.01",
+    0
+   ],
+   [
+    4,
+    "male.n.02",
+    2
+   ],
+   [
+    5,
+    "female.n.02",
+    3
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    0,
+    "NEGATION"
+   ],
+   [
+    2,
+    1,
+    "NEGATION"
+   ],
+   [
+    3,
+    1,
+    "NEGATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p21/d3057",
+  "sent": "According to Tom's will, Mary will inherit his entire estate.",
+  "sbn": "according.a.02 Proposition >1 Source +2 male.n.02 Name \"Tom\" will.n.03 Creator -1 CONTINUATION <0 female.n.02 Name \"Mary\" time.n.08 TSU now inherit.v.01 Agent -2 Time -1 Theme +3 male.n.02 ANA -5 entire.a.01 AttributeOf +1 estate.n.01 User -2",
+  "role": "ANA",
+  "raw": "-5",
+  "src": 6,
+  "src_tok": "male.n.02",
+  "src_box": 1,
+  "lin": 1,
+  "lin_tok": "male.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "according.a.02",
+    0
+   ],
+   [
+    1,
+    "male.n.02",
+    0
+   ],
+   [
+    2,
+    "will.n.03",
+    0
+   ],
+   [
+    3,
+    "female.n.02",
+    1
+   ],
+   [
+    4,
+    "time.n.08",
+    1
+   ],
+   [
+    5,
+    "inherit.v.01",
+    1
+   ],
+   [
+    6,
+    "male.n.02",
+    1
+   ],
+   [
+    7,
+    "entire.a.01",
+    1
+   ],
+   [
+    8,
+    "estate.n.01",
+    1
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    1,
+    "CONTINUATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p08/d3432",
+  "sent": "I think Tom said his last name is Jackson.",
+  "sbn": "person.n.01 EQU speaker think.v.04 Proposition >1 Agent -1 Time +1 time.n.08 EQU now CONTINUATION <0 male.n.02 Name \"Tom\" say.v.01 Proposition >1 Agent -1 Time +1 time.n.08 TPR now CONTINUATION <0 male.n.02 ANA -3 last_name.n.01 Bearer -1 be.v.02 Theme -1 Time +1 Co-Theme +2 time.n.08 EQU now name.n.01 EQU \"Jackson\"",
+  "role": "ANA",
+  "raw": "-3",
+  "src": 6,
+  "src_tok": "male.n.02",
+  "src_box": 2,
+  "lin": 3,
+  "lin_tok": "male.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "person.n.01",
+    0
+   ],
+   [
+    1,
+    "think.v.04",
+    0
+   ],
+   [
+    2,
+    "time.n.08",
+    0
+   ],
+   [
+    3,
+    "male.n.02",
+    1
+   ],
+   [
+    4,
+    "say.v.01",
+    1
+   ],
+   [
+    5,
+    "time.n.08",
+    1
+   ],
+   [
+    6,
+    "male.n.02",
+    2
+   ],
+   [
+    7,
+    "last_name.n.01",
+    2
+   ],
+   [
+    8,
+    "be.v.02",
+    2
+   ],
+   [
+    9,
+    "time.n.08",
+    2
+   ],
+   [
+    10,
+    "name.n.01",
+    2
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    1,
+    "CONTINUATION"
+   ],
+   [
+    2,
+    2,
+    "CONTINUATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p95/d1727",
+  "sent": "He acted like he didn't know me.",
+  "sbn": "male.n.02 act.v.02 Agent -1 Time +1 Proposition >1 time.n.08 TPR now CONTINUATION <0 male.n.02 ANA -3 NEGATION <1 time.n.08 TPR now know.v.04 Experiencer -2 Time -1 Stimulus +1 person.n.01 EQU speaker",
+  "role": "ANA",
+  "raw": "-3",
+  "src": 3,
+  "src_tok": "male.n.02",
+  "src_box": 1,
+  "lin": 0,
+  "lin_tok": "male.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "male.n.02",
+    0
+   ],
+   [
+    1,
+    "act.v.02",
+    0
+   ],
+   [
+    2,
+    "time.n.08",
+    0
+   ],
+   [
+    3,
+    "male.n.02",
+    1
+   ],
+   [
+    4,
+    "time.n.08",
+    2
+   ],
+   [
+    5,
+    "know.v.04",
+    2
+   ],
+   [
+    6,
+    "person.n.01",
+    2
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    1,
+    "CONTINUATION"
+   ],
+   [
+    2,
+    1,
+    "NEGATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p78/d1839",
+  "sent": "He resented that she was dating his brother.",
+  "sbn": "male.n.02 resent.v.01 Proposition >1 Experiencer -1 Time +1 time.n.08 TPR now CONTINUATION <0 female.n.02 time.n.08 TPR now date.v.01 Agent -2 Time -1 Co-Agent +2 male.n.02 ANA -6 person.n.01 Role +1 brother.n.01 Of -2",
+  "role": "ANA",
+  "raw": "-6",
+  "src": 6,
+  "src_tok": "male.n.02",
+  "src_box": 1,
+  "lin": 0,
+  "lin_tok": "male.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "male.n.02",
+    0
+   ],
+   [
+    1,
+    "resent.v.01",
+    0
+   ],
+   [
+    2,
+    "time.n.08",
+    0
+   ],
+   [
+    3,
+    "female.n.02",
+    1
+   ],
+   [
+    4,
+    "time.n.08",
+    1
+   ],
+   [
+    5,
+    "date.v.01",
+    1
+   ],
+   [
+    6,
+    "male.n.02",
+    1
+   ],
+   [
+    7,
+    "person.n.01",
+    1
+   ],
+   [
+    8,
+    "brother.n.01",
+    1
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    1,
+    "CONTINUATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p00/d1936",
+  "sent": "My watch may be one or two minutes fast.",
+  "sbn": "person.n.01 EQU speaker watch.n.01 User -1 POSSIBILITY <1 entity.n.01 fast.a.02 Theme -2 Value -1 NEGATION <1 NEGATION <1 quantity.n.01 EQU 1 minute.n.01 EQU -3 Quantity -1 NEGATION <2 quantity.n.01 EQU 2 minute.n.01 EQU -5 Quantity -1",
+  "role": "EQU",
+  "raw": "-5",
+  "src": 7,
+  "src_tok": "minute.n.01",
+  "src_box": 4,
+  "lin": 2,
+  "lin_tok": "entity.n.01",
+  "reg": 0,
+  "reg_tok": "person.n.01",
+  "concepts": [
+   [
+    0,
+    "person.n.01",
+    0
+   ],
+   [
+    1,
+    "watch.n.01",
+    0
+   ],
+   [
+    2,
+    "entity.n.01",
+    1
+   ],
+   [
+    3,
+    "fast.a.02",
+    1
+   ],
+   [
+    4,
+    "quantity.n.01",
+    3
+   ],
+   [
+    5,
+    "minute.n.01",
+    3
+   ],
+   [
+    6,
+    "quantity.n.01",
+    4
+   ],
+   [
+    7,
+    "minute.n.01",
+    4
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    0,
+    "POSSIBILITY"
+   ],
+   [
+    2,
+    1,
+    "NEGATION"
+   ],
+   [
+    3,
+    2,
+    "NEGATION"
+   ],
+   [
+    4,
+    2,
+    "NEGATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p02/d2952",
+  "sent": "Give the book to whomever wants it.",
+  "sbn": "person.n.01 EQU hearer NEGATION <1 NEGATION <1 give.v.03 Agent -1 Theme +1 Recipient +2 CONJUNCTION <3 book.n.02 CONJUNCTION <3 person.n.01 want.v.01 Pivot -1 Time +1 Theme +2 time.n.08 EQU now entity.n.01 ANA -4",
+  "role": "ANA",
+  "raw": "-4",
+  "src": 6,
+  "src_tok": "entity.n.01",
+  "src_box": 4,
+  "lin": 2,
+  "lin_tok": "book.n.02",
+  "reg": 0,
+  "reg_tok": "person.n.01",
+  "concepts": [
+   [
+    0,
+    "person.n.01",
+    0
+   ],
+   [
+    1,
+    "give.v.03",
+    2
+   ],
+   [
+    2,
+    "book.n.02",
+    3
+   ],
+   [
+    3,
+    "person.n.01",
+    4
+   ],
+   [
+    4,
+    "want.v.01",
+    4
+   ],
+   [
+    5,
+    "time.n.08",
+    4
+   ],
+   [
+    6,
+    "entity.n.01",
+    4
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    0,
+    "NEGATION"
+   ],
+   [
+    2,
+    1,
+    "NEGATION"
+   ],
+   [
+    3,
+    0,
+    "CONJUNCTION"
+   ],
+   [
+    4,
+    1,
+    "CONJUNCTION"
+   ]
+  ]
+ },
+ {
+  "doc": "p79/d2000",
+  "sent": "Tom claimed that he didn't see anything.",
+  "sbn": "male.n.02 Name \"Tom\" claim.v.01 Proposition >1 Agent -1 Time +1 time.n.08 TPR now CONTINUATION <0 male.n.02 ANA -3 NEGATION <1 time.n.08 TPR now see.v.03 Experiencer -2 Time -1 Stimulus +1 entity.n.01",
+  "role": "ANA",
+  "raw": "-3",
+  "src": 3,
+  "src_tok": "male.n.02",
+  "src_box": 1,
+  "lin": 0,
+  "lin_tok": "male.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "male.n.02",
+    0
+   ],
+   [
+    1,
+    "claim.v.01",
+    0
+   ],
+   [
+    2,
+    "time.n.08",
+    0
+   ],
+   [
+    3,
+    "male.n.02",
+    1
+   ],
+   [
+    4,
+    "time.n.08",
+    2
+   ],
+   [
+    5,
+    "see.v.03",
+    2
+   ],
+   [
+    6,
+    "entity.n.01",
+    2
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    1,
+    "CONTINUATION"
+   ],
+   [
+    2,
+    1,
+    "NEGATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p25/d3227",
+  "sent": "Tom doesn't have a credit card or a bank account.",
+  "sbn": "male.n.02 Name \"Tom\" NEGATION <1 time.n.08 EQU now have.v.01 Pivot -2 Time -1 Theme +1 entity.n.01 NEGATION <1 NEGATION <1 credit_card.n.01 EQU -1 NEGATION <2 bank_account.n.01 EQU -2",
+  "role": "EQU",
+  "raw": "-2",
+  "src": 5,
+  "src_tok": "bank_account.n.01",
+  "src_box": 4,
+  "lin": 3,
+  "lin_tok": "entity.n.01",
+  "reg": 2,
+  "reg_tok": "have.v.01",
+  "concepts": [
+   [
+    0,
+    "male.n.02",
+    0
+   ],
+   [
+    1,
+    "time.n.08",
+    1
+   ],
+   [
+    2,
+    "have.v.01",
+    1
+   ],
+   [
+    3,
+    "entity.n.01",
+    1
+   ],
+   [
+    4,
+    "credit_card.n.01",
+    3
+   ],
+   [
+    5,
+    "bank_account.n.01",
+    4
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    0,
+    "NEGATION"
+   ],
+   [
+    2,
+    1,
+    "NEGATION"
+   ],
+   [
+    3,
+    2,
+    "NEGATION"
+   ],
+   [
+    4,
+    2,
+    "NEGATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p02/d0136",
+  "sent": "Tom asks his mother if she can but him a new toy.",
+  "sbn": "male.n.02 Name \"Tom\" ask.v.02 Proposition >1 Agent -1 Time +1 Recipient +3 time.n.08 EQU now male.n.02 ANA -3 person.n.01 Role +1 mother.n.01 Of -2 CONTINUATION <0 female.n.02 POSSIBILITY <1 buy.v.01 Agent -1 Beneficiary +1 Theme +3 male.n.02 ANA -8 new.a.01 AttributeOf +1 toy.n.01",
+  "role": "ANA",
+  "raw": "-8",
+  "src": 8,
+  "src_tok": "male.n.02",
+  "src_box": 2,
+  "lin": 0,
+  "lin_tok": "male.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "male.n.02",
+    0
+   ],
+   [
+    1,
+    "ask.v.02",
+    0
+   ],
+   [
+    2,
+    "time.n.08",
+    0
+   ],
+   [
+    3,
+    "male.n.02",
+    0
+   ],
+   [
+    4,
+    "person.n.01",
+    0
+   ],
+   [
+    5,
+    "mother.n.01",
+    0
+   ],
+   [
+    6,
+    "female.n.02",
+    1
+   ],
+   [
+    7,
+    "buy.v.01",
+    2
+   ],
+   [
+    8,
+    "male.n.02",
+    2
+   ],
+   [
+    9,
+    "new.a.01",
+    2
+   ],
+   [
+    10,
+    "toy.n.01",
+    2
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    1,
+    "CONTINUATION"
+   ],
+   [
+    2,
+    1,
+    "POSSIBILITY"
+   ]
+  ]
+ },
+ {
+  "doc": "p00/d2473",
+  "sent": "These cups are all broken.",
+  "sbn": "cup.n.01 NEGATION <1 NEGATION <1 time.n.08 EQU now CONJUNCTION <2 entity.n.01 SubOf -2 CONJUNCTION <2 broken.a.01 Time -2 AttributeOf -1",
+  "role": "SubOf",
+  "raw": "-2",
+  "src": 2,
+  "src_tok": "entity.n.01",
+  "src_box": 3,
+  "lin": 0,
+  "lin_tok": "cup.n.01",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "cup.n.01",
+    0
+   ],
+   [
+    1,
+    "time.n.08",
+    2
+   ],
+   [
+    2,
+    "entity.n.01",
+    3
+   ],
+   [
+    3,
+    "broken.a.01",
+    4
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    0,
+    "NEGATION"
+   ],
+   [
+    2,
+    1,
+    "NEGATION"
+   ],
+   [
+    3,
+    1,
+    "CONJUNCTION"
+   ],
+   [
+    4,
+    2,
+    "CONJUNCTION"
+   ]
+  ]
+ },
+ {
+  "doc": "p00/d2473",
+  "sent": "These cups are all broken.",
+  "sbn": "cup.n.01 NEGATION <1 NEGATION <1 time.n.08 EQU now CONJUNCTION <2 entity.n.01 SubOf -2 CONJUNCTION <2 broken.a.01 Time -2 AttributeOf -1",
+  "role": "Time",
+  "raw": "-2",
+  "src": 3,
+  "src_tok": "broken.a.01",
+  "src_box": 4,
+  "lin": 1,
+  "lin_tok": "time.n.08",
+  "reg": 0,
+  "reg_tok": "cup.n.01",
+  "concepts": [
+   [
+    0,
+    "cup.n.01",
+    0
+   ],
+   [
+    1,
+    "time.n.08",
+    2
+   ],
+   [
+    2,
+    "entity.n.01",
+    3
+   ],
+   [
+    3,
+    "broken.a.01",
+    4
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    0,
+    "NEGATION"
+   ],
+   [
+    2,
+    1,
+    "NEGATION"
+   ],
+   [
+    3,
+    1,
+    "CONJUNCTION"
+   ],
+   [
+    4,
+    2,
+    "CONJUNCTION"
+   ]
+  ]
+ },
+ {
+  "doc": "p00/d2473",
+  "sent": "These cups are all broken.",
+  "sbn": "cup.n.01 NEGATION <1 NEGATION <1 time.n.08 EQU now CONJUNCTION <2 entity.n.01 SubOf -2 CONJUNCTION <2 broken.a.01 Time -2 AttributeOf -1",
+  "role": "AttributeOf",
+  "raw": "-1",
+  "src": 3,
+  "src_tok": "broken.a.01",
+  "src_box": 4,
+  "lin": 2,
+  "lin_tok": "entity.n.01",
+  "reg": 1,
+  "reg_tok": "time.n.08",
+  "concepts": [
+   [
+    0,
+    "cup.n.01",
+    0
+   ],
+   [
+    1,
+    "time.n.08",
+    2
+   ],
+   [
+    2,
+    "entity.n.01",
+    3
+   ],
+   [
+    3,
+    "broken.a.01",
+    4
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    0,
+    "NEGATION"
+   ],
+   [
+    2,
+    1,
+    "NEGATION"
+   ],
+   [
+    3,
+    1,
+    "CONJUNCTION"
+   ],
+   [
+    4,
+    2,
+    "CONJUNCTION"
+   ]
+  ]
+ },
+ {
+  "doc": "p16/d1742",
+  "sent": "A rubber ball bounces because it is elastic.",
+  "sbn": "NEGATION <1 rubber.n.01 ball.n.01 MadeOf -1 NEGATION <1 bounce.v.01 Theme -1 EXPLANATION <2 entity.n.01 ANA -2 time.n.08 EQU now elastic.a.01 AttributeOf -2 Time -1",
+  "role": "ANA",
+  "raw": "-2",
+  "src": 3,
+  "src_tok": "entity.n.01",
+  "src_box": 3,
+  "lin": 1,
+  "lin_tok": "ball.n.01",
+  "reg": 0,
+  "reg_tok": "rubber.n.01",
+  "concepts": [
+   [
+    0,
+    "rubber.n.01",
+    1
+   ],
+   [
+    1,
+    "ball.n.01",
+    1
+   ],
+   [
+    2,
+    "bounce.v.01",
+    2
+   ],
+   [
+    3,
+    "entity.n.01",
+    3
+   ],
+   [
+    4,
+    "time.n.08",
+    3
+   ],
+   [
+    5,
+    "elastic.a.01",
+    3
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    0,
+    "NEGATION"
+   ],
+   [
+    2,
+    1,
+    "NEGATION"
+   ],
+   [
+    3,
+    1,
+    "EXPLANATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p76/d3024",
+  "sent": "He is named Jeff by everyone.",
+  "sbn": "male.n.02 NEGATION <1 NEGATION <1 time.n.08 EQU now name.v.01 Theme -2 Time -1 Result +1 name.n.01 EQU \"Jeff\" CONJUNCTION <2 person.n.01 AgentOf -2",
+  "role": "AgentOf",
+  "raw": "-2",
+  "src": 4,
+  "src_tok": "person.n.01",
+  "src_box": 3,
+  "lin": 2,
+  "lin_tok": "name.v.01",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "male.n.02",
+    0
+   ],
+   [
+    1,
+    "time.n.08",
+    2
+   ],
+   [
+    2,
+    "name.v.01",
+    2
+   ],
+   [
+    3,
+    "name.n.01",
+    2
+   ],
+   [
+    4,
+    "person.n.01",
+    3
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    0,
+    "NEGATION"
+   ],
+   [
+    2,
+    1,
+    "NEGATION"
+   ],
+   [
+    3,
+    1,
+    "CONJUNCTION"
+   ]
+  ]
+ },
+ {
+  "doc": "p20/d1811",
+  "sent": "Tom looked like he was healthy.",
+  "sbn": "male.n.02 Name \"Tom\" look.v.02 Theme -1 Time +1 Proposition >1 time.n.08 TPR now CONTINUATION <0 male.n.02 ANA -3 time.n.08 TPR now healthy.a.01 AttributeOf -2 Time -1",
+  "role": "ANA",
+  "raw": "-3",
+  "src": 3,
+  "src_tok": "male.n.02",
+  "src_box": 1,
+  "lin": 0,
+  "lin_tok": "male.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "male.n.02",
+    0
+   ],
+   [
+    1,
+    "look.v.02",
+    0
+   ],
+   [
+    2,
+    "time.n.08",
+    0
+   ],
+   [
+    3,
+    "male.n.02",
+    1
+   ],
+   [
+    4,
+    "time.n.08",
+    1
+   ],
+   [
+    5,
+    "healthy.a.01",
+    1
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    1,
+    "CONTINUATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p81/d2987",
+  "sent": "Melanie said that she likes swimming.",
+  "sbn": "female.n.02 Name \"Melanie\" say.v.01 Proposition >1 Agent -1 Time +1 time.n.08 TPR now CONTINUATION <0 female.n.02 ANA -3 like.v.02 Experiencer -1 Time +1 Stimulus +2 time.n.08 EQU now swimming.n.01",
+  "role": "ANA",
+  "raw": "-3",
+  "src": 3,
+  "src_tok": "female.n.02",
+  "src_box": 1,
+  "lin": 0,
+  "lin_tok": "female.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "female.n.02",
+    0
+   ],
+   [
+    1,
+    "say.v.01",
+    0
+   ],
+   [
+    2,
+    "time.n.08",
+    0
+   ],
+   [
+    3,
+    "female.n.02",
+    1
+   ],
+   [
+    4,
+    "like.v.02",
+    1
+   ],
+   [
+    5,
+    "time.n.08",
+    1
+   ],
+   [
+    6,
+    "swimming.n.01",
+    1
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    1,
+    "CONTINUATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p90/d3171",
+  "sent": "He said that he grew up in Tunisia.",
+  "sbn": "male.n.02 say.v.02 Proposition >1 Agent -1 Time +1 time.n.08 TPR now CONTINUATION <0 male.n.02 ANA -3 grow_up.v.01 Patient -1 Time +1 Location +2 time.n.08 TPR now country.n.02 Name \"Tunisia\"",
+  "role": "ANA",
+  "raw": "-3",
+  "src": 3,
+  "src_tok": "male.n.02",
+  "src_box": 1,
+  "lin": 0,
+  "lin_tok": "male.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "male.n.02",
+    0
+   ],
+   [
+    1,
+    "say.v.02",
+    0
+   ],
+   [
+    2,
+    "time.n.08",
+    0
+   ],
+   [
+    3,
+    "male.n.02",
+    1
+   ],
+   [
+    4,
+    "grow_up.v.01",
+    1
+   ],
+   [
+    5,
+    "time.n.08",
+    1
+   ],
+   [
+    6,
+    "country.n.02",
+    1
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    1,
+    "CONTINUATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p12/d2625",
+  "sent": "He whispered to me that he was hungry.",
+  "sbn": "male.n.02 whisper.v.01 Proposition >1 Agent -1 Time +1 Recipient +2 time.n.08 TPR now person.n.01 EQU speaker CONTINUATION <0 male.n.02 ANA -4 time.n.08 TPR now hungry.a.01 Experiencer -2 Time -1",
+  "role": "ANA",
+  "raw": "-4",
+  "src": 4,
+  "src_tok": "male.n.02",
+  "src_box": 1,
+  "lin": 0,
+  "lin_tok": "male.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "male.n.02",
+    0
+   ],
+   [
+    1,
+    "whisper.v.01",
+    0
+   ],
+   [
+    2,
+    "time.n.08",
+    0
+   ],
+   [
+    3,
+    "person.n.01",
+    0
+   ],
+   [
+    4,
+    "male.n.02",
+    1
+   ],
+   [
+    5,
+    "time.n.08",
+    1
+   ],
+   [
+    6,
+    "hungry.a.01",
+    1
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    1,
+    "CONTINUATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p97/d2001",
+  "sent": "He asked her where she lived.",
+  "sbn": "male.n.02 ask.v.01 Proposition >1 Agent -1 Time +1 Recipient +2 time.n.08 TPR now female.n.02 CONTINUATION <0 location.n.01 Name ? female.n.02 ANA -2 live.v.01 Location -2 Theme -1 Time +1 time.n.08 TPR now",
+  "role": "ANA",
+  "raw": "-2",
+  "src": 5,
+  "src_tok": "female.n.02",
+  "src_box": 1,
+  "lin": 3,
+  "lin_tok": "female.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "male.n.02",
+    0
+   ],
+   [
+    1,
+    "ask.v.01",
+    0
+   ],
+   [
+    2,
+    "time.n.08",
+    0
+   ],
+   [
+    3,
+    "female.n.02",
+    0
+   ],
+   [
+    4,
+    "location.n.01",
+    1
+   ],
+   [
+    5,
+    "female.n.02",
+    1
+   ],
+   [
+    6,
+    "live.v.01",
+    1
+   ],
+   [
+    7,
+    "time.n.08",
+    1
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    1,
+    "CONTINUATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p06/d1742",
+  "sent": "He suggested to her that she should buy it.",
+  "sbn": "male.n.02 suggest.v.01 Proposition >1 Causer -1 Time +1 Recipient +2 time.n.08 TPR now female.n.02 CONTINUATION <0 female.n.02 ANA -1 NECESSITY <1 buy.v.01 Agent -1 Theme +1 entity.n.01",
+  "role": "ANA",
+  "raw": "-1",
+  "src": 4,
+  "src_tok": "female.n.02",
+  "src_box": 1,
+  "lin": 3,
+  "lin_tok": "female.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "male.n.02",
+    0
+   ],
+   [
+    1,
+    "suggest.v.01",
+    0
+   ],
+   [
+    2,
+    "time.n.08",
+    0
+   ],
+   [
+    3,
+    "female.n.02",
+    0
+   ],
+   [
+    4,
+    "female.n.02",
+    1
+   ],
+   [
+    5,
+    "buy.v.01",
+    2
+   ],
+   [
+    6,
+    "entity.n.01",
+    2
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    1,
+    "CONTINUATION"
+   ],
+   [
+    2,
+    1,
+    "NECESSITY"
+   ]
+  ]
+ },
+ {
+  "doc": "p30/d1420",
+  "sent": "He asked her if she was Jane.",
+  "sbn": "male.n.02 ask.v.01 Proposition >1 Agent -1 Time +1 Recipient +2 time.n.08 TPR now female.n.02 CONTINUATION <0 female.n.02 ANA -1 be.v.06 Theme -1 Time +1 Co-Theme +2 time.n.08 TPR now female.n.02 Name \"Jane\"",
+  "role": "ANA",
+  "raw": "-1",
+  "src": 4,
+  "src_tok": "female.n.02",
+  "src_box": 1,
+  "lin": 3,
+  "lin_tok": "female.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "male.n.02",
+    0
+   ],
+   [
+    1,
+    "ask.v.01",
+    0
+   ],
+   [
+    2,
+    "time.n.08",
+    0
+   ],
+   [
+    3,
+    "female.n.02",
+    0
+   ],
+   [
+    4,
+    "female.n.02",
+    1
+   ],
+   [
+    5,
+    "be.v.06",
+    1
+   ],
+   [
+    6,
+    "time.n.08",
+    1
+   ],
+   [
+    7,
+    "female.n.02",
+    1
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    1,
+    "CONTINUATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p23/d2513",
+  "sent": "\"Are you still cold,\" she asked, as she kissed him on the forehead.",
+  "sbn": "time.n.08 EQU now person.n.01 EQU hearer cold.a.01 Time -2 AttributeOf -1 CONTINUATION <0 female.n.02 ask.v.01 Proposition <1 Agent -1 Time +1 time.n.08 TPR now CONTINUATION <3 female.n.02 ANA -3 kiss.v.01 Agent -1 Time +1 Co-Agent +2 Experiencer +3 time.n.08 TPR now male.n.02 forehead.n.01",
+  "role": "ANA",
+  "raw": "-3",
+  "src": 6,
+  "src_tok": "female.n.02",
+  "src_box": 2,
+  "lin": 3,
+  "lin_tok": "female.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "time.n.08",
+    0
+   ],
+   [
+    1,
+    "person.n.01",
+    0
+   ],
+   [
+    2,
+    "cold.a.01",
+    0
+   ],
+   [
+    3,
+    "female.n.02",
+    1
+   ],
+   [
+    4,
+    "ask.v.01",
+    1
+   ],
+   [
+    5,
+    "time.n.08",
+    1
+   ],
+   [
+    6,
+    "female.n.02",
+    2
+   ],
+   [
+    7,
+    "kiss.v.01",
+    2
+   ],
+   [
+    8,
+    "time.n.08",
+    2
+   ],
+   [
+    9,
+    "male.n.02",
+    2
+   ],
+   [
+    10,
+    "forehead.n.01",
+    2
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    1,
+    "CONTINUATION"
+   ],
+   [
+    2,
+    -1,
+    "CONTINUATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p63/d3045",
+  "sent": "Tom doesn't think he's as creative as Mary.",
+  "sbn": "male.n.02 Name \"Tom\" NEGATION <1 time.n.08 EQU now think.v.01 Time -1 Proposition >1 Agent -2 CONTINUATION <0 male.n.02 ANA -3 time.n.08 EQU now as.r.01 Theme -2 Co-Theme +2 creative.a.01 AttributeOf -3 Time -2 Degree -1 female.n.02 Name \"Mary\"",
+  "role": "ANA",
+  "raw": "-3",
+  "src": 3,
+  "src_tok": "male.n.02",
+  "src_box": 2,
+  "lin": 0,
+  "lin_tok": "male.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "male.n.02",
+    0
+   ],
+   [
+    1,
+    "time.n.08",
+    1
+   ],
+   [
+    2,
+    "think.v.01",
+    1
+   ],
+   [
+    3,
+    "male.n.02",
+    2
+   ],
+   [
+    4,
+    "time.n.08",
+    2
+   ],
+   [
+    5,
+    "as.r.01",
+    2
+   ],
+   [
+    6,
+    "creative.a.01",
+    2
+   ],
+   [
+    7,
+    "female.n.02",
+    2
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    0,
+    "NEGATION"
+   ],
+   [
+    2,
+    2,
+    "CONTINUATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p05/d2840",
+  "sent": "The coworker claimed he had missed the bus.",
+  "sbn": "person.n.01 Role +1 co-worker.n.01 claim.v.01 Proposition >1 Agent -2 Time +1 time.n.08 TPR now CONTINUATION <0 male.n.02 ANA -4 miss.v.05 Agent -1 Time +1 Theme +2 time.n.08 TPR now bus.n.01",
+  "role": "ANA",
+  "raw": "-4",
+  "src": 4,
+  "src_tok": "male.n.02",
+  "src_box": 1,
+  "lin": 0,
+  "lin_tok": "person.n.01",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "person.n.01",
+    0
+   ],
+   [
+    1,
+    "co-worker.n.01",
+    0
+   ],
+   [
+    2,
+    "claim.v.01",
+    0
+   ],
+   [
+    3,
+    "time.n.08",
+    0
+   ],
+   [
+    4,
+    "male.n.02",
+    1
+   ],
+   [
+    5,
+    "miss.v.05",
+    1
+   ],
+   [
+    6,
+    "time.n.08",
+    1
+   ],
+   [
+    7,
+    "bus.n.01",
+    1
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    1,
+    "CONTINUATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p95/d1663",
+  "sent": "Who fights can lose. Who doesn't fight has already lost.",
+  "sbn": "NEGATION <1 person.n.01 fight.v.01 Agent -1 Time +1 time.n.08 EQU now NEGATION <1 POSSIBILITY <1 lose.v.02 Agent -3 CONTINUATION <4 NEGATION <1 person.n.01 time.n.08 EQU now NEGATION <1 fight.v.01 Agent -2 Time -1 NEGATION <2 lose.v.02 Agent -3 Time +1 time.n.08 TPR now",
+  "role": "Agent",
+  "raw": "-3",
+  "src": 7,
+  "src_tok": "lose.v.02",
+  "src_box": 7,
+  "lin": 4,
+  "lin_tok": "person.n.01",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "person.n.01",
+    1
+   ],
+   [
+    1,
+    "fight.v.01",
+    1
+   ],
+   [
+    2,
+    "time.n.08",
+    1
+   ],
+   [
+    3,
+    "lose.v.02",
+    3
+   ],
+   [
+    4,
+    "person.n.01",
+    5
+   ],
+   [
+    5,
+    "time.n.08",
+    5
+   ],
+   [
+    6,
+    "fight.v.01",
+    6
+   ],
+   [
+    7,
+    "lose.v.02",
+    7
+   ],
+   [
+    8,
+    "time.n.08",
+    7
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    0,
+    "NEGATION"
+   ],
+   [
+    2,
+    1,
+    "NEGATION"
+   ],
+   [
+    3,
+    2,
+    "POSSIBILITY"
+   ],
+   [
+    4,
+    0,
+    "CONTINUATION"
+   ],
+   [
+    5,
+    4,
+    "NEGATION"
+   ],
+   [
+    6,
+    5,
+    "NEGATION"
+   ],
+   [
+    7,
+    5,
+    "NEGATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p97/d0821",
+  "sent": "He replied that he did not know.",
+  "sbn": "male.n.02 reply.v.01 Proposition >1 Agent -1 Time +1 time.n.08 TPR now CONTINUATION <0 male.n.02 ANA -3 NEGATION <1 time.n.08 TPR now know.v.01 Experiencer -2 Time -1",
+  "role": "ANA",
+  "raw": "-3",
+  "src": 3,
+  "src_tok": "male.n.02",
+  "src_box": 1,
+  "lin": 0,
+  "lin_tok": "male.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "male.n.02",
+    0
+   ],
+   [
+    1,
+    "reply.v.01",
+    0
+   ],
+   [
+    2,
+    "time.n.08",
+    0
+   ],
+   [
+    3,
+    "male.n.02",
+    1
+   ],
+   [
+    4,
+    "time.n.08",
+    2
+   ],
+   [
+    5,
+    "know.v.01",
+    2
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    1,
+    "CONTINUATION"
+   ],
+   [
+    2,
+    1,
+    "NEGATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p83/d1787",
+  "sent": "Tom told Mary that she looked like Marilyn Monroe.",
+  "sbn": "male.n.02 Name \"Tom\" tell.v.02 Proposition >1 Agent -1 Time +1 Recipient +2 time.n.08 TPR now female.n.02 Name \"Mary\" CONTINUATION <0 female.n.02 ANA -1 look.v.02 Theme -1 Time +1 Attribute +2 time.n.08 TPR now female.n.02 Name \"Marilyn Monroe\"",
+  "role": "ANA",
+  "raw": "-1",
+  "src": 4,
+  "src_tok": "female.n.02",
+  "src_box": 1,
+  "lin": 3,
+  "lin_tok": "female.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "male.n.02",
+    0
+   ],
+   [
+    1,
+    "tell.v.02",
+    0
+   ],
+   [
+    2,
+    "time.n.08",
+    0
+   ],
+   [
+    3,
+    "female.n.02",
+    0
+   ],
+   [
+    4,
+    "female.n.02",
+    1
+   ],
+   [
+    5,
+    "look.v.02",
+    1
+   ],
+   [
+    6,
+    "time.n.08",
+    1
+   ],
+   [
+    7,
+    "female.n.02",
+    1
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    1,
+    "CONTINUATION"
+   ]
+  ]
+ },
+ {
+  "doc": "p19/d2862",
+  "sent": "She gave away all her dolls.",
+  "sbn": "female.n.02 NEGATION <1 NEGATION <1 give_away.v.01 Agent -1 Time +1 Theme +2 time.n.08 TPR now CONJUNCTION <2 entity.n.01 SubOf +2 CONJUNCTION <4 female.n.02 ANA -4 doll.n.01 User -1",
+  "role": "ANA",
+  "raw": "-4",
+  "src": 4,
+  "src_tok": "female.n.02",
+  "src_box": 4,
+  "lin": 0,
+  "lin_tok": "female.n.02",
+  "reg": null,
+  "reg_tok": "OUT-OF-RANGE",
+  "concepts": [
+   [
+    0,
+    "female.n.02",
+    0
+   ],
+   [
+    1,
+    "give_away.v.01",
+    2
+   ],
+   [
+    2,
+    "time.n.08",
+    2
+   ],
+   [
+    3,
+    "entity.n.01",
+    3
+   ],
+   [
+    4,
+    "female.n.02",
+    4
+   ],
+   [
+    5,
+    "doll.n.01",
+    4
+   ]
+  ],
+  "boxes": [
+   [
+    0,
+    null,
+    "TOP"
+   ],
+   [
+    1,
+    0,
+    "NEGATION"
+   ],
+   [
+    2,
+    1,
+    "NEGATION"
+   ],
+   [
+    3,
+    1,
+    "CONJUNCTION"
+   ],
+   [
+    4,
+    0,
+    "CONJUNCTION"
+   ]
+  ]
+ }
+]

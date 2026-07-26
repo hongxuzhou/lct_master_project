@@ -1,0 +1,1538 @@
+divergence by separator sequence:
+     38  CONTINUATION
+      8  NEGATION > NEGATION > CONJUNCTION > CONJUNCTION
+      7  NEGATION > NEGATION > NEGATION
+      6  CONTINUATION > NEGATION
+      5  NEGATION > CONTINUATION
+      5  NEGATION > NEGATION > NEGATION > NEGATION
+      5  NEGATION > NEGATION > CONJUNCTION
+      4  CONTINUATION > POSSIBILITY
+      2  CONTINUATION > NECESSITY
+      2  NEGATION > NEGATION > CONJUNCTION > NEGATION > NEGATION
+      2  CONTINUATION > CONTINUATION
+      1  NEGATION > NEGATION
+      1  NEGATION > CONTRAST
+      1  CONTRAST > NEGATION > CONTINUATION
+      1  POSSIBILITY > ALTERNATION > ALTERNATION
+      1  ALTERNATION > ALTERNATION
+      1  POSSIBILITY > NEGATION > NEGATION > NEGATION
+      1  NEGATION > NEGATION > EXPLANATION
+      1  NEGATION > NEGATION > POSSIBILITY > CONTINUATION > NEGATION > NEGATION > NEGATION
+
+==============================================================================
+p17/d0758   Philip Morris said it sold 201 bn cigarettes world-wide during the quarter.
+SBN: company.n.01 Name "Philip Morris" say.v.02 Proposition >1 Agent -1 Time +1 time.n.08 TPR now CONTINUATION <0 entity.n.01 ANA -3 sell.v.01 Agent -1 Time +1 Theme +3 Manner +4 Duration +5 time.n.08 TPR now quantity.n.01 EQU 201000000000 cigarette.n.01 Quantity -1 world-wide.a.01 quarter.n.06
+boxes: B0(top), B1(CONTINUATION -> parent B1)
+concepts:
+   [ 0] B0  company.n.01   <== LINEAR model says this
+   [ 1] B0  say.v.02
+   [ 2] B0  time.n.08
+   [ 3] B1  entity.n.01   <== SOURCE (the concept bearing the index)
+   [ 4] B1  sell.v.01
+   [ 5] B1  time.n.08
+   [ 6] B1  quantity.n.01
+   [ 7] B1  cigarette.n.01
+   [ 8] B1  world-wide.a.01
+   [ 9] B1  quarter.n.06
+EDGE: entity.n.01 --ANA -3-->
+   LINEAR  : [0] company.n.01
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p50/d2550   Tom told me that he'd lost his watch.
+SBN: male.n.02 Name "Tom" tell.v.02 Proposition >1 Agent -1 Time +1 Recipient +2 time.n.08 TPR now person.n.01 EQU speaker CONTINUATION <0 male.n.02 ANA -4 lose.v.05 Agent -1 Time +1 Theme +3 time.n.08 TPR now male.n.02 ANA -7 watch.n.01 User -1
+boxes: B0(top), B1(CONTINUATION -> parent B1)
+concepts:
+   [ 0] B0  male.n.02   <== LINEAR model says this
+   [ 1] B0  tell.v.02
+   [ 2] B0  time.n.08
+   [ 3] B0  person.n.01
+   [ 4] B1  male.n.02   <== SOURCE (the concept bearing the index)
+   [ 5] B1  lose.v.05
+   [ 6] B1  time.n.08
+   [ 7] B1  male.n.02
+   [ 8] B1  watch.n.01
+EDGE: male.n.02 --ANA -4-->
+   LINEAR  : [0] male.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p50/d2550   Tom told me that he'd lost his watch.
+SBN: male.n.02 Name "Tom" tell.v.02 Proposition >1 Agent -1 Time +1 Recipient +2 time.n.08 TPR now person.n.01 EQU speaker CONTINUATION <0 male.n.02 ANA -4 lose.v.05 Agent -1 Time +1 Theme +3 time.n.08 TPR now male.n.02 ANA -7 watch.n.01 User -1
+boxes: B0(top), B1(CONTINUATION -> parent B1)
+concepts:
+   [ 0] B0  male.n.02   <== LINEAR model says this
+   [ 1] B0  tell.v.02
+   [ 2] B0  time.n.08
+   [ 3] B0  person.n.01
+   [ 4] B1  male.n.02
+   [ 5] B1  lose.v.05
+   [ 6] B1  time.n.08
+   [ 7] B1  male.n.02   <== SOURCE (the concept bearing the index)
+   [ 8] B1  watch.n.01
+EDGE: male.n.02 --ANA -7-->
+   LINEAR  : [0] male.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p78/d2341   Tom flipped over the card and saw that it was the ace of spades.
+SBN: male.n.02 Name "Tom" flip_over.v.01 Agent -1 Time +1 Theme +2 time.n.08 TPR now card.n.01 see.v.01 Proposition >1 Experiencer -4 Time +1 time.n.08 TPR now CONTINUATION <0 entity.n.01 ANA -3 be.v.02 Theme -1 Time +1 Co-Theme +2 time.n.08 TPR now ace.n.02 SubOf +1 spade.n.01
+boxes: B0(top), B1(CONTINUATION -> parent B1)
+concepts:
+   [ 0] B0  male.n.02
+   [ 1] B0  flip_over.v.01
+   [ 2] B0  time.n.08
+   [ 3] B0  card.n.01   <== LINEAR model says this
+   [ 4] B0  see.v.01
+   [ 5] B0  time.n.08
+   [ 6] B1  entity.n.01   <== SOURCE (the concept bearing the index)
+   [ 7] B1  be.v.02
+   [ 8] B1  time.n.08
+   [ 9] B1  ace.n.02
+   [10] B1  spade.n.01
+EDGE: entity.n.01 --ANA -3-->
+   LINEAR  : [3] card.n.01
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p00/d3233   The doctor told Tom that he should eat a lot of vegetables.
+SBN: person.n.01 Role +1 doctor.n.01 tell.v.02 Proposition >1 Agent -2 Time +1 Recipient +2 time.n.08 TPR now male.n.02 Name "Tom" CONTINUATION <0 male.n.02 ANA -1 NECESSITY <1 eat.v.01 Agent -1 Patient +1 entity.n.01 Quantity + EQU +1 vegetable.n.01
+boxes: B0(top), B1(CONTINUATION -> parent B1), B2(NECESSITY -> parent B1)
+concepts:
+   [ 0] B0  person.n.01
+   [ 1] B0  doctor.n.01
+   [ 2] B0  tell.v.02
+   [ 3] B0  time.n.08
+   [ 4] B0  male.n.02   <== LINEAR model says this
+   [ 5] B1  male.n.02   <== SOURCE (the concept bearing the index)
+   [ 6] B2  eat.v.01
+   [ 7] B2  entity.n.01
+   [ 8] B2  vegetable.n.01
+EDGE: male.n.02 --ANA -1-->
+   LINEAR  : [4] male.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p71/d2285   Tom didn't realize he had his sweater on inside out.
+SBN: male.n.02 Name "Tom" NEGATION <1 time.n.08 TPR now realize.v.01 Time -1 Proposition >1 Experiencer -2 CONTINUATION <0 male.n.02 ANA -3 have_on.v.01 Agent -1 Time +1 Theme +3 Manner +4 time.n.08 TPR now male.n.02 ANA -6 sweater.n.01 User -1 inside_out.r.01
+boxes: B0(top), B1(NEGATION -> parent B0), B2(CONTINUATION -> parent B2)
+concepts:
+   [ 0] B0  male.n.02   <== LINEAR model says this
+   [ 1] B1  time.n.08
+   [ 2] B1  realize.v.01
+   [ 3] B2  male.n.02   <== SOURCE (the concept bearing the index)
+   [ 4] B2  have_on.v.01
+   [ 5] B2  time.n.08
+   [ 6] B2  male.n.02
+   [ 7] B2  sweater.n.01
+   [ 8] B2  inside_out.r.01
+EDGE: male.n.02 --ANA -3-->
+   LINEAR  : [0] male.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p71/d2285   Tom didn't realize he had his sweater on inside out.
+SBN: male.n.02 Name "Tom" NEGATION <1 time.n.08 TPR now realize.v.01 Time -1 Proposition >1 Experiencer -2 CONTINUATION <0 male.n.02 ANA -3 have_on.v.01 Agent -1 Time +1 Theme +3 Manner +4 time.n.08 TPR now male.n.02 ANA -6 sweater.n.01 User -1 inside_out.r.01
+boxes: B0(top), B1(NEGATION -> parent B0), B2(CONTINUATION -> parent B2)
+concepts:
+   [ 0] B0  male.n.02   <== LINEAR model says this
+   [ 1] B1  time.n.08
+   [ 2] B1  realize.v.01
+   [ 3] B2  male.n.02
+   [ 4] B2  have_on.v.01
+   [ 5] B2  time.n.08
+   [ 6] B2  male.n.02   <== SOURCE (the concept bearing the index)
+   [ 7] B2  sweater.n.01
+   [ 8] B2  inside_out.r.01
+EDGE: male.n.02 --ANA -6-->
+   LINEAR  : [0] male.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p47/d2958   He's happy that he passed that exam.
+SBN: male.n.02 time.n.08 EQU now happy.a.01 Time -1 Proposition >1 Experiencer -2 CONTINUATION <0 male.n.02 ANA -3 pass.v.14 Agent -1 Time +1 Theme +2 time.n.08 TPR now exam.n.01
+boxes: B0(top), B1(CONTINUATION -> parent B1)
+concepts:
+   [ 0] B0  male.n.02   <== LINEAR model says this
+   [ 1] B0  time.n.08
+   [ 2] B0  happy.a.01
+   [ 3] B1  male.n.02   <== SOURCE (the concept bearing the index)
+   [ 4] B1  pass.v.14
+   [ 5] B1  time.n.08
+   [ 6] B1  exam.n.01
+EDGE: male.n.02 --ANA -3-->
+   LINEAR  : [0] male.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p88/d2319   He who risks not gains not.
+SBN: NEGATION <1 person.n.01 EQU +1 entity.n.01 NEGATION <1 NEGATION <1 risk.v.01 Agent -1 NEGATION <2 gain.v.01 Agent -2
+boxes: B0(top), B1(NEGATION -> parent B0), B2(NEGATION -> parent B1), B3(NEGATION -> parent B2), B4(NEGATION -> parent B2)
+concepts:
+   [ 0] B1  person.n.01   <== REGISTER model says this
+   [ 1] B1  entity.n.01   <== LINEAR model says this
+   [ 2] B3  risk.v.01
+   [ 3] B4  gain.v.01   <== SOURCE (the concept bearing the index)
+EDGE: gain.v.01 --Agent -2-->
+   LINEAR  : [1] entity.n.01
+   REGISTER: [0] person.n.01
+
+==============================================================================
+p42/d1416   She is convinced that her son is still alive.
+SBN: female.n.02 time.n.08 EQU now convinced.a.02 Time -1 Proposition >1 Experiencer -2 CONTINUATION <0 female.n.02 ANA -3 person.n.01 Role +1 son.n.01 Of -2 time.n.08 EQU now alive.a.01 AttributeOf -3 Time -1
+boxes: B0(top), B1(CONTINUATION -> parent B1)
+concepts:
+   [ 0] B0  female.n.02   <== LINEAR model says this
+   [ 1] B0  time.n.08
+   [ 2] B0  convinced.a.02
+   [ 3] B1  female.n.02   <== SOURCE (the concept bearing the index)
+   [ 4] B1  person.n.01
+   [ 5] B1  son.n.01
+   [ 6] B1  time.n.08
+   [ 7] B1  alive.a.01
+EDGE: female.n.02 --ANA -3-->
+   LINEAR  : [0] female.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p42/d3251   Either you or he is wrong.
+SBN: entity.n.01 time.n.08 EQU now wrong.a.01 AttributeOf -2 Time -1 NEGATION <1 NEGATION <1 person.n.01 EQU hearer EQU -3 NEGATION <2 male.n.02 EQU -4
+boxes: B0(top), B1(NEGATION -> parent B0), B2(NEGATION -> parent B1), B3(NEGATION -> parent B1)
+concepts:
+   [ 0] B0  entity.n.01   <== LINEAR model says this
+   [ 1] B0  time.n.08
+   [ 2] B0  wrong.a.01
+   [ 3] B2  person.n.01
+   [ 4] B3  male.n.02   <== SOURCE (the concept bearing the index)
+EDGE: male.n.02 --EQU -4-->
+   LINEAR  : [0] entity.n.01
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p65/d1457   He is either in London or in Paris.
+SBN: male.n.02 be.v.03 Theme -1 Time +1 Location +1 time.n.08 EQU now city.n.01 NEGATION <1 NEGATION <1 city.n.01 Name "London" EQU -1 NEGATION <2 city.n.01 Name "Paris" EQU -2
+boxes: B0(top), B1(NEGATION -> parent B0), B2(NEGATION -> parent B1), B3(NEGATION -> parent B1)
+concepts:
+   [ 0] B0  male.n.02
+   [ 1] B0  be.v.03
+   [ 2] B0  time.n.08   <== REGISTER model says this
+   [ 3] B0  city.n.01   <== LINEAR model says this
+   [ 4] B2  city.n.01
+   [ 5] B3  city.n.01   <== SOURCE (the concept bearing the index)
+EDGE: city.n.01 --EQU -2-->
+   LINEAR  : [3] city.n.01
+   REGISTER: [2] time.n.08
+
+==============================================================================
+p12/d2239   She admits that she stole the jewels.
+SBN: female.n.02 admit.v.01 Proposition >1 Agent -1 Time +1 time.n.08 EQU now CONTINUATION <0 female.n.02 ANA -3 steal.v.01 Agent -1 Time +1 Theme +2 time.n.08 TPR now jewel.n.01
+boxes: B0(top), B1(CONTINUATION -> parent B1)
+concepts:
+   [ 0] B0  female.n.02   <== LINEAR model says this
+   [ 1] B0  admit.v.01
+   [ 2] B0  time.n.08
+   [ 3] B1  female.n.02   <== SOURCE (the concept bearing the index)
+   [ 4] B1  steal.v.01
+   [ 5] B1  time.n.08
+   [ 6] B1  jewel.n.01
+EDGE: female.n.02 --ANA -3-->
+   LINEAR  : [0] female.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p73/d3107   Tom claimed he saw a UFO.
+SBN: male.n.02 Name "Tom" claim.v.01 Proposition >1 Agent -1 Time +1 time.n.08 TPR now CONTINUATION <0 male.n.02 ANA -3 see.v.01 Experiencer -1 Time +1 Stimulus +2 time.n.08 TPR now ufo.n.01
+boxes: B0(top), B1(CONTINUATION -> parent B1)
+concepts:
+   [ 0] B0  male.n.02   <== LINEAR model says this
+   [ 1] B0  claim.v.01
+   [ 2] B0  time.n.08
+   [ 3] B1  male.n.02   <== SOURCE (the concept bearing the index)
+   [ 4] B1  see.v.01
+   [ 5] B1  time.n.08
+   [ 6] B1  ufo.n.01
+EDGE: male.n.02 --ANA -3-->
+   LINEAR  : [0] male.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p07/d2196   Tom isn't sure whether he locked the door.
+SBN: male.n.02 Name "Tom" NEGATION <1 time.n.08 EQU now sure.a.01 Time -1 Proposition >1 Experiencer -2 CONTINUATION <0 male.n.02 ANA -3 lock.v.01 Agent -1 Time +1 Patient +2 time.n.08 TPR now door.n.01
+boxes: B0(top), B1(NEGATION -> parent B0), B2(CONTINUATION -> parent B2)
+concepts:
+   [ 0] B0  male.n.02   <== LINEAR model says this
+   [ 1] B1  time.n.08
+   [ 2] B1  sure.a.01
+   [ 3] B2  male.n.02   <== SOURCE (the concept bearing the index)
+   [ 4] B2  lock.v.01
+   [ 5] B2  time.n.08
+   [ 6] B2  door.n.01
+EDGE: male.n.02 --ANA -3-->
+   LINEAR  : [0] male.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p98/d2653   Samuel helps everyone who asks him.
+SBN: male.n.02 Name "Samuel" NEGATION <1 NEGATION <1 help.v.01 Agent -1 Time +1 Beneficiary +2 time.n.08 EQU now CONJUNCTION <2 person.n.03 ask.v.02 Agent -1 Time +1 Patient +2 time.n.08 EQU now male.n.02 ANA -6
+boxes: B0(top), B1(NEGATION -> parent B0), B2(NEGATION -> parent B1), B3(CONJUNCTION -> parent B1)
+concepts:
+   [ 0] B0  male.n.02   <== LINEAR model says this
+   [ 1] B2  help.v.01
+   [ 2] B2  time.n.08
+   [ 3] B3  person.n.03
+   [ 4] B3  ask.v.02
+   [ 5] B3  time.n.08
+   [ 6] B3  male.n.02   <== SOURCE (the concept bearing the index)
+EDGE: male.n.02 --ANA -6-->
+   LINEAR  : [0] male.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p25/d1536   He likes neither baseball nor football.
+SBN: male.n.02 NEGATION <1 like.v.02 Experiencer -1 Time +1 Stimulus +2 time.n.08 EQU now entity.n.01 NEGATION <1 NEGATION <1 baseball.n.01 EQU -1 NEGATION <2 football.n.01 EQU -2
+boxes: B0(top), B1(NEGATION -> parent B0), B2(NEGATION -> parent B1), B3(NEGATION -> parent B2), B4(NEGATION -> parent B2)
+concepts:
+   [ 0] B0  male.n.02
+   [ 1] B1  like.v.02
+   [ 2] B1  time.n.08   <== REGISTER model says this
+   [ 3] B1  entity.n.01   <== LINEAR model says this
+   [ 4] B3  baseball.n.01
+   [ 5] B4  football.n.01   <== SOURCE (the concept bearing the index)
+EDGE: football.n.01 --EQU -2-->
+   LINEAR  : [3] entity.n.01
+   REGISTER: [2] time.n.08
+
+==============================================================================
+p65/d1574   Tom told me that he had been skydiving since he was sixteen.
+SBN: male.n.02 Name "Tom" tell.v.01 Proposition >1 Agent -1 Time +1 Recipient +2 time.n.08 TPR now person.n.01 EQU speaker CONTINUATION <0 male.n.02 ANA -4 time.n.08 TPR now skydive.v.01 Theme -2 Time -1 Start +1 entity.n.01 male.n.02 ANA -8 time.n.08 TPR now old.a.01 Participant -3 AttributeOf -2 Time -1 Value +1 measure.n.02 Quantity 16 Unit +1 year.n.01
+boxes: B0(top), B1(CONTINUATION -> parent B1)
+concepts:
+   [ 0] B0  male.n.02   <== LINEAR model says this
+   [ 1] B0  tell.v.01
+   [ 2] B0  time.n.08
+   [ 3] B0  person.n.01
+   [ 4] B1  male.n.02   <== SOURCE (the concept bearing the index)
+   [ 5] B1  time.n.08
+   [ 6] B1  skydive.v.01
+   [ 7] B1  entity.n.01
+   [ 8] B1  male.n.02
+   [ 9] B1  time.n.08
+   [10] B1  old.a.01
+   [11] B1  measure.n.02
+   [12] B1  year.n.01
+EDGE: male.n.02 --ANA -4-->
+   LINEAR  : [0] male.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p65/d1574   Tom told me that he had been skydiving since he was sixteen.
+SBN: male.n.02 Name "Tom" tell.v.01 Proposition >1 Agent -1 Time +1 Recipient +2 time.n.08 TPR now person.n.01 EQU speaker CONTINUATION <0 male.n.02 ANA -4 time.n.08 TPR now skydive.v.01 Theme -2 Time -1 Start +1 entity.n.01 male.n.02 ANA -8 time.n.08 TPR now old.a.01 Participant -3 AttributeOf -2 Time -1 Value +1 measure.n.02 Quantity 16 Unit +1 year.n.01
+boxes: B0(top), B1(CONTINUATION -> parent B1)
+concepts:
+   [ 0] B0  male.n.02   <== LINEAR model says this
+   [ 1] B0  tell.v.01
+   [ 2] B0  time.n.08
+   [ 3] B0  person.n.01
+   [ 4] B1  male.n.02
+   [ 5] B1  time.n.08
+   [ 6] B1  skydive.v.01
+   [ 7] B1  entity.n.01
+   [ 8] B1  male.n.02   <== SOURCE (the concept bearing the index)
+   [ 9] B1  time.n.08
+   [10] B1  old.a.01
+   [11] B1  measure.n.02
+   [12] B1  year.n.01
+EDGE: male.n.02 --ANA -8-->
+   LINEAR  : [0] male.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p60/d2812   I convinced him that he was wrong.
+SBN: person.n.01 EQU speaker convince.v.01 Proposition >1 Agent -1 Time +1 Recipient +2 time.n.08 TPR now male.n.02 CONTINUATION <0 male.n.02 ANA -1 time.n.08 TPR now wrong.a.01 AttributeOf -2 Time -1
+boxes: B0(top), B1(CONTINUATION -> parent B1)
+concepts:
+   [ 0] B0  person.n.01
+   [ 1] B0  convince.v.01
+   [ 2] B0  time.n.08
+   [ 3] B0  male.n.02   <== LINEAR model says this
+   [ 4] B1  male.n.02   <== SOURCE (the concept bearing the index)
+   [ 5] B1  time.n.08
+   [ 6] B1  wrong.a.01
+EDGE: male.n.02 --ANA -1-->
+   LINEAR  : [3] male.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p70/d1634   Mary senses the aliens are watching her.
+SBN: female.n.02 Name "Mary" sense.v.03 Proposition >1 Experiencer -1 Time +1 time.n.08 EQU now CONTINUATION <0 alien.n.03 time.n.08 EQU now watch.v.02 Agent -2 Time -1 Theme +1 female.n.02 ANA -6
+boxes: B0(top), B1(CONTINUATION -> parent B1)
+concepts:
+   [ 0] B0  female.n.02   <== LINEAR model says this
+   [ 1] B0  sense.v.03
+   [ 2] B0  time.n.08
+   [ 3] B1  alien.n.03
+   [ 4] B1  time.n.08
+   [ 5] B1  watch.v.02
+   [ 6] B1  female.n.02   <== SOURCE (the concept bearing the index)
+EDGE: female.n.02 --ANA -6-->
+   LINEAR  : [0] female.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p51/d2927   Camels have either one or two humps.
+SBN: camel.n.01 have.v.02 Pivot -1 Time +1 Theme +2 time.n.08 EQU now entity.n.01 NEGATION <1 NEGATION <1 quantity.n.01 EQU 1 hump.n.01 EQU -2 Quantity -1 NEGATION <2 quantity.n.01 EQU 2 hump.n.01 EQU -4 Quantity -1
+boxes: B0(top), B1(NEGATION -> parent B0), B2(NEGATION -> parent B1), B3(NEGATION -> parent B1)
+concepts:
+   [ 0] B0  camel.n.01
+   [ 1] B0  have.v.02   <== REGISTER model says this
+   [ 2] B0  time.n.08
+   [ 3] B0  entity.n.01   <== LINEAR model says this
+   [ 4] B2  quantity.n.01
+   [ 5] B2  hump.n.01
+   [ 6] B3  quantity.n.01
+   [ 7] B3  hump.n.01   <== SOURCE (the concept bearing the index)
+EDGE: hump.n.01 --EQU -4-->
+   LINEAR  : [3] entity.n.01
+   REGISTER: [1] have.v.02
+
+==============================================================================
+p10/d2815   Tom suspected that his father was dyslexic.
+SBN: male.n.02 Name "Tom" suspect.v.01 Proposition >1 Agent -1 Time +1 time.n.08 TPR now CONTINUATION <0 male.n.02 ANA -3 person.n.01 Role +1 father.n.01 Of -2 time.n.08 TPR now dyslexic.a.01 AttributeOf -3 Time -1
+boxes: B0(top), B1(CONTINUATION -> parent B1)
+concepts:
+   [ 0] B0  male.n.02   <== LINEAR model says this
+   [ 1] B0  suspect.v.01
+   [ 2] B0  time.n.08
+   [ 3] B1  male.n.02   <== SOURCE (the concept bearing the index)
+   [ 4] B1  person.n.01
+   [ 5] B1  father.n.01
+   [ 6] B1  time.n.08
+   [ 7] B1  dyslexic.a.01
+EDGE: male.n.02 --ANA -3-->
+   LINEAR  : [0] male.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p84/d0920   She promised me that she would clean my room.
+SBN: female.n.02 promise.v.01 Proposition >1 Agent -1 Time +1 Recipient +2 time.n.08 TPR now person.n.01 EQU speaker CONTINUATION <0 female.n.02 ANA -4 time.n.08 TSU now clean.v.02 Agent -2 Time -1 Source +2 person.n.01 EQU speaker room.n.01 User -1
+boxes: B0(top), B1(CONTINUATION -> parent B1)
+concepts:
+   [ 0] B0  female.n.02   <== LINEAR model says this
+   [ 1] B0  promise.v.01
+   [ 2] B0  time.n.08
+   [ 3] B0  person.n.01
+   [ 4] B1  female.n.02   <== SOURCE (the concept bearing the index)
+   [ 5] B1  time.n.08
+   [ 6] B1  clean.v.02
+   [ 7] B1  person.n.01
+   [ 8] B1  room.n.01
+EDGE: female.n.02 --ANA -4-->
+   LINEAR  : [0] female.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p04/d2865   I don't have the time or the money.
+SBN: person.n.01 EQU speaker NEGATION <1 time.n.08 EQU now have.v.01 Pivot -2 Time -1 Theme +1 entity.n.01 NEGATION <1 NEGATION <1 time.n.02 EQU -1 NEGATION <2 money.n.02 EQU -2
+boxes: B0(top), B1(NEGATION -> parent B0), B2(NEGATION -> parent B1), B3(NEGATION -> parent B2), B4(NEGATION -> parent B2)
+concepts:
+   [ 0] B0  person.n.01
+   [ 1] B1  time.n.08
+   [ 2] B1  have.v.01   <== REGISTER model says this
+   [ 3] B1  entity.n.01   <== LINEAR model says this
+   [ 4] B3  time.n.02
+   [ 5] B4  money.n.02   <== SOURCE (the concept bearing the index)
+EDGE: money.n.02 --EQU -2-->
+   LINEAR  : [3] entity.n.01
+   REGISTER: [2] have.v.01
+
+==============================================================================
+p64/d1787   Tom managed to carry everything himself.
+SBN: male.n.02 Name "Tom" NEGATION <1 NEGATION <1 manage.v.01 Agent -1 Time +1 Topic +2 time.n.08 TPR now carry.v.01 Agent -3 Theme +1 CONJUNCTION <2 entity.n.01 CONJUNCTION <2 male.n.02 EQU -5
+boxes: B0(top), B1(NEGATION -> parent B0), B2(NEGATION -> parent B1), B3(CONJUNCTION -> parent B1), B4(CONJUNCTION -> parent B2)
+concepts:
+   [ 0] B0  male.n.02   <== LINEAR model says this
+   [ 1] B2  manage.v.01
+   [ 2] B2  time.n.08
+   [ 3] B2  carry.v.01
+   [ 4] B3  entity.n.01
+   [ 5] B4  male.n.02   <== SOURCE (the concept bearing the index)
+EDGE: male.n.02 --EQU -5-->
+   LINEAR  : [0] male.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p65/d2231   Tom says that he's allergic to school.
+SBN: male.n.02 Name "Tom" say.v.01 Proposition >1 Agent -1 Time +1 time.n.08 EQU now CONTINUATION <0 male.n.02 ANA -3 time.n.08 EQU now allergic.a.02 Experiencer -2 Time -1 Stimulus +1 school.n.01
+boxes: B0(top), B1(CONTINUATION -> parent B1)
+concepts:
+   [ 0] B0  male.n.02   <== LINEAR model says this
+   [ 1] B0  say.v.01
+   [ 2] B0  time.n.08
+   [ 3] B1  male.n.02   <== SOURCE (the concept bearing the index)
+   [ 4] B1  time.n.08
+   [ 5] B1  allergic.a.02
+   [ 6] B1  school.n.01
+EDGE: male.n.02 --ANA -3-->
+   LINEAR  : [0] male.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p47/d1463   Either you or I am wrong.
+SBN: entity.n.01 time.n.08 EQU now wrong.a.01 AttributeOf -2 Time -1 NEGATION <1 NEGATION <1 person.n.01 EQU hearer EQU -3 NEGATION <2 person.n.01 EQU -4 EQU speaker
+boxes: B0(top), B1(NEGATION -> parent B0), B2(NEGATION -> parent B1), B3(NEGATION -> parent B1)
+concepts:
+   [ 0] B0  entity.n.01   <== LINEAR model says this
+   [ 1] B0  time.n.08
+   [ 2] B0  wrong.a.01
+   [ 3] B2  person.n.01
+   [ 4] B3  person.n.01   <== SOURCE (the concept bearing the index)
+EDGE: person.n.01 --EQU -4-->
+   LINEAR  : [0] entity.n.01
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p87/d2746   He is now either in Rome or in Paris.
+SBN: male.n.02 be.v.03 Theme -1 Time +1 Location +2 time.n.08 EQU now city.n.01 NEGATION <1 NEGATION <1 city.n.01 Name "Rome" EQU -1 NEGATION <2 city.n.01 Name "Paris" EQU -2
+boxes: B0(top), B1(NEGATION -> parent B0), B2(NEGATION -> parent B1), B3(NEGATION -> parent B1)
+concepts:
+   [ 0] B0  male.n.02
+   [ 1] B0  be.v.03
+   [ 2] B0  time.n.08   <== REGISTER model says this
+   [ 3] B0  city.n.01   <== LINEAR model says this
+   [ 4] B2  city.n.01
+   [ 5] B3  city.n.01   <== SOURCE (the concept bearing the index)
+EDGE: city.n.01 --EQU -2-->
+   LINEAR  : [3] city.n.01
+   REGISTER: [2] time.n.08
+
+==============================================================================
+p01/d2312   He put all his money in the box.
+SBN: male.n.02 time.n.08 TPR now NEGATION <1 NEGATION <1 put.v.01 Agent -2 Time -1 Theme +1 Destination +4 CONJUNCTION <2 entity.n.01 SubOf +2 male.n.02 ANA -4 money.n.01 User -1 CONJUNCTION <4 box.n.01
+boxes: B0(top), B1(NEGATION -> parent B0), B2(NEGATION -> parent B1), B3(CONJUNCTION -> parent B1), B4(CONJUNCTION -> parent B0)
+concepts:
+   [ 0] B0  male.n.02   <== LINEAR model says this
+   [ 1] B0  time.n.08
+   [ 2] B2  put.v.01
+   [ 3] B3  entity.n.01
+   [ 4] B3  male.n.02   <== SOURCE (the concept bearing the index)
+   [ 5] B3  money.n.01
+   [ 6] B4  box.n.01
+EDGE: male.n.02 --ANA -4-->
+   LINEAR  : [0] male.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p83/d1653   She cabled us that she was coming.
+SBN: female.n.02 cable.v.01 Proposition >1 Agent -1 Time +1 Recipient +2 time.n.08 TPR now person.n.01 Sub speaker CONTINUATION <0 female.n.02 ANA -4 time.n.08 TPR now come.v.01 Theme -2 Time -1
+boxes: B0(top), B1(CONTINUATION -> parent B1)
+concepts:
+   [ 0] B0  female.n.02   <== LINEAR model says this
+   [ 1] B0  cable.v.01
+   [ 2] B0  time.n.08
+   [ 3] B0  person.n.01
+   [ 4] B1  female.n.02   <== SOURCE (the concept bearing the index)
+   [ 5] B1  time.n.08
+   [ 6] B1  come.v.01
+EDGE: female.n.02 --ANA -4-->
+   LINEAR  : [0] female.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p39/d3455   She said she was happy.
+SBN: female.n.02 say.v.01 Proposition >1 Agent -1 Time +1 time.n.08 TPR now CONTINUATION <0 female.n.02 ANA -3 time.n.08 TPR now happy.a.01 Experiencer -2 Time -1
+boxes: B0(top), B1(CONTINUATION -> parent B1)
+concepts:
+   [ 0] B0  female.n.02   <== LINEAR model says this
+   [ 1] B0  say.v.01
+   [ 2] B0  time.n.08
+   [ 3] B1  female.n.02   <== SOURCE (the concept bearing the index)
+   [ 4] B1  time.n.08
+   [ 5] B1  happy.a.01
+EDGE: female.n.02 --ANA -3-->
+   LINEAR  : [0] female.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p44/d0783   Maria knew neither his name nor his phone number.
+SBN: female.n.02 Name "Maria" NEGATION <1 know.v.01 Experiencer -1 Time +1 Stimulus +3 time.n.08 TPR now male.n.02 name.n.01 Bearer -1 NEGATION <2 know.v.01 Experiencer -5 Time +1 Stimulus +3 time.n.08 TPR now male.n.02 phone_number.n.01 User -1
+boxes: B0(top), B1(NEGATION -> parent B0), B2(NEGATION -> parent B0)
+concepts:
+   [ 0] B0  female.n.02   <== LINEAR model says this
+   [ 1] B1  know.v.01
+   [ 2] B1  time.n.08
+   [ 3] B1  male.n.02
+   [ 4] B1  name.n.01
+   [ 5] B2  know.v.01   <== SOURCE (the concept bearing the index)
+   [ 6] B2  time.n.08
+   [ 7] B2  male.n.02
+   [ 8] B2  phone_number.n.01
+EDGE: know.v.01 --Experiencer -5-->
+   LINEAR  : [0] female.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p27/d1630   Tom said he wouldn't shoot an unarmed man.
+SBN: male.n.02 Name "Tom" say.v.01 Proposition >1 Agent -1 Time +1 time.n.08 TPR now CONTINUATION <0 male.n.02 ANA -3 NEGATION <1 time.n.08 TSU now shoot.v.01 Agent -2 Time -1 Patient +2 unarmed.a.01 AttributeOf +1 man.n.01
+boxes: B0(top), B1(CONTINUATION -> parent B1), B2(NEGATION -> parent B1)
+concepts:
+   [ 0] B0  male.n.02   <== LINEAR model says this
+   [ 1] B0  say.v.01
+   [ 2] B0  time.n.08
+   [ 3] B1  male.n.02   <== SOURCE (the concept bearing the index)
+   [ 4] B2  time.n.08
+   [ 5] B2  shoot.v.01
+   [ 6] B2  unarmed.a.01
+   [ 7] B2  man.n.01
+EDGE: male.n.02 --ANA -3-->
+   LINEAR  : [0] male.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p04/d1518   Tom asked Mary if she knew John.
+SBN: male.n.02 Name "Tom" ask.v.01 Proposition >1 Agent -1 Time +1 Recipient +2 time.n.08 TPR now female.n.02 Name "Mary" CONTINUATION <0 female.n.02 ANA -1 know.v.04 Experiencer -1 Time +1 Stimulus +2 time.n.08 TPR now male.n.02 Name "John"
+boxes: B0(top), B1(CONTINUATION -> parent B1)
+concepts:
+   [ 0] B0  male.n.02
+   [ 1] B0  ask.v.01
+   [ 2] B0  time.n.08
+   [ 3] B0  female.n.02   <== LINEAR model says this
+   [ 4] B1  female.n.02   <== SOURCE (the concept bearing the index)
+   [ 5] B1  know.v.04
+   [ 6] B1  time.n.08
+   [ 7] B1  male.n.02
+EDGE: female.n.02 --ANA -1-->
+   LINEAR  : [3] female.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p44/d3239   Tom is hoping that he can hitch a ride to Boston.
+SBN: male.n.02 Name "Tom" time.n.08 EQU now hope.v.01 Time -1 Proposition >1 Agent -2 CONTINUATION <0 male.n.02 ANA -3 POSSIBILITY <1 hitch.v.04 Agent -1 Theme +1 ride.n.01 Destination +1 city.n.01 Name "Boston"
+boxes: B0(top), B1(CONTINUATION -> parent B1), B2(POSSIBILITY -> parent B1)
+concepts:
+   [ 0] B0  male.n.02   <== LINEAR model says this
+   [ 1] B0  time.n.08
+   [ 2] B0  hope.v.01
+   [ 3] B1  male.n.02   <== SOURCE (the concept bearing the index)
+   [ 4] B2  hitch.v.04
+   [ 5] B2  ride.n.01
+   [ 6] B2  city.n.01
+EDGE: male.n.02 --ANA -3-->
+   LINEAR  : [0] male.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p17/d3548   Bob waved to everyone he saw.
+SBN: male.n.02 Name "Bob" NEGATION <1 NEGATION <1 wave.v.01 Agent -1 Time +1 Recipient +2 time.n.08 TPR now CONJUNCTION <2 person.n.01 male.n.02 ANA -4 see.v.01 Stimulus -2 Experiencer -1 Time +1 time.n.08 TPR now
+boxes: B0(top), B1(NEGATION -> parent B0), B2(NEGATION -> parent B1), B3(CONJUNCTION -> parent B1)
+concepts:
+   [ 0] B0  male.n.02   <== LINEAR model says this
+   [ 1] B2  wave.v.01
+   [ 2] B2  time.n.08
+   [ 3] B3  person.n.01
+   [ 4] B3  male.n.02   <== SOURCE (the concept bearing the index)
+   [ 5] B3  see.v.01
+   [ 6] B3  time.n.08
+EDGE: male.n.02 --ANA -4-->
+   LINEAR  : [0] male.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p65/d2845   Tom began to suspect that Mary was cheating on him.
+SBN: male.n.02 Name "Tom" begin.v.01 Time +1 PartOf +2 time.n.08 TPR now suspect.v.01 Proposition >1 Agent -3 CONTINUATION <0 female.n.02 Name "Mary" time.n.08 TPR now cheat.v.04 Agent -2 Time -1 Patient +1 male.n.02 ANA -7
+boxes: B0(top), B1(CONTINUATION -> parent B1)
+concepts:
+   [ 0] B0  male.n.02   <== LINEAR model says this
+   [ 1] B0  begin.v.01
+   [ 2] B0  time.n.08
+   [ 3] B0  suspect.v.01
+   [ 4] B1  female.n.02
+   [ 5] B1  time.n.08
+   [ 6] B1  cheat.v.04
+   [ 7] B1  male.n.02   <== SOURCE (the concept bearing the index)
+EDGE: male.n.02 --ANA -7-->
+   LINEAR  : [0] male.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p02/d0847   She knew that John loved her.
+SBN: female.n.02 know.v.01 Proposition >1 Experiencer -1 Time +1 time.n.08 TPR now CONTINUATION <0 male.n.02 Name "John" love.v.03 Experiencer -1 Time +1 Stimulus +2 time.n.08 TPR now female.n.02 ANA -6
+boxes: B0(top), B1(CONTINUATION -> parent B1)
+concepts:
+   [ 0] B0  female.n.02   <== LINEAR model says this
+   [ 1] B0  know.v.01
+   [ 2] B0  time.n.08
+   [ 3] B1  male.n.02
+   [ 4] B1  love.v.03
+   [ 5] B1  time.n.08
+   [ 6] B1  female.n.02   <== SOURCE (the concept bearing the index)
+EDGE: female.n.02 --ANA -6-->
+   LINEAR  : [0] female.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p32/d2452   Tom saved every letter that Mary sent him.
+SBN: male.n.02 Name "Tom" NEGATION <1 NEGATION <1 save.v.02 Agent -1 Time +1 Theme +2 time.n.08 TPR now CONJUNCTION <2 letter.n.01 female.n.02 Name "Mary" send.v.03 Theme -2 Agent -1 Time +1 Destination +2 time.n.08 TPR now male.n.02 ANA -7
+boxes: B0(top), B1(NEGATION -> parent B0), B2(NEGATION -> parent B1), B3(CONJUNCTION -> parent B1)
+concepts:
+   [ 0] B0  male.n.02   <== LINEAR model says this
+   [ 1] B2  save.v.02
+   [ 2] B2  time.n.08
+   [ 3] B3  letter.n.01
+   [ 4] B3  female.n.02
+   [ 5] B3  send.v.03
+   [ 6] B3  time.n.08
+   [ 7] B3  male.n.02   <== SOURCE (the concept bearing the index)
+EDGE: male.n.02 --ANA -7-->
+   LINEAR  : [0] male.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p23/d3033   Mr Briggs is not a doctor, he is a vet.
+SBN: mr.n.01 male.n.02 Name "Briggs" Title -1 NEGATION <1 be.v.08 Theme -1 Time +1 Co-Theme +2 time.n.08 EQU now doctor.n.01 CONTRAST <2 male.n.02 ANA -4 be.v.08 Theme -1 Time +1 Co-Theme +2 time.n.08 EQU now vet.n.01
+boxes: B0(top), B1(NEGATION -> parent B0), B2(CONTRAST -> parent B0)
+concepts:
+   [ 0] B0  mr.n.01
+   [ 1] B0  male.n.02   <== LINEAR model says this
+   [ 2] B1  be.v.08
+   [ 3] B1  time.n.08
+   [ 4] B1  doctor.n.01
+   [ 5] B2  male.n.02   <== SOURCE (the concept bearing the index)
+   [ 6] B2  be.v.08
+   [ 7] B2  time.n.08
+   [ 8] B2  vet.n.01
+EDGE: male.n.02 --ANA -4-->
+   LINEAR  : [1] male.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p00/d1580   She never told me she had a cat.
+SBN: female.n.02 NEGATION <1 tell.v.02 Proposition >1 Agent -1 Time +1 Recipient +2 time.n.08 TPR now person.n.01 EQU speaker CONTINUATION <0 female.n.02 ANA -4 have.v.04 Pivot -1 Time +1 Theme +2 time.n.08 TPR now cat.n.01
+boxes: B0(top), B1(NEGATION -> parent B0), B2(CONTINUATION -> parent B2)
+concepts:
+   [ 0] B0  female.n.02   <== LINEAR model says this
+   [ 1] B1  tell.v.02
+   [ 2] B1  time.n.08
+   [ 3] B1  person.n.01
+   [ 4] B2  female.n.02   <== SOURCE (the concept bearing the index)
+   [ 5] B2  have.v.04
+   [ 6] B2  time.n.08
+   [ 7] B2  cat.n.01
+EDGE: female.n.02 --ANA -4-->
+   LINEAR  : [0] female.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p65/d1491   Tom asked Mary if he could kiss her.
+SBN: male.n.02 Name "Tom" ask.v.02 Proposition >1 Agent -1 Time +1 Recipient +2 time.n.08 TPR now female.n.02 Name "Mary" CONTINUATION <0 male.n.02 ANA -4 POSSIBILITY <1 kiss.v.01 Agent -1 Co-Agent +1 female.n.02 ANA -3
+boxes: B0(top), B1(CONTINUATION -> parent B1), B2(POSSIBILITY -> parent B1)
+concepts:
+   [ 0] B0  male.n.02   <== LINEAR model says this
+   [ 1] B0  ask.v.02
+   [ 2] B0  time.n.08
+   [ 3] B0  female.n.02
+   [ 4] B1  male.n.02   <== SOURCE (the concept bearing the index)
+   [ 5] B2  kiss.v.01
+   [ 6] B2  female.n.02
+EDGE: male.n.02 --ANA -4-->
+   LINEAR  : [0] male.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p65/d1491   Tom asked Mary if he could kiss her.
+SBN: male.n.02 Name "Tom" ask.v.02 Proposition >1 Agent -1 Time +1 Recipient +2 time.n.08 TPR now female.n.02 Name "Mary" CONTINUATION <0 male.n.02 ANA -4 POSSIBILITY <1 kiss.v.01 Agent -1 Co-Agent +1 female.n.02 ANA -3
+boxes: B0(top), B1(CONTINUATION -> parent B1), B2(POSSIBILITY -> parent B1)
+concepts:
+   [ 0] B0  male.n.02
+   [ 1] B0  ask.v.02
+   [ 2] B0  time.n.08
+   [ 3] B0  female.n.02   <== LINEAR model says this
+   [ 4] B1  male.n.02
+   [ 5] B2  kiss.v.01
+   [ 6] B2  female.n.02   <== SOURCE (the concept bearing the index)
+EDGE: female.n.02 --ANA -3-->
+   LINEAR  : [3] female.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p44/d2063   He pretended that he was a lawyer.
+SBN: male.n.02 pretend.v.01 Proposition >1 Agent -1 Time +1 time.n.08 TPR now CONTINUATION <0 male.n.02 ANA -3 EQU +2 time.n.08 TPR now person.n.01 Role +1 lawyer.n.01 Time -2
+boxes: B0(top), B1(CONTINUATION -> parent B1)
+concepts:
+   [ 0] B0  male.n.02   <== LINEAR model says this
+   [ 1] B0  pretend.v.01
+   [ 2] B0  time.n.08
+   [ 3] B1  male.n.02   <== SOURCE (the concept bearing the index)
+   [ 4] B1  time.n.08
+   [ 5] B1  person.n.01
+   [ 6] B1  lawyer.n.01
+EDGE: male.n.02 --ANA -3-->
+   LINEAR  : [0] male.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p86/d2401   Tom says he doesn't like air conditioning.
+SBN: male.n.02 Name "Tom" say.v.01 Proposition >1 Agent -1 Time +1 time.n.08 EQU now CONTINUATION <0 male.n.02 ANA -3 NEGATION <1 time.n.08 EQU now like.v.02 Experiencer -2 Time -1 Stimulus +1 air_conditioning.n.01
+boxes: B0(top), B1(CONTINUATION -> parent B1), B2(NEGATION -> parent B1)
+concepts:
+   [ 0] B0  male.n.02   <== LINEAR model says this
+   [ 1] B0  say.v.01
+   [ 2] B0  time.n.08
+   [ 3] B1  male.n.02   <== SOURCE (the concept bearing the index)
+   [ 4] B2  time.n.08
+   [ 5] B2  like.v.02
+   [ 6] B2  air_conditioning.n.01
+EDGE: male.n.02 --ANA -3-->
+   LINEAR  : [0] male.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p57/d0862   I found a note on my desk, but I don't know whose it is.
+SBN: person.n.01 EQU speaker find.v.01 Agent -1 Time +1 Theme +2 Location +4 time.n.08 TPR now note.n.01 person.n.01 EQU speaker desk.n.01 User -1 CONTRAST <1 person.n.01 EQU speaker NEGATION <1 time.n.08 EQU now know.v.01 Time -1 Proposition >1 Experiencer -2 CONTINUATION <0 person.n.01 Name ? entity.n.01 User -1 entity.n.01 ANA -8 be.v.02 Co-Theme -2 Theme -1 Time +1 time.n.08 EQU now
+boxes: B0(top), B1(CONTRAST -> parent B0), B2(NEGATION -> parent B1), B3(CONTINUATION -> parent B3)
+concepts:
+   [ 0] B0  person.n.01
+   [ 1] B0  find.v.01
+   [ 2] B0  time.n.08
+   [ 3] B0  note.n.01   <== LINEAR model says this
+   [ 4] B0  person.n.01
+   [ 5] B0  desk.n.01
+   [ 6] B1  person.n.01
+   [ 7] B2  time.n.08
+   [ 8] B2  know.v.01
+   [ 9] B3  person.n.01
+   [10] B3  entity.n.01
+   [11] B3  entity.n.01   <== SOURCE (the concept bearing the index)
+   [12] B3  be.v.02
+   [13] B3  time.n.08
+EDGE: entity.n.01 --ANA -8-->
+   LINEAR  : [3] note.n.01
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p01/d0210   Samuel helps anyone that asks him.
+SBN: male.n.02 Name "Samuel" NEGATION <1 NEGATION <1 help.v.01 Agent -1 Time +1 Beneficiary +2 time.n.08 EQU now CONJUNCTION <2 person.n.01 entity.n.01 EQU -1 ask.v.02 Agent -1 Time +1 Recipient +2 time.n.08 EQU now male.n.02 ANA -7
+boxes: B0(top), B1(NEGATION -> parent B0), B2(NEGATION -> parent B1), B3(CONJUNCTION -> parent B1)
+concepts:
+   [ 0] B0  male.n.02   <== LINEAR model says this
+   [ 1] B2  help.v.01
+   [ 2] B2  time.n.08
+   [ 3] B3  person.n.01
+   [ 4] B3  entity.n.01
+   [ 5] B3  ask.v.02
+   [ 6] B3  time.n.08
+   [ 7] B3  male.n.02   <== SOURCE (the concept bearing the index)
+EDGE: male.n.02 --ANA -7-->
+   LINEAR  : [0] male.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p02/d3082   The thief told the police he hadn't stolen anything.
+SBN: person.n.01 Role +1 thief.n.01 tell.v.01 Proposition >1 Agent -2 Time +1 Recipient +2 time.n.08 TPR now police.n.01 CONTINUATION <0 male.n.02 ANA -5 NEGATION <1 steal.v.01 Agent -1 Time +1 Theme +2 time.n.08 TPR now entity.n.01
+boxes: B0(top), B1(CONTINUATION -> parent B1), B2(NEGATION -> parent B1)
+concepts:
+   [ 0] B0  person.n.01   <== LINEAR model says this
+   [ 1] B0  thief.n.01
+   [ 2] B0  tell.v.01
+   [ 3] B0  time.n.08
+   [ 4] B0  police.n.01
+   [ 5] B1  male.n.02   <== SOURCE (the concept bearing the index)
+   [ 6] B2  steal.v.01
+   [ 7] B2  time.n.08
+   [ 8] B2  entity.n.01
+EDGE: male.n.02 --ANA -5-->
+   LINEAR  : [0] person.n.01
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p07/d1900   He eats neither meat nor fish.
+SBN: male.n.02 NEGATION <1 eat.v.01 Agent -1 Time +1 Patient +2 time.n.08 EQU now entity.n.01 NEGATION <1 NEGATION <1 meat.n.01 EQU -1 NEGATION <2 fish.n.02 EQU -2
+boxes: B0(top), B1(NEGATION -> parent B0), B2(NEGATION -> parent B1), B3(NEGATION -> parent B2), B4(NEGATION -> parent B2)
+concepts:
+   [ 0] B0  male.n.02
+   [ 1] B1  eat.v.01
+   [ 2] B1  time.n.08   <== REGISTER model says this
+   [ 3] B1  entity.n.01   <== LINEAR model says this
+   [ 4] B3  meat.n.01
+   [ 5] B4  fish.n.02   <== SOURCE (the concept bearing the index)
+EDGE: fish.n.02 --EQU -2-->
+   LINEAR  : [3] entity.n.01
+   REGISTER: [2] time.n.08
+
+==============================================================================
+p00/d1761   Tom says he's busy.
+SBN: male.n.02 Name "Tom" say.v.01 Proposition >1 Agent -1 Time +1 time.n.08 EQU now CONTINUATION <0 male.n.02 ANA -3 time.n.08 EQU now busy.a.01 AttributeOf -2 Time -1
+boxes: B0(top), B1(CONTINUATION -> parent B1)
+concepts:
+   [ 0] B0  male.n.02   <== LINEAR model says this
+   [ 1] B0  say.v.01
+   [ 2] B0  time.n.08
+   [ 3] B1  male.n.02   <== SOURCE (the concept bearing the index)
+   [ 4] B1  time.n.08
+   [ 5] B1  busy.a.01
+EDGE: male.n.02 --ANA -3-->
+   LINEAR  : [0] male.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p10/d1901   Maybe he is Italian or Spanish.
+SBN: POSSIBILITY <1 male.n.02 ALTERNATION <1 time.n.08 EQU now be.v.03 Theme -2 Time -1 Source +1 country.n.02 Name "italy" ALTERNATION <2 time.n.08 EQU now be.v.03 Theme -5 Time -1 Source +1 country.n.02 Name "spain"
+boxes: B0(top), B1(POSSIBILITY -> parent B0), B2(ALTERNATION -> parent B1), B3(ALTERNATION -> parent B1)
+concepts:
+   [ 0] B1  male.n.02   <== LINEAR model says this
+   [ 1] B2  time.n.08
+   [ 2] B2  be.v.03
+   [ 3] B2  country.n.02
+   [ 4] B3  time.n.08
+   [ 5] B3  be.v.03   <== SOURCE (the concept bearing the index)
+   [ 6] B3  country.n.02
+EDGE: be.v.03 --Theme -5-->
+   LINEAR  : [0] male.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p06/d3114   Dan confessed to Linda that he was dying.
+SBN: male.n.02 Name "Dan" confess.v.02 Proposition >1 Agent -1 Time +1 Recipient +2 time.n.08 TPR now female.n.02 Name "Linda" CONTINUATION <0 male.n.02 ANA -4 time.n.08 TPR now die.v.01 Patient -2 Time -1
+boxes: B0(top), B1(CONTINUATION -> parent B1)
+concepts:
+   [ 0] B0  male.n.02   <== LINEAR model says this
+   [ 1] B0  confess.v.02
+   [ 2] B0  time.n.08
+   [ 3] B0  female.n.02
+   [ 4] B1  male.n.02   <== SOURCE (the concept bearing the index)
+   [ 5] B1  time.n.08
+   [ 6] B1  die.v.01
+EDGE: male.n.02 --ANA -4-->
+   LINEAR  : [0] male.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p60/d2992   Anyone who is not shocked by quantum theory has not understood it.
+SBN: NEGATION <1 person.n.01 EQU +1 entity.n.01 time.n.08 EQU now NEGATION <1 shocked.a.01 Experiencer -2 Time -1 Stimulus +1 CONJUNCTION <3 quantum_theory.n.01 NEGATION <3 time.n.08 TPR now NEGATION <1 understand.v.01 Experiencer -6 Time -1 Stimulus +1 entity.n.01 ANA -3
+boxes: B0(top), B1(NEGATION -> parent B0), B2(NEGATION -> parent B1), B3(CONJUNCTION -> parent B0), B4(NEGATION -> parent B1), B5(NEGATION -> parent B4)
+concepts:
+   [ 0] B1  person.n.01   <== LINEAR model says this
+   [ 1] B1  entity.n.01
+   [ 2] B1  time.n.08
+   [ 3] B2  shocked.a.01
+   [ 4] B3  quantum_theory.n.01
+   [ 5] B4  time.n.08
+   [ 6] B5  understand.v.01   <== SOURCE (the concept bearing the index)
+   [ 7] B5  entity.n.01
+EDGE: understand.v.01 --Experiencer -6-->
+   LINEAR  : [0] person.n.01
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p60/d2992   Anyone who is not shocked by quantum theory has not understood it.
+SBN: NEGATION <1 person.n.01 EQU +1 entity.n.01 time.n.08 EQU now NEGATION <1 shocked.a.01 Experiencer -2 Time -1 Stimulus +1 CONJUNCTION <3 quantum_theory.n.01 NEGATION <3 time.n.08 TPR now NEGATION <1 understand.v.01 Experiencer -6 Time -1 Stimulus +1 entity.n.01 ANA -3
+boxes: B0(top), B1(NEGATION -> parent B0), B2(NEGATION -> parent B1), B3(CONJUNCTION -> parent B0), B4(NEGATION -> parent B1), B5(NEGATION -> parent B4)
+concepts:
+   [ 0] B1  person.n.01
+   [ 1] B1  entity.n.01
+   [ 2] B1  time.n.08   <== REGISTER model says this
+   [ 3] B2  shocked.a.01
+   [ 4] B3  quantum_theory.n.01   <== LINEAR model says this
+   [ 5] B4  time.n.08
+   [ 6] B5  understand.v.01
+   [ 7] B5  entity.n.01   <== SOURCE (the concept bearing the index)
+EDGE: entity.n.01 --ANA -3-->
+   LINEAR  : [4] quantum_theory.n.01
+   REGISTER: [2] time.n.08
+
+==============================================================================
+p26/d0887   Oleg is happy that someone loves him.
+SBN: male.n.02 Name "Oleg" time.n.08 EQU now happy.a.01 Time -1 Proposition >1 Experiencer -2 CONTINUATION <0 person.n.01 love.v.03 Experiencer -1 Time +1 Stimulus +2 time.n.08 EQU now male.n.02 ANA -6
+boxes: B0(top), B1(CONTINUATION -> parent B1)
+concepts:
+   [ 0] B0  male.n.02   <== LINEAR model says this
+   [ 1] B0  time.n.08
+   [ 2] B0  happy.a.01
+   [ 3] B1  person.n.01
+   [ 4] B1  love.v.03
+   [ 5] B1  time.n.08
+   [ 6] B1  male.n.02   <== SOURCE (the concept bearing the index)
+EDGE: male.n.02 --ANA -6-->
+   LINEAR  : [0] male.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p69/d0337   Bake for 20 to 25 minutes.
+SBN: person.n.01 EQU hearer bake.v.01 Agent -1 Duration +1 minute.n.01 NEGATION <1 NEGATION <1 quantity.n.01 EQU 20 minute.n.01 EQU -2 Quantity -1 NEGATION <2 quantity.n.01 EQU 25 minute.n.01 EQU -4 Quantity -1
+boxes: B0(top), B1(NEGATION -> parent B0), B2(NEGATION -> parent B1), B3(NEGATION -> parent B1)
+concepts:
+   [ 0] B0  person.n.01   <== REGISTER model says this
+   [ 1] B0  bake.v.01
+   [ 2] B0  minute.n.01   <== LINEAR model says this
+   [ 3] B2  quantity.n.01
+   [ 4] B2  minute.n.01
+   [ 5] B3  quantity.n.01
+   [ 6] B3  minute.n.01   <== SOURCE (the concept bearing the index)
+EDGE: minute.n.01 --EQU -4-->
+   LINEAR  : [2] minute.n.01
+   REGISTER: [0] person.n.01
+
+==============================================================================
+p40/d2795   She's maxed out all her credit cards.
+SBN: female.n.02 NEGATION <1 NEGATION <1 max_out.v.01 Agent -1 Time +1 Theme +2 time.n.08 TPR now CONJUNCTION <2 entity.n.01 SubOf +2 CONJUNCTION <4 female.n.02 ANA -4 credit_card.n.01 User -1
+boxes: B0(top), B1(NEGATION -> parent B0), B2(NEGATION -> parent B1), B3(CONJUNCTION -> parent B1), B4(CONJUNCTION -> parent B0)
+concepts:
+   [ 0] B0  female.n.02   <== LINEAR model says this
+   [ 1] B2  max_out.v.01
+   [ 2] B2  time.n.08
+   [ 3] B3  entity.n.01
+   [ 4] B4  female.n.02   <== SOURCE (the concept bearing the index)
+   [ 5] B4  credit_card.n.01
+EDGE: female.n.02 --ANA -4-->
+   LINEAR  : [0] female.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p09/d1616   Tom was surprised the police knew his name.
+SBN: male.n.02 Name "Tom" time.n.08 TPR now surprised.a.01 Time -1 Proposition >1 Experiencer -2 CONTINUATION <0 police.n.01 know.v.01 Experiencer -1 Time +1 Stimulus +3 time.n.08 TPR now male.n.02 ANA -6 name.n.01 Bearer -1
+boxes: B0(top), B1(CONTINUATION -> parent B1)
+concepts:
+   [ 0] B0  male.n.02   <== LINEAR model says this
+   [ 1] B0  time.n.08
+   [ 2] B0  surprised.a.01
+   [ 3] B1  police.n.01
+   [ 4] B1  know.v.01
+   [ 5] B1  time.n.08
+   [ 6] B1  male.n.02   <== SOURCE (the concept bearing the index)
+   [ 7] B1  name.n.01
+EDGE: male.n.02 --ANA -6-->
+   LINEAR  : [0] male.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p83/d3087   Dan realized he was in love with Linda.
+SBN: male.n.02 Name "Dan" realize.v.01 Proposition >1 Experiencer -1 Time +1 time.n.08 TPR now CONTINUATION <0 male.n.02 ANA -3 time.n.08 TPR now in_love.a.01 Experiencer -2 Time -1 Stimulus +1 female.n.02 Name "Linda"
+boxes: B0(top), B1(CONTINUATION -> parent B1)
+concepts:
+   [ 0] B0  male.n.02   <== LINEAR model says this
+   [ 1] B0  realize.v.01
+   [ 2] B0  time.n.08
+   [ 3] B1  male.n.02   <== SOURCE (the concept bearing the index)
+   [ 4] B1  time.n.08
+   [ 5] B1  in_love.a.01
+   [ 6] B1  female.n.02
+EDGE: male.n.02 --ANA -3-->
+   LINEAR  : [0] male.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p34/d0790   Is it sweet or sour?
+SBN: entity.n.01 ALTERNATION <1 time.n.08 EQU now sweet.a.01 AttributeOf -2 Time -1 ALTERNATION <2 time.n.08 EQU now sour.a.02 AttributeOf -4 Time -1
+boxes: B0(top), B1(ALTERNATION -> parent B0), B2(ALTERNATION -> parent B0)
+concepts:
+   [ 0] B0  entity.n.01   <== LINEAR model says this
+   [ 1] B1  time.n.08
+   [ 2] B1  sweet.a.01
+   [ 3] B2  time.n.08
+   [ 4] B2  sour.a.02   <== SOURCE (the concept bearing the index)
+EDGE: sour.a.02 --AttributeOf -4-->
+   LINEAR  : [0] entity.n.01
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p26/d2094   Tom asked Mary if she had been to Boston.
+SBN: male.n.02 Name "Tom" ask.v.01 Proposition >1 Agent -1 Time +1 Recipient +2 time.n.08 TPR now female.n.02 Name "Mary" CONTINUATION <0 female.n.02 ANA -1 be.v.03 Theme -1 Time +1 Location +2 time.n.08 TPR now city.n.01 Name "Boston"
+boxes: B0(top), B1(CONTINUATION -> parent B1)
+concepts:
+   [ 0] B0  male.n.02
+   [ 1] B0  ask.v.01
+   [ 2] B0  time.n.08
+   [ 3] B0  female.n.02   <== LINEAR model says this
+   [ 4] B1  female.n.02   <== SOURCE (the concept bearing the index)
+   [ 5] B1  be.v.03
+   [ 6] B1  time.n.08
+   [ 7] B1  city.n.01
+EDGE: female.n.02 --ANA -1-->
+   LINEAR  : [3] female.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p03/d2307   Tom admitted he was afraid.
+SBN: male.n.02 Name "Tom" admit.v.01 Proposition >1 Agent -1 Time +1 time.n.08 TPR now CONTINUATION <0 male.n.02 ANA -3 time.n.08 TPR now afraid.a.01 Experiencer -2 Time -1
+boxes: B0(top), B1(CONTINUATION -> parent B1)
+concepts:
+   [ 0] B0  male.n.02   <== LINEAR model says this
+   [ 1] B0  admit.v.01
+   [ 2] B0  time.n.08
+   [ 3] B1  male.n.02   <== SOURCE (the concept bearing the index)
+   [ 4] B1  time.n.08
+   [ 5] B1  afraid.a.01
+EDGE: male.n.02 --ANA -3-->
+   LINEAR  : [0] male.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p45/d1861   Is this baby a he or a she?
+SBN: be.v.01 Time +1 Theme +2 Co-Theme +3 time.n.08 EQU now baby.n.01 entity.n.01 NEGATION <1 NEGATION <1 male.n.02 EQU -1 NEGATION <2 female.n.02 EQU -2
+boxes: B0(top), B1(NEGATION -> parent B0), B2(NEGATION -> parent B1), B3(NEGATION -> parent B1)
+concepts:
+   [ 0] B0  be.v.01
+   [ 1] B0  time.n.08
+   [ 2] B0  baby.n.01   <== REGISTER model says this
+   [ 3] B0  entity.n.01   <== LINEAR model says this
+   [ 4] B2  male.n.02
+   [ 5] B3  female.n.02   <== SOURCE (the concept bearing the index)
+EDGE: female.n.02 --EQU -2-->
+   LINEAR  : [3] entity.n.01
+   REGISTER: [2] baby.n.01
+
+==============================================================================
+p21/d3057   According to Tom's will, Mary will inherit his entire estate.
+SBN: according.a.02 Proposition >1 Source +2 male.n.02 Name "Tom" will.n.03 Creator -1 CONTINUATION <0 female.n.02 Name "Mary" time.n.08 TSU now inherit.v.01 Agent -2 Time -1 Theme +3 male.n.02 ANA -5 entire.a.01 AttributeOf +1 estate.n.01 User -2
+boxes: B0(top), B1(CONTINUATION -> parent B1)
+concepts:
+   [ 0] B0  according.a.02
+   [ 1] B0  male.n.02   <== LINEAR model says this
+   [ 2] B0  will.n.03
+   [ 3] B1  female.n.02
+   [ 4] B1  time.n.08
+   [ 5] B1  inherit.v.01
+   [ 6] B1  male.n.02   <== SOURCE (the concept bearing the index)
+   [ 7] B1  entire.a.01
+   [ 8] B1  estate.n.01
+EDGE: male.n.02 --ANA -5-->
+   LINEAR  : [1] male.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p08/d3432   I think Tom said his last name is Jackson.
+SBN: person.n.01 EQU speaker think.v.04 Proposition >1 Agent -1 Time +1 time.n.08 EQU now CONTINUATION <0 male.n.02 Name "Tom" say.v.01 Proposition >1 Agent -1 Time +1 time.n.08 TPR now CONTINUATION <0 male.n.02 ANA -3 last_name.n.01 Bearer -1 be.v.02 Theme -1 Time +1 Co-Theme +2 time.n.08 EQU now name.n.01 EQU "Jackson"
+boxes: B0(top), B1(CONTINUATION -> parent B1), B2(CONTINUATION -> parent B2)
+concepts:
+   [ 0] B0  person.n.01
+   [ 1] B0  think.v.04
+   [ 2] B0  time.n.08
+   [ 3] B1  male.n.02   <== LINEAR model says this
+   [ 4] B1  say.v.01
+   [ 5] B1  time.n.08
+   [ 6] B2  male.n.02   <== SOURCE (the concept bearing the index)
+   [ 7] B2  last_name.n.01
+   [ 8] B2  be.v.02
+   [ 9] B2  time.n.08
+   [10] B2  name.n.01
+EDGE: male.n.02 --ANA -3-->
+   LINEAR  : [3] male.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p95/d1727   He acted like he didn't know me.
+SBN: male.n.02 act.v.02 Agent -1 Time +1 Proposition >1 time.n.08 TPR now CONTINUATION <0 male.n.02 ANA -3 NEGATION <1 time.n.08 TPR now know.v.04 Experiencer -2 Time -1 Stimulus +1 person.n.01 EQU speaker
+boxes: B0(top), B1(CONTINUATION -> parent B1), B2(NEGATION -> parent B1)
+concepts:
+   [ 0] B0  male.n.02   <== LINEAR model says this
+   [ 1] B0  act.v.02
+   [ 2] B0  time.n.08
+   [ 3] B1  male.n.02   <== SOURCE (the concept bearing the index)
+   [ 4] B2  time.n.08
+   [ 5] B2  know.v.04
+   [ 6] B2  person.n.01
+EDGE: male.n.02 --ANA -3-->
+   LINEAR  : [0] male.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p78/d1839   He resented that she was dating his brother.
+SBN: male.n.02 resent.v.01 Proposition >1 Experiencer -1 Time +1 time.n.08 TPR now CONTINUATION <0 female.n.02 time.n.08 TPR now date.v.01 Agent -2 Time -1 Co-Agent +2 male.n.02 ANA -6 person.n.01 Role +1 brother.n.01 Of -2
+boxes: B0(top), B1(CONTINUATION -> parent B1)
+concepts:
+   [ 0] B0  male.n.02   <== LINEAR model says this
+   [ 1] B0  resent.v.01
+   [ 2] B0  time.n.08
+   [ 3] B1  female.n.02
+   [ 4] B1  time.n.08
+   [ 5] B1  date.v.01
+   [ 6] B1  male.n.02   <== SOURCE (the concept bearing the index)
+   [ 7] B1  person.n.01
+   [ 8] B1  brother.n.01
+EDGE: male.n.02 --ANA -6-->
+   LINEAR  : [0] male.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p00/d1936   My watch may be one or two minutes fast.
+SBN: person.n.01 EQU speaker watch.n.01 User -1 POSSIBILITY <1 entity.n.01 fast.a.02 Theme -2 Value -1 NEGATION <1 NEGATION <1 quantity.n.01 EQU 1 minute.n.01 EQU -3 Quantity -1 NEGATION <2 quantity.n.01 EQU 2 minute.n.01 EQU -5 Quantity -1
+boxes: B0(top), B1(POSSIBILITY -> parent B0), B2(NEGATION -> parent B1), B3(NEGATION -> parent B2), B4(NEGATION -> parent B2)
+concepts:
+   [ 0] B0  person.n.01   <== REGISTER model says this
+   [ 1] B0  watch.n.01
+   [ 2] B1  entity.n.01   <== LINEAR model says this
+   [ 3] B1  fast.a.02
+   [ 4] B3  quantity.n.01
+   [ 5] B3  minute.n.01
+   [ 6] B4  quantity.n.01
+   [ 7] B4  minute.n.01   <== SOURCE (the concept bearing the index)
+EDGE: minute.n.01 --EQU -5-->
+   LINEAR  : [2] entity.n.01
+   REGISTER: [0] person.n.01
+
+==============================================================================
+p02/d2952   Give the book to whomever wants it.
+SBN: person.n.01 EQU hearer NEGATION <1 NEGATION <1 give.v.03 Agent -1 Theme +1 Recipient +2 CONJUNCTION <3 book.n.02 CONJUNCTION <3 person.n.01 want.v.01 Pivot -1 Time +1 Theme +2 time.n.08 EQU now entity.n.01 ANA -4
+boxes: B0(top), B1(NEGATION -> parent B0), B2(NEGATION -> parent B1), B3(CONJUNCTION -> parent B0), B4(CONJUNCTION -> parent B1)
+concepts:
+   [ 0] B0  person.n.01   <== REGISTER model says this
+   [ 1] B2  give.v.03
+   [ 2] B3  book.n.02   <== LINEAR model says this
+   [ 3] B4  person.n.01
+   [ 4] B4  want.v.01
+   [ 5] B4  time.n.08
+   [ 6] B4  entity.n.01   <== SOURCE (the concept bearing the index)
+EDGE: entity.n.01 --ANA -4-->
+   LINEAR  : [2] book.n.02
+   REGISTER: [0] person.n.01
+
+==============================================================================
+p79/d2000   Tom claimed that he didn't see anything.
+SBN: male.n.02 Name "Tom" claim.v.01 Proposition >1 Agent -1 Time +1 time.n.08 TPR now CONTINUATION <0 male.n.02 ANA -3 NEGATION <1 time.n.08 TPR now see.v.03 Experiencer -2 Time -1 Stimulus +1 entity.n.01
+boxes: B0(top), B1(CONTINUATION -> parent B1), B2(NEGATION -> parent B1)
+concepts:
+   [ 0] B0  male.n.02   <== LINEAR model says this
+   [ 1] B0  claim.v.01
+   [ 2] B0  time.n.08
+   [ 3] B1  male.n.02   <== SOURCE (the concept bearing the index)
+   [ 4] B2  time.n.08
+   [ 5] B2  see.v.03
+   [ 6] B2  entity.n.01
+EDGE: male.n.02 --ANA -3-->
+   LINEAR  : [0] male.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p25/d3227   Tom doesn't have a credit card or a bank account.
+SBN: male.n.02 Name "Tom" NEGATION <1 time.n.08 EQU now have.v.01 Pivot -2 Time -1 Theme +1 entity.n.01 NEGATION <1 NEGATION <1 credit_card.n.01 EQU -1 NEGATION <2 bank_account.n.01 EQU -2
+boxes: B0(top), B1(NEGATION -> parent B0), B2(NEGATION -> parent B1), B3(NEGATION -> parent B2), B4(NEGATION -> parent B2)
+concepts:
+   [ 0] B0  male.n.02
+   [ 1] B1  time.n.08
+   [ 2] B1  have.v.01   <== REGISTER model says this
+   [ 3] B1  entity.n.01   <== LINEAR model says this
+   [ 4] B3  credit_card.n.01
+   [ 5] B4  bank_account.n.01   <== SOURCE (the concept bearing the index)
+EDGE: bank_account.n.01 --EQU -2-->
+   LINEAR  : [3] entity.n.01
+   REGISTER: [2] have.v.01
+
+==============================================================================
+p02/d0136   Tom asks his mother if she can but him a new toy.
+SBN: male.n.02 Name "Tom" ask.v.02 Proposition >1 Agent -1 Time +1 Recipient +3 time.n.08 EQU now male.n.02 ANA -3 person.n.01 Role +1 mother.n.01 Of -2 CONTINUATION <0 female.n.02 POSSIBILITY <1 buy.v.01 Agent -1 Beneficiary +1 Theme +3 male.n.02 ANA -8 new.a.01 AttributeOf +1 toy.n.01
+boxes: B0(top), B1(CONTINUATION -> parent B1), B2(POSSIBILITY -> parent B1)
+concepts:
+   [ 0] B0  male.n.02   <== LINEAR model says this
+   [ 1] B0  ask.v.02
+   [ 2] B0  time.n.08
+   [ 3] B0  male.n.02
+   [ 4] B0  person.n.01
+   [ 5] B0  mother.n.01
+   [ 6] B1  female.n.02
+   [ 7] B2  buy.v.01
+   [ 8] B2  male.n.02   <== SOURCE (the concept bearing the index)
+   [ 9] B2  new.a.01
+   [10] B2  toy.n.01
+EDGE: male.n.02 --ANA -8-->
+   LINEAR  : [0] male.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p00/d2473   These cups are all broken.
+SBN: cup.n.01 NEGATION <1 NEGATION <1 time.n.08 EQU now CONJUNCTION <2 entity.n.01 SubOf -2 CONJUNCTION <2 broken.a.01 Time -2 AttributeOf -1
+boxes: B0(top), B1(NEGATION -> parent B0), B2(NEGATION -> parent B1), B3(CONJUNCTION -> parent B1), B4(CONJUNCTION -> parent B2)
+concepts:
+   [ 0] B0  cup.n.01   <== LINEAR model says this
+   [ 1] B2  time.n.08
+   [ 2] B3  entity.n.01   <== SOURCE (the concept bearing the index)
+   [ 3] B4  broken.a.01
+EDGE: entity.n.01 --SubOf -2-->
+   LINEAR  : [0] cup.n.01
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p00/d2473   These cups are all broken.
+SBN: cup.n.01 NEGATION <1 NEGATION <1 time.n.08 EQU now CONJUNCTION <2 entity.n.01 SubOf -2 CONJUNCTION <2 broken.a.01 Time -2 AttributeOf -1
+boxes: B0(top), B1(NEGATION -> parent B0), B2(NEGATION -> parent B1), B3(CONJUNCTION -> parent B1), B4(CONJUNCTION -> parent B2)
+concepts:
+   [ 0] B0  cup.n.01   <== REGISTER model says this
+   [ 1] B2  time.n.08   <== LINEAR model says this
+   [ 2] B3  entity.n.01
+   [ 3] B4  broken.a.01   <== SOURCE (the concept bearing the index)
+EDGE: broken.a.01 --Time -2-->
+   LINEAR  : [1] time.n.08
+   REGISTER: [0] cup.n.01
+
+==============================================================================
+p00/d2473   These cups are all broken.
+SBN: cup.n.01 NEGATION <1 NEGATION <1 time.n.08 EQU now CONJUNCTION <2 entity.n.01 SubOf -2 CONJUNCTION <2 broken.a.01 Time -2 AttributeOf -1
+boxes: B0(top), B1(NEGATION -> parent B0), B2(NEGATION -> parent B1), B3(CONJUNCTION -> parent B1), B4(CONJUNCTION -> parent B2)
+concepts:
+   [ 0] B0  cup.n.01
+   [ 1] B2  time.n.08   <== REGISTER model says this
+   [ 2] B3  entity.n.01   <== LINEAR model says this
+   [ 3] B4  broken.a.01   <== SOURCE (the concept bearing the index)
+EDGE: broken.a.01 --AttributeOf -1-->
+   LINEAR  : [2] entity.n.01
+   REGISTER: [1] time.n.08
+
+==============================================================================
+p16/d1742   A rubber ball bounces because it is elastic.
+SBN: NEGATION <1 rubber.n.01 ball.n.01 MadeOf -1 NEGATION <1 bounce.v.01 Theme -1 EXPLANATION <2 entity.n.01 ANA -2 time.n.08 EQU now elastic.a.01 AttributeOf -2 Time -1
+boxes: B0(top), B1(NEGATION -> parent B0), B2(NEGATION -> parent B1), B3(EXPLANATION -> parent B1)
+concepts:
+   [ 0] B1  rubber.n.01   <== REGISTER model says this
+   [ 1] B1  ball.n.01   <== LINEAR model says this
+   [ 2] B2  bounce.v.01
+   [ 3] B3  entity.n.01   <== SOURCE (the concept bearing the index)
+   [ 4] B3  time.n.08
+   [ 5] B3  elastic.a.01
+EDGE: entity.n.01 --ANA -2-->
+   LINEAR  : [1] ball.n.01
+   REGISTER: [0] rubber.n.01
+
+==============================================================================
+p76/d3024   He is named Jeff by everyone.
+SBN: male.n.02 NEGATION <1 NEGATION <1 time.n.08 EQU now name.v.01 Theme -2 Time -1 Result +1 name.n.01 EQU "Jeff" CONJUNCTION <2 person.n.01 AgentOf -2
+boxes: B0(top), B1(NEGATION -> parent B0), B2(NEGATION -> parent B1), B3(CONJUNCTION -> parent B1)
+concepts:
+   [ 0] B0  male.n.02
+   [ 1] B2  time.n.08
+   [ 2] B2  name.v.01   <== LINEAR model says this
+   [ 3] B2  name.n.01
+   [ 4] B3  person.n.01   <== SOURCE (the concept bearing the index)
+EDGE: person.n.01 --AgentOf -2-->
+   LINEAR  : [2] name.v.01
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p20/d1811   Tom looked like he was healthy.
+SBN: male.n.02 Name "Tom" look.v.02 Theme -1 Time +1 Proposition >1 time.n.08 TPR now CONTINUATION <0 male.n.02 ANA -3 time.n.08 TPR now healthy.a.01 AttributeOf -2 Time -1
+boxes: B0(top), B1(CONTINUATION -> parent B1)
+concepts:
+   [ 0] B0  male.n.02   <== LINEAR model says this
+   [ 1] B0  look.v.02
+   [ 2] B0  time.n.08
+   [ 3] B1  male.n.02   <== SOURCE (the concept bearing the index)
+   [ 4] B1  time.n.08
+   [ 5] B1  healthy.a.01
+EDGE: male.n.02 --ANA -3-->
+   LINEAR  : [0] male.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p81/d2987   Melanie said that she likes swimming.
+SBN: female.n.02 Name "Melanie" say.v.01 Proposition >1 Agent -1 Time +1 time.n.08 TPR now CONTINUATION <0 female.n.02 ANA -3 like.v.02 Experiencer -1 Time +1 Stimulus +2 time.n.08 EQU now swimming.n.01
+boxes: B0(top), B1(CONTINUATION -> parent B1)
+concepts:
+   [ 0] B0  female.n.02   <== LINEAR model says this
+   [ 1] B0  say.v.01
+   [ 2] B0  time.n.08
+   [ 3] B1  female.n.02   <== SOURCE (the concept bearing the index)
+   [ 4] B1  like.v.02
+   [ 5] B1  time.n.08
+   [ 6] B1  swimming.n.01
+EDGE: female.n.02 --ANA -3-->
+   LINEAR  : [0] female.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p90/d3171   He said that he grew up in Tunisia.
+SBN: male.n.02 say.v.02 Proposition >1 Agent -1 Time +1 time.n.08 TPR now CONTINUATION <0 male.n.02 ANA -3 grow_up.v.01 Patient -1 Time +1 Location +2 time.n.08 TPR now country.n.02 Name "Tunisia"
+boxes: B0(top), B1(CONTINUATION -> parent B1)
+concepts:
+   [ 0] B0  male.n.02   <== LINEAR model says this
+   [ 1] B0  say.v.02
+   [ 2] B0  time.n.08
+   [ 3] B1  male.n.02   <== SOURCE (the concept bearing the index)
+   [ 4] B1  grow_up.v.01
+   [ 5] B1  time.n.08
+   [ 6] B1  country.n.02
+EDGE: male.n.02 --ANA -3-->
+   LINEAR  : [0] male.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p12/d2625   He whispered to me that he was hungry.
+SBN: male.n.02 whisper.v.01 Proposition >1 Agent -1 Time +1 Recipient +2 time.n.08 TPR now person.n.01 EQU speaker CONTINUATION <0 male.n.02 ANA -4 time.n.08 TPR now hungry.a.01 Experiencer -2 Time -1
+boxes: B0(top), B1(CONTINUATION -> parent B1)
+concepts:
+   [ 0] B0  male.n.02   <== LINEAR model says this
+   [ 1] B0  whisper.v.01
+   [ 2] B0  time.n.08
+   [ 3] B0  person.n.01
+   [ 4] B1  male.n.02   <== SOURCE (the concept bearing the index)
+   [ 5] B1  time.n.08
+   [ 6] B1  hungry.a.01
+EDGE: male.n.02 --ANA -4-->
+   LINEAR  : [0] male.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p97/d2001   He asked her where she lived.
+SBN: male.n.02 ask.v.01 Proposition >1 Agent -1 Time +1 Recipient +2 time.n.08 TPR now female.n.02 CONTINUATION <0 location.n.01 Name ? female.n.02 ANA -2 live.v.01 Location -2 Theme -1 Time +1 time.n.08 TPR now
+boxes: B0(top), B1(CONTINUATION -> parent B1)
+concepts:
+   [ 0] B0  male.n.02
+   [ 1] B0  ask.v.01
+   [ 2] B0  time.n.08
+   [ 3] B0  female.n.02   <== LINEAR model says this
+   [ 4] B1  location.n.01
+   [ 5] B1  female.n.02   <== SOURCE (the concept bearing the index)
+   [ 6] B1  live.v.01
+   [ 7] B1  time.n.08
+EDGE: female.n.02 --ANA -2-->
+   LINEAR  : [3] female.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p06/d1742   He suggested to her that she should buy it.
+SBN: male.n.02 suggest.v.01 Proposition >1 Causer -1 Time +1 Recipient +2 time.n.08 TPR now female.n.02 CONTINUATION <0 female.n.02 ANA -1 NECESSITY <1 buy.v.01 Agent -1 Theme +1 entity.n.01
+boxes: B0(top), B1(CONTINUATION -> parent B1), B2(NECESSITY -> parent B1)
+concepts:
+   [ 0] B0  male.n.02
+   [ 1] B0  suggest.v.01
+   [ 2] B0  time.n.08
+   [ 3] B0  female.n.02   <== LINEAR model says this
+   [ 4] B1  female.n.02   <== SOURCE (the concept bearing the index)
+   [ 5] B2  buy.v.01
+   [ 6] B2  entity.n.01
+EDGE: female.n.02 --ANA -1-->
+   LINEAR  : [3] female.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p30/d1420   He asked her if she was Jane.
+SBN: male.n.02 ask.v.01 Proposition >1 Agent -1 Time +1 Recipient +2 time.n.08 TPR now female.n.02 CONTINUATION <0 female.n.02 ANA -1 be.v.06 Theme -1 Time +1 Co-Theme +2 time.n.08 TPR now female.n.02 Name "Jane"
+boxes: B0(top), B1(CONTINUATION -> parent B1)
+concepts:
+   [ 0] B0  male.n.02
+   [ 1] B0  ask.v.01
+   [ 2] B0  time.n.08
+   [ 3] B0  female.n.02   <== LINEAR model says this
+   [ 4] B1  female.n.02   <== SOURCE (the concept bearing the index)
+   [ 5] B1  be.v.06
+   [ 6] B1  time.n.08
+   [ 7] B1  female.n.02
+EDGE: female.n.02 --ANA -1-->
+   LINEAR  : [3] female.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p23/d2513   "Are you still cold," she asked, as she kissed him on the forehead.
+SBN: time.n.08 EQU now person.n.01 EQU hearer cold.a.01 Time -2 AttributeOf -1 CONTINUATION <0 female.n.02 ask.v.01 Proposition <1 Agent -1 Time +1 time.n.08 TPR now CONTINUATION <3 female.n.02 ANA -3 kiss.v.01 Agent -1 Time +1 Co-Agent +2 Experiencer +3 time.n.08 TPR now male.n.02 forehead.n.01
+boxes: B0(top), B1(CONTINUATION -> parent B1), B2(CONTINUATION -> parent B-1)
+concepts:
+   [ 0] B0  time.n.08
+   [ 1] B0  person.n.01
+   [ 2] B0  cold.a.01
+   [ 3] B1  female.n.02   <== LINEAR model says this
+   [ 4] B1  ask.v.01
+   [ 5] B1  time.n.08
+   [ 6] B2  female.n.02   <== SOURCE (the concept bearing the index)
+   [ 7] B2  kiss.v.01
+   [ 8] B2  time.n.08
+   [ 9] B2  male.n.02
+   [10] B2  forehead.n.01
+EDGE: female.n.02 --ANA -3-->
+   LINEAR  : [3] female.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p63/d3045   Tom doesn't think he's as creative as Mary.
+SBN: male.n.02 Name "Tom" NEGATION <1 time.n.08 EQU now think.v.01 Time -1 Proposition >1 Agent -2 CONTINUATION <0 male.n.02 ANA -3 time.n.08 EQU now as.r.01 Theme -2 Co-Theme +2 creative.a.01 AttributeOf -3 Time -2 Degree -1 female.n.02 Name "Mary"
+boxes: B0(top), B1(NEGATION -> parent B0), B2(CONTINUATION -> parent B2)
+concepts:
+   [ 0] B0  male.n.02   <== LINEAR model says this
+   [ 1] B1  time.n.08
+   [ 2] B1  think.v.01
+   [ 3] B2  male.n.02   <== SOURCE (the concept bearing the index)
+   [ 4] B2  time.n.08
+   [ 5] B2  as.r.01
+   [ 6] B2  creative.a.01
+   [ 7] B2  female.n.02
+EDGE: male.n.02 --ANA -3-->
+   LINEAR  : [0] male.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p05/d2840   The coworker claimed he had missed the bus.
+SBN: person.n.01 Role +1 co-worker.n.01 claim.v.01 Proposition >1 Agent -2 Time +1 time.n.08 TPR now CONTINUATION <0 male.n.02 ANA -4 miss.v.05 Agent -1 Time +1 Theme +2 time.n.08 TPR now bus.n.01
+boxes: B0(top), B1(CONTINUATION -> parent B1)
+concepts:
+   [ 0] B0  person.n.01   <== LINEAR model says this
+   [ 1] B0  co-worker.n.01
+   [ 2] B0  claim.v.01
+   [ 3] B0  time.n.08
+   [ 4] B1  male.n.02   <== SOURCE (the concept bearing the index)
+   [ 5] B1  miss.v.05
+   [ 6] B1  time.n.08
+   [ 7] B1  bus.n.01
+EDGE: male.n.02 --ANA -4-->
+   LINEAR  : [0] person.n.01
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p95/d1663   Who fights can lose. Who doesn't fight has already lost.
+SBN: NEGATION <1 person.n.01 fight.v.01 Agent -1 Time +1 time.n.08 EQU now NEGATION <1 POSSIBILITY <1 lose.v.02 Agent -3 CONTINUATION <4 NEGATION <1 person.n.01 time.n.08 EQU now NEGATION <1 fight.v.01 Agent -2 Time -1 NEGATION <2 lose.v.02 Agent -3 Time +1 time.n.08 TPR now
+boxes: B0(top), B1(NEGATION -> parent B0), B2(NEGATION -> parent B1), B3(POSSIBILITY -> parent B2), B4(CONTINUATION -> parent B0), B5(NEGATION -> parent B4), B6(NEGATION -> parent B5), B7(NEGATION -> parent B5)
+concepts:
+   [ 0] B1  person.n.01
+   [ 1] B1  fight.v.01
+   [ 2] B1  time.n.08
+   [ 3] B3  lose.v.02
+   [ 4] B5  person.n.01   <== LINEAR model says this
+   [ 5] B5  time.n.08
+   [ 6] B6  fight.v.01
+   [ 7] B7  lose.v.02   <== SOURCE (the concept bearing the index)
+   [ 8] B7  time.n.08
+EDGE: lose.v.02 --Agent -3-->
+   LINEAR  : [4] person.n.01
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p97/d0821   He replied that he did not know.
+SBN: male.n.02 reply.v.01 Proposition >1 Agent -1 Time +1 time.n.08 TPR now CONTINUATION <0 male.n.02 ANA -3 NEGATION <1 time.n.08 TPR now know.v.01 Experiencer -2 Time -1
+boxes: B0(top), B1(CONTINUATION -> parent B1), B2(NEGATION -> parent B1)
+concepts:
+   [ 0] B0  male.n.02   <== LINEAR model says this
+   [ 1] B0  reply.v.01
+   [ 2] B0  time.n.08
+   [ 3] B1  male.n.02   <== SOURCE (the concept bearing the index)
+   [ 4] B2  time.n.08
+   [ 5] B2  know.v.01
+EDGE: male.n.02 --ANA -3-->
+   LINEAR  : [0] male.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p83/d1787   Tom told Mary that she looked like Marilyn Monroe.
+SBN: male.n.02 Name "Tom" tell.v.02 Proposition >1 Agent -1 Time +1 Recipient +2 time.n.08 TPR now female.n.02 Name "Mary" CONTINUATION <0 female.n.02 ANA -1 look.v.02 Theme -1 Time +1 Attribute +2 time.n.08 TPR now female.n.02 Name "Marilyn Monroe"
+boxes: B0(top), B1(CONTINUATION -> parent B1)
+concepts:
+   [ 0] B0  male.n.02
+   [ 1] B0  tell.v.02
+   [ 2] B0  time.n.08
+   [ 3] B0  female.n.02   <== LINEAR model says this
+   [ 4] B1  female.n.02   <== SOURCE (the concept bearing the index)
+   [ 5] B1  look.v.02
+   [ 6] B1  time.n.08
+   [ 7] B1  female.n.02
+EDGE: female.n.02 --ANA -1-->
+   LINEAR  : [3] female.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
+==============================================================================
+p19/d2862   She gave away all her dolls.
+SBN: female.n.02 NEGATION <1 NEGATION <1 give_away.v.01 Agent -1 Time +1 Theme +2 time.n.08 TPR now CONJUNCTION <2 entity.n.01 SubOf +2 CONJUNCTION <4 female.n.02 ANA -4 doll.n.01 User -1
+boxes: B0(top), B1(NEGATION -> parent B0), B2(NEGATION -> parent B1), B3(CONJUNCTION -> parent B1), B4(CONJUNCTION -> parent B0)
+concepts:
+   [ 0] B0  female.n.02   <== LINEAR model says this
+   [ 1] B2  give_away.v.01
+   [ 2] B2  time.n.08
+   [ 3] B3  entity.n.01
+   [ 4] B4  female.n.02   <== SOURCE (the concept bearing the index)
+   [ 5] B4  doll.n.01
+EDGE: female.n.02 --ANA -4-->
+   LINEAR  : [0] female.n.02
+   REGISTER: [None] OUT-OF-RANGE
+
