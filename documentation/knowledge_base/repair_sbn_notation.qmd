@@ -36,7 +36,7 @@ $$(w, f) \llbracket \mathit{Correction}(\pi_1, \pi_2) \rrbracket_m (w', g) \text
 * Always ignore interregna in the transcription, but retain them in the annotation on the right hand side of `%`. Common English interregna include but are not limited to "I mean", "well", "actually", "no", and "in fact". 
 
 # Covered Cases 
-**For demonstration purpose, all the synstets in the examples are written as `.01`, which does not represent the actual synset in WordNet.**
+**For demonstration purpose, all the synstets in the examples are written as `.01`, with a few exceptions, which does not represent the actual synset in WordNet.**
 ## One-Sentence Cases
 
 ### SV Sentence
@@ -80,14 +80,15 @@ chase
     CONJUNCTION <2
 hunt
 ```
+If SBN allows not fulfilling every semantic roles for a predicate, the following one should also be legal, meanwhile, following the natural language order.
 
 ```sbn
 cat.n.01
 time.n.08 EUQ now
     CORRECTION <1
-chase
+chase Agent -2 Time -1
     CONJUNCTION <2
-hunt
+hunt Agent -3 Theme +1 Time -2 
 rat.n.01
 ```
 
@@ -95,42 +96,86 @@ rat.n.01
 "I ordered a banana bread, I mean, a cherry pie"
 
 ```sbn
-% TODO
+person.n.01 EQU speaker              % I
+time.n.01 TPR now                    % ordered
+order.v.01 Agent -2 Time -1          %
+    CORRECTION <1                    %
+banana_bread.n.01 ThemeOf -1         % a banana bread, I mean
+    CONJUNCTION <2                   %
+cherry_pie.n.01 ThemeOf -2           % a cherry pie
 ```
 
 ### Negation
 "I didn't order a banana bread, I mean, a cherry pie"
 
 ```sbn
-% TODO
+person.n.01 EQU speaker              % I
+time.n.01 TPR now                    % 
+NEGATION <1                          % didn't
+order.v.01 Agent -2 Time -1          % order
+  CORRECTION <1                      %
+banana_bread.n.01 ThemeOf-1          % a banana bread,
+  CONJUNCTION <2                     %
+cherry_pie.n.01 ThemeOf -2           % a cherry pie
 ```
 
 ### Adjunct 
 "The class is on Monday, no, on Tuesday"
 
 ```sbn
-% TODO
+class.n.01                               % The class
+time.n.08 EQU now                        %
+be.v.01 Theme -2 Time -1                 % is on
+  CORRECTION <1                          % 
+time.n.08 Day "Monday" TimeOf -1         % Monday,
+  CONJUNCTION <2                         % no, on 
+time.n.08 Day "Tuesday" TimeOf -2        % Tuesday.
 ```
 
 ### Preposition replacement
 "I went to, I mean, from the school"
 
 ```sbn
-% TODO
+person.n.01 EQU speaker                    % I
+run.v.01 Theme -1 Time +1                  % ran
+time.n.08 TPR now                          %
+CORRECTION <1                              %
+event.v.01 EQU -2 Destination +1           % to
+entity.n.01                                %
+CONJUNCTION <2                             %
+event.v.01 EQU -4 Source +1                % I mean from
+school.n.02                                % the school.
 ```
 
 ### Universal Quantification - Donkey sentence
 "If a farmer owns a donkey, he beats, I mean, feeds it."
+Notice the difference with the SBN of verb self-repair. In the current case, the reparandum verb *beat* locates in the consequence (right) clause. It means the reparandum needs to travel across two boxex (`NEGATION` and `CORRECTION`) to reach all the nodes. 
 
 ```sbn
-% TODO
+NEGATION <1                              % Every/If
+farmer.n.01                              % farmer
+own.v.01 Pivot -1 Theme +1               % who owns a
+donkey.n.01                              % donkey,
+NEGATION <2                              % he
+entity.n.01 EQU -1                       % it
+    CORRECTION <1                        %
+beat.v.01 Agent -4 Patient -1            % beats (reparandum)
+    CONJUNCTION <2                       %
+feed.v.01 Agent -5 Patient -2            % feeds it
 ```
 
-Compared to an ordinary donkey sentence without self-repair:
+Compared to an ordinary donkey sentence without self-repair, extracted from Bos (2021):
+"Every farmer who owns a donkey beats it" 
 
 ```sbn
-% TODO
+    NEGATION -1                 % Every 
+farmer.n.01                     % farmer
+own.v.01 Pivot -1  Theme +1     % who owns
+donkey.n.01  NEGATION -1        % a donkey
+beat.v.01 Agent -3  Patient +1  % beats
+entity.n.01 EQU -2              % it
 ```
+It is notetaking that in the "ordinary" donkey sentence, the pronoun "it" follows the natural language oder by appearing by the end of the SBN sequence. However, in the sel-repair variety, it is moved forward to satisfy the two rules above. 
 
 ### Retracting and Forwarding Repairs
 
@@ -138,14 +183,39 @@ Compared to an ordinary donkey sentence without self-repair:
 "Bill said you will put, I mean, you will drop the ball on the table"
 
 ```sbn
-% TODO
+male.n.02 Name "Bill"                              % Bill           
+say.v.01                                           % said
+Proposition >1                                     %
+Agent -1                                           %
+Time +1                                            %
+time.n.08 TPR now                                  %
+CONTINUATION <0                                    %
+person.n.01 EQU hearer                             % you
+time.n.08 TSU now                                  % will
+    CORRECTION <1                                  %
+put.v.01 Agent -2 Time -1 Theme +2 Destination +3  % put [Positive Index Alert!!]
+    CONJUNCTION <2                                 % I mean,               
+drop.v.01 Agent -3 Time -2 Theme +1 Destination +2 % drop 
+ball.n.01                                          % the ball
+table.n.02                                         % on the table 
 ```
 
 #### Forwarding Self-Repair
 "Josh drove, no, Marsha drove the old car to the church"
 
 ```sbn
-% TODO
+entity.n.01
+    CORRECTION <1
+male.n.02 Name "Josh" EQU -1             % Josh
+drive.v.03 Agent -1 Time +1 Theme +3     % drove
+time.n.08 TPR now 
+    CONJUNCTION <2                       % no
+female.n.02 Name "Marsha" EQU -4         % Marsha
+drive.v.03 Agent -1 Time +1 Theme +2     % drove [Positive index aleart!!]
+time.n.08 TPR now                        %
+old.a.02 Value +1                        % the old 
+car.n.01 Attribute -1 Destination +1     % car
+church.n.02                              % to the church
 ```
 
 ## Multiple-Sentence (Discourse) Cases
@@ -153,14 +223,44 @@ Compared to an ordinary donkey sentence without self-repair:
 "A: My favourite dessert is banana bread, actually, cherry pie. B: They are both good desserts"
 
 ```sbn
-% TODO
+% Utterance 1
+person.n.01 EQU speaker                    % node 1
+favourite.a.02 Experiencer -1 Stimulus +1  % node 2
+dessert.n.01                               % node 3
+be.v.02 Theme -1 Time +1 Co-Theme +2       % node 4
+time.n.08 EQU now                          % node 5
+    CORRECTION <1
+banana_bread.n.01                          % node 6  (reparandum)
+CONJUNCTION <2
+cherry_pie.n.01 Co-ThemeOf -3              % node 7  (repair)
+
+% Utterance 2
+CONTINUATION <1
+entity.n.01 ANA -2 ANA -1                  % node 8: refers to nodes 6 and 7
+time.n.08 EQU now                          % node 9
+good.a.01 AttributeOf -2 Time -1           % node 10
+dessert.n.01                               % node 11
 ```
 
 ###  Intra-utterance Self-Repair Combined with Cross-turn
 "A: Joe bought a Ferrari, I mean, a Jaguar, as a birthday gift. B: No, he bought it as a wedding gift."
 
 ```sbn
-% TODO
+% A's utterance — Context 0
+person.n.01 Name "Joe"                    % Joe
+time.n.01 TPR now                         %
+buy.v.01 Agent -2 Time -1 Manner +3       % bought
+    CORRECTION <1                         % I mean, [sub-clausal]
+car.n.01 Name "Ferrari" ThemeOf -1        % a Ferrari — Context 1 (reparandum)
+    CONJUNCTION <2                        %
+car.n.01 Name "Jaguar" ThemeOf -2         % a Jaguar — merged into Context 0
+gift.n.01 PartOf "birthday"               % as a birthday gift
+% Discourse boundary
+CORRECTION <1                             % No, [discourse-level] — Context 2
+% B's utterance
+male.n.01 EQU -6                          % he
+buy.v.01 Agent -1 Theme -3 Manner +1      % bought it
+gift.n.01 PartOf "wedding"                % as a wedding gift
 ```
 
 
@@ -169,11 +269,19 @@ Compared to an ordinary donkey sentence without self-repair:
 ## Tense and Aspect 
 "She went to, well, has been to the church"
 
+Reason:
+
 ## Rhetorical Relation Replacement 
 "I helped my mum when, I mean, even though I was busy"
+
+Reason:
 
 ## Quantifier Replacement
 "Every, no, some dishes are tasty"
 
+Reason:
+
 ## Modal Verb 
 "I think you would, well, should work harder"
+
+Reason: 
