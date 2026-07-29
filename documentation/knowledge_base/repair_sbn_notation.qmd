@@ -1,0 +1,179 @@
+---
+title: "Notation Design: Representing Self-Repair in Simplified Box Notation"
+author: "Hongxu Zhou"
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+    number-sections: true
+    html-math-method: katex
+---
+
+# The Mechanism of `CORRECTION + CONJUNCTION` 
+
+## Component Definition
+
+### `CORRECTION` 
+By adopting the definition by Lascarides & Asher (2009), `CORRECTION` is considered as divergent (non-veridical) subordinating rhetorical relation embedding a denial, as quoted here:
+
+> Asher and Lascarides (2003, p363) stipulates that in the absence of divergent rhetorical relations (in other words, speech acts of denial such as *Correction* and *Counterevidence*), all the content is agreed upon. So SDRT wrongly predicts that (1c) is agreed upon.
+
+and:
+
+>Let 〈Π, F, last〉 be an SDRS. Furthermore, where π1, π2 ∈ Π, we say that π1 > π2 iff either: (i) R(π1, π2) is within the range of F , where R is a subordinating relation (e.g., Q-Elab, Plan-Elab, IQAP, Correction, Background, Elaboration, Explanation); or ... 
+
+According to the same paper, the semantics of Correction is defined as 
+
+$$(w, f) \llbracket \mathit{Correction}(\pi_1, \pi_2) \rrbracket_m (w', g) \text{ iff } (w, f) \llbracket (\neg K_{\pi_1}) \land K_{\pi_2} \land \varphi_{\mathit{Correction}(\pi_1, \pi_2)} \rrbracket_m (w', g)$$
+
+## Fundamental Rules of SBN 
+* Accessibility: (a) neither positive nor negative indices can enter negated context, and (b) only negative indices in negated contexts can refer to discourse referents outside the negation. 
+
+## Rules of Annotating Self-Repair
+* Always use `CORRECTION` to quarantine the reparandum, and use `CONJUNCTION` to merge the content afterwards back to the upper context. 
+* Always follow the Fundamental Rules of SBN
+* Always ignore interregna in the transcription, but retain them in the annotation on the right hand side of `%`. Common English interregna include but are not limited to "I mean", "well", "actually", "no", and "in fact". 
+
+# Covered Cases 
+**For demonstration purpose, all the synstets in the examples are written as `.01`, which does not represent the actual synset in WordNet.**
+## One-Sentence Cases
+
+### SV Sentence
+"The boy sneezed, I mean, coughed"
+
+```sbn
+boy.n.01.                      % The boy
+time.n.08 TPR now              
+    CORRECTION <1
+sneeze.v.01 Agent -1 Time -1.  % sneezed, I mean,
+    CONJUNCTION <2
+cough.v.01 Agent -3 Time -2    % coughed
+```
+
+### SVO Sentence
+
+#### Subject Self-repair 
+"Josh, no, Mary plays tennis well"
+
+```sbn
+entity.n.01                          
+    CORRECTION <1
+male.n.02 Name "Josh" EQU -1         % Josh, no,
+    CONJUNCTION <2                   
+female.n.02 Name "Mary" EQU -2       % Mary
+play.v.01 Agent -3 Time +1 Theme +2  % plays
+time.n.08 EQU now                    
+tennis.n.01                          % tennis !!!well程度副词在SBN里显示吗？这个先挂着，写完了回头一起处理
+```
+
+#### Verb Self-repair
+"The cat chases, actually, hunts the rat"
+This case of representation has not been fully decided yet. Depends on allowing the nodes in the `CORRECTION` box being free loading or not, we have two temporal notations:
+
+```sbn
+cat.n.01
+rat.n.01
+time.n.08 EUQ now
+    CORRECTION <1 Agent -3 Theme -2  
+chase
+    CONJUNCTION <2
+hunt
+```
+
+```sbn
+cat.n.01
+time.n.08 EUQ now
+    CORRECTION <1
+chase
+    CONJUNCTION <2
+hunt
+rat.n.01
+```
+
+#### Object Self-repair
+"I ordered a banana bread, I mean, a cherry pie"
+
+```sbn
+% TODO
+```
+
+### Negation
+"I didn't order a banana bread, I mean, a cherry pie"
+
+```sbn
+% TODO
+```
+
+### Adjunct 
+"The class is on Monday, no, on Tuesday"
+
+```sbn
+% TODO
+```
+
+### Preposition replacement
+"I went to, I mean, from the school"
+
+```sbn
+% TODO
+```
+
+### Universal Quantification - Donkey sentence
+"If a farmer owns a donkey, he beats, I mean, feeds it."
+
+```sbn
+% TODO
+```
+
+Compared to an ordinary donkey sentence without self-repair:
+
+```sbn
+% TODO
+```
+
+### Retracting and Forwarding Repairs
+
+#### Retracting Repair 
+"Bill said you will put, I mean, you will drop the ball on the table"
+
+```sbn
+% TODO
+```
+
+#### Forwarding Self-Repair
+"Josh drove, no, Marsha drove the old car to the church"
+
+```sbn
+% TODO
+```
+
+## Multiple-Sentence (Discourse) Cases
+### Anaphora referring to both reparandum and repair 
+"A: My favourite dessert is banana bread, actually, cherry pie. B: They are both good desserts"
+
+```sbn
+% TODO
+```
+
+###  Intra-utterance Self-Repair Combined with Cross-turn
+"A: Joe bought a Ferrari, I mean, a Jaguar, as a birthday gift. B: No, he bought it as a wedding gift."
+
+```sbn
+% TODO
+```
+
+
+# Noted Limitations
+
+## Tense and Aspect 
+"She went to, well, has been to the church"
+
+## Rhetorical Relation Replacement 
+"I helped my mum when, I mean, even though I was busy"
+
+## Quantifier Replacement
+"Every, no, some dishes are tasty"
+
+## Modal Verb 
+"I think you would, well, should work harder"
