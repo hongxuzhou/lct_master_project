@@ -118,7 +118,8 @@ class SBNSpec:
         "ThemeOf", # Add new role
         "TimeOf", # Add new role
         "AgentOf", # Add new role
-        "MannerOf" # Add new
+        "MannerOf", # Add new
+        "Co-ThemeOf" # Add new role
     }
 
     ROLES = {
@@ -140,6 +141,7 @@ class SBNSpec:
         "Co-Agent",
         "Co-Patient",
         "Co-Theme",
+        "Co-ThemeOf", # Add new role
         "Consumer",
         "Destination",
         "Duration",
