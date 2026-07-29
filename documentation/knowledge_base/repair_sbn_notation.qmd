@@ -180,7 +180,7 @@ It is notetaking that in the "ordinary" donkey sentence, the pronoun "it" follow
 ### Retracting and Forwarding Repairs
 
 #### Retracting Repair 
-"Bill said you will put, I mean, you will drop the ball on the table"
+"Bill said you will put, I mean, you will drop the ball on the table" (Husband, 2015)
 
 ```sbn
 male.n.02 Name "Bill"                              % Bill           
