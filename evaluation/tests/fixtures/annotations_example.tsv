@@ -1,0 +1,7 @@
+id	sentence	sbn_repair	repair_type	device
+ex01	The boy sneezed, I mean, coughed	boy.n.01 time.n.08 TPR now CORRECTION <1 sneeze.v.01 Agent -2 Time -1 CONJUNCTION <2 cough.v.01 Agent -3 Time -2	sv	1
+ex02	I ordered a banana bread, I mean, a cherry pie	person.n.01 EQU speaker time.n.08 TPR now order.v.01 Agent -2 Time -1 CORRECTION <1 banana_bread.n.01 ThemeOf -1 CONJUNCTION <2 cherry_pie.n.01 ThemeOf -2	object	2
+ex03	I ran to, I mean, from the school	person.n.01 EQU speaker time.n.08 TPR now run.v.01 Theme -2 Time -1 school.n.02 CORRECTION <1 entity.n.01 EQU -2 Destination -1 CONJUNCTION <2 entity.n.01 EQU -3 Source -2	preposition	3
+ex04	I didn't order a banana bread, I mean, a cherry pie	person.n.01 EQU speaker time.n.08 TPR now NEGATION <1 order.v.01 Agent -2 Time -1 CORRECTION <1 banana_bread.n.01 ThemeOf -1 CONJUNCTION <2 cherry_pie.n.01 ThemeOf -2	negation	2
+ex05	My favourite dessert is banana bread, actually, cherry pie. They are both good desserts	person.n.01 EQU speaker favorite.a.02 Experiencer -1 Stimulus +1 dessert.n.01 time.n.08 EQU now be.v.02 Theme -2 Time -1 CORRECTION <1 banana_bread.n.01 Co-ThemeOf -1 CONJUNCTION <2 cherry_pie.n.01 Co-ThemeOf -2 CONTINUATION <1 entity.n.01 ANA -2 ANA -1 time.n.08 EQU now be.v.02 Theme -2 Time -1 Co-Theme +2 good.a.01 AttributeOf +1 dessert.n.01	discourse_anaphora	2
+ex06	The boy coughed	boy.n.01 time.n.08 TPR now cough.v.01 Agent -2 Time -1	none	

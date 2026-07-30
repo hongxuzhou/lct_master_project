@@ -1,0 +1,13 @@
+id	condition	pred_sbn
+ex01	perfect	boy.n.01 time.n.08 TPR now CORRECTION <1 sneeze.v.01 Agent -2 Time -1 CONJUNCTION <2 cough.v.01 Agent -3 Time -2
+ex02	perfect	person.n.01 EQU speaker time.n.08 TPR now order.v.01 Agent -2 Time -1 CORRECTION <1 banana_bread.n.01 ThemeOf -1 CONJUNCTION <2 cherry_pie.n.01 ThemeOf -2
+ex03	perfect	person.n.01 EQU speaker time.n.08 TPR now run.v.01 Theme -2 Time -1 school.n.02 CORRECTION <1 entity.n.01 EQU -2 Destination -1 CONJUNCTION <2 entity.n.01 EQU -3 Source -2
+ex04	perfect	person.n.01 EQU speaker time.n.08 TPR now NEGATION <1 order.v.01 Agent -2 Time -1 CORRECTION <1 banana_bread.n.01 ThemeOf -1 CONJUNCTION <2 cherry_pie.n.01 ThemeOf -2
+ex05	perfect	person.n.01 EQU speaker favorite.a.02 Experiencer -1 Stimulus +1 dessert.n.01 time.n.08 EQU now be.v.02 Theme -2 Time -1 CORRECTION <1 banana_bread.n.01 Co-ThemeOf -1 CONJUNCTION <2 cherry_pie.n.01 Co-ThemeOf -2 CONTINUATION <1 entity.n.01 ANA -2 ANA -1 time.n.08 EQU now be.v.02 Theme -2 Time -1 Co-Theme +2 good.a.01 AttributeOf +1 dessert.n.01
+ex06	perfect	boy.n.01 time.n.08 TPR now cough.v.01 Agent -2 Time -1
+ex01	missed_repair	boy.n.01 time.n.08 TPR now cough.v.01 Agent -2 Time -1
+ex02	missed_repair	person.n.01 EQU speaker time.n.08 TPR now order.v.01 Agent -2 Time -1 Theme +1 cherry_pie.n.01
+ex03	missed_repair	person.n.01 EQU speaker time.n.08 TPR now run.v.01 Theme -2 Time -1 Source +1 school.n.02
+ex04	lost_negation	person.n.01 EQU speaker time.n.08 TPR now order.v.01 Agent -2 Time -1 CORRECTION <1 banana_bread.n.01 ThemeOf -1 CONJUNCTION <2 cherry_pie.n.01 ThemeOf -2
+ex05	missed_repair	person.n.01 EQU speaker favorite.a.02 Experiencer -1 Stimulus +1 dessert.n.01 time.n.08 EQU now be.v.02 Theme -2 Time -1 Co-Theme +1 cherry_pie.n.01
+ex06	garbage	this is not sbn at all

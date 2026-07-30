@@ -25,6 +25,36 @@ can pull back and run locally on the scored table.
   the legacy `from smatch import ...` guarded so no `smatch.py`/`amr.py` is
   needed. `sbn_spec.py` carries Hongxu's CORRECTION + invertible-role edits.
 
+## Repair evaluation (two metrics)
+
+A repair-aware parser is characterised by two numbers, answering different
+questions. Neither alone is the score.
+
+| | question | module | test |
+|---|---|---|---|
+| **Metric A** | did it find the repair, quarantine the right material, merge into the right context? | `sbn_lib/repair_metrics.py` | `test_repair_metrics.py` |
+| **Metric B** | with the repair scaffolding removed, does the speaker's final semantics match? | `sbn_lib/repair_strip.py` | `test_repair_strip.py` |
+
+Metric B strips CORRECTION/CONJUNCTION structure and the two kinds of
+scaffolding dummy at the **graph** level, then scores the result with smatch++
+against natural fluent-sentence SBN. It is a partial function: items outside
+its machine-checkable domain return `status="na"` and belong in the challenge
+set, where only Metric A applies. Metric A is deliberately un-gated so those
+items still get a score.
+
+The two are **not independent** — mislabelling a cross-turn denial as an
+intra-turn repair is penalised in A and again in B, because stripping then
+deletes content the speaker did commit to. State this when reporting.
+
+Both modules' docstrings carry the design rationale; the test suites are driven
+by the worked examples in `documentation/knowledge_base/repair_sbn_notation.qmd`
+and double as a regression check on the notation itself.
+
+```bash
+python3 test_repair_strip.py -v   # 16 cases; 11 single-sentence repairs at F1 1.00
+python3 test_repair_metrics.py    # 8 cases, all well-formed wrong predictions
+```
+
 ## Why this exists
 PMB SBN parsing research moved to **smatch++** (flipz357/smatchpp). This replaces
 the legacy `evaluate_repair_smatch.py` which used the bundled `smatch.py`.
@@ -56,5 +86,11 @@ fast approximation.
 ## Notes
 - smatchpp returns F1 on a 0–100 scale; the toolkit stores it as 0–1.
 - Gold SBN is converted to Penman once per id (cached).
+- **`make_scorer` passes `GenericStandardizer`.** Without it smatch++ does not
+  de-invert `:X-of`, so every inverted role (`AttributeOf`, `PartOf`, `ThemeOf`,
+  …) scores as a different edge — see the comment above `make_scorer`. Anything
+  scored before Jul/2026 predates the fix and is understated. `GenericStandardizer`
+  also lower-cases labels; if name casing must count, substitute a standardizer
+  that runs `relabel_vars` + `deinvert_e` only.
 - Feed predictions from the inference stage; the HF dataset
   (`Shrikes/self_repair_parsing_pilot_data`) stays a static input manifest.

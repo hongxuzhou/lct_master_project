@@ -56,6 +56,7 @@ except ImportError as e:
 
 try:
     from smatchpp import Smatchpp, solvers
+    from smatchpp.formalism.generic.tools import GenericStandardizer
 except ImportError as e:
     sys.exit(f"smatchpp not installed: {e}\nInstall with: pip install smatchpp")
 
@@ -83,14 +84,33 @@ def sbn_to_penman(sbn_str: str):
 
 # ── Scoring ──────────────────────────────────────────────────────────────────
 
+# Inverted roles (`:X-of`) -- read before changing the standardizer.
+#
+# CAUSE : smatch++ does not de-invert `:X-of` edges by itself. `sbn_smatch.
+#         to_penman_string` rewrites INVERTIBLE_ROLES `XOf` -> `:X-of` on the
+#         assumption that it does. That rewrite is necessary, not sufficient.
+# IMPACT: without a standardizer every inverted role scores as a wholly
+#         different edge. Two graphs identical except for `Theme +1` vs
+#         `ThemeOf -1` score 93.33, not 100.0. Hits PMB gold's ~2600 inverted
+#         edges (AttributeOf 1802, PartOf 572, SubOf 120, ...) and every
+#         inverted role in the repair notation. Scores produced before this
+#         fix are understated and must be recomputed before being cited.
+# FIX   : pass GenericStandardizer, which de-inverts during standardization.
+#         It also lower-cases labels and strips quotes, so name constants are
+#         compared case-insensitively -- intended, but note it.
+# -- Hongxu Zhou, Jul/2026
+
 def make_scorer(solver_name: str = "ilp") -> Smatchpp:
     """Build a Smatchpp scorer. 'ilp' = exact (recommended); 'hillclimber' = fast approx."""
     solver_name = solver_name.lower()
     if solver_name == "ilp":
-        return Smatchpp(alignmentsolver=solvers.ILP())
-    if solver_name in ("hillclimber", "hc"):
-        return Smatchpp(alignmentsolver=solvers.HillClimber())
-    raise ValueError(f"Unknown solver '{solver_name}' (use 'ilp' or 'hillclimber').")
+        alignment_solver = solvers.ILP()
+    elif solver_name in ("hillclimber", "hc"):
+        alignment_solver = solvers.HillClimber()
+    else:
+        raise ValueError(f"Unknown solver '{solver_name}' (use 'ilp' or 'hillclimber').")
+    return Smatchpp(alignmentsolver=alignment_solver,
+                    graph_standardizer=GenericStandardizer())
 
 
 def score_penman_pair(scorer: Smatchpp, gold_penman: str, pred_penman: str):
