@@ -39,7 +39,7 @@ A single `CORRECTION` token carries two distinct jobs. They are told apart **str
 | What `CORRECTION` does | quarantines the reparandum | Lascarides & Asher proper: denies $\pi_1$, commits $\pi_2$ |
 | What `CONJUNCTION` does | merges the repair *and everything after it* back into the box one level above `CORRECTION` | n/a |
 
-**Recognition, not disambiguation.** `CONJUNCTION` has one semantics throughout SBN: per Bos (2021) it does not open a new DRS, it merges subsequent material into the DRS of its target box (cf. Zeevat 1991 on DRS merging). This holds identically whether or not a `CORRECTION` precedes it — there is no separate "repair-`CONJUNCTION`" reading. What differs is the discourse configuration: when a `CONJUNCTION` shares a parent box with a `CORRECTION`, the merge it performs happens to resolve a self-repair, because its target is exactly the box that was live before the reparandum was quarantined. Tooling that needs to detect *that a `CONJUNCTION` is part of a repair* (for QC or scoring) can use parent-box co-occurrence with `CORRECTION` as its test — but that is a test for recognising a repair configuration, not a fork in what `CONJUNCTION` means.
+**Recognition, not disambiguation.** `CONJUNCTION` has one semantics throughout SBN: per Bos (2021, 2023) it does not open a new DRS, it merges subsequent material into the DRS of its target box (cf. Zeevat 1991 on DRS merging). This holds identically whether or not a `CORRECTION` precedes it — there is no separate "repair-`CONJUNCTION`" reading. What differs is the discourse configuration: when a `CONJUNCTION` shares a parent box with a `CORRECTION`, the merge it performs happens to resolve a self-repair, because its target is exactly the box that was live before the reparandum was quarantined. Tooling that needs to detect *that a `CONJUNCTION` is part of a repair* (for QC or scoring) can use parent-box co-occurrence with `CORRECTION` as its test — but that is a test for recognising a repair configuration, not a fork in what `CONJUNCTION` means.
 
 **On the direction of the relation.** The parser emits box-to-box edges as `target_box → new_box`. In the cross-turn case this means the connector's target is $\pi_1$ (denied) and the newly opened box is $\pi_2$ (committed), reflecting the argument order of the definition above, so no extra convention is needed. In the intra-turn case the newly opened box holds the quarantined reparandum, and the Correction relation proper is recovered from the `CORRECTION`/`CONJUNCTION` pair rather than from the single edge.
 
@@ -52,13 +52,13 @@ The rule above is quoted verbatim from Bos (2021). The following are operational
 
 **C1: Index counting is linear and boxes never reset it.** `Role -n` / `Role +n` counts *all* preceding concepts in raw sequence order. Separators do not reset, restrict, or partition the counting domain; concepts sitting in already-closed, non-ancestor sibling boxes still occupy positions and still count. 
 
-Do not conflate the two index spaces: **angle brackets index boxes, `+`/`-` index concepts.** `Proposition >1` and `CONTINUATION <0` are box pointers, not concept indices — which is why a `Proposition >1` target can sit two or more concept positions forward.
+Do not conflate the two index spaces: **angle brackets index boxes, `+`/`-` index concepts.** `Proposition >1` and `CONTINUATION <0` are box pointers, not concept indices, which is why a `Proposition >1` target can sit two or more concept positions forward.
 
 **C2 — "Outside the negation" means an *ancestor* box.** Referents in *sibling* boxes are equally inaccessible, even when they precede the current concept in linear order.
 
-**C3 — `CONJUNCTION` boundaries are permeable, `CORRECTION` boundaries are not.** A positive index may cross into a `CONJUNCTION` box, because `CONJUNCTION` merges rather than subordinates; PMB gold does this routinely (`p01/d3366`: `leave.v.01 … Time +2 … CONJUNCTION <2 time.n.08 DayOfWeek monday`). A positive index may **never** cross into or out of a `CORRECTION` box. See the repair toolkit below for how to avoid it.
+**C3 — `CONJUNCTION` boundaries are permeable, `CORRECTION` boundaries are not.** A positive index representing a thematic role shall **never cross into** a `CORRECTION` box. A negative index inside a `CORRECTION` box is permitted to cross out as long as it targets an ancestor box (e.g., `BOX 0`). However, indices shall never cross laterally between sibling boxes (e.g., from a `CORRECTION` box into a `CONJUNCTION` box). See the repair toolkit below for how to resolve illegal inbound or lateral links.
 
-**C4 — A `CORRECTION` box is transparent to cross-turn anaphora.** This is where `CORRECTION` genuinely differs from `NEGATION`, and it is a positive property of the relation, not a loophole. In "My favourite dessert is banana bread, actually, cherry pie. — They are both good desserts," the plural anaphor picks up the quarantined reparandum, and the discourse is perfectly felicitous. Quarantining a reparandum removes it from what the speaker commits to; it does not remove it from the discourse referent domain. This **can** be explained by Lascarides & Asher (2009). 
+**C4 — Under certain conditions, the content nested in a`CORRECTION` box can be referred to.** However, discourse referents inside a CORRECTION box survive and remain anaphorically accessible. Quarantining a reparandum removes what the speaker commits to propositionally, but it does not remove the uttered entities from the discourse referent domain. According to SBN, entities like proper nouns or definites naturally project to BOX 0. For self-repairs, we extend this: entities introduced in a reparandum project their referential availability to the enclosing context. Therefore, anaphoric indices (like ANA) referencing these entities do not technically violate the structural barrier of C3, as they pick up the projected referent. This is where `CORRECTION` genuinely differs from `NEGATION`, and it is a positive property of the relation, not a loophole.  
 
 **C5 — The `CONJUNCTION` box has a tail.** Everything from `CONJUNCTION` up to the next separator stays inside that box, including material that has nothing to do with the repair (in the subject-repair example below, the predicate `play.v.01`, its tense referent and its object all land there). Because `CONJUNCTION` merges, this is semantically equivalent to putting that material directly in the box one level above `CORRECTION` (the box the merge targets, not necessarily `BOX0`; under a `NEGATION`, for instance, that target is the negated box, see the Negation case below).
 
@@ -103,8 +103,8 @@ On ④'s cost: index magnitude grows monotonically with movement, and `SBNSpec.I
 
 ```sbn
 boy.n.01                       % The boy
-time.n.08 TPR now              %
-    CORRECTION <1              %
+time.n.08 TPR now              % 
+    CORRECTION <1              % 
 sneeze.v.01 Agent -2 Time -1   % sneezed,
     CONJUNCTION <2             % I mean,
 cough.v.01 Agent -3 Time -2    % coughed
@@ -125,7 +125,7 @@ male.n.02 Name "Josh" EQU -1                  % Josh,
     CONJUNCTION <2                            % no,
 female.n.02 Name "Mary" EQU -2                % Mary
 play.v.01 Agent -3 Time +1 Theme +2 Manner +3 % plays
-time.n.08 EQU now                             %
+time.n.08 EQU now                             % 
 tennis.n.01                                   % tennis
 well.r.01                                     % well
 ```
@@ -141,9 +141,9 @@ This example also illustrates clarification **C5**: the predicate, its tense ref
 
 ```sbn
 cat.n.01                            % The cat
-time.n.08 EQU now                   %
-    CORRECTION <1                   %
-chase.v.01 Agent -2 Time -1         % chases, 
+time.n.08 EQU now                   % 
+    CORRECTION <1                   % 
+chase.v.01 Agent -2 Time -1         % chases,
     CONJUNCTION <2                  % actually,
 hunt.v.01 Agent -3 Theme +1 Time -2 % hunts
 rat.n.01                            % the rat
@@ -159,9 +159,9 @@ rat.n.01                            % the rat
 
 ```sbn
 person.n.01 EQU speaker              % I
-time.n.08 TPR now                    %
+time.n.08 TPR now                    % 
 order.v.01 Agent -2 Time -1          % ordered
-    CORRECTION <1                    %
+    CORRECTION <1                    % 
 banana_bread.n.01 ThemeOf -1         % a banana bread,
     CONJUNCTION <2                   % I mean,
 cherry_pie.n.01 ThemeOf -2           % a cherry pie
@@ -170,6 +170,25 @@ cherry_pie.n.01 ThemeOf -2           % a cherry pie
 ![DAG: object self-repair — "I ordered a banana bread, I mean, a cherry pie"](images/object-self-repair.png)
 
 `ThemeOf` here is device ② of the toolkit: the object *is* the reparandum, so it must be linked, and inverting the role lets both candidate objects point backward at `order.v.01` in `Box 0` instead of forcing a positive index down into the `CORRECTION` box.
+
+#### Tense & Aspect Replacement
+"She will go to, well, went to the church"
+
+```sbn
+female.n.02                                % She
+    CORRECTION <1                          % 
+time.n.08 TSU now                          % [will]
+go.v.01 Theme -2 Time -1                   % go to,
+    CONJUNCTION <2                         % well,
+time.n.08 TPR now                          % [went]
+go.v.01 Theme -4 Time -1 Destination +1    % went to
+church.n.02                                % the church
+```
+
+![DAG: Time & aspect replacement - "She will go to, well, went to the church"](images/time_aspect_replace.png)
+
+This case demonstrates device ①. The speaker abandons the phrase *will go to* before uttering the destination. Therefore, the first predicate (go.v.01) takes no Destination role.
+This example illustrates why tense and aspect self-repairs do not suffer from the topological limitations that affect separators. In SBN, tense and aspect are not topological separators but ordinary concepts (time.n.08) and edge labels (Time). Consequently, a tense/aspect self-repair is structurally identical to a standard verb self-repair. The initial event concept and its associated time node are smoothly quarantined inside the `CORRECTION` box, while the corrected event and its new time node are introduced safely in the `CONJUNCTION` box. All indices remain perfectly legal and natural.
 
 ### Negation
 "I didn't order a banana bread, I mean, a cherry pie"
@@ -196,10 +215,10 @@ Note the resulting box structure: `BOX0 →NEGATION→ BOX1`, `BOX1 →CORRECTIO
 
 ```sbn
 class.n.01                                % The class
-time.n.08 EQU now                         %
+time.n.08 EQU now                         % 
 be.v.01 Theme -2 Time -1                  % is on
-    CORRECTION <1                         %
-time.n.08 DayOfWeek monday TimeOf -1      % Monday, 
+    CORRECTION <1                         % 
+time.n.08 DayOfWeek monday TimeOf -1      % Monday,
     CONJUNCTION <2                        % no,
 time.n.08 DayOfWeek tuesday TimeOf -2     % on Tuesday
 ```
@@ -215,11 +234,11 @@ What is repaired here is not a concept but an **edge label** — `Destination` g
 
 ```sbn
 person.n.01 EQU speaker              % I
-time.n.08 TPR now                    %
+time.n.08 TPR now                    % 
 run.v.01 Theme -2 Time -1            % ran
 school.n.02                          % the school
-    CORRECTION <1                    %
-entity.n.01 EQU -2 Destination -1    % to, 
+    CORRECTION <1                    % 
+entity.n.01 EQU -2 Destination -1    % to,
     CONJUNCTION <2                   % I mean,
 entity.n.01 EQU -3 Source -2         % from
 ```
@@ -265,7 +284,7 @@ NEGATION -1                     % Every
 farmer.n.01                     % farmer
 own.v.01 Pivot -1  Theme +1     % who owns
 donkey.n.01                     % a donkey
-NEGATION -1                     %
+NEGATION -1                     % 
 beat.v.01 Agent -3  Patient +1  % beats
 entity.n.01 EQU -2              % it
 ```
@@ -309,11 +328,11 @@ PMB gold shows the same asymmetry between a subordinate and a matrix occurrence 
 entity.n.01
     CORRECTION <1
 male.n.02 Name "Josh" EQU -1                         % Josh
-time.n.08 TPR now                                    %
-drive.v.03 Agent -2 Time -1                          % drove, 
+time.n.08 TPR now                                    % 
+drive.v.03 Agent -2 Time -1                          % drove,
     CONJUNCTION <2                                   % no,
 female.n.02 Name "Marsha" EQU -4                     % Marsha
-time.n.08 TPR now                                    %
+time.n.08 TPR now                                    % 
 drive.v.03 Agent -2 Time -1 Theme +2 Destination +3  % drove
 old.a.02 AttributeOf +1                              % the old
 car.n.01                                             % car
@@ -341,15 +360,15 @@ favorite.a.02 Experiencer -1 Stimulus +1   % favourite
 dessert.n.01                               % dessert
 time.n.08 EQU now                          % 
 be.v.02 Theme -2 Time -1                   % is
-    CORRECTION <1                          %
+    CORRECTION <1                          % 
 banana_bread.n.01 Co-ThemeOf -1            % banana bread, (reparandum)
-    CONJUNCTION <2                         % actually,  
+    CONJUNCTION <2                         % actually,
 cherry_pie.n.01 Co-ThemeOf -2              % cherry pie (repair)
 %%% Utterance 2
-    CONTINUATION <1                        %
+    CONTINUATION <1                        % 
 entity.n.01 ANA -2 ANA -1                  % B: They  — picks up both reparandum and repair
 time.n.08 EQU now                          % are
-be.v.02 Theme -2 Time -1 Co-Theme +2       %
+be.v.02 Theme -2 Time -1 Co-Theme +2       % 
 good.a.01 AttributeOf +1                   % both good
 dessert.n.01                               % desserts
 ```
@@ -394,29 +413,29 @@ The second one is written `<1`, which yields `BOX2 →CORRECTION→ BOX3`. Its t
 
 # Noted Limitations
 
-## Tense and Aspect 
-"She went to, well, has been to the church"
+## Topological Limitations: The "Separator vs. Concept" Divide
+The `CORRECTION` mechanism proposed in this notation is designed to quarantine node-level Concepts and their argument edges. Therefore, it is mathematically and structurally impossible to encapsulate a topological Separator inside a concept-level `CORRECTION` box. Attempting to do so would destroy the validity of the underlying Directed Acyclic Graph (DAG). This architectural divide restricts the notation from handling repairs that involve logical operators or discourse structures.
 
-Reason:
-
-## Rhetorical Relation Replacement 
-"I helped my mum when, I mean, even though I was busy"
-
-Reason:
-
-## Quantifier Replacement
+### Quantifier Replacement
 "Every, no, some dishes are tasty"
+Reason:  In SBN, universal quantification (e.g., "every") is not represented as a single concept node, but is constructed using double `NEGATION` separators that open new nested context boxes. When the speaker repairs the quantifier to "some" (an existential quantifier that does not require new boxes), it is impossible to use a `CORRECTION` box to retrospectively "undo" or quarantine the topological boundaries of the already-opened NEGATION boxes.
 
-Reason:
+### Rhetorical Relation Replacement
+"I helped my mum when, even though I was busy."
 
-## Modal Verb
+Reason: Rhetorical relations (such as `EXPLANATION`, `CONTRAST`, or `CONCESSION`) act as Separators that connect two distinct discourse contexts. They cannot be quarantined inside a `CORRECTION` box that is meant for semantic concepts.
+
+## Modal Verb Replacement
 "I think you would, well, should work harder"
 
-Reason:
+Reason: Similar to quantifiers and rhetorical relations, modal verbs (like "should" or "would") are frequently treated as structural separators (e.g., `NECESSITY` or `POSSIBILITY`) in formal semantics. For the same reason above, they are immune to the current CORRECTION boxing mechanism.
 
-## Discontinuous (Delayed) Repair
+## Linear Serialisation Limitations: Discontinuous (Delayed) Repair
 "I bought three apples from Lidl yesterday, actually, four"
 
 Every case covered so far is an *instant* repair: the interregnum follows its reparandum immediately, so `CORRECTION` opens right where the trouble source ends. Here the reparandum is just `Quantity 3` on `apple.n.01` — device-wise no different from the Adjunct case's `DayOfWeek monday → tuesday` — but "actually, four" arrives only after "from Lidl yesterday" has already been uttered and committed, and that material is not itself being repaired.
 
 `CORRECTION` can only quarantine what comes after it in the sequence. Opened where "actually" actually occurs, it can no longer reach back and quarantine "three". It is already asserted. Opened right after "three" instead (mimicking the instant-repair cases), it quarantines "from Lidl" and "yesterday" along with it, wrongly marking them as retracted. Device ④ does not rescue this either: it would have to postpone an entire adjunct span past the whole `CORRECTION`/`CONJUNCTION` pair, not just move one argument's index, which is a far larger break from surface order than anything the toolkit currently licenses.
+
+
+
