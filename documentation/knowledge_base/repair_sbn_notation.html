@@ -7,6 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Hongxu Zhou">
+<meta name="dcterms.date" content="2026-07-30">
 
 <title>Notation Design: Representing Self-Repair in Simplified Box Notation</title>
 <style>
@@ -128,6 +129,7 @@ window.Quarto = {
   <li><a href="#rhetorical-relation-replacement" id="toc-rhetorical-relation-replacement" class="nav-link" data-scroll-target="#rhetorical-relation-replacement"><span class="header-section-number">3.2</span> Rhetorical Relation Replacement</a></li>
   <li><a href="#quantifier-replacement" id="toc-quantifier-replacement" class="nav-link" data-scroll-target="#quantifier-replacement"><span class="header-section-number">3.3</span> Quantifier Replacement</a></li>
   <li><a href="#modal-verb" id="toc-modal-verb" class="nav-link" data-scroll-target="#modal-verb"><span class="header-section-number">3.4</span> Modal Verb</a></li>
+  <li><a href="#discontinuous-delayed-repair" id="toc-discontinuous-delayed-repair" class="nav-link" data-scroll-target="#discontinuous-delayed-repair"><span class="header-section-number">3.5</span> Discontinuous (Delayed) Repair</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -150,6 +152,12 @@ window.Quarto = {
           </div>
   </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">2026-07-30</p>
+    </div>
+  </div>
   
     
   </div>
@@ -167,7 +175,7 @@ window.Quarto = {
 <h3 data-number="1.1.1" class="anchored" data-anchor-id="correction"><span class="header-section-number">1.1.1</span> <code>CORRECTION</code></h3>
 <p>By adopting the definition by Lascarides &amp; Asher (2009), <code>CORRECTION</code> is considered as divergent (non-veridical) subordinating rhetorical relation embedding a denial, as quoted here:</p>
 <blockquote class="blockquote">
-<p>Asher and Lascarides (2003, p363) stipulates that in the absence of divergent rhetorical relations (in other words, speech acts of denial such as <em>Correction</em> and <em>Counterevidence</em>), all the content is agreed upon. So SDRT wrongly predicts that (1c) is agreed upon.</p>
+<p>Asher and Lascarides (2003, p363) stipulates that in the absence of divergent rhetorical relations (in other words, speech acts of denial such as <em>Correction</em> and <em>Counterevidence</em>), all the content is agreed upon.</p>
 </blockquote>
 <p>and:</p>
 <blockquote class="blockquote">
@@ -178,7 +186,7 @@ window.Quarto = {
 </section>
 <section id="the-two-tasks-of-correction" class="level3" data-number="1.1.2">
 <h3 data-number="1.1.2" class="anchored" data-anchor-id="the-two-tasks-of-correction"><span class="header-section-number">1.1.2</span> The two tasks of <code>CORRECTION</code></h3>
-<p>A single <code>CORRECTION</code> token carries two distinct jobs. They are told apart <strong>structurally</strong>， annotating the separator itself (e.g.&nbsp;<code>CORRECTION-intra</code>) would violate SBN’s design philosophy, which admits only the fixed separator inventory.</p>
+<p>A single <code>CORRECTION</code> token carries two distinct jobs. They are told apart <strong>structurally</strong>. Annotating the separator itself (e.g.&nbsp;<code>CORRECTION-intra</code>) would violate SBN’s design philosophy, which admits only the fixed separator inventory.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
@@ -210,7 +218,7 @@ window.Quarto = {
 </tr>
 </tbody>
 </table>
-<p><strong>Disambiguation rule.</strong> A <code>CONJUNCTION</code> is a repair-<code>CONJUNCTION</code> iff it shares a parent box with a <code>CORRECTION</code>. Otherwise it is the ordinary wide-scope-quantifier <code>CONJUNCTION</code> of standard SBN. Any tool that touches <code>CONJUNCTION</code> semantics decides on this test alone.</p>
+<p><strong>Recognition, not disambiguation.</strong> <code>CONJUNCTION</code> has one semantics throughout SBN: per Bos (2021) it does not open a new DRS, it merges subsequent material into the DRS of its target box (cf.&nbsp;Zeevat 1991 on DRS merging). This holds identically whether or not a <code>CORRECTION</code> precedes it — there is no separate “repair-<code>CONJUNCTION</code>” reading. What differs is the discourse configuration: when a <code>CONJUNCTION</code> shares a parent box with a <code>CORRECTION</code>, the merge it performs happens to resolve a self-repair, because its target is exactly the box that was live before the reparandum was quarantined. Tooling that needs to detect <em>that a <code>CONJUNCTION</code> is part of a repair</em> (for QC or scoring) can use parent-box co-occurrence with <code>CORRECTION</code> as its test — but that is a test for recognising a repair configuration, not a fork in what <code>CONJUNCTION</code> means.</p>
 <p><strong>On the direction of the relation.</strong> The parser emits box-to-box edges as <code>target_box → new_box</code>. In the cross-turn case this means the connector’s target is <span class="math inline">\pi_1</span> (denied) and the newly opened box is <span class="math inline">\pi_2</span> (committed), reflecting the argument order of the definition above, so no extra convention is needed. In the intra-turn case the newly opened box holds the quarantined reparandum, and the Correction relation proper is recovered from the <code>CORRECTION</code>/<code>CONJUNCTION</code> pair rather than from the single edge.</p>
 </section>
 </section>
@@ -227,8 +235,8 @@ window.Quarto = {
 <p><strong>C2 — “Outside the negation” means an <em>ancestor</em> box.</strong> Referents in <em>sibling</em> boxes are equally inaccessible, even when they precede the current concept in linear order.</p>
 <p><strong>C3 — <code>CONJUNCTION</code> boundaries are permeable, <code>CORRECTION</code> boundaries are not.</strong> A positive index may cross into a <code>CONJUNCTION</code> box, because <code>CONJUNCTION</code> merges rather than subordinates; PMB gold does this routinely (<code>p01/d3366</code>: <code>leave.v.01 … Time +2 … CONJUNCTION &lt;2 time.n.08 DayOfWeek monday</code>). A positive index may <strong>never</strong> cross into or out of a <code>CORRECTION</code> box. See the repair toolkit below for how to avoid it.</p>
 <p><strong>C4 — A <code>CORRECTION</code> box is transparent to cross-turn anaphora.</strong> This is where <code>CORRECTION</code> genuinely differs from <code>NEGATION</code>, and it is a positive property of the relation, not a loophole. In “My favourite dessert is banana bread, actually, cherry pie. — They are both good desserts,” the plural anaphor picks up the quarantined reparandum, and the discourse is perfectly felicitous. Quarantining a reparandum removes it from what the speaker commits to; it does not remove it from the discourse referent domain. This <strong>can</strong> be explained by Lascarides &amp; Asher (2009).</p>
-<p><strong>C5 — The <code>CONJUNCTION</code> box has a tail.</strong> Everything from <code>CONJUNCTION</code> up to the next separator stays inside that box, including material that has nothing to do with the repair (in the subject-repair example below, the predicate <code>play.v.01</code>, its tense referent and its object all land there). Because <code>CONJUNCTION</code> merges, this is semantically equivalent to putting them in the matrix box — but it is a <em>different graph</em>, and therefore a different Smatch score. Treat it as a fixed convention rather than an annotator’s choice.</p>
-<p><strong>C6 — <code>ThemeOf</code> / <code>TimeOf</code> / <code>MannerOf</code> / <code>Co-ThemeOf</code> are extensions of this project, not PMB practice.</strong> The inverted roles actually attested in gold are <code>AttributeOf</code> (1802), <code>PartOf</code> (572), <code>SubOf</code> (120), <code>ColourOf</code> (80), <code>MadeOf</code> (38), <code>InstanceOf</code> (37), <code>ContentOf</code> (4), <code>CauserOf</code> (2), <code>FeatureOf</code> (1), <code>AgentOf</code> (1). <code>ThemeOf</code>, <code>TimeOf</code>, <code>MannerOf</code> and <code>Co-ThemeOf</code> occur <strong>zero</strong> times. Relying on them to avoid positive indices is sound, but note that <code>to_penman_string</code> normalises <code>Of → -of</code> <strong>only</strong> for members of <code>SBNSpec.INVERTIBLE_ROLES</code>; an inverted role missing from that set is scored by Smatch as a wholly different edge.</p>
+<p><strong>C5 — The <code>CONJUNCTION</code> box has a tail.</strong> Everything from <code>CONJUNCTION</code> up to the next separator stays inside that box, including material that has nothing to do with the repair (in the subject-repair example below, the predicate <code>play.v.01</code>, its tense referent and its object all land there). Because <code>CONJUNCTION</code> merges, this is semantically equivalent to putting that material directly in the box one level above <code>CORRECTION</code> (the box the merge targets, not necessarily <code>BOX0</code>; under a <code>NEGATION</code>, for instance, that target is the negated box, see the Negation case below).</p>
+<p><strong>C6 — <code>ThemeOf</code> / <code>TimeOf</code> / <code>MannerOf</code> / <code>Co-ThemeOf</code> are extensions of this project, not PMB 5.1.0 practice.</strong> The inverted roles actually attested in gold are <code>AttributeOf</code> (1802), <code>PartOf</code> (572), <code>SubOf</code> (120), <code>ColourOf</code> (80), <code>MadeOf</code> (38), <code>InstanceOf</code> (37), <code>ContentOf</code> (4), <code>CauserOf</code> (2), <code>FeatureOf</code> (1), <code>AgentOf</code> (1). <code>ThemeOf</code>, <code>TimeOf</code>, <code>MannerOf</code> and <code>Co-ThemeOf</code> occur <strong>zero</strong> times. Relying on them to avoid positive indices is sound, but note that <code>to_penman_string</code> normalises <code>Of → -of</code> <strong>only</strong> for members of <code>SBNSpec.INVERTIBLE_ROLES</code>; an inverted role missing from that set is scored by Smatch as a wholly different edge.</p>
 </section>
 </section>
 <section id="rules-of-annotating-self-repair" class="level2" data-number="1.3">
@@ -290,9 +298,9 @@ window.Quarto = {
 </tr>
 </tbody>
 </table>
-<p>Why ①–③ cannot be swapped for one another:</p>
+<p>Why ①–③ cannot be swapped for one another. First, the structure both bullets below turn on: <code>CORRECTION &lt;1</code> and <code>CONJUNCTION &lt;2</code> both resolve to the <em>same</em> target box (the box live before <code>CORRECTION</code> opened), so the box they each open — the <code>CORRECTION</code> box and the <code>CONJUNCTION</code> box — are siblings, neither an ancestor of the other.</p>
 <ul>
-<li>② cannot fix an <em>outbound</em> link. Inverting <code>put.v.01 Theme +2 → ball.n.01</code> yields <code>ball.n.01 ThemeOf -n</code>, a negative index running from the <code>CONJUNCTION</code> box into the <code>CORRECTION</code> box — a sibling, hence inaccessible by <strong>C2</strong>. Outbound links are fixed by ① or ④ only.</li>
+<li>② only fixes <em>inbound</em> links (a concept in an ancestor box pointing into the reparandum) — inverting the role turns that into a negative index that still terminates on an ancestor, which C2 always permits. It cannot fix an <em>outbound</em> link, i.e.&nbsp;a concept <em>inside</em> the <code>CORRECTION</code> box that needs to reach a concept in the sibling <code>CONJUNCTION</code> box. Inverting <code>put.v.01 Theme +2 → ball.n.01</code> yields <code>ball.n.01 ThemeOf -n</code>: the index sign flips, but the target is still the sibling <code>CORRECTION</code> box, not an ancestor, so <strong>C2</strong> still blocks it. Outbound links are fixed by ① or ④ only.</li>
 <li>① cannot fix an <em>inbound</em> link. If the reparandum <em>is</em> the argument (an object repair, say), declining to write the role leaves it a dangling concept with no edges at all.</li>
 <li>④ cannot fix an inbound link either: moving the reparandum before the <code>CORRECTION</code> takes it out of the box that is supposed to quarantine it.</li>
 </ul>
@@ -307,10 +315,10 @@ window.Quarto = {
 <h3 data-number="2.0.1" class="anchored" data-anchor-id="sv-sentence"><span class="header-section-number">2.0.1</span> SV Sentence</h3>
 <p>“The boy sneezed, I mean, coughed”</p>
 <pre class="sbn"><code>boy.n.01                       % The boy
-time.n.08 TPR now
-    CORRECTION &lt;1
-sneeze.v.01 Agent -2 Time -1   % sneezed, I mean,
-    CONJUNCTION &lt;2
+time.n.08 TPR now              %
+    CORRECTION &lt;1              %
+sneeze.v.01 Agent -2 Time -1   % sneezed,
+    CONJUNCTION &lt;2             % I mean,
 cough.v.01 Agent -3 Time -2    % coughed</code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -318,7 +326,6 @@ cough.v.01 Agent -3 Time -2    % coughed</code></pre>
 <figcaption>DAG: SV sentence self-repair — “The boy sneezed, I mean, coughed”</figcaption>
 </figure>
 </div>
-<p>Note <code>Agent -2</code>, not <code>-1</code>: counting back from <code>sneeze.v.01</code>, position −1 is <code>time.n.08</code> and −2 is <code>boy.n.01</code>. Writing <code>Agent -1 Time -1</code> points both roles at the same node, and because the graph is a simple digraph the second edge overwrites the first — the <code>Agent</code> edge disappears silently, with no parse error.</p>
 </section>
 <section id="svo-sentence" class="level3" data-number="2.0.2">
 <h3 data-number="2.0.2" class="anchored" data-anchor-id="svo-sentence"><span class="header-section-number">2.0.2</span> SVO Sentence</h3>
@@ -327,11 +334,11 @@ cough.v.01 Agent -3 Time -2    % coughed</code></pre>
 <p>“Josh, no, Mary plays tennis well”</p>
 <pre class="sbn"><code>entity.n.01
     CORRECTION &lt;1
-male.n.02 Name "Josh" EQU -1                  % Josh, no,
-    CONJUNCTION &lt;2
+male.n.02 Name "Josh" EQU -1                  % Josh, 
+    CONJUNCTION &lt;2                            % no,
 female.n.02 Name "Mary" EQU -2                % Mary
 play.v.01 Agent -3 Time +1 Theme +2 Manner +3 % plays
-time.n.08 EQU now
+time.n.08 EQU now                             %
 tennis.n.01                                   % tennis
 well.r.01                                     % well</code></pre>
 <div class="quarto-figure quarto-figure-center">
@@ -341,16 +348,16 @@ well.r.01                                     % well</code></pre>
 </figure>
 </div>
 <p>The manner adverb attaches through the <code>Manner</code> role, following gold (<code>p94/d2703</code>, “I play the piano well.”): <code>play.v.07 Agent -1 Time +1 Theme +2 Manner +3 time.n.08 EQU now piano.n.01 well.r.10</code>.</p>
-<p>This example also illustrates clarification <strong>C5</strong>: the predicate, its tense referent, its object and the adverb all sit inside the <code>CONJUNCTION</code> box, not the matrix box, because nothing closes that box before the end of the sequence.</p>
+<p>This example also illustrates clarification <strong>C5</strong>: the predicate, its tense referent, its object and the adverb all sit inside the <code>CONJUNCTION</code> box, not <code>BOX 0</code>. However, they will be merged back to the box that <code>CONJUNCTION</code> indexes to.</p>
 </section>
 <section id="verb-self-repair" class="level4" data-number="2.0.2.2">
 <h4 data-number="2.0.2.2" class="anchored" data-anchor-id="verb-self-repair"><span class="header-section-number">2.0.2.2</span> Verb Self-repair</h4>
 <p>“The cat chases, actually, hunts the rat”</p>
 <pre class="sbn"><code>cat.n.01                            % The cat
-time.n.08 EQU now
-    CORRECTION &lt;1
-chase.v.01 Agent -2 Time -1         % chases, actually,
-    CONJUNCTION &lt;2
+time.n.08 EQU now                   %
+    CORRECTION &lt;1                   %
+chase.v.01 Agent -2 Time -1         % chases, 
+    CONJUNCTION &lt;2                  % actually,
 hunt.v.01 Agent -3 Theme +1 Time -2 % hunts
 rat.n.01                            % the rat</code></pre>
 <div class="quarto-figure quarto-figure-center">
@@ -359,20 +366,17 @@ rat.n.01                            % the rat</code></pre>
 <figcaption>DAG: verb self-repair — “The cat chases, actually, hunts the rat”</figcaption>
 </figure>
 </div>
-<p><code>chase.v.01</code> carries no <code>Theme</code>. This is device ① of the repair toolkit, and it is the correct analysis rather than a concession: the rat was never uttered under the abandoned “chases” plan. PMB gold does the same for arguments that go unrealised — <code>p62/d1986</code>, “I also did not call.”, is annotated <code>call.v.03 Agent … Time …</code> with no recipient at all, even though <code>call.v.03</code> is transitive.</p>
-<p>An earlier draft attached the shared roles to the separator itself:</p>
-<pre><code>    CORRECTION &lt;1 Agent -3 Theme -2</code></pre>
-<p>This is not legal SBN — a separator takes exactly one connector and nothing else. The parser accepts the line but assigns <code>Agent</code> and <code>Theme</code> to the <em>preceding concept</em> (<code>time.n.08</code>), and <code>Agent -3</code> then falls out of range and is silently demoted to a constant node labelled <code>-3</code>. The notation is retained here only as a worked example of how an out-of-range index fails without raising an error.</p>
+<p><code>chase.v.01</code> carries no <code>Theme</code>. This is device ① of the repair toolkit, and it is the correct analysis rather than a concession: the rat was never uttered under the abandoned “chases” plan. PMB gold does the same for arguments that go unrealised: <code>p62/d1986</code>, “I also did not call.”, is annotated <code>call.v.03 Agent … Time …</code> with no recipient, even though <code>call.v.03</code> is transitive.</p>
 </section>
 <section id="object-self-repair" class="level4" data-number="2.0.2.3">
 <h4 data-number="2.0.2.3" class="anchored" data-anchor-id="object-self-repair"><span class="header-section-number">2.0.2.3</span> Object Self-repair</h4>
 <p>“I ordered a banana bread, I mean, a cherry pie”</p>
 <pre class="sbn"><code>person.n.01 EQU speaker              % I
-time.n.08 TPR now
+time.n.08 TPR now                    %
 order.v.01 Agent -2 Time -1          % ordered
-    CORRECTION &lt;1
-banana_bread.n.01 ThemeOf -1         % a banana bread, I mean,
-    CONJUNCTION &lt;2
+    CORRECTION &lt;1                    %
+banana_bread.n.01 ThemeOf -1         % a banana bread,
+    CONJUNCTION &lt;2                   % I mean,
 cherry_pie.n.01 ThemeOf -2           % a cherry pie</code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -380,8 +384,7 @@ cherry_pie.n.01 ThemeOf -2           % a cherry pie</code></pre>
 <figcaption>DAG: object self-repair — “I ordered a banana bread, I mean, a cherry pie”</figcaption>
 </figure>
 </div>
-<p><code>ThemeOf</code> here is device ② of the toolkit: the object <em>is</em> the reparandum, so it must be linked, and inverting the role lets both candidate objects point backward at <code>order.v.01</code> in the matrix box instead of forcing a positive index down into the <code>CORRECTION</code> box.</p>
-<p>Use <code>time.n.08</code> for the tense referent throughout. In gold it appears 9310 times in that function; <code>time.n.01</code> (45 occurrences) denotes a countable occasion and takes <code>Quantity</code>, as in “He has been to France three times.”</p>
+<p><code>ThemeOf</code> here is device ② of the toolkit: the object <em>is</em> the reparandum, so it must be linked, and inverting the role lets both candidate objects point backward at <code>order.v.01</code> in <code>Box 0</code> instead of forcing a positive index down into the <code>CORRECTION</code> box.</p>
 </section>
 </section>
 <section id="negation" class="level3" data-number="2.0.3">
@@ -392,8 +395,8 @@ time.n.08 TPR now
     NEGATION &lt;1                      % didn't
 order.v.01 Agent -2 Time -1          % order
     CORRECTION &lt;1
-banana_bread.n.01 ThemeOf -1         % a banana bread, I mean,
-    CONJUNCTION &lt;2
+banana_bread.n.01 ThemeOf -1         % a banana bread,
+    CONJUNCTION &lt;2                   % I mean,
 cherry_pie.n.01 ThemeOf -2           % a cherry pie</code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -401,18 +404,18 @@ cherry_pie.n.01 ThemeOf -2           % a cherry pie</code></pre>
 <figcaption>DAG: negation self-repair — “I didn’t order a banana bread, I mean, a cherry pie”</figcaption>
 </figure>
 </div>
-<p>Note the resulting box structure: <code>BOX0 →NEGATION→ BOX1</code>, <code>BOX1 →CORRECTION→ BOX2</code>, <code>BOX1 →CONJUNCTION→ BOX3</code>. Because <code>CONJUNCTION &lt;2</code> counts back two boxes from the box it opens, the repair merges into the <strong>negated</strong> box rather than the matrix box — which is what the sentence means. Getting this wrong is easy and produces no parse error.</p>
+<p>Note the resulting box structure: <code>BOX0 →NEGATION→ BOX1</code>, <code>BOX1 →CORRECTION→ BOX2</code>, <code>BOX1 →CONJUNCTION→ BOX3</code>. Because <code>CONJUNCTION &lt;2</code> counts back two boxes from the box it opens, the repair merges into the <strong>negated</strong> box rather than the matrix box, which is what the sentence means. Getting this wrong is easy and produces no parse error.</p>
 <p>(<code>ThemeOf -1</code> needs the space. <code>ThemeOf-1</code> is tokenised as a single unknown token and aborts the parse.)</p>
 </section>
 <section id="adjunct" class="level3" data-number="2.0.4">
 <h3 data-number="2.0.4" class="anchored" data-anchor-id="adjunct"><span class="header-section-number">2.0.4</span> Adjunct</h3>
 <p>“The class is on Monday, no, on Tuesday”</p>
 <pre class="sbn"><code>class.n.01                                % The class
-time.n.08 EQU now
+time.n.08 EQU now                         %
 be.v.01 Theme -2 Time -1                  % is on
-    CORRECTION &lt;1
-time.n.08 DayOfWeek monday TimeOf -1      % Monday, no,
-    CONJUNCTION &lt;2
+    CORRECTION &lt;1                         %
+time.n.08 DayOfWeek monday TimeOf -1      % Monday, 
+    CONJUNCTION &lt;2                        % no,
 time.n.08 DayOfWeek tuesday TimeOf -2     % on Tuesday</code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -420,19 +423,19 @@ time.n.08 DayOfWeek tuesday TimeOf -2     % on Tuesday</code></pre>
 <figcaption>DAG: adjunct self-repair — “The class is on Monday, no, on Tuesday”</figcaption>
 </figure>
 </div>
-<p>The role is <code>DayOfWeek</code>, and its value is a <strong>bare lower-case constant</strong>, not a quoted string — gold writes <code>time.n.08 DayOfWeek monday</code> (16 occurrences across the weekdays). There is no <code>Day</code> role in <code>SBNSpec.ROLES</code>, so <code>Day "Monday"</code> aborts the parse.</p>
+<p>The role is <code>DayOfWeek</code>, and its value is a <strong>bare lower-case constant</strong>, not a quoted string. Gold data writes <code>time.n.08 DayOfWeek monday</code> (16 occurrences across the weekdays). There is no <code>Day</code> role in <code>SBNSpec.ROLES</code>, so <code>Day "Monday"</code> aborts the parse.</p>
 </section>
 <section id="preposition-replacement" class="level3" data-number="2.0.5">
 <h3 data-number="2.0.5" class="anchored" data-anchor-id="preposition-replacement"><span class="header-section-number">2.0.5</span> Preposition replacement</h3>
 <p>“I ran to, I mean, from the school”</p>
-<p>What is repaired here is not a concept but an <strong>edge label</strong> — <code>Destination</code> gives way to <code>Source</code>. SBN has no way to place a bare role inside a box, so this calls for device ③: introduce a dummy concept, tie it to the event with <code>EQU</code>, and hang the competing role on the dummy. Bos uses the same construction for logical disjunction in the Sequence Notation paper.</p>
+<p>What is repaired here is not a concept but an <strong>edge label</strong> — <code>Destination</code> gives way to <code>Source</code>. SBN has no way to place a bare role inside a box, so this calls for device ③: introduce a dummy concept, tie it to the event with <code>EQU</code>, and hang the competing role on the dummy. Bos (2021) uses the same construction for logical disjunction.</p>
 <pre class="sbn"><code>person.n.01 EQU speaker              % I
-time.n.08 TPR now
+time.n.08 TPR now                    %
 run.v.01 Theme -2 Time -1            % ran
 school.n.02                          % the school
-    CORRECTION &lt;1
-entity.n.01 EQU -2 Destination -1    % to, I mean,
-    CONJUNCTION &lt;2
+    CORRECTION &lt;1                    %
+entity.n.01 EQU -2 Destination -1    % to, 
+    CONJUNCTION &lt;2                   % I mean,
 entity.n.01 EQU -3 Source -2         % from</code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -441,7 +444,7 @@ entity.n.01 EQU -3 Source -2         % from</code></pre>
 </figure>
 </div>
 <p>Both dummies are <code>EQU</code> to the same running event. Inside the <code>CORRECTION</code> box the dummy bears <code>Destination</code> and is denied; inside the merged box it bears <code>Source</code> and is committed. Every index is negative and every target lies in the superordinate <code>BOX0</code>, so no accessibility constraint is touched.</p>
-<p>The dummy must be a legal synset: <code>entity.n.01</code> is the general-purpose placeholder of the notation and occurs 1315 times in gold, whereas <code>event.v.01</code> is not a WordNet entry at all — “event” has no verbal sense.</p>
+<p>The dummy must be a legal synset: <code>entity.n.01</code> is the general-purpose placeholder of the notation and occurs 1315 times in gold, whereas <code>event.v.01</code>, being a more intuitive dummy for a predicate, is not a WordNet entry since it has no verbal sense. Following SBN routine, we retain the usage of <code>entity.n.01</code>, instead of introducing a new top concept for all activities, e.g., <code>action.v.01</code>.</p>
 <p>Note also that PMB never reifies a preposition as its own node in the ordinary case; <code>Source</code> and <code>Destination</code> attach directly to the verb (<code>fly.v.01 … Source +2 Destination +3</code>). The dummy is introduced here <em>only</em> because the repair needs two mutually exclusive versions of one edge.</p>
 </section>
 <section id="universal-quantification---donkey-sentence" class="level3" data-number="2.0.6">
@@ -454,21 +457,24 @@ donkey.n.01                              % donkey,
     NEGATION &lt;1
 entity.n.01 EQU -1                       % it
     CORRECTION &lt;1
-beat.v.01 Agent -4 Patient -1            % he beats, I mean,   (reparandum)
-    CONJUNCTION &lt;2
-feed.v.01 Agent -5 Patient -2            % feeds it</code></pre>
+beat.v.01 Agent -4 Patient -1            % he beats, 
+    CONJUNCTION &lt;2                       % I mean,
+feed.v.01 Agent -5 Patient -2            % he feeds it</code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/donkey-sentence-self-repair.png" class="img-fluid figure-img"></p>
 <figcaption>DAG: donkey sentence self-repair — “If a farmer owns a donkey, he beats, I mean, feeds it”</figcaption>
 </figure>
 </div>
-<p>The second separator is <code>NEGATION &lt;1</code>, not <code>&lt;2</code>. A connector counts back from the box it opens, so <code>&lt;1</code> yields <code>BOX1 →NEGATION→ BOX2</code>, the nesting a conditional requires. <code>&lt;2</code> yields <code>BOX0 →NEGATION→ BOX2</code> — two <em>sibling</em> negations hanging off the matrix box, which collapses the conditional structure while still parsing without complaint.</p>
+<p>Look at the second <code>NEGATION</code>, the one right before <code>entity.n.01 EQU -1</code> (“it”). It has to be written <code>&lt;1</code>.</p>
+<p>SBN builds a universal conditional out of two <em>nested</em> negations. It reads as “no donkey-owner who doesn’t beat it”, being equivalent to “every farmer who owns a donkey beats it.” The first <code>NEGATION &lt;1</code> opens <code>BOX1</code> and targets <code>BOX0</code> (<code>BOX0 →NEGATION→ BOX1</code>); <code>BOX1</code> holds the restrictor, “a farmer owns a donkey.” The second <code>NEGATION</code> then opens <code>BOX2</code>. Writing <code>&lt;1</code> counts back one box from <code>BOX2</code> and lands on <code>BOX1</code>, giving <code>BOX1 →NEGATION→ BOX2</code>. That is, <code>BOX2</code> sits <em>inside</em> <code>BOX1</code>, not beside it. That nesting is what makes the two clauses one conditional: <code>BOX2</code> (the consequent, “he beats it”) falls under the restrictor’s own negation, so the whole thing reads roughly as “there is no farmer-and-donkey pair such that he doesn’t beat it” — i.e.&nbsp;a universal conditional.</p>
+<p>If the second <code>NEGATION</code> were written <code>&lt;2</code> instead, it would count back two boxes from <code>BOX2</code> and land on <code>BOX0</code>: <code>BOX0 →NEGATION→ BOX2</code>. Now <code>BOX1</code> and <code>BOX2</code> both hang directly off <code>BOX0</code> as siblings, each negated independently (e.g., “no farmer owns a donkey” and, separately, “he doesn’t beat it”). There are two unrelated denials instead of one conditional. The parser accepts this without complaint. Nevertheless, it’s a different, wrong meaning.</p>
 <p>Compared to an ordinary donkey sentence without self-repair, extracted from Bos (2021): “Every farmer who owns a donkey beats it”</p>
-<pre class="sbn"><code>    NEGATION -1                 % Every 
+<pre class="sbn"><code>NEGATION -1                     % Every 
 farmer.n.01                     % farmer
 own.v.01 Pivot -1  Theme +1     % who owns
-donkey.n.01  NEGATION -1        % a donkey
+donkey.n.01                     % a donkey
+NEGATION -1                     %
 beat.v.01 Agent -3  Patient +1  % beats
 entity.n.01 EQU -2              % it</code></pre>
 <div class="quarto-figure quarto-figure-center">
@@ -477,7 +483,7 @@ entity.n.01 EQU -2              % it</code></pre>
 <figcaption>DAG: donkey sentence baseline (no repair) — “Every farmer who owns a donkey beats it”</figcaption>
 </figure>
 </div>
-<p>It is notetaking that in the “ordinary” donkey sentence, the pronoun “it” follows the natural language oder by appearing by the end of the SBN sequence. However, in the sel-repair variety, it is moved forward to satisfy the two rules above.</p>
+<p>It is noteworthy that in the “ordinary” donkey sentence, the pronoun “it” follows the natural language oder by appearing by the end of the SBN sequence. However, in the sel-repair variety, it is moved forward to satisfy the two rules above.</p>
 </section>
 <section id="retracting-and-forwarding-repairs" class="level3" data-number="2.0.7">
 <h3 data-number="2.0.7" class="anchored" data-anchor-id="retracting-and-forwarding-repairs"><span class="header-section-number">2.0.7</span> Retracting and Forwarding Repairs</h3>
@@ -491,8 +497,8 @@ time.n.08 TPR now
 person.n.01 EQU hearer                             % you
 time.n.08 TSU now                                  % will
     CORRECTION &lt;1
-put.v.01 Agent -2 Time -1                          % put, I mean,
-    CONJUNCTION &lt;2
+put.v.01 Agent -2 Time -1                          % put, 
+    CONJUNCTION &lt;2                                 % I mean,
 drop.v.01 Agent -3 Time -2 Theme +1 Destination +2 % you will drop
 ball.n.01                                          % the ball
 table.n.02                                         % on the table</code></pre>
@@ -502,7 +508,7 @@ table.n.02                                         % on the table</code></pre>
 <figcaption>DAG: retracting repair — “Bill said you will put, I mean, you will drop the ball on the table”</figcaption>
 </figure>
 </div>
-<p>This is the clearest case for device ①. The earlier draft gave <code>put.v.01</code> a <code>Theme +2</code> and a <code>Destination +3</code>, both reaching forward out of the <code>CORRECTION</code> box into a sibling — barred by <strong>C2</strong> and <strong>C3</strong>. But the repair is not really an index problem: the speaker abandoned the utterance after “you will put” and never said what was to be put or where. Assigning <code>put</code> a theme and a destination is the annotator reconstructing an intention, not transcribing a commitment. Dropping the two roles resolves the accessibility violation and yields the more faithful analysis at the same time.</p>
+<p>This case demonstrates device ①. Giving <code>put.v.01</code> a <code>Theme +2</code> and a <code>Destination +3</code> reaches forward out of the <code>CORRECTION</code> box into a sibling, which breaks the accessibility rules. A more serious issue is the speaker abandoned the utterance after “you will put” and never said what was to be put or where, so assigning it a theme and a destination would be the annotator reconstructing an intention, not transcribing a commitment. Dropping the two roles resolves the accessibility violation and yields the more faithful analysis at the same time.</p>
 <p>The forward indices that remain on <code>drop.v.01</code> are unproblematic: <code>drop</code>, <code>ball</code> and <code>table</code> all sit in the same <code>CONJUNCTION</code> box, so nothing crosses a boundary.</p>
 <p>PMB gold shows the same asymmetry between a subordinate and a matrix occurrence of one predicate — <code>p79/d0205</code>, “If you sing, we’ll sing with you.”, has <code>sing.v.02 Agent -1 Time +1</code> in the antecedent box against <code>sing.v.02 Agent -2 Time -1 Co-Agent +1</code> in the consequent.</p>
 </section>
@@ -512,11 +518,11 @@ table.n.02                                         % on the table</code></pre>
 <pre class="sbn"><code>entity.n.01
     CORRECTION &lt;1
 male.n.02 Name "Josh" EQU -1                         % Josh
-time.n.08 TPR now
-drive.v.03 Agent -2 Time -1                          % drove, no,
-    CONJUNCTION &lt;2
+time.n.08 TPR now                                    %
+drive.v.03 Agent -2 Time -1                          % drove, 
+    CONJUNCTION &lt;2                                   % no,
 female.n.02 Name "Marsha" EQU -4                     % Marsha
-time.n.08 TPR now
+time.n.08 TPR now                                    %
 drive.v.03 Agent -2 Time -1 Theme +2 Destination +3  % drove
 old.a.02 AttributeOf +1                              % the old
 car.n.01                                             % car
@@ -528,11 +534,11 @@ church.n.02                                          % to the church</code></pre
 </figure>
 </div>
 <p>Device ① again: the car and the church were never uttered under the abandoned “Josh drove” plan, so the first <code>drive.v.03</code> takes no <code>Theme</code> and no <code>Destination</code>.</p>
-<p>Three further corrections to the earlier draft, all of which parsed silently:</p>
+<p>Three more pitfalls worth naming, all of which parse silently with no error:</p>
 <ul>
-<li><code>Theme +3</code> on the first <code>drive.v.03</code> resolved to the <em>second</em> <code>drive.v.03</code>, making the event its own theme; <code>Theme +2</code> on the second resolved to <code>old.a.02</code>, the adjective.</li>
-<li><code>old.a.02 Value +1</code> together with <code>car.n.01 Attribute -1</code> created two contradictory edges between the same pair of nodes. Gold writes a single inverted edge for an attributive adjective: <code>new.a.01 AttributeOf +1 museum.n.01</code>.</li>
-<li><code>Destination</code> belonged on the driving event, not on the car. Gold: <code>go.v.01 … Destination +2 city.n.01</code>.</li>
+<li>A <code>Theme</code> on the first <code>drive.v.03</code> resolved to the <em>second</em> <code>drive.v.03</code> (making the event its own theme), and a <code>Theme</code> on the second resolved to <code>old.a.02</code>, the adjective — both indices landed on whatever concept sat at that raw offset, not on the intended argument.</li>
+<li>Giving the same adjective both a <code>Value</code> role and its host concept an <code>Attribute</code> role creates two contradictory edges between the same pair of nodes. Gold writes a single inverted edge for an attributive adjective instead: <code>new.a.01 AttributeOf +1 museum.n.01</code>.</li>
+<li><code>Destination</code> belongs on the driving event, not on the car. Gold: <code>go.v.01 … Destination +2 city.n.01</code>.</li>
 </ul>
 </section>
 </section>
@@ -545,17 +551,17 @@ church.n.02                                          % to the church</code></pre
 person.n.01 EQU speaker                    % A: My
 favorite.a.02 Experiencer -1 Stimulus +1   % favourite
 dessert.n.01                               % dessert
-time.n.08 EQU now
+time.n.08 EQU now                          % 
 be.v.02 Theme -2 Time -1                   % is
-    CORRECTION &lt;1
-banana_bread.n.01 Co-ThemeOf -1            % banana bread, actually,   (reparandum)
-    CONJUNCTION &lt;2
-cherry_pie.n.01 Co-ThemeOf -2              % cherry pie                (repair)
+    CORRECTION &lt;1                          %
+banana_bread.n.01 Co-ThemeOf -1            % banana bread, (reparandum)
+    CONJUNCTION &lt;2                         % actually,  
+cherry_pie.n.01 Co-ThemeOf -2              % cherry pie (repair)
 %%% Utterance 2
-    CONTINUATION &lt;1
+    CONTINUATION &lt;1                        %
 entity.n.01 ANA -2 ANA -1                  % B: They  — picks up both reparandum and repair
 time.n.08 EQU now                          % are
-be.v.02 Theme -2 Time -1 Co-Theme +2
+be.v.02 Theme -2 Time -1 Co-Theme +2       %
 good.a.01 AttributeOf +1                   % both good
 dessert.n.01                               % desserts</code></pre>
 <div class="quarto-figure quarto-figure-center">
@@ -564,7 +570,7 @@ dessert.n.01                               % desserts</code></pre>
 <figcaption>DAG: anaphora referring to both reparandum and repair — “My favourite dessert is banana bread, actually, cherry pie. They are both good desserts”</figcaption>
 </figure>
 </div>
-<p>Both candidate objects now reach the copula through <code>Co-ThemeOf</code> (device ②), symmetrically. The earlier draft mixed the two conventions — a forward <code>Co-Theme +2</code> from <code>be.v.02</code> down into the <code>CORRECTION</code> box for the reparandum, and an inverted <code>Co-ThemeOf</code> for the repair — and the forward one violates <strong>C3</strong>.</p>
+<p>Both candidate objects now reach the copula through <code>Co-ThemeOf</code> (device ②), symmetrically.</p>
 <p><code>Co-ThemeOf</code> is not part of stock PMB and has to be declared in <code>sbn_spec.py</code> in <strong>both</strong> <code>ROLES</code> and <code>INVERTIBLE_ROLES</code>. Adding it to <code>ROLES</code> alone lets the sequence parse but leaves the Penman output as <code>:Co-ThemeOf</code>, which Smatch will not normalise against a gold <code>:Co-Theme</code>. Cf. <strong>C6</strong>.</p>
 <p>The final <code>dessert.n.01</code> needs the copula to attach to; without it the concept carries no edges at all and “desserts” contributes nothing to the representation. Gold writes plural predicate nominals this way — “Those are not fish.” is <code>entity.n.01 … be.v.01 Theme -1 Time +1 Co-Theme +2 time.n.08 EQU now fish.n.01</code>.</p>
 <p>This example is the evidence for clarification <strong>C4</strong>: <code>entity.n.01 ANA -2</code> reaches into the <code>CORRECTION</code> box to pick up the discarded reparandum, and the discourse is entirely natural. To mark “both” explicitly, gold would add <code>Quantity 2</code> to the <code>entity.n.01</code> (“My parents are both doctors.”).</p>
@@ -574,16 +580,16 @@ dessert.n.01                               % desserts</code></pre>
 <p>“A: Joe bought a Ferrari, I mean, a Jaguar, as a birthday gift. B: No, he bought it as a wedding gift.”</p>
 <pre class="sbn"><code>%%% A's utterance
 male.n.02 Name "Joe"                     % Joe
-time.n.08 TPR now
+time.n.08 TPR now                        % 
 buy.v.01 Agent -2 Time -1 Attribute +3   % bought
-    CORRECTION &lt;1                        % I mean,   [intra-turn: has a sibling CONJUNCTION]
+    CORRECTION &lt;1                        % [intra-turn: has a sibling CONJUNCTION]
 car.n.01 Name "Ferrari" ThemeOf -1       % a Ferrari  (reparandum)
-    CONJUNCTION &lt;2
+    CONJUNCTION &lt;2                       % I mean, 
 car.n.01 Name "Jaguar" ThemeOf -2        % a Jaguar   (merged back into BOX0)
 gift.n.01 Of +1                          % as a
 birthday.n.01                            % birthday gift
 %%% B's utterance
-    CORRECTION &lt;1                        % No,       [cross-turn: no sibling CONJUNCTION]
+    CORRECTION &lt;1                        % No, [cross-turn: no sibling CONJUNCTION]
 male.n.02 EQU -7                         % he
 buy.v.01 Agent -1 Theme -4 Attribute +1  % bought it
 gift.n.01 Of +1                          % as a
@@ -595,8 +601,7 @@ wedding.n.01                             % wedding gift</code></pre>
 </figure>
 </div>
 <p>Both uses of <code>CORRECTION</code> occur in one sequence, and the structural test of the Mechanism section separates them without any annotation on the token itself: the first has a sibling <code>CONJUNCTION</code> and therefore quarantines a reparandum; the second has none and is the Lascarides &amp; Asher relation proper.</p>
-<p>The second one is written <code>&lt;1</code>, which yields <code>BOX2 →CORRECTION→ BOX3</code>. Its <span class="math inline">\pi_1</span> is A’s <code>CONJUNCTION</code> box — the box that actually holds <code>gift.n.01 Of birthday.n.01</code>, which is exactly what B objects to. Writing <code>&lt;3</code> would instead target <code>BOX0</code> and deny A’s utterance wholesale. Both parse; <strong><code>&lt;1</code> is the convention adopted here</strong>, because it localises the denial to the constituent under dispute. After the merge the two readings share their truth conditions, but they are different graphs and therefore score differently, so the choice has to be fixed rather than left to the annotator.</p>
-<p>Three further corrections: <code>Manner</code> becomes <code>Attribute</code>, following gold for “as a X” predications (“She hired him as a programmer.” — <code>hire.v.01 … Attribute +3 … programmer.n.01</code>), while <code>Manner</code> in gold takes manner adverbs and means of transport. <code>PartOf "birthday"</code> was ill-formed, since <code>PartOf</code> relates two concepts and cannot take a string; <code>birthday</code> is promoted to a concept and linked with the generic relational role <code>Of</code>. And a named male individual is <code>male.n.02</code> in gold (4414 occurrences against a single <code>male.n.01</code>), not <code>person.n.01</code>.</p>
+<p>The second one is written <code>&lt;1</code>, which yields <code>BOX2 →CORRECTION→ BOX3</code>. Its target (<span class="math inline">\pi_1</span> in Lascarides &amp; Asher’s terms) is A’s <code>CONJUNCTION</code> box — the box that, per <strong>C5</strong>, holds <code>gift.n.01 Of birthday.n.01</code>, which is exactly what B objects to. As <strong>C5</strong> already established, this <code>CONJUNCTION</code> box has no content of its own. Everything in it is merged into whatever box it targets, so “targeting A’s <code>CONJUNCTION</code> box” means the denial reaches that merged content. Writing <code>&lt;3</code> would instead target <code>BOX0</code> and deny A’s utterance wholesale. Both parse, and after the merge the two readings share the same meaning but are different graphs, scored differently by Smatch; <code>&lt;1</code> is the choice made here, because it localises the denial to the constituent under dispute. As with <strong>C6</strong>, this construction has no PMB precedent (it does not occur in gold), so it is a project-internal stipulation rather than received annotation practice — fixed for the same reason <strong>C5</strong> is fixed: leaving it open would let two annotators produce differently-scored graphs for the same discourse.</p>
 </section>
 </section>
 </section>
@@ -621,6 +626,12 @@ wedding.n.01                             % wedding gift</code></pre>
 <h2 data-number="3.4" class="anchored" data-anchor-id="modal-verb"><span class="header-section-number">3.4</span> Modal Verb</h2>
 <p>“I think you would, well, should work harder”</p>
 <p>Reason:</p>
+</section>
+<section id="discontinuous-delayed-repair" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="discontinuous-delayed-repair"><span class="header-section-number">3.5</span> Discontinuous (Delayed) Repair</h2>
+<p>“I bought three apples from Lidl yesterday, actually, four”</p>
+<p>Every case covered so far is an <em>instant</em> repair: the interregnum follows its reparandum immediately, so <code>CORRECTION</code> opens right where the trouble source ends. Here the reparandum is just <code>Quantity 3</code> on <code>apple.n.01</code> — device-wise no different from the Adjunct case’s <code>DayOfWeek monday → tuesday</code> — but “actually, four” arrives only after “from Lidl yesterday” has already been uttered and committed, and that material is not itself being repaired.</p>
+<p><code>CORRECTION</code> can only quarantine what comes after it in the sequence. Opened where “actually” actually occurs, it can no longer reach back and quarantine “three”. It is already asserted. Opened right after “three” instead (mimicking the instant-repair cases), it quarantines “from Lidl” and “yesterday” along with it, wrongly marking them as retracted. Device ④ does not rescue this either: it would have to postpone an entire adjunct span past the whole <code>CORRECTION</code>/<code>CONJUNCTION</code> pair, not just move one argument’s index, which is a far larger break from surface order than anything the toolkit currently licenses.</p>
 </section>
 </section>
 
