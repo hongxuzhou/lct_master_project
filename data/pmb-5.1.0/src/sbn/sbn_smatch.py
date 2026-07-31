@@ -737,6 +737,8 @@ class SBNGraph(BaseGraph):
         return final_result
 
     def __init_type_indices(self):
+        # The counter for each type of edge and node. 
+        
         self.type_indices = {
             SBN_NODE_TYPE.SYNSET: 0,
             SBN_NODE_TYPE.CONSTANT: 0,
@@ -749,6 +751,7 @@ class SBNGraph(BaseGraph):
         }
 
     def _id_for_type(
+        # Once create a node/edge of such, counter +1
             self, type: Union[SBN_NODE_TYPE, SBN_EDGE_TYPE]
     ) -> SBN_ID:
         _id = (type, self.type_indices[type])

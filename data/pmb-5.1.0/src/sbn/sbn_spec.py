@@ -23,7 +23,7 @@ __all__ = [
     "SBNError",
     "SBNSpec",
     "split_comments",
-    "split_synset_id",
+    "split_synset_id", 
     "get_doc_id",
 ]
 
@@ -73,17 +73,17 @@ class SBNSpec:
         "SOURCE",
         "CONJUNCTION",
         "ELABORATION",
-        "CORRECTION" # Add new separator
+        "CORRECTION", # Add new separator - Hongxu Zhou May/2026
     }
 
     DRS_OPERATORS = {
         # Manually added (not part of clf_signature.yaml)
-        "TSU",  # What does this mean?
-        "MOR",
-        "BOT",
-        "TOP",
-        "ESU",
-        "EPR",
+        "TSU",  # temporally succeeds (after)
+        "MOR", # greater than
+        "BOT", # ? 
+        "TOP", # No more than 
+        "ESU", # ?
+        "EPR", # ? 
         # --- From here down copied from clf_signature.yaml ---
         # temporal relations
         "EQU",  # equal
@@ -115,6 +115,7 @@ class SBNSpec:
         "ContentOf",
         "PartOf",
         "SubOf",
+        # hereafter are added by Hongxu Zhou for repair-aware SBN -- May/2026
         "ThemeOf", # Add new role
         "TimeOf", # Add new role
         "AgentOf", # Add new role
