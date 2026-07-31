@@ -42,8 +42,7 @@ fast approximation.
 **This is what the synthesis script has to produce.** Everything else is
 derived — deriving rather than annotating is the point, because gold and
 prediction then pass through byte-identical code and any difference between
-them is the parser's, not two annotators'.
-
+them is the parser's, not two annotators'
 ### 1. Annotate these three columns
 
 | column | type | notes |
