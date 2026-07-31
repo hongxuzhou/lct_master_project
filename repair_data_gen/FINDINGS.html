@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>findings</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="FINDINGS_files/libs/clipboard/clipboard.min.js"></script>
+<script src="FINDINGS_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="FINDINGS_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="FINDINGS_files/libs/quarto-html/popper.min.js"></script>
+<script src="FINDINGS_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="FINDINGS_files/libs/quarto-html/anchor.min.js"></script>
+<link href="FINDINGS_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="FINDINGS_files/libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="FINDINGS_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="FINDINGS_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="FINDINGS_files/libs/bootstrap/bootstrap-81267100e462c21b3d6c0d5bf76a3417.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+
+
+
+<section id="feasibility-boundary-of-lard-style-repair-synthesis-on-pmb-gold-sbn" class="level1">
+<h1>Feasibility boundary of LARD-style repair synthesis on PMB gold SBN</h1>
+<p>Investigation of the plan: take <code>data/pmb-5.1.0/split/en/train/gold.sbn</code>, mutate one concept into a WordNet neighbour to obtain a reparandum, and splice <code>CORRECTION</code> / <code>CONJUNCTION</code> around the pair to get a repair-aware SBN whose diff against the clean SBN is known by construction.</p>
+<p><strong>Verdict: the plan works, and works better than expected — but not for the reasons or at the boundary that were anticipated.</strong> The <code>entity.n.01</code> dummy is <em>not</em> where it breaks; on the contrary the dummy is what rescues 33% of all sites. The real boundary is elsewhere, and is described in §4.</p>
+<p>Everything below is measured, not estimated. Code is in this directory; <code>python3 test_against_doc.py</code>, <code>python3 analyse_feasibility.py</code>, <code>python3 validate_with_pmb_parser.py</code>, <code>python3 generate_repairs.py</code>.</p>
+<hr>
+<section id="the-transform-is-not-a-diff-two-graphs-problem" class="level2">
+<h2 class="anchored" data-anchor-id="the-transform-is-not-a-diff-two-graphs-problem">1. The transform is not a “diff two graphs” problem</h2>
+<p>The plan describes generating sentence A and sentence B, parsing both, and diffing the two SBNs. That step is unnecessary and should be dropped: because the reparandum is produced by <em>substitution</em> on a gold graph, the graph-level diff is known a priori — it is exactly one concept node. No second parse, no graph alignment, and therefore no parser error enters the data.</p>
+<p>What is <em>not</em> trivial is everything the substitution drags with it. Inserting <code>CORRECTION</code>/<code>CONJUNCTION</code> at concept position <code>i</code>:</p>
+<ul>
+<li>adds one (sometimes two) concepts, so <strong>every</strong> <code>±n</code> index that spans the splice point shifts — indices count all concepts linearly (C1);</li>
+<li>moves the repaired concept’s argument edges across a box boundary, which C3 forbids in one direction and permits in the other;</li>
+<li>adds <strong>two boxes</strong>, so every downstream <code>&lt;n</code> box pointer <em>and</em> every box-valued role (<code>Proposition &gt;1</code>) has to be renumbered too. This second index space is easy to miss and fails silently — see §5.</li>
+</ul>
+<p><code>repair_transform.py</code> implements all of this. Its correctness check is <code>test_against_doc.py</code>: fed the <em>clean</em> SBN of each covered case in <code>documentation/knowledge_base/repair_sbn_notation.qmd</code>, it must reproduce the hand-written repair SBN character for character.</p>
+<p><strong>8 of 9 covered cases reproduce exactly.</strong> The ninth (forwarding repair) is not a single-concept repair at all — see §4.3.</p>
+<hr>
+</section>
+<section id="there-is-a-fifth-device-and-it-does-most-of-the-work" class="level2">
+<h2 class="anchored" data-anchor-id="there-is-a-fifth-device-and-it-does-most-of-the-work">2. There is a fifth device, and it does most of the work</h2>
+<p>The notation doc’s toolkit lists four devices. The subject self-repair case uses a fifth one that is not in the table:</p>
+<blockquote class="blockquote">
+<p><strong>Device ⑤ — anchor dummy.</strong> Put <code>entity.n.01</code> <em>before</em> the <code>CORRECTION</code>, redirect every inbound edge onto it, and hang both copies off it with <code>EQU</code>.</p>
+</blockquote>
+<p>This is what makes <code>entity.n.01 / CORRECTION / male.n.02 Name "Josh" EQU -1 / CONJUNCTION / female.n.02 Name "Mary" EQU -2 / play.v.01 Agent -3</code> legal. It should be written into the toolkit table, because it is the <em>only</em> device that fixes two situations the other four cannot:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Situation</th>
+<th>①drop</th>
+<th>②invert</th>
+<th>④move</th>
+<th>⑤anchor</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>inbound edge whose role has no <code>…Of</code> inverse (<code>Role</code>, <code>Location</code>, <code>Patient</code>, <code>Stimulus</code>, <code>Destination</code>)</td>
+<td>✗</td>
+<td>✗</td>
+<td>✗</td>
+<td>✓</td>
+</tr>
+<tr class="even">
+<td>reparandum would be left with no edges at all</td>
+<td>✗</td>
+<td>✗</td>
+<td>✗</td>
+<td>✓</td>
+</tr>
+</tbody>
+</table>
+<p>Crucially ⑤ solves the non-invertible-inbound problem <strong>without adding roles to <code>SBNSpec.ROLES</code></strong>. Before ⑤ was implemented, 5,001 sites were blocked by non-invertible inbound roles (<code>Role</code> ×966, <code>Location</code> ×569, <code>Patient</code> ×554, <code>Stimulus</code> ×445, <code>Destination</code> ×385 …) and the obvious fix would have been to mint <code>RoleOf</code>, <code>LocationOf</code>, <code>PatientOf</code>. That would have been schema growth for an ad-hoc case. With ⑤, 18 sites remain blocked.</p>
+<p><strong>Strategy order matters and should be POS-dependent.</strong> <code>entity.n.01 EQU X</code> asserts an entity identity, which only reads correctly when <code>X</code> is a referent. For adjectives and verbs, device ④ (movement) is tried first instead — otherwise a prenominal adjective repair produces <code>entity.n.01 EQU fresh.a.01</code> (“an entity that <em>is</em> freshness”), which parses but is nonsense. With the fix, “Sixty new museums opened” correctly yields <code>quantity.n.01 EQU 60 museum.n.01 Quantity -1 CORRECTION &lt;1 current.a.01 AttributeOf -1 CONJUNCTION &lt;2 new.a.01 AttributeOf -2 …</code>.</p>
+<hr>
+</section>
+<section id="coverage-measured" class="level2">
+<h2 class="anchored" data-anchor-id="coverage-measured">3. Coverage, measured</h2>
+<p>Over all 9,552 English gold train documents:</p>
+<pre><code>structural / non-lexical concepts   24655       (time.n.08, entity.n.01, person.n.01, …)
+lexical concepts (n/v/a)            23232   100.0%
+  not alignable to an uttered word   5346    23.0%
+  aligned                           17886    77.0%
+    no WordNet reparandum            1405     6.0%
+    usable candidate site           16481    70.9%
+
+splice outcome on usable sites
+  legal                             16420    99.6%
+  blocked                              61     0.4%</code></pre>
+<p>Blocked, all strategies exhausted: <code>index_overflow</code> 45, <code>dangling_reparandum</code> 23, <code>non_invertible_inbound</code> 18, <code>hoist_unavailable</code> 55 (overlapping).</p>
+<p>By part of speech, with the strategy each site ended up needing:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>POS</th>
+<th>lexical</th>
+<th>aligned</th>
+<th>usable</th>
+<th>legal</th>
+<th>inplace / anchor / hoist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>n</td>
+<td>11781</td>
+<td>10060</td>
+<td>9560</td>
+<td>9520</td>
+<td>3101 / 6419 / 0</td>
+</tr>
+<tr class="even">
+<td>v</td>
+<td>8609</td>
+<td>5091</td>
+<td>4229</td>
+<td>4221</td>
+<td>4088 / 98 / 35</td>
+</tr>
+<tr class="odd">
+<td>a</td>
+<td>2842</td>
+<td>2735</td>
+<td>2692</td>
+<td>2679</td>
+<td>2001 / 202 / 476</td>
+</tr>
+</tbody>
+</table>
+<p>Per document: <strong>8,732 / 9,552 (91.4%) yield at least one legal repair site.</strong> At two samples per document the generator produces <strong>15,197 samples covering 95.0% of gold documents</strong>.</p>
+<p>Two supporting facts that the design depends on:</p>
+<ul>
+<li><strong>SBN concept order tracks surface word order in 98.2% of documents.</strong> This is what licenses device ① (“the argument had not been uttered yet”) — dropping a forward role is only honest if the target word really does come later.</li>
+<li><strong>Adjective satellites are a non-issue.</strong> WordNet adjectives have no hypernyms, so LARD’s co-hyponym recipe returns nothing for them and the naive implementation scores 0/2842. The fallback (<code>similar_to</code> / <code>also_see</code> / antonym) fixes it. Note that the similarity cluster is full of <code>.s.</code> satellite synsets, which <code>SBNSpec.SYNSET_PATTERN</code> cannot write (<code>n|v|a|r|x</code> only) and which occur <strong>zero</strong> times in gold — so they must be filtered, and after filtering every adjective still has at least one usable candidate.</li>
+</ul>
+<p>Every generated sample was checked against the project’s own parser (<code>sbn_smatch.SBNGraph</code>). Of 6,000 sampled: 5,999 parse, 5,999 produce <code>CORRECTION</code> and <code>CONJUNCTION</code> as siblings off the same parent box, 5,994 lose no edges. All 6 failures are pre-existing gold defects, not transform bugs (§5).</p>
+<hr>
+</section>
+<section id="where-it-actually-breaks" class="level2">
+<h2 class="anchored" data-anchor-id="where-it-actually-breaks">4. Where it actually breaks</h2>
+<section id="not-the-entity.n.01-dummy" class="level3">
+<h3 class="anchored" data-anchor-id="not-the-entity.n.01-dummy">4.1 Not the <code>entity.n.01</code> dummy</h3>
+<p>The anticipated problem — that the <code>entity.n.01</code> dummy pattern would need complex handling — is inverted. The dummy is cheap (one node, two <code>EQU</code> edges), mechanically derivable, and is what makes 6,719 sites legal. It costs nothing at generation time. Its only real cost is at <em>scoring</em> time: it adds an <code>entity.n.01</code> instance triple plus two <code>EQU</code> triples to every graph that uses it, which a parser must reproduce to score well. Whether that is a fair thing to ask of a parser is a design question, not a feasibility one.</p>
+</section>
+<section id="the-real-boundary-is-the-mutation-operator-not-the-splice" class="level3">
+<h3 class="anchored" data-anchor-id="the-real-boundary-is-the-mutation-operator-not-the-splice">4.2 The real boundary is the <em>mutation operator</em>, not the splice</h3>
+<p>The splice is nearly total (99.6%). What is narrow is <strong>what a WordNet synset substitution can express.</strong> SBN carries four kinds of repairable material and lexical substitution reaches only one:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Repairable material</th>
+<th>SBN encoding</th>
+<th>Reachable by synset substitution?</th>
+<th>Gold docs containing it</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>content word</td>
+<td>concept node</td>
+<td><strong>yes</strong></td>
+<td>91.4% (≥1 legal site)</td>
+</tr>
+<tr class="even">
+<td>constant</td>
+<td>role <em>value</em> (<code>DayOfWeek monday</code>, <code>ClockTime 22:00</code>, <code>Quantity 3</code>, <code>Name "Josh"</code>)</td>
+<td>no</td>
+<td>47.1%</td>
+</tr>
+<tr class="odd">
+<td>tense / aspect</td>
+<td>operator on <code>time.n.08</code> (<code>TPR</code>/<code>EQU</code>/<code>TSU</code>)</td>
+<td>no</td>
+<td>97.3%</td>
+</tr>
+<tr class="even">
+<td>edge label</td>
+<td>role name (<code>Destination</code> → <code>Source</code>)</td>
+<td>no</td>
+<td>97.9%</td>
+</tr>
+</tbody>
+</table>
+<p>This is the headline. The notation doc’s covered-case inventory is broader than the generator’s reach:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Covered case</th>
+<th>generable now</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>SV sentence, verb repair</td>
+<td>✓</td>
+</tr>
+<tr class="even">
+<td>SVO subject repair</td>
+<td>✓ (device ⑤)</td>
+</tr>
+<tr class="odd">
+<td>SVO object repair</td>
+<td>✓ (device ②)</td>
+</tr>
+<tr class="even">
+<td>Negation</td>
+<td>✓ (inherited; the repair correctly merges into the negated box)</td>
+</tr>
+<tr class="odd">
+<td>Donkey sentence</td>
+<td>✓</td>
+</tr>
+<tr class="even">
+<td>Retracting repair</td>
+<td>✓</td>
+</tr>
+<tr class="odd">
+<td>Adjunct (<code>monday</code> → <code>tuesday</code>)</td>
+<td>✗ — repairs a <em>constant</em></td>
+</tr>
+<tr class="even">
+<td>Tense &amp; aspect replacement</td>
+<td>✗ — repairs an <em>operator</em></td>
+</tr>
+<tr class="odd">
+<td>Preposition replacement</td>
+<td>✗ — repairs an <em>edge label</em> (device ③)</td>
+</tr>
+<tr class="even">
+<td>Forwarding repair</td>
+<td>✗ — repairs a <em>span</em> (subject <strong>and</strong> verb re-uttered)</td>
+</tr>
+<tr class="odd">
+<td>Anaphora over reparandum+repair</td>
+<td>✗ — needs a second utterance</td>
+</tr>
+<tr class="even">
+<td>Intra-turn + cross-turn combined</td>
+<td>✗ — needs discourse composition</td>
+</tr>
+</tbody>
+</table>
+<p>The good news: three of the six gaps are cheap extensions of the same machinery, and they are large. A <strong>constant-mutation operator</strong> (perturb <code>DayOfWeek</code>, <code>ClockTime</code>, <code>Quantity</code>, <code>MonthOfYear</code>, <code>Name</code>) reaches 47.1% of documents and directly produces the Adjunct case. A <strong>tense/aspect operator</strong> (perturb <code>TPR</code>/<code>EQU</code>/<code>TSU</code> on <code>time.n.08</code>) reaches 97.3% and is structurally identical to a verb repair, as the notation doc already argues. An <strong>edge-label operator</strong> with device ③ reaches 97.9% and produces the preposition case. None of them needs any new notation.</p>
+<p>The remaining three (span repair, anaphora, cross-turn) require composing more than one gold document or more than one concept, which is a different generator, not an extension of this one.</p>
+</section>
+<section id="repetition-and-degree-1-replacement" class="level3">
+<h3 class="anchored" data-anchor-id="repetition-and-degree-1-replacement">4.3 Repetition and degree-&gt;1 replacement</h3>
+<p>LARD’s degree-2/3 replacements repeat 1–3 words before the reparandum. Only words with <strong>no SBN concept</strong> can be repeated for free (determiners, prepositions, auxiliaries, particles) — repeating a content word would require that word to appear inside the <code>CORRECTION</code> box too, which is a two-concept repair. The generator therefore repeats only function words. Pure LARD <em>repetitions</em> (“Let’s meet [today + today]”) are outside this notation altogether: reparandum and repair are the same concept, so the graph has nothing to quarantine.</p>
+</section>
+<section id="semantic-plausibility-of-the-reparandum-the-weakest-link" class="level3">
+<h3 class="anchored" data-anchor-id="semantic-plausibility-of-the-reparandum-the-weakest-link">4.4 Semantic plausibility of the reparandum — the weakest link</h3>
+<p>This is the largest <em>quality</em> problem, and it is inherited from LARD rather than caused by SBN. WordNet co-hyponymy gives good nouns and poor verbs, because the verb hierarchy is shallow: <code>bear.v.02</code> sits directly under <code>produce.v.01</code> (depth 1), so its co-hyponyms are <code>sporulate</code>, <code>manufacture</code>, <code>grind_out</code>. The generator ranks candidates by relation tightness (verb group and adjective similarity cluster before co-hyponyms), single-word lemmas, sense number and path similarity, which fixes the worst of it — <code>see.v.01 → watch.v.03</code>, <code>doctor.n.01 → dentist.n.01</code>, <code>dog.n.01 → hyena/jackal/fox</code>, <code>new.a.01 → current/fresh/modern</code> — but leaves residue: <em>“The wind is blowing region, or rather, east.”</em></p>
+<p>LARD 2025’s answer is a sentence-encoder re-rank (their eq. 1–3), and that is the right fix here too. It is not implemented, because it needs a model download. It should be the next thing done, and it is orthogonal to everything in §1–§3.</p>
+</section>
+<section id="alignment" class="level3">
+<h3 class="anchored" data-anchor-id="alignment">4.5 Alignment</h3>
+<p>23% of lexical concepts cannot be tied to a surface word by lemma+POS matching. Some are genuinely non-surface (implicit concepts PMB introduces); some are matcher failures. These sites are dropped, which costs recall but not correctness. PMB 5.1.0’s split files carry no token alignment, so this ceiling is a property of the data source, not the method.</p>
+<hr>
+</section>
+</section>
+<section id="toolchain-defects-found-along-the-way" class="level2">
+<h2 class="anchored" data-anchor-id="toolchain-defects-found-along-the-way">5. Toolchain defects found along the way</h2>
+<p>These affect the evaluation pipeline as much as the generator.</p>
+<ol type="1">
+<li><p><strong><code>CauserOf</code> is attested in gold but missing from <code>SBNSpec.ROLES</code>.</strong> <code>p36/d2375</code> and <code>p30/d2358</code> abort the stock parser with “Invalid token found”. One line to fix in <code>sbn_spec.py</code>.</p></li>
+<li><p><strong><code>INDEX_PATTERN</code> matches a single digit</strong>, so <code>-10</code> is silently read as <code>-1</code>. The splice inflates index magnitudes, so this is a live constraint, not a theoretical one: 45 sites are blocked by it, and 44 generated samples sit at magnitude 9 — one concept away from silent corruption. The generator records <code>max_abs_index</code> per row so these can be filtered.</p></li>
+<li><p><strong>Box pointers are a second index space and the splice must renumber them.</strong> 16.2% of gold documents contain a separator; 1.9% contain a box-valued role (<code>Proposition &gt;1</code> ×172, <code>Proposition &lt;1</code> ×12). Before this was handled, the splice silently produced <strong>cyclic graphs</strong> (a <code>Proposition &lt;1</code> from inside the <code>CONJUNCTION</code> box pointing back at the <code>CORRECTION</code> box) and mis-targeted downstream <code>CONJUNCTION</code> pointers. Both parse without error. This is the single most dangerous class of bug in this pipeline and the reason <code>validate_with_pmb_parser.py</code> exists.</p></li>
+<li><p><strong>11 gold documents lose an edge at parse time</strong> because two roles on one concept carry the same index — e.g.&nbsp;<code>p21/d2512</code> “The dog barks at all strangers.” is <code>bark.v.04 Agent -2 Time +1 Recipient +1</code>, where <code>Time</code> and <code>Recipient</code> both resolve to <code>person.n.01</code>. The graph is a <code>DiGraph</code>, so one edge is dropped. Pre-existing, not introduced here, but it caps achievable Smatch on those documents.</p></li>
+</ol>
+<hr>
+</section>
+<section id="recommendation" class="level2">
+<h2 class="anchored" data-anchor-id="recommendation">6. Recommendation</h2>
+<p>Proceed with the plan, with three changes:</p>
+<ol type="1">
+<li><strong>Drop the “parse two sentences and diff” step.</strong> Substitute on the gold graph directly; the diff is known.</li>
+<li><strong>Add the three cheap mutation operators</strong> (constant, tense/aspect, edge-label + device ③) before scaling up. They roughly triple the notation coverage of the generated set at no notational cost, and they are the only way the generated data will exercise the parts of the notation the thesis actually argues for.</li>
+<li><strong>Add the contextual re-rank</strong> from LARD 2025. Reparandum plausibility, not graph legality, is what currently limits sample quality.</li>
+</ol>
+<p>Also: write device ⑤ into the notation doc’s toolkit table, and make the strategy order POS-dependent there as well — the doc currently presents ④ as a last resort, but for prenominal modifiers it is the <em>first</em> choice, and ⑤ is not listed at all.</p>
+<hr>
+</section>
+<section id="files" class="level2">
+<h2 class="anchored" data-anchor-id="files">Files</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>file</th>
+<th>what</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>sbn_lin.py</code></td>
+<td>linear-order SBN parser/serialiser (the PMB graph parser discards the linear order indices are computed over)</td>
+</tr>
+<tr class="even">
+<td><code>repair_transform.py</code></td>
+<td>the splice, three strategies, five devices, both index spaces</td>
+</tr>
+<tr class="odd">
+<td><code>wn_candidates.py</code></td>
+<td>reparandum pool from WordNet + SBN-writability filter + plausibility ranking</td>
+</tr>
+<tr class="even">
+<td><code>inflect_en.py</code></td>
+<td>lemma + PTB tag → surface form (WordNet exception lists + regular orthography)</td>
+</tr>
+<tr class="odd">
+<td><code>generate_repairs.py</code></td>
+<td>end-to-end generator → TSV</td>
+</tr>
+<tr class="even">
+<td><code>test_against_doc.py</code></td>
+<td>regression against the notation doc’s covered cases</td>
+</tr>
+<tr class="odd">
+<td><code>analyse_feasibility.py</code></td>
+<td>the funnel and per-POS numbers in §3</td>
+</tr>
+<tr class="even">
+<td><code>validate_with_pmb_parser.py</code></td>
+<td>round-trip every sample through <code>sbn_smatch.SBNGraph</code></td>
+</tr>
+<tr class="odd">
+<td><code>repairs_train.tsv</code></td>
+<td>15,197 generated samples</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
