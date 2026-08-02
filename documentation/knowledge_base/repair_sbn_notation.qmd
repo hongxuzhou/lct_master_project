@@ -46,6 +46,7 @@ A single `CORRECTION` token carries two distinct jobs. They are told apart **str
 ## Fundamental Rules of SBN
 * Accessibility: (a) neither positive nor negative indices can enter negated context, and (b) only negative indices in negated contexts can refer to discourse referents outside the negation.
 
+
 ### Clarifications
 
 The rule above is quoted verbatim from Bos (2021). The following are operational clarifications of it, plus one counting rule of SBN.

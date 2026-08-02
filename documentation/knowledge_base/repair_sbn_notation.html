@@ -125,11 +125,13 @@ window.Quarto = {
   </ul></li>
   <li><a href="#noted-limitations" id="toc-noted-limitations" class="nav-link" data-scroll-target="#noted-limitations"><span class="header-section-number">3</span> Noted Limitations</a>
   <ul class="collapse">
-  <li><a href="#tense-and-aspect" id="toc-tense-and-aspect" class="nav-link" data-scroll-target="#tense-and-aspect"><span class="header-section-number">3.1</span> Tense and Aspect</a></li>
-  <li><a href="#rhetorical-relation-replacement" id="toc-rhetorical-relation-replacement" class="nav-link" data-scroll-target="#rhetorical-relation-replacement"><span class="header-section-number">3.2</span> Rhetorical Relation Replacement</a></li>
-  <li><a href="#quantifier-replacement" id="toc-quantifier-replacement" class="nav-link" data-scroll-target="#quantifier-replacement"><span class="header-section-number">3.3</span> Quantifier Replacement</a></li>
-  <li><a href="#modal-verb" id="toc-modal-verb" class="nav-link" data-scroll-target="#modal-verb"><span class="header-section-number">3.4</span> Modal Verb</a></li>
-  <li><a href="#discontinuous-delayed-repair" id="toc-discontinuous-delayed-repair" class="nav-link" data-scroll-target="#discontinuous-delayed-repair"><span class="header-section-number">3.5</span> Discontinuous (Delayed) Repair</a></li>
+  <li><a href="#topological-limitations-the-separator-vs.-concept-divide" id="toc-topological-limitations-the-separator-vs.-concept-divide" class="nav-link" data-scroll-target="#topological-limitations-the-separator-vs.-concept-divide"><span class="header-section-number">3.1</span> Topological Limitations: The “Separator vs.&nbsp;Concept” Divide</a>
+  <ul class="collapse">
+  <li><a href="#quantifier-replacement" id="toc-quantifier-replacement" class="nav-link" data-scroll-target="#quantifier-replacement"><span class="header-section-number">3.1.1</span> Quantifier Replacement</a></li>
+  <li><a href="#rhetorical-relation-replacement" id="toc-rhetorical-relation-replacement" class="nav-link" data-scroll-target="#rhetorical-relation-replacement"><span class="header-section-number">3.1.2</span> Rhetorical Relation Replacement</a></li>
+  </ul></li>
+  <li><a href="#modal-verb-replacement" id="toc-modal-verb-replacement" class="nav-link" data-scroll-target="#modal-verb-replacement"><span class="header-section-number">3.2</span> Modal Verb Replacement</a></li>
+  <li><a href="#linear-serialisation-limitations-discontinuous-delayed-repair" id="toc-linear-serialisation-limitations-discontinuous-delayed-repair" class="nav-link" data-scroll-target="#linear-serialisation-limitations-discontinuous-delayed-repair"><span class="header-section-number">3.3</span> Linear Serialisation Limitations: Discontinuous (Delayed) Repair</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -233,8 +235,8 @@ window.Quarto = {
 <p><strong>C1: Index counting is linear and boxes never reset it.</strong> <code>Role -n</code> / <code>Role +n</code> counts <em>all</em> preceding concepts in raw sequence order. Separators do not reset, restrict, or partition the counting domain; concepts sitting in already-closed, non-ancestor sibling boxes still occupy positions and still count.</p>
 <p>Do not conflate the two index spaces: <strong>angle brackets index boxes, <code>+</code>/<code>-</code> index concepts.</strong> <code>Proposition &gt;1</code> and <code>CONTINUATION &lt;0</code> are box pointers, not concept indices, which is why a <code>Proposition &gt;1</code> target can sit two or more concept positions forward.</p>
 <p><strong>C2 — “Outside the negation” means an <em>ancestor</em> box.</strong> Referents in <em>sibling</em> boxes are equally inaccessible, even when they precede the current concept in linear order.</p>
-<p><strong>C3 — <code>CONJUNCTION</code> boundaries are permeable, <code>CORRECTION</code> boundaries are not.</strong> A positive index may cross into a <code>CONJUNCTION</code> box, because <code>CONJUNCTION</code> merges rather than subordinates; PMB gold does this routinely (<code>p01/d3366</code>: <code>leave.v.01 … Time +2 … CONJUNCTION &lt;2 time.n.08 DayOfWeek monday</code>). A positive index shall <strong>never</strong> cross into or out of a <code>CORRECTION</code> box. See the repair toolkit below for how to avoid it.</p>
-<p><strong>C4 — Under certain conditions, the content nested in a<code>CORRECTION</code> box can be referred to.</strong> According to SBN, words include definiteness and proper noun can project to the highest level (<code>BOX 0</code>), which provides potential base for pronouns appearing after the reparandum and the repair to refer back to them. Another case is generics. It is a known limitation in current SBN. However, in the repair-aware SBN notation, we take it as solved. This is where <code>CORRECTION</code> genuinely differs from <code>NEGATION</code>, and it is a positive property of the relation, not a loophole. In “My favourite dessert is banana bread, actually, cherry pie. — They are both good desserts,” the plural anaphor picks up the quarantined reparandum, and the discourse is perfectly felicitous. Quarantining a reparandum removes it from what the speaker commits to; it does not remove it from the discourse referent domain.</p>
+<p><strong>C3 — <code>CONJUNCTION</code> boundaries are permeable, <code>CORRECTION</code> boundaries are not.</strong> A positive index representing a thematic role shall <strong>never cross into</strong> a <code>CORRECTION</code> box. A negative index inside a <code>CORRECTION</code> box is permitted to cross out as long as it targets an ancestor box (e.g., <code>BOX 0</code>). However, indices shall never cross laterally between sibling boxes (e.g., from a <code>CORRECTION</code> box into a <code>CONJUNCTION</code> box). See the repair toolkit below for how to resolve illegal inbound or lateral links.</p>
+<p><strong>C4 — Under certain conditions, the content nested in a<code>CORRECTION</code> box can be referred to.</strong> However, discourse referents inside a CORRECTION box survive and remain anaphorically accessible. Quarantining a reparandum removes what the speaker commits to propositionally, but it does not remove the uttered entities from the discourse referent domain. According to SBN, entities like proper nouns or definites naturally project to BOX 0. For self-repairs, we extend this: entities introduced in a reparandum project their referential availability to the enclosing context. Therefore, anaphoric indices (like ANA) referencing these entities do not technically violate the structural barrier of C3, as they pick up the projected referent. This is where <code>CORRECTION</code> genuinely differs from <code>NEGATION</code>, and it is a positive property of the relation, not a loophole.</p>
 <p><strong>C5 — The <code>CONJUNCTION</code> box has a tail.</strong> Everything from <code>CONJUNCTION</code> up to the next separator stays inside that box, including material that has nothing to do with the repair (in the subject-repair example below, the predicate <code>play.v.01</code>, its tense referent and its object all land there). Because <code>CONJUNCTION</code> merges, this is semantically equivalent to putting that material directly in the box one level above <code>CORRECTION</code> (the box the merge targets, not necessarily <code>BOX0</code>; under a <code>NEGATION</code>, for instance, that target is the negated box, see the Negation case below).</p>
 <p><strong>C6 — <code>ThemeOf</code> / <code>TimeOf</code> / <code>MannerOf</code> / <code>Co-ThemeOf</code> are extensions of this project, not PMB 5.1.0 practice.</strong> The inverted roles actually attested in gold are <code>AttributeOf</code> (1802), <code>PartOf</code> (572), <code>SubOf</code> (120), <code>ColourOf</code> (80), <code>MadeOf</code> (38), <code>InstanceOf</code> (37), <code>ContentOf</code> (4), <code>CauserOf</code> (2), <code>FeatureOf</code> (1), <code>AgentOf</code> (1). <code>ThemeOf</code>, <code>TimeOf</code>, <code>MannerOf</code> and <code>Co-ThemeOf</code> occur <strong>zero</strong> times. Relying on them to avoid positive indices is sound, but note that <code>to_penman_string</code> normalises <code>Of → -of</code> <strong>only</strong> for members of <code>SBNSpec.INVERTIBLE_ROLES</code>; an inverted role missing from that set is scored by Smatch as a wholly different edge.</p>
 </section>
@@ -315,8 +317,8 @@ window.Quarto = {
 <h3 data-number="2.0.1" class="anchored" data-anchor-id="sv-sentence"><span class="header-section-number">2.0.1</span> SV Sentence</h3>
 <p>“The boy sneezed, I mean, coughed”</p>
 <pre class="sbn"><code>boy.n.01                       % The boy
-time.n.08 TPR now              %
-    CORRECTION &lt;1              %
+time.n.08 TPR now              % 
+    CORRECTION &lt;1              % 
 sneeze.v.01 Agent -2 Time -1   % sneezed,
     CONJUNCTION &lt;2             % I mean,
 cough.v.01 Agent -3 Time -2    % coughed</code></pre>
@@ -338,7 +340,7 @@ male.n.02 Name "Josh" EQU -1                  % Josh,
     CONJUNCTION &lt;2                            % no,
 female.n.02 Name "Mary" EQU -2                % Mary
 play.v.01 Agent -3 Time +1 Theme +2 Manner +3 % plays
-time.n.08 EQU now                             %
+time.n.08 EQU now                             % 
 tennis.n.01                                   % tennis
 well.r.01                                     % well</code></pre>
 <div class="quarto-figure quarto-figure-center">
@@ -354,9 +356,9 @@ well.r.01                                     % well</code></pre>
 <h4 data-number="2.0.2.2" class="anchored" data-anchor-id="verb-self-repair"><span class="header-section-number">2.0.2.2</span> Verb Self-repair</h4>
 <p>“The cat chases, actually, hunts the rat”</p>
 <pre class="sbn"><code>cat.n.01                            % The cat
-time.n.08 EQU now                   %
-    CORRECTION &lt;1                   %
-chase.v.01 Agent -2 Time -1         % chases, 
+time.n.08 EQU now                   % 
+    CORRECTION &lt;1                   % 
+chase.v.01 Agent -2 Time -1         % chases,
     CONJUNCTION &lt;2                  % actually,
 hunt.v.01 Agent -3 Theme +1 Time -2 % hunts
 rat.n.01                            % the rat</code></pre>
@@ -372,9 +374,9 @@ rat.n.01                            % the rat</code></pre>
 <h4 data-number="2.0.2.3" class="anchored" data-anchor-id="object-self-repair"><span class="header-section-number">2.0.2.3</span> Object Self-repair</h4>
 <p>“I ordered a banana bread, I mean, a cherry pie”</p>
 <pre class="sbn"><code>person.n.01 EQU speaker              % I
-time.n.08 TPR now                    %
+time.n.08 TPR now                    % 
 order.v.01 Agent -2 Time -1          % ordered
-    CORRECTION &lt;1                    %
+    CORRECTION &lt;1                    % 
 banana_bread.n.01 ThemeOf -1         % a banana bread,
     CONJUNCTION &lt;2                   % I mean,
 cherry_pie.n.01 ThemeOf -2           % a cherry pie</code></pre>
@@ -385,6 +387,25 @@ cherry_pie.n.01 ThemeOf -2           % a cherry pie</code></pre>
 </figure>
 </div>
 <p><code>ThemeOf</code> here is device ② of the toolkit: the object <em>is</em> the reparandum, so it must be linked, and inverting the role lets both candidate objects point backward at <code>order.v.01</code> in <code>Box 0</code> instead of forcing a positive index down into the <code>CORRECTION</code> box.</p>
+</section>
+<section id="tense-aspect-replacement" class="level4" data-number="2.0.2.4">
+<h4 data-number="2.0.2.4" class="anchored" data-anchor-id="tense-aspect-replacement"><span class="header-section-number">2.0.2.4</span> Tense &amp; Aspect Replacement</h4>
+<p>“She will go to, well, went to the church”</p>
+<pre class="sbn"><code>female.n.02                                % She
+    CORRECTION &lt;1                          % 
+time.n.08 TSU now                          % [will]
+go.v.01 Theme -2 Time -1                   % go to,
+    CONJUNCTION &lt;2                         % well,
+time.n.08 TPR now                          % [went]
+go.v.01 Theme -4 Time -1 Destination +1    % went to
+church.n.02                                % the church</code></pre>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/time_aspect_replace.png" class="img-fluid figure-img"></p>
+<figcaption>DAG: Time &amp; aspect replacement - “She will go to, well, went to the church”</figcaption>
+</figure>
+</div>
+<p>This case demonstrates device ①. The speaker abandons the phrase <em>will go to</em> before uttering the destination. Therefore, the first predicate (go.v.01) takes no Destination role. This example illustrates why tense and aspect self-repairs do not suffer from the topological limitations that affect separators. In SBN, tense and aspect are not topological separators but ordinary concepts (time.n.08) and edge labels (Time). Consequently, a tense/aspect self-repair is structurally identical to a standard verb self-repair. The initial event concept and its associated time node are smoothly quarantined inside the <code>CORRECTION</code> box, while the corrected event and its new time node are introduced safely in the <code>CONJUNCTION</code> box. All indices remain perfectly legal and natural.</p>
 </section>
 </section>
 <section id="negation" class="level3" data-number="2.0.3">
@@ -411,10 +432,10 @@ cherry_pie.n.01 ThemeOf -2           % a cherry pie</code></pre>
 <h3 data-number="2.0.4" class="anchored" data-anchor-id="adjunct"><span class="header-section-number">2.0.4</span> Adjunct</h3>
 <p>“The class is on Monday, no, on Tuesday”</p>
 <pre class="sbn"><code>class.n.01                                % The class
-time.n.08 EQU now                         %
+time.n.08 EQU now                         % 
 be.v.01 Theme -2 Time -1                  % is on
-    CORRECTION &lt;1                         %
-time.n.08 DayOfWeek monday TimeOf -1      % Monday, 
+    CORRECTION &lt;1                         % 
+time.n.08 DayOfWeek monday TimeOf -1      % Monday,
     CONJUNCTION &lt;2                        % no,
 time.n.08 DayOfWeek tuesday TimeOf -2     % on Tuesday</code></pre>
 <div class="quarto-figure quarto-figure-center">
@@ -430,11 +451,11 @@ time.n.08 DayOfWeek tuesday TimeOf -2     % on Tuesday</code></pre>
 <p>“I ran to, I mean, from the school”</p>
 <p>What is repaired here is not a concept but an <strong>edge label</strong> — <code>Destination</code> gives way to <code>Source</code>. SBN has no way to place a bare role inside a box, so this calls for device ③: introduce a dummy concept, tie it to the event with <code>EQU</code>, and hang the competing role on the dummy. Bos (2021) uses the same construction for logical disjunction.</p>
 <pre class="sbn"><code>person.n.01 EQU speaker              % I
-time.n.08 TPR now                    %
+time.n.08 TPR now                    % 
 run.v.01 Theme -2 Time -1            % ran
 school.n.02                          % the school
-    CORRECTION &lt;1                    %
-entity.n.01 EQU -2 Destination -1    % to, 
+    CORRECTION &lt;1                    % 
+entity.n.01 EQU -2 Destination -1    % to,
     CONJUNCTION &lt;2                   % I mean,
 entity.n.01 EQU -3 Source -2         % from</code></pre>
 <div class="quarto-figure quarto-figure-center">
@@ -474,7 +495,7 @@ feed.v.01 Agent -5 Patient -2            % he feeds it</code></pre>
 farmer.n.01                     % farmer
 own.v.01 Pivot -1  Theme +1     % who owns
 donkey.n.01                     % a donkey
-NEGATION -1                     %
+NEGATION -1                     % 
 beat.v.01 Agent -3  Patient +1  % beats
 entity.n.01 EQU -2              % it</code></pre>
 <div class="quarto-figure quarto-figure-center">
@@ -518,11 +539,11 @@ table.n.02                                         % on the table</code></pre>
 <pre class="sbn"><code>entity.n.01
     CORRECTION &lt;1
 male.n.02 Name "Josh" EQU -1                         % Josh
-time.n.08 TPR now                                    %
-drive.v.03 Agent -2 Time -1                          % drove, 
+time.n.08 TPR now                                    % 
+drive.v.03 Agent -2 Time -1                          % drove,
     CONJUNCTION &lt;2                                   % no,
 female.n.02 Name "Marsha" EQU -4                     % Marsha
-time.n.08 TPR now                                    %
+time.n.08 TPR now                                    % 
 drive.v.03 Agent -2 Time -1 Theme +2 Destination +3  % drove
 old.a.02 AttributeOf +1                              % the old
 car.n.01                                             % car
@@ -553,15 +574,15 @@ favorite.a.02 Experiencer -1 Stimulus +1   % favourite
 dessert.n.01                               % dessert
 time.n.08 EQU now                          % 
 be.v.02 Theme -2 Time -1                   % is
-    CORRECTION &lt;1                          %
+    CORRECTION &lt;1                          % 
 banana_bread.n.01 Co-ThemeOf -1            % banana bread, (reparandum)
-    CONJUNCTION &lt;2                         % actually,  
+    CONJUNCTION &lt;2                         % actually,
 cherry_pie.n.01 Co-ThemeOf -2              % cherry pie (repair)
 %%% Utterance 2
-    CONTINUATION &lt;1                        %
+    CONTINUATION &lt;1                        % 
 entity.n.01 ANA -2 ANA -1                  % B: They  — picks up both reparandum and repair
 time.n.08 EQU now                          % are
-be.v.02 Theme -2 Time -1 Co-Theme +2       %
+be.v.02 Theme -2 Time -1 Co-Theme +2       % 
 good.a.01 AttributeOf +1                   % both good
 dessert.n.01                               % desserts</code></pre>
 <div class="quarto-figure quarto-figure-center">
@@ -607,28 +628,26 @@ wedding.n.01                             % wedding gift</code></pre>
 </section>
 <section id="noted-limitations" class="level1" data-number="3">
 <h1 data-number="3"><span class="header-section-number">3</span> Noted Limitations</h1>
-<section id="tense-and-aspect" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="tense-and-aspect"><span class="header-section-number">3.1</span> Tense and Aspect</h2>
-<p>“She went to, well, has been to the church”</p>
-<p>Reason:</p>
+<section id="topological-limitations-the-separator-vs.-concept-divide" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="topological-limitations-the-separator-vs.-concept-divide"><span class="header-section-number">3.1</span> Topological Limitations: The “Separator vs.&nbsp;Concept” Divide</h2>
+<p>The <code>CORRECTION</code> mechanism proposed in this notation is designed to quarantine node-level Concepts and their argument edges. Therefore, it is mathematically and structurally impossible to encapsulate a topological Separator inside a concept-level <code>CORRECTION</code> box. Attempting to do so would destroy the validity of the underlying Directed Acyclic Graph (DAG). This architectural divide restricts the notation from handling repairs that involve logical operators or discourse structures.</p>
+<section id="quantifier-replacement" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1" class="anchored" data-anchor-id="quantifier-replacement"><span class="header-section-number">3.1.1</span> Quantifier Replacement</h3>
+<p>“Every, no, some dishes are tasty” Reason: In SBN, universal quantification (e.g., “every”) is not represented as a single concept node, but is constructed using double <code>NEGATION</code> separators that open new nested context boxes. When the speaker repairs the quantifier to “some” (an existential quantifier that does not require new boxes), it is impossible to use a <code>CORRECTION</code> box to retrospectively “undo” or quarantine the topological boundaries of the already-opened NEGATION boxes.</p>
 </section>
-<section id="rhetorical-relation-replacement" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="rhetorical-relation-replacement"><span class="header-section-number">3.2</span> Rhetorical Relation Replacement</h2>
-<p>“I helped my mum when, I mean, even though I was busy”</p>
-<p>Reason:</p>
+<section id="rhetorical-relation-replacement" class="level3" data-number="3.1.2">
+<h3 data-number="3.1.2" class="anchored" data-anchor-id="rhetorical-relation-replacement"><span class="header-section-number">3.1.2</span> Rhetorical Relation Replacement</h3>
+<p>“I helped my mum when, even though I was busy.”</p>
+<p>Reason: Rhetorical relations (such as <code>EXPLANATION</code>, <code>CONTRAST</code>, or <code>CONCESSION</code>) act as Separators that connect two distinct discourse contexts. They cannot be quarantined inside a <code>CORRECTION</code> box that is meant for semantic concepts.</p>
 </section>
-<section id="quantifier-replacement" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="quantifier-replacement"><span class="header-section-number">3.3</span> Quantifier Replacement</h2>
-<p>“Every, no, some dishes are tasty”</p>
-<p>Reason:</p>
 </section>
-<section id="modal-verb" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="modal-verb"><span class="header-section-number">3.4</span> Modal Verb</h2>
+<section id="modal-verb-replacement" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="modal-verb-replacement"><span class="header-section-number">3.2</span> Modal Verb Replacement</h2>
 <p>“I think you would, well, should work harder”</p>
-<p>Reason:</p>
+<p>Reason: Similar to quantifiers and rhetorical relations, modal verbs (like “should” or “would”) are frequently treated as structural separators (e.g., <code>NECESSITY</code> or <code>POSSIBILITY</code>) in formal semantics. For the same reason above, they are immune to the current CORRECTION boxing mechanism.</p>
 </section>
-<section id="discontinuous-delayed-repair" class="level2" data-number="3.5">
-<h2 data-number="3.5" class="anchored" data-anchor-id="discontinuous-delayed-repair"><span class="header-section-number">3.5</span> Discontinuous (Delayed) Repair</h2>
+<section id="linear-serialisation-limitations-discontinuous-delayed-repair" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="linear-serialisation-limitations-discontinuous-delayed-repair"><span class="header-section-number">3.3</span> Linear Serialisation Limitations: Discontinuous (Delayed) Repair</h2>
 <p>“I bought three apples from Lidl yesterday, actually, four”</p>
 <p>Every case covered so far is an <em>instant</em> repair: the interregnum follows its reparandum immediately, so <code>CORRECTION</code> opens right where the trouble source ends. Here the reparandum is just <code>Quantity 3</code> on <code>apple.n.01</code> — device-wise no different from the Adjunct case’s <code>DayOfWeek monday → tuesday</code> — but “actually, four” arrives only after “from Lidl yesterday” has already been uttered and committed, and that material is not itself being repaired.</p>
 <p><code>CORRECTION</code> can only quarantine what comes after it in the sequence. Opened where “actually” actually occurs, it can no longer reach back and quarantine “three”. It is already asserted. Opened right after “three” instead (mimicking the instant-repair cases), it quarantines “from Lidl” and “yesterday” along with it, wrongly marking them as retracted. Device ④ does not rescue this either: it would have to postpone an entire adjunct span past the whole <code>CORRECTION</code>/<code>CONJUNCTION</code> pair, not just move one argument’s index, which is a far larger break from surface order than anything the toolkit currently licenses.</p>

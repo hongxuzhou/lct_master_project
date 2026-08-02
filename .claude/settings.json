@@ -2,7 +2,15 @@
   "permissions": {
     "allow": [
       "Bash(python3 -c ' *)",
-      "Bash(awk -F. '{print $\\(NF-1\\)}')"
+      "Bash(awk -F. '{print $\\(NF-1\\)}')",
+      "Bash(grep -nE \"^#{1,4} |Covered|covered|Limitation|limitation\" documentation/knowledge_base/repair_sbn_notation.qmd)",
+      "Bash(grep -nE \"^#{1,4} \" /Users/hongxuzhou/Documents/GitHub/lct_master_project/documentation/knowledge_base/repair_sbn_notation.qmd)",
+      "mcp__claude_ai_Hugging_Face__hub_repo_details",
+      "Bash(quarto --version)",
+      "Bash(quarto publish *)",
+      "Bash(git branch *)",
+      "Bash(git push *)",
+      "Bash(curl -s https://api.github.com/repos/hongxuzhou/lct_master_project/pages)"
     ]
   }
 }
