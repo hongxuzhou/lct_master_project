@@ -1,0 +1,14 @@
+pre.sbn{
+    background-color: #f0f0f0;  /*light grey */
+    border: 1px solid #999999; /*dark grey line */
+    border-radius: 4px;
+    padding: 1em;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9em;
+    line-height: 1.4;
+
+}
+
+pre.sbn code{
+    color: #333333:
+}
