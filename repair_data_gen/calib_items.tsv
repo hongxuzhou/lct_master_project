@@ -1,29 +1,29 @@
 item_id	A_original	B_substituted	word_in_A	word_in_B	same_meaning	fits_sentence	notes
-i001	His steps were clearly marked in the snow.	His steps were clearly animized in the snow.	mark	animized			
-i002	Another focal point is the avoidance of industrial accidents.	Another focal point is the abandonment of industrial accidents.	avoidance	abandonment			
-i003	What does the abbreviation IRA stand for?	What does the etymon IRA stand for?	abbreviation	etymon			
-i004	The hen hatched five eggs.	The hen calmed five eggs.	hatch	calmed			
-i005	The pigeon has flown the coop.	The pigeon has flown the pen.	coop	pen			
-i006	My father complained about the traffic noise.	My father complained about the traffic beep.	noise	beep			
-i007	His speech bored me.	His description bored me.	speech	description			
-i008	Germany borders on France.	Germany attaches on France.	border	attaches			
-i009	The bill passed the Diet.	The arraignment passed the Diet.	bill	arraignment			
-i010	He put his foot on the brake suddenly.	He put his foot on the safety belt suddenly.	brake	safety belt			
-i011	The FBI secretly bugged the mobster's hangout.	The FBI secretly bugged the recidivist's hangout.	mobster	recidivist			
-i012	Drops dripped.	Drops squirted.	drip	squirted			
-i013	Tom walked Mary to the front door.	Tom scurried Mary to the front door.	walk	scurried			
-i014	I came; I saw; I conquered.	I came; I saw; I survived.	conquer	survived			
-i015	Looters stole ancient artifacts from the tomb.	Banditti stole ancient artifacts from the tomb.	looter	banditti			
-i016	My six-month old son is teething.	My six-month old son is fledging.	teethe	fledging			
-i017	He tried to seduce me.	He tried to bring round me.	seduce	bring round			
-i018	He pays with a credit card.	He presents with a credit card.	pay	presents			
-i019	Tom knew who the kidnappers were.	Tom knew who the violators were.	kidnapper	violators			
-i020	We hailed a cab.	We beeped a cab.	hail	beeped			
-i021	The name rang a bell in me.	The name whizzed a bell in me.	ring	whizzed			
-i022	Tom comforted Mary.	Tom pacified Mary.	comfort	pacified			
-i023	Whenever he comes up to Tokyo, he stays with us.	Whenever he descends up to Tokyo, he stays with us.	come_up	descends			
-i024	The Tomei Expressway connects Tokyo with Nagoya.	The Tomei Expressway introduces Tokyo with Nagoya.	connect	introduces			
-i025	I can't recall her name at the moment.	I can't adopt her name at the moment.	recall	adopt			
+i001	His steps were clearly marked in the snow.	His steps were clearly animized in the snow.	mark	animized	no	no	
+i002	Another focal point is the avoidance of industrial accidents.	Another focal point is the abandonment of industrial accidents.	avoidance	abandonment	no	no	
+i003	What does the abbreviation IRA stand for?	What does the etymon IRA stand for?	abbreviation	etymon	no	no	"etymon is more about ""from"" than ""standing for"""
+i004	The hen hatched five eggs.	The hen calmed five eggs.	hatch	calmed	no	no	
+i005	The pigeon has flown the coop.	The pigeon has flown the pen.	coop	pen	yes	yes	
+i006	My father complained about the traffic noise.	My father complained about the traffic beep.	noise	beep	no	yes	noise can left monotonically involve beep -- driving sound, etc. 
+i007	His speech bored me.	His description bored me.	speech	description	no	yes	
+i008	Germany borders on France.	Germany attaches on France.	border	attaches	no	no	
+i009	The bill passed the Diet.	The arraignment passed the Diet.	bill	arraignment	no	yes	I actually don't know what the diet means. 
+i010	He put his foot on the brake suddenly.	He put his foot on the safety belt suddenly.	brake	safety belt	no	yes	It only makes sense when column B represents reparandum
+i011	The FBI secretly bugged the mobster's hangout.	The FBI secretly bugged the recidivist's hangout.	mobster	recidivist	no	yes	
+i012	Drops dripped.	Drops squirted.	drip	squirted	no	yes	
+i013	Tom walked Mary to the front door.	Tom scurried Mary to the front door.	walk	scurried	no	no	scurry is mainly an intransitive verb, right?
+i014	I came; I saw; I conquered.	I came; I saw; I survived.	conquer	survived	no	yes	
+i015	Looters stole ancient artifacts from the tomb.	Banditti stole ancient artifacts from the tomb.	looter	banditti	no	yes	
+i016	My six-month old son is teething.	My six-month old son is fledging.	teethe	fledging	no	no	let's assume we are talking about humans
+i017	He tried to seduce me.	He tried to bring round me.	seduce	bring round	no	no	"it's usually ""bring somebody around"". I don't against repalcing a single verb with a phrase, but only when the phrase makes sense after the substituion"
+i018	He pays with a credit card.	He presents with a credit card.	pay	presents	no	yes	
+i019	Tom knew who the kidnappers were.	Tom knew who the violators were.	kidnapper	violators	no	yes	
+i020	We hailed a cab.	We beeped a cab.	hail	beeped	no	yes	
+i021	The name rang a bell in me.	The name whizzed a bell in me.	ring	whizzed	no	no	Ring a bell is a fixed expression. We didn't consider this in data generation
+i022	Tom comforted Mary.	Tom pacified Mary.	comfort	pacified	yes	yes 	
+i023	Whenever he comes up to Tokyo, he stays with us.	Whenever he descends up to Tokyo, he stays with us.	come_up	descends	no	no	come up to is a fixed expression. Also, the replacing algorithm seems perform poorly when the original expression is a phrase. It causes unexpected residual
+i024	The Tomei Expressway connects Tokyo with Nagoya.	The Tomei Expressway introduces Tokyo with Nagoya.	connect	introduces	no	no	
+i025	I can't recall her name at the moment.	I can't adopt her name at the moment.	recall	adopt	no	yes	
 i026	He played his trump card.	He played his hole card card.	trump_card	hole card			
 i027	The police broke up the crowd.	The police broke up the community.	crowd	community			
 i028	The organizers expect more than 300,000 visitors.	The organizers choose more than 300,000 visitors.	expect	choose			
