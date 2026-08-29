@@ -1,0 +1,682 @@
+\documentclass{article}
+% This is the research proposal for Groningen University. The submission of RP is the necessary 
+% step before master's thesis registration.
+% The proposal should not be longer than 10 pages (before methodology section, it is already 6 pages long)
+\usepackage[margin=1in]{geometry}
+
+% Math and figures
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{tikz-cd}
+\usepackage{multicol}
+
+\usepackage{microtype}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{mdframed}
+
+% Paragraphs
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1\baselineskip}
+
+\usepackage{natbib}
+\usepackage{url}
+\usepackage{listings}
+
+\bibliographystyle{plainnat}
+
+\title{Representing Self-Repair In Meaning Representation System: A Case Study of SBN}
+\author{Hongxu Zhou}
+
+
+\begin{document}
+\pagestyle{empty}
+
+\maketitle
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    citecolor=black,
+    urlcolor=blue
+}
+
+% Style for SBN sequences
+% Save this for the thesis
+% --Hongxu Zhou
+\lstdefinestyle{sbn}{
+    basicstyle=\ttfamily\small,
+    breaklines=false,
+    frame=single,
+    rulecolor=\color{gray!60},
+    backgroundcolor=\color{gray!6},
+    xleftmargin=1.5em,
+    xrightmargin=1.5em,
+    framexleftmargin=1em,
+    columns=flexible,
+    keepspaces=true,
+    showstringspaces=false,
+    aboveskip=0.6em,
+    belowskip=0.6em,
+    commentstyle=\color{gray!80}\itshape,
+    morecomment=[l]{\%},
+}
+
+\newcommand{\sbnterm}[1]{\texttt{#1}}
+
+
+
+\section{Introduction}
+
+Self-repair is a routine property of spontaneous speech, where a speaker breaks off
+an utterance and revises part of what they have just said. Computational work
+generally follows the taxonomy of \citet{shribergPreliminaries1994}, which
+%% TODO: add Shriberg 1994, Levelt 1983 and Fox, Maschler & Uhmann 2010
+%% (J. Pragmatics 42(9), key foxCrosslinguisticStudySelfrepair2010) to .bib
+builds on \citet{leveltMonitoringSelfrepair1983} and decomposes a repair into
+three parts: the \emph{reparandum}, the material to
+be revised; an \emph{interregnum}, an editing phrase such as \textit{I mean} that
+may or may not be present; and the \emph{repair}, the material that replaces the reparandum.
+What the reparandum contributes differs across the three repair types the
+taxonomy distinguishes. A repetition restates it and a restart abandons it, so in
+neither case does removing it change what the speaker has committed to.
+Replacement is the exception: the speaker withdraws a commitment already made and
+puts another one in its place, so it is the only type that involves a semantic
+update.
+
+%% TODO(P3): the Switchboard composition figure (over half of annotated
+%% disfluencies are simple repetitions, \citealp{charniakEditDetectionParsing2001,
+%% shribergDISFLUENCIESSWITCHBOARD1996}) belongs with the data-availability
+%% premise near RQ2, not here. Cite composition, not the 5.9%% rate.
+
+The dominant computational treatment is detection-and-deletion, where the
+reparandum is treated as noise and the goal is to recover a fluent string before
+downstream tasks begin \citep{johnsonTAGbasedNoisychannelModel2004,
+zayatsRobustCrossdomainDisfluency2018, rohanianBestBothWorlds2021}. The two
+types that involve no update lose nothing under it: a repetition leaves its
+content standing elsewhere in the string, and a restart never asserted any in the
+first place. That fit is part of why the approach has held up so well.
+
+Replacement is where deletion costs something. The material it discards was
+committed to and then withdrawn, and both halves of that are part of what the
+discourse records. Comprehenders behave accordingly, holding the reparandum in
+context \citep{brennanHowListenersCompensate2001}, where it stays available as an
+antecedent later in the same dialogue
+\citep{purverComputationalModelsMiscommunication2018}.
+In \textit{``My favourite dessert is cherry pie, actually, banana bread. They are
+both good desserts,''} a system that receives only the cleaned string has no
+second candidate for the plural pronoun ``they" to pick up.
+
+\citet{senSemanticParsingDisfluent2021} make the assumption concrete. Every
+disfluent utterance in their data is paired with the meaning representation in slot-value format of
+its fluent counterpart, so the reparandum leaves no trace in the target at all.
+A parser trained this way scores 0.81 exact match on fluent input and 0.02 on
+disfluent versions of the same utterances. Synthetic augmentation recovers much
+of that loss, though not evenly. Filled pauses end up largely handled, while
+repairs stay below 0.3 even at the highest augmentation setting, on a disfluent
+test set small enough that the figures are indicative rather than exact.
+
+What that target discards has been the object of study elsewhere.
+\citet{foxCrosslinguisticStudySelfrepair2010} code recycling, their term for
+repetition, against replacement in English, German and Hebrew, and the two divide
+the vocabulary between them. Recycling returns to a function word in roughly four
+cases out of five, while replacement substitutes a content word between a third
+and a half of the time. Replacement is the rarer of the two in all three
+languages, and the one that carries lexical content when it occurs. Clinical work meets the same imbalance
+from the other side. \citet{beierDisfluenciesAge2023} find no age effect on
+disfluency when the count is aggregated; separating the types shows repeats
+moving slightly with age while repairs do not, and the two predicted by different
+variables. \citet{pirinenComprehensiveAnalysis2023} report significantly more
+revisions and abandoned utterances in autistic young adults than in controls,
+with no group difference for multisyllabic repetition. In both, the variation the
+study is after sits in a subtype an aggregate disfluency rate averages away.
+%% CUT(P2): the ASR-smoothing point (\citealp{romanaFluencyBank2024}) and the
+%% dementia-detection cost (\citealp{farzanaHowYouSay2022}) were removed here.
+%% Both concern the speech-to-text stage, which sits upstream of everything this
+%% thesis does. Restore as a single subordinate clause if the scope argument is
+%% wanted back.
+
+Rarity of this kind sets how often a system meets the phenomenon, while the cost
+of mishandling it is set by what a single instance carries. What a single
+instance carries in both studies is a contrast: Fox et al. code the replaced item
+against the item that replaced it, and a revision counts as a revision only
+relative to what it revised. Neither half of the pair is the unit, so keeping the
+reparandum available and keeping its relation to the repair are one requirement
+rather than two.
+
+Formal and computational semantics keep the retracted material. Standard DRT
+\citep{Kamp1995} updates context monotonically, so nothing once added can be
+taken back out, and taking a commitment back out is what a correction requires.
+\citet{vanleusenIncompatibilityContextDiagnosis2004} supplies both a diagnosis
+and a procedure, stated in Logical Description Grammar rather than in DRT itself:
+a correction is felicitous when the corrective claim is incompatible with its
+antecedent in context, and the update it triggers retracts that antecedent before
+it adds the claim. Retraction is the operation on the context, and correction is
+the discourse move that calls for it. Later work takes up the procedure and
+leaves the formalism. Layered DRT demotes the offending layer
+\citep{maierDenialCorrectionLayered2007}, and SDRT relates the two propositions
+through a \textsc{Correction} rhetorical relation
+\citep{lascaridesSegmentedDiscourseRepresentation2007}. What the three share is
+the unit they work on. In each of them the material denied is a complete
+assertion, and none reaches inside one. SDRT is the case that matters here, since
+SBN takes its relation inventory from it. Applied to \textit{``I need a train, I
+mean, a flight, to Berlin tonight,''} SDRT has to split one continuous utterance
+into two speech acts before it can relate them. Whether the incompatibility
+condition carries over to a speaker correcting themselves is a question
+\citet{vanleusenIncompatibilityContextDiagnosis2004} leaves open.
+Dynamic Syntax with TTR operates at the right granularity, marking reparandum
+edges as repaired rather than deleting them
+\citep{houghProcessingSelfrepairsIncremental2012, eshghiLearningGenerateCorr2023},
+but maintaining incremental state is computationally expensive and does not fit
+the sequence-to-sequence paradigm most current parsers are built on.
+
+What is missing is a notation that can express non-monotonic self-repair at the
+sub-propositional level, keep the reparandum structurally available, and still
+be produced by a sequence model. Simplified Box Notation (SBN) \citep{bosSBN}
+is a natural candidate for closing this gap. It is a linear serialisation of DRS,
+inheriting DRT's box and scope semantics while remaining a string that a
+sequence-to-sequence language model can produce directly. \citet{zhangEllipsisResolution2025} examine ellipsis in the same ecosystem with a
+challenge set of 120 items, where PMB already supplies the target representation. %% TODO: add to .bib
+Self-repair has no such representation, and building one has to come before any
+diagnosis of parser behaviour.
+%% TODO(P2): Sen \& Groves (2021) moves up into the detection-and-deletion paragraph,
+%% carrying the 0.02 / 0.26 / 0.75 figures.
+
+The thesis makes four contributions.
+
+\begin{enumerate}[itemsep=0.2em]
+  \item A representation of replacement self-repair in SBN, in which a
+        \sbnterm{CORRECTION} box quarantines the reparandum and a sibling
+        \sbnterm{CONJUNCTION} merges the repair into the context that was live
+        before it. The scope of the treatment is stated explicitly, including the
+        cases it cannot reach.
+  \item The first instantiation of \sbnterm{CORRECTION}, a separator that SBN's
+        inventory reserves but that appears nowhere in the annotated data of
+        PMB 5.1.0.
+  \item A pipeline that synthesises repair-aware (NL, SBN) pairs by transforming
+        gold meaning representations directly, so that no parser output enters the
+        training targets.
+  \item A pilot study of how a parser trained on standard PMB data behaves on
+        disfluent input, which shows the reparandum surviving into a well-formed
+        graph alongside the repair.
+\end{enumerate}
+
+Three research questions follow.
+
+\begin{enumerate}
+  \item \textbf{Theory:} How should replacement self-repair be represented within SBN, and what is the coverage of that representation?
+  \item \textbf{Data:} Given the scarcity of replacement self-repair in existing meaning-banked corpora, how can high-quality SBN-annotated data be synthesised from existing resources such as the Parallel Meaning Bank (PMB)?
+  \item \textbf{Model:} Once fine-tuned on this synthesised data, how well do pretrained language models learn to parse replacement self-repair, and what error patterns remain?
+\end{enumerate}
+
+\section{Self-Repair Formalism in SBN}
+\label{sec:formalism}
+
+SBN represents a sentence as a sequence of boxes linked by separators, with
+concepts and their argument roles nested inside each box. Some separators are
+structural, such as \sbnterm{NEGATION} and \sbnterm{CONJUNCTION}. The rest are
+discourse relations, which Bos takes over from SDRT more or less as they stand
+\citep{bosSBN}. Two kinds of index hold the sequence together. Angle brackets on a
+separator point between boxes, and signed numbers on a role point between
+concepts. A signed index counts concepts along the whole sequence, and a box
+boundary does not reset that count. A concept may only refer into a box that
+dominates it, and where a role would otherwise cross that boundary the
+\emph{-Of} form of the role turns the index backwards. That is what lets both
+candidates in a repair attach to the verb in the box above them instead of
+pointing forward across a box boundary. Inversion is part of the notation, though
+the inverted forms this project needs, including \emph{ThemeOf} and
+\emph{TimeOf}, do not occur in PMB's annotated data.
+
+A correction does two things at once. In SDRT it denies one proposition and
+commits to another, which can be written
+\textsc{Correction}$(\pi_1,\pi_2) \equiv \neg K_{\pi_1} \wedge K_{\pi_2}$
+\citep{lascaridesSegmentedDiscourseRepresentation2007}, and van Leusen's procedure
+adds that the two halves update the context in different ways, one by retraction
+and one by ordinary merge. \sbnterm{CORRECTION} is already available for the job,
+since it entered SBN with the rest of SDRT's inventory, although PMB 5.1.0 never
+uses it. One separator cannot carry the whole relation. A separator opens a single
+box at the point where it stands, takes no arguments of its own, and has no way to
+express a condition of two conjuncts that update differently. The two halves are
+therefore split across two separators. \sbnterm{CORRECTION} opens the box that
+quarantines the reparandum and carries the denial, while a sibling
+\sbnterm{CONJUNCTION} merges the repair into the context that was live before the
+correction opened and carries the commitment. Both boxes hang from the same
+parent.
+
+The same relation covers the cross-turn case without the second separator, and
+the reason lies in what is being denied. When one speaker corrects another, both
+arguments are complete contexts already, so a single separator relates two boxes
+that exist anyway and no clause is interrupted. When a speaker corrects
+themselves, the denied material is a constituent of a clause still in progress. It
+has no box, so one has to be opened for it, and opening it breaks off the clause,
+which then has to be resumed. The sibling \sbnterm{CONJUNCTION} is what that
+resumption looks like. It appears exactly when the denied material sits below the
+level of a proposition, which is also what tells the two configurations apart.
+
+In \textit{``I ordered a banana bread, I mean, a cherry pie,''} both candidate
+objects attach to the ordering event through an inverted \emph{ThemeOf} role,
+so the reference points backward into \sbnterm{Box 0} instead of forward into
+the boxes that quarantine and merge them:
+
+\begin{lstlisting}[style=sbn]
+person.n.01 EQU speaker              % I
+time.n.08 TPR now
+order.v.01 Agent -2 Time -1          % ordered
+    CORRECTION <1
+banana_bread.n.01 ThemeOf -1         % a banana bread,
+    CONJUNCTION <2                   % I mean,
+cherry_pie.n.01 ThemeOf -2           % a cherry pie
+\end{lstlisting}
+
+Both candidates reach the verb by counting backwards, which works because the
+verb precedes them in the sentence and so also in the sequence. Where the
+repaired concept comes first instead, most often a repaired subject, the
+predicate that governs it is still ahead and no backward index reaches it. A
+dummy concept, \sbnterm{entity.n.01}, is placed before the \sbnterm{CORRECTION}
+to resolve this. The predicate's role lands on the dummy, which sits in the box
+that dominates both candidates, and each candidate ties itself to the dummy with
+\sbnterm{EQU}. This is the device Bos uses where a discourse referent and its
+conceptual predicate end up in different boxes \citep{bosSBN}; here it gives the
+two candidates a single referent the predicate can also see. A repaired subject
+is among the commonest sites the notation has to cover, so this is not a
+marginal use.
+%% Source: Bos (2021), Variable-free DRS, Fig. 3 (p.5). Make sure the bib key
+%% resolves to the 2021 paper and not the 2023 sequence-notation one.
+
+The same dummy reaches repairs that target a role rather than a concept, such as
+a repaired preposition, where it is introduced to carry the role and tied to the
+event in the same way. That extends the device to material which has no concept
+of its own.
+
+In SBN the sub-propositional boundary falls at the separator. The mechanism
+covers replacement below that level, as long as the reparandum and the repair
+sit at the same level as each other.
+Within that boundary, the notation handles repair on subjects, verbs, objects,
+tense, aspect, negation scope, and adjuncts, and repair whose reparandum remains
+available as an antecedent later in the discourse. The same boundary excludes
+cases where the thing repaired is itself a separator. Replacing a quantifier would
+mean undoing the nested \sbnterm{NEGATION} boxes that already encode it, and a
+rhetorical relation or a modal verb runs into the same difficulty, since none of
+the three is a concept and a \sbnterm{CORRECTION} box can quarantine nothing
+else. The dummy concept works inside that limit rather than
+around it, giving a repaired role somewhere to attach without making a separator
+quarantinable. A further limitation is independent of the boundary.
+\sbnterm{CORRECTION} can only quarantine material that follows it in the sequence,
+so a repair whose reparandum was uttered several concepts earlier cannot be
+captured without reordering.
+%% TODO: an intra-turn repair followed by a cross-turn correction in the same
+%% discourse was listed here as covered. Held back until KB 8.1 settles which box
+%% the cross-turn CORRECTION attaches to.
+
+\section{Pilot Study}
+\label{sec:pilot}
+
+Whether the notation needs that place is a question about what parsers do without
+it. A model trained only on fluent data has nowhere to record a withdrawn
+commitment, so a replacement in its input leaves it two moves: drop the
+reparandum, which is what detection-and-deletion would do, or write it in as
+though the speaker had asserted it. The pilot establishes which move a current
+parser makes, and how much the choice costs.
+
+The parser is Gemma-2-9B, fine-tuned with LoRA on PMB 5.1.0 train gold (NL, SBN)
+pairs that contain no self-repair, and it was run over 836 sentences from
+the same gold set under seven conditions: the sentence
+unmodified (\textsc{gold}), a synthetic replacement inserted at the head,
+middle, or tail of the sentence (\textsc{repair}), and the same three
+positions with the interregnum \textit{``I mean''} inserted before the repair
+(\textsc{repair+interr.}). These are the 865 sentences of nine words or more,
+minus 29 items that turned out to be multi-sentence or direct speech; the length
+threshold is what makes the three insertion positions distinguishable. The
+sentences come from the training data by design. The gold condition shows what
+the parser produces when the target for that sentence was among its training
+examples, and the disfluent conditions are read against that. The main experiment
+does not evaluate on training material, because generalisation is what it has to
+measure. Every condition is scored against the same gold SBN graph for that sentence, so
+the input string is the only thing that varies. Scoring uses smatch++
+(citehere), which aligns the predicted and gold graphs and reports precision and
+recall over the matched triples. The training steps are set to be aligned with Xiao
+(2025), the source of the fine-tuning setup this pilot reuses.
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{lccc}
+\toprule
+condition & success \% & F1 (successes only) & F1 (penalized) \\
+\midrule
+gold (no repair) & 97.1 & 0.975 & 0.947 \\
+repair & 92.0--95.5 & 0.825--0.842 & 0.760--0.804 \\
+repair + interregnum & 70.5--86.6 & 0.779--0.805 & 0.557--0.697 \\
+\bottomrule
+\end{tabular}
+\caption{Parser performance by condition (repair and repair+interregnum rows
+range over head/mid/tail). Penalized F1 scores a failed parse as 0. Repair
+variants were generated with a language model; the head and mid variants were
+checked by hand, the tail variants were not.}
+\label{tab:pilot-summary}
+\end{table}
+
+Performance degrades in two steps. Penalized F1 falls from 0.947 to
+0.760--0.804 once a plain replacement is inserted, and falls further to
+0.557--0.697 once an interregnum is added before the repair. Only a reparandum is
+inserted in these conditions, so the gold graph stays the correct target
+throughout. A parser that discarded the inserted material and returned the clean
+graph would score on the disfluent conditions as well as on the gold one, and
+that is what a detection-and-deletion system is built to produce. The pilot would
+have counted it as success.
+
+The outputs show something else. The reparandum is neither discarded nor marked,
+but written into the graph as an additional concept, which leaves the result well
+formed and wrong. Gold triples survive as a subset of the larger graph, so recall
+holds while precision drops, and F1 settles in a range that reads as partial
+competence. Relative indexing is what makes this cheap. Inserting a concept at
+the front of the sequence moves every later position along by one, but the
+distances between concepts do not change, so every index in the gold parse stays
+correct and the whole of it survives around the inserted node. The parser's output for \textit{``Jerry, Tom threw a rock at Mary, but it
+didn't hit her''} scores an F1 of 0.883 against the gold graph for the
+unmodified sentence. It begins as follows, with the remaining second clause
+left out since it does not bear on the reparandum:
+
+\begin{lstlisting}[style=sbn]
+male.n.02 Name "Jerry"
+male.n.02 Name "Tom"
+throw.v.01 Agent -1 Time +1 Theme +2 Destination +3
+time.n.08 TPR now
+rock.n.01
+female.n.02 Name "Mary"
+% "Jerry" (the reparandum) is written in as a free-standing node with no role
+% attaching it to the rest of the graph. Everything after it is the gold parse
+% unchanged: the absolute positions move along by one, but the indices are
+% relative, so Agent -1 still reaches Tom and none of them has to be rewritten.
+\end{lstlisting}
+
+A companion ablation separates what the pretrained model already knows about
+repair from what the narrow SBN fine-tuning changed. The base model runs with no
+adapter, and the prompt asks it to mark the reparandum, the interregnum and the
+repair in plain text. Here the split runs between cued and uncued repair.
+Interregnum repair is detected at ceiling, 100\% across all
+positions, because \textit{``I mean''} is a fixed lexical cue. Plain
+replacement offers no such cue and is detected only 30.7--64.2\% of the time,
+with the rate varying by where the reparandum sits. Detection therefore does not follow from a lexical cue alone.
+It requires telling the reparandum from the repair by content, and even that is not the end of it. A
+parser that has told them apart still has only two moves available in SBN as it
+stands. It can drop the reparandum, which loses material the discourse may still
+need, or write the reparandum in, which credits the speaker with a commitment they
+withdrew. The outputs above take the second. There is no third move, because the
+notation has nowhere to record that something was retracted.
+Section~\ref{sec:formalism} supplies that place, and it has not been set out in
+full or evaluated before.
+
+\section{Methodology}
+
+\subsection{Data}
+\label{sec:data}
+
+%% TODO: add to .bib -- passaliLARD2022, guptaDisflQA2021, abzianidzePMB2017,
+%% fellbaumWordNet1998, schulerVerbNet2005, bakerFrameNet1998,
+%% laurerLessAnnotating2024 (the NLI model the distinctness filter runs on).
+
+Supplying that place is not enough, because a parser learns from examples and the
+examples do not exist. PMB 5.1.0 pairs 9,552 English sentences with hand-checked
+SBN graphs, and not one of them contains a self-repair. The corpora that do
+contain self-repair carry no meaning representation, whether the disfluency is
+natural, as in Switchboard, or synthetic, as in LARD and DISFL-QA. Where both
+sides are present they do not meet: \citet{senSemanticParsingDisfluent2021} pair
+every disfluent utterance with the representation of its fluent counterpart, so
+the reparandum leaves no trace in the target. Nothing available pairs a
+replacement with a representation that keeps both the reparandum and its relation
+to the repair.
+
+That pairing is built from PMB gold, and the construction is a single move. The
+word the gold sentence already contains stays as the repair, since it records
+what the speaker settled on, and a reparandum is manufactured in front of it. So
+\textit{``The movie starts at ten o'clock''} becomes \textit{``The performance,
+actually, movie starts at ten o'clock.''} The gold annotation survives inside the
+result rather than being rewritten to accommodate it. Generation runs separately
+over PMB's own train, dev and test partitions, and a source sentence yields at
+most two variants. Every variant therefore stays in the partition its source came
+from.
+
+What a variant has to look like depends on what the repair does to the graph.
+Substituting one content word leaves the rest of the graph standing, while
+repairing a tense, an edge label or a name reaches parts of it that lexical
+substitution never touches, and Section~\ref{sec:formalism} treats these as
+separate cases. Table~\ref{tab:grid} is organised by that difference and not by
+how long the repair runs on the surface. Most of its rows can be filled
+automatically. Forwarding repair spans a subject and its verb at once, which the
+transformation cannot express in one move, so the generator drafts those and a
+person passes them. Repair whose reparandum is picked up later needs a second
+sentence, and cross-turn correction needs a second speaker, so both are written
+by hand.
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{llrrr}
+\toprule
+what the repair changes & how it is made & train & dev & test \\
+\midrule
+one content word                    & automatic          & 2,200 & 265 & 425 \\
+a constant: name, number, time      & automatic          & 1,120 & 140 & 230 \\
+tense or aspect                     & automatic          &   500 &  60 & 100 \\
+an edge label                       & automatic          &   500 &  60 & 100 \\
+a subject and its verb together     & drafted, reviewed  &   200 &  30 &  60 \\
+reparandum reused later; cross-turn & hand-written       &   --- & --- &  80 \\
+\midrule
+total & & 4,520 & 555 & 995 \\
+\bottomrule
+\end{tabular}
+\caption{Target composition, by the operation the repair requires of the graph.}
+\label{tab:grid}
+\end{table}
+
+The repair corpus is added to PMB gold rather than replacing it, and comes to
+about a third of the combined training data. That proportion answers the pilot: a
+parser already inclined to write too much structure would only be pushed further
+by a corpus in which repair is the norm. Supply is not what constrains it, since
+the concept-substitution operator has produced some 15,200 candidates on the
+training partition alone and the quotas sample from those. The hand-written rows
+go to the test set by themselves, where they ask whether a model reaches a
+construction it has never seen.
+
+A site is available wherever the generator can find the word that realises a gold
+concept, which it does by matching lemma and coarse part of speech against the
+sentence. Where no match is found the site is passed over. The
+\sbnterm{CORRECTION} box takes a single concept, so what gets withdrawn is a
+single content word: \textit{the movie} against \textit{the performance}, never
+\textit{the big dog} against \textit{the small cat}. Function words fall outside
+that limit, since SBN gives them no concept of their own, and a reparandum may
+repeat the determiner or the preposition in front of the content word and still
+run to several words when spoken.
+
+On the sentence, the reparandum goes in before the repair and both spans are
+recorded. On the graph, \sbnterm{CORRECTION} opens the box that quarantines the
+reparandum and a sibling \sbnterm{CONJUNCTION} merges the repair into the context
+that was live before it, with both boxes hanging from the same parent. Because a
+signed index counts concepts along the whole sequence, the insertion displaces
+every reference reaching across it, and each of those is recomputed. In
+\textit{p60/d2470} the object of \textit{put} is repaired, and the two candidates
+attach to the verb through the inverted \emph{ThemeOf} of
+Section~\ref{sec:formalism}:
+
+\begin{lstlisting}[style=sbn]
+% gold: put.v.01 Agent -1 Time +1 Theme +2 Destination +3
+male.n.02 Name "Tom"
+put.v.01 Agent -1 Time +1 Destination +4   % Theme is now inverted, below
+time.n.08 TPR now
+    CORRECTION <1
+radar.n.01 ThemeOf -2                      % the attempt withdrawn
+    CONJUNCTION <2                         % no wait,
+thermometer.n.01 ThemeOf -3                % the gold concept, untouched
+location.n.01 SZN +2
+male.n.02 ANA -6                           % was -5
+arm.n.01 PartOf -1
+\end{lstlisting}
+The displacement shows in the roles nobody edited: \sbnterm{Destination} moves
+from \sbnterm{+3} to \sbnterm{+4} and \sbnterm{ANA} from \sbnterm{-5} to
+\sbnterm{-6}, while what each of them points at is unchanged.
+
+Whether the result is legal is settled before anything else is asked of it. Every
+sample is read back with PMB's own parser and checked for four things: that the
+graph has no cycle, that reparandum and repair sit in sibling boxes, that no edge
+of the gold graph has been lost, and that no index has grown too long to be read.
+Two of the four fail quietly, because an inserted box moves every index behind it
+and arithmetic that is wrong still parses. Of the sites the generator attempts,
+99.7\% come through legal. The surgery is not where the risk sits; the choice of
+reparandum is.
+
+A reparandum has to be a sibling of the repair in a contrast set, one slot with an
+incompatible value in it, and what counts as the slot varies with the part of
+speech. Ranking candidates by similarity is the obvious way to find one and it
+returns the wrong relation, yielding near-synonyms at between a quarter and a
+half of sites depending on the part of speech, where correcting \textit{watch}
+to \textit{see} is pedantry rather than repair. The pool is assembled from WordNet co-hyponyms, VerbNet classes and
+FrameNet frames, which encode contrast where distance encodes proximity.
+
+Legality says nothing about whether a sentence could have been spoken.
+\textit{``Adversary, Hitler assumed power in 1933''} passes every check above.
+Whether a candidate differs from the repair enough to make a correction worth
+uttering is a question about entailment, and natural language inference answers it
+where embedding distance cannot: distance puts \textit{cheap} beside
+\textit{expensive}, and an antonym is among the best reparanda available. Whether
+the candidate could have stood in that position at all is a separate question, and
+a language model's surprisal answers that one, compared among the candidates at a
+single site rather than against a fixed threshold. A usable reparandum clears
+both, being plausible where it was put without being interchangeable with what
+replaced it.
+
+Neither threshold can be argued for in advance, so both are being calibrated
+against 150 pairs labelled by hand with the scores hidden. What comes out is a
+band, since a candidate can fail by sitting too close to the repair as easily as
+by sitting too far from it. The distinctness filter is implemented; the fit filter
+and the band the two define together are still in calibration.
+
+The interregnum varies on a second axis, and it is deliberately not spread evenly.
+The pilot detected interregnum-marked repair at ceiling and missed unmarked repair
+most of the time, so the unmarked case is the one a corpus has to teach and it is
+generated in full. Five editing phrases take the place of the pilot's single
+\textit{``I mean,''} which left open whether a model had recognised a repair or two
+words. Phrases that signal reformulation are kept out, since \textit{``that is''}
+and \textit{``or rather''} leave both versions standing and withdraw no
+commitment. An interregnum changes the graph as well as the sentence, so a marked
+sample and its unmarked twin are two records joined by an identifier.
+
+Each record carries the identifier of the sentence it came from, the clean and
+disfluent sentences, the clean and repair-aware graphs, the spans of reparandum,
+repair and interregnum, and the operation the repair required. Reparandum and
+repair are recorded rather than recovered, where the pilot had to find them by
+diffing one graph against another. The outcome of each structural check is kept
+with the record, so a defect can be inspected and not only filtered away.
+
+Because the repair is spliced onto a gold graph by a transformation whose
+parameters are known for every sample, the splice can be undone. Removing the
+reparandum with its two boxes and running the renumbering backwards returns the
+original graph without a parser, which lets one corpus be scored against a
+repair-aware target, against the clean meaning, and against what a
+detection-and-deletion system would be expected to produce. Failure can then be
+localised, since a parse may be wrong about the repair or about the sentence
+underneath it. The inverse transformation is not yet written.
+
+Working now are the concept-substitution operator, the candidate pool, the graph
+transformation and the structural checks, and the first calibration set is
+labelled. Operators for constants, for tense and aspect and for edge labels are
+still to be written, along with the inverse transformation and the fit threshold.
+Generation at full scale follows those, then sampling to the quotas above, review
+of the forwarding drafts, and the hand-written cases. Human work across the
+pipeline comes to some 880 judgements, of which the calibration labels are 150 and
+the rest is spot-checking the finished corpus, passing the drafted cases and
+writing the test-only ones. Section~\ref{sec:timeline} places these in order.
+
+
+\subsection{Model}
+\label{sec:model}
+
+Once that corpus exists, the question is what a parser trained on it does. The
+pilot has already shown what one does without it. Given a replacement it had no
+notation for, the model wrote the reparandum in as an ordinary concept and left
+the graph well formed and wrong [hx: here I want to use a quick sentence to refresh the readers' memory that without trainig, the parser will sacrefise semantic accuracry to glue components together to make the output is structurally legal.]. 
+Section~\ref{sec:formalism} supplies the missing
+notation and Section~\ref{sec:data} the missing examples. What a parser does when
+it has both is still open.
+
+Only scale and training data are allowed to vary. Gemma-2 is released at 2B, 9B
+and 27B, and each size is fine-tuned twice, once on PMB gold alone and once on
+PMB gold with the repair corpus added. Sizes within one release share a
+tokeniser, a pre-training recipe and an architecture, so a difference between
+them is one of scale and not of provenance. The LoRA configuration and the
+training schedule follow Xiao (2025), unchanged across all six runs. That keeps
+the comparison between the two data conditions steady at every size. The 27B
+model does not fit on a single 40 GB device in half precision. That pair of runs
+therefore depends on a larger allocation, with a quantised base as the fallback.
+%% TODO: resolve "Xiao (2025)" to a bib key; it is cited the same informal way
+%% in Section~\ref{sec:pilot}.
+
+Every output is checked for legality before it is scored, by the tests the
+generator already runs on its own. Those tests reject a string that will not
+parse, a graph carrying a cycle, a concept referring to itself, and an index
+reaching past the end of the sequence. [hx: can we change it to an umbrealla term such as ill-formed ouputs] The pilot reported a success rate alongside two F1
+figures, one over the successful parses and one counting failures as zero. The
+same three columns are kept here.
+
+Scoring runs against the repair-aware graph with smatch++, which aligns the
+output to the target and reports precision and recall over the matched triples.
+That figure stands as the headline result for each run. The same alignment
+supports a finer reading. Every gold triple sits either inside the two boxes the
+splice introduced or in the material around them, and the transformation recorded
+which. Recall over the first group says whether the model found the reparandum
+and the repair and put them in the right relation. Precision and recall over the
+second say whether it got the sentence underneath right.
+
+That second group is informative even where a model produces no
+\sbnterm{CORRECTION} box at all, and the pilot outputs are the case in point.
+Inserting a reparandum shifts every later concept along by one, but SBN indices
+are relative, so the distances between concepts hold and the gold parse survives
+around the inserted node. Recall stayed high there while precision fell.
+Reading the two groups apart turns that observation into a measurement. It
+separates a model that misses a repair from one that also damages the clause the
+repair sits in.
+
+Marked and unmarked variants of the same repair share a target graph, since an
+editing phrase contributes no concept. The corpus joins the two by an identifier,
+so their scores can be compared one record against its twin. A model that has
+learned to pass over the editing phrase scores alike on both, and a gap between
+them says the phrase is being read as content. The pilot gives reason to expect
+one, since its parser lost ground at every insertion position once an interregnum
+was added.
+
+Those scores break down further by the operation each repair required, along the
+categories of Table~\ref{tab:grid}. The breakdown locates trouble and is not
+reported cell by cell. Several of those categories are small once the interregnum
+split is applied, and a per-cell F1 over a few dozen items carries little weight.
+Adding repair data to the training mix could also cost something on ordinary
+sentences, so every repair-trained model is run on the unmodified PMB gold test
+set as well. Its score there is read against the sibling trained on gold alone,
+which isolates what the added data cost.
+
+The hand-written items pass through the legality checks and the headline figure
+in the same way. Grouping their gold triples needs a definition of its own for
+each of the two kinds. A repair whose reparandum is picked up later has the
+intra-sentential structure of every other item, so its repair-related triples are
+the ones in the two spliced boxes. What it adds is a pronoun in the following
+sentence that has to resolve to the reparandum, and that resolution is checked
+separately. Cross-turn correction has a different shape, since both of its
+arguments are complete contexts and a single \sbnterm{CORRECTION} relates them
+with no sibling \sbnterm{CONJUNCTION}. The repair-related group is defined there
+over the two boxes the relation connects. Neither kind appears in training at any
+size.
+
+\section{Timeline}
+\label{sec:timeline}
+
+%% NB: claims live in the contribution list in the Introduction.
+%% This section lists concrete artefacts only (dataset, annotation manual,
+%% adapter weights, evaluation toolkit, coverage report).
+\section{Expected Outcomes And Deliverable}
+
+\bibliography{}
+
+\end{document}
+

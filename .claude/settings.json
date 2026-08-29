@@ -10,7 +10,8 @@
       "Bash(quarto publish *)",
       "Bash(git branch *)",
       "Bash(git push *)",
-      "Bash(curl -s https://api.github.com/repos/hongxuzhou/lct_master_project/pages)"
+      "Bash(curl -s https://api.github.com/repos/hongxuzhou/lct_master_project/pages)",
+      "mcp__notion__notion-fetch"
     ]
   }
 }
