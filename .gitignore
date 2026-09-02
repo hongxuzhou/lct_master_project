@@ -6,3 +6,12 @@ data/pmb-5.1.0/lora_data
 repair_data_gen/reference
 
 !repair_data_gen/reference/two_page_rp.tex
+
+# Candidate pools are regenerable intermediates (build_pool.py) and run to tens
+# of MB.  Committing each regeneration would leave a permanent blob per
+# iteration in git history.  The scripts and the summarise() stats are the
+# reproducible record; the pool itself is not.
+repair_data_gen/pool_*.tsv
+
+__pycache__/
+*.pyc

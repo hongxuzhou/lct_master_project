@@ -752,8 +752,12 @@ regeneration.
 ### 5.4 Defects that must be fixed before regenerating
 
 Measured in the trial corpus, all fixable, together affecting roughly a third
-of its rows (`FINDINGS.md` §6). Status is as of the first fix round
-(`FINDINGS.md` §6.6):
+of its rows (`FINDINGS.md` §6). Status is as of the second fix round; the
+first round's entries are marked where its findings still stand
+(`FINDINGS.md` §6.6). The second round was prompted by 150 hand-annotated
+calibration items, whose oddities turned out to share one cause: `align`
+returned a single token index, so a multiword concept was only ever matched,
+inflected and replaced on its first word.
 
 | defect | share | fix | status |
 |---|---|---|---|
@@ -765,7 +769,11 @@ of its rows (`FINDINGS.md` §6). Status is as of the first fix round
 | near-synonym candidates | verbs 23%, adjectives 45% | change the pool, not the filter (§2.1) | open |
 | broken inflections (`adversaryest`) | 0.2% | already flagged by a column; filter | open |
 | past tense taken as past participle (*"Tom sewn"*) | not yet counted | irregular-verb table picks the wrong form | open |
-| multiword lemma pluralised on the first word (*"bigs cat"*) | not yet counted | inflect the head, not the first token | open |
+| multiword lemma pluralised on the first word (*"bigs cat"*) | 1.5% of pool | right-headed for nouns, left-headed for verbs, head-initial for postmodified phrases (`inflect_en._head_index`) | **done** — 0 |
+| multiword repair replaced on its first word only (*"his hole card **card**"*, *"harmonizing **up** its presence"*) | 5.4% of pool | `align` returns the token span spelling the concept, and gives the site up when it cannot resolve one | **done** — 0 |
+| reparandum inflected from the modifier's tag (*"I love hamburger, that is, hot dogs"*) | 11.5% of multiword-noun samples | take the tag from the compound's head token, not the aligned one | **done** — 0 |
+| candidate already present in the sentence (*"Lungs, heart, **veins**, **veins** and capillaries"*) | 0.12% | surface-and-lemma guard in the pool builder | **done** — 0 |
+| argument-frame mismatch (*"I conferred your brother on the street"*) | 2.2% of pool | **not a pool guard — see below** | open |
 
 **One defect class does not appear in this table, and that is the point of
 §5.1 and §5.2 being separate layers.** During the first fix round, an
@@ -773,6 +781,60 @@ intermediate version produced *"Adversary, Hitler assumed power in 1933."* —
 a legal graph that passed every rule check, and whose only symptom was that the
 sentence is nonsense. Reading samples is part of each iteration, not a final
 audit step.
+
+#### Argument-frame mismatch belongs to the upper bound, not to the pool
+
+The last row of the table is the one open defect this design already believed
+it had solved, so it needs its reasoning recorded rather than a one-line fix.
+
+**What it looks like.** A multiword verb repair replaced by a single-word
+candidate loses its particle, and the candidate's own frame may not accept the
+arguments left behind:
+
+```
+run_into.v.04  -> confer      I conferred your brother on the street.     no
+put_in.v.05    -> distribute  She distributed for a raise.                no
+wipe_away.v.01 -> shed        Tom shed his tears.                         fine
+rip_off.v.01   -> overcharge  Tom overcharged you.                        fine
+```
+
+5,159 rows, 2.2% of the pool. It is not new — before `align` returned spans the
+same rows read *"I conferred **into** your brother"*, an obviously broken
+string. Repairing the residue did not repair this; it only changed the
+signature from visibly broken to plausibly wrong, which makes it harder to
+spot in annotation and is worth saying out loud.
+
+**Why §2.1's answer does not cover it.** VerbNet was added precisely to
+guarantee a shared argument frame, and these candidates come from VerbNet, not
+from the co-hyponym half of the union — the co-hyponym pool for these synsets
+is empty. Class membership states that two verbs share an alternation frame *at
+class level*; it does not state that they are interchangeable in one surface
+realisation. When the repair is phrasal, the frame that made them class-mates
+was stated for the phrasal form, and deleting the particle deletes it.
+
+**Why layer one cannot be recruited.** `d1_drop_role` fires on 4,629 of the
+5,159 rows, on the good and the bad alike — it describes splice mechanics (can
+the reparandum copy carry that edge) and not English valency. PMB's edge labels
+being VerbNet roles does not make the graph layer sensitive to this.
+
+**Why it is nevertheless not a pool guard**, despite §5.2's rule that a cause
+identifiable in advance belongs in the generator. The good and the bad rows are
+structurally identical — same relation source, same device, same shape
+(multiword repair × single-word candidate). Any rule expressible at pool level
+kills both, and roughly four in ten of this class read fine. What separates
+them is whether the word fits where it was put, which is the upper bound's
+definition verbatim: *a relation between a word and its context, measured by a
+language model's surprisal for the reparandum in its left context*. **This is
+the strongest case yet for building the upper bound**, which as of the second
+fix round is still unimplemented — `nli_filter` carries only
+`SYNONYMY_REJECT_ABOVE`.
+
+**What the pool should do is instrument, not filter.** Emit a `frame_change`
+column marking multiword-repair × single-word-candidate rows, so calibration
+can stratify on the class and measure whether the upper bound actually
+separates it. Without the column there is no way to verify that the bound
+solved the problem it was built for. Same principle as §6.4: store the score,
+not only the verdict.
 
 ---
 

@@ -18,6 +18,7 @@ from functools import lru_cache
 from nltk.corpus import wordnet as wn
 
 VOWELS = "aeiou"
+VERB_TAGS = ("VBD", "VBN", "VBZ", "VBG", "VBP", "VB")
 
 
 @lru_cache(maxsize=1)
@@ -59,6 +60,43 @@ def _ing_form(w: str) -> str:
     return w + "ing"
 
 
+# Words that make a multiword noun something other than a compound.  A
+# preposition postmodifies, which moves the head to the front; a coordinator
+# joins two heads, which no single inflection point can express.
+POSTMODIFIERS = {"of", "in", "at", "on", "to", "for", "with", "by", "from"}
+COORDINATORS = {"and", "or"}
+
+
+def _head_index(parts: list[str], wn_pos: str | None) -> tuple[int, bool]:
+    """(which word carries the inflection, is that answer trustworthy).
+
+    English phrasal verbs are left-headed -- `grind out` -> `ground out` --
+    so tense sits on the first word.  Noun compounds are right-headed --
+    `sperm bank` -> `sperm banks` -- so number sits on the last.  Inflecting
+    `parts[0]` for both was right for every verb in the pool and wrong for
+    every one of the 3,153 noun compounds in it (`sperms bank`).
+
+    Two kinds of noun phrase are not compounds.  A postmodified one is
+    head-initial and just as reliable: `chest of drawers` -> `chests of
+    drawers`.  A coordination inflects both conjuncts -- `bow and arrow` ->
+    `bows and arrows` -- which a single inflection point cannot express, so it
+    takes the first word and reports the result as a guess.
+
+    What stays wrong and undetectable is the borrowed plural that is already
+    plural (`vasa vasorum` -> `vasa vasorums`) and the postposed adjective
+    (`attorney general` -> `attorney generals`).  WordNet's exception list
+    carries no space-separated multiword entry to check them against.
+    """
+    if wn_pos != "n":
+        return 0, True
+    words = set(parts)
+    if words & COORDINATORS:
+        return 0, False
+    if words & POSTMODIFIERS:
+        return 0, True
+    return len(parts) - 1, True
+
+
 IRREGULAR_CORE = {
     ("be", "VBZ"): "is", ("be", "VBP"): "are", ("be", "VBD"): "was",
     ("be", "VBN"): "been", ("be", "VBG"): "being",
@@ -77,16 +115,23 @@ def inflect(lemma: str, tag: str, wn_pos: str | None = None) -> tuple[str, bool]
     """
     if wn_pos in ("a", "r"):
         return lemma.lower(), True
+    # No such override for nouns.  A verb tag on a noun concept is often
+    # right: PMB annotates "It rained for three days" with `rain.n.01`, and
+    # the candidate has to surface as "snowed", not "snow".  Where the tag is
+    # a tagger error rather than a verbal surface, `inflection_tag` in
+    # `generate_repairs` is the one that can tell, because it knows whether
+    # the token sits inside a compound.
     parts = lemma.split()
     if len(parts) > 1:                      # inflect the head, keep the rest
-        head, conf = inflect(parts[0], tag, wn_pos)
-        return " ".join([head] + parts[1:]), conf
+        i, reliable = _head_index(parts, wn_pos)
+        head, conf = inflect(parts[i], tag, wn_pos)
+        return " ".join(parts[:i] + [head] + parts[i + 1:]), conf and reliable
     w = lemma.lower()
     if (w, tag) in IRREGULAR_CORE:
         return IRREGULAR_CORE[(w, tag)], True
 
     exc = _inverse_exceptions()
-    if tag in ("VBD", "VBN", "VBZ", "VBG", "VBP", "VB"):
+    if tag in VERB_TAGS:
         forms = exc.get((w, "v"), [])
         if tag == "VB" or tag == "VBP":
             return w, True

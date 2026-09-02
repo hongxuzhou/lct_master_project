@@ -29,7 +29,7 @@ from pathlib import Path
 
 import spacy
 
-from inflect_en import inflect, match_case
+from inflect_en import VERB_TAGS, inflect, match_case
 from repair_transform import build_repair
 from sbn_lin import SYNSET_PATTERN, read_split
 from wn_candidates import candidates
@@ -55,6 +55,17 @@ INTERREGNA = ["I mean", "no", "no wait", "sorry", "actually"]
 # Function words that may be repeated inside the reparandum for free.
 FREE_POS = {"DET", "ADP", "AUX", "PART"}
 
+# A verb particle shifts over the object ("ripped you off") but not far: the
+# widest separation over all four PMB splits is five tokens, and English
+# resists more -- the heavier the object, the more speakers keep the particle
+# adjacent.  Nothing is gained by opening this further, and a wide window
+# starts accepting coincidental matches (see `_span_from`).
+VERB_SPAN_WINDOW = 5
+# Labels the second word of a verb concept can carry.  `prt` is the plain
+# particle; light-verb constructions ("take part", "take place", "give birth")
+# make it a `dobj` instead, and those are 50 of the 542 multiword verbs.
+VERB_SPAN_DEPS = {"prt", "prep", "advmod", "dobj"}
+
 
 def _name_constants(concept) -> list[str]:
     """Surface strings a concept carries in its own constant-valued roles.
@@ -75,10 +86,123 @@ def _name_constants(concept) -> list[str]:
     return out
 
 
+def _span_from(spacy_doc, head_i: int, rest: list[str], wn_pos: str):
+    """Token indices spelling a concept whose first lemma word sits at head_i.
+
+    Returns None when this occurrence does not spell the concept out, which is
+    the caller's signal to try the next occurrence or give the site up.
+
+    The span is *the tokens that spell the concept*, which is why the two word
+    classes need different rules rather than a shared window.
+
+    Noun (and adjective, adverb) compounds are contiguous.  Every apparent gap
+    measured over the four PMB splits was a tokenised hyphen or possessive --
+    `air-conditioning` is air/-/conditioning, `bull's-eye` is bull/'s/-/eye --
+    never intervening material.  Those punctuation tokens spell the compound
+    too, so they join the span; anything else ends the match.  This also
+    rejects the one real misalignment in the corpus, `ring_finger` claiming
+    the `ring` of "a wedding ring" eleven tokens earlier.
+
+    Phrasal verbs genuinely separate, over an object that is *not* part of the
+    verb and so must stay out of the span.  A remaining word is accepted if it
+    is adjacent to the previous one -- nothing else can be there -- or, further
+    out, if the parse says it hangs off this verb.  Requiring the dependency
+    only at a distance keeps the common adjacent case free of parser error
+    while still refusing a coincidental `off` elsewhere in the window.
+
+    Matching is on surface or lemma, so a compound whose head spaCy fails to
+    lemmatise is given up ("spider webs", where `webs` lemmatises to itself).
+    Accepting a regular plural for the last word as well was measured over all
+    four splits and recovers exactly one site out of 26,578, which does not
+    pay for a rule.
+    """
+    if not rest:
+        return (head_i,)
+
+    if wn_pos == "v":
+        span = [head_i]
+        for w in rest:
+            # A hyphen inside a verb compound spells it, exactly as it does
+            # inside a noun one ("roller-skate"), so it neither breaks
+            # adjacency nor stays behind when the span is replaced.
+            glue = []
+            nxt = span[-1] + 1
+            while nxt < len(spacy_doc) and spacy_doc[nxt].is_punct:
+                glue.append(nxt)
+                nxt += 1
+            hit = None
+            stop = min(head_i + 1 + VERB_SPAN_WINDOW, len(spacy_doc))
+            for j in range(span[-1] + 1, stop):
+                t = spacy_doc[j]
+                if t.text.lower() != w and t.lemma_.lower() != w:
+                    continue
+                if j == nxt:
+                    span.extend(glue)
+                    hit = j
+                    break
+                if t.head.i == head_i and t.dep_ in VERB_SPAN_DEPS:
+                    hit = j
+                    break
+            if hit is None:
+                return None
+            span.append(hit)
+        return tuple(span)
+
+    span = [head_i]
+    j = head_i + 1
+    for w in rest:
+        glue = []
+        while j < len(spacy_doc) and (spacy_doc[j].is_punct
+                                      or spacy_doc[j].tag_ == "POS"):
+            glue.append(j)
+            j += 1
+        if j >= len(spacy_doc):
+            return None
+        t = spacy_doc[j]
+        if t.text.lower() != w and t.lemma_.lower() != w:
+            return None
+        span.extend(glue)
+        span.append(j)
+        j += 1
+    return tuple(span)
+
+
+def inflection_tag(spacy_doc, span, wn_pos: str) -> str:
+    """The PTB tag whose inflection the reparandum has to copy.
+
+    English noun compounds are right-headed, so `hot dogs` carries its number
+    on `dogs` -- but the token `align` claims is the modifier `hot`, which
+    spaCy tags JJ.  Inflecting to JJ adds nothing, and the reparandum stays
+    singular against a plural repair: "I love hamburger, that is, hot dogs."
+    Phrasal verbs are left-headed (`ground out`, `steps up`), so there the
+    claimed token already carries the inflection.
+
+    Inside a compound, a verb tag is a tagger error rather than a verbal
+    surface -- spaCy reads the head of `TV set` as VBN, and a noun candidate
+    inflected to VBN comes out "radio receivered" -- so it is read as a plain
+    singular.  On a single token the same tag is usually real and must be
+    kept: PMB annotates "It rained for three days" with `rain.n.01`, where a
+    candidate has to surface as "snowed" and not "snow".
+    """
+    if wn_pos == "n" and len(span) > 1:
+        tag = spacy_doc[span[-1]].tag_
+        return "NN" if tag in VERB_TAGS else tag
+    return spacy_doc[span[0]].tag_
+
+
 def align(doc_sbn, spacy_doc):
     """Tie SBN concepts to surface tokens.
 
-    Returns (lexical, named), both concept position -> spaCy token index.
+    Returns (lexical, named).  `lexical` maps a concept position to the *span*
+    of token indices spelling it -- a one-tuple for the ordinary single-word
+    concept, longer for `peace_treaty.n.01` or `take_off.v.06`.  A concept
+    whose span cannot be resolved is dropped rather than aligned to its first
+    word alone: a partial alignment is what left `trump_card -> hole_card` as
+    "his hole card card", and no downstream step can recover from it.
+
+    `named` still maps to a single token index.  Its consumer, the constant
+    operator of DESIGN.md §2, is not written yet, and multiword names have a
+    matching problem of their own; widening it here would be untested change.
 
     The two are kept apart because they feed different mutation operators.
     A concept carrying `Name "Japan"` is aligned to the token `Japan`, but its
@@ -116,8 +240,8 @@ def align(doc_sbn, spacy_doc):
         if _name_constants(c):
             continue
         m = SYNSET_PATTERN.match(c.synset)
-        lemma = m.group(1).replace("_", " ").lower()
-        head = lemma.split()[0]
+        words = m.group(1).replace("_", " ").lower().split()
+        head, rest = words[0], words[1:]
         want_pos = WN2UD[c.pos_tag]
         best = None
         for t in spacy_doc:
@@ -126,14 +250,21 @@ def align(doc_sbn, spacy_doc):
             same_lemma = t.lemma_.lower() == head or t.text.lower() == head
             if not same_lemma:
                 continue
+            # An occurrence that does not spell the whole concept is not this
+            # concept.  Skipping it rather than taking it also recovers the
+            # case where an earlier token shares the head word by accident:
+            # `hot_dog.n.02` passes over the `hot` of "it was hot outside".
+            span = _span_from(spacy_doc, t.i, rest, c.pos_tag)
+            if span is None:
+                continue
             score = (t.pos_ == want_pos) or (want_pos == "ADJ" and t.pos_ in ("ADJ", "VERB"))
             if best is None or (score and not best[1]):
-                best = (t.i, bool(score))
+                best = (span, bool(score))
             if score:
                 break
         if best is not None:
             out[c.pos] = best[0]
-            used.add(best[0])
+            used.update(best[0])
     return out, named
 
 
@@ -289,15 +420,20 @@ def main() -> None:
             res = build_repair(doc_sbn, cpos, cand)
             if not res.ok:
                 continue
-            tok = sdoc[amap[cpos]]
+            span = amap[cpos]
             m = SYNSET_PATTERN.match(cand)
-            surface, conf = inflect(m.group(1).replace("_", " "), tok.tag_,
+            surface, conf = inflect(m.group(1).replace("_", " "),
+                                    inflection_tag(sdoc, span, c.pos_tag),
                                     c.pos_tag)
             if not conf:
                 stats["low_conf"] += 1
             inter = (rng.choice(INTERREGNA)
                      if rng.random() < args.interregnum_rate else None)
-            nl = make_nl(sdoc, amap[cpos], surface, inter,
+            # `make_nl` takes the head alone on purpose: it leaves the rest of
+            # the sentence in place after the repair, so a multiword repair is
+            # spelled out across the repair and the tail ("the convention, I
+            # mean, the peace treaty").  Only the reparandum is one word.
+            nl = make_nl(sdoc, span[0], surface, inter,
                          repeat_free=rng.random() < 0.5)
             sbn_rep = build_repair(doc_sbn, cpos, cand,
                                    interregnum=inter).sbn

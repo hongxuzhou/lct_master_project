@@ -11,6 +11,9 @@ Two layers run here, in the order DESIGN.md §5 requires:
   rule layer      `build_repair` on every candidate.  A candidate whose splice
                   is illegal is out regardless of how natural it reads, and
                   the check is free because the splice has to be built anyway.
+                  A candidate the sentence already contains is dropped here
+                  too, before the splice: it would read as repetition rather
+                  than correction, and no graph property can rescue it.
   language layer  optional (`--nli`): the lower bound of the band, rejecting
                   candidates that are synonyms of the repair.  See
                   `nli_filter` for why this is an NLI model and not a cosine.
@@ -33,7 +36,7 @@ from pathlib import Path
 
 import spacy
 
-from generate_repairs import NON_LEXICAL, WN2UD, align
+from generate_repairs import NON_LEXICAL, WN2UD, align, inflection_tag
 from inflect_en import inflect, match_case
 from repair_transform import build_repair
 from sbn_lin import SYNSET_PATTERN, read_split
@@ -57,16 +60,53 @@ FIELDS = [
 NLI_FIELDS = ["entail_fwd", "entail_bwd", "synonymy", "contradiction", "neutral"]
 
 
-def substituted_sentence(spacy_doc, tok_i: int, surface: str) -> str:
-    """The clean sentence with token `tok_i` replaced by `surface`."""
-    tok = spacy_doc[tok_i]
-    new = match_case(tok.text, surface)
-    if tok_i == 0:
+def sentence_forms(spacy_doc) -> set[str]:
+    """Every way a word already in the sentence could be written.
+
+    Lemmas as well as surfaces, because the collision survives inflection: a
+    candidate realised as `dollar` reads as a repetition in a sentence that
+    says `dollars`, exactly as `veins` does in one that says `veins`.
+    """
+    out: set[str] = set()
+    for t in spacy_doc:
+        if t.is_punct:
+            continue
+        out.add(t.text.lower())
+        out.add(t.lemma_.lower())
+    return out
+
+
+def substituted_sentence(spacy_doc, span, surface: str) -> str:
+    """The clean sentence with the tokens in `span` replaced by `surface`.
+
+    `span` is what `align` returns: every token spelling one concept.  The
+    first takes the new word and the rest go, which is the whole of the
+    multiword fix -- replacing only the first left the tail behind, gluing it
+    to the new word ("his hole card card", "harmonizing up its presence").
+    Because the span carries a compound's internal punctuation but not the
+    object a phrasal verb shifts over, the same rule serves both:
+    `air-conditioning` goes entirely, `took my boots off` keeps "my boots".
+    """
+    head = span[0]
+    drop = set(span[1:])
+    new = match_case(spacy_doc[head].text, surface)
+    if head == 0:
         new = match_case(spacy_doc[0].text, new)
-    return "".join(
-        (new + t.whitespace_) if t.i == tok_i else t.text_with_ws
-        for t in spacy_doc
-    ).strip()
+    # A deleted token hands its trailing space to whatever now precedes the
+    # gap.  Keeping the head's own spacing instead leaves the hole the deleted
+    # words filled ("I love hamburger ."), and keeping the span's last one
+    # closes a gap that should stay open when the span is discontinuous
+    # ("Tom cheatedyou ." for "ripped you off").
+    pieces: list[list[str]] = []
+    for t in spacy_doc:
+        if t.i == head:
+            pieces.append([new, t.whitespace_])
+        elif t.i in drop:
+            if pieces:
+                pieces[-1][1] = t.whitespace_
+        else:
+            pieces.append([t.text, t.whitespace_])
+    return "".join(text + ws for text, ws in pieces).strip()
 
 
 def build(split: str, limit: int) -> list[dict]:
@@ -76,19 +116,37 @@ def build(split: str, limit: int) -> list[dict]:
     nlp = spacy.load("en_core_web_sm")
 
     rows: list[dict] = []
+    repeated = 0
     for doc_sbn, sdoc in zip(docs, nlp.pipe([d.sentence for d in docs],
                                             batch_size=256)):
         amap, _named = align(doc_sbn, sdoc)
-        for cpos, tok_i in sorted(amap.items()):
+        already = sentence_forms(sdoc)
+        for cpos, span in sorted(amap.items()):
             c = doc_sbn.concepts[cpos]
             if c.pos_tag not in WN2UD or c.synset in NON_LEXICAL:
                 continue
-            tok = sdoc[tok_i]
+            tag = inflection_tag(sdoc, span, c.pos_tag)
             for cand in candidates(c.synset):
-                res = build_repair(doc_sbn, cpos, cand)
                 m = SYNSET_PATTERN.match(cand)
                 surface, conf = inflect(m.group(1).replace("_", " "),
-                                        tok.tag_, c.pos_tag)
+                                        tag, c.pos_tag)
+                # A reparandum the sentence already contains is not a
+                # correction but a repetition -- "Lungs, heart, veins, veins
+                # and capillaries form the cardiovascular system."  The row is
+                # unusable however legal its graph is, so drop it before
+                # building the splice rather than after.
+                #
+                # Only whole surfaces are tested, so a multiword reparandum
+                # sharing one word with the sentence survives.  That is
+                # deliberate: the shared word is legitimate when it *is* the
+                # repair ("Can you figure skate, I mean, ice skate?" repeats
+                # the head, as contrastive correction does) and a repetition
+                # only when it sits elsewhere.  Telling those apart needs the
+                # repair's token span, which `align` does not yet return.
+                if surface.lower() in already:
+                    repeated += 1
+                    continue
+                res = build_repair(doc_sbn, cpos, cand)
                 rows.append({
                     "doc_id": doc_sbn.doc_id,
                     "split": split,
@@ -104,8 +162,10 @@ def build(split: str, limit: int) -> list[dict]:
                     "blockers": "|".join(b.value for b in res.blockers),
                     "max_abs_index": res.max_abs_index,
                     "nl_clean": doc_sbn.sentence,
-                    "nl_substituted": substituted_sentence(sdoc, tok_i, surface),
+                    "nl_substituted": substituted_sentence(sdoc, span, surface),
                 })
+    print(f"dropped {repeated} candidates whose surface is already in the "
+          f"sentence")
     return rows
 
 
