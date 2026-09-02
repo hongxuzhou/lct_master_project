@@ -64,6 +64,24 @@ VERB_SPAN_WINDOW = 5
 # Labels the second word of a verb concept can carry.  `prt` is the plain
 # particle; light-verb constructions ("take part", "take place", "give birth")
 # make it a `dobj` instead, and those are 50 of the 542 multiword verbs.
+#
+# This test earns nothing on PMB and is kept for other corpora, so measure
+# before removing *or* extending it.  Over all four splits, dropping it and
+# taking the first match in the window instead gives: zero differing spans,
+# zero sites lost, two sites gained (`have_on` in "I have something on",
+# `bring_down` in "He brought our TV set down to the cellar" -- both correctly
+# alignable, both rejected here only because spaCy misparses the particle onto
+# another head).  What it guards against never occurs: the precondition for a
+# coincidental match, the particle word appearing more than once within the
+# window, has 0 instances across the 542 multiword verbs.
+#
+# It is kept anyway, for two reasons.  The two sites it costs yield candidates
+# that land in the open argument-frame class of DESIGN.md §5.4 ("He putted our
+# TV set to the cellar"), so recovering them buys no usable sample; and
+# freer text than Tatoeba's short sentences can produce the coincidence this
+# rejects.  The real price is that alignment now depends on spaCy's parser and
+# not only its tagger, which belongs in the thesis's reproducibility note
+# rather than in a code change.
 VERB_SPAN_DEPS = {"prt", "prep", "advmod", "dobj"}
 
 

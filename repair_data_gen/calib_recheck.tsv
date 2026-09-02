@@ -1,0 +1,21 @@
+item_id	A_original	B_substituted	word_in_A	word_in_B	same_meaning	fits_sentence	notes
+i023	Whenever he comes up to Tokyo, he stays with us.	Whenever he descends to Tokyo, he stays with us.	come up	descends	no	yes	Yeah it sounds fine. The guy may live in somewhere super high. 
+i026	He played his trump card.	He played his hole card.	trump card	hole card	no (RISKY!)	yes	The two expressions can be synonyms. We need to double check on that. 
+i029	Zip up!	Sew!	zip up	sew	no	yes	It's a bit too early but I don't think this sample forms a high-quality repalcment self-repair. Because the two variables can be seen as turn-level complete replacement. Maybe we can filter the data by length (original length >= 3, for example) 
+i041	Grant was not an effective political leader.	Grant was not an effective imam.	political leader	imam	no	yes	An imam is hignly religional, while a political leader does not have to. 
+i052	The prince bowed down to Snow White.	The prince slumped to Snow White.	bow down	slumped	no	no	"It's just odd. If the prince suddently sits on Snow White (SW), then it should be ""slumped onto); if he wants to collapse in SW's arms, then it should be ""into"". "
+i063	Some brave passengers caught the pickpocket and turned him over to the police.	Some brave passengers caught the pickpocket and gathered him to the police.	turn over	gathered	no	no	In this context, i believe the pickpocket should be in one piece and alive. So they cannot be gathered. 
+i065	Deutsche Telekom is stepping up its presence in China.	Deutsche Telekom is harmonizing its presence in China.	step up	harmonizing	no	yes	It sounds like DT does a re-org to its branches in China. 
+i085	"Gregor's broken loose."""	"Gregor's arrived."""	break loose	arrived	no	yes	Gregor has arrived -- makes sense 
+i086	Italy has two mountain ranges, the Alps and the Apennines.	Italy has two massifs, the Alps and the Apennines.	mountain range	massifs	no	no (low confidence)	It might be me being dramatic. But the two proper nouns in this sample are plural. So, they strongly indicate mountain ranges. But massif means a single, discontinue, usually cliffy mountain. So, are they contradicted? 
+i087	The computer system shuts down automatically at 8pm.	The network shuts down automatically at 8pm.	computer system	network	no	yes	It's a typical IT description
+i094	Baena Soares was arrested by the armed forces.	Baena Soares was arrested by the ranks and file.	armed forces	ranks and file	no	yes	Rank and file is a fixed expression. So, it is not perfect but works fine. 
+i100	The rain has let up.	The rain has tidied.	let up	tidied	no	no	The rain has no intention to tide things up. And there misses an objective. 
+i101	A cow chases away flies with its tail.	A cow pulls flies with its tail.	chase away	pulls	no	no	"Let's assume the cow is the spiece that we are familiar with. Then, a tail cannot pull. I would say it's a ""drink a chair"" type mismatch."
+i116	Tom carefully wiped his fingerprints off the knife.	Tom carefully wiped his signature recognitions off the knife.	fingerprint	signature recognitions	no	no	SR should be something digital and abstract like an algorithm. It can't be physically wiped. 
+i123	That news got around.	That news supervened.	get around	supervened	no	yes 	Sunds overtly formal but can't find a reason to say no. 
+i124	He broke down all at once.	He footled all at once.	break down	footled	no	yes	It's like someone startes to do stupid things all of a sudden. So I'd say it's fair. 
+i125	I farted in class and the teacher threw me out.	I farted in class and the teacher extradited me.	throw out	extradited	no	no	Frame mismatch. 
+i136	How many people in the Netherlands are addicted to hard drugs?	How many people in the Netherlands are addicted to recreational drugs?	hard drug	recreational drugs	no	yes	It's so typical. It makes perfect sense. 
+i138	She does not let up.	She does not occidentalize.	let up	occidentalize	no	no	Makes sense -  a person can reject a culture. 
+i151	She pouted when she was told to wash the dishes.	She pouted when she was told to dress the dishes.	wash	dress	no	yes	Makes sense. Dressing the dishes is a common thing in high-end places, so it's toally doable. 

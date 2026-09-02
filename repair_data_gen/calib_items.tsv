@@ -1,151 +1,151 @@
-item_id	A_original	B_substituted	word_in_A	word_in_B	same_meaning	fits_sentence	notes
-i001	His steps were clearly marked in the snow.	His steps were clearly animized in the snow.	mark	animized	no	no	"""animize"" means to give something life. A step cannot be given life. "
-i002	Another focal point is the avoidance of industrial accidents.	Another focal point is the abandonment of industrial accidents.	avoidance	abandonment	no	no	"can we ""abandon"" industrial accidents? I mean we can minimise them or make them more frequent, but we cannot, out of our subjective intention, desicde that they will be ditched out of our lives. "
-i003	What does the abbreviation IRA stand for?	What does the etymon IRA stand for?	abbreviation	etymon	no	no	"etymon is more about ""from"" than ""standing for"""
-i004	The hen hatched five eggs.	The hen calmed five eggs.	hatch	calmed	no	no	The hen calm chicks for sure, but it's too early to calm eggs. 
-i005	The pigeon has flown the coop.	The pigeon has flown the pen.	coop	pen	no	yes	a coop is like the little house; a pen is like the field that the animals live in. It can imcorporate a coop. 
-i006	My father complained about the traffic noise.	My father complained about the traffic beep.	noise	beep	no	no	a beep is countable. So the traffic beep is like a specific beep coming from the roads. But I would say this is a grey zone example.
-i007	His speech bored me.	His description bored me.	speech	description	no	yes	it's a very typical case that stands. 
-i008	Germany borders on France.	Germany attaches on France.	border	attaches	no	no	It's a grammatical thing. attach should come with to instead of on. Plus, even if B stands, it sounds like germany is an add-on to France. I think in this case, border_on should be treated as a phrase or at least a fixed expression. 
-i009	The bill passed the Diet.	The arraignment passed the Diet.	bill	arraignment	no	yes	"If the Diet means the National Diet of Jepan, then I think B stands. Even though I'm not sure if it is the Diet's work to pass an arraigment. But at least it is not like ""to drink a chair"" mistake. "
-i010	He put his foot on the brake suddenly.	He put his foot on the safety belt suddenly.	brake	safety belt	no	yes	It only makes sense when column B represents reparandum
-i011	The FBI secretly bugged the mobster's hangout.	The FBI secretly bugged the recidivist's hangout.	mobster	recidivist	no	yes	It's a typical pass
-i012	Drops dripped.	Drops squirted.	drip	squirted	no	yes	Drop and squirt are not compatible with each other. 
-i013	Tom walked Mary to the front door.	Tom scurried Mary to the front door.	walk	scurried	no	no	scurry is mainly an intransitive verb
-i014	I came; I saw; I conquered.	I came; I saw; I survived.	conquer	survived	no	yes	It's a typical green flag. 
-i015	Looters stole ancient artifacts from the tomb.	Banditti stole ancient artifacts from the tomb.	looter	banditti	no	yes	It's a typical green flag.
-i016	My six-month old son is teething.	My six-month old son is fledging.	teethe	fledging	no	no	let's assume we are talking about humans, then a human cannot fledge, I hope. 
-i017	He tried to seduce me.	He tried to bring round me.	seduce	bring round	no	no	"it's usually ""bring somebody around"" -- separable phrasal verb. I don't against repalcing a single verb with a phrase, but only when the phrase makes sense after the substituion. When the object is a pronoun, it HAS to be placed betweeen the verb and the particle. "
-i018	He pays with a credit card.	He presents with a credit card.	pay	presents	no	yes	Yeah, a person can show up with a credit card.
-i019	Tom knew who the kidnappers were.	Tom knew who the violators were.	kidnapper	violators	no	yes	It's a typical green flag.
-i020	We hailed a cab.	We beeped a cab.	hail	beeped	no	yes	It's a typical green flag.
-i021	The name rang a bell in me.	The name whizzed a bell in me.	ring	whizzed	no	no	Ring a bell is a fixed expression. We didn't consider this in data generation
-i022	Tom comforted Mary.	Tom pacified Mary.	comfort	pacified	yes	yes 	This is a boundary case in the lower bound side. We need to check WordNet to have a more concrete idea. 
-i023	Whenever he comes up to Tokyo, he stays with us.	Whenever he descends up to Tokyo, he stays with us.	come_up	descends	no	no	come up to is a fixed expression. Also, the replacing algorithm seems perform poorly when the original expression is a phrase. It causes unexpected residual
-i024	The Tomei Expressway connects Tokyo with Nagoya.	The Tomei Expressway introduces Tokyo with Nagoya.	connect	introduces	no	no	"It's a grammatical issue. Introduce does not come with ""with"" "
-i025	I can't recall her name at the moment.	I can't adopt her name at the moment.	recall	adopt	no	yes	"Boundary case, but I can't decise if it's a ""drink a chair"" level mistake. "
-i026	He played his trump card.	He played his hole card card.	trump_card	hole card	no	no	This is an important error that reflects the issue of the current detection-replaccemnt logic. It seems to me, withought reading the code line-by-line, that the detection logic and the repalcemet logic are differnt in terms of granularity. This case deserves a thorgouh double-check. 
-i027	The police broke up the crowd.	The police broke up the community.	crowd	community	no	yes	"Technically, the police can break up a community by dismissing the people. For exmaple, a bunch of hobos living in a block, then got ""broken up"" by being sepearted, exiled and etc. "
-i028	The organizers expect more than 300,000 visitors.	The organizers choose more than 300,000 visitors.	expect	choose	no	yes	"The organisers can conduct the ""choosing"" activity; the visitors can be choosen. For example, it's a huge magic show expecting volunteers. "
-i029	Zip up!	Sew up!	zip_up	sew	no	yes	Odd but passed. Guess two mistakes make one right. But as i026 shows, this error can cause demage. 
-i030	She bought a toaster, a coffeemaker, an egg cooker and a hand mixer.	She bought a toaster, a coffeemaker, an egg enamelware and a hand mixer.	cooker	enamelware	no	yes	an egg enamelware looks odd to me, but I googled and it is real. No reason to say no. 
-i031	The water's leaking from the elbow of the pipe.	The water's vomitting from the elbow of the pipe.	leak	vomitting	no	no	Water cannot vomit itself, it can only be vomitted. 
-i032	Eric played a sweet tune on the piano.	Eric played a sweet popularism on the piano.	tune	popularism	no	no	Category Mistake, an abstract concept cannot be played 
-i033	There are more than 150 nations in the world.	There are more than 150 amphictyonies in the world.	nation	amphictyonies	no	yes	amphictyonies -- in an alternative universe where Aicient Greece still exists, this makes sense
-i034	The pen I am writing with belongs to Tom.	The pen I am writing with totals to Tom.	belong	totals	no	no	The object/subject does not fit the verb
-i035	I'm no rebel.	I'm no enfant terrible.	rebel	enfant terrible	no	 no	Why the expression inserted in Sent B is also a two-word expression, but this works well, unlike the trump card case? 
-i036	Tom spread some strawberry jam on his toast.	Tom sewn some strawberry jam on his toast.	spread	sewn	no	no	You cannot sew liqud 
-i037	Put this scarf around your neck.	Put this camlet around your neck.	scarf	camlet	no (BUT RISKY!)	yes	We need to double check if camlet and scarf share the same synset. 
-i038	The guards found a hacksaw blade in the prisoner's pocket.	The guards found a hacksaw blade in the languisher's pocket.	prisoner	languisher	no	yes	It's giving The Shawshank Redemption, so I'll let it pass. 
-i039	Acid fruits like pineapples and lemons are sour.	Acid fruits like pineapples and lemons are unpalatable.	sour	unpalatable	no	yes	totally makes sense, at least lemons are unpalatable. 
-i040	He pays with a credit card.	He provides with a credit card.	pay	provides	no	no	"When provide is with ""with"", it has to be a ditransitive-like frame. "
-i041	Grant was not an effective political leader.	Grant was not an effective imam leader.	political_leader	imam	no	yes	If chai tea, Sahara desert, and PIN number work, then imam leader should also work.
-i042	The pigeon is cooing.	The pigeon is meowing.	coo	meowing	no	no	the verb is strongly connected to the verb. A bird cannot meow.
-i043	I will prosper.	I will become.	prosper	become	no	no	Grammar issue. Become is a copular word that requires a predicative. 
-i044	The tiger escaped from the zoo.	The liger escaped from the zoo.	tiger	liger	no	yes	It's super normal for a liger to live in a zoo
-i045	He has been telling lies about himself.	He has been telling misrepresentations about himself.	lie	misrepresentations	no	yes	It makes sense, but we need to check if lie and misrepresentation share one same synset. 
-i046	Lungs, heart, veins, arteries and capillaries form the cardiovascular system.	Lungs, heart, veins, vasas vasorum and capillaries form the cardiovascular system.	artery	vasas vasorum	no	yes	It's a typical bio/medical expression.
-i047	The bad weather marred the ceremony.	The bad weather marred the party.	ceremony	party	no	yes	A party should not be a ceremony (right? In my understanding a party is always chill and casual and fun, while a ceremony is more formal and serious). 
-i048	Let's go to the beach.	Let's rise to the beach.	go	rise	no	yes	Makes perfect sense. Like a bouch of crabs or divers can say that. 
-i049	I erased my hard disk by accident.	I obviated my hard disk by accident.	erase	obviated	no	no	Obviate must apply to an abstract concept such as obstacle, risk, or requirement. 
-i050	Dan has been seeing a psychiatrist since 1997.	Dan has been seeing a gerontologist since 1997.	psychiatrist	gerontologist	no	yes	Makes perfect sense. 
-i051	This merchandise is tax free.	This entrant is tax free.	merchandise	entrant	no	no	human can't be tax free
-i052	The prince bowed down to Snow White.	The prince slumped down to Snow White.	bow_down	slumped	no	yes (It's luck)	"This is another ""trump card"" case. Again, it passes out of luck. -- Again, we need to check this issue. "
-i053	She wrinkled her brows.	She craned her brows.	wrinkle	craned	no	No	"I think ""crane"" is only applied to structure like neck and head. "
-i054	We're wasting ammunition.	We're wasting armament.	ammunition	armament	no (RISKY!)	yes (RISKY!)	Need to double check if ammu and arm share the same synset or not 
-i055	The treaty was signed on November 18, 1903.	The treaty was scored on November 18, 1903.	sign	scored	no	no	A treaty can't be scored 
-i056	Peter is buying a tomcat.	Peter is buying a mouser.	tomcat	mouser	no	yes	A mouser makes perfect sense 
-i057	Tom had his palm read.	Tom had his palm forecast.	read	forecast	no	no	category mismatch
-i058	This soup is too salty to eat.	This soup is too savory to eat.	salty	savory	no	yes (RISKY!)	Need to double check if they share the same synset 
-i059	I got an A on my essay.	I aced an A on my essay.	get	aced	no	no	Tautology 
-i060	Yoke the oxen to the plow.	Sew the oxen to the plow.	yoke	sew	no	no	category mismatch -- physical imcompatability. 
-i061	This river runs into Lake Ontario.	This river matures into Lake Ontario.	run	matures	no	no	Verb-object mismatch
-i062	Tom faked his death.	Tom cribbed his death.	fake	cribbed	no	no	verb-object mismatch. Crible must have a narrow column of expressions such as essay, idea, or answer. 
-i063	Some brave passengers caught the pickpocket and turned him over to the police.	Some brave passengers caught the pickpocket and gathered him over to the police.	turn_over	gathered	no	no	you can't gather a single entity. 
-i064	She crumbled a biscuit.	She crumbled a victoria sandwich.	biscuit	victoria sandwich	no	yes	It makes sense to make a cake into small crumbles 
-i065	Deutsche Telekom is stepping up its presence in China.	Deutsche Telekom is harmonizing up its presence in China.	step_up	harmonizing	no	no	"another ""trump card"" issue"
-i066	I pulled a triceps.	I pulled a intercostal.	triceps	intercostal	no	yes (with a flow)	a -> an before a vowel is not applied yet 
-i067	There's a famous book in English whose entire last chapter is a single sentence.	Therebroods a famous book in English whose entire last chapter is a single sentence.	be	broods	no 	no	"Another issue that emerged. We maybe need to be super cautious with expressions like ""there be"" and ""it is that""...Also, a book cannot brood. "
-i068	The hat's hanging on the rack.	The hat's balancing on the rack.	hang	balancing	no	yes	Poetic and makes sense. 
-i069	The soldiers resisted the enemy attack.	The soldiers resisted the enemy campaign.	attack	campaign	no	yes (RISKY!)	we need to check if campaingn and attach share the same synset.
-i070	His ideas accord with theirs.	His ideas calm with theirs.	accord	calm	no	no	A abstract idea cannot calm 
-i071	Let's jump into the water.	Let's flit into the water.	jump	flit	no	yes	image it's a water bird flits into water to catch a fish
-i072	Everyone who worked on that project became a millionaire.	Everyone who worked on that project transformed a millionaire.	become	transformed	no	no	It's a grammar issue. Transforms, when used as a transitive verb, needs to connect the receiver, and use an into to show the results
-i073	Tom passed the ball to Mary.	Tom knocked the ball to Mary.	pass	knocked	no	yes	This makes sense in the ball activity 
-i074	The lion roars.	The lion clamors.	roar	clamors	no	no	Clamor requires the subject to be both collective and humanised. 
-i075	She is a chatterbox.	She is a stentor.	chatterbox	stentor	no	yes	A typical calssical assusion. She has a bright and loud voice. 
-i076	The loss reached three million yen.	The figure reached three million yen.	loss	figure	no	yes	This is a typical financal expression
-i077	Tom sat under a tree, strumming his ukulele.	Tom sat under a tree, tinging his ukulele.	strum	tinging	no	no	if the tinging is ting, then a ukulele should be strumed (original sentence), only bells or cans with small rocks inside can ting; if it is tinge, then this context does not support Tom dying his ukulele with a colour -- I might be wrong. This needs double check. 
-i078	Tom seems conceited.	Tom subtends conceited.	seem	subtends	no	no	This sentence is gebrish 
-i079	They weren't warned of the tidal wave.	They weren't warned of the tidal jitter.	wave	jitter	no	yes	The jitter can refer to a scientific observation -- the reading is spiking, in a high frequency
-i080	He resented his friend's action.	He resented his friend's communication.	action	communication	no	yes	a person can resent to a more abstract thing like communication. 
-i081	The boy clasped the puppy to his chest.	The boy clasped the puppy to his organ.	chest	organ	no	yes	clasp requires items to touch each other. But organ should be internal. Or this is a very horiffing scienario. 
-i082	Tom extinguished his torch.	Tom extinguished his strip lighting.	torch	strip lighting	no	no	a modern strip lighting cannot be extinguihshed, it is for something that ignets 
-i083	"Who starred in ""The Poseidon Adventure""?"	"Who usherred in ""The Poseidon Adventure""?"	star	usherred	no	yes	"""usher in"" as a phrase can express something/someone starts a new type/era of style and genre"
-i084	In 1960, the company added polyacrylonitrile staple fibers to its range.	In 1960, the issuer added polyacrylonitrile staple fibers to its range.	company	issuer	no	yes	It reads professional 
-i085	"Gregor's broken loose."""	"Gregor's arrived loose."""	break_loose	arrived	no	no	A human being cannot arrive loose. Also, this is another trump card issue 
-i086	Italy has two mountain ranges, the Alps and the Apennines.	Italy has two massif ranges, the Alps and the Apennines.	mountain_range	massif	no	no	Another trump card issue 
-i087	The computer system shuts down automatically at 8pm.	The network system shuts down automatically at 8pm.	computer_system	network	no	yes	it makes perfect sense 
-i088	Tom drew the shortest straw.	Tom pilfered the shortest straw.	draw	pilfered	no	yes	a straw is usually cheap, it suits pitfer well
-i089	I slipped and twisted my ankle.	I blackened and twisted my ankle.	slip	blackened	no	yes	a twisted ankle can be blackened due to inner bleeding. 
-i090	He escaped from prison.	He escaped from reformatory.	prison	reformatory	no	yes	The zero article format is fine when it comes to prison/reformatory/school
-i091	"""Whose newspapers are these?"" ""They are my father's."""	"""Whose works are these?"" ""They are my father's."""	newspaper	works	no	yes	It makes perfect sense 
-i092	I made a decision.	I crayoned a decision.	make	crayoned	no	no	a decision is a mental, abstract concenpt. It cannot be crayoned as a concrete product. 
-i093	Tom drew the shortest straw.	Tom reaped the shortest straw.	draw	reaped	no	no	"1. to draw the shortest straw is a fixed expression. A more famous but similar case in linguistics is ""to kick the bucket"". 2. Even if we understand it literaly, it is odd to reap one single straw -- I am not certain here "
-i094	Baena Soares was arrested by the armed forces.	Baena Soares was arrested by the rank and file forces.	armed_forces	rank and file	no	yes	rank and file means ordinary soilders. It makes sense to me. 
-i095	I am intelligent.	I am perceptive.	intelligent	perceptive	no (RISKY)	yes 	It needs a double check in WordNet to see if they share the same synset. 
-i096	Tom knew the answer.	Tom knew the comment.	answer	comment	no	yes 	It makes sense to me 
-i097	Tom cut the pie into six pieces.	Tom cut the pie into six upstairses.	piece	upstairses	no	no	you cannot cut something into upstaires 
-i098	She is pretty bad at tennis.	She is pretty nasty at tennis.	bad	nasty	no	yes 	It looks perfectly fine to me 
-i099	I love anal sex.	I love anal perspiration.	sex	perspiration	no	yes 	It's a personal preference 
-i100	The rain has let up.	The rain has tidied up.	let_up	tidied	no	no	tidy up is clearly agntive. But a rain does not have a goal
-i101	A cow chases away flies with its tail.	A cow pulls away flies with its tail.	chase_away	pulls	no	no	Another trump card issue. Also, cow tails cannot full things 
-i102	The surgeon amputated the wrong leg.	The surgeon scooped the wrong leg.	amputate	scooped	no	no	You can scoop from a leg, but you cannot scoop the whole leg. Its physical feature makes it unmached
-i103	I drink two cups of coffee.	I drink two mugs of coffee.	cup	mugs	no (RISKY!)	yes	we need to check if cup and mug are in the same synset 
-i104	Pochi and Moko are in the kennel, and other dogs are playing in the garden.	Pochi and Moko are in the kennel, and other dogs are visitting in the garden.	play	visitting	no	yes	visit can be used as an intransitive verb, meaning a casual meeting up
-i105	If you take this medicine, the stomach ache will be healed.	If you take this medicine, the stomach ache will be freed.	heal	freed	no	no	Ontological ummatch
-i106	I twisted my ankle.	I maimed my ankle.	twist	maimed	no	yes	It makes perfect sense 
-i107	I see the golden cross.	I see the golden housing.	cross	housing	no	yes	It makes sense to me, like there is an item where its outter layer is golden. 
-i108	She answers us whenever we ask her a question.	She explains us whenever we ask her a question.	answer	explains	no	no	grammatical issue. The syntax of explain is not right 
-i109	The jackal howls.	The jackal clatters.	howl	clatters	no	no	Clatter cannot be used to describe a sound made by soft tissues of a jackal. 
-i110	The room was lit by candles.	The room was rushed by candles.	light	rushed	no	no	A candle cannot move things 
-i111	He's baling the hay.	He's catching the hay.	bale	catching	no	yes	This makes sense tome 
-i112	She stamped the mud off her shoes.	She rushed the mud off her shoes.	stamp	rushed	no	no	The verb rush does not fit the frame 
-i113	The coup was meticulously executed.	The disbandment was meticulously executed.	coup	disbandment	no	yes	This makes perfect sense 
-i114	I demand a refund.	I encore a refund.	demand	encore	no	no	encore is locked in state/performance-related expressions. It does not match with a refund. 
-i115	Some of these apples are bad.	Some of these apples are corrupt.	bad	corrupt	no (VERY RISKY!!)	yes	we need to check this. Especially, both no and corrupt make the same meaning in this sentence -- more or less. 
-i116	Tom carefully wiped his fingerprints off the knife.	Tom carefully wiped his signatures recognition off the knife.	fingerprint	signatures recognition	no	no	signatures recognition is a bio-tech term 
-i117	His speech bored me.	His speech depressed me.	bore	depressed	no	yes	This makes sense to me 
-i118	This table's surface is smooth.	This table's commodity is smooth.	surface	commodity	no	no	category mismatch 
-i119	Lungs, heart, veins, arteries and capillaries form the cardiovascular system.	Lungs, heart, veins, veins and capillaries form the cardiovascular system.	artery	veins	no	yes (BUT RISKY!!)	It's tautology -- Another issue we didn't forsee. 
-i120	She admits that she stole the jewels.	She beatifies that she stole the jewels.	admit	beatifies	no	no	beatify can only use a noun as the object. 
-i121	A dog is sensitive to smell.	A dog is wise to smell.	sensitive	wise	no	no	wise denotes the sophisticated thinking. But sniffing is more about instict. 
-i122	Tom kissed his cousin.	Tom kissed his enate.	cousin	enate	no (RISKY!!)	yes	the two words can largely overlap. We need to double check in WordNet. 
-i123	That news got around.	That news supervened around.	get_around	supervened	no	no	another trump card issue. Also, Supervene has a specific phylosofical meaning. 
-i124	He broke down all at once.	He footled down all at once.	break_down	footled	no	no	another trump card issue. Also, there is no phrase as footle down. 
-i125	I farted in class and the teacher threw me out.	I farted in class and the teacher extradited me out.	throw_out	extradited	no	no	another trump card issue. The agent of extraditing 
-i126	The duck quacks.	The goose quacks.	duck	goose	no	no	Quack is for ducks only. Geese should use horn, cackle, or hiss. 
-i127	The sun is rising above the horizon.	The sun is leaning above the horizon.	rise	leaning	no	no	If something can lean, then it cannot be above something else. 
-i128	Tom despises lies.	Tom respects lies.	despise	respects	no	yes	Totally makes sense. 
-i129	The tale is familiar to us.	The tale is competent to us.	familiar	competent	no	no	category mismatch. A tale cannot be competent. 
-i130	She wandered about the country.	She wandered about the environment.	country	environment	no	yes	"even though the word ""environment""is super big, it still fits the proposition. "
-i131	Hurricane Sandy is coming.	Hurricane Sandy is descending.	come	descending	no	yes	descending fits the clamte topic.
-i132	The guards found a hacksaw blade in the prisoner's pocket.	The guards greeted a hacksaw blade in the prisoner's pocket.	find	greeted	no	no	the theme of to greet has to be human or humanised. 
-i133	Dense forests cover the Carpathians.	Dense growths cover the Carpathians.	forest	growths	no (RISKY)	yes 	It works because growth, just like forest, can denote to thick plants. 
-i134	Tom loaded the bags into the trunk of his car.	Tom strung the bags into the trunk of his car.	load	strung	no	no	The strajectory of the item being strung has to be linear. So, bags cannot do that in the physicl sense. 
-i135	Tom painted his room white.	Tom coppered his room white.	paint	coppered	no	no	the colour and the verb do not match. 
-i136	How many people in the Netherlands are addicted to hard drugs?	How many people in the Netherlands are addicted to recreational drug drugs?	hard_drug	recreational drug	no(RISKY!!)	no	Another trump card issue. If this issue is solved, then this case can be typically good. 
-i137	The room was lit by candles.	The room was fattened by candles.	light	fattened	no	no	A room cannot get fattended, nor can a candle do this to anything. 
-i138	She does not let up.	She does not occidentalize up.	let_up	occidentalize	no	no	Another trump card issue. The verb does not match the particle. 
-i139	Thanks Mom.	Honors Mom.	thank	honors	no	no	It requires a subject. 
-i140	We hiked through a beautiful green valley.	We scurried through a beautiful green valley.	hike	scurried	no	yes	a bunch of people walked through a valley in hurry - makes sense. 
-i141	I am unsettled about the news.	I am unsympathetic about the news.	unsettled	unsympathetic	no	yes	It makes sense. A person can be indifferent to the news. 
-i142	He showed it to me.	He explained it to me.	show	explained	no	yes	Meets the grammatical and semantic expectation of the word explain. 
-i143	The wind has abated.	The wind has crumbled.	abate	crumbled	no	no	The air cannot be crumbled
-i144	Its long neck resembles that of a horse.	Its long neck corroborates that of a horse.	resemble	corroborates	no	no	The theme of the verb corroborate needs to be abstract, such as a theory, a hypothesis, or a statement. 
-i145	She loved Tom.	She hated Tom.	love	hated	no	yes	It makes perfect sense 
-i146	I don't dig modern jazz.	I don't solve modern jazz.	dig	solve	no	no	a musical genre cannot be solved. 
-i147	My wife is Swedish.	My monogamist is Swedish.	wife	monogamist	no	yes	It makes sense in a specific context. Such as a seminar discussing marriage system. 
-i148	The cardinals have elected a new pope.	The eparches have elected a new pope.	cardinal	eparches	no	yes 	It is even real that Oriental Orthodoxy eparches vote for the next pope
-i149	The gown is made of silk.	The dirndl is made of silk.	gown	dirndl	no	yes	It is true that dirndls are usually made of silk 
-i150	He wrapped his arms around me.	He floated his arms around me.	wrap	floated	no	yes	If that is in a pool, then it makes sense??? -- require double check.
+item_id	A_original	B_substituted	word_in_A	word_in_B	same_meaning	fits_sentence	notes	provenance
+i001	His steps were clearly marked in the snow.	His steps were clearly animized in the snow.	mark	animized	no	no	"""animize"" means to give something life. A step cannot be given life. "	original
+i002	Another focal point is the avoidance of industrial accidents.	Another focal point is the abandonment of industrial accidents.	avoidance	abandonment	no	no	"can we ""abandon"" industrial accidents? I mean we can minimise them or make them more frequent, but we cannot, out of our subjective intention, desicde that they will be ditched out of our lives. "	original
+i003	What does the abbreviation IRA stand for?	What does the etymon IRA stand for?	abbreviation	etymon	no	no	"etymon is more about ""from"" than ""standing for"""	original
+i004	The hen hatched five eggs.	The hen calmed five eggs.	hatch	calmed	no	no	The hen calm chicks for sure, but it's too early to calm eggs. 	original
+i005	The pigeon has flown the coop.	The pigeon has flown the pen.	coop	pen	no	yes	a coop is like the little house; a pen is like the field that the animals live in. It can imcorporate a coop. 	original
+i006	My father complained about the traffic noise.	My father complained about the traffic beep.	noise	beep	no	no	a beep is countable. So the traffic beep is like a specific beep coming from the roads. But I would say this is a grey zone example.	original
+i007	His speech bored me.	His description bored me.	speech	description	no	yes	it's a very typical case that stands. 	original
+i008	Germany borders on France.	Germany attaches on France.	border	attaches	no	no	It's a grammatical thing. attach should come with to instead of on. Plus, even if B stands, it sounds like germany is an add-on to France. I think in this case, border_on should be treated as a phrase or at least a fixed expression. 	original
+i009	The bill passed the Diet.	The arraignment passed the Diet.	bill	arraignment	no	yes	"If the Diet means the National Diet of Jepan, then I think B stands. Even though I'm not sure if it is the Diet's work to pass an arraigment. But at least it is not like ""to drink a chair"" mistake. "	original
+i010	He put his foot on the brake suddenly.	He put his foot on the safety belt suddenly.	brake	safety belt	no	yes	It only makes sense when column B represents reparandum	original
+i011	The FBI secretly bugged the mobster's hangout.	The FBI secretly bugged the recidivist's hangout.	mobster	recidivist	no	yes	It's a typical pass	original
+i012	Drops dripped.	Drops squirted.	drip	squirted	no	yes	Drop and squirt are not compatible with each other. 	original
+i013	Tom walked Mary to the front door.	Tom scurried Mary to the front door.	walk	scurried	no	no	scurry is mainly an intransitive verb	original
+i014	I came; I saw; I conquered.	I came; I saw; I survived.	conquer	survived	no	yes	It's a typical green flag. 	original
+i015	Looters stole ancient artifacts from the tomb.	Banditti stole ancient artifacts from the tomb.	looter	banditti	no	yes	It's a typical green flag.	original
+i016	My six-month old son is teething.	My six-month old son is fledging.	teethe	fledging	no	no	let's assume we are talking about humans, then a human cannot fledge, I hope. 	original
+i017	He tried to seduce me.	He tried to bring round me.	seduce	bring round	no	no	"it's usually ""bring somebody around"" -- separable phrasal verb. I don't against repalcing a single verb with a phrase, but only when the phrase makes sense after the substituion. When the object is a pronoun, it HAS to be placed betweeen the verb and the particle. "	original
+i018	He pays with a credit card.	He presents with a credit card.	pay	presents	no	yes	Yeah, a person can show up with a credit card.	original
+i019	Tom knew who the kidnappers were.	Tom knew who the violators were.	kidnapper	violators	no	yes	It's a typical green flag.	original
+i020	We hailed a cab.	We beeped a cab.	hail	beeped	no	yes	It's a typical green flag.	original
+i021	The name rang a bell in me.	The name whizzed a bell in me.	ring	whizzed	no	no	Ring a bell is a fixed expression. We didn't consider this in data generation	original
+i022	Tom comforted Mary.	Tom pacified Mary.	comfort	pacified	yes	yes 	This is a boundary case in the lower bound side. We need to check WordNet to have a more concrete idea. 	original
+i023	Whenever he comes up to Tokyo, he stays with us.	Whenever he descends to Tokyo, he stays with us.	come up	descends	no	yes	Yeah it sounds fine. The guy may live in somewhere super high. 	rejudged
+i024	The Tomei Expressway connects Tokyo with Nagoya.	The Tomei Expressway introduces Tokyo with Nagoya.	connect	introduces	no	no	"It's a grammatical issue. Introduce does not come with ""with"" "	original
+i025	I can't recall her name at the moment.	I can't adopt her name at the moment.	recall	adopt	no	yes	"Boundary case, but I can't decise if it's a ""drink a chair"" level mistake. "	original
+i026	He played his trump card.	He played his hole card.	trump card	hole card	no (RISKY!)	yes	The two expressions can be synonyms. We need to double check on that. 	rejudged
+i027	The police broke up the crowd.	The police broke up the community.	crowd	community	no	yes	"Technically, the police can break up a community by dismissing the people. For exmaple, a bunch of hobos living in a block, then got ""broken up"" by being sepearted, exiled and etc. "	original
+i028	The organizers expect more than 300,000 visitors.	The organizers choose more than 300,000 visitors.	expect	choose	no	yes	"The organisers can conduct the ""choosing"" activity; the visitors can be choosen. For example, it's a huge magic show expecting volunteers. "	original
+i029	Zip up!	Sew!	zip up	sew	no	yes	It's a bit too early but I don't think this sample forms a high-quality repalcment self-repair. Because the two variables can be seen as turn-level complete replacement. Maybe we can filter the data by length (original length >= 3, for example) 	rejudged
+i030	She bought a toaster, a coffeemaker, an egg cooker and a hand mixer.	She bought a toaster, a coffeemaker, an egg enamelware and a hand mixer.	cooker	enamelware	no	yes	an egg enamelware looks odd to me, but I googled and it is real. No reason to say no. 	original
+i031	The water's leaking from the elbow of the pipe.	The water's vomitting from the elbow of the pipe.	leak	vomitting	no	no	Water cannot vomit itself, it can only be vomitted. 	original
+i032	Eric played a sweet tune on the piano.	Eric played a sweet popularism on the piano.	tune	popularism	no	no	Category Mistake, an abstract concept cannot be played 	original
+i033	There are more than 150 nations in the world.	There are more than 150 amphictyonies in the world.	nation	amphictyonies	no	yes	amphictyonies -- in an alternative universe where Aicient Greece still exists, this makes sense	original
+i034	The pen I am writing with belongs to Tom.	The pen I am writing with totals to Tom.	belong	totals	no	no	The object/subject does not fit the verb	original
+i035	I'm no rebel.	I'm no enfant terrible.	rebel	enfant terrible	no	 no	Why the expression inserted in Sent B is also a two-word expression, but this works well, unlike the trump card case? 	original
+i036	Tom spread some strawberry jam on his toast.	Tom sewn some strawberry jam on his toast.	spread	sewn	no	no	You cannot sew liqud 	original
+i037	Put this scarf around your neck.	Put this camlet around your neck.	scarf	camlet	no (BUT RISKY!)	yes	We need to double check if camlet and scarf share the same synset. 	original
+i038	The guards found a hacksaw blade in the prisoner's pocket.	The guards found a hacksaw blade in the languisher's pocket.	prisoner	languisher	no	yes	It's giving The Shawshank Redemption, so I'll let it pass. 	original
+i039	Acid fruits like pineapples and lemons are sour.	Acid fruits like pineapples and lemons are unpalatable.	sour	unpalatable	no	yes	totally makes sense, at least lemons are unpalatable. 	original
+i040	He pays with a credit card.	He provides with a credit card.	pay	provides	no	no	"When provide is with ""with"", it has to be a ditransitive-like frame. "	original
+i041	Grant was not an effective political leader.	Grant was not an effective imam.	political leader	imam	no	yes	An imam is hignly religional, while a political leader does not have to. 	rejudged
+i042	The pigeon is cooing.	The pigeon is meowing.	coo	meowing	no	no	the verb is strongly connected to the verb. A bird cannot meow.	original
+i043	I will prosper.	I will become.	prosper	become	no	no	Grammar issue. Become is a copular word that requires a predicative. 	original
+i044	The tiger escaped from the zoo.	The liger escaped from the zoo.	tiger	liger	no	yes	It's super normal for a liger to live in a zoo	original
+i045	He has been telling lies about himself.	He has been telling misrepresentations about himself.	lie	misrepresentations	no	yes	It makes sense, but we need to check if lie and misrepresentation share one same synset. 	original
+i046	Lungs, heart, veins, arteries and capillaries form the cardiovascular system.	Lungs, heart, veins, vasas vasorum and capillaries form the cardiovascular system.	artery	vasas vasorum	no	yes	It's a typical bio/medical expression.	artifact
+i047	The bad weather marred the ceremony.	The bad weather marred the party.	ceremony	party	no	yes	A party should not be a ceremony (right? In my understanding a party is always chill and casual and fun, while a ceremony is more formal and serious). 	original
+i048	Let's go to the beach.	Let's rise to the beach.	go	rise	no	yes	Makes perfect sense. Like a bouch of crabs or divers can say that. 	original
+i049	I erased my hard disk by accident.	I obviated my hard disk by accident.	erase	obviated	no	no	Obviate must apply to an abstract concept such as obstacle, risk, or requirement. 	original
+i050	Dan has been seeing a psychiatrist since 1997.	Dan has been seeing a gerontologist since 1997.	psychiatrist	gerontologist	no	yes	Makes perfect sense. 	original
+i051	This merchandise is tax free.	This entrant is tax free.	merchandise	entrant	no	no	human can't be tax free	original
+i052	The prince bowed down to Snow White.	The prince slumped to Snow White.	bow down	slumped	no	no	"It's just odd. If the prince suddently sits on Snow White (SW), then it should be ""slumped onto); if he wants to collapse in SW's arms, then it should be ""into"". "	rejudged
+i053	She wrinkled her brows.	She craned her brows.	wrinkle	craned	no	No	"I think ""crane"" is only applied to structure like neck and head. "	original
+i054	We're wasting ammunition.	We're wasting armament.	ammunition	armament	no (RISKY!)	yes (RISKY!)	Need to double check if ammu and arm share the same synset or not 	original
+i055	The treaty was signed on November 18, 1903.	The treaty was scored on November 18, 1903.	sign	scored	no	no	A treaty can't be scored 	original
+i056	Peter is buying a tomcat.	Peter is buying a mouser.	tomcat	mouser	no	yes	A mouser makes perfect sense 	original
+i057	Tom had his palm read.	Tom had his palm forecast.	read	forecast	no	no	category mismatch	original
+i058	This soup is too salty to eat.	This soup is too savory to eat.	salty	savory	no	yes (RISKY!)	Need to double check if they share the same synset 	original
+i059	I got an A on my essay.	I aced an A on my essay.	get	aced	no	no	Tautology 	original
+i060	Yoke the oxen to the plow.	Sew the oxen to the plow.	yoke	sew	no	no	category mismatch -- physical imcompatability. 	original
+i061	This river runs into Lake Ontario.	This river matures into Lake Ontario.	run	matures	no	no	Verb-object mismatch	original
+i062	Tom faked his death.	Tom cribbed his death.	fake	cribbed	no	no	verb-object mismatch. Crible must have a narrow column of expressions such as essay, idea, or answer. 	original
+i063	Some brave passengers caught the pickpocket and turned him over to the police.	Some brave passengers caught the pickpocket and gathered him to the police.	turn over	gathered	no	no	In this context, i believe the pickpocket should be in one piece and alive. So they cannot be gathered. 	rejudged
+i064	She crumbled a biscuit.	She crumbled a victoria sandwich.	biscuit	victoria sandwich	no	yes	It makes sense to make a cake into small crumbles 	original
+i065	Deutsche Telekom is stepping up its presence in China.	Deutsche Telekom is harmonizing its presence in China.	step up	harmonizing	no	yes	It sounds like DT does a re-org to its branches in China. 	rejudged
+i066	I pulled a triceps.	I pulled a intercostal.	triceps	intercostal	no	yes (with a flow)	a -> an before a vowel is not applied yet 	original
+i067	There's a famous book in English whose entire last chapter is a single sentence.	Therebroods a famous book in English whose entire last chapter is a single sentence.	be	broods	no 	no	"Another issue that emerged. We maybe need to be super cautious with expressions like ""there be"" and ""it is that""...Also, a book cannot brood. "	original
+i068	The hat's hanging on the rack.	The hat's balancing on the rack.	hang	balancing	no	yes	Poetic and makes sense. 	original
+i069	The soldiers resisted the enemy attack.	The soldiers resisted the enemy campaign.	attack	campaign	no	yes (RISKY!)	we need to check if campaingn and attach share the same synset.	original
+i070	His ideas accord with theirs.	His ideas calm with theirs.	accord	calm	no	no	A abstract idea cannot calm 	original
+i071	Let's jump into the water.	Let's flit into the water.	jump	flit	no	yes	image it's a water bird flits into water to catch a fish	original
+i072	Everyone who worked on that project became a millionaire.	Everyone who worked on that project transformed a millionaire.	become	transformed	no	no	It's a grammar issue. Transforms, when used as a transitive verb, needs to connect the receiver, and use an into to show the results	original
+i073	Tom passed the ball to Mary.	Tom knocked the ball to Mary.	pass	knocked	no	yes	This makes sense in the ball activity 	original
+i074	The lion roars.	The lion clamors.	roar	clamors	no	no	Clamor requires the subject to be both collective and humanised. 	original
+i075	She is a chatterbox.	She is a stentor.	chatterbox	stentor	no	yes	A typical calssical assusion. She has a bright and loud voice. 	original
+i076	The loss reached three million yen.	The figure reached three million yen.	loss	figure	no	yes	This is a typical financal expression	original
+i077	Tom sat under a tree, strumming his ukulele.	Tom sat under a tree, tinging his ukulele.	strum	tinging	no	no	if the tinging is ting, then a ukulele should be strumed (original sentence), only bells or cans with small rocks inside can ting; if it is tinge, then this context does not support Tom dying his ukulele with a colour -- I might be wrong. This needs double check. 	original
+i078	Tom seems conceited.	Tom subtends conceited.	seem	subtends	no	no	This sentence is gebrish 	original
+i079	They weren't warned of the tidal wave.	They weren't warned of the tidal jitter.	wave	jitter	no	yes	The jitter can refer to a scientific observation -- the reading is spiking, in a high frequency	original
+i080	He resented his friend's action.	He resented his friend's communication.	action	communication	no	yes	a person can resent to a more abstract thing like communication. 	original
+i081	The boy clasped the puppy to his chest.	The boy clasped the puppy to his organ.	chest	organ	no	yes	clasp requires items to touch each other. But organ should be internal. Or this is a very horiffing scienario. 	original
+i082	Tom extinguished his torch.	Tom extinguished his strip lighting.	torch	strip lighting	no	no	a modern strip lighting cannot be extinguihshed, it is for something that ignets 	original
+i083	"Who starred in ""The Poseidon Adventure""?"	"Who usherred in ""The Poseidon Adventure""?"	star	usherred	no	yes	"""usher in"" as a phrase can express something/someone starts a new type/era of style and genre"	original
+i084	In 1960, the company added polyacrylonitrile staple fibers to its range.	In 1960, the issuer added polyacrylonitrile staple fibers to its range.	company	issuer	no	yes	It reads professional 	original
+i085	"Gregor's broken loose."""	"Gregor's arrived."""	break loose	arrived	no	yes	Gregor has arrived -- makes sense 	rejudged
+i086	Italy has two mountain ranges, the Alps and the Apennines.	Italy has two massifs, the Alps and the Apennines.	mountain range	massifs	no	no (low confidence)	It might be me being dramatic. But the two proper nouns in this sample are plural. So, they strongly indicate mountain ranges. But massif means a single, discontinue, usually cliffy mountain. So, are they contradicted? 	rejudged
+i087	The computer system shuts down automatically at 8pm.	The network shuts down automatically at 8pm.	computer system	network	no	yes	It's a typical IT description	rejudged
+i088	Tom drew the shortest straw.	Tom pilfered the shortest straw.	draw	pilfered	no	yes	a straw is usually cheap, it suits pitfer well	original
+i089	I slipped and twisted my ankle.	I blackened and twisted my ankle.	slip	blackened	no	yes	a twisted ankle can be blackened due to inner bleeding. 	original
+i090	He escaped from prison.	He escaped from reformatory.	prison	reformatory	no	yes	The zero article format is fine when it comes to prison/reformatory/school	original
+i091	"""Whose newspapers are these?"" ""They are my father's."""	"""Whose works are these?"" ""They are my father's."""	newspaper	works	no	yes	It makes perfect sense 	original
+i092	I made a decision.	I crayoned a decision.	make	crayoned	no	no	a decision is a mental, abstract concenpt. It cannot be crayoned as a concrete product. 	original
+i093	Tom drew the shortest straw.	Tom reaped the shortest straw.	draw	reaped	no	no	"1. to draw the shortest straw is a fixed expression. A more famous but similar case in linguistics is ""to kick the bucket"". 2. Even if we understand it literaly, it is odd to reap one single straw -- I am not certain here "	original
+i094	Baena Soares was arrested by the armed forces.	Baena Soares was arrested by the ranks and file.	armed forces	ranks and file	no	yes	Rank and file is a fixed expression. So, it is not perfect but works fine. 	rejudged
+i095	I am intelligent.	I am perceptive.	intelligent	perceptive	no (RISKY)	yes 	It needs a double check in WordNet to see if they share the same synset. 	original
+i096	Tom knew the answer.	Tom knew the comment.	answer	comment	no	yes 	It makes sense to me 	original
+i097	Tom cut the pie into six pieces.	Tom cut the pie into six upstairses.	piece	upstairses	no	no	you cannot cut something into upstaires 	original
+i098	She is pretty bad at tennis.	She is pretty nasty at tennis.	bad	nasty	no	yes 	It looks perfectly fine to me 	original
+i099	I love anal sex.	I love anal perspiration.	sex	perspiration	no	yes 	It's a personal preference 	original
+i100	The rain has let up.	The rain has tidied.	let up	tidied	no	no	The rain has no intention to tide things up. And there misses an objective. 	rejudged
+i101	A cow chases away flies with its tail.	A cow pulls flies with its tail.	chase away	pulls	no	no	"Let's assume the cow is the spiece that we are familiar with. Then, a tail cannot pull. I would say it's a ""drink a chair"" type mismatch."	rejudged
+i102	The surgeon amputated the wrong leg.	The surgeon scooped the wrong leg.	amputate	scooped	no	no	You can scoop from a leg, but you cannot scoop the whole leg. Its physical feature makes it unmached	original
+i103	I drink two cups of coffee.	I drink two mugs of coffee.	cup	mugs	no (RISKY!)	yes	we need to check if cup and mug are in the same synset 	original
+i104	Pochi and Moko are in the kennel, and other dogs are playing in the garden.	Pochi and Moko are in the kennel, and other dogs are visitting in the garden.	play	visitting	no	yes	visit can be used as an intransitive verb, meaning a casual meeting up	original
+i105	If you take this medicine, the stomach ache will be healed.	If you take this medicine, the stomach ache will be freed.	heal	freed	no	no	Ontological ummatch	original
+i106	I twisted my ankle.	I maimed my ankle.	twist	maimed	no	yes	It makes perfect sense 	original
+i107	I see the golden cross.	I see the golden housing.	cross	housing	no	yes	It makes sense to me, like there is an item where its outter layer is golden. 	original
+i108	She answers us whenever we ask her a question.	She explains us whenever we ask her a question.	answer	explains	no	no	grammatical issue. The syntax of explain is not right 	original
+i109	The jackal howls.	The jackal clatters.	howl	clatters	no	no	Clatter cannot be used to describe a sound made by soft tissues of a jackal. 	original
+i110	The room was lit by candles.	The room was rushed by candles.	light	rushed	no	no	A candle cannot move things 	original
+i111	He's baling the hay.	He's catching the hay.	bale	catching	no	yes	This makes sense tome 	original
+i112	She stamped the mud off her shoes.	She rushed the mud off her shoes.	stamp	rushed	no	no	The verb rush does not fit the frame 	original
+i113	The coup was meticulously executed.	The disbandment was meticulously executed.	coup	disbandment	no	yes	This makes perfect sense 	original
+i114	I demand a refund.	I encore a refund.	demand	encore	no	no	encore is locked in state/performance-related expressions. It does not match with a refund. 	original
+i115	Some of these apples are bad.	Some of these apples are corrupt.	bad	corrupt	no (VERY RISKY!!)	yes	we need to check this. Especially, both no and corrupt make the same meaning in this sentence -- more or less. 	original
+i116	Tom carefully wiped his fingerprints off the knife.	Tom carefully wiped his signature recognitions off the knife.	fingerprint	signature recognitions	no	no	SR should be something digital and abstract like an algorithm. It can't be physically wiped. 	rejudged
+i117	His speech bored me.	His speech depressed me.	bore	depressed	no	yes	This makes sense to me 	original
+i118	This table's surface is smooth.	This table's commodity is smooth.	surface	commodity	no	no	category mismatch 	original
+i120	She admits that she stole the jewels.	She beatifies that she stole the jewels.	admit	beatifies	no	no	beatify can only use a noun as the object. 	original
+i121	A dog is sensitive to smell.	A dog is wise to smell.	sensitive	wise	no	no	wise denotes the sophisticated thinking. But sniffing is more about instict. 	original
+i122	Tom kissed his cousin.	Tom kissed his enate.	cousin	enate	no (RISKY!!)	yes	the two words can largely overlap. We need to double check in WordNet. 	original
+i123	That news got around.	That news supervened.	get around	supervened	no	yes 	Sunds overtly formal but can't find a reason to say no. 	rejudged
+i124	He broke down all at once.	He footled all at once.	break down	footled	no	yes	It's like someone startes to do stupid things all of a sudden. So I'd say it's fair. 	rejudged
+i125	I farted in class and the teacher threw me out.	I farted in class and the teacher extradited me.	throw out	extradited	no	no	Frame mismatch. 	rejudged
+i126	The duck quacks.	The goose quacks.	duck	goose	no	no	Quack is for ducks only. Geese should use horn, cackle, or hiss. 	original
+i127	The sun is rising above the horizon.	The sun is leaning above the horizon.	rise	leaning	no	no	If something can lean, then it cannot be above something else. 	original
+i128	Tom despises lies.	Tom respects lies.	despise	respects	no	yes	Totally makes sense. 	original
+i129	The tale is familiar to us.	The tale is competent to us.	familiar	competent	no	no	category mismatch. A tale cannot be competent. 	original
+i130	She wandered about the country.	She wandered about the environment.	country	environment	no	yes	"even though the word ""environment""is super big, it still fits the proposition. "	original
+i131	Hurricane Sandy is coming.	Hurricane Sandy is descending.	come	descending	no	yes	descending fits the clamte topic.	original
+i132	The guards found a hacksaw blade in the prisoner's pocket.	The guards greeted a hacksaw blade in the prisoner's pocket.	find	greeted	no	no	the theme of to greet has to be human or humanised. 	original
+i133	Dense forests cover the Carpathians.	Dense growths cover the Carpathians.	forest	growths	no (RISKY)	yes 	It works because growth, just like forest, can denote to thick plants. 	original
+i134	Tom loaded the bags into the trunk of his car.	Tom strung the bags into the trunk of his car.	load	strung	no	no	The strajectory of the item being strung has to be linear. So, bags cannot do that in the physicl sense. 	original
+i135	Tom painted his room white.	Tom coppered his room white.	paint	coppered	no	no	the colour and the verb do not match. 	original
+i136	How many people in the Netherlands are addicted to hard drugs?	How many people in the Netherlands are addicted to recreational drugs?	hard drug	recreational drugs	no	yes	It's so typical. It makes perfect sense. 	rejudged
+i137	The room was lit by candles.	The room was fattened by candles.	light	fattened	no	no	A room cannot get fattended, nor can a candle do this to anything. 	original
+i138	She does not let up.	She does not occidentalize.	let up	occidentalize	no	no	Makes sense -  a person can reject a culture. 	rejudged
+i139	Thanks Mom.	Honors Mom.	thank	honors	no	no	It requires a subject. 	original
+i140	We hiked through a beautiful green valley.	We scurried through a beautiful green valley.	hike	scurried	no	yes	a bunch of people walked through a valley in hurry - makes sense. 	original
+i141	I am unsettled about the news.	I am unsympathetic about the news.	unsettled	unsympathetic	no	yes	It makes sense. A person can be indifferent to the news. 	original
+i142	He showed it to me.	He explained it to me.	show	explained	no	yes	Meets the grammatical and semantic expectation of the word explain. 	original
+i143	The wind has abated.	The wind has crumbled.	abate	crumbled	no	no	The air cannot be crumbled	original
+i144	Its long neck resembles that of a horse.	Its long neck corroborates that of a horse.	resemble	corroborates	no	no	The theme of the verb corroborate needs to be abstract, such as a theory, a hypothesis, or a statement. 	original
+i145	She loved Tom.	She hated Tom.	love	hated	no	yes	It makes perfect sense 	original
+i146	I don't dig modern jazz.	I don't solve modern jazz.	dig	solve	no	no	a musical genre cannot be solved. 	original
+i147	My wife is Swedish.	My monogamist is Swedish.	wife	monogamist	no	yes	It makes sense in a specific context. Such as a seminar discussing marriage system. 	original
+i148	The cardinals have elected a new pope.	The eparches have elected a new pope.	cardinal	eparches	no	yes 	It is even real that Oriental Orthodoxy eparches vote for the next pope	original
+i149	The gown is made of silk.	The dirndl is made of silk.	gown	dirndl	no	yes	It is true that dirndls are usually made of silk 	original
+i150	He wrapped his arms around me.	He floated his arms around me.	wrap	floated	no	yes	If that is in a pool, then it makes sense??? -- require double check.	original
+i151	She pouted when she was told to wash the dishes.	She pouted when she was told to dress the dishes.	wash	dress	no	yes	Makes sense. Dressing the dishes is a common thing in high-end places, so it's toally doable. 	replacement
