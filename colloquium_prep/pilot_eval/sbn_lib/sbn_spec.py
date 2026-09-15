@@ -119,7 +119,8 @@ class SBNSpec:
         "TimeOf", # Add new role
         "AgentOf", # Add new role
         "MannerOf", # Add new
-        "Co-ThemeOf" # Add new role
+        "Co-ThemeOf", # Add new role
+        "LocationOf" # Add new role
     }
 
     ROLES = {
@@ -152,6 +153,7 @@ class SBNSpec:
         "Instrument",
         "Instance",
         "Location",
+        "LocationOf", # Add new role
         "Manner",
         "MannerOf", #Add new role
         "Material",
