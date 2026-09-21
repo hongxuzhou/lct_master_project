@@ -39,17 +39,10 @@ import spacy
 from generate_repairs import NON_LEXICAL, WN2UD, align, inflection_tag
 from inflect_en import inflect, match_case
 from repair_transform import build_repair
-from sbn_lin import SYNSET_PATTERN, read_split
+from sbn_lin import SPLITS, SYNSET_PATTERN, read_split
 from wn_candidates import candidates
 
 ROOT = Path(__file__).resolve().parents[1]
-
-SPLITS = {
-    "train": "data/pmb-5.1.0/split/en/train/gold.sbn",
-    "dev": "data/pmb-5.1.0/split/en/dev/standard.sbn",
-    "test": "data/pmb-5.1.0/split/en/test/standard.sbn",
-    "test_long": "data/pmb-5.1.0/split/en/test/long.sbn",
-}
 
 FIELDS = [
     "doc_id", "split", "concept_pos", "repair_synset", "reparandum_synset",

@@ -31,7 +31,7 @@ import spacy
 
 from inflect_en import VERB_TAGS, inflect, match_case
 from repair_transform import build_repair
-from sbn_lin import SYNSET_PATTERN, read_split
+from sbn_lin import SPLITS, SYNSET_PATTERN, read_split
 from wn_candidates import candidates
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -394,7 +394,7 @@ def pick(doc_id: str, cpos: int, synset: str,
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--split", default="train")
+    ap.add_argument("--split", default="train", choices=sorted(SPLITS))
     ap.add_argument("--pool", default=None,
                     help="scored pool from build_pool.py; without it, "
                          "candidate selection is unfiltered")
@@ -413,7 +413,7 @@ def main() -> None:
 
     rng = random.Random(args.seed)
     pool = load_pool(args.pool) if args.pool else None
-    gold = ROOT / f"data/pmb-5.1.0/split/en/{args.split}/gold.sbn"
+    gold = ROOT / SPLITS[args.split]
     docs = read_split(gold)
     if args.limit:
         docs = docs[: args.limit]

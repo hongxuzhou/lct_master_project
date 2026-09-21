@@ -166,6 +166,19 @@ def parse_sbn_line(raw: str, doc_id: str = "", sentence: str = "") -> SBNDoc:
     return SBNDoc(doc_id, sentence, raw, concepts, separators)
 
 
+# Canonical split-name -> source-file mapping, relative to the repo root.
+# Single source of truth: build_pool.py and generate_repairs.py both import
+# this rather than each hardcoding their own, so the two cannot silently
+# drift apart (train uses gold.sbn; dev/test have no gold.sbn, only
+# standard.sbn -- see DESIGN.md §1 step 1).
+SPLITS = {
+    "train": "data/pmb-5.1.0/split/en/train/gold.sbn",
+    "dev": "data/pmb-5.1.0/split/en/dev/standard.sbn",
+    "test": "data/pmb-5.1.0/split/en/test/standard.sbn",
+    "test_long": "data/pmb-5.1.0/split/en/test/long.sbn",
+}
+
+
 def read_split(path: str | Path) -> list[SBNDoc]:
     """Read a PMB split .sbn file (id / sentence / sbn / blank blocks)."""
     lines = Path(path).read_text(encoding="utf-8").split("\n")
