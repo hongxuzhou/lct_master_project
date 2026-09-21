@@ -3,8 +3,15 @@ Regression: does the transform reproduce the hand-written covered cases of
 documentation/knowledge_base/repair_sbn_notation.qmd from their clean SBN?
 
 Each case gives (clean SBN in the doc's own linearisation, repair site,
-reparandum synset, expected repaired SBN).  A pass means the mechanical
-splice and the annotator's hand agree exactly.
+reparandum synset, expected repaired SBN).
+
+A pass means the mechanical splice and the annotator's hand agree exactly --
+EXCEPT for the two cases flagged `EXPECTATION ADJUSTED TO CURRENT BEHAVIOUR`
+below (subject self-repair, adjunct).  There `want` was written from what the
+transform emits rather than from what the doc says, because the transform
+cannot yet mutate a constant.  Those two pass on splice topology only, so the
+summary line at the end overstates agreement with the doc by two.  Restore
+their expectations when constant mutation lands.
 
 Run:  python3 test_against_doc.py
 """
@@ -42,6 +49,16 @@ CASES = [
         clean='female.n.02 Name "Mary" play.v.01 Agent -1 Time +1 Theme +2 '
               "Manner +3 time.n.08 EQU now tennis.n.01 well.r.01",
         i=0, reparandum="male.n.02", strategy=Strategy.ANCHOR,
+        # EXPECTATION ADJUSTED TO CURRENT BEHAVIOUR -- this is not an
+        # independent check of the doc's annotation.
+        # The doc writes `male.n.02 Name "Josh"` in the CORRECTION box.  The
+        # transform copies non-index role values verbatim onto both copies and
+        # has no way to mutate a constant, so it emits `Name "Mary"` there: the
+        # right concept under the wrong name.  `want` below encodes what the
+        # transform does, not what the annotator wrote, so this case passes on
+        # splice topology alone.  Restore the doc's string once constant
+        # mutation lands; until then a pass here does NOT mean the subject
+        # case is reproduced.
         want='entity.n.01 CORRECTION <1 male.n.02 Name "Mary" EQU -1 '
              'CONJUNCTION <2 female.n.02 Name "Mary" EQU -2 play.v.01 '
              "Agent -3 Time +1 Theme +2 Manner +3 time.n.08 EQU now "
@@ -61,6 +78,14 @@ CASES = [
         clean="class.n.01 time.n.08 EQU now be.v.01 Theme -2 Time -1 Time +1 "
               "time.n.08 DayOfWeek tuesday",
         i=3, reparandum="time.n.08", strategy=None,
+        # EXPECTATION ADJUSTED TO CURRENT BEHAVIOUR -- weaker than the case it
+        # is named after.
+        # The doc contrasts `DayOfWeek monday` with `DayOfWeek tuesday`.  The
+        # transform cannot change the constant, so the substitution here is
+        # `time.n.08` for `time.n.08`: a no-op that exercises the splice
+        # geometry and nothing else.  Both boxes end up saying `tuesday`, which
+        # is not the adjunct repair at all.  Give this case a real reparandum
+        # once constant mutation lands.
         want="class.n.01 time.n.08 EQU now be.v.01 Theme -2 Time -1 "
              "CORRECTION <1 time.n.08 DayOfWeek tuesday TimeOf -1 "
              "CONJUNCTION <2 time.n.08 DayOfWeek tuesday TimeOf -2",
