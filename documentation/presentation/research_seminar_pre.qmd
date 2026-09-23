@@ -1,0 +1,132 @@
+---
+title: "Representing and Parsing Replacement Self-Repair in Formal Meaning Representations"
+author: "Hongxu Zhou"
+format: 
+    dtslides-revealjs:
+        slide-number: c/t
+bibliography: my_library.bib
+institute: |
+  Erasmus Mundus Joint Master Degree in LCT <br>
+  <div style="display: flex; justify-content: center; align-items: center; gap: 15px; margin-top: 10px;">
+    <img src="logo/lct_logo.png" style="height: 40px; width: auto;" alt="EM Logo">
+    <img src="logo/rugr_logoen_rood.png" style="height: 40px; width: auto;" alt="RUG Logo">
+    <img src="logo/uds_logo.svg" style="height: 36px; width: auto;" alt="UdS Logo">
+  </div>
+---
+# Hook 
+Put the siri example here, showing how current diaglogue system fails to handle RSR
+
+![A weather request to Siri with an RSR](viz/siri-b-i-d.png){width="20%" fig-align="center"}
+
+# Roadmap
+
+# Simplified Box Notation (SBN)
+
+## `CORRECTION` + `CONJUNCTION`
+
+```{.sbn code-line-numbers="false"}
+boy.n.01                       % The boy
+time.n.08 TPR now              %
+    CORRECTION <1              %
+sneeze.v.01 Agent -2 Time -1   % sneezed,
+    CONJUNCTION <2             % I mean,
+cough.v.01 Agent -3 Time -2    % coughed
+```
+
+# Related Work
+
+:::{.notes}
+related work here should be much more lightweight than the RP. 
+
+it should only show the essential threads, with bold text, keywords, etc., showing the "core" of previous methods and formal/computational semantic accounts
+
+Regarding the semantic side, use **a lot of** visualisation, showing how DS-TTR and AMR do not work in this project.
+
+incompability should also show an example showing it's contextual-based. 
+:::
+
+## Research Questions {style="text-align: center;"}
+
+::: {.r-fit-text}
+1. **Representation**: How should within-clause RSR be represented in SBN, and what are the coverage and limitations of the representation?
+2. **Parsing**: How well can LLM-based semantic parsers learn this representation from synthesised meaning-banked data, and what errors remain?
+:::
+
+
+# Pilot Study Report 
+
+## A quick look of the pilot study setting 
+
+## results 
+
+- Use figures and tables here
+
+## One example 
+
+- Use a malformed SBN showcasing how the parser gets it wrong. 
+  - Maybe just the example from the RP
+  - Don't forget to define 
+
+# Showing what is not done 
+
+- only one model --- no scaling tested
+- no tested "RSR NL --> Fluent SBN" LoRA setting
+
+# Formalism -- Answering RQ1 
+
+First recall what is RQ1 
+
+Telling the audience that I ALREADY DESIGNED the formalism 
+
+## Formalism Showcase 
+
+Use the Berlin-Dublin example 
+
+## Abstract Description 
+
+:::{.text-center}
+
+$$
+K = K_{\pi_{\text{pre}}} \land \neg K_{\pi_m} \land \big(K_{\pi_n} \land K_{\pi_{\text{post}}}\big) \land \varphi_{\mathit{Corr}(\pi_m,\pi_n)}
+$$
+:::
+
+where: 
+$K_{\pi_m}$ represents the reparandum
+$K_{\pi_{\text{post}}}$ represents the repair
+
+I put the abstract definition after the example to let the audience develop the gist first. Even if they fail to catch the logic expression, it doesn't obsticle the later parts. -- Does it work?
+
+## Coverage
+
+Use a table show the mechanism 
+
+-------------------------
+| concept | nouns, verbs| 
+| roles | propositions | 
+------------------------
+
+# Data -- Corpus Building 
+
+## Source 
+
+WordNet 
+
+PMB
+
+## Process
+
+Use a diagram explaining the process, focusing on the intuition 
+
+## mapping the formalism and the data? 
+
+# Model 
+My idea is using one case illustrating hwo it is evaluated through the whole pipeline. This also explains the aims of each aspect of the evaluation
+
+# Wrap up
+
+# Bibliography 
+
+# Backup
+
+# Thankyou 
