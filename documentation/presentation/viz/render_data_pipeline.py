@@ -104,7 +104,7 @@ def main():
     transform = table([
         cell(f"{title('④ Insert before<BR/>the repair')}<BR/>"
              f"{desc('± editing expression')}<BR/>"
-             f"{ex('What is the storm,<BR/>I mean, is the weather<BR/>like in Dublin?')}",
+             f"{ex('What is the storm,<BR/>I mean, the weather<BR/>like in Dublin?')}",
              LANE_H, width=190, port="nl"),
         cell(f"{title('④ Add paired<BR/>contexts')}<BR/>"
              f"{desc('both linked to<BR/>shared content')}<BR/>"
@@ -115,7 +115,7 @@ def main():
 
     check = table([
         cell(f"{title('⑤ Linguistic<BR/>filtering')}<BR/>"
-             f"{desc('contrast (NLI),<BR/>contextual fit<BR/>(LM)')}",
+             f"{desc('contextual fit<BR/>(LM surprisal)')}",
              LANE_H, style="dashed", port="ling"),
         cell(f"{title('⑤ Structural<BR/>validation')}<BR/>"
              f"{desc('well-formed,<BR/>status, links,<BR/>rest unchanged')}",

@@ -72,7 +72,7 @@
 <text xml:space="preserve" text-anchor="start" x="585.25" y="-269.55" font-family="Times,serif" font-weight="bold" font-size="21.00">the repair</text>
 <text xml:space="preserve" text-anchor="start" x="556" y="-251.4" font-family="Times,serif" font-size="18.00">± editing expression</text>
 <text xml:space="preserve" text-anchor="start" x="568" y="-234.35" font-family="Times,serif" font-style="italic" font-size="17.00">What is the storm,</text>
-<text xml:space="preserve" text-anchor="start" x="554.5" y="-217.35" font-family="Times,serif" font-style="italic" font-size="17.00">I mean, is the weather</text>
+<text xml:space="preserve" text-anchor="start" x="562.38" y="-217.35" font-family="Times,serif" font-style="italic" font-size="17.00">I mean, the weather</text>
 <text xml:space="preserve" text-anchor="start" x="579.62" y="-200.35" font-family="Times,serif" font-style="italic" font-size="17.00">like in Dublin?</text>
 <polygon fill="none" stroke="black" points="534.5,-31.5 534.5,-191.5 724.5,-191.5 724.5,-31.5 534.5,-31.5"/>
 <text xml:space="preserve" text-anchor="start" x="565.75" y="-165.55" font-family="Times,serif" font-weight="bold" font-size="21.00">④ Add paired</text>
@@ -100,11 +100,10 @@
 <g id="node6" class="node">
 <title>check</title>
 <polygon fill="none" stroke="black" stroke-dasharray="5,2" points="749.5,-183 749.5,-308 882.75,-308 882.75,-183 749.5,-183"/>
-<text xml:space="preserve" text-anchor="start" x="757.62" y="-274.55" font-family="Times,serif" font-weight="bold" font-size="21.00">⑤ Linguistic</text>
-<text xml:space="preserve" text-anchor="start" x="780.5" y="-253.55" font-family="Times,serif" font-weight="bold" font-size="21.00">filtering</text>
-<text xml:space="preserve" text-anchor="start" x="761.75" y="-235.4" font-family="Times,serif" font-size="18.00">contrast (NLI),</text>
-<text xml:space="preserve" text-anchor="start" x="768.12" y="-217.4" font-family="Times,serif" font-size="18.00">contextual fit</text>
-<text xml:space="preserve" text-anchor="start" x="796.62" y="-199.4" font-family="Times,serif" font-size="18.00">(LM)</text>
+<text xml:space="preserve" text-anchor="start" x="757.62" y="-265.55" font-family="Times,serif" font-weight="bold" font-size="21.00">⑤ Linguistic</text>
+<text xml:space="preserve" text-anchor="start" x="780.5" y="-244.55" font-family="Times,serif" font-weight="bold" font-size="21.00">filtering</text>
+<text xml:space="preserve" text-anchor="start" x="768.12" y="-226.4" font-family="Times,serif" font-size="18.00">contextual fit</text>
+<text xml:space="preserve" text-anchor="start" x="763.25" y="-208.4" font-family="Times,serif" font-size="18.00">(LM surprisal)</text>
 <polygon fill="none" stroke="black" points="749.5,-58 749.5,-183 882.75,-183 882.75,-58 749.5,-58"/>
 <text xml:space="preserve" text-anchor="start" x="756.5" y="-149.55" font-family="Times,serif" font-weight="bold" font-size="21.00">⑤ Structural</text>
 <text xml:space="preserve" text-anchor="start" x="770.75" y="-128.55" font-family="Times,serif" font-weight="bold" font-size="21.00">validation</text>

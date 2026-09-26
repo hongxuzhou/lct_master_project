@@ -15,7 +15,12 @@
       "Bash(grep -nE '\"[^\"]{6,}\"' render_data_pipeline.py)",
       "Bash(grep -nE '[0-9],[0-9]{3}|items|challenge set|later-reference|non-RSR|test set' main.tex)",
       "Bash(cd /Users/hongxuzhou/Documents/GitHub/lct_master_project/repair_data_gen && grep -nE '^def |^class |^    def ' repair_transform.py sbn_lin.py generate_repairs.py | head -60; sed -n '/^def repair\\\\b\\\\|^def transform\\\\|^def apply/,/^def /p' repair_transform.py | head -60)",
-      "Bash(grep -vE '^\\\\s*$')"
+      "Bash(grep -vE '^\\\\s*$')",
+      "Bash(awk -F'\\\\t' 'NR>1 && $4==\"weather.n.01\"' pool_train.tsv pool_dev.tsv)",
+      "Bash(rsvg-convert -w 800 siri_rsr_status.svg -o /private/tmp/claude-501/-Users-hongxuzhou-Documents-GitHub-lct-master-project/d3b8f716-f88e-4d06-be9f-181e2ef9ffae/scratchpad/png/siri_rsr_status.png)",
+      "Bash(HF_HUB_OFFLINE=1 python3 -c ' *)",
+      "Bash(rsvg-convert -w 800 wordnet_siblings.svg -o /private/tmp/claude-501/-Users-hongxuzhou-Documents-GitHub-lct-master-project/d3b8f716-f88e-4d06-be9f-181e2ef9ffae/scratchpad/png/wordnet_siblings.png)",
+      "Bash(grep -nE 'fragment|Other siblings|^.*## |notes|:::$')"
     ],
     "additionalDirectories": [
       "/Users/hongxuzhou/Documents/GitHub/lct_master_project"

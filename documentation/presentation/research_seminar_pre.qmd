@@ -65,27 +65,19 @@ On self-corrections, the best system passes 58.8% of scenarios (GPT-Realtime) an
 Goal: the second row is the Siri error in a current agent. The paper reports this as a case (the API is called before the correction ends), not as a rate; do not claim a proportion. TODO: verify the number of self-correction scenarios (the Pass@1 values are multiples of 1/17).
 :::
 
-## Roadmap
+## This talk asks two questions
 
-- **Related Work**: self-repair and how systems handle it
-- **Pilot**: a current semantic parser on self-repair input
-- **Representation**: a meaning representation for self-repair
-- **Data**: training pairs from a meaning bank
-- **Experiment Design**: training and evaluating parsers
+1. **RQ1**: How can a meaning representation record a self-repair, keeping what was withdrawn, and what can it not cover?
+2. **RQ2**: How well can LLM-based parsers learn this representation from synthesised data, and what errors remain?
 
-::: {.notes}
-TODO (step 2): merge with the next slide into "Two questions for this talk": RQs in plain words, roadmap sections labelled RQ1 (Representation) / RQ2 (Experiment Design).
+&nbsp;
+
+::: {.center}
+Related Work → Pilot → **Representation** (RQ1) → Data → **Experiment Design** (RQ2)
 :::
 
-## Research questions
-
-This project extends SBN to record all three pieces of information, and trains parsers to produce it.
-
-1. **Representation**: How can SBN represent within-clause RSR, and what can it not cover?
-2. **Parsing**: How well can LLM-based parsers learn this representation from synthesised data, and what errors remain?
-
 ::: {.notes}
-TODO (step 2): merge into the Roadmap slide above. Rephrase without "SBN" (not yet introduced): a meaning representation that records the repair; parsers that learn it from synthesised data.
+Goal: the audience knows what the talk answers before any theory. Same substance as the RP RQs; "SBN" is replaced by "a meaning representation" because it has not been introduced yet. The roadmap row is the only roadmap; section slides later need one sentence each.
 :::
 
 # Related Work
@@ -149,29 +141,28 @@ All three concern what the utterance *means*, not which words were spoken.
 Goal: the puzzle. Do not name the solution yet. These three items are reused as requirements (Representation); keep the wording identical.
 :::
 
-## Meaning representations make such information explicit and checkable {.small-slide}
+## A meaning representation is a graph of concepts and roles {.small-slide}
 
-A **meaning representation (MR)** organises entities, events and their relations into a structure that can be examined formally. In LLM-based systems, MRs make model-interpreted meaning inspectable beyond surface text:
+*What is the weather like in Dublin?*
 
-An MR can record all three pieces of information, so an error can be traced to a missing candidate, a wrong status or a wrong role.
+:::: {.columns}
+::: {.column width="58%"}
+![](viz/fluent_siri_example.svg){width="100%" fig-align="center"}
+:::
+::: {.column width="42%"}
+- **Nodes** are concepts: *weather*, *like*, a *city* named Dublin.
+- **Edges** are roles: the city is the **Location** of the weather request.
+- The **box** on the left is a context: it holds everything the speaker asserts.
+:::
+::::
+
+Such a graph has room for all three pieces of information: two city nodes, a context for each, and one Location role. Because the structure is explicit, an output can be checked piece by piece.
 
 ::: {.notes}
-Goal: the answer. Argue inspectability, not performance; the thesis does not test downstream gains.
-TODO (step 2): new title "A meaning representation is a graph of concepts and roles"; add the fluent Siri graph (Michael: example MR graph here) and show where each of the three pieces would sit. MR-use table moved to Backup; replace with one sentence.
+Goal: the answer to the previous slide, with a picture (Michael). Argue inspectability, not performance; the thesis does not test downstream gains. If asked where MRs are used with LLMs: Backup table. The box is introduced here so that two boxes on the Representation slide need no explanation.
 :::
 
-## SBN is the meaning representation of the Parallel Meaning Bank
-
-- **Simplified Box Notation (SBN)** represents meaning as a sequence of **concepts** (WordNet [@millerWordNetLexicalDatabase1994] senses) and **roles** that link them [@bosQuantificationAnnotationDiscourse2021; @bosSequenceNotationCatching2023].
-- Each sequence corresponds to a **directed acyclic graph (DAG)**, so an LLM can generate the graph as text.
-- The Parallel Meaning Bank (PMB) 5.1.0 provides gold sentence–SBN pairs [@abzianidzeParallelMeaningBank2017].
-
-::: {.notes}
-Goal: SBN is an agreed notation; no linguistic backbone. Boxes wait until Representation.
-TODO (step 2): merge into the next slide ("SBN writes this graph as a sequence an LLM can generate").
-:::
-
-## An SBN sequence and its graph encode the same meaning
+## SBN writes this graph as text, so an LLM can generate it {.small-slide}
 
 *What is the weather like in Dublin?*
 
@@ -193,68 +184,61 @@ Each line introduces a concept. A role points to another concept by relative pos
 :::
 ::::
 
+**Simplified Box Notation (SBN)** is the format of the Parallel Meaning Bank (PMB 5.1.0), which provides gold sentence–SBN pairs [@abzianidzeParallelMeaningBank2017; @bosSequenceNotationCatching2023]. Semantic parsing then becomes text-to-text: sentence in, SBN out.
+
 ::: {.notes}
-Goal: the Siri request, now fluent, as the audience's first SBN.
+Goal: the same graph as text; this is what the parser generates. Concepts are WordNet senses (weather.n.01 = first noun sense). SBN is an agreed notation; no linguistic backbone.
 :::
 
 # Pilot Study
 
-## The pilot tests a parser that cannot mark content as withdrawn
+## Can an existing SBN parser handle self-repair?
 
-- **Parser**: Gemma-2 9B [@gemmateamGemma2Improving2024], fine-tuned with LoRA [@huLoRALowRankAdaptation2021] on fluent PMB sentence–SBN pairs only.
-- **Input**: 833 sentences from the PMB training data, so the parser had seen their fluent SBNs; only the RSR inputs were new. Qwen3-32B [@yangQwen3TechnicalReport2025] inserted a reparandum of the same part of speech before one word, giving 2,499 RSR inputs without and 2,499 with *I mean*.
-- **Reference**: the original fluent gold SBN, so a correct parse leaves the reparandum out [following @senSemanticParsingDisfluent2021].
+- **Parser**: Gemma-2 9B [@gemmateamGemma2Improving2024], fine-tuned with LoRA [@huLoRALowRankAdaptation2021] on fluent PMB pairs only.
+- **Input**: 833 PMB sentences with an inserted reparandum, with and without *I mean* (2,499 each).
+- **Correct answer**: the fluent gold SBN, i.e. the reparandum is left out [following @senSemanticParsingDisfluent2021].
 
-::: {.notes}
-TODO (step 2): new title "Can an existing SBN parser handle self-repair?"; merge with the next slide (setup + goat/cow input row).
-:::
-
-## An Example of Input
 | Fluent (PMB) | RSR, no editing expression | RSR + *I mean* |
 |---|---|---|
 | A cow gave birth to a calf with two heads. | **A goat**, a cow gave birth to a calf with two heads. | **A goat**, *I mean*, a cow gave birth to a calf with two heads. |
 
 ::: {.notes}
-Goal: the example row defines the two RSR conditions visually; no internal terms such as "unmarked".
+Goal: state exactly what the pilot does (Michael). The bar is deliberately low: only asks the parser to drop the reparandum, since fluent SBN cannot mark it as withdrawn. The 833 sentences come from PMB training data, so the parser had seen their fluent SBNs; only the RSR inputs were new. Reparanda: Qwen3-32B [@yangQwen3TechnicalReport2025], same part of speech, before one word.
 :::
 
-## Self-repair lowers parsing accuracy, most sharply with *I mean*
+## Self-repair lowers parsing accuracy, and the parser asserts the reparandum
 
-| Input | Scorable (%) | Δ | Failure-penalised F1 | Δ |
-|---|---:|---:|---:|---:|
-| Fluent | 97.5 | — | 0.950 | — |
-| RSR, no editing expression | 94.6 | −2.9 | 0.786 | −0.164 |
-| RSR + *I mean* | 76.5 | −21.0 | 0.609 | −0.341 |
+| Input | Scorable (%) | Failure-penalised F1 |
+|---|---:|---:|
+| Fluent | 97.5 | 0.950 |
+| RSR, no editing expression | 94.6 | 0.786 |
+| RSR + *I mean* | 76.5 | 0.609 |
 
-- **Scorable**: the output can be converted into a graph and scored.
-- **Failure-penalised F1**: SMATCH++ F1 [@opitzSMATCHStandardizedExtended2023], with unscorable outputs counted as 0.
+- In **90.1%** of scorable RSR outputs the parse has *more* concepts than the fluent one: the goat is asserted, not dropped.
+- A parse that asserts the goat still scores **0.764**: one graph score does not show whether the repair was handled.
 
-All pairwise differences in F1 are significant (Wilcoxon signed-rank, *p* < .001).
-
-::: {.notes}
-Goal: Δ is relative to Fluent. Position effects go to Backup.
-TODO (step 2): merge in the two lessons from the next slide as the takeaway lines.
+::: {.smaller}
+Scorable: the output converts into a graph. F1: SMATCH++ [@opitzSMATCHStandardizedExtended2023], unscorable outputs counted as 0.
 :::
 
-## Keeping the reparandum meant asserting it, and the graph score hid the error
-
-1. In **90.1%** of scorable RSR outputs, the parser produced more concepts than for the fluent source (median +2): the reparandum was often added to the asserted content.
-2. A parse that asserts the goat still scores **0.764**, so a single graph score cannot show whether the repair was handled.
-
 ::: {.notes}
-Goal: the pilot shows the need for RSR supervision and for evaluation finer than SMATCH++. It does NOT show that SBN must be extended; that argument comes from later reference. Lesson 2 pays off in Experiment Design.
-TODO (step 2): merge into the results slide above.
+Goal: numbers only (Michael); the analysis is in Backup (goat/cow DAGs, recognition probe, position effects). All pairwise F1 differences significant (Wilcoxon signed-rank, p < .001). Median +2 concepts. The pilot shows the need for RSR supervision and for evaluation finer than SMATCH++; it does NOT show that SBN must be extended, that comes from later reference. The 0.764 pays off in Experiment Design.
 :::
 
 # Representation
 
-## Berlin and Dublin sit in sibling contexts under the same request
+## Keep both cities, and mark Berlin as withdrawn
 
-![](viz/siri_rsr.svg){width="85%" fig-align="center"}
+*What is the weather like in Berlin, I mean, in Dublin?*
+
+![](viz/siri_rsr_status.svg){width="100%" fig-align="center"}
+
+| Both candidates | Their status | The role they compete for |
+|:-:|:-:|:-:|
+| two `city` nodes | a withdrawn and an accepted context | both are `LocationOf` the request |
 
 ::: {.notes}
-Goal: the graph counterpart of the previous slide; reuse the layout of fluent_siri_example.svg so the change is visible.
-TODO (step 2): new title "Keep both cities, mark Berlin as withdrawn"; annotate withdrawn / accepted / shared Location role, matching the three pieces of information. Say the NEGATION analogy in one spoken sentence (slide in Backup).
+Goal: the three pieces of information from Related Work, now visible in one graph; the table repeats the column heads of that slide word for word. Spoken, one sentence: SBN already has contexts whose content is represented but not asserted, e.g. negation (Backup: John did not buy a car). CORRECTION and CONJUNCTION are existing SBN separators; no new separator is introduced. CORRECTION follows SDRT's Correction relation (Backup). If pressed on data: CORRECTION does not occur in PMB 5.1.0 gold. Figure: render_status_graphs.py.
 :::
 
 ## Both cities remain available for later reference; only Dublin is the requested location
@@ -299,96 +283,149 @@ Each item keeps the PMB split of its source document, so no training document re
 Goal: why the data is generated, and how: both sides of a gold pair change together. Callback: the pilot changed only the input. The dashed "?" edge is what Experiment Design tests.
 :::
 
-## Step ①–③: pick a concept, draw a competitor
+## Steps ①–③: pick a concept, draw a competitor for it
 
-::: {.notes}
-TODO (step 2): fluent Siri pair (sentence lane + SBN lane) -> pick "weather" / weather.n.01 -> draw "storm" / storm.n.01 from WordNet, same part of speech. Fragments, one step each. Full pipeline figure in Backup.
+<table>
+<thead><tr><th>Step</th><th>Sentence side</th><th>SBN side</th></tr></thead>
+<tbody>
+<tr><td>① Start from a gold PMB pair</td><td><em>What is the weather like in Dublin?</em></td><td>the SBN shown earlier</td></tr>
+<tr class="fragment"><td>② Pick a noun, verb or adjective that a word expresses</td><td><em>weather</em></td><td><code>weather.n.01</code></td></tr>
+<tr class="fragment"><td>③ Draw a WordNet sibling: same kind of thing, different value</td><td><em>storm</em></td><td><code>storm.n.01</code></td></tr>
+</tbody>
+</table>
+
+::: {.fragment}
+Other siblings of *weather* in the pool: *cloud*, *sunset*, *aurora*, *halo*, … Synonyms are never drawn, because the pool takes siblings only.
 :::
 
-## Step ④: edit both sides together
-
 ::: {.notes}
-TODO (step 2): sentence side inserts the reparandum (± editing expression); SBN side adds CORRECTION / CONJUNCTION (generator output: anchor construction, see storm_weather_scores.md). Same visual structure as the Berlin/Dublin representation slide. Surface form pending the retracing decision.
+Goal: the audience follows one item through the pipeline; this slide and the next two are one continuous walkthrough. Step ② needs the word–concept alignment, which is why the step spans both sides. Siblings = WordNet co-hyponyms for nouns; verbs use VerbNet classes, adjectives FrameNet frames and antonyms. storm.n.01 is a real pool candidate for a PMB document with weather.n.01 (p99/d2202). Berlin → Dublin is not used here: proper names need an operator outside the implemented corpus.
+Q&A: "How is storm found?" → Backup #/bk-wordnet. "Isn't a storm a kind of weather?" / "What about synonyms?" → Backup #/bk-synonyms.
 :::
 
-## Step ⑤: keep only legal and sensible pairs
+## Step ④: edit both sides of the pair together
 
-Legal is not yet good: candidates are filtered for **semantic contrast** with bidirectional NLI [@laurerLessAnnotatingMore2024] (*couch → sofa* fails) and for **contextual fit** with the reparandum's surprisal given its left context (*cake → carburettor, for his wedding* fails). Both thresholds are set on a labelled sample and frozen before filtering.
+*What is the weather like in Dublin?* → *What is **the storm**, I mean, the weather like in Dublin?*
 
-::: {.notes}
-TODO (step 2): structural check + the two filters, each with its failing example; storm/weather passes both.
+::: {.small}
+```{.sbn code-line-numbers="3-7"}
+entity.n.01 EQU ?                                    % What
+time.n.08 EQU now                                    % is
+entity.n.01                                          % both fill this slot
+    CORRECTION <1                                    % withdrawn:
+storm.n.01 EQU -1                                    %   the storm
+    CONJUNCTION <2                                   % accepted (I mean):
+weather.n.01 EQU -2                                  %   the weather
+like.a.01 Co-Theme -5 Time -4 Theme -3 Location +1   % like
+city.n.01 Name "Dublin"                              % in Dublin?
+```
 :::
 
-## The transformation yields a legal graph at 99.7% of usable sites {.small-slide}
+The same structure as Berlin and Dublin: a withdrawn context, an accepted context, one shared role (the Theme of *like*).
 
-| Stage (PMB training partition) | Count | % of lexical concepts |
+::: {.notes}
+Goal: the pair is edited on both sides at once, so the target is known by construction; no parser is involved. Highlighted lines are what the generator adds; the indices of later concepts shift automatically. The shared entity.n.01 slot is the anchor construction, used when both candidates fill a role of a later concept (Backup: anchor and movement). The editing expression is optional: in training about 30% of items carry one. The SBN is the generator's output for this sentence; the sentence side is shown with "the" repeated, which is the natural form.
+:::
+
+## Step ⑤: keep only pairs that are well formed and make sense {.small-slide}
+
+| Check | Rejects | Rejected example |
+|---|---|---|
+| **Structure** | ill-formed graph, wrong status, a missing link, any change outside the repair | — |
+| **Contextual fit**: LM surprisal of the reparandum given its left context | a reparandum nobody would say | *cake → carburettor, for his wedding* |
+
+The contextual-fit threshold is set on 150 hand-labelled candidates and frozen before the corpus is filtered.
+
+::: {.notes}
+Goal: why the corpus is not just random substitution. Status: the structural check is done over the whole training partition; contextual fit is being calibrated. Do not claim storm/weather passes the final filter: the threshold is not frozen yet.
+Synonyms are not a filter here: they are excluded when the pool is built (Step ③, Backup #/bk-synonyms). NLI scores are computed and archived but reject nothing. The RP still describes an NLI filter; if Koller asks, the calibration sample showed the pool already contains almost no synonyms (1 of 150), so a synonym filter had nothing to do.
+:::
+
+## The training partition yields 16,425 candidate repair sites {.small-slide}
+
+| PMB training partition (9,552 documents) | Count | % |
 |---|---:|---:|
-| Lexical concepts (noun, verb, adjective) | 23,232 | 100.0 |
-| Aligned to an uttered word | 17,886 | 77.0 |
-| Usable site with a WordNet reparandum | 16,481 | 70.9 |
-| Structurally legal transformation | 16,425 | 70.7 |
+| Nouns, verbs and adjectives in the gold SBNs | 23,232 | 100.0 |
+| … expressed by a word in the sentence | 17,886 | 77.0 |
+| … with a WordNet competitor | 16,481 | 70.9 |
+| … giving a well-formed repair-aware graph | 16,425 | 70.7 |
 
-The paired configuration applies almost wherever a reparandum can be inserted, which is the empirical side of RQ1's coverage question.
+The transformation succeeds at 99.7% of the sites where a competitor exists. These sites are the candidate pool **before** linguistic filtering and sampling; the sampling rule is fixed before training.
 
 ::: {.notes}
-Goal: structural generation and validation are complete; linguistic filtering, the independent audit and final sampling remain. Most of the alignment loss is verbs without a surface word. Scope: immediate replacement of aligned noun, verb and adjective concepts, written PMB contexts; the experiments test learnability within these boundaries, not coverage of spontaneous RSR.
-TODO (step 2): retitle "How much data this yields"; present as the candidate pool before linguistic filtering and sampling (known numbers only); 99.7% as one sentence.
+Goal: known numbers only. Structural generation and validation are complete; linguistic filtering, the independent audit and final sampling remain. Most of the alignment loss is verbs without a surface word. 99.7% is the empirical side of RQ1's coverage question. Scope: immediate replacement of aligned noun, verb and adjective concepts in written PMB contexts; the experiments test learnability within these boundaries, not coverage of spontaneous RSR. The sampling rule limits repeated use of a source document.
 :::
 
 # Experiment Design
 
-## Two conditions with identical inputs isolate the effect of the target representation {.small-slide}
+## Three training conditions: same inputs, different targets {.small-slide}
 
-| Condition | RSR inputs | Target for RSR inputs | Corresponds to | 2B | 9B | 27B |
-|---|---|---|---|:-:|:-:|:-:|
-| Fluent only | no | — | the pilot parser | ✓ | ✓ | ✓ |
-| RSR normalisation | yes | fluent gold SBN | deletion | ✓ | ✓ | ✓ |
-| Repair-aware | yes | repair-aware SBN | this project | ✓ | ✓ | ✓ |
+Training input: *What is the storm, I mean, the weather like in Dublin?*
 
-- Qwen3.5 at three sizes [@qwenQwen35Native2026], LoRA, one parsing instruction that does not say whether an input contains an RSR.
-- Within each model size, the two RSR conditions share inputs, example counts and training procedure; **only the target differs**.
-- Every size is trained under all three conditions with three matched seeds: 27 runs.
+| Condition | Role | Target for this input | Answers |
+|---|---|---|---|
+| Fluent only | **reference**: the pilot parser | — (never sees RSR input) | how far a parser gets without RSR training |
+| RSR normalisation | **baseline**: deletion | the fluent SBN: *weather* only | what keeping the reparandum buys and costs |
+| Repair-aware | **this project** | *storm* withdrawn, *weather* accepted | RQ2: can the representation be learned? |
 
-::: {.notes}
-Goal: the rows of the comparison table become training conditions. Fluent only vs repair-aware changes both the examples and the targets, so it is a reference, not the controlled comparison. Every size × condition has three matched seeds (27 runs), so the target effect can be compared across model capacities. Qwen3.5 because it is the most recent family with dense checkpoints across the sizes needed. Normalisation is an end-to-end parser, not a pipeline.
-TODO (step 2): "Same inputs, different targets" with the storm/weather item; label the roles explicitly: Fluent only = reference (the pilot parser), RSR normalisation = baseline (deletion), Repair-aware = this project; say which RQ aspect each serves.
+The controlled comparison is between the **baseline** and **repair-aware** conditions: they share inputs, example counts and training, and only the target differs.
+
+::: {.smaller}
+Qwen3.5 at 2B, 9B and 27B [@qwenQwen35Native2026] is fine-tuned with LoRA under all three conditions, with three seeds each (27 runs). One parsing instruction serves all conditions and does not say whether an input contains a repair.
 :::
 
-## A single graph score cannot separate opposite failures {.small-slide}
-
-*Let's stand, I mean, sit in the shade.*
-
-| Output | Typical of | SMATCH++ | RSR-structure accuracy | Accepted meaning |
-|---|---|---|:-:|:-:|
-| *stand* dropped, fluent graph | normalisation | partial | ✗ | ✓ |
-| *stand* and *sit* both asserted | the pilot parser | partial | ✗ | ✗ |
-| *stand* withdrawn, *sit* accepted | repair-aware target | full | ✓ | ✓ |
-
-- **RSR-structure accuracy**: paired contexts, correct **status**, required **links** to shared content: the three pieces of information.
-- **Accepted meaning**: the prediction without its withdrawn context, scored against the fluent gold graph.
-
 ::: {.notes}
-Goal: callback to the pilot's 0.764: the first two rows get partial graph credit for opposite reasons. The component scores of RSR-structure accuracy show which requirement failed.
-TODO (step 2): replace stand/sit with storm/weather and the scores in storm_weather_scores.md; keep only the SMATCH++ column here, the two new measures go to the next slide.
+Goal: pre-empt the CS reflex that the most vanilla setting is the baseline. Fluent only vs repair-aware changes both the examples and the targets, so it is a reference, not the controlled comparison. All conditions keep the same fluent PMB pairs. Three sizes so the target effect can be compared across model capacities. Qwen3.5 because it is the most recent family with dense checkpoints across the sizes needed. Normalisation is an end-to-end parser, not a pipeline.
 :::
 
-## Two measures separate them
+## A single graph score cannot tell opposite failures apart
 
-::: {.notes}
-TODO (step 2): add RSR-structure accuracy and accepted meaning as columns to the storm/weather table (✓/✗ per row); then one line per question: learnable? / what does keeping the reparandum buy? / what does it cost? — which measure answers each. Old evaluation matrix in Backup.
+Test input: *What is the storm, I mean, the weather like in Dublin?*
+
+| Output | Typical of | SMATCH++ |
+|---|---|---:|
+| *storm* dropped | baseline | 0.67 |
+| *storm* asserted as well | reference | 0.68 |
+| *storm* withdrawn, *weather* accepted | repair-aware | 1.00 |
+
+The first two outputs are wrong in opposite ways: one loses the storm, the other asserts it. [Yet their scores are almost the same]{.fg}, just as the pilot's goat parse still scored 0.764.
+
+::: {.smaller}
+Constructed outputs, scored against the repair-aware gold graph with the project's evaluator.
 :::
 
-## Further tests check that the parser learned the distinction, not a surface pattern {.small-slide}
+::: {.notes}
+Goal: the problem before the solution. These are hand-built outputs standing for each condition's typical behaviour, not model predictions (storm_weather_scores.md). Exact: 0.667 / 0.680 / 1.000. A pilot-style output that also turns "I mean" into an event scores 0.557; not shown, the goat/cow DAGs in Backup cover that case.
+:::
 
-| Possible shortcut | Test |
-|---|---|
-| The editing expression triggers the structure | About 30% of RSR training inputs carry *I mean*, *no*, *no wait* or *actually*. Each test item comes with and without one; *sorry* never appears in training |
-| Any two adjacent competing words trigger the structure | Lists, appositions and coordination without replacement (non-RSR set) |
-| The configuration is applied beyond its scope | Corrections across discourse turns |
+## Two measures tell them apart {.small-slide}
+
+| Output | SMATCH++ | RSR-structure accuracy | Accepted meaning |
+|---|---:|:-:|---:|
+| *storm* dropped | 0.67 | ✗ | 1.00 |
+| *storm* asserted as well | 0.68 | ✗ | 0.95 |
+| *storm* withdrawn, *weather* accepted | 1.00 | ✓ | 1.00 |
+
+- **RSR-structure accuracy** (primary): both candidates, correct status, the shared role. → *Can the representation be learned?*
+- **Accepted meaning**: remove the withdrawn part, compare with the fluent graph. → *Does keeping the reparandum cost the final request?*
+- **Later reference** (Berlin/Dublin test set): can *these two cities* reach both? → *What does keeping it buy?*
 
 ::: {.notes}
-Goal: answer the obvious objection to synthetic data before it is raised. The non-RSR documents are held out of training (9,447 training documents remain). Error categories: Backup.
-TODO (step 2): one concrete example per row (with / without "I mean", unseen "sorry", a list such as "Berlin, Dublin and Paris").
+Goal: each measure answers one part of RQ2. RSR-structure accuracy is read in absolute terms: only the repair-aware parser is trained on the structure, so it is expected to lead. Accepted meaning compares baseline and repair-aware; its job is the cost, not catching the reference parser; if asked about the 0.95, that is why it cannot be the primary measure. Also reported: SMATCH++ and the spurious-RSR rate on the unmodified PMB test set. Full matrix: Backup.
+:::
+
+## Further tests check that the parser learned the distinction, not a surface cue {.small-slide}
+
+| Possible shortcut | Test | Example |
+|---|---|---|
+| The editing expression triggers the structure | Each test item with and without one; *sorry* never appears in training | *What is the storm, **sorry**, the weather like in Dublin?* |
+| Any two adjacent words of the same kind trigger it | Lists, appositions and coordination without replacement | *We flew to Berlin, Dublin and Paris.* (no repair) |
+| The structure is applied beyond one clause | Corrections across turns | A: *Is it Berlin?* B: *No, Dublin.* |
+
+About 30% of repair training inputs carry *I mean*, *no*, *no wait* or *actually*; the rest carry none.
+
+::: {.notes}
+Goal: answer the obvious objection to synthetic data before it is raised. The non-RSR documents are held out of training (9,447 training documents remain). The examples in the third column are illustrations of each test type, not items from the test sets. Error categories: Backup.
 :::
 
 ## Summary: keep both cities, mark the withdrawn one {.small-slide}
@@ -397,8 +434,8 @@ TODO (step 2): one concrete example per row (with / without "I mean", unseen "so
 |----|------------|
 | **Related Work** | Deletion loses Berlin; tagging keeps it but not its status or its role. |
 | **Pilot** | A parser trained on fluent SBN often asserts the reparandum, and SMATCH++ hides the error. |
-| **Representation** | Pairing `CORRECTION` with `CONJUNCTION` records both candidates, their status and the role they compete for. |
-| **Data** | Transforming PMB pairs on both sides yields a legal graph at 99.7% of usable sites. |
+| **Representation** | A withdrawn and an accepted context (`CORRECTION`, `CONJUNCTION`) record both candidates, their status and the role they compete for. |
+| **Data** | Editing PMB pairs on both sides yields 16,425 candidate sites; the transformation succeeds at 99.7% of them. |
 | **Experiment Design** *(planned)* | Three conditions at three model sizes test whether the structure is learnable, and what keeping the reparandum buys and costs. |
 
 Back to Siri: a parser that produces this representation queries the weather in Dublin, and can still resolve *these two cities* to Berlin and Dublin.
@@ -596,12 +633,81 @@ Why SBN rather than AMR [@banarescuAbstractMeaningRepresentation2013] or DS-TTR 
 ![](viz/data_pipeline.svg){width="100%" fig-align="center"}
 
 ::: {.smaller}
-Running example: the Siri request. The reparandum, the utterance and the SBN splice are the generator's actual output for this sentence. Dashed: in progress.
+Running example: the Siri request. The reparandum and the SBN splice are the generator's output for this sentence. Dashed: in progress.
 :::
 
 ::: {.notes}
 Goal: the intuition of data synthesis in one picture. Top lane = sentence, bottom lane = SBN, as in the previous square. Steps ② and ③ span both lanes because the word–concept alignment ties a word to a concept. Step ④ is where the two sides are edited in parallel; "linked to shared content" covers the direct, anchor and movement constructions (this example uses the anchor construction; see Backup). The step names match the rows of the yield table. Berlin → Dublin is NOT used here: proper names need a separate operator that is not part of the implemented corpus.
-TODO: the utterance in the figure retraces "is the"; fix once the retracing decision is made.
+The utterance is shown with "the" repeated (the natural form); the generator currently may also repeat "is", a data issue to fix before the data is frozen.
+:::
+
+## One generated record keeps the source, every choice made and both sides of the new pair {#bk-record}
+
+::: {.small}
+```{.yaml code-line-numbers="false"}
+# PMB source
+doc_id:             p42/d1468
+split:              train
+nl_clean:           Let's sit in the shade.
+sbn_clean: >
+  time.n.08 TSU now person.n.01 EQU speaker
+  sit.v.01 Time -2 Theme -1 Location +1 shade.n.01
+# Repair selection and transformation
+# the third concept in the sequence, counted from zero
+concept_pos:        2
+repair_synset:      sit.v.01
+reparandum_synset:  stand.v.01
+reparandum_surface: stand
+strategy:           inplace
+devices:            d1_drop_role
+blockers:           —
+# the largest role index without its sign; the ceiling is nine
+max_abs_index:      3
+# Generated pair
+nl_repair:          Let's stand, sit in the shade.
+nl_repair_interr:   Let's stand, I mean, sit in the shade.
+sbn_repair: >
+  time.n.08 TSU now person.n.01 EQU speaker
+  CORRECTION <1 stand.v.01 Time -2 Theme -1
+  CONJUNCTION <2 sit.v.01 Time -3 Theme -2 Location +1 shade.n.01
+# Validation (NLI scores are archived, not used for filtering)
+# 1 = well-formed graph; items with 0 are dropped
+legal:              1
+entail_fwd:         0.0005
+entail_bwd:         0.0005
+synonymy:           0.0005
+```
+:::
+
+::: {.notes}
+Goal: answer "what does one finished item look like?". Source: RP Appendix "Example Generated Corpus Record" (tab:worked-record), fields and values unchanged, shown as the record itself (YAML) rather than a table; the RP groups are the comment lines. This is a real record for a verb site (in-place construction), unlike storm/weather in the main deck, which uses the anchor construction.
+The last group's comment differs from the RP heading ("Validation and filtering"): the NLI scores are archived and filter nothing (see #/bk-synonyms). A transformation that exceeds the single-digit index ceiling is recorded as legal 0 with index_overflow among its blockers.
+:::
+
+## Noun competitors are WordNet siblings: one step up, then all children {#bk-wordnet}
+
+![](viz/wordnet_siblings.svg){width="100%" fig-align="center"}
+
+For a noun, the generator goes one step up from the repair concept and takes the parent's other children as candidates. This is how *storm* is found for *weather*, together with *cloud*, *sunset* and the rest.
+
+::: {.smaller}
+Verbs and adjectives follow the same idea by other routes: VerbNet class-mates for verbs, FrameNet frame-mates and antonyms for adjectives. In each case the candidate fills the same slot with a different value.
+:::
+
+::: {.notes}
+Goal: answer "how is storm found?". Rule: repair_data_gen/wn_candidates.py `_cohyponyms`. Figure: render_wordnet_siblings.py (reads the sibling list from WordNet). atmospheric_phenomenon.n.01 has 16 children. Next slide answers the follow-up about synonyms.
+:::
+
+## Synonyms never enter the pool, and *storm* is a more specific word, not a synonym {#bk-synonyms .small-slide}
+
+- The pool draws siblings only. WordNet's near-synonym relations (`similar_to` clusters, verb groups) are never used, and a candidate that shares a lemma with the repair is dropped. *Couch → sofa* cannot occur: *couch* and *sofa* are lemmas of one synset.
+- In a hand-labelled sample of 150 candidates, annotators judged only **1** to mean the same as the repair.
+- *Storm* is more specific than *weather*: an NLI model [@laurerLessAnnotatingMore2024] finds entailment in one direction only (*storm* ⇒ *weather* 0.84; *weather* ⇒ *storm* 0.005). Moving from a too-specific word to a more general one is a natural repair.
+
+::: {.notes}
+Goal: answer "isn't a storm a kind of weather?" and "what about synonyms?". WordNet places storm as a sibling of weather although its gloss reads "a violent weather condition": the tree and the gloss disagree, which is why the NLI score is shown as a diagnostic.
+If asked how much NLI filters: nothing. NLI scores are computed and archived for possible later use; the synonym class is empty by construction (pool stage), so a threshold would only remove good candidates. The RP still describes an NLI filter; this is the change since the RP.
+Why not embedding similarity: it scores hot/cold as similar as sofa/couch, so it cannot separate "interchangeable" from "different values on one dimension".
 :::
 
 ## Anchor and Movement Constructions
