@@ -1,0 +1,4 @@
+- source: research_seminar_pre.qmd
+  posit-connect-cloud:
+    - id: 01a0d853-3ab8-ff08-f821-e8710d88e81e
+      url: https://connect.posit.cloud/hongxuzhou/content/01a0d853-3ab8-ff08-f821-e8710d88e81e

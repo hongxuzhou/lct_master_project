@@ -33,7 +33,26 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-  </style>
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
   <link rel="stylesheet" href="research_seminar_pre_files/libs/revealjs/dist/theme/quarto-8a0fcd2c87ea72ee5c436e25e3d5fa2e.css">
   <link href="research_seminar_pre_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="research_seminar_pre_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
@@ -149,39 +168,36 @@ Hongxu Zhou
 </div>
 
 </section>
-<section id="hook" class="title-slide slide level1 center">
-<h1>Hook</h1>
-<p>Put the siri example here, showing how current diaglogue system fails to handle RSR</p>
+<section id="siri-answers-for-the-city-the-speaker-took-back" class="slide level2">
+<h2>Siri answers for the city the speaker took back</h2>
+<!--
+SKELETON CONVENTIONS
+- Audience: Koller's group. Mostly CS, not semantic parsing. Koller has the RP; nobody else has read it.
+- Principle: visual and oral presentation complement each other, but the slides alone must let the audience
+  reconstruct the chain of information.
+    * Section names (roadmap level) are noun phrases.
+    * Slide titles are full-sentence claims. Reading the titles in order should give the argument.
+    * The body holds the evidence for the title: tables, figures, examples. Claims are full sentences;
+      keywords appear only as labels inside tables and figures.
+- "Goal:" = speaker notes (::: {.notes}), visible in speaker view (press S).
+- Slide budget: content slides <= 25; structure slides (`#` headers, one sentence of segue, no recap) <= 5.
+  Title, Thank You, References and Backup do not count. A fragment-heavy walkthrough slide counts by
+  speaking time, not as one slide. Check: grep -c '^## ' before '# Thank You'.
+- Running examples, one job each:
+    Berlin/Dublin  -> Hook, Related Work, SBN intro (fluent), Representation (the only one with later reference)
+    goat/cow       -> Pilot input example only; DAGs and strings in Backup
+    storm/weather  -> Data walkthrough and Experiment Design (same fluent Siri sentence, repair site "weather";
+                      Berlin -> Dublin cannot be generated: proper names need an operator outside the corpus).
+                      Scores: storm_weather_scores.md
+- Spine: the three pieces of information a system needs (both candidates / their status / the role they
+  compete for). Introduced in Related Work, used as the requirements in Representation.
+- Detail goes to Backup: pull those slides up in Q&A, never in the talk.
+- Source of truth for Data and Experiment Design: the RP.
+-->
 
-<img data-src="viz/siri-b-i-d.png" style="width:20.0%" class="r-stretch quarto-figure-center"><p class="caption">A weather request to Siri with an RSR</p></section>
-
-<section id="roadmap" class="title-slide slide level1 center">
-<h1>Roadmap</h1>
-
-</section>
-
-<section>
-<section id="simplified-box-notation-sbn" class="title-slide slide level1 center">
-<h1>Simplified Box Notation (SBN)</h1>
-
-</section>
-<section id="correction-conjunction" class="slide level2">
-<h2><code>CORRECTION</code> + <code>CONJUNCTION</code></h2>
-<pre class="sbn"><code>boy.n.01                       % The boy
-time.n.08 TPR now              %
-    CORRECTION &lt;1              %
-sneeze.v.01 Agent -2 Time -1   % sneezed,
-    CONJUNCTION &lt;2             % I mean,
-cough.v.01 Agent -3 Time -2    % coughed</code></pre>
-</section></section>
-<section>
-<section id="related-work" class="title-slide slide level1 center">
-<h1>Related Work</h1>
+<img data-src="viz/siri-b-i-d.png" class="quarto-figure quarto-figure-center r-stretch" style="width:20.0%"><p>The speaker replaces <em>Berlin</em> with <em>Dublin</em>, but Siri returns the weather for Berlin. This is a <strong>replacement self-repair (RSR)</strong> <span class="citation" data-cites="shribergPreliminariesTheorySpeech1994">(<a href="#/references" role="doc-biblioref" onclick="">Shriberg 1994</a>)</span>.</p>
 <aside class="notes">
-<p>related work here should be much more lightweight than the RP.</p>
-<p>it should only show the essential threads, with bold text, keywords, etc., showing the “core” of previous methods and formal/computational semantic accounts</p>
-<p>Regarding the semantic side, use <strong>a lot of</strong> visualisation, showing how DS-TTR and AMR do not work in this project.</p>
-<p>incompability should also show an example showing it’s contextual-based.</p>
+<p>Goal: the phenomenon is real and everyday. Name it only; the anatomy opens the Related Work section.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -194,56 +210,1211 @@ cough.v.01 Agent -3 Time -2    % coughed</code></pre>
           display:block!important;
       }</style></aside>
 </section>
-<section id="research-questions" class="slide level2" style="text-align: center;">
-<h2>Research Questions</h2>
-<div class="r-fit-text">
+<section id="current-voice-agents-make-the-same-mistake" class="slide level2">
+<h2>Current voice agents make the same mistake</h2>
+<p>Full-Duplex-Bench-v3 tests six spoken agents on real disfluent speech that requires API calls <span class="citation" data-cites="linFullDuplexBenchv3BenchmarkingTool2026">(<a href="#/references" role="doc-biblioref" onclick="">Lin et al. 2026</a>)</span>.</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>The user says</th>
+<th>The system fills in</th>
+<th>The user wants</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Siri</td>
+<td>Berlin, I mean, Dublin</td>
+<td>location = Berlin</td>
+<td>Dublin</td>
+</tr>
+<tr class="even">
+<td>Gemini Live 3.1</td>
+<td>Rome, corrected to Milan</td>
+<td>destination = Rome</td>
+<td>Milan</td>
+</tr>
+</tbody>
+</table>
+<p>On self-corrections, the best system passes 58.8% of scenarios (GPT-Realtime) and the weakest 17.6%.</p>
+<aside class="notes">
+<p>Goal: the second row is the Siri error in a current agent. The paper reports this as a case (the API is called before the correction ends), not as a rate; do not claim a proportion. TODO: verify the number of self-correction scenarios (the Pass@1 values are multiples of 1/17).</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="roadmap" class="slide level2">
+<h2>Roadmap</h2>
+<ul>
+<li><strong>Related Work</strong>: self-repair and how systems handle it</li>
+<li><strong>Pilot</strong>: a current semantic parser on self-repair input</li>
+<li><strong>Representation</strong>: a meaning representation for self-repair</li>
+<li><strong>Data</strong>: training pairs from a meaning bank</li>
+<li><strong>Experiment Design</strong>: training and evaluating parsers</li>
+</ul>
+<aside class="notes">
+<p>TODO (step 2): merge with the next slide into “Two questions for this talk”: RQs in plain words, roadmap sections labelled RQ1 (Representation) / RQ2 (Experiment Design).</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="research-questions" class="slide level2">
+<h2>Research questions</h2>
+<p>This project extends SBN to record all three pieces of information, and trains parsers to produce it.</p>
 <ol type="1">
-<li><strong>Representation</strong>: How should within-clause RSR be represented in SBN, and what are the coverage and limitations of the representation?</li>
-<li><strong>Parsing</strong>: How well can LLM-based semantic parsers learn this representation from synthesised meaning-banked data, and what errors remain?</li>
+<li><strong>Representation</strong>: How can SBN represent within-clause RSR, and what can it not cover?</li>
+<li><strong>Parsing</strong>: How well can LLM-based parsers learn this representation from synthesised data, and what errors remain?</li>
 </ol>
+<aside class="notes">
+<p>TODO (step 2): merge into the Roadmap slide above. Rephrase without “SBN” (not yet introduced): a meaning representation that records the repair; parsers that learn it from synthesised data.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section>
+<section id="related-work" class="title-slide slide level1 center">
+<h1>Related Work</h1>
+
+</section>
+<section id="an-rsr-has-three-parts" class="slide level2">
+<h2>An RSR has three parts</h2>
+<blockquote>
+<p>What is the weather like [in Berlin]<sub>reparandum</sub>, [I mean]<sub>editing&nbsp;expression</sub>, [in Dublin]<sub>repair</sub>?</p>
+</blockquote>
+<ul>
+<li>The <strong>reparandum</strong> is the material the speaker withdraws.</li>
+<li>The <strong>editing expression</strong> optionally signals the repair, e.g.&nbsp;<em>I mean</em>, <em>actually</em>, <em>no</em>.</li>
+<li>The <strong>repair</strong> is the material that replaces the reparandum.</li>
+</ul>
+<p>This project covers replacements <strong>within a single clause</strong> <span class="citation" data-cites="leveltMonitoringSelfrepairSpeech1983 shribergPreliminariesTheorySpeech1994">(<a href="#/references" role="doc-biblioref" onclick="">Levelt 1983</a>; <a href="#/references" role="doc-biblioref" onclick="">Shriberg 1994</a>)</span>.</p>
+</section>
+<section id="nlp-pipelines-either-delete-the-reparandum-or-tag-it" class="slide level2">
+<h2>NLP pipelines either delete the reparandum or tag it</h2>
+<div class="columns">
+<div class="column" style="width:48%;">
+<h3 id="deletion">Deletion</h3>
+<p>The reparandum and the editing expression are removed, and the fluent text is passed on <span class="citation" data-cites="johnsonTAGbasedNoisychannelModel2004">(<a href="#/references" role="doc-biblioref" onclick="">Johnson and Charniak 2004</a>)</span>.</p>
+<p>→ <em>What is the weather like in Dublin?</em></p>
+</div><div class="column" style="width:48%;">
+<h3 id="tagged-transcription">Tagged transcription</h3>
+<p>The words are kept, and disfluent spans or tokens are labelled <span class="citation" data-cites="zayatsMultidomainDisfluencyRepair2014 futamiStreamingJointSpeech2023">(<a href="#/references" role="doc-biblioref" onclick="">Zayats et al. 2014</a>; <a href="#/references" role="doc-biblioref" onclick="">Futami et al. 2023</a>)</span>.</p>
+<p>→ <em>What is the weather like <del>in Berlin</del> in Dublin?</em></p>
+</div></div>
+<p>Both approaches serve the same goal: recovering the speaker’s final intention.</p>
+<aside class="notes">
+<p>Goal: concede that this goal is right for task-oriented pipelines that only need the final request.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="deleted-or-tagged-the-reparandum-can-still-matter-later" class="slide level2">
+<h2>Deleted or tagged, the reparandum can still matter later</h2>
+<blockquote>
+<p>What is the weather like in Berlin, I mean, in Dublin? Show me the airports of <strong>these two cities</strong>.</p>
+</blockquote>
+<ul>
+<li>After <strong>deletion</strong>, <em>these two cities</em> has only one antecedent left.</li>
+<li>After <strong>tagging</strong>, both names survive, but nothing records that Berlin was the location or that Dublin replaced it.</li>
+</ul>
+<p>Psycholinguistic and dialogue studies show that the reparandum stays in the context <span class="citation" data-cites="lauLingeringEffectsDisfluent2005 purverComputationalModelsMiscommunication2018">(<a href="#/references" role="doc-biblioref" onclick="">Lau and Ferreira 2005</a>; <a href="#/references" role="doc-biblioref" onclick="">Purver et al. 2018</a>)</span>.</p>
+<aside class="notes">
+<p>Goal: first turning point of the talk.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="a-system-needs-three-pieces-of-information-about-the-revision" class="slide level2">
+<h2>A system needs three pieces of information about the revision</h2>
+<ol type="1">
+<li><strong>Both candidates</strong>: Berlin and Dublin</li>
+<li><strong>Their status</strong>: Berlin is withdrawn, Dublin is accepted</li>
+<li><strong>The role they compete for</strong>: the location in the weather request</li>
+</ol>
+<p>All three concern what the utterance <em>means</em>, not which words were spoken.</p>
+<aside class="notes">
+<p>Goal: the puzzle. Do not name the solution yet. These three items are reused as requirements (Representation); keep the wording identical.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="meaning-representations-make-such-information-explicit-and-checkable" class="slide level2 small-slide">
+<h2>Meaning representations make such information explicit and checkable</h2>
+<p>A <strong>meaning representation (MR)</strong> organises entities, events and their relations into a structure that can be examined formally. In LLM-based systems, MRs make model-interpreted meaning inspectable beyond surface text:</p>
+<p>An MR can record all three pieces of information, so an error can be traced to a missing candidate, a wrong status or a wrong role.</p>
+<aside class="notes">
+<p>Goal: the answer. Argue inspectability, not performance; the thesis does not test downstream gains. TODO (step 2): new title “A meaning representation is a graph of concepts and roles”; add the fluent Siri graph (Michael: example MR graph here) and show where each of the three pieces would sit. MR-use table moved to Backup; replace with one sentence.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="sbn-is-the-meaning-representation-of-the-parallel-meaning-bank" class="slide level2">
+<h2>SBN is the meaning representation of the Parallel Meaning Bank</h2>
+<ul>
+<li><strong>Simplified Box Notation (SBN)</strong> represents meaning as a sequence of <strong>concepts</strong> (WordNet <span class="citation" data-cites="millerWordNetLexicalDatabase1994">(<a href="#/references" role="doc-biblioref" onclick="">Miller 1994</a>)</span> senses) and <strong>roles</strong> that link them <span class="citation" data-cites="bosQuantificationAnnotationDiscourse2021 bosSequenceNotationCatching2023">(<a href="#/references" role="doc-biblioref" onclick="">Bos 2021a</a>, <a href="#/references" role="doc-biblioref" onclick="">2023</a>)</span>.</li>
+<li>Each sequence corresponds to a <strong>directed acyclic graph (DAG)</strong>, so an LLM can generate the graph as text.</li>
+<li>The Parallel Meaning Bank (PMB) 5.1.0 provides gold sentence–SBN pairs <span class="citation" data-cites="abzianidzeParallelMeaningBank2017">(<a href="#/references" role="doc-biblioref" onclick="">Abzianidze et al. 2017</a>)</span>.</li>
+</ul>
+<aside class="notes">
+<p>Goal: SBN is an agreed notation; no linguistic backbone. Boxes wait until Representation. TODO (step 2): merge into the next slide (“SBN writes this graph as a sequence an LLM can generate”).</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="an-sbn-sequence-and-its-graph-encode-the-same-meaning" class="slide level2">
+<h2>An SBN sequence and its graph encode the same meaning</h2>
+<p><em>What is the weather like in Dublin?</em></p>
+<div class="columns">
+<div class="column" style="width:64%;">
+<div class="small">
+<pre class="sbn"><code>entity.n.01 EQU ?                                   % What
+time.n.08 EQU now                                   % is
+weather.n.01                                        % the weather
+like.a.01 Co-Theme -3 Time -2 Theme -1 Location +1  % like
+city.n.01 Name "Dublin"                             % in Dublin?</code></pre>
 </div>
+<p>Each line introduces a concept. A role points to another concept by relative position: <code>-1</code> is the previous concept, <code>+1</code> the next.</p>
+</div><div class="column" style="width:36%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="viz/fluent_siri_example.svg" class="quarto-figure quarto-figure-center"></p>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>Goal: the Siri request, now fluent, as the audience’s first SBN.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
-<section id="pilot-study-report" class="title-slide slide level1 center">
-<h1>Pilot Study Report</h1>
+<section id="pilot-study" class="title-slide slide level1 center">
+<h1>Pilot Study</h1>
 
 </section>
-<section id="a-quick-look-of-the-pilot-study-setting" class="slide level2">
-<h2>A quick look of the pilot study setting</h2>
-</section>
-<section id="results" class="slide level2">
-<h2>results</h2>
+<section id="the-pilot-tests-a-parser-that-cannot-mark-content-as-withdrawn" class="slide level2">
+<h2>The pilot tests a parser that cannot mark content as withdrawn</h2>
 <ul>
-<li>Use figures and tables here</li>
+<li><strong>Parser</strong>: Gemma-2 9B <span class="citation" data-cites="gemmateamGemma2Improving2024">(<a href="#/references" role="doc-biblioref" onclick="">Gemma Team et al. 2024</a>)</span>, fine-tuned with LoRA <span class="citation" data-cites="huLoRALowRankAdaptation2021">(<a href="#/references" role="doc-biblioref" onclick="">Hu et al. 2021</a>)</span> on fluent PMB sentence–SBN pairs only.</li>
+<li><strong>Input</strong>: 833 sentences from the PMB training data, so the parser had seen their fluent SBNs; only the RSR inputs were new. Qwen3-32B <span class="citation" data-cites="yangQwen3TechnicalReport2025">(<a href="#/references" role="doc-biblioref" onclick="">A. Yang et al. 2025</a>)</span> inserted a reparandum of the same part of speech before one word, giving 2,499 RSR inputs without and 2,499 with <em>I mean</em>.</li>
+<li><strong>Reference</strong>: the original fluent gold SBN, so a correct parse leaves the reparandum out <span class="citation" data-cites="senSemanticParsingDisfluent2021">(following <a href="#/references" role="doc-biblioref" onclick="">Sen and Groves 2021</a>)</span>.</li>
 </ul>
+<aside class="notes">
+<p>TODO (step 2): new title “Can an existing SBN parser handle self-repair?”; merge with the next slide (setup + goat/cow input row).</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="one-example" class="slide level2">
-<h2>One example</h2>
+<section id="an-example-of-input" class="slide level2">
+<h2>An Example of Input</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Fluent (PMB)</th>
+<th>RSR, no editing expression</th>
+<th>RSR + <em>I mean</em></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A cow gave birth to a calf with two heads.</td>
+<td><strong>A goat</strong>, a cow gave birth to a calf with two heads.</td>
+<td><strong>A goat</strong>, <em>I mean</em>, a cow gave birth to a calf with two heads.</td>
+</tr>
+</tbody>
+</table>
+<aside class="notes">
+<p>Goal: the example row defines the two RSR conditions visually; no internal terms such as “unmarked”.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="self-repair-lowers-parsing-accuracy-most-sharply-with-i-mean" class="slide level2">
+<h2>Self-repair lowers parsing accuracy, most sharply with <em>I mean</em></h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Input</th>
+<th style="text-align: right;">Scorable (%)</th>
+<th style="text-align: right;">Δ</th>
+<th style="text-align: right;">Failure-penalised F1</th>
+<th style="text-align: right;">Δ</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Fluent</td>
+<td style="text-align: right;">97.5</td>
+<td style="text-align: right;">—</td>
+<td style="text-align: right;">0.950</td>
+<td style="text-align: right;">—</td>
+</tr>
+<tr class="even">
+<td>RSR, no editing expression</td>
+<td style="text-align: right;">94.6</td>
+<td style="text-align: right;">−2.9</td>
+<td style="text-align: right;">0.786</td>
+<td style="text-align: right;">−0.164</td>
+</tr>
+<tr class="odd">
+<td>RSR + <em>I mean</em></td>
+<td style="text-align: right;">76.5</td>
+<td style="text-align: right;">−21.0</td>
+<td style="text-align: right;">0.609</td>
+<td style="text-align: right;">−0.341</td>
+</tr>
+</tbody>
+</table>
 <ul>
-<li>Use a malformed SBN showcasing how the parser gets it wrong.
-<ul>
-<li>Maybe just the example from the RP</li>
-<li>Don’t forget to define</li>
-</ul></li>
+<li><strong>Scorable</strong>: the output can be converted into a graph and scored.</li>
+<li><strong>Failure-penalised F1</strong>: SMATCH++ F1 <span class="citation" data-cites="opitzSMATCHStandardizedExtended2023">(<a href="#/references" role="doc-biblioref" onclick="">Opitz 2023</a>)</span>, with unscorable outputs counted as 0.</li>
 </ul>
+<p>All pairwise differences in F1 are significant (Wilcoxon signed-rank, <em>p</em> &lt; .001).</p>
+<aside class="notes">
+<p>Goal: Δ is relative to Fluent. Position effects go to Backup. TODO (step 2): merge in the two lessons from the next slide as the takeaway lines.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="keeping-the-reparandum-meant-asserting-it-and-the-graph-score-hid-the-error" class="slide level2">
+<h2>Keeping the reparandum meant asserting it, and the graph score hid the error</h2>
+<ol type="1">
+<li>In <strong>90.1%</strong> of scorable RSR outputs, the parser produced more concepts than for the fluent source (median +2): the reparandum was often added to the asserted content.</li>
+<li>A parse that asserts the goat still scores <strong>0.764</strong>, so a single graph score cannot show whether the repair was handled.</li>
+</ol>
+<aside class="notes">
+<p>Goal: the pilot shows the need for RSR supervision and for evaluation finer than SMATCH++. It does NOT show that SBN must be extended; that argument comes from later reference. Lesson 2 pays off in Experiment Design. TODO (step 2): merge into the results slide above.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
-<section id="showing-what-is-not-done" class="title-slide slide level1 center">
-<h1>Showing what is not done</h1>
+<section>
+<section id="representation" class="title-slide slide level1 center">
+<h1>Representation</h1>
+
+</section>
+<section id="berlin-and-dublin-sit-in-sibling-contexts-under-the-same-request" class="slide level2">
+<h2>Berlin and Dublin sit in sibling contexts under the same request</h2>
+
+<img data-src="viz/siri_rsr.svg" class="quarto-figure quarto-figure-center r-stretch" style="width:85.0%"><aside class="notes">
+<p>Goal: the graph counterpart of the previous slide; reuse the layout of fluent_siri_example.svg so the change is visible. TODO (step 2): new title “Keep both cities, mark Berlin as withdrawn”; annotate withdrawn / accepted / shared Location role, matching the three pieces of information. Say the NEGATION analogy in one spoken sentence (slide in Backup).</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="both-cities-remain-available-for-later-reference-only-dublin-is-the-requested-location" class="slide level2">
+<h2>Both cities remain available for later reference; only Dublin is the requested location</h2>
+<blockquote>
+<p>Show me the airports of <strong>these two cities</strong>.</p>
+</blockquote>
+
+<img data-src="viz/siri_later_reference.svg" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"><p><em>These two cities</em> links to both Berlin and Dublin (<code>ANA</code>), but Berlin does not become the requested location again.</p>
+<div class="smaller">
+<p>Berlin stays accessible because proper names project out of the withdrawn context <span class="citation" data-cites="bosVariablefreeDiscourseRepresentation2021">(<a href="#/references" role="doc-biblioref" onclick="">Bos 2021b</a>)</span>. The later-reference test set only uses referents that can project in this way.</p>
+</div>
+<aside class="notes">
+<p>Goal: close the loop opened in Related Work. The DAG carries the claim; one sentence states it, the small note states the mechanism and its limit. If the final DAG is too tall, switch to two columns (text left, DAG right).</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-representation-covers-concept-and-role-replacement-the-corpus-implements-single-concepts" class="slide level2 small-slide">
+<h2>The representation covers concept and role replacement; the corpus implements single concepts</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><strong>Representable</strong></td>
+<td>Replacement of a concept or a role, also inside a context such as negation</td>
+</tr>
+<tr class="even">
+<td><strong>Implemented in the corpus</strong></td>
+<td>Replacement of a single noun, verb or adjective concept</td>
+</tr>
+<tr class="odd">
+<td><strong>Outside the design</strong></td>
+<td>Replacement of a separator (e.g.&nbsp;<em>must</em> → <em>might</em>, <em>when</em> → <em>even though</em>); delayed repair</td>
+</tr>
+</tbody>
+</table>
+<aside class="notes">
+<p>Goal: keep “representable” and “implemented” apart; this is where the sharpest questions will land. Why not AMR or DS-TTR: Backup.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="data" class="title-slide slide level1 center">
+<h1>Data</h1>
+
+</section>
+<section id="no-corpus-pairs-self-repair-with-sbn-so-pmb-pairs-are-transformed-on-both-sides" class="slide level2 small-slide">
+<h2>No corpus pairs self-repair with SBN, so PMB pairs are transformed on both sides</h2>
+<p>The PMB has fluent sentence–SBN pairs; disfluency corpora have self-repairs but no SBN <span class="citation" data-cites="deshmukhResegmentationSWITCHBOARD1998 passaliLARDLargescaleArtificial2022 guptaDisflQABenchmarkDataset2021">(<a href="#/references" role="doc-biblioref" onclick="">Deshmukh et al. 1998</a>; <a href="#/references" role="doc-biblioref" onclick="">Passali et al. 2022</a>; <a href="#/references" role="doc-biblioref" onclick="">Gupta et al. 2021</a>)</span>.</p>
+
+<img data-src="viz/paired_transformation.svg" class="quarto-figure quarto-figure-center r-stretch" style="width:70.0%"><p>Each item keeps the PMB split of its source document, so no training document reappears in evaluation.</p>
+<aside class="notes">
+<p>Goal: why the data is generated, and how: both sides of a gold pair change together. Callback: the pilot changed only the input. The dashed “?” edge is what Experiment Design tests.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="step-①③-pick-a-concept-draw-a-competitor" class="slide level2">
+<h2>Step ①–③: pick a concept, draw a competitor</h2>
+<aside class="notes">
+<p>TODO (step 2): fluent Siri pair (sentence lane + SBN lane) -&gt; pick “weather” / weather.n.01 -&gt; draw “storm” / storm.n.01 from WordNet, same part of speech. Fragments, one step each. Full pipeline figure in Backup.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="step-④-edit-both-sides-together" class="slide level2">
+<h2>Step ④: edit both sides together</h2>
+<aside class="notes">
+<p>TODO (step 2): sentence side inserts the reparandum (± editing expression); SBN side adds CORRECTION / CONJUNCTION (generator output: anchor construction, see storm_weather_scores.md). Same visual structure as the Berlin/Dublin representation slide. Surface form pending the retracing decision.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="step-⑤-keep-only-legal-and-sensible-pairs" class="slide level2">
+<h2>Step ⑤: keep only legal and sensible pairs</h2>
+<p>Legal is not yet good: candidates are filtered for <strong>semantic contrast</strong> with bidirectional NLI <span class="citation" data-cites="laurerLessAnnotatingMore2024">(<a href="#/references" role="doc-biblioref" onclick="">Laurer et al. 2024</a>)</span> (<em>couch → sofa</em> fails) and for <strong>contextual fit</strong> with the reparandum’s surprisal given its left context (<em>cake → carburettor, for his wedding</em> fails). Both thresholds are set on a labelled sample and frozen before filtering.</p>
+<aside class="notes">
+<p>TODO (step 2): structural check + the two filters, each with its failing example; storm/weather passes both.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-transformation-yields-a-legal-graph-at-99.7-of-usable-sites" class="slide level2 small-slide">
+<h2>The transformation yields a legal graph at 99.7% of usable sites</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Stage (PMB training partition)</th>
+<th style="text-align: right;">Count</th>
+<th style="text-align: right;">% of lexical concepts</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Lexical concepts (noun, verb, adjective)</td>
+<td style="text-align: right;">23,232</td>
+<td style="text-align: right;">100.0</td>
+</tr>
+<tr class="even">
+<td>Aligned to an uttered word</td>
+<td style="text-align: right;">17,886</td>
+<td style="text-align: right;">77.0</td>
+</tr>
+<tr class="odd">
+<td>Usable site with a WordNet reparandum</td>
+<td style="text-align: right;">16,481</td>
+<td style="text-align: right;">70.9</td>
+</tr>
+<tr class="even">
+<td>Structurally legal transformation</td>
+<td style="text-align: right;">16,425</td>
+<td style="text-align: right;">70.7</td>
+</tr>
+</tbody>
+</table>
+<p>The paired configuration applies almost wherever a reparandum can be inserted, which is the empirical side of RQ1’s coverage question.</p>
+<aside class="notes">
+<p>Goal: structural generation and validation are complete; linguistic filtering, the independent audit and final sampling remain. Most of the alignment loss is verbs without a surface word. Scope: immediate replacement of aligned noun, verb and adjective concepts, written PMB contexts; the experiments test learnability within these boundaries, not coverage of spontaneous RSR. TODO (step 2): retitle “How much data this yields”; present as the candidate pool before linguistic filtering and sampling (known numbers only); 99.7% as one sentence.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="experiment-design" class="title-slide slide level1 center">
+<h1>Experiment Design</h1>
+
+</section>
+<section id="two-conditions-with-identical-inputs-isolate-the-effect-of-the-target-representation" class="slide level2 small-slide">
+<h2>Two conditions with identical inputs isolate the effect of the target representation</h2>
+<table class="caption-top" style="width:100%;">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Condition</th>
+<th>RSR inputs</th>
+<th>Target for RSR inputs</th>
+<th>Corresponds to</th>
+<th style="text-align: center;">2B</th>
+<th style="text-align: center;">9B</th>
+<th style="text-align: center;">27B</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Fluent only</td>
+<td>no</td>
+<td>—</td>
+<td>the pilot parser</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+</tr>
+<tr class="even">
+<td>RSR normalisation</td>
+<td>yes</td>
+<td>fluent gold SBN</td>
+<td>deletion</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+</tr>
+<tr class="odd">
+<td>Repair-aware</td>
+<td>yes</td>
+<td>repair-aware SBN</td>
+<td>this project</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+</tr>
+</tbody>
+</table>
 <ul>
-<li>only one model — no scaling tested</li>
-<li>no tested “RSR NL –&gt; Fluent SBN” LoRA setting</li>
+<li>Qwen3.5 at three sizes <span class="citation" data-cites="qwenQwen35Native2026">(<a href="#/references" role="doc-biblioref" onclick="">Qwen Team 2026</a>)</span>, LoRA, one parsing instruction that does not say whether an input contains an RSR.</li>
+<li>Within each model size, the two RSR conditions share inputs, example counts and training procedure; <strong>only the target differs</strong>.</li>
+<li>Every size is trained under all three conditions with three matched seeds: 27 runs.</li>
 </ul>
+<aside class="notes">
+<p>Goal: the rows of the comparison table become training conditions. Fluent only vs repair-aware changes both the examples and the targets, so it is a reference, not the controlled comparison. Every size × condition has three matched seeds (27 runs), so the target effect can be compared across model capacities. Qwen3.5 because it is the most recent family with dense checkpoints across the sizes needed. Normalisation is an end-to-end parser, not a pipeline. TODO (step 2): “Same inputs, different targets” with the storm/weather item; label the roles explicitly: Fluent only = reference (the pilot parser), RSR normalisation = baseline (deletion), Repair-aware = this project; say which RQ aspect each serves.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="a-single-graph-score-cannot-separate-opposite-failures" class="slide level2 small-slide">
+<h2>A single graph score cannot separate opposite failures</h2>
+<p><em>Let’s stand, I mean, sit in the shade.</em></p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Output</th>
+<th>Typical of</th>
+<th>SMATCH++</th>
+<th style="text-align: center;">RSR-structure accuracy</th>
+<th style="text-align: center;">Accepted meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><em>stand</em> dropped, fluent graph</td>
+<td>normalisation</td>
+<td>partial</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✓</td>
+</tr>
+<tr class="even">
+<td><em>stand</em> and <em>sit</em> both asserted</td>
+<td>the pilot parser</td>
+<td>partial</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✗</td>
+</tr>
+<tr class="odd">
+<td><em>stand</em> withdrawn, <em>sit</em> accepted</td>
+<td>repair-aware target</td>
+<td>full</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>RSR-structure accuracy</strong>: paired contexts, correct <strong>status</strong>, required <strong>links</strong> to shared content: the three pieces of information.</li>
+<li><strong>Accepted meaning</strong>: the prediction without its withdrawn context, scored against the fluent gold graph.</li>
+</ul>
+<aside class="notes">
+<p>Goal: callback to the pilot’s 0.764: the first two rows get partial graph credit for opposite reasons. The component scores of RSR-structure accuracy show which requirement failed. TODO (step 2): replace stand/sit with storm/weather and the scores in storm_weather_scores.md; keep only the SMATCH++ column here, the two new measures go to the next slide.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="two-measures-separate-them" class="slide level2">
+<h2>Two measures separate them</h2>
+<aside class="notes">
+<p>TODO (step 2): add RSR-structure accuracy and accepted meaning as columns to the storm/weather table (✓/✗ per row); then one line per question: learnable? / what does keeping the reparandum buy? / what does it cost? — which measure answers each. Old evaluation matrix in Backup.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="further-tests-check-that-the-parser-learned-the-distinction-not-a-surface-pattern" class="slide level2 small-slide">
+<h2>Further tests check that the parser learned the distinction, not a surface pattern</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Possible shortcut</th>
+<th>Test</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>The editing expression triggers the structure</td>
+<td>About 30% of RSR training inputs carry <em>I mean</em>, <em>no</em>, <em>no wait</em> or <em>actually</em>. Each test item comes with and without one; <em>sorry</em> never appears in training</td>
+</tr>
+<tr class="even">
+<td>Any two adjacent competing words trigger the structure</td>
+<td>Lists, appositions and coordination without replacement (non-RSR set)</td>
+</tr>
+<tr class="odd">
+<td>The configuration is applied beyond its scope</td>
+<td>Corrections across discourse turns</td>
+</tr>
+</tbody>
+</table>
+<aside class="notes">
+<p>Goal: answer the obvious objection to synthetic data before it is raised. The non-RSR documents are held out of training (9,447 training documents remain). Error categories: Backup. TODO (step 2): one concrete example per row (with / without “I mean”, unseen “sorry”, a list such as “Berlin, Dublin and Paris”).</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="summary-keep-both-cities-mark-the-withdrawn-one" class="slide level2 small-slide">
+<h2>Summary: keep both cities, mark the withdrawn one</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 75%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><strong>Related Work</strong></td>
+<td>Deletion loses Berlin; tagging keeps it but not its status or its role.</td>
+</tr>
+<tr class="even">
+<td><strong>Pilot</strong></td>
+<td>A parser trained on fluent SBN often asserts the reparandum, and SMATCH++ hides the error.</td>
+</tr>
+<tr class="odd">
+<td><strong>Representation</strong></td>
+<td>Pairing <code>CORRECTION</code> with <code>CONJUNCTION</code> records both candidates, their status and the role they compete for.</td>
+</tr>
+<tr class="even">
+<td><strong>Data</strong></td>
+<td>Transforming PMB pairs on both sides yields a legal graph at 99.7% of usable sites.</td>
+</tr>
+<tr class="odd">
+<td><strong>Experiment Design</strong> <em>(planned)</em></td>
+<td>Three conditions at three model sizes test whether the structure is learnable, and what keeping the reparandum buys and costs.</td>
+</tr>
+</tbody>
+</table>
+<p>Back to Siri: a parser that produces this representation queries the weather in Dublin, and can still resolve <em>these two cities</em> to Berlin and Dublin.</p>
+<aside class="notes">
+<p>Goal: one sentence per roadmap section, in the same words as the section’s key slide, so the chain can be reread here. Only the first four rows are findings; Experiment Design is the plan. Close on Siri: the accepted meaning gives the right API call, the kept reparandum serves later reference.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="status-and-timeline" class="slide level2">
+<h2>Status and Timeline</h2>
+<ul>
+<li><strong>done</strong>: pilot; representation; structural generation over the PMB training partition</li>
+<li><strong>next</strong>: freeze filtered data and challenge sets → 27 training runs → evaluation → thesis (14 Dec)</li>
+</ul>
+<aside class="notes">
+<p>Goal: feasibility. RP timeline: filters calibrated and frozen, challenge sets and evaluation toolkit completed by 4 Oct; the 27 runs from 5 Oct to 1 Nov.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section id="thank-you" class="title-slide slide level1 center">
+<h1>Thank You</h1>
+
+</section>
+
+<section id="references" class="title-slide slide level1 smaller scrollable">
+<h1>References</h1>
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-abzianidzeParallelMeaningBank2017" class="csl-entry" role="listitem">
+Abzianidze, Lasha, Johannes Bjerva, Kilian Evang, et al. 2017. <span>“The <span>Parallel</span> <span>Meaning</span> <span>Bank</span>: <span>Towards</span> a <span>Multilingual</span> <span>Corpus</span> of <span>Translations</span> <span>Annotated</span> with <span>Compositional</span> <span>Meaning</span> <span>Representations</span>.”</span> In <em>Proceedings of the 15th <span>Conference</span> of the <span>European</span> <span>Chapter</span> of the <span>Association</span> for <span>Computational</span> <span>Linguistics</span>: <span>Volume</span> 2, <span>Short</span> <span>Papers</span></em>, edited by Mirella Lapata, Phil Blunsom, and Alexander Koller. Association for Computational Linguistics. <a href="https://aclanthology.org/E17-2039/">https://aclanthology.org/E17-2039/</a>.
+</div>
+<div id="ref-banarescuAbstractMeaningRepresentation2013" class="csl-entry" role="listitem">
+Banarescu, Laura, Claire Bonial, Shu Cai, et al. 2013. <span>“Abstract <span>Meaning</span> <span>Representation</span> for <span>Sembanking</span>.”</span> <em>Proceedings of the 7th <span>Linguistic</span> <span>Annotation</span> <span>Workshop</span> &amp; <span>Interoperability</span> with <span>Discourse</span></em> (Sofia, Bulgaria), 178–86.
+</div>
+<div id="ref-bosQuantificationAnnotationDiscourse2021" class="csl-entry" role="listitem">
+Bos, Johan. 2021a. <span>“Quantiﬁcation <span>Annotation</span> in <span>Discourse</span> <span>Representation</span> <span>Theory</span>.”</span> <em>Proceedings of the 17th <span>Joint</span> <span>ACL</span> - <span>ISO</span> <span>Workshop</span> on <span>Interoperable</span> <span>Semantic</span> <span>Annotation</span> (<span>ISA</span>-17)</em> (Groningen, Netherlands (Online)), June.
+</div>
+<div id="ref-bosVariablefreeDiscourseRepresentation2021" class="csl-entry" role="listitem">
+Bos, Johan. 2021b. <span>“Variable-Free <span>Discourse</span> <span>Representation</span> <span>Structures</span>.”</span> <a href="https://www.semanticscholar.org/paper/Variable-free-Discourse-Representation-Structures-*-Bos/6d3b8e54d183a9fdda186f986b319c55c85a6c06">https://www.semanticscholar.org/paper/Variable-free-Discourse-Representation-Structures-*-Bos/6d3b8e54d183a9fdda186f986b319c55c85a6c06</a>.
+</div>
+<div id="ref-bosSequenceNotationCatching2023" class="csl-entry" role="listitem">
+Bos, Johan. 2023. <span>“The <span>Sequence</span> <span>Notation</span>: <span>Catching</span> <span>Complex</span> <span>Meanings</span> in <span>Simple</span> <span>Graphs</span>.”</span> In <em>Proceedings of the 15th <span>International</span> <span>Conference</span> on <span>Computational</span> <span>Semantics</span></em>, edited by Maxime Amblard and Ellen Breitholtz. Association for Computational Linguistics. <a href="https://aclanthology.org/2023.iwcs-1.20/">https://aclanthology.org/2023.iwcs-1.20/</a>.
+</div>
+<div id="ref-deshmukhResegmentationSWITCHBOARD1998" class="csl-entry" role="listitem">
+Deshmukh, Neeraj, Aravind Ganapathiraju, Andi Gleeson, Jonathan Hamaker, and Joseph Picone. 1998. <span>“Resegmentation of <span>SWITCHBOARD</span>.”</span> <em>5th <span>International</span> <span>Conference</span> on <span>Spoken</span> <span>Language</span> <span>Processing</span> (<span>ICSLP</span> 1998)</em>, November, paper 0685–0. <a href="https://doi.org/10.21437/ICSLP.1998-588">https://doi.org/10.21437/ICSLP.1998-588</a>.
+</div>
+<div id="ref-futamiStreamingJointSpeech2023" class="csl-entry" role="listitem">
+Futami, Hayato, Emiru Tsunoo, Kentaro Shibata, et al. 2023. <em>Streaming <span>Joint</span> <span>Speech</span> <span>Recognition</span> and <span>Disfluency</span> <span>Detection</span></em>. arXiv. <a href="https://doi.org/10.48550/arXiv.2211.08726">https://doi.org/10.48550/arXiv.2211.08726</a>.
+</div>
+<div id="ref-gemmateamGemma2Improving2024" class="csl-entry" role="listitem">
+Gemma Team, Morgane Riviere, Shreya Pathak, et al. 2024. <em>Gemma 2: <span>Improving</span> <span>Open</span> <span>Language</span> <span>Models</span> at a <span>Practical</span> <span>Size</span></em>. arXiv. <a href="https://doi.org/10.48550/ARXIV.2408.00118">https://doi.org/10.48550/ARXIV.2408.00118</a>.
+</div>
+<div id="ref-guptaDisflQABenchmarkDataset2021" class="csl-entry" role="listitem">
+Gupta, Aditya, Jiacheng Xu, Shyam Upadhyay, Diyi Yang, and Manaal Faruqui. 2021. <em>Disfl-<span>QA</span>: <span>A</span> <span>Benchmark</span> <span>Dataset</span> for <span>Understanding</span> <span>Disfluencies</span> in <span>Question</span> <span>Answering</span></em>. arXiv. <a href="https://doi.org/10.48550/arXiv.2106.04016">https://doi.org/10.48550/arXiv.2106.04016</a>.
+</div>
+<div id="ref-houghProcessingSelfrepairsIncremental2012" class="csl-entry" role="listitem">
+Hough, Julian, and Matthew Purver. 2012. <span>“Processing <span>Self</span>-<span>Repairs</span> in an <span>Incremental</span> <span>Type</span>-<span>Theoretic</span> <span>Dialogue</span> <span>System</span>.”</span> <em>Proceedings of the 16th <span>SemDial</span> Workshop on the Semantics and Pragmatics of Dialogue (<span>SeineDial</span>)</em>, 136–44. <a href="https://www.researchgate.net/profile/Jonathan-Ginzburg/publication/281073413_SeineDial_16th_Workshop_on_the_Semantics_and_Pragmatics_of_Dialogue_SemDial/links/564995c308ae451880aee2c6/SeineDial-16th-Workshop-on-the-Semantics-and-Pragmatics-of-Dialogue-SemDial.pdf#page=145">https://www.researchgate.net/profile/Jonathan-Ginzburg/publication/281073413_SeineDial_16th_Workshop_on_the_Semantics_and_Pragmatics_of_Dialogue_SemDial/links/564995c308ae451880aee2c6/SeineDial-16th-Workshop-on-the-Semantics-and-Pragmatics-of-Dialogue-SemDial.pdf#page=145</a>.
+</div>
+<div id="ref-huLoRALowRankAdaptation2021" class="csl-entry" role="listitem">
+Hu, Edward J., Yelong Shen, Phillip Wallis, et al. 2021. <em><span>LoRA</span>: <span>Low</span>-<span>Rank</span> <span>Adaptation</span> of <span>Large</span> <span>Language</span> <span>Models</span></em>. arXiv. <a href="https://doi.org/10.48550/arXiv.2106.09685">https://doi.org/10.48550/arXiv.2106.09685</a>.
+</div>
+<div id="ref-johnsonTAGbasedNoisychannelModel2004" class="csl-entry" role="listitem">
+Johnson, Mark, and Eugene Charniak. 2004. <span>“A <span>TAG</span>-Based Noisy-Channel Model of Speech Repairs.”</span> <em>Proceedings of the 42nd <span>Annual</span> <span>Meeting</span> of the <span>Association</span> for <span>Computational</span> <span>Linguistics</span> (<span>ACL</span>-04)</em> (Barcelona, Spain), July, 33–39. <a href="https://doi.org/10.3115/1218955.1218960">https://doi.org/10.3115/1218955.1218960</a>.
+</div>
+<div id="ref-lascaridesAgreementDisputesCommitments2009" class="csl-entry" role="listitem">
+Lascarides, A., and N. Asher. 2009. <span>“Agreement, <span>Disputes</span> and <span>Commitments</span> in <span>Dialogue</span>.”</span> <em>Journal of Semantics</em> 26 (2): 109–58. <a href="https://doi.org/10.1093/jos/ffn013">https://doi.org/10.1093/jos/ffn013</a>.
+</div>
+<div id="ref-lauLingeringEffectsDisfluent2005" class="csl-entry" role="listitem">
+Lau, Ellen F., and Fernanda Ferreira. 2005. <span>“Lingering Effects of Disfluent Material on Comprehension of Garden Path Sentences.”</span> <em>Language and Cognitive Processes</em> 20 (5): 633–66. <a href="https://doi.org/10.1080/01690960444000142">https://doi.org/10.1080/01690960444000142</a>.
+</div>
+<div id="ref-laurerLessAnnotatingMore2024" class="csl-entry" role="listitem">
+Laurer, Moritz, Wouter Van Atteveldt, Andreu Casas, and Kasper Welbers. 2024. <span>“Less <span>Annotating</span>, <span>More</span> <span>Classifying</span>: <span>Addressing</span> the <span>Data</span> <span>Scarcity</span> <span>Issue</span> of <span>Supervised</span> <span>Machine</span> <span>Learning</span> with <span>Deep</span> <span>Transfer</span> <span>Learning</span> and <span>BERT</span>-<span>NLI</span>.”</span> <em>Political Analysis</em> 32 (1): 84–100. <a href="https://doi.org/10.1017/pan.2023.20">https://doi.org/10.1017/pan.2023.20</a>.
+</div>
+<div id="ref-leveltMonitoringSelfrepairSpeech1983" class="csl-entry" role="listitem">
+Levelt, Willem J. M. 1983. <span>“Monitoring and Self-Repair in Speech.”</span> <em>Cognition</em> 14 (1): 41–104. <a href="https://doi.org/10.1016/0010-0277(83)90026-4">https://doi.org/10.1016/0010-0277(83)90026-4</a>.
+</div>
+<div id="ref-linFullDuplexBenchv3BenchmarkingTool2026" class="csl-entry" role="listitem">
+Lin, Guan-Ting, Chen Chen, Zhehuai Chen, and Hung-yi Lee. 2026. <em>Full-<span>Duplex</span>-<span>Bench</span>-V3: <span>Benchmarking</span> <span>Tool</span> <span>Use</span> for <span>Full</span>-<span>Duplex</span> <span>Voice</span> <span>Agents</span> <span>Under</span> <span>Real</span>-<span>World</span> <span>Disfluency</span></em>. arXiv. <a href="https://doi.org/10.48550/ARXIV.2604.04847">https://doi.org/10.48550/ARXIV.2604.04847</a>.
+</div>
+<div id="ref-millerWordNetLexicalDatabase1994" class="csl-entry" role="listitem">
+Miller, George A. 1994. <span>“<span>WordNet</span>: <span>A</span> <span>Lexical</span> <span>Database</span> for <span>English</span>.”</span> <em>Human <span>Language</span> <span>Technology</span>: <span>Proceedings</span> of a <span>Workshop</span> Held at <span>Plainsboro</span>, <span>New</span> <span>Jersey</span>, <span>March</span> 8-11, 1994</em>. <a href="https://aclanthology.org/H94-1111/">https://aclanthology.org/H94-1111/</a>.
+</div>
+<div id="ref-opitzSMATCHStandardizedExtended2023" class="csl-entry" role="listitem">
+Opitz, Juri. 2023. <span>“<span>SMATCH</span>++: <span>Standardized</span> and <span>Extended</span> <span>Evaluation</span> of <span>Semantic</span> <span>Graphs</span>.”</span> <em>Findings of the <span>Association</span> for <span>Computational</span> <span>Linguistics</span>: <span>EACL</span> 2023</em> (Dubrovnik, Croatia), 1595–607. <a href="https://doi.org/10.18653/v1/2023.findings-eacl.118">https://doi.org/10.18653/v1/2023.findings-eacl.118</a>.
+</div>
+<div id="ref-passaliLARDLargescaleArtificial2022" class="csl-entry" role="listitem">
+Passali, T., T. Mavropoulos, G. Tsoumakas, G. Meditskos, and S. Vrochidis. 2022. <em><span>LARD</span>: <span>Large</span>-Scale <span>Artificial</span> <span>Disfluency</span> <span>Generation</span></em>. arXiv. <a href="https://doi.org/10.48550/arXiv.2201.05041">https://doi.org/10.48550/arXiv.2201.05041</a>.
+</div>
+<div id="ref-purverComputationalModelsMiscommunication2018" class="csl-entry" role="listitem">
+Purver, Matthew, Julian Hough, and Christine Howes. 2018. <span>“Computational <span>Models</span> of <span>Miscommunication</span> <span>Phenomena</span>.”</span> <em>Topics in Cognitive Science</em> 10 (2): 425–51. <a href="https://doi.org/10.1111/tops.12324">https://doi.org/10.1111/tops.12324</a>.
+</div>
+<div id="ref-qwenQwen35Native2026" class="csl-entry" role="listitem">
+Qwen Team. 2026. <em><span>Qwen3.5</span>: <span>Towards</span> <span>Native</span> <span>Multimodal</span> <span>Agents</span></em>. Qwen. <a href="https://qwen.ai/blog?id=qwen3.5">https://qwen.ai/blog?id=qwen3.5</a>.
+</div>
+<div id="ref-reganMASSIVEMultilingualAbstract2024" class="csl-entry" role="listitem">
+Regan, Michael, Shira Wein, George Baker, and Emilio Monti. 2024. <span>“<span>MASSIVE</span> <span>Multilingual</span> <span>Abstract</span> <span>Meaning</span> <span>Representation</span>: <span>A</span> <span>Dataset</span> and <span>Baselines</span> for <span>Hallucination</span> <span>Detection</span>.”</span> In <em>Proceedings of the 13th <span>Joint</span> <span>Conference</span> on <span>Lexical</span> and <span>Computational</span> <span>Semantics</span> (*<span>SEM</span> 2024)</em>, edited by Danushka Bollegala and Vered Shwartz. Association for Computational Linguistics. <a href="https://doi.org/10.18653/v1/2024.starsem-1.1">https://doi.org/10.18653/v1/2024.starsem-1.1</a>.
+</div>
+<div id="ref-senSemanticParsingDisfluent2021" class="csl-entry" role="listitem">
+Sen, Priyanka, and Isabel Groves. 2021. <span>“Semantic <span>Parsing</span> of <span>Disfluent</span> <span>Speech</span>.”</span> <em>Proceedings of the 16th <span>Conference</span> of the <span>European</span> <span>Chapter</span> of the <span>Association</span> for <span>Computational</span> <span>Linguistics</span>: <span>Main</span> <span>Volume</span></em> (Online), 1748–53. <a href="https://doi.org/10.18653/v1/2021.eacl-main.150">https://doi.org/10.18653/v1/2021.eacl-main.150</a>.
+</div>
+<div id="ref-shribergPreliminariesTheorySpeech1994" class="csl-entry" role="listitem">
+Shriberg, Elizabeth Ellen. 1994. <span>“Preliminaries to a Theory of Speech Disfluencies.”</span> PhD thesis, University of California at Berkeley.
+</div>
+<div id="ref-yangQwen3TechnicalReport2025" class="csl-entry" role="listitem">
+Yang, An, Anfeng Li, Baosong Yang, et al. 2025. <em>Qwen3 <span>Technical</span> <span>Report</span></em>. arXiv. <a href="https://doi.org/10.48550/arXiv.2505.09388">https://doi.org/10.48550/arXiv.2505.09388</a>.
+</div>
+<div id="ref-yangEmphasisingStructuredInformation2025" class="csl-entry" role="listitem">
+Yang, Bohao, Kun Zhao, Dong Liu, Chen Tang, Liang Zhan, and Chenghua Lin. 2025. <span>“Emphasising <span>Structured</span> <span>Information</span>: <span>Integrating</span> <span>Abstract</span> <span>Meaning</span> <span>Representation</span> into <span>LLMs</span> for <span>Enhanced</span> <span>Open</span>-<span>Domain</span> <span>Dialogue</span> <span>Evaluation</span>.”</span> In <em>Findings of the <span>Association</span> for <span>Computational</span> <span>Linguistics</span>: <span>EMNLP</span> 2025</em>, edited by Christos Christodoulopoulos, Tanmoy Chakraborty, Carolyn Rose, and Violet Peng. Association for Computational Linguistics. <a href="https://doi.org/10.18653/v1/2025.findings-emnlp.1096">https://doi.org/10.18653/v1/2025.findings-emnlp.1096</a>.
+</div>
+<div id="ref-yeSWANSemanticWatermarking2026" class="csl-entry" role="listitem">
+Ye, Ziping, Gourab Dey, Christos Christodoulopoulos, et al. 2026. <span>“<span>SWAN</span>: <span>Semantic</span> <span>Watermarking</span> with <span>Abstract</span> <span>Meaning</span> <span>Representation</span>.”</span> In <em>Proceedings of the 64th <span>Annual</span> <span>Meeting</span> of the <span>Association</span> for <span>Computational</span> <span>Linguistics</span> (<span>Volume</span> 1: <span>Long</span> <span>Papers</span>)</em>, edited by Maria Liakata, Viviane P. Moreira, Jiajun Zhang, and David Jurgens. Association for Computational Linguistics. <a href="https://doi.org/10.18653/v1/2026.acl-long.1681">https://doi.org/10.18653/v1/2026.acl-long.1681</a>.
+</div>
+<div id="ref-zayatsMultidomainDisfluencyRepair2014" class="csl-entry" role="listitem">
+Zayats, Victoria, Mari Ostendorf, and Hannaneh Hajishirzi. 2014. <span>“Multi-Domain Disfluency and Repair Detection.”</span> <em>Interspeech 2014</em>, September, 2907–11. <a href="https://doi.org/10.21437/Interspeech.2014-603">https://doi.org/10.21437/Interspeech.2014-603</a>.
+</div>
+</div>
 </section>
 
 <section>
-<section id="formalism-answering-rq1" class="title-slide slide level1 center">
-<h1>Formalism – Answering RQ1</h1>
-<p>First recall what is RQ1</p>
-<p>Telling the audience that I ALREADY DESIGNED the formalism</p>
+<section id="backup" class="title-slide slide level1 center">
+<h1>Backup</h1>
+
 </section>
-<section id="formalism-showcase" class="slide level2">
-<h2>Formalism Showcase</h2>
-<p>Use the Berlin-Dublin example</p>
+<section id="meaning-representations-in-llm-based-systems" class="slide level2 small-slide">
+<h2>Meaning representations in LLM-based systems</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>MR use</th>
+<th>Study</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Detect unsupported relations in generated database queries</td>
+<td><span class="citation" data-cites="reganMASSIVEMultilingualAbstract2024">Regan et al. (<a href="#/references" role="doc-biblioref" onclick="">2024</a>)</span></td>
+</tr>
+<tr class="even">
+<td>Evaluate the contextual appropriateness of dialogue responses</td>
+<td><span class="citation" data-cites="yangEmphasisingStructuredInformation2025">B. Yang et al. (<a href="#/references" role="doc-biblioref" onclick="">2025</a>)</span></td>
+</tr>
+<tr class="odd">
+<td>Construct paraphrase-resistant semantic watermarks</td>
+<td><span class="citation" data-cites="yeSWANSemanticWatermarking2026">Ye et al. (<a href="#/references" role="doc-biblioref" onclick="">2026</a>)</span></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="pilot-full-results-and-position-effects" class="slide level2">
+<h2>Pilot: Full Results and Position Effects</h2>
+</section>
+<section id="recognition-probe-the-failure-is-not-only-a-failure-to-notice-the-repair" class="slide level2">
+<h2>Recognition Probe: the failure is not only a failure to notice the repair</h2>
+<p>The base Gemma-2 9B, without the adapter, was asked to mark the reparandum, the editing expression and the repair in plain text.</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Input</th>
+<th style="text-align: right;">RSR detected (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Fluent (false alarm)</td>
+<td style="text-align: right;">1.0</td>
+</tr>
+<tr class="even">
+<td>RSR, no editing expression</td>
+<td style="text-align: right;">44.8</td>
+</tr>
+<tr class="odd">
+<td>RSR + <em>I mean</em></td>
+<td style="text-align: right;">100.0</td>
+</tr>
+</tbody>
+</table>
+<p>With <em>I mean</em>, the base model notices every repair, yet the fine-tuned parser often represents <em>I mean</em> as content. Without it, the base model misses more than half.</p>
+<aside class="notes">
+<p>Goal: pre-empt “the parser just didn’t notice the repair”. State the limit before anyone asks: the probe changes the task and removes the adapter, so it cannot isolate SBN generation as the error source. The gap with and without an editing expression motivates the paired test items in Data. Span F1 and position breakdown go to Backup.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="goatcow-the-parser-asserts-the-reparandum-and-turns-i-mean-into-an-event" class="slide level2">
+<h2>Goat/Cow: the parser asserts the reparandum and turns <em>I mean</em> into an event</h2>
+<p><em>A goat, I mean, a cow gave birth to a calf with two heads.</em></p>
+<div class="columns">
+<div class="column" style="width:48%;">
+<p><strong>Fluent reference</strong></p>
+<p><img data-src="viz/goat_cow_fluent.svg" style="width:100.0%"></p>
+</div><div class="column" style="width:48%;">
+<p><strong>Parse of the RSR input</strong></p>
+<p><img data-src="viz/goat_cow_rsr_parse.svg" style="width:100.0%"></p>
+</div></div>
+<p>Most of the graph matches the reference, so the parse still scores <strong>0.764</strong> SMATCH++. Nothing in it records that the cow replaces the goat.</p>
+<aside class="notes">
+<p>Goal: the DAGs replace the SBN strings (strings on the next slide). The picture explains the 0.764: a correct graph with extra structure grown onto it.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="goatcow-sbn-strings" class="slide level2">
+<h2>Goat/Cow: SBN Strings</h2>
+<p><em>A goat, I mean, a cow gave birth to a calf with two heads.</em></p>
+<div class="columns">
+<div class="column" style="width:48%;">
+<p>Fluent reference</p>
+<pre class="sbn"><code>cow.n.01                                     % cow
+give_birth.v.01 Agent -1 Time +1 Patient +2  % gave birth
+time.n.08 TPR now
+calf.n.01 Part +2                            % calf
+quantity.n.01 EQU 2                          % two
+head.n.01 Quantity -1                        % heads</code></pre>
+</div><div class="column" style="width:48%;">
+<p>Parse of the RSR input</p>
+<pre class="sbn"><code>goat.n.01                                    % goat
+person.n.01 EQU speaker                      % I
+mean.v.01 Theme -2 Agent -1 Time +1          % mean
+time.n.08 EQU now
+cow.n.01                                     % cow
+give_birth.v.01 Agent -1 Time +1 Patient +2  % gave birth
+time.n.08 TPR now
+calf.n.01 Part +2                            % calf
+quantity.n.01 EQU 2                          % two
+head.n.01 Quantity -1                        % heads</code></pre>
+</div></div>
+</section>
+<section id="no-current-approach-records-the-revision-in-the-meaning" class="slide level2">
+<h2>No current approach records the revision in the meaning</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: center;">Both candidates</th>
+<th style="text-align: center;">Their status</th>
+<th style="text-align: center;">The role they compete for</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Deletion</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+</tr>
+<tr class="even">
+<td>Tagged transcription</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓ (on words)</td>
+<td style="text-align: center;">✗</td>
+</tr>
+<tr class="odd">
+<td>Parser trained on fluent SBN (pilot)</td>
+<td style="text-align: center;">✓<sup>a</sup></td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✗</td>
+</tr>
+<tr class="even">
+<td><strong>This project</strong></td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓ (in the meaning)</td>
+<td style="text-align: center;">✓</td>
+</tr>
+</tbody>
+</table>
+<div class="smaller">
+<p><sup>a</sup> 90.1% of scorable outputs contain more concepts than the fluent parse; the reparandum is often kept as asserted content.</p>
+</div>
+<aside class="notes">
+<p>Goal: the columns are the three pieces of information from Related Work; the table needs no example to be read.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="sbn-can-already-keep-content-without-asserting-it-contexts" class="slide level2">
+<h2>SBN can already keep content without asserting it: contexts</h2>
+<p><em>John did not buy a car.</em></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="small">
+<pre class="sbn"><code>male.n.02 Name "John"               % John
+    NEGATION &lt;1                     % did not
+time.n.08 TPR now
+buy.v.01 Agent -2 Time -1 Theme +1  % buy
+car.n.01                            % a car</code></pre>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="viz/negation_john.svg" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+</figure>
+</div>
+</div></div>
+<ul>
+<li>A <strong>separator</strong> such as <code>NEGATION</code> opens a new <strong>context</strong>: the buying event and the car are represented, but their content is denied.</li>
+<li><strong>Accessibility</strong>: a link may reach out of the negated context (to John), but not into it.</li>
+</ul>
+<aside class="notes">
+<p>Goal: the first piece of information (keep the reparandum without asserting it) needs exactly this device.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="correction-holds-the-withdrawn-candidate-conjunction-the-accepted-one" class="slide level2 small-slide">
+<h2><code>CORRECTION</code> holds the withdrawn candidate, <code>CONJUNCTION</code> the accepted one</h2>
+<pre class="sbn"><code>entity.n.01 EQU ?                       % What
+time.n.08 EQU now                       % is
+weather.n.01                            % the weather
+like.a.01 Co-Theme -3 Time -2 Theme -1  % like
+    CORRECTION &lt;1
+city.n.01 Name "Berlin" LocationOf -1   % in Berlin
+    CONJUNCTION &lt;2                      % I mean,
+city.n.01 Name "Dublin" LocationOf -2   % in Dublin?</code></pre>
+<ul>
+<li><code>CORRECTION</code> opens the context for Berlin. Following SDRT’s <em>Correction</em> relation, its content is withdrawn: ¬K<sub>π1</sub> ∧ K<sub>π2</sub> <span class="citation" data-cites="lascaridesAgreementDisputesCommitments2009">(<a href="#/references" role="doc-biblioref" onclick="">Lascarides and Asher 2009</a>)</span>.</li>
+<li><code>CONJUNCTION</code> opens the context for Dublin and merges it back into the shared request.</li>
+<li>Both cities link to the weather request with <code>LocationOf</code>, so the revised role is recorded.</li>
+</ul>
+<aside class="notes">
+<p>Goal: the three pieces of information, met one per bullet. RP wording: the representation pairs the existing separators CORRECTION and CONJUNCTION and introduces no new separator. If pressed on data: CORRECTION does not occur in PMB 5.1.0 gold.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="abstract-description" class="slide level2">
 <h2>Abstract Description</h2>
@@ -252,64 +1423,150 @@ cough.v.01 Agent -3 Time -2    % coughed</code></pre>
 K = K_{\pi_{\text{pre}}} \land \neg K_{\pi_m} \land \big(K_{\pi_n} \land K_{\pi_{\text{post}}}\big) \land \varphi_{\mathit{Corr}(\pi_m,\pi_n)}
 \]</span></p>
 </div>
-<p>where: <span class="math inline">\(K_{\pi_m}\)</span> represents the reparandum <span class="math inline">\(K_{\pi_{\text{post}}}\)</span> represents the repair</p>
-<p>I put the abstract definition after the example to let the audience develop the gist first. Even if they fail to catch the logic expression, it doesn’t obsticle the later parts. – Does it work?</p>
+<p>where: <span class="math inline">\(K_{\pi_m}\)</span> represents the reparandum <span class="math inline">\(K_{\pi_n}\)</span> represents the repair <span class="math inline">\(K_{\pi_{\text{post}}}\)</span> represents the continuation after the repair</p>
 </section>
-<section id="coverage" class="slide level2">
-<h2>Coverage</h2>
-<p>Use a table show the mechanism</p>
+<section id="why-not-amr-or-ds-ttr" class="slide level2">
+<h2>Why Not AMR or DS-TTR</h2>
+<p>Why SBN rather than AMR <span class="citation" data-cites="banarescuAbstractMeaningRepresentation2013">(<a href="#/references" role="doc-biblioref" onclick="">Banarescu et al. 2013</a>)</span> or DS-TTR <span class="citation" data-cites="houghProcessingSelfrepairsIncremental2012">(<a href="#/references" role="doc-biblioref" onclick="">Hough and Purver 2012</a>)</span>: AMR lacks separate semantic contexts and does not record the order of the replacement; DS-TTR keeps the withdrawn path only in its processing history. SBN separates contexts, and the PMB supplies sentence–SBN pairs.</p>
+</section>
+<section id="each-item-edits-a-gold-pair-on-both-sides-then-checks-both-sides" class="slide level2">
+<h2>Each item edits a gold pair on both sides, then checks both sides</h2>
+
+<img data-src="viz/data_pipeline.svg" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"><div class="smaller">
+<p>Running example: the Siri request. The reparandum, the utterance and the SBN splice are the generator’s actual output for this sentence. Dashed: in progress.</p>
+</div>
+<aside class="notes">
+<p>Goal: the intuition of data synthesis in one picture. Top lane = sentence, bottom lane = SBN, as in the previous square. Steps ② and ③ span both lanes because the word–concept alignment ties a word to a concept. Step ④ is where the two sides are edited in parallel; “linked to shared content” covers the direct, anchor and movement constructions (this example uses the anchor construction; see Backup). The step names match the rows of the yield table. Berlin → Dublin is NOT used here: proper names need a separate operator that is not part of the implemented corpus. TODO: the utterance in the figure retraces “is the”; fix once the retracing decision is made.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="anchor-and-movement-constructions" class="slide level2">
+<h2>Anchor and Movement Constructions</h2>
+<ul>
+<li><strong>Anchor</strong>: <em>Josh, I mean, Mary bought a cake</em>: shared <code>entity.n.01</code>, both candidates <code>EQU</code> it</li>
+<li><strong>Movement</strong>: <em>Tom opened, no, broke the window</em>: <em>window</em> moved before the paired contexts</li>
+</ul>
+<aside class="notes">
+<p>Goal: operational conventions for sites where the direct construction fails. Show only if asked; full listings from RP Appendix.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="rsr-structure-accuracy-shows-learnability-the-two-rsr-conditions-show-benefit-and-cost" class="slide level2 small-slide">
+<h2>RSR-structure accuracy shows learnability; the two RSR conditions show benefit and cost</h2>
 <table class="caption-top">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Question</th>
+<th>Comparison</th>
+<th>Measure</th>
+<th>Test data</th>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
-<td>| concept | nouns, verbs|</td>
+<td>Can the representation be learned?</td>
+<td>repair-aware, absolute</td>
+<td>RSR-structure accuracy, error types</td>
+<td>generated RSR test items</td>
 </tr>
 <tr class="even">
-<td>| roles | propositions |</td>
+<td>What does keeping the reparandum buy?</td>
+<td>normalisation vs repair-aware</td>
+<td>links to the withdrawn referent</td>
+<td>later-reference challenge set</td>
+</tr>
+<tr class="odd">
+<td>What does it cost?</td>
+<td>normalisation vs repair-aware</td>
+<td>accepted meaning</td>
+<td>generated RSR test items</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>all conditions</td>
+<td>SMATCH++, spurious-RSR rate</td>
+<td>unmodified PMB test set</td>
 </tr>
 </tbody>
 </table>
+<p>RSR-structure accuracy, the primary measure, is read in absolute terms: the repair-aware parser is expected to lead the other conditions on it, since only it is trained on that structure.</p>
+<aside class="notes">
+<p>Goal: the full evaluation matrix. The design sets no threshold for declaring the richer representation cost-free; paired differences show the size of any cost.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="error-categories" class="slide level2">
+<h2>Error Categories</h2>
+<p>Errors are classified as missing configuration, reversed status, wrong link to shared content, reparandum left in accepted content, editing expression represented as content, spurious RSR, or malformed SBN.</p>
+<aside class="notes">
+<p>Goal: the error categories are fixed before the test outputs are inspected.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="statistics" class="slide level2 small-slide">
+<h2>Statistics</h2>
+<ul>
+<li><strong>Unit of observation</strong>: the PMB source document; all variants of a source are averaged before comparison.</li>
+<li><strong>Seeds</strong>: for each model size and matched seed, paired document-level differences with 95% confidence intervals from 10,000 paired bootstrap samples; within each size, the mean and range of the three differences summarise training variation. A result counts as stable only when all three differences have the same direction.</li>
+<li><strong>Multiple comparisons</strong>: Holm correction within each family of secondary comparisons.</li>
+</ul>
+<aside class="notes">
+<p>Goal: RP Appendix “Statistical Comparisons”. Show only if asked.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+
 </section></section>
-<section>
-<section id="data-corpus-building" class="title-slide slide level1 center">
-<h1>Data – Corpus Building</h1>
-
-</section>
-<section id="source" class="slide level2">
-<h2>Source</h2>
-<p>WordNet</p>
-<p>PMB</p>
-</section>
-<section id="process" class="slide level2">
-<h2>Process</h2>
-<p>Use a diagram explaining the process, focusing on the intuition</p>
-</section>
-<section id="mapping-the-formalism-and-the-data" class="slide level2">
-<h2>mapping the formalism and the data?</h2>
-</section></section>
-<section id="model" class="title-slide slide level1 center">
-<h1>Model</h1>
-<p>My idea is using one case illustrating hwo it is evaluated through the whole pipeline. This also explains the aims of each aspect of the evaluation</p>
-</section>
-
-<section id="wrap-up" class="title-slide slide level1 center">
-<h1>Wrap up</h1>
-
-</section>
-
-<section id="bibliography" class="title-slide slide level1 center">
-<h1>Bibliography</h1>
-
-</section>
-
-<section id="backup" class="title-slide slide level1 center">
-<h1>Backup</h1>
-
-</section>
-
-<section id="thankyou" class="title-slide slide level1 center">
-<h1>Thankyou</h1>
-
-</section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
