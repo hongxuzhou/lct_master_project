@@ -211,6 +211,7 @@
       margin-right: 0; 
     }
   </style>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,700;1,700&amp;display=swap">
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -252,9 +253,12 @@ SKELETON CONVENTIONS
 - Running examples, one job each:
     Berlin/Dublin  -> Hook, Related Work, SBN intro (fluent), Representation (the only one with later reference)
     goat/cow       -> Pilot input example only; DAGs and strings in Backup
-    storm/weather  -> Data walkthrough and Experiment Design (same fluent Siri sentence, repair site "weather";
+    storm/weather  -> Data walkthrough AND Experiment Design (same fluent Siri sentence, repair site "weather";
                       Berlin -> Dublin cannot be generated: proper names need an operator outside the corpus).
-                      Scores: storm_weather_scores.md
+                      A constructed item, not a PMB document: it illustrates, it is never a test item.
+                      No model scores: nothing has been run.
+    stand/sit      -> Backup only (RP worked record p42/d1468, #/bk-record).
+    Berlin/Dublin returns in Experiment Design as the later-reference challenge.
 - Spine: the three pieces of information a system needs (both candidates / their status / the role they
   compete for). Introduced in Related Work, used as the requirements in Representation.
 - Detail goes to Backup: pull those slides up in Q&A, never in the talk.
@@ -324,8 +328,8 @@ SKELETON CONVENTIONS
           display:block!important;
       }</style></aside>
 </section>
-<section id="this-talk-asks-two-questions" class="slide level2">
-<h2>This talk asks two questions</h2>
+<section id="this-project-asks-two-questions" class="slide level2">
+<h2>This project asks two questions</h2>
 <ol type="1">
 <li><strong>RQ1</strong>: How can a meaning representation record a self-repair, keeping what was withdrawn, and what can it not cover?</li>
 <li><strong>RQ2</strong>: How well can LLM-based parsers learn this representation from synthesised data, and what errors remain?</li>
@@ -356,7 +360,8 @@ SKELETON CONVENTIONS
 <section id="an-rsr-has-three-parts" class="slide level2">
 <h2>An RSR has three parts</h2>
 <blockquote>
-<p>What is the weather like [in Berlin]<sub>reparandum</sub>, [I mean]<sub>editing&nbsp;expression</sub>, [in Dublin]<sub>repair</sub>?</p>
+<p>What is the weather like [in Berlin]<sub>reparandum</sub>,<br>
+[I mean]<sub>editing&nbsp;expression</sub>, [in Dublin]<sub>repair</sub>?</p>
 </blockquote>
 <ul>
 <li>The <strong>reparandum</strong> is the material the speaker withdraws.</li>
@@ -399,9 +404,9 @@ SKELETON CONVENTIONS
 </blockquote>
 <ul>
 <li>After <strong>deletion</strong>, <em>these two cities</em> has only one antecedent left.</li>
-<li>After <strong>tagging</strong>, both names survive, but nothing records that Berlin was the location or that Dublin replaced it.</li>
+<li>After <strong>tagging</strong>, both names survive and Berlin is marked as withdrawn, but nothing links either city to the weather request.</li>
 </ul>
-<p>Psycholinguistic and dialogue studies show that the reparandum stays in the context <span class="citation" data-cites="lauLingeringEffectsDisfluent2005 purverComputationalModelsMiscommunication2018">(<a href="#/references" role="doc-biblioref" onclick="">Lau and Ferreira 2005</a>; <a href="#/references" role="doc-biblioref" onclick="">Purver et al. 2018</a>)</span>.</p>
+<p>Psycholinguistic <span class="citation" data-cites="lauLingeringEffectsDisfluent2005">(<a href="#/references" role="doc-biblioref" onclick="">Lau and Ferreira 2005</a>)</span> and dialogue studies show that the reparandum stays in the context <span class="citation" data-cites="purverComputationalModelsMiscommunication2018">(<a href="#/references" role="doc-biblioref" onclick="">Purver et al. 2018</a>)</span>.</p>
 <aside class="notes">
 <p>Goal: first turning point of the talk.</p>
 <style type="text/css">
@@ -419,11 +424,11 @@ SKELETON CONVENTIONS
 <section id="a-system-needs-three-pieces-of-information-about-the-revision" class="slide level2">
 <h2>A system needs three pieces of information about the revision</h2>
 <ol type="1">
-<li><strong>Both candidates</strong>: Berlin and Dublin</li>
+<li><strong>Both reparandum and repair</strong>: Berlin and Dublin</li>
 <li><strong>Their status</strong>: Berlin is withdrawn, Dublin is accepted</li>
 <li><strong>The role they compete for</strong>: the location in the weather request</li>
 </ol>
-<p>All three concern what the utterance <em>means</em>, not which words were spoken.</p>
+<p>Tags on words can hold the first two. The third is a relation between meanings, so it needs a representation of meaning.</p>
 <aside class="notes">
 <p>Goal: the puzzle. Do not name the solution yet. These three items are reused as requirements (Representation); keep the wording identical.</p>
 <style type="text/css">
@@ -490,7 +495,7 @@ city.n.01 Name "Dublin"                             % in Dublin?</code></pre>
 </figure>
 </div>
 </div></div>
-<p><strong>Simplified Box Notation (SBN)</strong> is the format of the Parallel Meaning Bank (PMB 5.1.0), which provides gold sentence–SBN pairs <span class="citation" data-cites="abzianidzeParallelMeaningBank2017 bosSequenceNotationCatching2023">(<a href="#/references" role="doc-biblioref" onclick="">Abzianidze et al. 2017</a>; <a href="#/references" role="doc-biblioref" onclick="">Bos 2023</a>)</span>. Semantic parsing then becomes text-to-text: sentence in, SBN out.</p>
+<p><strong>Simplified Box Notation (SBN) <span class="citation" data-cites="bosSequenceNotationCatching2023 bosQuantificationAnnotationDiscourse2021">(<a href="#/references" role="doc-biblioref" onclick="">Bos 2023</a>, <a href="#/references" role="doc-biblioref" onclick="">2021a</a>)</span></strong> is the format of the Parallel Meaning Bank (PMB 5.1.0), which provides gold sentence–SBN pairs <span class="citation" data-cites="abzianidzeParallelMeaningBank2017">(<a href="#/references" role="doc-biblioref" onclick="">Abzianidze et al. 2017</a>)</span>. Semantic parsing then becomes text-to-text: sentence in, SBN out.</p>
 <aside class="notes">
 <p>Goal: the same graph as text; this is what the parser generates. Concepts are WordNet senses (weather.n.01 = first noun sense). SBN is an agreed notation; no linguistic backbone.</p>
 <style type="text/css">
@@ -510,10 +515,10 @@ city.n.01 Name "Dublin"                             % in Dublin?</code></pre>
 <h1>Pilot Study</h1>
 
 </section>
-<section id="can-an-existing-sbn-parser-handle-self-repair" class="slide level2">
+<section id="can-an-existing-sbn-parser-handle-self-repair" class="slide level2 small-slide">
 <h2>Can an existing SBN parser handle self-repair?</h2>
 <ul>
-<li><strong>Parser</strong>: Gemma-2 9B <span class="citation" data-cites="gemmateamGemma2Improving2024">(<a href="#/references" role="doc-biblioref" onclick="">Gemma Team et al. 2024</a>)</span>, fine-tuned with LoRA <span class="citation" data-cites="huLoRALowRankAdaptation2021">(<a href="#/references" role="doc-biblioref" onclick="">Hu et al. 2021</a>)</span> on fluent PMB pairs only.</li>
+<li><strong>Parser</strong>: Gemma-2 9B <span class="citation" data-cites="gemmateamGemma2Improving2024">(<a href="#/references" role="doc-biblioref" onclick="">Gemma Team et al. 2024</a>)</span>, fine-tuned with LoRA <span class="citation" data-cites="huLoRALowRankAdaptation2021">(<a href="#/references" role="doc-biblioref" onclick="">Hu et al. 2021</a>)</span> on PMB train gold split (all fluent).</li>
 <li><strong>Input</strong>: 833 PMB sentences with an inserted reparandum, with and without <em>I mean</em> (2,499 each).</li>
 <li><strong>Correct answer</strong>: the fluent gold SBN, i.e.&nbsp;the reparandum is left out <span class="citation" data-cites="senSemanticParsingDisfluent2021">(following <a href="#/references" role="doc-biblioref" onclick="">Sen and Groves 2021</a>)</span>.</li>
 </ul>
@@ -552,40 +557,48 @@ city.n.01 Name "Dublin"                             % in Dublin?</code></pre>
           display:block!important;
       }</style></aside>
 </section>
-<section id="self-repair-lowers-parsing-accuracy-and-the-parser-asserts-the-reparandum" class="slide level2">
+<section id="self-repair-lowers-parsing-accuracy-and-the-parser-asserts-the-reparandum" class="slide level2 small-slide">
 <h2>Self-repair lowers parsing accuracy, and the parser asserts the reparandum</h2>
 <table class="caption-top">
 <thead>
 <tr class="header">
 <th>Input</th>
 <th style="text-align: right;">Scorable (%)</th>
+<th style="text-align: right;">Rel. Δ</th>
 <th style="text-align: right;">Failure-penalised F1</th>
+<th style="text-align: right;">Rel. Δ</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>Fluent</td>
 <td style="text-align: right;">97.5</td>
+<td style="text-align: right;">—</td>
 <td style="text-align: right;">0.950</td>
+<td style="text-align: right;">—</td>
 </tr>
 <tr class="even">
 <td>RSR, no editing expression</td>
 <td style="text-align: right;">94.6</td>
+<td style="text-align: right;">−3.0%</td>
 <td style="text-align: right;">0.786</td>
+<td style="text-align: right;">−17.3%</td>
 </tr>
 <tr class="odd">
 <td>RSR + <em>I mean</em></td>
 <td style="text-align: right;">76.5</td>
+<td style="text-align: right;">−21.5%</td>
 <td style="text-align: right;">0.609</td>
+<td style="text-align: right;">−35.9%</td>
 </tr>
 </tbody>
 </table>
 <ul>
-<li>In <strong>90.1%</strong> of scorable RSR outputs the parse has <em>more</em> concepts than the fluent one: the goat is asserted, not dropped.</li>
+<li>In <strong>90.1%</strong> of scorable RSR outputs the parse has more concepts than the fluent one. The extra concepts often include the reparandum, which the parse then asserts as content.</li>
 <li>A parse that asserts the goat still scores <strong>0.764</strong>: one graph score does not show whether the repair was handled.</li>
 </ul>
 <div class="smaller">
-<p>Scorable: the output converts into a graph. F1: SMATCH++ <span class="citation" data-cites="opitzSMATCHStandardizedExtended2023">(<a href="#/references" role="doc-biblioref" onclick="">Opitz 2023</a>)</span>, unscorable outputs counted as 0.</p>
+<p>Scorable: the output converts into a graph. F1: SMATCH++ <span class="citation" data-cites="opitzSMATCHStandardizedExtended2023">(<a href="#/references" role="doc-biblioref" onclick="">Opitz 2023</a>)</span>, unscorable outputs counted as 0. Rel. Δ: change relative to Fluent.</p>
 </div>
 <aside class="notes">
 <p>Goal: numbers only (Michael); the analysis is in Backup (goat/cow DAGs, recognition probe, position effects). All pairwise F1 differences significant (Wilcoxon signed-rank, p &lt; .001). Median +2 concepts. The pilot shows the need for RSR supervision and for evaluation finer than SMATCH++; it does NOT show that SBN must be extended, that comes from later reference. The 0.764 pays off in Experiment Design.</p>
@@ -653,7 +666,7 @@ city.n.01 Name "Dublin"                             % in Dublin?</code></pre>
 
 <img data-src="viz/siri_later_reference.svg" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"><p><em>These two cities</em> links to both Berlin and Dublin (<code>ANA</code>), but Berlin does not become the requested location again.</p>
 <div class="smaller">
-<p>Berlin stays accessible because proper names project out of the withdrawn context <span class="citation" data-cites="bosVariablefreeDiscourseRepresentation2021">(<a href="#/references" role="doc-biblioref" onclick="">Bos 2021</a>)</span>. The later-reference test set only uses referents that can project in this way.</p>
+<p>Berlin stays accessible because proper names project out of the withdrawn context <span class="citation" data-cites="bosVariablefreeDiscourseRepresentation2021">(<a href="#/references" role="doc-biblioref" onclick="">Bos 2021b</a>)</span>. The later-reference test set only uses referents that can project in this way.</p>
 </div>
 <aside class="notes">
 <p>Goal: close the loop opened in Related Work. The DAG carries the claim; one sentence states it, the small note states the mechanism and its limit. If the final DAG is too tall, switch to two columns (text left, DAG right).</p>
@@ -770,7 +783,7 @@ the SBN shown earlier
 </tr>
 <tr class="fragment">
 <td>
-③ Draw a WordNet sibling: same kind of thing, different value
+③ Draw a concept with the same WordNet parent
 </td>
 <td>
 <em>storm</em>
@@ -782,7 +795,7 @@ the SBN shown earlier
 </tbody>
 </table>
 <div class="fragment">
-<p>Other siblings of <em>weather</em> in the pool: <em>cloud</em>, <em>sunset</em>, <em>aurora</em>, <em>halo</em>, … Synonyms are never drawn, because the pool takes siblings only.</p>
+<p>Other siblings of <em>weather</em> in the pool: <em>cloud</em>, <em>sunset</em>, <em>aurora</em>, <em>halo</em>, … The pool takes siblings only, so WordNet synonyms of <em>weather</em> are excluded.</p>
 </div>
 <aside class="notes">
 <p>Goal: the audience follows one item through the pipeline; this slide and the next two are one continuous walkthrough. Step ② needs the word–concept alignment, which is why the step spans both sides. Siblings = WordNet co-hyponyms for nouns; verbs use VerbNet classes, adjectives FrameNet frames and antonyms. storm.n.01 is a real pool candidate for a PMB document with weather.n.01 (p99/d2202). Berlin → Dublin is not used here: proper names need an operator outside the implemented corpus. Q&amp;A: “How is storm found?” → Backup #/bk-wordnet. “Isn’t a storm a kind of weather?” / “What about synonyms?” → Backup #/bk-synonyms.</p>
@@ -812,7 +825,7 @@ the SBN shown earlier
 <span id="cb2-8"><a href="" aria-label="8"></a>like.a.01 Co-Theme -5 Time -4 Theme -3 Location +1   % like</span>
 <span id="cb2-9"><a href="" aria-label="9"></a>city.n.01 Name "Dublin"                              % in Dublin?</span></code></pre></div>
 </div>
-<p>The same structure as Berlin and Dublin: a withdrawn context, an accepted context, one shared role (the Theme of <em>like</em>).</p>
+<p>As with Berlin and Dublin, the item has a withdrawn and an accepted context, and both candidates compete for one role, the Theme of <em>like</em>.</p>
 <aside class="notes">
 <p>Goal: the pair is edited on both sides at once, so the target is known by construction; no parser is involved. Highlighted lines are what the generator adds; the indices of later concepts shift automatically. The shared entity.n.01 slot is the anchor construction, used when both candidates fill a role of a later concept (Backup: anchor and movement). The editing expression is optional: in training about 30% of items carry one. The SBN is the generator’s output for this sentence; the sentence side is shown with “the” repeated, which is the natural form.</p>
 <style type="text/css">
@@ -850,7 +863,7 @@ the SBN shown earlier
 </tr>
 <tr class="even">
 <td><strong>Contextual fit</strong>: LM surprisal of the reparandum given its left context</td>
-<td>a reparandum nobody would say</td>
+<td>an implausible reparandum</td>
 <td><em>cake → carburettor, for his wedding</em></td>
 </tr>
 </tbody>
@@ -921,53 +934,143 @@ the SBN shown earlier
 <section>
 <section id="experiment-design" class="title-slide slide level1 center">
 <h1>Experiment Design</h1>
+<aside class="notes">
+<p>Segue, one sentence: “Now let’s follow the same item, <em>What is the storm, I mean, the weather like in Dublin?</em>, through the experiment.”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="training-the-same-repaired-sentences-different-answers" class="slide level2 small-slide">
+<h2>Training: the same repaired sentences, different answers</h2>
+<table class="exp-table">
+<thead>
+<tr>
+<th>
+Setting
+</th>
+<th>
+Trained on
+</th>
+<th>
+Example input
+</th>
+<th>
+Taught answer
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<strong>Fluent only</strong>
+</td>
+<td>
+fluent PMB pairs
+</td>
+<td>
+<em>What is the weather like in Dublin?</em>
+</td>
+<td>
+<img src="viz/fluent_siri_example.svg" style="height:70px; margin:0;">
+</td>
+</tr>
+<tr class="fragment">
+<td>
+<strong>Normalisation</strong>
+</td>
+<td>
+fluent PMB pairs<br>+ repaired sentences
+</td>
+<td>
+<em>What is the storm, I mean, the weather like in Dublin?</em>
+</td>
+<td>
+<img src="viz/fluent_siri_example.svg" style="height:70px; margin:0;">
+</td>
+</tr>
+<tr class="fragment">
+<td>
+<strong>Repair-aware</strong>
+</td>
+<td>
+fluent PMB pairs<br>+ <strong>the same</strong> repaired sentences
+</td>
+<td>
+<em>What is the storm, I mean, the weather like in Dublin?</em>
+</td>
+<td>
+<img src="viz/storm_weather_rsr_status.svg" style="height:70px; margin:0;">
+</td>
+</tr>
+</tbody>
+</table>
+<div class="fragment">
+<p>The last two parsers read the same sentences; only the answer they are taught differs.</p>
+</div>
+<div class="smaller">
+<p>Each setting is trained on Qwen3.5 at 2B, 9B and 27B <span class="citation" data-cites="qwenQwen35Native2026">(<a href="#/references" role="doc-biblioref" onclick="">Qwen Team 2026</a>)</span> with three seeds, 27 models in total. All use one instruction, which never says whether a sentence contains a repair.</p>
+</div>
+<aside class="notes">
+<p>Goal: the audience sees that normalisation and repair-aware have identical inputs, so any difference comes from the answer. Spoken: fluent only is the pilot’s setup; normalisation is the deletion approach from Related Work; repair-aware is this project. Normalisation is taught to give a repaired sentence the fluent sentence’s answer: its answer graph is the same picture as fluent only’s. About 30% of the repaired training sentences carry an editing expression (I mean / no / no wait / actually); the rest carry none. LoRA; matched seeds across settings within a model size; checkpoint by lowest dev loss, test outputs never consulted. Example counts are fixed only after sampling, so no numbers here. The storm/weather item is the one from the Data walkthrough, the generator’s output for a constructed sentence: it illustrates, it is not a test item. The repair-aware answer is the SBN from Step ④ drawn as a graph.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="testing-what-each-change-to-the-training-brings" class="slide level2 small-slide">
+<h2>Testing: what each change to the training brings</h2>
+<div style="display:grid; grid-template-columns:32% 68%; column-gap:1.2em; row-gap:0.35em; width:88%; margin:0.4em auto 0; align-items:center;">
+<div style="border:2px solid #1f4e79; border-radius:6px; padding:0.2em 0.6em; font-weight:bold; text-align:center;">
+Fluent only
+</div>
+<div>
 
-</section>
-<section id="three-training-conditions-same-inputs-different-targets" class="slide level2 small-slide">
-<h2>Three training conditions: same inputs, different targets</h2>
-<p>Training input: <em>What is the storm, I mean, the weather like in Dublin?</em></p>
-<table class="caption-top">
-<colgroup>
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Condition</th>
-<th>Role</th>
-<th>Target for this input</th>
-<th>Answers</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Fluent only</td>
-<td><strong>reference</strong>: the pilot parser</td>
-<td>— (never sees RSR input)</td>
-<td>how far a parser gets without RSR training</td>
-</tr>
-<tr class="even">
-<td>RSR normalisation</td>
-<td><strong>baseline</strong>: deletion</td>
-<td>the fluent SBN: <em>weather</em> only</td>
-<td>what keeping the reparandum buys and costs</td>
-</tr>
-<tr class="odd">
-<td>Repair-aware</td>
-<td><strong>this project</strong></td>
-<td><em>storm</em> withdrawn, <em>weather</em> accepted</td>
-<td>RQ2: can the representation be learned?</td>
-</tr>
-</tbody>
-</table>
-<p>The controlled comparison is between the <strong>baseline</strong> and <strong>repair-aware</strong> conditions: they share inputs, example counts and training, and only the target differs.</p>
+</div>
+<div class="fragment" data-fragment-index="1" style="color:#1f4e79; padding-left:1.2em;">
+↓ &nbsp;<strong>+ repaired sentences</strong>
+</div>
+<div class="fragment" data-fragment-index="1">
+<p>Does it learn to drop <em>storm</em>? <span style="font-size:0.6em; color:#555; border:1px solid #999; border-radius:4px; padding:0 0.35em; vertical-align:middle;">repaired</span><br> Does ordinary parsing get worse? <span style="font-size:0.6em; color:#555; border:1px solid #999; border-radius:4px; padding:0 0.35em; vertical-align:middle;">ordinary</span></p>
+</div>
+<div class="fragment" data-fragment-index="1" style="border:2px solid #1f4e79; border-radius:6px; padding:0.2em 0.6em; font-weight:bold; text-align:center;">
+Normalisation
+</div>
+<div class="fragment" data-fragment-index="1">
+
+</div>
+<div class="fragment" data-fragment-index="2" style="color:#1f4e79; padding-left:1.2em;">
+↓ &nbsp;<strong>+ a different answer</strong>
+</div>
+<div class="fragment" data-fragment-index="2">
+<p>Does it learn to mark <em>storm</em> as withdrawn? <span style="font-size:0.6em; color:#555; border:1px solid #999; border-radius:4px; padding:0 0.35em; vertical-align:middle;">repaired</span><br> Is the final request as good as normalisation’s? <span style="font-size:0.6em; color:#555; border:1px solid #999; border-radius:4px; padding:0 0.35em; vertical-align:middle;">repaired</span><br> Does it add repairs that are not there? <span style="font-size:0.6em; color:#555; border:1px solid #999; border-radius:4px; padding:0 0.35em; vertical-align:middle;">ordinary</span></p>
+</div>
+<div class="fragment" data-fragment-index="2" style="border:2px solid #1f4e79; border-radius:6px; padding:0.2em 0.6em; font-weight:bold; text-align:center;">
+Repair-aware
+</div>
+<div class="fragment" data-fragment-index="2">
+
+</div>
+</div>
 <div class="smaller">
-<p>Qwen3.5 at 2B, 9B and 27B <span class="citation" data-cites="qwenQwen35Native2026">(<a href="#/references" role="doc-biblioref" onclick="">Qwen Team 2026</a>)</span> is fine-tuned with LoRA under all three conditions, with three seeds each (27 runs). One parsing instruction serves all conditions and does not say whether an input contains a repair.</p>
+<p>Repaired test sentences go only to the two parsers trained on them; the pilot already showed that a fluent-only parser keeps the reparandum. Ordinary sentences (the unmodified PMB test set) go to all three. No test sentence comes from a training document.</p>
 </div>
 <aside class="notes">
-<p>Goal: pre-empt the CS reflex that the most vanilla setting is the baseline. Fluent only vs repair-aware changes both the examples and the targets, so it is a reference, not the controlled comparison. All conditions keep the same fluent PMB pairs. Three sizes so the target effect can be compared across model capacities. Qwen3.5 because it is the most recent family with dense checkpoints across the sizes needed. Normalisation is an end-to-end parser, not a pipeline.</p>
+<p>Goal: each setting adds one ingredient to the one above it, as on the training slide, so each step answers what that ingredient brings. Same vertical order as the training slide. Step 1 is not a scored comparison on repaired sentences: fluent only is not tested on them (never taught repairs). “Does it learn to drop storm” is answered by normalisation’s own results; the fluent-only side comes from the pilot (Gemma-2 9B, not Qwen3.5; same fluent-only training). On ordinary sentences, fluent only vs normalisation is a real comparison: the effect of seeing repaired sentences. Step 2 is the controlled comparison: same inputs, only the answer differs. Structure is read for repair-aware alone (absolute); the final request compares normalisation and repair-aware with the same ruler (next slide); on ordinary sentences, the effect of the new answer format, incl.&nbsp;repairs added to fluent input. Every repaired test sentence comes in two versions, with and without an editing expression, incl.&nbsp;the unseen “sorry”. Outputs are not corrected. Full matrix and breakdowns: Backup #/bk-tests.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -980,41 +1083,26 @@ the SBN shown earlier
           display:block!important;
       }</style></aside>
 </section>
-<section id="a-single-graph-score-cannot-tell-opposite-failures-apart" class="slide level2">
-<h2>A single graph score cannot tell opposite failures apart</h2>
-<p>Test input: <em>What is the storm, I mean, the weather like in Dublin?</em></p>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th>Output</th>
-<th>Typical of</th>
-<th style="text-align: right;">SMATCH++</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><em>storm</em> dropped</td>
-<td>baseline</td>
-<td style="text-align: right;">0.67</td>
-</tr>
-<tr class="even">
-<td><em>storm</em> asserted as well</td>
-<td>reference</td>
-<td style="text-align: right;">0.68</td>
-</tr>
-<tr class="odd">
-<td><em>storm</em> withdrawn, <em>weather</em> accepted</td>
-<td>repair-aware</td>
-<td style="text-align: right;">1.00</td>
-</tr>
-</tbody>
-</table>
-<p>The first two outputs are wrong in opposite ways: one loses the storm, the other asserts it. <span class="fg">Yet their scores are almost the same</span>, just as the pilot’s goat parse still scored 0.764.</p>
-<div class="smaller">
-<p>Constructed outputs, scored against the repair-aware gold graph with the project’s evaluator.</p>
-</div>
+<section id="evaluation-two-checks-on-a-repair-aware-output" class="slide level2 small-slide">
+<h2>Evaluation: two checks on a repair-aware output</h2>
+<div class="columns">
+<div class="column" style="width:55%;">
+<p><strong>Check 1: the structure</strong></p>
+<p><img data-src="viz/storm_weather_rsr_status.svg" style="width:100.0%"></p>
+<ol type="1">
+<li>a valid graph</li>
+<li>a withdrawn and an accepted box</li>
+<li><em>storm</em> withdrawn, <em>weather</em> accepted</li>
+<li>both linked to what they share: the Theme of <em>like</em></li>
+</ol>
+</div><div class="column" style="width:45%;">
+<p><strong>Check 2: the final meaning</strong></p>
+<p>Cut the withdrawn box away:</p>
+<p><img data-src="viz/fluent_siri_example.svg" style="width:85.0%"></p>
+<p>What remains must match the gold graph of <em>What is the weather like in Dublin?</em> The normalisation parser’s output is compared with the same graph directly.</p>
+</div></div>
 <aside class="notes">
-<p>Goal: the problem before the solution. These are hand-built outputs standing for each condition’s typical behaviour, not model predictions (storm_weather_scores.md). Exact: 0.667 / 0.680 / 1.000. A pilot-style output that also turns “I mean” into an event scores 0.557; not shown, the goat/cow DAGs in Backup cover that case.</p>
+<p>Goal: the intuition of both measures on one output. Spoken callback: “One graph score is not enough: the pilot’s goat parse still scored 0.764.” Check 1 = RSR-structure accuracy, the primary measure: repair-aware only, read in absolute terms, the four requirements reported separately so we see where an output fails. Check 4 follows the gold (anchor construction, Step ④): storm and weather both EQU the shared entity.n.01 slot that like takes as its Theme (blue edges); Dublin and the time hang off like, outside both boxes. Check 2 = accepted meaning, the fair comparison between normalisation and repair-aware; every output takes part, none is pre-filtered. When the withdrawn box is cut, the anchor slot collapses into weather, so the repair-aware gold gives back the fluent graph exactly (accepted meaning 1.000, storm_weather_scores.md). A reversed output would fail both checks: after cutting, “What is the storm like in Dublin?” is left. If asked for a number: on this item, a hand-built output that simply asserts storm (no contexts) still scores 0.950 SMATCH++ against the fluent gold. These are constructed outputs, not model predictions. Also reported: SMATCH++ against the full repair-aware gold, as a continuous score. The cutting rule is checked on every generated gold before training: cutting must give back the PMB gold exactly. Error categories (fixed before inspecting outputs) and statistics: Backup.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1027,93 +1115,19 @@ the SBN shown earlier
           display:block!important;
       }</style></aside>
 </section>
-<section id="two-measures-tell-them-apart" class="slide level2 small-slide">
-<h2>Two measures tell them apart</h2>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th>Output</th>
-<th style="text-align: right;">SMATCH++</th>
-<th style="text-align: center;">RSR-structure accuracy</th>
-<th style="text-align: right;">Accepted meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><em>storm</em> dropped</td>
-<td style="text-align: right;">0.67</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: right;">1.00</td>
-</tr>
-<tr class="even">
-<td><em>storm</em> asserted as well</td>
-<td style="text-align: right;">0.68</td>
-<td style="text-align: center;">✗</td>
-<td style="text-align: right;">0.95</td>
-</tr>
-<tr class="odd">
-<td><em>storm</em> withdrawn, <em>weather</em> accepted</td>
-<td style="text-align: right;">1.00</td>
-<td style="text-align: center;">✓</td>
-<td style="text-align: right;">1.00</td>
-</tr>
-</tbody>
-</table>
+<section id="challenge-resolving-these-two-cities-requires-keeping-the-withdrawn-city" class="slide level2 small-slide">
+<h2>Challenge: resolving <em>these two cities</em> requires keeping the withdrawn city</h2>
+<p><em>What is the weather like in Berlin, I mean, in Dublin? Show me the airports of <strong>these two cities</strong>.</em></p>
+<p><img data-src="viz/siri_later_reference_status.svg" style="width:92%; max-height:none; margin:0 auto; display:block;"></p>
 <ul>
-<li><strong>RSR-structure accuracy</strong> (primary): both candidates, correct status, the shared role. → <em>Can the representation be learned?</em></li>
-<li><strong>Accepted meaning</strong>: remove the withdrawn part, compare with the fluent graph. → <em>Does keeping the reparandum cost the final request?</em></li>
-<li><strong>Later reference</strong> (Berlin/Dublin test set): can <em>these two cities</em> reach both? → <em>What does keeping it buy?</em></li>
+<li><strong>Repair-aware</strong>: <em>these two cities</em> points to both (purple), while the weather request still asks only about Dublin.</li>
+<li><strong>Normalisation</strong>: Berlin was deleted, so <em>these two cities</em> has only one city to point to.</li>
 </ul>
+<div class="fragment smaller">
+<p>Two further challenge sets: look-alikes such as <em>coffee, tea and milk</em>, where no parser should find a repair; and corrections across turns (A: <em>Is it Berlin?</em> B: <em>No, Dublin.</em>), where the within-sentence structure should not be used.</p>
+</div>
 <aside class="notes">
-<p>Goal: each measure answers one part of RQ2. RSR-structure accuracy is read in absolute terms: only the repair-aware parser is trained on the structure, so it is expected to lead. Accepted meaning compares baseline and repair-aware; its job is the cost, not catching the reference parser; if asked about the 0.95, that is why it cannot be the primary measure. Also reported: SMATCH++ and the spurious-RSR rate on the unmodified PMB test set. Full matrix: Backup.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="further-tests-check-that-the-parser-learned-the-distinction-not-a-surface-cue" class="slide level2 small-slide">
-<h2>Further tests check that the parser learned the distinction, not a surface cue</h2>
-<table class="caption-top">
-<colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Possible shortcut</th>
-<th>Test</th>
-<th>Example</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>The editing expression triggers the structure</td>
-<td>Each test item with and without one; <em>sorry</em> never appears in training</td>
-<td><em>What is the storm, <strong>sorry</strong>, the weather like in Dublin?</em></td>
-</tr>
-<tr class="even">
-<td>Any two adjacent words of the same kind trigger it</td>
-<td>Lists, appositions and coordination without replacement</td>
-<td><em>We flew to Berlin, Dublin and Paris.</em> (no repair)</td>
-</tr>
-<tr class="odd">
-<td>The structure is applied beyond one clause</td>
-<td>Corrections across turns</td>
-<td>A: <em>Is it Berlin?</em> B: <em>No, Dublin.</em></td>
-</tr>
-</tbody>
-</table>
-<p>About 30% of repair training inputs carry <em>I mean</em>, <em>no</em>, <em>no wait</em> or <em>actually</em>; the rest carry none.</p>
-<aside class="notes">
-<p>Goal: answer the obvious objection to synthetic data before it is raised. The non-RSR documents are held out of training (9,447 training documents remain). The examples in the third column are illustrations of each test type, not items from the test sets. Error categories: Backup.</p>
+<p>Goal: the payoff of the opening example: keeping the withdrawn content is useful. Tested on normalisation and repair-aware only; normalisation cannot succeed in principle. The later-reference set only uses referents that can project out of the withdrawn context, such as proper names. Look-alikes: all three settings, scored against the PMB gold; repair-aware can fail by adding a repair (spurious-repair rate), normalisation by deleting content (SMATCH++ drops), fluent only is the baseline. Cross-turn corrections: normalisation and repair-aware.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1136,11 +1150,11 @@ the SBN shown earlier
 <tbody>
 <tr class="odd">
 <td><strong>Related Work</strong></td>
-<td>Deletion loses Berlin; tagging keeps it but not its status or its role.</td>
+<td>Deletion loses Berlin; tagging keeps it and marks it as withdrawn, but not the role it competes for.</td>
 </tr>
 <tr class="even">
 <td><strong>Pilot</strong></td>
-<td>A parser trained on fluent SBN often asserts the reparandum, and SMATCH++ hides the error.</td>
+<td>A parser trained on fluent SBN often asserts the reparandum, and a single SMATCH++ score does not reveal this.</td>
 </tr>
 <tr class="odd">
 <td><strong>Representation</strong></td>
@@ -1152,11 +1166,11 @@ the SBN shown earlier
 </tr>
 <tr class="odd">
 <td><strong>Experiment Design</strong> <em>(planned)</em></td>
-<td>Three conditions at three model sizes test whether the structure is learnable, and what keeping the reparandum buys and costs.</td>
+<td>Three conditions at three model sizes test whether the structure is learnable, and whether keeping the reparandum helps later reference without harming the final meaning.</td>
 </tr>
 </tbody>
 </table>
-<p>Back to Siri: a parser that produces this representation queries the weather in Dublin, and can still resolve <em>these two cities</em> to Berlin and Dublin.</p>
+<p>For the Siri request, the accepted meaning asks for the weather in Dublin, and Berlin stays available for <em>these two cities</em>.</p>
 <aside class="notes">
 <p>Goal: one sentence per roadmap section, in the same words as the section’s key slide, so the chain can be reread here. Only the first four rows are findings; Experiment Design is the plan. Close on Siri: the accepted meaning gives the right API call, the kept reparandum serves later reference.</p>
 <style type="text/css">
@@ -1205,8 +1219,11 @@ Abzianidze, Lasha, Johannes Bjerva, Kilian Evang, et al. 2017. <span>“The <spa
 <div id="ref-banarescuAbstractMeaningRepresentation2013" class="csl-entry" role="listitem">
 Banarescu, Laura, Claire Bonial, Shu Cai, et al. 2013. <span>“Abstract <span>Meaning</span> <span>Representation</span> for <span>Sembanking</span>.”</span> <em>Proceedings of the 7th <span>Linguistic</span> <span>Annotation</span> <span>Workshop</span> &amp; <span>Interoperability</span> with <span>Discourse</span></em> (Sofia, Bulgaria), 178–86.
 </div>
+<div id="ref-bosQuantificationAnnotationDiscourse2021" class="csl-entry" role="listitem">
+Bos, Johan. 2021a. <span>“Quantiﬁcation <span>Annotation</span> in <span>Discourse</span> <span>Representation</span> <span>Theory</span>.”</span> <em>Proceedings of the 17th <span>Joint</span> <span>ACL</span> - <span>ISO</span> <span>Workshop</span> on <span>Interoperable</span> <span>Semantic</span> <span>Annotation</span> (<span>ISA</span>-17)</em> (Groningen, Netherlands (Online)), June.
+</div>
 <div id="ref-bosVariablefreeDiscourseRepresentation2021" class="csl-entry" role="listitem">
-Bos, Johan. 2021. <span>“Variable-Free <span>Discourse</span> <span>Representation</span> <span>Structures</span>.”</span> <a href="https://www.semanticscholar.org/paper/Variable-free-Discourse-Representation-Structures-*-Bos/6d3b8e54d183a9fdda186f986b319c55c85a6c06">https://www.semanticscholar.org/paper/Variable-free-Discourse-Representation-Structures-*-Bos/6d3b8e54d183a9fdda186f986b319c55c85a6c06</a>.
+Bos, Johan. 2021b. <span>“Variable-Free <span>Discourse</span> <span>Representation</span> <span>Structures</span>.”</span> <a href="https://www.semanticscholar.org/paper/Variable-free-Discourse-Representation-Structures-*-Bos/6d3b8e54d183a9fdda186f986b319c55c85a6c06">https://www.semanticscholar.org/paper/Variable-free-Discourse-Representation-Structures-*-Bos/6d3b8e54d183a9fdda186f986b319c55c85a6c06</a>.
 </div>
 <div id="ref-bosSequenceNotationCatching2023" class="csl-entry" role="listitem">
 Bos, Johan. 2023. <span>“The <span>Sequence</span> <span>Notation</span>: <span>Catching</span> <span>Complex</span> <span>Meanings</span> in <span>Simple</span> <span>Graphs</span>.”</span> In <em>Proceedings of the 15th <span>International</span> <span>Conference</span> on <span>Computational</span> <span>Semantics</span></em>, edited by Maxime Amblard and Ellen Breitholtz. Association for Computational Linguistics. <a href="https://aclanthology.org/2023.iwcs-1.20/">https://aclanthology.org/2023.iwcs-1.20/</a>.
@@ -1284,8 +1301,8 @@ Zayats, Victoria, Mari Ostendorf, and Hannaneh Hajishirzi. 2014. <span>“Multi-
 </section>
 
 <section>
-<section id="backup" class="title-slide slide level1 center">
-<h1>Backup</h1>
+<section id="appendix" class="title-slide slide level1 center">
+<h1>Appendix</h1>
 
 </section>
 <section id="meaning-representations-in-llm-based-systems" class="slide level2 small-slide">
@@ -1317,11 +1334,138 @@ Zayats, Victoria, Mari Ostendorf, and Hannaneh Hajishirzi. 2014. <span>“Multi-
 </tbody>
 </table>
 </section>
-<section id="pilot-full-results-and-position-effects" class="slide level2">
-<h2>Pilot: Full Results and Position Effects</h2>
+<section id="why-not-amr-or-ds-ttr" class="slide level2">
+<h2>Why Not AMR or DS-TTR</h2>
+<p>Why SBN rather than AMR <span class="citation" data-cites="banarescuAbstractMeaningRepresentation2013">(<a href="#/references" role="doc-biblioref" onclick="">Banarescu et al. 2013</a>)</span> or DS-TTR <span class="citation" data-cites="houghProcessingSelfrepairsIncremental2012">(<a href="#/references" role="doc-biblioref" onclick="">Hough and Purver 2012</a>)</span>: AMR lacks separate semantic contexts and does not record the order of the replacement; DS-TTR keeps the withdrawn path only in its processing history. SBN separates contexts, and the PMB provides sentence–SBN pairs.</p>
 </section>
-<section id="recognition-probe-the-failure-is-not-only-a-failure-to-notice-the-repair" class="slide level2">
-<h2>Recognition Probe: the failure is not only a failure to notice the repair</h2>
+<section id="pilot-i-mean-mostly-makes-the-output-unparsable-above-all-after-the-sentence-start" class="slide level2 small-slide">
+<h2>Pilot: <em>I mean</em> mostly makes the output unparsable, above all after the sentence start</h2>
+<table style="font-size:0.8em; margin:0.4em auto;">
+<thead>
+<tr>
+<th rowspan="2">
+Reparandum
+</th>
+<th colspan="3" style="text-align:center;">
+RSR, no editing expression
+</th>
+<th colspan="3" style="text-align:center;">
+RSR + <em>I mean</em>
+</th>
+</tr>
+<tr>
+<th>
+Scorable %
+</th>
+<th>
+F1 scorable
+</th>
+<th>
+Unparsed
+</th>
+<th>
+Scorable %
+</th>
+<th>
+F1 scorable
+</th>
+<th>
+Unparsed
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+near start
+</td>
+<td>
+95.8
+</td>
+<td>
+0.842
+</td>
+<td>
+12
+</td>
+<td>
+86.9
+</td>
+<td>
+0.805
+</td>
+<td>
+89
+</td>
+</tr>
+<tr>
+<td>
+middle
+</td>
+<td>
+92.3
+</td>
+<td>
+0.827
+</td>
+<td>
+28
+</td>
+<td>
+<strong>71.8</strong>
+</td>
+<td>
+0.779
+</td>
+<td>
+<strong>205</strong>
+</td>
+</tr>
+<tr>
+<td>
+near end
+</td>
+<td>
+95.6
+</td>
+<td>
+0.825
+</td>
+<td>
+22
+</td>
+<td>
+<strong>70.7</strong>
+</td>
+<td>
+0.803
+</td>
+<td>
+<strong>230</strong>
+</td>
+</tr>
+</tbody>
+</table>
+<p><em>I mean</em> costs up to 25 points of scorability but only 0.02–0.05 F1 on what does parse. With <em>I mean</em>, the start differs from the middle and end in scorability; the middle and end do not differ from each other.</p>
+<div class="smaller">
+<p>Fluent reference: 97.5% scorable, F1 scorable 0.975. 833 PMB documents per cell (3 excluded whose gold SBN fails to score). Unparsed: the output string cannot be read as SBN at all. Tests per group (with / without <em>I mean</em>): Cochran’s Q + McNemar on scorability, Friedman + Wilcoxon on F1 of documents scorable in all three positions; Holm-corrected, all reported differences p &lt; .01.</p>
+</div>
+<aside class="notes">
+<p>Goal: answer “where does the drop come from?” and “does position matter?”. The main-slide rows are the means of the three positions (0.786, 0.609). Failure-penalised F1 per position (not on the slide): no EE 0.807 / 0.763 / 0.788; with I mean 0.700 / 0.559 / 0.568; fluent 0.950. Ill-formed outputs (readable but failing the strict check) are few everywhere: fluent 14; no EE 23 / 36 / 15; with I mean 20 / 30 / 14. Without an editing expression, the middle position is the one that stands out on scorability (92.3 vs ~95.7; head vs tail n.s.). With I mean, head vs mid and head vs tail p ≈ 0, mid vs tail p = .63. F1 among scorable: mid is lower than head and tail in both groups (with I mean, head vs tail n.s.; without, head is higher than both). Caveat if asked: the F1 tests use complete triplets only (722 documents without, 408 with I mean), so they under-represent the hardest documents. Source: colloquium_prep/pilot_eval/v2_pilot_eval_run (preds_long_scored.parquet; analysis/position_significance_test.md).</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="recognition-probe-with-i-mean-the-base-model-detects-every-repair" class="slide level2">
+<h2>Recognition probe: with <em>I mean</em>, the base model detects every repair</h2>
 <p>The base Gemma-2 9B, without the adapter, was asked to mark the reparandum, the editing expression and the repair in plain text.</p>
 <table class="caption-top">
 <thead>
@@ -1345,7 +1489,7 @@ Zayats, Victoria, Mari Ostendorf, and Hannaneh Hajishirzi. 2014. <span>“Multi-
 </tr>
 </tbody>
 </table>
-<p>With <em>I mean</em>, the base model notices every repair, yet the fine-tuned parser often represents <em>I mean</em> as content. Without it, the base model misses more than half.</p>
+<p>The fine-tuned parser nevertheless often turns <em>I mean</em> into content, so with an editing expression the parse errors are not explained by missed repairs alone. Without one, the base model misses more than half of the repairs.</p>
 <aside class="notes">
 <p>Goal: pre-empt “the parser just didn’t notice the repair”. State the limit before anyone asks: the probe changes the task and removes the adapter, so it cannot isolate SBN generation as the error source. The gap with and without an editing expression motivates the paired test items in Data. Span F1 and position breakdown go to Backup.</p>
 <style type="text/css">
@@ -1411,6 +1555,125 @@ calf.n.01 Part +2                            % calf
 quantity.n.01 EQU 2                          % two
 head.n.01 Quantity -1                        % heads</code></pre>
 </div></div>
+</section>
+<section id="bio-tags-mark-which-words-were-withdrawn-not-which-role-they-filled" class="slide level2 small-slide">
+<h2>BIO tags mark which words were withdrawn, not which role they filled</h2>
+<table class="bio-table" style="font-size:0.8em; margin:0.6em auto; text-align:center;">
+<tbody>
+<tr>
+<td>
+<em>What</em>
+</td>
+<td>
+<em>is</em>
+</td>
+<td>
+<em>the</em>
+</td>
+<td>
+<em>weather</em>
+</td>
+<td>
+<em>like</em>
+</td>
+<td style="color:#c0392b;">
+<em>in</em>
+</td>
+<td style="color:#c0392b;">
+<em>Berlin</em>
+</td>
+<td style="color:#555;">
+<em>I</em>
+</td>
+<td style="color:#555;">
+<em>mean</em>
+</td>
+<td style="color:#1e8449;">
+<em>in</em>
+</td>
+<td style="color:#1e8449;">
+<em>Dublin</em>
+</td>
+</tr>
+<tr style="font-family:monospace; font-size:0.85em;">
+<td>
+O
+</td>
+<td>
+O
+</td>
+<td>
+O
+</td>
+<td>
+O
+</td>
+<td>
+O
+</td>
+<td style="color:#c0392b; font-weight:bold;">
+B-RM
+</td>
+<td style="color:#c0392b; font-weight:bold;">
+I-RM
+</td>
+<td style="color:#555; font-weight:bold;">
+B-EE
+</td>
+<td style="color:#555; font-weight:bold;">
+I-EE
+</td>
+<td style="color:#1e8449; font-weight:bold;">
+B-RP
+</td>
+<td style="color:#1e8449; font-weight:bold;">
+I-RP
+</td>
+</tr>
+</tbody>
+</table>
+<p>RM = reparandum, EE = editing expression, RP = repair, O = outside any repair.</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: center;">Both candidates</th>
+<th style="text-align: center;">Their status</th>
+<th style="text-align: center;">The role they compete for</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>BIO tags</td>
+<td style="text-align: center;">✓ <em>Berlin</em> and <em>Dublin</em> are both kept</td>
+<td style="text-align: center;">✓ on words: RM is withdrawn</td>
+<td style="text-align: center;">✗ nothing links either city to the weather request</td>
+</tr>
+</tbody>
+</table>
+<p>A deletion pipeline removes the RM and EE tokens and passes on only <em>What is the weather like in Dublin</em>.</p>
+<div class="smaller">
+<p>Label set simplified for illustration; published schemes differ in detail, e.g.&nbsp;extra tags for the interruption point <span class="citation" data-cites="zayatsMultidomainDisfluencyRepair2014">(<a href="#/references" role="doc-biblioref" onclick="">Zayats et al. 2014</a>)</span>.</p>
+</div>
+<aside class="notes">
+<p>Goal: make “tagged transcription” concrete for the Related Work claim that tagging keeps both names but not their status in the meaning or their role. Tags live on the token sequence, so they cannot say that Berlin was the Location, or support “these two cities” in a meaning representation. Colours match the status graphs (red withdrawn, green accepted).</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="no-current-approach-records-the-revision-in-the-meaning" class="slide level2">
 <h2>No current approach records the revision in the meaning</h2>
@@ -1542,9 +1805,25 @@ K = K_{\pi_{\text{pre}}} \land \neg K_{\pi_m} \land \big(K_{\pi_n} \land K_{\pi_
 </div>
 <p>where: <span class="math inline">\(K_{\pi_m}\)</span> represents the reparandum <span class="math inline">\(K_{\pi_n}\)</span> represents the repair <span class="math inline">\(K_{\pi_{\text{post}}}\)</span> represents the continuation after the repair</p>
 </section>
-<section id="why-not-amr-or-ds-ttr" class="slide level2">
-<h2>Why Not AMR or DS-TTR</h2>
-<p>Why SBN rather than AMR <span class="citation" data-cites="banarescuAbstractMeaningRepresentation2013">(<a href="#/references" role="doc-biblioref" onclick="">Banarescu et al. 2013</a>)</span> or DS-TTR <span class="citation" data-cites="houghProcessingSelfrepairsIncremental2012">(<a href="#/references" role="doc-biblioref" onclick="">Hough and Purver 2012</a>)</span>: AMR lacks separate semantic contexts and does not record the order of the replacement; DS-TTR keeps the withdrawn path only in its processing history. SBN separates contexts, and the PMB supplies sentence–SBN pairs.</p>
+<section id="the-full-formal-design-is-on-github" class="slide level2">
+<h2>The full formal design is on GitHub</h2>
+
+<img data-src="viz/formalism-link.png" class="quarto-figure quarto-figure-center r-stretch" style="width:30.0%"><div style="text-align:center;">
+<p>Scan for the theoretical design page: the representation, its semantics and the constructions in full.</p>
+</div>
+<aside class="notes">
+<p>Goal: hand over the formal details instead of presenting them. Show at the end of the formalism questions, or leave up during Q&amp;A.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="each-item-edits-a-gold-pair-on-both-sides-then-checks-both-sides" class="slide level2">
 <h2>Each item edits a gold pair on both sides, then checks both sides</h2>
@@ -1637,11 +1916,11 @@ K = K_{\pi_{\text{pre}}} \land \neg K_{\pi_m} \land \big(K_{\pi_n} \land K_{\pi_
       }</style></aside>
 </section>
 <section id="bk-synonyms" class="slide level2 small-slide">
-<h2>Synonyms never enter the pool, and <em>storm</em> is a more specific word, not a synonym</h2>
+<h2>The pool excludes WordNet synonyms, and <em>storm</em> is more specific than <em>weather</em></h2>
 <ul>
 <li>The pool draws siblings only. WordNet’s near-synonym relations (<code>similar_to</code> clusters, verb groups) are never used, and a candidate that shares a lemma with the repair is dropped. <em>Couch → sofa</em> cannot occur: <em>couch</em> and <em>sofa</em> are lemmas of one synset.</li>
 <li>In a hand-labelled sample of 150 candidates, annotators judged only <strong>1</strong> to mean the same as the repair.</li>
-<li><em>Storm</em> is more specific than <em>weather</em>: an NLI model <span class="citation" data-cites="laurerLessAnnotatingMore2024">(<a href="#/references" role="doc-biblioref" onclick="">Laurer et al. 2024</a>)</span> finds entailment in one direction only (<em>storm</em> ⇒ <em>weather</em> 0.84; <em>weather</em> ⇒ <em>storm</em> 0.005). Moving from a too-specific word to a more general one is a natural repair.</li>
+<li><em>Storm</em> is more specific than <em>weather</em>: an NLI model <span class="citation" data-cites="laurerLessAnnotatingMore2024">(<a href="#/references" role="doc-biblioref" onclick="">Laurer et al. 2024</a>)</span> finds entailment in one direction only (<em>storm</em> ⇒ <em>weather</em> 0.84; <em>weather</em> ⇒ <em>storm</em> 0.005). The two words are therefore not interchangeable, and replacing one with the other changes the request.</li>
 </ul>
 <aside class="notes">
 <p>Goal: answer “isn’t a storm a kind of weather?” and “what about synonyms?”. WordNet places storm as a sibling of weather although its gloss reads “a violent weather condition”: the tree and the gloss disagree, which is why the NLI score is shown as a diagnostic. If asked how much NLI filters: nothing. NLI scores are computed and archived for possible later use; the synonym class is empty by construction (pool stage), so a threshold would only remove good candidates. The RP still describes an NLI filter; this is the change since the RP. Why not embedding similarity: it scores hot/cold as similar as sofa/couch, so it cannot separate “interchangeable” from “different values on one dimension”.</p>
@@ -1665,6 +1944,71 @@ K = K_{\pi_{\text{pre}}} \land \neg K_{\pi_m} \land \big(K_{\pi_n} \land K_{\pi_
 </ul>
 <aside class="notes">
 <p>Goal: operational conventions for sites where the direct construction fails. Show only if asked; full listings from RP Appendix.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="bk-tests" class="slide level2 small-slide">
+<h2>Which parser is tested on which set, and what else is broken down</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Test set</th>
+<th>Input</th>
+<th style="text-align: center;">Fluent only</th>
+<th style="text-align: center;">Normalisation</th>
+<th style="text-align: center;">Repair-aware</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Repaired test sentences</td>
+<td>repaired</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+</tr>
+<tr class="even">
+<td>PMB test set</td>
+<td>fluent</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+</tr>
+<tr class="odd">
+<td>Look-alikes (lists, appositions)</td>
+<td>fluent, repair-like</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+</tr>
+<tr class="even">
+<td>Discourse (later reference, cross-turn)</td>
+<td>repaired, multi-sentence</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+</tr>
+</tbody>
+</table>
+<p>On the repaired test sentences, results are also broken down by: the same sentence with and without an editing expression; editing expressions seen in training against the unseen <em>sorry</em>; and the construction used (direct, anchor, movement).</p>
+<aside class="notes">
+<p>Goal: the full test design in one table, for Q&amp;A. Rule: repaired input only for the two settings trained on it; fluent input for all three.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1702,13 +2046,13 @@ K = K_{\pi_{\text{pre}}} \land \neg K_{\pi_m} \land \big(K_{\pi_n} \land K_{\pi_
 <td>generated RSR test items</td>
 </tr>
 <tr class="even">
-<td>What does keeping the reparandum buy?</td>
+<td>Does keeping the reparandum help later reference?</td>
 <td>normalisation vs repair-aware</td>
 <td>links to the withdrawn referent</td>
 <td>later-reference challenge set</td>
 </tr>
 <tr class="odd">
-<td>What does it cost?</td>
+<td>Does it harm the accepted meaning?</td>
 <td>normalisation vs repair-aware</td>
 <td>accepted meaning</td>
 <td>generated RSR test items</td>
@@ -1721,7 +2065,7 @@ K = K_{\pi_{\text{pre}}} \land \neg K_{\pi_m} \land \big(K_{\pi_n} \land K_{\pi_
 </tr>
 </tbody>
 </table>
-<p>RSR-structure accuracy, the primary measure, is read in absolute terms: the repair-aware parser is expected to lead the other conditions on it, since only it is trained on that structure.</p>
+<p>RSR-structure accuracy is the primary measure. It is read in absolute terms, because only the repair-aware parser is trained to produce the structure.</p>
 <aside class="notes">
 <p>Goal: the full evaluation matrix. The design sets no threshold for declaring the richer representation cost-free; paired differences show the size of any cost.</p>
 <style type="text/css">

@@ -20,7 +20,13 @@
       "Bash(rsvg-convert -w 800 siri_rsr_status.svg -o /private/tmp/claude-501/-Users-hongxuzhou-Documents-GitHub-lct-master-project/d3b8f716-f88e-4d06-be9f-181e2ef9ffae/scratchpad/png/siri_rsr_status.png)",
       "Bash(HF_HUB_OFFLINE=1 python3 -c ' *)",
       "Bash(rsvg-convert -w 800 wordnet_siblings.svg -o /private/tmp/claude-501/-Users-hongxuzhou-Documents-GitHub-lct-master-project/d3b8f716-f88e-4d06-be9f-181e2ef9ffae/scratchpad/png/wordnet_siblings.png)",
-      "Bash(grep -nE 'fragment|Other siblings|^.*## |notes|:::$')"
+      "Bash(grep -nE 'fragment|Other siblings|^.*## |notes|:::$')",
+      "Bash(awk 'NR<536 && /<section id=/{l=$0} NR==536{print l}' research_seminar_pre.html)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless=new --disable-gpu --window-size=1600,900 --virtual-time-budget=8000 --screenshot=/private/tmp/claude-501/-Users-hongxuzhou-Documents-GitHub-lct-master-project/cf893d17-4515-4ac8-89fb-a8f400a7ecf2/scratchpad/table.png 'file://__TRACKED_VAR__/research_seminar_pre.html#/can-an-existing-sbn-parser-handle-self-repair')",
+      "Bash(grep -nE \"^#{1,2} \" research_seminar_pre.qmd)",
+      "Bash(python -c ' *)",
+      "Bash(rsvg-convert -w 900 -b white siri_later_reference_status.svg -o /private/tmp/claude-501/-Users-hongxuzhou-Documents-GitHub-lct-master-project/27ae06a1-403e-4707-8503-58aa1362c3bd/scratchpad/png/later.png)",
+      "Bash(awk -F: '$1>490')"
     ],
     "additionalDirectories": [
       "/Users/hongxuzhou/Documents/GitHub/lct_master_project"
