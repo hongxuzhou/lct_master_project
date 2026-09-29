@@ -26,7 +26,9 @@
       "Bash(grep -nE \"^#{1,2} \" research_seminar_pre.qmd)",
       "Bash(python -c ' *)",
       "Bash(rsvg-convert -w 900 -b white siri_later_reference_status.svg -o /private/tmp/claude-501/-Users-hongxuzhou-Documents-GitHub-lct-master-project/27ae06a1-403e-4707-8503-58aa1362c3bd/scratchpad/png/later.png)",
-      "Bash(awk -F: '$1>490')"
+      "Bash(awk -F: '$1>490')",
+      "WebFetch(domain:github.com)",
+      "Bash(curl -sL -o fdb3.json https://raw.githubusercontent.com/DanielLin94144/Full-Duplex-Bench/main/v3/benchmark_data_v2.json)"
     ],
     "additionalDirectories": [
       "/Users/hongxuzhou/Documents/GitHub/lct_master_project"

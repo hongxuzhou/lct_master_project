@@ -54,7 +54,9 @@ The speaker replaces *Berlin* with *Dublin*, but Siri returns the weather for Be
 This is a **replacement self-repair (RSR)** [@shribergPreliminariesTheorySpeech1994].
 
 ::: {.notes}
-Goal: the phenomenon is real and everyday. Name it only; the anatomy opens the Related Work section.
+let's start with an example. I took this screenshot a couple of days ago. It shows I asked the voice assistant on my phone about the weather in Berlin, but then I changed my mind to Dublin. 
+**This** first say something, then corrected by the speaker themselves, is what linguists called a "replacement self-repair". 
+The transcription is correct, as you can see, but it returns the weather of Berlin, which is clearly corrected by myself. 
 :::
 
 ## Current voice agents make the same mistake
@@ -69,7 +71,9 @@ Full-Duplex-Bench-v3 tests six spoken agents on real disfluent speech that requi
 On self-corrections, the best system passes 58.8% of scenarios (GPT-Realtime) and the weakest 17.6%.
 
 ::: {.notes}
-Goal: the second row is the Siri error in a current agent. The paper reports this as a case (the API is called before the correction ends), not as a rate; do not claim a proportion. TODO: verify the number of self-correction scenarios (the Pass@1 values are multiples of 1/17).
+In fact, this type of problem is not rare, even in current LLM-based systems. A recent bechmark study witnessed that Gemini Live 3.1 made the same type of mistake by sending the withdrawn content to the API, and, of cause, returned the wrong answer. 
+
+Prepare for answer: If people ask about the actual performance and test size: the benchmark has 100 recorded scenarios from 12 speakers; 21 of them are designed as self-corrections (paper, Introduction; also the released scenario file). The self-correction Pass@1 in Table 3 is 0.588 for GPT-Realtime, 0.353 for Gemini Live 3.1 and 0.176 for the cascaded pipeline. Say "about twenty scenarios": the Table 3 values are all multiples of 1/17, and the paper does not explain the gap to 21. The Rome/Milan case is Table 8: Gemini Live 3.1 called the API 2.27 s before the user finished correcting.
 :::
 
 ## This project asks two questions
@@ -84,12 +88,14 @@ Related Work → Pilot → **Representation** (RQ1) → Data → **Experiment De
 :::
 
 ::: {.notes}
-Goal: the audience knows what the talk answers before any theory. Same substance as the RP RQs; "SBN" is replaced by "a meaning representation" because it has not been introduced yet. The roadmap row is the only roadmap; section slides later need one sentence each.
+Regarding this, this project asks two research questions. The first is how to design a meaning represenation system that can capture and represent such a phenomina; the second is what will be the performance if we implement this meaning representation to an LLM-based parser. Here, what is a meaning representation system, and why we need it in this project will be introduced in the coming section. 
+
+For the rest of this presentation, I will first review the existing work on self-repair, then report the completed pilot study, and in the representation section, I will demonstrate a meaning representation formalism that I designed, which directed responds to RQ 1, after that, I will report how the parsing experiment is designed to answer RQ2. 
 :::
 
 # Related Work
 
-## An RSR has three parts
+## Anatomy: An RSR has three parts
 
 > What is the weather like [in Berlin]~reparandum~,\
 > [I mean]~editing\ expression~, [in Dublin]~repair~?
@@ -100,6 +106,9 @@ Goal: the audience knows what the talk answers before any theory. Same substance
 
 This project covers replacements **within a single clause** [@leveltMonitoringSelfrepairSpeech1983; @shribergPreliminariesTheorySpeech1994].
 
+:::{.notes}
+disfluency领域通常将一个self-repair分为三部分，reparandum是说话人主动撤回的内容，即例子中的in berlin,repair是说话人用来替换reparandum的内容，表示了说话人的最终意图。而二者之间可能存在一个editing expression，英语中常见的有actually， I mean等。
+:::
 ## NLP pipelines either delete the reparandum or tag it
 
 :::: {.columns}
@@ -120,10 +129,11 @@ The words are kept, and disfluent spans or tokens are labelled [@zayatsMultidoma
 Both approaches serve the same goal: recovering the speaker's final intention.
 
 ::: {.notes}
-Goal: concede that this goal is right for task-oriented pipelines that only need the final request.
+Two mainstream methods used in NLP pipelines are deletion and tagged transcription. In the case of deletion, the disfluent part that includes the reparandum and the optional editing phrase will be removed, so the downstream components on the pipeline will not see that the speaker ever said "in Berlin". 
+In the case of tagged transcription, the disfluent part will be kept, but with an annotation tagging out the span of the disfluent content. 
 :::
 
-## Deleted or tagged, the reparandum can still matter later
+## Later Reference: Deleted or tagged, the reparandum can still matter later
 
 > What is the weather like in Berlin, I mean, in Dublin?
 > Show me the airports of **these two cities**.
@@ -131,10 +141,14 @@ Goal: concede that this goal is right for task-oriented pipelines that only need
 - After **deletion**, *these two cities* has only one antecedent left.
 - After **tagging**, both names survive and Berlin is marked as withdrawn, but nothing links either city to the weather request.
 
-Psycholinguistic [@lauLingeringEffectsDisfluent2005] and dialogue studies show that the reparandum stays in the context [@purverComputationalModelsMiscommunication2018].
+Psycholinguistic [@lauLingeringEffectsDisfluent2005] and computational linguistic studies [@purverComputationalModelsMiscommunication2018] show that the reparandum stays in the context.
 
 ::: {.notes}
-Goal: first turning point of the talk.
+However, both methods meet a challenge when encounter situations like this example. The "two cites" refers back to both the withdrawn reparandum and the added repair. 
+
+This phenomina has be observed and discussed by both psycholingusitic and computational linguistic studies. 
+
+In our case, as you can imiage, the deletion method will lose one antecedent, while the tagging transcription looks better, but the annotation still does not explain how the dislfuent span relates to the rest of the utterance, so the downstream models possibly need to do extra infernece to get things right. 
 :::
 
 ## A system needs three pieces of information about the revision
@@ -146,7 +160,7 @@ Goal: first turning point of the talk.
 Tags on words can hold the first two. The third is a relation between meanings, so it needs a representation of meaning.
 
 ::: {.notes}
-Goal: the puzzle. Do not name the solution yet. These three items are reused as requirements (Representation); keep the wording identical.
+To solve this puzzle, I propose that we need a solution that satisfied all three requirements. It not only should keeps the reparandum and repair like tagged transcription does, but furthermore, should records the structural relation between them, such as who replaces whom. 
 :::
 
 ## A meaning representation is a graph of concepts and roles {.small-slide}
@@ -167,7 +181,11 @@ Goal: the puzzle. Do not name the solution yet. These three items are reused as 
 Such a graph has room for all three pieces of information: two city nodes, a context for each, and one Location role. Because the structure is explicit, an output can be checked piece by piece.
 
 ::: {.notes}
-Goal: the answer to the previous slide, with a picture (Michael). Argue inspectability, not performance; the thesis does not test downstream gains. If asked where MRs are used with LLMs: Backup table. The box is introduced here so that two boxes on the Representation slide need no explanation.
+The requirements bring us to meaning representation. Meaning representation is a central topic in computational semantics. It focuses on mapping natural language to formal symbolic structure, so machines can compute meanings on that. 
+
+MR usually represent meanings in human readable strings or graphs. This gives us inspectability.
+
+If asked where MRs are used with LLMs: Backup table. The box is introduced here so that two boxes on the Representation slide need no explanation.
 :::
 
 ## SBN writes this graph as text, so an LLM can generate it {.small-slide}
@@ -192,26 +210,45 @@ Each line introduces a concept. A role points to another concept by relative pos
 :::
 ::::
 
-**Simplified Box Notation (SBN) [@bosSequenceNotationCatching2023; @bosQuantificationAnnotationDiscourse2021]** is the format of the Parallel Meaning Bank (PMB 5.1.0), which provides gold sentence–SBN pairs [@abzianidzeParallelMeaningBank2017]. Semantic parsing then becomes text-to-text: sentence in, SBN out.
+**Simplified Box Notation (SBN) [@bosSequenceNotationCatching2023; @bosQuantificationAnnotationDiscourse2021]** is the format of the Parallel Meaning Bank (PMB 5.1.0), which provides gold sentence–SBN pairs [@abzianidzeParallelMeaningBank2017].  
+
+Semantic parsing then becomes text-to-text: sentence in, SBN out.
 
 ::: {.notes}
-Goal: the same graph as text; this is what the parser generates. Concepts are WordNet senses (weather.n.01 = first noun sense). SBN is an agreed notation; no linguistic backbone.
+For this project, I use Simplifed Box Notation, or SBN in short. This is a framework developed by Prof Johan Bos at Groningen University. It has two adventages that particularly suits this project.
+
+First, an SBN representation is a string and a graph at the same time. Its linearised format makes it fit the end2end ML paradigm.
+
+Second, SBN is the annotation format of the Parallel Meaning Bank, so there are thousands of gold sentence–SBN pairs already. These pairs are the raw material for the data I generate later.
+
+(Do not mention scope here. The box was introduced on the previous slide; its "keep without asserting" use is stated once, on the Representation slide, where it pays off.)
 :::
 
 # Pilot Study
+
+:::{.notes}
+next, I will report what would happen if we train an SBN parser and force it to parse natural language with RSR
+:::
 
 ## Can an existing SBN parser handle self-repair? {.small-slide}
 
 - **Parser**: Gemma-2 9B [@gemmateamGemma2Improving2024], fine-tuned with LoRA [@huLoRALowRankAdaptation2021] on PMB train gold split (all fluent).
 - **Input**: 833 PMB sentences with an inserted reparandum, with and without *I mean* (2,499 each).
-- **Correct answer**: the fluent gold SBN, i.e. the reparandum is left out [following @senSemanticParsingDisfluent2021].
 
 | Fluent (PMB) | RSR, no editing expression | RSR + *I mean* |
 |---|---|---|
 | A cow gave birth to a calf with two heads. | **A goat**, a cow gave birth to a calf with two heads. | **A goat**, *I mean*, a cow gave birth to a calf with two heads. |
 
+**Correct answer for all three inputs**: the same fluent gold SBN, with the reparandum left out [following @senSemanticParsingDisfluent2021].
+
 ::: {.notes}
-Goal: state exactly what the pilot does (Michael). The bar is deliberately low: only asks the parser to drop the reparandum, since fluent SBN cannot mark it as withdrawn. The 833 sentences come from PMB training data, so the parser had seen their fluent SBNs; only the RSR inputs were new. Reparanda: Qwen3-32B [@yangQwen3TechnicalReport2025], same part of speech, before one word.
+For this pilot study, I used Gemma2 9B. It it finetuned on PMB train gold split using lora.
+
+As to the parsing data, I extracted 833 samples from the same pool, and use Qwen 3 32B to insert a reparandum in the natrual language side. For each sample, I make three RSR variants. Based on that, I further inserted "I mean" editing expression between the reparandum and the repair.  As you see in the table, all three inputs share one answer: the fluent SBN, since the reparandum should be considered as "withdrawn".
+
+So the bar is deliberately low: fluent SBN has no way to mark the goat as withdrawn, so the parser only has to leave it out.
+
+If asked: the 833 sentences come from the training data, so the parser had seen their fluent SBNs; only the RSR inputs were new.
 :::
 
 ## Self-repair lowers parsing accuracy, and the parser asserts the reparandum {.small-slide}
@@ -223,14 +260,17 @@ Goal: state exactly what the pilot does (Michael). The bar is deliberately low: 
 | RSR + *I mean* | 76.5 | −21.5% | 0.609 | −35.9% |
 
 - In **90.1%** of scorable RSR outputs the parse has more concepts than the fluent one. The extra concepts often include the reparandum, which the parse then asserts as content.
-- A parse that asserts the goat still scores **0.764**: one graph score does not show whether the repair was handled.
+- Fluent SBN offers only two options for the goat: drop it or assert it. The parser mostly asserts it.
 
 ::: {.smaller}
 Scorable: the output converts into a graph. F1: SMATCH++ [@opitzSMATCHStandardizedExtended2023], unscorable outputs counted as 0. Rel. Δ: change relative to Fluent.
 :::
 
 ::: {.notes}
-Goal: numbers only (Michael); the analysis is in Backup (goat/cow DAGs, recognition probe, position effects). All pairwise F1 differences significant (Wilcoxon signed-rank, p < .001). Median +2 concepts. The pilot shows the need for RSR supervision and for evaluation finer than SMATCH++; it does NOT show that SBN must be extended, that comes from later reference. The 0.764 pays off in Experiment Design.
+However, the results show interesting traits. First, we can clearly see the pattern that "the more inserted, the worse of performance". Second, the parser predominently keeps both the reparandum and the repair, and possibly, the editing expression. How do we know that? By comparing the parser's output with the reference SBN, I found that 90% of the parser's output has more concepts.
+
+Bridge to the next section: with fluent SBN, the parser can only drop the goat or assert it. The representation I propose adds a third option: keep the goat, but mark it as withdrawn.
+(Careful: the pilot shows the need for RSR training data and for an evaluation finer than one graph score. It does not show that SBN must be extended; that argument comes from later reference.)
 :::
 
 # Representation
@@ -246,7 +286,16 @@ Goal: numbers only (Michael); the analysis is in Backup (goat/cow DAGs, recognit
 | two `city` nodes | a withdrawn and an accepted context | both are `LocationOf` the request |
 
 ::: {.notes}
-Goal: the three pieces of information from Related Work, now visible in one graph; the table repeats the column heads of that slide word for word. Spoken, one sentence: SBN already has contexts whose content is represented but not asserted, e.g. negation (Backup: John did not buy a car). CORRECTION and CONJUNCTION are existing SBN separators; no new separator is introduced. CORRECTION follows SDRT's Correction relation (Backup). If pressed on data: CORRECTION does not occur in PMB 5.1.0 gold. Figure: render_status_graphs.py.
+I designed an extention to represent RSR in SBN. It uses two sperators. The intuition is first use CORRECTION to quarintine the reparandum, and use CONJUNCTION to merge the repair and the rest of the utterance back to the graph.
+
+SBN already has boxes that hold content without asserting it: this is how negation works. I reuse that mechanism; both separators already exist in SBN, no new one is introduced.
+
+We can use the three requqirements ealier to check.
+
+First, both Berlin and Dublin are kept in the representation, check; second, Berlin sits in the withdrawn CORRECTION box and Dublin in the accepted CONJUNCTION box, check; third, both are linked to the weather request by LocationOf, so the role they compete for is also represented, all three checked.
+
+Like before, this graph is written line by line as an SBN string; you will see one in the Data section.
+If asked for the string now: Backup "CORRECTION holds the withdrawn candidate". If asked about negation: Backup "John did not buy a car".
 :::
 
 ## Both cities remain available for later reference; only Dublin is the requested location
@@ -262,7 +311,7 @@ Berlin stays accessible because proper names project out of the withdrawn contex
 :::
 
 ::: {.notes}
-Goal: close the loop opened in Related Work. The DAG carries the claim; one sentence states it, the small note states the mechanism and its limit. If the final DAG is too tall, switch to two columns (text left, DAG right).
+This method directly answers the question of later reference. We can use ANA edge to connect the plural "two citeis" back to both Berlin and Dublin, and so the two utterances can be represented by one legal and well-formed SBN. 
 :::
 
 ## The representation covers concept and role replacement; the corpus implements single concepts {.small-slide}
@@ -274,10 +323,15 @@ Goal: close the loop opened in Related Work. The DAG carries the claim; one sent
 | **Outside the design** | Replacement of a separator (e.g. *must* → *might*, *when* → *even though*); delayed repair |
 
 ::: {.notes}
-Goal: keep "representable" and "implemented" apart; this is where the sharpest questions will land. Why not AMR or DS-TTR: Backup.
+Finally, this extention can represent the replacement of a concept or a role, also inside a context such as negation. The corpus I generate implements the simplest part of this: replacing a single noun, verb or adjective.
+
+Meanwhile, the limitation is also clear. When the replaced item is itself a separator, such as a modal (must → might) or a discourse relation (when → even though), this extention cannot represent it. One example is "I helped my mum when, even though I was busy". Delayed repairs are also outside the design.
 :::
 
 # Data
+:::{.notes}
+Now, coming to the data section. I will explain how to map the theoretical reprentation to real data that supports training and testing. 
+::: 
 
 ## No corpus pairs self-repair with SBN, so PMB pairs are transformed on both sides {.small-slide}
 
@@ -288,7 +342,7 @@ The PMB has fluent sentence–SBN pairs; disfluency corpora have self-repairs bu
 Each item keeps the PMB split of its source document, so no training document reappears in evaluation.
 
 ::: {.notes}
-Goal: why the data is generated, and how: both sides of a gold pair change together. Callback: the pilot changed only the input. The dashed "?" edge is what Experiment Design tests.
+One of the main challenges of this project is that the disfluency relted copora contain RSR, but no meaning representation, while PMB has high quality representation, but with no RSR data. So, I am developing a data synthesis pipeline. That is reflected by the rightmost arrow of the diagram. 
 :::
 
 ## Steps ①–③: pick a concept, draw a competitor for it
@@ -307,8 +361,12 @@ Other siblings of *weather* in the pool: *cloud*, *sunset*, *aurora*, *halo*, �
 :::
 
 ::: {.notes}
-Goal: the audience follows one item through the pipeline; this slide and the next two are one continuous walkthrough. Step ② needs the word–concept alignment, which is why the step spans both sides. Siblings = WordNet co-hyponyms for nouns; verbs use VerbNet classes, adjectives FrameNet frames and antonyms. storm.n.01 is a real pool candidate for a PMB document with weather.n.01 (p99/d2202). Berlin → Dublin is not used here: proper names need an operator outside the implemented corpus.
-Q&A: "How is storm found?" → Backup #/bk-wordnet. "Isn't a storm a kind of weather?" / "What about synonyms?" → Backup #/bk-synonyms.
+Let's walk it through step by step. But this is an intuitive demonstration, more details are still waiting to be settled. 
+
+Fist, we choose a PMB pair from the corpus. For this walk through, we use the example seen earlier. Now, we have the natural language and its meaning representation. 
+
+Next, we choose a word, for this word, we find its "sibling" in WordNet. For this case, we choose storm. 
+Be awre, WordNet organises words, particularly nouns, by hypernymy. So the siblings of the word "weather" are also weather-related. 
 :::
 
 ## Step ④: edit both sides of the pair together
@@ -332,7 +390,7 @@ city.n.01 Name "Dublin"                              % in Dublin?
 As with Berlin and Dublin, the item has a withdrawn and an accepted context, and both candidates compete for one role, the Theme of *like*.
 
 ::: {.notes}
-Goal: the pair is edited on both sides at once, so the target is known by construction; no parser is involved. Highlighted lines are what the generator adds; the indices of later concepts shift automatically. The shared entity.n.01 slot is the anchor construction, used when both candidates fill a role of a later concept (Backup: anchor and movement). The editing expression is optional: in training about 30% of items carry one. The SBN is the generator's output for this sentence; the sentence side is shown with "the" repeated, which is the natural form.
+Now that we have all the material, the next step is to do lego on both side. We insert the word chosen **in front of** the orignal word, so the meaning of the original fluent is unchanged, it just has a reparandum, and so becomes an RSR sample. 
 :::
 
 ## Step ⑤: keep only pairs that are well formed and make sense {.small-slide}
@@ -345,8 +403,7 @@ Goal: the pair is edited on both sides at once, so the target is known by constr
 The contextual-fit threshold is set on 150 hand-labelled candidates and frozen before the corpus is filtered.
 
 ::: {.notes}
-Goal: why the corpus is not just random substitution. Status: the structural check is done over the whole training partition; contextual fit is being calibrated. Do not claim storm/weather passes the final filter: the threshold is not frozen yet.
-Synonyms are not a filter here: they are excluded when the pool is built (Step ③, Backup #/bk-synonyms). NLI scores are computed and archived but reject nothing. The RP still describes an NLI filter; if Koller asks, the calibration sample showed the pool already contains almost no synonyms (1 of 150), so a synonym filter had nothing to do.
+After the synthesis, I will also run two rounds of quality check. The first is to make sure that the output is strucutrally correct. And the second is to make sure the samples are contextually fitted. 
 :::
 
 ## The training partition yields 16,425 candidate repair sites {.small-slide}
@@ -361,13 +418,13 @@ Synonyms are not a filter here: they are excluded when the pool is built (Step �
 The transformation succeeds at 99.7% of the sites where a competitor exists. These sites are the candidate pool **before** linguistic filtering and sampling; the sampling rule is fixed before training.
 
 ::: {.notes}
-Goal: known numbers only. Structural generation and validation are complete; linguistic filtering, the independent audit and final sampling remain. Most of the alignment loss is verbs without a surface word. 99.7% is the empirical side of RQ1's coverage question. Scope: immediate replacement of aligned noun, verb and adjective concepts in written PMB contexts; the experiments test learnability within these boundaries, not coverage of spontaneous RSR. The sampling rule limits repeated use of a source document.
+To sum up, I am still buidling on the dataset, but PMB train gold split can yield more than sixteen thousand samples, so it should be sufficient for model training. 
 :::
 
 # Experiment Design
 
 ::: {.notes}
-Segue, one sentence: "Now let's follow the same item, *What is the storm, I mean, the weather like in Dublin?*, through the experiment."
+So now we have the data. How will I test it? I'll keep following the same sentence: "What is the storm, I mean, the weather like in Dublin?"
 :::
 
 ## Training: the same repaired sentences, different answers {.small-slide}
@@ -390,8 +447,7 @@ Each setting is trained on Qwen3.5 at 2B, 9B and 27B [@qwenQwen35Native2026] wit
 :::
 
 ::: {.notes}
-Goal: the audience sees that normalisation and repair-aware have identical inputs, so any difference comes from the answer. Spoken: fluent only is the pilot's setup; normalisation is the deletion approach from Related Work; repair-aware is this project. Normalisation is taught to give a repaired sentence the fluent sentence's answer: its answer graph is the same picture as fluent only's.
-About 30% of the repaired training sentences carry an editing expression (I mean / no / no wait / actually); the rest carry none. LoRA; matched seeds across settings within a model size; checkpoint by lowest dev loss, test outputs never consulted. Example counts are fixed only after sampling, so no numbers here. The storm/weather item is the one from the Data walkthrough, the generator's output for a constructed sentence: it illustrates, it is not a test item. The repair-aware answer is the SBN from Step ④ drawn as a graph.
+Now, moving on the experiment design. I plan to use Qwen 3.5 in three sizes, all dense models, with three random seeds. For this project, I designed three settings, each setting has one more condition than the last one. 
 :::
 
 ## Testing: what each change to the training brings {.small-slide}
@@ -418,7 +474,11 @@ Repaired test sentences go only to the two parsers trained on them; the pilot al
 :::
 
 ::: {.notes}
-Goal: each setting adds one ingredient to the one above it, as on the training slide, so each step answers what that ingredient brings. Same vertical order as the training slide.
+This set up provides a great advantage, as the whole experment is an ablation. By comparing the performance on fluent only vs. normalisation, we will see does adding RSR data and teaching the model to drop the reparandum and the editing expression hurt the parser's performance on ordinary, fluent utterances.
+
+Whether the model learns the "CORRECTION-CONJUNCTION" extention is read from the repair-aware parser alone, in absolute terms: only this parser is taught the structure. Comparing repair-aware with normalisation answers a different question: does keeping the reparandum cost anything in the final meaning?
+
+[NOT SPOKEN] Goal: each setting adds one ingredient to the one above it, as on the training slide, so each step answers what that ingredient brings. Same vertical order as the training slide.
 Step 1 is not a scored comparison on repaired sentences: fluent only is not tested on them (never taught repairs). "Does it learn to drop storm" is answered by normalisation's own results; the fluent-only side comes from the pilot (Gemma-2 9B, not Qwen3.5; same fluent-only training). On ordinary sentences, fluent only vs normalisation is a real comparison: the effect of seeing repaired sentences.
 Step 2 is the controlled comparison: same inputs, only the answer differs. Structure is read for repair-aware alone (absolute); the final request compares normalisation and repair-aware with the same ruler (next slide); on ordinary sentences, the effect of the new answer format, incl. repairs added to fluent input.
 Every repaired test sentence comes in two versions, with and without an editing expression, incl. the unseen "sorry". Outputs are not corrected. Full matrix and breakdowns: Backup #/bk-tests.
@@ -449,7 +509,15 @@ What remains must match the gold graph of *What is the weather like in Dublin?* 
 ::::
 
 ::: {.notes}
-Goal: the intuition of both measures on one output. Spoken callback: "One graph score is not enough: the pilot's goat parse still scored 0.764."
+So how do we score a repair-aware output? With two checks.
+
+The first check, on the left, is the structure. Four things must be right: a valid graph; one withdrawn and one accepted box; storm in the withdrawn box and weather in the accepted one; and both linked to the same slot. I report the four separately, so I can see where a parser goes wrong.
+
+The second check, on the right, is the final meaning. We cut the withdrawn box away, and what is left should be the normal graph for "What is the weather like in Dublin?" The normalisation parser gives this graph directly, so both parsers are measured with the same ruler.
+
+Why two checks? Because one score hides too much: an output that just keeps "storm" as normal content still scores 0.95.
+
+[NOT SPOKEN] Goal: the intuition of both measures on one output. Spoken callback: "One graph score is not enough: an output that simply asserts storm still scores 0.950 against the fluent gold." (The pilot's goat parse, 0.764, is in Backup if asked.)
 Check 1 = RSR-structure accuracy, the primary measure: repair-aware only, read in absolute terms, the four requirements reported separately so we see where an output fails. Check 4 follows the gold (anchor construction, Step ④): storm and weather both EQU the shared entity.n.01 slot that like takes as its Theme (blue edges); Dublin and the time hang off like, outside both boxes.
 Check 2 = accepted meaning, the fair comparison between normalisation and repair-aware; every output takes part, none is pre-filtered. When the withdrawn box is cut, the anchor slot collapses into weather, so the repair-aware gold gives back the fluent graph exactly (accepted meaning 1.000, storm_weather_scores.md). A reversed output would fail both checks: after cutting, "What is the storm like in Dublin?" is left.
 If asked for a number: on this item, a hand-built output that simply asserts storm (no contexts) still scores 0.950 SMATCH++ against the fluent gold. These are constructed outputs, not model predictions. Also reported: SMATCH++ against the full repair-aware gold, as a continuous score.
@@ -470,7 +538,15 @@ Two further challenge sets: look-alikes such as *coffee, tea and milk*, where no
 :::
 
 ::: {.notes}
-Goal: the payoff of the opening example: keeping the withdrawn content is useful. Tested on normalisation and repair-aware only; normalisation cannot succeed in principle. The later-reference set only uses referents that can project out of the withdrawn context, such as proper names.
+Now back to the example from the very beginning: "Berlin, I mean, Dublin", and then: "Show me the airports of these two cities."
+
+In the repair-aware graph, "these two cities" points to both Berlin and Dublin, the purple edges, while the weather request still asks only about Dublin. So we keep Berlin, but we don't send it to the weather API.
+
+The normalisation parser has already deleted Berlin, so it has only one city to point to. This is what we gain by keeping the withdrawn content.
+
+[fragment] I also test the opposite risk: sentences that only look like repairs, like "coffee, tea and milk", and corrections by another speaker, like "Is it Berlin?" "No, Dublin." In both cases, this structure should not appear.
+
+[NOT SPOKEN] Goal: the payoff of the opening example: keeping the withdrawn content is useful. Tested on normalisation and repair-aware only; normalisation cannot succeed in principle. The later-reference set only uses referents that can project out of the withdrawn context, such as proper names.
 Look-alikes: all three settings, scored against the PMB gold; repair-aware can fail by adding a repair (spurious-repair rate), normalisation by deleting content (SMATCH++ drops), fluent only is the baseline. Cross-turn corrections: normalisation and repair-aware.
 :::
 
@@ -479,7 +555,7 @@ Look-alikes: all three settings, scored against the PMB gold; repair-aware can f
 | | |
 |----|------------|
 | **Related Work** | Deletion loses Berlin; tagging keeps it and marks it as withdrawn, but not the role it competes for. |
-| **Pilot** | A parser trained on fluent SBN often asserts the reparandum, and a single SMATCH++ score does not reveal this. |
+| **Pilot** | A parser trained on fluent SBN can only drop the reparandum or assert it, and it mostly asserts it. |
 | **Representation** | A withdrawn and an accepted context (`CORRECTION`, `CONJUNCTION`) record both candidates, their status and the role they compete for. |
 | **Data** | Editing PMB pairs on both sides yields 16,425 candidate sites; the transformation succeeds at 99.7% of them. |
 | **Experiment Design** *(planned)* | Three conditions at three model sizes test whether the structure is learnable, and whether keeping the reparandum helps later reference without harming the final meaning. |
@@ -487,7 +563,19 @@ Look-alikes: all three settings, scored against the PMB gold; repair-aware can f
 For the Siri request, the accepted meaning asks for the weather in Dublin, and Berlin stays available for *these two cities*.
 
 ::: {.notes}
-Goal: one sentence per roadmap section, in the same words as the section's key slide, so the chain can be reread here. Only the first four rows are findings; Experiment Design is the plan. Close on Siri: the accepted meaning gives the right API call, the kept reparandum serves later reference.
+To sum up. Current pipelines delete the reparandum or tag it, but neither records the role the two candidates compete for.
+
+The pilot showed that a parser trained on fluent data mostly asserts the reparandum.
+
+My representation keeps both: the withdrawn one in a CORRECTION box, the accepted one in a CONJUNCTION box, and both linked to the role they share.
+
+Editing PMB pairs on both sides gives more than sixteen thousand candidate sites.
+
+And the planned experiment tests whether a parser can learn this, and whether keeping the reparandum helps later reference without hurting the final meaning.
+
+So, for my Siri request: the final meaning asks for Dublin, and Berlin is still there when I say "these two cities".
+
+[NOT SPOKEN] Goal: one sentence per roadmap section, in the same words as the section's key slide, so the chain can be reread here. Only the first four rows are findings; Experiment Design is the plan. Close on Siri: the accepted meaning gives the right API call, the kept reparandum serves later reference.
 :::
 
 ## Status and Timeline
@@ -496,7 +584,13 @@ Goal: one sentence per roadmap section, in the same words as the section's key s
 - **next**: freeze filtered data and challenge sets → 27 training runs → evaluation → thesis (14 Dec)
 
 ::: {.notes}
-Goal: feasibility. RP timeline: filters calibrated and frozen, challenge sets and evaluation toolkit completed by 4 Oct; the 27 runs from 5 Oct to 1 Nov.
+Finally, where am I now? The pilot and the representation are done, and the generator already runs over the whole PMB training split.
+
+Next week, by the fourth of October, I will freeze the filtered data, the challenge sets and the evaluation code. Then come the 27 training runs, through October, then the evaluation, and the thesis is due on the fourteenth of December.
+
+Thank you. I'm happy to take questions.
+
+[NOT SPOKEN] Goal: feasibility. RP timeline: filters calibrated and frozen, challenge sets and evaluation toolkit completed by 4 Oct; the 27 runs from 5 Oct to 1 Nov.
 :::
 
 # Thank You
@@ -548,7 +642,7 @@ Caveat if asked: the F1 tests use complete triplets only (722 documents without,
 Source: colloquium_prep/pilot_eval/v2_pilot_eval_run (preds_long_scored.parquet; analysis/position_significance_test.md).
 :::
 
-## Recognition probe: with *I mean*, the base model detects every repair
+## Recognition probe: with *I mean*, the base model detects every repair {#recognition-probe}
 
 The base Gemma-2 9B, without the adapter, was asked to mark the reparandum, the editing expression and the repair in plain text.
 
@@ -828,6 +922,22 @@ Why not embedding similarity: it scores hot/cold as similar as sofa/couch, so it
 Goal: operational conventions for sites where the direct construction fails. Show only if asked; full listings from RP Appendix.
 :::
 
+## Editing expressions are varied in training and held out in testing, so the parser cannot rely on one cue {#bk-editing .small-slide}
+
+| | Editing expressions | What it tests |
+|---|---|---|
+| **Training** | About 30% of repaired sentences carry one of *I mean*, *no*, *no wait*, *actually*; the rest carry none | The parser cannot rely on a cue that most repairs lack |
+| **Testing: paired versions** | Every test item comes twice, with the same repair and the same target: once without and once with an editing expression | The effect of the editing expression, with the content held constant |
+| **Testing: unseen form** | The expressions seen in training, plus *sorry*, which never appears in training | Generalisation to an editing expression the parser has not seen |
+
+In the pilot, *I mean* was the strongest cue: the base model detected every repair with it and fewer than half without it ([recognition probe](#/recognition-probe)).
+
+::: {.notes}
+Goal: answer "does the parser just learn 'I mean' as a trigger?". Source: RP, Training and Evaluation Conditions (the 30% and the four forms) and the paragraph on further tests (paired versions, held-out sorry).
+Limitation, state it before being asked: one held-out form is a probe, not a full test of generalisation. Sorry is also partly an apology, so it differs in kind from the four training forms; a failure on it may reflect that difference rather than a missing generalisation.
+Also: the repaired test items without an editing expression are the harder half; the pilot probe detected only 44.8% of those.
+:::
+
 ## Which parser is tested on which set, and what else is broken down {#bk-tests .small-slide}
 
 | Test set | Input | Fluent only | Normalisation | Repair-aware |
@@ -837,7 +947,7 @@ Goal: operational conventions for sites where the direct construction fails. Sho
 | Look-alikes (lists, appositions) | fluent, repair-like | ✓ | ✓ | ✓ |
 | Discourse (later reference, cross-turn) | repaired, multi-sentence | | ✓ | ✓ |
 
-On the repaired test sentences, results are also broken down by: the same sentence with and without an editing expression; editing expressions seen in training against the unseen *sorry*; and the construction used (direct, anchor, movement).
+On the repaired test sentences, results are also broken down by: the same sentence with and without an editing expression; editing expressions seen in training against the unseen *sorry* ([editing expressions](#/bk-editing)); and the construction used (direct, anchor, movement).
 
 ::: {.notes}
 Goal: the full test design in one table, for Q&A. Rule: repaired input only for the two settings trained on it; fluent input for all three.
