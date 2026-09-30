@@ -267,7 +267,7 @@ SKELETON CONVENTIONS
 
 <img data-src="viz/siri-b-i-d.png" class="quarto-figure quarto-figure-center r-stretch" style="width:20.0%"><p>The speaker replaces <em>Berlin</em> with <em>Dublin</em>, but Siri returns the weather for Berlin. This is a <strong>replacement self-repair (RSR)</strong> <span class="citation" data-cites="shribergPreliminariesTheorySpeech1994">(<a href="#/references" role="doc-biblioref" onclick="">Shriberg 1994</a>)</span>.</p>
 <aside class="notes">
-<p>let’s start with an example. I took this screenshot a couple of days ago. It shows I asked the voice assistant on my phone about the weather in Berlin, but then I changed my mind to Dublin. <strong>This</strong> first say something, then corrected by the speaker themselves, is what linguists called a “replacement self-repair”. The transcription is correct, as you can see, but it returns the weather of Berlin, which is clearly corrected by myself.</p>
+<p>Let’s start with an example. I took this screenshot a couple of days ago. I asked the voice assistant on my phone about the weather in Berlin, but then I changed my mind to Dublin. <strong>This</strong>, saying something and then correcting it yourself, is what linguists call a “replacement self-repair”. As you can see, the transcription is correct. But it returns the weather for Berlin, the city I had just taken back.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -315,7 +315,7 @@ SKELETON CONVENTIONS
 </table>
 <p>On self-corrections, the best system passes 58.8% of scenarios (GPT-Realtime) and the weakest 17.6%.</p>
 <aside class="notes">
-<p>In fact, this type of problem is not rare, even in current LLM-based systems. A recent bechmark study witnessed that Gemini Live 3.1 made the same type of mistake by sending the withdrawn content to the API, and, of cause, returned the wrong answer.</p>
+<p>In fact, this problem is not rare, even in current LLM-based systems. A recent benchmark study found that Gemini Live 3.1 made the same mistake: it sent the withdrawn content to the API, and of course returned the wrong answer.</p>
 <p>Prepare for answer: If people ask about the actual performance and test size: the benchmark has 100 recorded scenarios from 12 speakers; 21 of them are designed as self-corrections (paper, Introduction; also the released scenario file). The self-correction Pass@1 in Table 3 is 0.588 for GPT-Realtime, 0.353 for Gemini Live 3.1 and 0.176 for the cascaded pipeline. Say “about twenty scenarios”: the Table 3 values are all multiples of 1/17, and the paper does not explain the gap to 21. The Rome/Milan case is Table 8: Gemini Live 3.1 called the API 2.27 s before the user finished correcting.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -340,8 +340,8 @@ SKELETON CONVENTIONS
 <p>Related Work → Pilot → <strong>Representation</strong> (RQ1) → Data → <strong>Experiment Design</strong> (RQ2)</p>
 </div>
 <aside class="notes">
-<p>Regarding this, this project asks two research questions. The first is how to design a meaning represenation system that can capture and represent such a phenomina; the second is what will be the performance if we implement this meaning representation to an LLM-based parser. Here, what is a meaning representation system, and why we need it in this project will be introduced in the coming section.</p>
-<p>For the rest of this presentation, I will first review the existing work on self-repair, then report the completed pilot study, and in the representation section, I will demonstrate a meaning representation formalism that I designed, which directed responds to RQ 1, after that, I will report how the parsing experiment is designed to answer RQ2.</p>
+<p>So this project asks two research questions. The first is how to design a meaning representation that can capture this phenomenon. The second is how well an LLM-based parser can learn this representation. What a meaning representation is, and why we need one here, I will explain in the next section.</p>
+<p>For the rest of this talk, I will first review existing work on self-repair, then report the pilot study I have completed. In the Representation section, I will show the formalism I designed, which answers RQ1. After that, I will show how the parsing experiment is designed to answer RQ2.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -372,7 +372,7 @@ SKELETON CONVENTIONS
 </ul>
 <p>This project covers replacements <strong>within a single clause</strong> <span class="citation" data-cites="leveltMonitoringSelfrepairSpeech1983 shribergPreliminariesTheorySpeech1994">(<a href="#/references" role="doc-biblioref" onclick="">Levelt 1983</a>; <a href="#/references" role="doc-biblioref" onclick="">Shriberg 1994</a>)</span>.</p>
 <aside class="notes">
-<p>disfluency领域通常将一个self-repair分为三部分，reparandum是说话人主动撤回的内容，即例子中的in berlin,repair是说话人用来替换reparandum的内容，表示了说话人的最终意图。而二者之间可能存在一个editing expression，英语中常见的有actually， I mean等。</p>
+<p>In disfluency research, a self-repair is usually split into three parts. The reparandum is what the speaker takes back, here “in Berlin”. The repair is what replaces it, “in Dublin”, and it shows what the speaker finally means. Between the two there may be an editing expression. In English, common ones are “actually” and “I mean”.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -399,7 +399,7 @@ SKELETON CONVENTIONS
 </div></div>
 <p>Both approaches serve the same goal: recovering the speaker’s final intention.</p>
 <aside class="notes">
-<p>Two mainstream methods used in NLP pipelines are deletion and tagged transcription. In the case of deletion, the disfluent part that includes the reparandum and the optional editing phrase will be removed, so the downstream components on the pipeline will not see that the speaker ever said “in Berlin”. In the case of tagged transcription, the disfluent part will be kept, but with an annotation tagging out the span of the disfluent content.</p>
+<p>NLP pipelines mainly use two methods: deletion and tagged transcription. With deletion, the disfluent part, the reparandum and the optional editing expression, is removed. So the later components in the pipeline never see that the speaker said “in Berlin”. With tagged transcription, the disfluent part is kept, but it is labelled as disfluent.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -423,9 +423,9 @@ SKELETON CONVENTIONS
 </ul>
 <p>Psycholinguistic <span class="citation" data-cites="lauLingeringEffectsDisfluent2005">(<a href="#/references" role="doc-biblioref" onclick="">Lau and Ferreira 2005</a>)</span> and computational linguistic studies <span class="citation" data-cites="purverComputationalModelsMiscommunication2018">(<a href="#/references" role="doc-biblioref" onclick="">Purver et al. 2018</a>)</span> show that the reparandum stays in the context.</p>
 <aside class="notes">
-<p>However, both methods meet a challenge when encounter situations like this example. The “two cites” refers back to both the withdrawn reparandum and the added repair.</p>
-<p>This phenomina has be observed and discussed by both psycholingusitic and computational linguistic studies.</p>
-<p>In our case, as you can imiage, the deletion method will lose one antecedent, while the tagging transcription looks better, but the annotation still does not explain how the dislfuent span relates to the rest of the utterance, so the downstream models possibly need to do extra infernece to get things right.</p>
+<p>However, both methods have a problem with examples like this one. “These two cities” refers back to both the withdrawn reparandum and the repair.</p>
+<p>This has been observed in both psycholinguistic and computational linguistic studies.</p>
+<p>As you can imagine, deletion loses one of the two cities. Tagged transcription looks better, but the tags still don’t say how the disfluent part relates to the rest of the sentence. So a downstream model may need extra inference to get it right.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -447,7 +447,7 @@ SKELETON CONVENTIONS
 </ol>
 <p>Tags on words can hold the first two. The third is a relation between meanings, so it needs a representation of meaning.</p>
 <aside class="notes">
-<p>To solve this puzzle, I propose that we need a solution that satisfied all three requirements. It not only should keeps the reparandum and repair like tagged transcription does, but furthermore, should records the structural relation between them, such as who replaces whom.</p>
+<p>To solve this puzzle, we need a solution that meets all three requirements. It should keep the reparandum and the repair, as tagged transcription does. But it should also record the structural relation between them: who replaces whom, and in which role.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -479,8 +479,8 @@ SKELETON CONVENTIONS
 </div></div>
 <p>Such a graph has room for all three pieces of information: two city nodes, a context for each, and one Location role. Because the structure is explicit, an output can be checked piece by piece.</p>
 <aside class="notes">
-<p>The requirements bring us to meaning representation. Meaning representation is a central topic in computational semantics. It focuses on mapping natural language to formal symbolic structure, so machines can compute meanings on that.</p>
-<p>MR usually represent meanings in human readable strings or graphs. This gives us inspectability.</p>
+<p>These requirements bring us to meaning representations. Meaning representation is a central topic in computational semantics. It maps natural language to a formal, symbolic structure, so that machines can compute with meaning.</p>
+<p>Meaning representations are usually written as human-readable strings or graphs, so we can inspect them.</p>
 <p>If asked where MRs are used with LLMs: Backup table. The box is introduced here so that two boxes on the Representation slide need no explanation.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -517,8 +517,8 @@ city.n.01 Name "Dublin"                             % in Dublin?</code></pre>
 <p><strong>Simplified Box Notation (SBN) <span class="citation" data-cites="bosSequenceNotationCatching2023 bosQuantificationAnnotationDiscourse2021">(<a href="#/references" role="doc-biblioref" onclick="">Bos 2023</a>, <a href="#/references" role="doc-biblioref" onclick="">2021a</a>)</span></strong> is the format of the Parallel Meaning Bank (PMB 5.1.0), which provides gold sentence–SBN pairs <span class="citation" data-cites="abzianidzeParallelMeaningBank2017">(<a href="#/references" role="doc-biblioref" onclick="">Abzianidze et al. 2017</a>)</span>.</p>
 <p>Semantic parsing then becomes text-to-text: sentence in, SBN out.</p>
 <aside class="notes">
-<p>For this project, I use Simplifed Box Notation, or SBN in short. This is a framework developed by Prof Johan Bos at Groningen University. It has two adventages that particularly suits this project.</p>
-<p>First, an SBN representation is a string and a graph at the same time. Its linearised format makes it fit the end2end ML paradigm.</p>
+<p>For this project, I use Simplified Box Notation, or SBN for short. It was developed by Johan Bos at the University of Groningen. It has two advantages that suit this project well.</p>
+<p>First, an SBN representation is a string and a graph at the same time. Because it is written as a sequence, it fits end-to-end machine learning.</p>
 <p>Second, SBN is the annotation format of the Parallel Meaning Bank, so there are thousands of gold sentence–SBN pairs already. These pairs are the raw material for the data I generate later.</p>
 <p>(Do not mention scope here. The box was introduced on the previous slide; its “keep without asserting” use is stated once, on the Representation slide, where it pays off.)</p>
 <style type="text/css">
@@ -537,7 +537,7 @@ city.n.01 Name "Dublin"                             % in Dublin?</code></pre>
 <section id="pilot-study" class="title-slide slide level1 center">
 <h1>Pilot Study</h1>
 <aside class="notes">
-<p>next, I will report what would happen if we train an SBN parser and force it to parse natural language with RSR</p>
+<p>Next, I will report what happens when we train an SBN parser on fluent data and ask it to parse sentences with a self-repair.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -579,8 +579,8 @@ city.n.01 Name "Dublin"                             % in Dublin?</code></pre>
 </table>
 <p><strong>Correct answer for all three inputs</strong>: the same fluent gold SBN, with the reparandum left out <span class="citation" data-cites="senSemanticParsingDisfluent2021">(following <a href="#/references" role="doc-biblioref" onclick="">Sen and Groves 2021</a>)</span>.</p>
 <aside class="notes">
-<p>For this pilot study, I used Gemma2 9B. It it finetuned on PMB train gold split using lora.</p>
-<p>As to the parsing data, I extracted 833 samples from the same pool, and use Qwen 3 32B to insert a reparandum in the natrual language side. For each sample, I make three RSR variants. Based on that, I further inserted “I mean” editing expression between the reparandum and the repair. As you see in the table, all three inputs share one answer: the fluent SBN, since the reparandum should be considered as “withdrawn”.</p>
+<p>For this pilot study, I used Gemma 2 9B, fine-tuned with LoRA on the gold training split of the PMB.</p>
+<p>For the test data, I took 833 sentences from the same pool and used Qwen3 32B to insert a reparandum into each sentence. For each sentence, I made three RSR variants. Then I made a second version of each variant, with “I mean” between the reparandum and the repair. As you see in the table, all three inputs share one answer: the fluent SBN, because the reparandum counts as withdrawn.</p>
 <p>So the bar is deliberately low: fluent SBN has no way to mark the goat as withdrawn, so the parser only has to leave it out.</p>
 <p>If asked: the 833 sentences come from the training data, so the parser had seen their fluent SBNs; only the RSR inputs were new.</p>
 <style type="text/css">
@@ -639,7 +639,7 @@ city.n.01 Name "Dublin"                             % in Dublin?</code></pre>
 <p>Scorable: the output converts into a graph. F1: SMATCH++ <span class="citation" data-cites="opitzSMATCHStandardizedExtended2023">(<a href="#/references" role="doc-biblioref" onclick="">Opitz 2023</a>)</span>, unscorable outputs counted as 0. Rel. Δ: change relative to Fluent.</p>
 </div>
 <aside class="notes">
-<p>However, the results show interesting traits. First, we can clearly see the pattern that “the more inserted, the worse of performance”. Second, the parser predominently keeps both the reparandum and the repair, and possibly, the editing expression. How do we know that? By comparing the parser’s output with the reference SBN, I found that 90% of the parser’s output has more concepts.</p>
+<p>The results show two things. First, a clear pattern: the more we insert, the worse the parser does. Second, the parser mostly keeps both the reparandum and the repair, and sometimes the editing expression too. How do we know? When I compare the outputs with the reference SBN, 90% of the outputs have more concepts.</p>
 <p>Bridge to the next section: with fluent SBN, the parser can only drop the goat or assert it. The representation I propose adds a third option: keep the goat, but mark it as withdrawn. (Careful: the pilot shows the need for RSR training data and for an evaluation finer than one graph score. It does not show that SBN must be extended; that argument comes from later reference.)</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -684,10 +684,10 @@ city.n.01 Name "Dublin"                             % in Dublin?</code></pre>
 </tbody>
 </table>
 <aside class="notes">
-<p>I designed an extention to represent RSR in SBN. It uses two sperators. The intuition is first use CORRECTION to quarintine the reparandum, and use CONJUNCTION to merge the repair and the rest of the utterance back to the graph.</p>
-<p>SBN already has boxes that hold content without asserting it: this is how negation works. I reuse that mechanism; both separators already exist in SBN, no new one is introduced.</p>
-<p>We can use the three requqirements ealier to check.</p>
-<p>First, both Berlin and Dublin are kept in the representation, check; second, Berlin sits in the withdrawn CORRECTION box and Dublin in the accepted CONJUNCTION box, check; third, both are linked to the weather request by LocationOf, so the role they compete for is also represented, all three checked.</p>
+<p>I designed an extension to represent RSR in SBN. It uses two separators. The idea is: CORRECTION quarantines the reparandum, and CONJUNCTION merges the repair back into the rest of the graph.</p>
+<p>SBN already has boxes that hold content without asserting it; this is how negation works. I reuse that mechanism, and both separators already exist in SBN.</p>
+<p>Let’s check the three requirements from earlier.</p>
+<p>First, both Berlin and Dublin are kept: check. Second, Berlin sits in the withdrawn CORRECTION box and Dublin in the accepted CONJUNCTION box: check. Third, both are linked to the weather request by LocationOf, so the role they compete for is recorded too: check.</p>
 <p>Like before, this graph is written line by line as an SBN string; you will see one in the Data section. If asked for the string now: Backup “CORRECTION holds the withdrawn candidate”. If asked about negation: Backup “John did not buy a car”.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -712,7 +712,7 @@ city.n.01 Name "Dublin"                             % in Dublin?</code></pre>
 <p>Berlin stays accessible because proper names project out of the withdrawn context <span class="citation" data-cites="bosVariablefreeDiscourseRepresentation2021">(<a href="#/references" role="doc-biblioref" onclick="">Bos 2021b</a>)</span>. The later-reference test set only uses referents that can project in this way.</p>
 </div>
 <aside class="notes">
-<p>This method directly answers the question of later reference. We can use ANA edge to connect the plural “two citeis” back to both Berlin and Dublin, and so the two utterances can be represented by one legal and well-formed SBN.</p>
+<p>This directly answers the later-reference problem. An ANA edge connects “these two cities” back to both Berlin and Dublin, so the two sentences can be represented by one well-formed SBN.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -748,8 +748,8 @@ city.n.01 Name "Dublin"                             % in Dublin?</code></pre>
 </tbody>
 </table>
 <aside class="notes">
-<p>Finally, this extention can represent the replacement of a concept or a role, also inside a context such as negation. The corpus I generate implements the simplest part of this: replacing a single noun, verb or adjective.</p>
-<p>Meanwhile, the limitation is also clear. When the replaced item is itself a separator, such as a modal (must → might) or a discourse relation (when → even though), this extention cannot represent it. One example is “I helped my mum when, even though I was busy”. Delayed repairs are also outside the design.</p>
+<p>Finally, this extension can represent the replacement of a concept or a role, also inside a context such as negation. The corpus I generate implements the simplest part of this: replacing a single noun, verb or adjective.</p>
+<p>The limitation is also clear. When the replaced item is itself a separator, such as a modal (must → might) or a discourse relation (when → even though), this extension cannot represent it. One example is “I helped my mum when, even though I was busy”. Delayed repairs are also outside the design.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -766,7 +766,7 @@ city.n.01 Name "Dublin"                             % in Dublin?</code></pre>
 <section id="data" class="title-slide slide level1 center">
 <h1>Data</h1>
 <aside class="notes">
-<p>Now, coming to the data section. I will explain how to map the theoretical reprentation to real data that supports training and testing.</p>
+<p>Now to the data. I will explain how I turn this representation into real data for training and testing.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -785,7 +785,7 @@ city.n.01 Name "Dublin"                             % in Dublin?</code></pre>
 
 <img data-src="viz/paired_transformation.svg" class="quarto-figure quarto-figure-center r-stretch" style="width:70.0%"><p>Each item keeps the PMB split of its source document, so no training document reappears in evaluation.</p>
 <aside class="notes">
-<p>One of the main challenges of this project is that the disfluency relted copora contain RSR, but no meaning representation, while PMB has high quality representation, but with no RSR data. So, I am developing a data synthesis pipeline. That is reflected by the rightmost arrow of the diagram.</p>
+<p>One of the main challenges of this project is that disfluency corpora contain RSR but no meaning representations, while the PMB has high-quality meaning representations but no RSR. So I am building a data synthesis pipeline. That is the rightmost arrow in the diagram.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -854,9 +854,9 @@ the SBN shown earlier
 <p>Other siblings of <em>weather</em> in the pool: <em>cloud</em>, <em>sunset</em>, <em>aurora</em>, <em>halo</em>, … The pool takes siblings only, so WordNet synonyms of <em>weather</em> are excluded.</p>
 </div>
 <aside class="notes">
-<p>Let’s walk it through step by step. But this is an intuitive demonstration, more details are still waiting to be settled.</p>
-<p>Fist, we choose a PMB pair from the corpus. For this walk through, we use the example seen earlier. Now, we have the natural language and its meaning representation.</p>
-<p>Next, we choose a word, for this word, we find its “sibling” in WordNet. For this case, we choose storm. Be awre, WordNet organises words, particularly nouns, by hypernymy. So the siblings of the word “weather” are also weather-related.</p>
+<p>Let’s walk through it step by step. This is an intuitive demonstration; some details are still being settled.</p>
+<p>First, we choose a PMB pair from the corpus. For this walkthrough, we use the example from earlier. Now we have the sentence and its meaning representation.</p>
+<p>Next, we choose a word, and for this word we find a “sibling” in WordNet. Here, we choose storm. WordNet organises words, especially nouns, in a hierarchy of more general and more specific terms. So the siblings of “weather” are also weather-related.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -885,7 +885,7 @@ the SBN shown earlier
 </div>
 <p>As with Berlin and Dublin, the item has a withdrawn and an accepted context, and both candidates compete for one role, the Theme of <em>like</em>.</p>
 <aside class="notes">
-<p>Now that we have all the material, the next step is to do lego on both side. We insert the word chosen <strong>in front of</strong> the orignal word, so the meaning of the original fluent is unchanged, it just has a reparandum, and so becomes an RSR sample.</p>
+<p>Now that we have all the material, the next step is to do Lego on both sides. We insert the chosen word <strong>in front of</strong> the original word. The meaning of the original sentence stays the same; it just gets a reparandum, and so it becomes an RSR example.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -928,7 +928,7 @@ the SBN shown earlier
 </table>
 <p>The contextual-fit threshold is set on 150 hand-labelled candidates and frozen before the corpus is filtered.</p>
 <aside class="notes">
-<p>After the synthesis, I will also run two rounds of quality check. The first is to make sure that the output is strucutrally correct. And the second is to make sure the samples are contextually fitted.</p>
+<p>After generation, I run two quality checks. The first makes sure the output is structurally correct. The second makes sure the reparandum fits its context.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -976,7 +976,7 @@ the SBN shown earlier
 </table>
 <p>The transformation succeeds at 99.7% of the sites where a competitor exists. These sites are the candidate pool <strong>before</strong> linguistic filtering and sampling; the sampling rule is fixed before training.</p>
 <aside class="notes">
-<p>To sum up, I am still buidling on the dataset, but PMB train gold split can yield more than sixteen thousand samples, so it should be sufficient for model training.</p>
+<p>To sum up, I am still building the dataset, but the PMB gold training split already gives more than sixteen thousand candidate sites, before filtering. That should be enough for training.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1077,7 +1077,7 @@ fluent PMB pairs<br>+ <strong>the same</strong> repaired sentences
 <p>Each setting is trained on Qwen3.5 at 2B, 9B and 27B <span class="citation" data-cites="qwenQwen35Native2026">(<a href="#/references" role="doc-biblioref" onclick="">Qwen Team 2026</a>)</span> with three seeds, 27 models in total. All use one instruction, which never says whether a sentence contains a repair.</p>
 </div>
 <aside class="notes">
-<p>Now, moving on the experiment design. I plan to use Qwen 3.5 in three sizes, all dense models, with three random seeds. For this project, I designed three settings, each setting has one more condition than the last one.</p>
+<p>Now to the experiment design. I plan to use Qwen3.5 in three sizes, all dense models, each with three random seeds. I designed three settings, and each one adds one thing to the one before.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1128,8 +1128,8 @@ Repair-aware
 <p>Repaired test sentences go only to the two parsers trained on them; the pilot already showed that a fluent-only parser keeps the reparandum. Ordinary sentences (the unmodified PMB test set) go to all three. No test sentence comes from a training document.</p>
 </div>
 <aside class="notes">
-<p>This set up provides a great advantage, as the whole experment is an ablation. By comparing the performance on fluent only vs.&nbsp;normalisation, we will see does adding RSR data and teaching the model to drop the reparandum and the editing expression hurt the parser’s performance on ordinary, fluent utterances.</p>
-<p>Whether the model learns the “CORRECTION-CONJUNCTION” extention is read from the repair-aware parser alone, in absolute terms: only this parser is taught the structure. Comparing repair-aware with normalisation answers a different question: does keeping the reparandum cost anything in the final meaning?</p>
+<p>This setup has a big advantage: the whole experiment is an ablation. By comparing fluent only with normalisation, we see whether adding RSR data, and teaching the model to drop the reparandum and the editing expression, hurts parsing of ordinary, fluent sentences.</p>
+<p>Whether the model learns the CORRECTION–CONJUNCTION extension is read from the repair-aware parser alone, in absolute terms: only this parser is taught the structure. Comparing repair-aware with normalisation answers a different question: does keeping the reparandum cost anything in the final meaning?</p>
 <p>[NOT SPOKEN] Goal: each setting adds one ingredient to the one above it, as on the training slide, so each step answers what that ingredient brings. Same vertical order as the training slide. Step 1 is not a scored comparison on repaired sentences: fluent only is not tested on them (never taught repairs). “Does it learn to drop storm” is answered by normalisation’s own results; the fluent-only side comes from the pilot (Gemma-2 9B, not Qwen3.5; same fluent-only training). On ordinary sentences, fluent only vs normalisation is a real comparison: the effect of seeing repaired sentences. Step 2 is the controlled comparison: same inputs, only the answer differs. Structure is read for repair-aware alone (absolute); the final request compares normalisation and repair-aware with the same ruler (next slide); on ordinary sentences, the effect of the new answer format, incl.&nbsp;repairs added to fluent input. Every repaired test sentence comes in two versions, with and without an editing expression, incl.&nbsp;the unseen “sorry”. Outputs are not corrected. Full matrix and breakdowns: Backup #/bk-tests.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
