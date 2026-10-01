@@ -42,20 +42,25 @@ ROLES = {
     "DayOfMonth", "DayOfWeek", "Decade", "MonthOfYear", "YearOfCentury",
     "Affector", "Context", "Equal", "Extent", "Precondition", "Measure",
     "Cause", "Order", "Participant", "FeatureOf",
-    # Attested in gold but missing from SBNSpec.ROLES -> the stock parser
-    # aborts on p36/d2375 and p30/d2358. Added here so parsing is lossless.
-    "CauserOf",
 }
 
-# Roles whose inverse to_penman_string() will normalise back to the base role.
-# NB: this is the *extended* set (project additions), cf. C6 of the notation doc.
-INVERTIBLE_ROLES = {
-    "InstanceOf", "AttributeOf", "ColourOf", "ContentOf", "PartOf", "SubOf",
-    "ThemeOf", "TimeOf", "AgentOf", "MannerOf", "Co-ThemeOf",
+# Every role that can take an index has an inverse (Bos 2021: R(x,y) <->
+# ROf(y,x)). Same rule as the block at the end of sbn_spec.py, which also puts
+# these in SBNSpec.INVERTIBLE_ROLES so to_penman_string() normalises them back.
+_CONSTANT_ONLY_ROLES = {
+    "Name", "ClockTime", "DayOfMonth", "DayOfWeek", "Decade", "MonthOfYear",
+    "YearOfCentury",
 }
-# Base role -> inverted form, restricted to inverses the scorer understands.
-INVERSE_OF = {r[: -len("Of")]: r for r in INVERTIBLE_ROLES if r.endswith("Of")}
-INVERSE_OF["Instance"] = "InstanceOf"
+_OF_ONLY_ROLES = {"Of", "MadeOf", "FeatureOf"}
+INVERTIBLE_ROLES = {
+    f"{r}Of" for r in ROLES
+    if not r.endswith("Of")
+    and r not in _CONSTANT_ONLY_ROLES | _OF_ONLY_ROLES | {"Proposition"}
+}
+ROLES |= INVERTIBLE_ROLES
+# Role -> its inverse, in both directions (ThemeOf -> Theme as well).
+INVERSE_OF = {r[: -len("Of")]: r for r in INVERTIBLE_ROLES}
+INVERSE_OF.update({inv: base for base, inv in list(INVERSE_OF.items())})
 
 SYNSET_PATTERN = re.compile(r"^(.+)\.(n|v|a|r|x)\.(\d+)$")
 IDX_PATTERN = re.compile(r"^([-+])(\d+)$")

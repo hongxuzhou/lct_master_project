@@ -251,6 +251,29 @@ class SBNSpec:
     VALUE_CONSTANT = r"^[A-Z]$"
 
 
+# Role inversion, added by Hongxu Zhou for repair-aware SBN -- Oct/2026.
+# Bos (2021, Variable-free DRS): "for any role R, we have that
+# R(x,y) <-> ROf(y,x)". The hand-written sets above only list the inverses
+# PMB happened to meet in its corpus, so every other inverse made the parser
+# abort (e.g. CauserOf, attested twice in gold). Here every role that can take
+# an index gets its inverse, in ROLES (so it parses) and in INVERTIBLE_ROLES
+# (so to_penman_string normalises it back for Smatch).
+# Not inverted: roles that only ever take a constant (in gold and by design),
+# Proposition (its target is a box), and roles that exist only in an Of form.
+_CONSTANT_ONLY_ROLES = {
+    "Name", "ClockTime", "DayOfMonth", "DayOfWeek", "Decade", "MonthOfYear",
+    "YearOfCentury",
+}
+_OF_ONLY_ROLES = {"Of", "MadeOf", "FeatureOf"}
+_INVERTED = {
+    f"{r}Of" for r in SBNSpec.ROLES
+    if not r.endswith("Of")
+    and r not in _CONSTANT_ONLY_ROLES | _OF_ONLY_ROLES | {"Proposition"}
+}
+SBNSpec.ROLES |= _INVERTED
+SBNSpec.INVERTIBLE_ROLES |= _INVERTED
+
+
 def split_comments(sbn_string: str) -> List[Tuple[str, Optional[str]]]:
     """
     Helper to remove starting comments and split the actual sbn and

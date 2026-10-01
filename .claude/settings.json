@@ -29,7 +29,8 @@
       "Bash(awk -F: '$1>490')",
       "WebFetch(domain:github.com)",
       "Bash(curl -sL -o fdb3.json https://raw.githubusercontent.com/DanielLin94144/Full-Duplex-Bench/main/v3/benchmark_data_v2.json)",
-      "Bash(awk '/\\\\{\\\\.notes\\\\}/{f=1;next} f&&/^:::/{f=0} f')"
+      "Bash(awk '/\\\\{\\\\.notes\\\\}/{f=1;next} f&&/^:::/{f=0} f')",
+      "Bash(/Users/hongxuzhou/miniconda3/envs/repairsbn/bin/python -c \"import ipykernel; print\\('ipykernel', ipykernel.__version__\\)\")"
     ],
     "additionalDirectories": [
       "/Users/hongxuzhou/Documents/GitHub/lct_master_project",
