@@ -4,6 +4,8 @@
 # port forwarding is needed.
 # Controlled by env vars from the .sub `environment` line:
 #   TAG        (optional) results file suffix, e.g. smoke
+#   SAMPLE     (optional) sample TSV, relative to the playground; default
+#              pinned_sample.tsv (round 1)
 #   LIMIT      (optional) only the first N sample rows
 #   WORKERS    (optional) parallel items, default 8
 #   REASONING  (optional) low/medium/high/xhigh, default high
@@ -17,7 +19,9 @@ VENV=$NETHOME/venvs/vllm
 CODE=$NETHOME/thesis_zone/llm_gen_playground
 MODEL_ID=meta-models/Muse-Glimmer-30B
 MODEL_PATH=${MODEL_PATH:-/scratch/common_models/Muse-Glimmer-30B}
-MAX_LEN=${MAX_LEN:-65536}
+# Room for the ~22k-token prompt, earlier turns' reasoning, and a 32768-token
+# turn (run_llm.py --max-tokens). 65536 in the first Muse Glimmer round.
+MAX_LEN=${MAX_LEN:-98304}
 [ -f "$MODEL_PATH/config.json" ] || { echo "no model at $MODEL_PATH (see setup log)"; exit 1; }
 
 export HF_HOME=$SCR/huggingface_cache
@@ -85,6 +89,7 @@ ARGS=(run --backend openai --base-url "http://127.0.0.1:$PORT/v1"
       --reasoning "${REASONING:-high}"
       --workers "${WORKERS:-8}")
 [ -n "$TAG" ] && ARGS+=(--tag "$TAG")
+[ -n "$SAMPLE" ] && ARGS+=(--sample "$SAMPLE")
 [ -n "$LIMIT" ] && ARGS+=(--limit "$LIMIT")
 
 cd "$CODE"

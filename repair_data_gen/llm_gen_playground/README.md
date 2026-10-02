@@ -314,12 +314,12 @@ pool of 9521:
 | type | site | eligible |
 |---|---|---|
 | `content_word` | a concept that is not a placeholder | 9501 |
-| `constant_name` | a `Name` constant | 3254 |
+| `constant_name` | a `Name` constant (not `Name ?`, since 2026-10-02: 3154) | 3254 |
 | `constant_number` | a plain number (`Quantity 3`, `EQU 100`), not a year or time | 799 |
 | `constant_temporal` | `ClockTime`, `DayOfWeek`, `DayOfMonth`, `MonthOfYear`, `YearOfCentury` | 311 |
 | `tense` | a verb with `Time` to an adjacent `time.n.08 TPR/EQU/TSU now` in the same box | 7290 |
 | `edge_label` | a verb with an index-valued `Destination`/`Source`/`Location` | 1871 |
-| `forwarding` | noun subject, its verb, and the verb's tense `time.n.08`, adjacent, as in example Q | 4574 |
+| `forwarding` | noun subject, its verb, and the verb's tense `time.n.08`, adjacent, as in example Q; since 2026-10-02 not a quantifier subject built with `NEGATION` (nobody, everyone) and not a verb the sentence elides ("so do I", "Neither Tom nor Mary goes"): 4522. Pronoun subjects stay | 4574 |
 
 Selection: no length filter (lengths follow gold, 2–17 words in this
 sample, so a length preference of the model shows up in `no_site` and error
@@ -406,6 +406,133 @@ believable slip, and whether the sentence reads naturally. Reading all 68:
 most are natural; weaker ones include "I'm from, on a boat" and "Rod
 Stewart, Cat Stevens is not a cat", where the name swap breaks the joke of
 the next sentence.
+
+# First round: results (Muse Glimmer 30B, 2026-10-02)
+
+Same 70 documents, base repairs only (no interregnum, `nl_left`/`nl_right`),
+prompt documents as before the `?` additions. Harness: `--backend openai`,
+vLLM 0.30.0+cu129 on one H100, BF16, reasoning `high`, temperature 1.0,
+top-p 0.95, top-k 64, seed 13, 8 workers, 16384 output tokens per turn
+(`results/raw/meta-models_Muse-Glimmer-30B/run_meta_*.json`). Files:
+`results/meta-models_Muse-Glimmer-30B.tsv`, `.checked.tsv`, raw replies.
+
+| type | n | answered | no_site | failed | structural checks | concepts in WordNet | untouched gold edges kept |
+|---|---|---|---|---|---|---|---|
+| content word | 10 | 10 | 0 | 0 | 10 | 10 | 10 |
+| constant: name | 10 | 10 | 0 | 0 | 10 | 10 | 10 |
+| constant: number | 10 | 9 | 0 | 1 | 9 | 9 | 9 |
+| constant: temporal | 10 | 9 | 0 | 1 | 9 | 9 | 9 |
+| tense | 10 | 10 | 0 | 0 | 10 | 10 | 10 |
+| edge label | 10 | 10 | 0 | 0 | 10 | 10 | 10 |
+| forwarding | 10 | 10 | 0 | 0 | 10 | 10 | 10 |
+| **all** | 70 | 68 | 0 | 2 | 68 | 68 | 68 |
+
+**Failed.** `p83/d2955` (number) and `p31/d1973` (temporal) hit the
+16384-token limit in the first turn, inside the reasoning, with no tool call
+and no answer (62–66k characters of reasoning against a median of 28k for
+answered items). Both circle: one over which temporal constant to change
+although the sentence has `YearOfCentury 1705`, the other over where
+`nl_left` should end. They count as failures of this round, not to be
+retried; a production run would raise the limit and report how many items
+needed it.
+
+**Oracle (content word).** 9 of 10 equal `build_repair`. `p10/d0798` differs
+for the same reason as Opus: the model moves the symmetric `EQU`, which
+`build_repair` cannot.
+
+**Rest of the sentence.** `check_repair_part.py` now also checks that the
+repair part is the end of the gold sentence and the gold text before it
+opens the reparandum part (possible since the split). It flags `p31/d1485`,
+"Neither John goes, Tom goes to the store nor Mary goes to the store",
+which repeats material the gold sentence elides; the SBN is correct. Opus
+failed on the same document in a different way, so the selection error
+noted above is confirmed. The other flag is `p23/d1567` ("Tom's" written
+out as "Tom is"), a false alarm.
+
+**Found by reading, not by any check.**
+
+- *A repair inside a quantifier.* `p99/d2900`, "He appreciated, nobody
+  appreciated his sacrifice". "Nobody" is built with `NEGATION`, which §7
+  rules out; Opus answered `no_site` here. The `CORRECTION` box hangs off
+  the negated box, so the withdrawn "he appreciated" is represented as
+  negated. The SBN passes every check and means the wrong thing.
+- *Synonyms as reparanda.* `rhythm.n.01` → `beat.n.03` (`p27/d1965`) is one
+  WordNet synset: no change of meaning, which `task.md` rules out. Close to
+  it: `apparatus` → `equipment` and `believe` → `trust` (hypernyms), `late`
+  → `overdue`. Opus's ten content-word pairs include none of these (sisters
+  or less related). `wn_lookup.py` shows definitions only, so a same-synset
+  pair has two identical definitions, which the model did not act on.
+- *Never `no_site`.* Muse answered every item, including the two Opus
+  declined (`p99/d2900` "Nobody", `p29/d1811` "I"). Forwarding replaced a
+  pronoun subject in 5 of 10 items ("He loves, I love…"), plus "Nobody".
+- *Surface.* "This Tuesday, This Wednesday" (capital in mid-sentence);
+  weaker readings as in the Opus round: "I'm from a boat, on a boat", "an
+  accident from the freeway", "John, Cat Stevens is not a cat". Edge-label
+  repairs use `Source` in 7 of 10.
+
+**Site choice (content word).** As with Opus, none of the ten sites needs ④
+or ⑤ (devices: ① 4, ② 4, none 2). Two models now chose no hard site on the
+same ten documents, which strengthens the hypothesis in the Opus section,
+though the two draws are not independent. In the smoke run, at the same
+temperature, Muse chose a subject (⑤) on `p04/d2647` and `p10/d0798`, so
+site choice varies between runs; per-request seeds do not make it
+reproducible under batching.
+
+**Reasoning length.** Median 28k characters of reasoning per answered item
+(interquartile 24k–35k; median 7.8k output tokens), longest for tense (33k)
+and shortest for content word (22k). The three smoke items (11k–17k) were
+not representative. The two failures also have a slightly higher rate of
+self-checking phrases ("wait", "let me recount", …: 1.3 against 1.1 per
+1000 characters).
+
+**Tool use.** Median four lookups per content-word item (Opus: one), two
+for forwarding, one for tense, none for the other types.
+
+**Decided after this round (2026-10-02).**
+
+- *Token limit* raised to 32768 per turn (`run_llm.py --max-tokens`), with
+  vLLM's `--max-model-len` at 98304 to leave room for the prompt and earlier
+  turns. Each raw reply now records `turn_output_tokens`, so the next round
+  can report how many items went past the old 16384.
+- *Synonyms are filtered.* `analyse_run.py` adds `wn_relation` for content
+  words and counts `same_synset` as a failure. `hypernym`, `hyponym` and
+  `similar_to` are recorded only: correcting to a more exact or more general
+  word ("apparatus, equipment") can be a natural repair, even if it is close
+  to a shortcut from the generator's side. On this round: `same_synset` 1,
+  `hypernym` 1, `hyponym` 1, `other` 7 (Opus: `other` 10).
+- *Fixed in `analyse_run.py`:* the run's `parse` column (did the reply parse)
+  shared its name with the SBN reader check `parse`, so unanswered rows were
+  left out of the failure list. The reply status is now kept as `reply`. The
+  counts in both result sections are unchanged.
+
+# Round 2 (planned, 2026-10-02)
+
+Round 1 showed what the errors look like; round 2 is to estimate how often
+they occur, per type, before any larger synthesis. All seven types take
+part: the RP's main corpus is content words only because the rule pipeline
+had only reached that type, not because the others were ruled out.
+
+- `pinned_sample_r2.tsv`: 50 documents per type (350), seed 13, drawn with
+  `select_docs.py --exclude pinned_sample.tsv`, so none from round 1 and none
+  used as a prompt example; 28 have `?` in gold. No interregnum column.
+- Everything changed after round 1 applies: base repairs with
+  `nl_left`/`nl_right`, `?` in the manual and the notation, the selection
+  rules for `Name ?` and forwarding, 32768 tokens per turn.
+- Job: `hpc/run_r2.sub` (16 workers), results in
+  `results/meta-models_Muse-Glimmer-30B.r2.tsv`.
+- Human audit of about 100 items, two questions each: does the SBN mean what
+  the sentence says (the `p99/d2900` kind of error), and does the repair read
+  naturally.
+
+Reference thresholds for a type to go into larger synthesis, written down
+before the run so the results do not move them, but to be revisited once
+real output exists: automatic checks pass on ≥ 95% of answered items; no
+answer on ≤ 3%; SBN meaning correct on ≥ 90% of audited items; natural on
+≥ 80%.
+
+Larger synthesis does not mean every PMB document: the RP samples to a quota
+with at most two sites per document. Selection runs locally and only the
+sample TSV goes to the cluster, so PMB itself never needs to be there.
 
 # Deferred
 

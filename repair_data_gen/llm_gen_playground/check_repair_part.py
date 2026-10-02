@@ -74,6 +74,16 @@ for r in rows:
         if not left.rstrip(",").lower().endswith(surf.lower()):
             probs.append(f"onset: text before the join does not end with "
                          f"reparandum_surface {surf!r}")
+        # Rest of the sentence unchanged (task.md step 4): the repair part is
+        # the end of the gold sentence, and the gold text before it opens the
+        # reparandum part. Only the first letter may change case ("The fly"
+        # -> "the fly"). Contractions written out ("Tom's" -> "Tom is") are
+        # flagged too; read those by hand.
+        gold = r["nl_clean"].strip()
+        cut = len(gold) - len(right)
+        if cut < 0 or gold[cut:].lower() != right.lower() or not left.startswith(gold[:cut].rstrip()):
+            probs.append("rest of the sentence changed: repair part is not the "
+                         "end of the gold sentence")
     if not in_order([w.lower() for w in WORD.findall(r["nl_clean"])], [w.lower() for w in WORD.findall(nl)]):
         probs.append("gold words not kept in order")
     if probs:

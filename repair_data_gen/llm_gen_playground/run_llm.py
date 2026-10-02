@@ -181,6 +181,7 @@ def openai_agent(prompt: str, args) -> tuple[str, float]:
     messages = [{"role": "system", "content": system_prompt()},
                 {"role": "user", "content": prompt}]
     usage = {"input_tokens": 0, "output_tokens": 0, "cache_read_input_tokens": 0}
+    turn_tokens: list[int] = []
     out = {"is_error": False, "subtype": "success", "result": "", "num_turns": 0}
     t0 = time.time()
     with tempfile.TemporaryDirectory(prefix="rsr_llm_") as work:
@@ -202,6 +203,9 @@ def openai_agent(prompt: str, args) -> tuple[str, float]:
             usage["input_tokens"] += u.get("prompt_tokens", 0) - cached
             usage["cache_read_input_tokens"] += cached
             usage["output_tokens"] += u.get("completion_tokens", 0)
+            # per turn, to count how many items needed more than the first
+            # round's 16384-token limit (README, Muse Glimmer round)
+            turn_tokens.append(u.get("completion_tokens", 0))
             choice = resp["choices"][0]
             msg = choice["message"]
             content = msg.get("content") or ""
@@ -235,6 +239,7 @@ def openai_agent(prompt: str, args) -> tuple[str, float]:
         else:
             out.update(is_error=True, subtype="error_max_turns")
     out["usage"] = usage
+    out["turn_output_tokens"] = turn_tokens
     out["messages"] = messages[1:]
     return json.dumps(out, ensure_ascii=False), time.time() - t0
 
@@ -249,7 +254,8 @@ def write_run_meta(raw_dir: Path, args) -> None:
     """Record the harness with the results (README §5: a result is about a
     model with a harness)."""
     meta = {"started": time.strftime("%Y-%m-%dT%H:%M:%S"), "backend": args.backend,
-            "model": args.model, "workers": args.workers}
+            "model": args.model, "workers": args.workers,
+            "sample": str(getattr(args, "sample", ""))}
     if args.backend == "openai":
         meta |= {k: getattr(args, k) for k in (
             "base_url", "tool_mode", "reasoning", "temperature", "top_p",
@@ -333,7 +339,7 @@ def result_row(row: dict, model: str, raw: str, secs: float, raw_file: Path) -> 
 
 
 def cmd_run(args) -> None:
-    rows = list(csv.DictReader(open(SAMPLE, encoding="utf-8"), delimiter="\t"))
+    rows = list(csv.DictReader(open(args.sample, encoding="utf-8"), delimiter="\t"))
     if args.only:
         rows = [r for r in rows if r["doc_id"] in set(args.only)]
     safe_model = re.sub(r"[^\w.-]", "_", args.model) + (f".{args.tag}" if args.tag else "")
@@ -394,7 +400,8 @@ def add_backend_args(p: argparse.ArgumentParser) -> None:
     p.add_argument("--top-p", type=float, default=0.95)
     p.add_argument("--top-k", type=int, default=64)
     p.add_argument("--seed", type=int, default=13)
-    p.add_argument("--max-tokens", type=int, default=16384,
+    # 16384 in the first Muse Glimmer round, where 2 of 70 items ran out
+    p.add_argument("--max-tokens", type=int, default=32768,
                    help="per model turn, reasoning included")
     p.add_argument("--workers", type=int, default=1,
                    help="parallel items; with vLLM, 8 lets the server batch")
@@ -405,6 +412,8 @@ def main() -> None:
     sub = ap.add_subparsers(dest="cmd", required=True)
     r = sub.add_parser("run")
     add_backend_args(r)
+    r.add_argument("--sample", type=Path, default=SAMPLE,
+                   help="sample TSV from select_docs.py (default: the first round's)")
     r.add_argument("--limit", type=int, default=0)
     r.add_argument("--only", nargs="*")
     r.add_argument("--tag", default="",

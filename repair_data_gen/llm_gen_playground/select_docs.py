@@ -2,6 +2,7 @@
 Pick the gold documents for one LLM-playground run, by repair type.
 
     python3 select_docs.py [--per-type 10] [--seed 13] [--out pinned_sample.tsv]
+                           [--exclude earlier_sample.tsv ...]
 
 For each repair type of prompt_docs/repair_notation.md §4, a document is
 eligible when its gold SBN offers at least one site of that type (the
@@ -17,9 +18,12 @@ Choices:
   points outside the sequence);
 - constant types draw at most one document per constant value, so that the
   name cell is not mostly "Tom" (1673 of 2188 male names in gold);
-- the interregnum is fixed here, as generate_repairs.py does it: 30% marked,
-  the marker drawn from I mean / no / no wait / actually (`sorry` is kept
-  for the test set).
+- `--exclude` leaves out documents of earlier samples, so a later round
+  draws fresh ones;
+- no interregnum: the model writes base repairs only, and editing
+  expressions are inserted later by script (README §1, decided 2026-10-02).
+  The first round's sample still has the column, from when the interregnum
+  was assigned here (30% marked, as generate_repairs.py does it).
 """
 from __future__ import annotations
 
@@ -36,6 +40,7 @@ ROOT = HERE.parents[1]
 sys.path.insert(0, str(ROOT / "repair_data_gen"))
 sys.path.insert(0, str(HERE))
 
+from nltk.corpus import wordnet as wn  # noqa: E402
 from sbn_lin import IDX_PATTERN, read_split  # noqa: E402
 from validate_with_pmb_parser import check  # noqa: E402
 from wn_lookup import PLACEHOLDERS, PMB_ONLY  # noqa: E402
@@ -52,9 +57,6 @@ EXAMPLE_DOCS = {
     "p18/d1394",   # example R (question slot), added 2026-10-02
 }
 
-INTERREGNA = ["I mean", "no", "no wait", "actually"]
-INTERREGNUM_RATE = 0.3
-
 TYPES = ("content_word", "constant_name", "constant_number",
          "constant_temporal", "tense", "edge_label", "forwarding")
 TEMPORAL_ROLES = {"ClockTime", "DayOfWeek", "DayOfMonth", "MonthOfYear", "YearOfCentury"}
@@ -62,6 +64,10 @@ EDGE_LABEL_ROLES = {"Destination", "Source", "Location"}
 SUBJECT_ROLES = {"Agent", "Theme", "Experiencer", "Patient", "Pivot"}
 TENSE_OPS = {"TPR", "EQU", "TSU"}
 NUMBER = re.compile(r"^\d+(\.\d+)?$")
+# referents of "nobody", "everybody", "nothing", "everything"
+QUANTIFIED = {"person.n.01", "entity.n.01", "thing.n.12"}
+BE_FORMS = {"be", "is", "are", "am", "was", "were", "been", "being", "s", "re", "m",
+            "isn", "aren", "wasn", "weren"}           # "isn't" -> isn, t
 
 
 def _target(c, val: str) -> int | None:
@@ -129,11 +135,55 @@ def site_edge_label(doc):
             if r in EDGE_LABEL_ROLES and _target(c, v) is not None]
 
 
+def _quantifier_restrictor(doc, x) -> bool:
+    """x is the referent of a quantifier built with NEGATION ("nobody",
+    "everybody": `NEGATION <1 person.n.01 …`): the first concept of a box that
+    NEGATION opens, with no anchor saying who it is. Replacing it is
+    quantifier replacement, which the notation cannot represent (KB, "Noted
+    Limitations"). A pronoun before a negation ("I never …",
+    `person.n.01 EQU speaker NEGATION <1 …`) is not affected.
+    """
+    if x.synset not in QUANTIFIED:
+        return False                      # "She always …": a pronoun in the
+                                          # scope of "always" stays eligible
+    opened = any(s.name == "NEGATION" and s.new_box == x.box
+                 and s.after_concept == x.pos for s in doc.separators)
+    # any constant says who it is: EQU speaker ("I"), Sub speaker ("we"), Name
+    anchored = any(_target(x, v) is None for _, v in x.roles)
+    return opened and not anchored
+
+
+def _said_as_often(doc, v) -> bool:
+    """The verb is uttered at least as often as the SBN has it.
+
+    Gold writes an elided verb out: "Neither Tom nor Mary goes to the store"
+    has `go.v.01` in both clauses but "goes" once, so "Tom goes" was never
+    said and cannot be restarted from (forwarding needs subject and verb on
+    the surface). Inflection is undone with WordNet's morphy; a multi-word
+    lemma (`pick_up`) is matched on its first word.
+    """
+    head = v.lemma.split("_")[0]
+    words = [w.lower() for w in re.findall(r"[A-Za-z]+(?:-[A-Za-z]+)*", doc.sentence)]
+    if head == "be":
+        said = sum(w in BE_FORMS for w in words)      # "Tom's" -> tom, s
+    else:
+        # every base form, not only the first: "saw" is see or saw,
+        # "found" find or found, "fell" fall or fell. The prefix test covers
+        # forms WordNet cannot reduce ("chickened out", "speakest"); it can
+        # only keep a site, never drop one.
+        said = sum(head in ([w] + wn._morphy(w, wn.VERB))
+                   or (len(head) >= 3 and w.startswith(head)) for w in words)
+    written = sum(c.synset == v.synset for c in doc.concepts)
+    return said >= written
+
+
 def site_forwarding(doc):
     """A subject immediately followed by its verb, then the verb's tense time.n.08.
 
     The pattern of example Q: `X V <subject role> -1 … Time +1 time.n.08 …`,
-    all three in one box.
+    all three in one box. Pronoun subjects (I, we, he, she) count; quantifier
+    subjects built with NEGATION do not, and neither does a verb the sentence
+    elides (both decided 2026-10-02, after p99/d2900 and p31/d1485).
     """
     out = []
     cs = doc.concepts
@@ -144,7 +194,7 @@ def site_forwarding(doc):
         subj = any(r in SUBJECT_ROLES and _target(v, val) == i for r, val in v.roles)
         tense = _is_tense_time(t) and any(
             r == "Time" and _target(v, val) == i + 2 for r, val in v.roles)
-        if subj and tense:
+        if subj and tense and not _quantifier_restrictor(doc, x) and _said_as_often(doc, v):
             out.append((i, x.synset))
     return out
 
@@ -171,14 +221,18 @@ def main() -> None:
     ap.add_argument("--per-type", type=int, default=10)
     ap.add_argument("--seed", type=int, default=13)
     ap.add_argument("--out", type=Path, default=HERE / "pinned_sample.tsv")
+    ap.add_argument("--exclude", type=Path, nargs="*", default=[],
+                    help="earlier sample TSVs whose documents are not drawn again")
     args = ap.parse_args()
     rng = random.Random(args.seed)
 
+    excluded = {r["doc_id"] for p in args.exclude
+                for r in csv.DictReader(open(p, encoding="utf-8"), delimiter="\t")}
     docs = read_split(GOLD)
     unreadable = [d for d, _ in read_split.skipped]  # type: ignore[attr-defined]
     pool, broken = [], []
     for d in docs:
-        if d.doc_id in EXAMPLE_DOCS:
+        if d.doc_id in EXAMPLE_DOCS or d.doc_id in excluded:
             continue
         # check() looks for CORRECTION/CONJUNCTION too; only the gold-level
         # checks matter here.
@@ -193,6 +247,7 @@ def main() -> None:
 
     print(f"gold docs {len(docs) + len(unreadable)}: unreadable by sbn_lin "
           f"{len(unreadable)}, used as prompt examples {len(EXAMPLE_DOCS)}, "
+          f"in earlier samples {len(excluded)}, "
           f"broken gold {len(broken)} {[d.doc_id for d in broken]}, "
           f"pool {len(pool)}")
     print("eligible documents per type:")
@@ -219,12 +274,9 @@ def main() -> None:
                 seen_values |= vals
             used.add(d.doc_id)
             picked += 1
-            inter = (rng.choice(INTERREGNA)
-                     if rng.random() < INTERREGNUM_RATE else "none")
             rows.append({
                 "doc_id": d.doc_id,
                 "repair_type": t,
-                "interregnum": inter,
                 "nl_clean": d.sentence,
                 "sbn_clean": d.raw,
                 "n_concepts": len(d.concepts),
@@ -239,9 +291,7 @@ def main() -> None:
         w = csv.DictWriter(f, fieldnames=list(rows[0]), delimiter="\t")
         w.writeheader()
         w.writerows(rows)
-    marked = sum(r["interregnum"] != "none" for r in rows)
-    print(f"\nwrote {len(rows)} rows to {args.out} "
-          f"({marked} with an interregnum)")
+    print(f"\nwrote {len(rows)} rows to {args.out}")
     by = collections.Counter(r["repair_type"] for r in rows)
     print("  " + ", ".join(f"{t} {by[t]}" for t in TYPES))
 
