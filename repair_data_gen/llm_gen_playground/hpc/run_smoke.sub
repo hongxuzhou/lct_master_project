@@ -4,8 +4,9 @@ initialdir = /nethome/honzhou
 executable = /nethome/honzhou/thesis_zone/llm_gen_playground/hpc/run.sh
 
 # Smoke test: 3 items, separate results file (results/<model>.smoke.tsv).
-# Fill TOOL_PARSER / REASONING_PARSER from the setup log if it listed any.
-environment = "TAG=smoke LIMIT=3 WORKERS=3 TOOL_MODE=text"
+# vLLM >= 0.28 ships muse_glimmer parsers. If tool calls fail to parse, fall
+# back to TOOL_MODE=text with both parser variables removed.
+environment = "TAG=smoke LIMIT=3 WORKERS=3 TOOL_MODE=auto TOOL_PARSER=muse_glimmer REASONING_PARSER=muse_glimmer"
 
 output = /scratch/hongxuzhou/logs/llm_gen/smoke.$(ClusterId).out
 error  = /scratch/hongxuzhou/logs/llm_gen/smoke.$(ClusterId).err

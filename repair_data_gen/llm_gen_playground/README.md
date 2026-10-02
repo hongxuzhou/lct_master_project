@@ -35,12 +35,25 @@ section.
   `prompt_docs/repair_notation.md` §4), and the agent-facing reference
   material (§3). The type is given, not chosen by the model, so that every
   type is covered and each can be scored on its own.
-- **Interregnum** is an input too: `none`, or one of I mean · no · no wait ·
-  actually. The harness assigns it as `generate_repairs.py` does (30%
-  marked, marker drawn at random), so unmarked repairs stay the majority.
-  `sorry`, the fifth marker of `DESIGN.md` step 5, is reserved for the test
-  set, to probe whether a trained model generalises to an unseen marker; it
-  is never shown or generated here.
+- **No interregnum** (decided 2026-10-02, before the Muse Glimmer run). The
+  model writes the base repair only ("The gnat, the fly buzzes."), as
+  `DESIGN.md` steps 3 and 5 order it for the rule pipeline. An editing
+  expression does not change the SBN, so adding one is a fixed string edit
+  at the repair onset, which a script does better than a model; and only a
+  scripted insertion gives the RP's matched test pairs (same repair, with
+  and without an expression). Insertion is deferred until the quality of
+  the base data has been assessed. The `interregnum` column of
+  `pinned_sample.tsv` (assigned for the Opus trial) is not used; results
+  carry `none`. The prompt documents' examples keep their interregna, since
+  the notation is unchanged; `task.md` tells the model to leave them out,
+  and `check_repair_part.py` flags any it writes.
+- **Repair onset.** The model returns the sentence in two parts, `nl_left`
+  (to the end of the reparandum) and `nl_right` (from the start of the
+  repair). The harness joins them with ", " into `nl_repair` and records
+  `repair_onset`, the character offset where the repair starts: the
+  interruption point, and the place an editing expression will go. The
+  split is asked for instead of an offset because models count characters
+  badly.
 - **Tool**: `wn_lookup.py`, a WordNet 3.0 dictionary and the only tool.
   `senses <lemma> <pos>` lists every sense with its definition; `check
   <lemma.pos.NN>` says whether a concept exists. Points that matter:
@@ -82,12 +95,13 @@ downstream code reads both pipelines and the two can be joined on `doc_id`:
 |---|---|
 | `doc_id`, `nl_clean`, `sbn_clean` | gold input |
 | `repair_type` | input: `content_word` / `constant_name` / `constant_number` / `constant_temporal` / `tense` / `edge_label` / `forwarding` |
-| `interregnum` | input |
+| `interregnum` | `none` in this round (base repairs only) |
 | `status`, `reason` | model: `ok` or `no_site` |
 | `site_index` | model: position of the repaired concept in the gold SBN (what `build_repair` takes as `i`) |
 | `repair_synset` | model's `site_synset` |
 | `reparandum_value` | model: the new constant, tense operator or role, where the synset does not change |
-| `nl_repair`, `sbn_repair` | model |
+| `nl_repair`, `sbn_repair` | model (`nl_repair` joined from `nl_left` and `nl_right`) |
+| `repair_onset` | harness: `len(nl_left) + 2`, the character offset of the repair in `nl_repair` |
 | `reparandum_synset`, `reparandum_surface` | model |
 | `repair_pos` | derived offline from `repair_synset` |
 | `devices` | model self-report, `\|`-separated: `d1_drop_role`, `d2_invert_role`, `d3_dummy_equ`, `d4_movement`, `d5_anchor_dummy` |
@@ -308,7 +322,8 @@ one document per constant value, so the name cell is not mostly "Tom".
 `check_untouched.py` (every gold edge away from the repair site survives,
 after normalising role and operator inversion), `check_repair_part.py`
 (R5, reparandum differs from repair, interregnum as assigned, gold words
-kept in order). Each of the two added checks was first shown to catch
+kept in order; for runs with `repair_onset`, also a single ", " at the
+onset and `reparandum_surface` ending the text before it). Each of the two added checks was first shown to catch
 deliberately broken inputs.
 
 | type | n | answered | no_site | structural checks | concepts in WordNet | untouched gold edges kept |

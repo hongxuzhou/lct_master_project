@@ -30,10 +30,21 @@ command -v uv || curl -LsSf https://astral.sh/uv/install.sh | sh
 uv --version
 
 echo "== venv"
-[ -x "$VENV/bin/python" ] || uv venv --python 3.12 "$VENV"
-# The nodes' driver supports CUDA 12.8: pin the torch build to it, or a newer
-# default wheel (cu13x) installs fine here and then fails on the GPU.
-uv pip install --python "$VENV/bin/python" --torch-backend=cu128 vllm nltk
+# Muse Glimmer (architecture + muse_glimmer tool/reasoning parsers) needs
+# vLLM >= 0.28. An unpinned install under --torch-backend=cu128 silently
+# resolved to 0.24.0, which has neither: releases since 0.28 are built for
+# CUDA 12.9 or 13.0 only. The nodes' driver reports CUDA 12.8; CUDA 12.x
+# minor-version compatibility lets a cu129 build run on it, cu130 would not.
+# So: the release's cu129 wheel, pinned, with the cu129 torch.
+VLLM_VERSION=0.30.0
+CU=cu129
+WHEEL=https://github.com/vllm-project/vllm/releases/download/v$VLLM_VERSION/vllm-$VLLM_VERSION%2B$CU-cp38-abi3-manylinux_2_28_x86_64.whl
+export UV_LINK_MODE=copy   # cache on /scratch, venv on /nethome: no hardlinks
+if [ "$("$VENV/bin/python" -c 'import vllm; print(vllm.__version__)' 2>/dev/null)" != "$VLLM_VERSION+$CU" ]; then
+    rm -rf "$VENV"         # start clean rather than upgrade a cu128 venv in place
+    uv venv --python 3.12 "$VENV"
+    uv pip install --python "$VENV/bin/python" --torch-backend=$CU "vllm @ $WHEEL" nltk
+fi
 
 echo "== WordNet"
 "$VENV/bin/python" -m nltk.downloader -d "$NETHOME/nltk_data" wordnet
@@ -62,6 +73,7 @@ print("transformers", transformers.__version__, "| vllm", vllm.__version__)
 from vllm import ModelRegistry
 print("$ARCH supported:", "$ARCH" in ModelRegistry.get_supported_archs())
 EOF
-echo "-- parser names mentioning muse/glimmer/atem (empty = none; use TOOL_MODE=text):"
-"$VENV/bin/vllm" serve --help=all 2>/dev/null \
-    | grep -io '[a-z0-9_]*\(muse\|glimmer\|atem\)[a-z0-9_]*' | sort -u || true
+echo "-- vLLM source files mentioning muse_glimmer (parsers expected; empty = use TOOL_MODE=text):"
+grep -rl muse_glimmer "$VENV"/lib/python3.12/site-packages/vllm --include=*.py | sed "s|$VENV/||" || true
+echo "-- weights (expect ~60G):"
+du -sh "$MODEL_DIR"; ls -la "$MODEL_DIR"

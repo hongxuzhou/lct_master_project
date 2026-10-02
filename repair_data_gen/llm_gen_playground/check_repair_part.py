@@ -57,12 +57,23 @@ for r in rows:
     if sig(rep) == sig(fix[:len(rep)]) and [ [x for x,_ in c.roles] for c in rep] == [[x for x,_ in c.roles] for c in fix[:len(rep)]]:
         probs.append("reparandum identical to repair")
     nl = r["nl_repair"]
-    inter = r["interregnum"]
+    inter = r.get("interregnum", "none")
     has = [m for m in INTER if re.search(rf"(^|[ ,]){re.escape(m)}([ ,]|$)", nl, re.I)]
     if inter != "none" and inter.lower() not in [h.lower() for h in has]:
         probs.append(f"interregnum {inter!r} missing")
     if inter == "none" and has and not any(w in r["nl_clean"].lower().split() for w in [h.lower() for h in has]):
         probs.append(f"unrequested interregnum {has}")
+    # Repair onset (runs with nl_left/nl_right only): the join is a single
+    # ", ", and the text before it ends with the reported reparandum.
+    if r.get("repair_onset"):
+        k = int(r["repair_onset"])
+        left, right = nl[:k - 2], nl[k:]
+        if left.endswith(",") or right.startswith(","):
+            probs.append("onset: extra comma at the join")
+        surf = r["reparandum_surface"].strip()
+        if not left.rstrip(",").lower().endswith(surf.lower()):
+            probs.append(f"onset: text before the join does not end with "
+                         f"reparandum_surface {surf!r}")
     if not in_order([w.lower() for w in WORD.findall(r["nl_clean"])], [w.lower() for w in WORD.findall(nl)]):
         probs.append("gold words not kept in order")
     if probs:

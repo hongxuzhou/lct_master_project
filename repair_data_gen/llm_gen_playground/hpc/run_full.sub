@@ -6,7 +6,7 @@ executable = /nethome/honzhou/thesis_zone/llm_gen_playground/hpc/run.sh
 # Full first round: all 70 rows of pinned_sample.tsv. Resumable: rows already
 # in results/<model>.tsv are skipped. Use the same TOOL_MODE and parsers as the
 # smoke run that worked.
-environment = "WORKERS=8 TOOL_MODE=text"
+environment = "WORKERS=8 TOOL_MODE=auto TOOL_PARSER=muse_glimmer REASONING_PARSER=muse_glimmer"
 
 output = /scratch/hongxuzhou/logs/llm_gen/full.$(ClusterId).out
 error  = /scratch/hongxuzhou/logs/llm_gen/full.$(ClusterId).err

@@ -13,10 +13,13 @@ Each request gives you:
   `constant_number`, `constant_temporal`, `tense`, `edge_label`,
   `forwarding` (self-repair document §4; the three `constant_` types are
   §4.2 with a name, a number, or a time or date).
-- **Interregnum**: the words to put between reparandum and repair
-  ("I mean", "no", "no wait", "actually"), or `none`, in which case
-  the repair follows the reparandum directly after a comma.
 - **Gold sentence** and **gold SBN**.
+
+You write the repair **without an interregnum**: the repair follows the
+reparandum directly after a comma ("The gnat, the fly buzzes."). The
+examples in the self-repair document mostly have one ("I mean", "no"); leave
+it out all the same. It is added to the sentence later, and it does not
+change the SBN.
 
 ## Steps
 
@@ -38,12 +41,14 @@ Each request gives you:
    - For a constant, keep the kind of value and keep the concept: a man's
      name on `male.n.02`, a woman's name on `female.n.02`, a country on
      `country.n.02`, a number for a number, a weekday for a weekday.
-4. **Write the repaired sentence.** Insert the reparandum, the interregnum
-   (if any) and the repair into the gold sentence, with commas around the
-   interregnum. Inflect the reparandum to fit ("chases, I mean, chased").
-   Repeat a determiner or preposition before the repair where a speaker
-   would ("the gnat, I mean, the fly"). Leave the rest of the sentence as it
-   is.
+4. **Write the repaired sentence, in two parts.** `nl_left` runs from the
+   start of the sentence to the end of the reparandum; `nl_right` runs from
+   the start of the repair to the end of the sentence. They are joined with
+   ", " to give the repaired sentence, so put no comma at the end of
+   `nl_left` and none at the start of `nl_right`. Inflect the reparandum to
+   fit ("chases, chased"). Repeat a determiner or preposition before the
+   repair where a speaker would ("the gnat, the fly"); the repeated word
+   belongs to `nl_right`. Leave the rest of the sentence as it is.
 5. **Write the repaired SBN.** Start from the gold SBN. Insert
    `CORRECTION <1`, the reparandum, `CONJUNCTION <2` and the repair as the
    repair type requires. Apply the toolkit (§3). Then recompute every index
@@ -81,7 +86,8 @@ object in a ```json block. Nothing may follow it.
   "reparandum_synset": "gnat.n.01",
   "reparandum_value": "",
   "reparandum_surface": "gnat",
-  "nl_repair": "The gnat, I mean, the fly buzzes.",
+  "nl_left": "The gnat",
+  "nl_right": "the fly buzzes.",
   "sbn_repair": "entity.n.01 CORRECTION <1 gnat.n.01 EQU -1 CONJUNCTION <2 fly.n.01 EQU -2 buzz.v.01 Agent -3",
   "devices": ["d5_anchor_dummy"]
 }
@@ -95,8 +101,9 @@ object in a ```json block. Nothing may follow it.
 | `site_synset` | that concept's synset, as written in the gold SBN |
 | `reparandum_synset` | the reparandum's synset. Same as `site_synset` for `constant_*` and `tense`; `entity.n.01` for `edge_label`; the new subject's synset for `forwarding` |
 | `reparandum_value` | what differs, when the synset does not: the new constant (`"Jim"` with quotes for a name, `2`, `thursday`), the new tense operator (`TSU now`), or the wrong role (`Source`). Otherwise `""` |
-| `reparandum_surface` | the reparandum's words as they appear in `nl_repair` |
-| `nl_repair` | the repaired sentence |
+| `reparandum_surface` | the reparandum's words as they appear in the sentence; `nl_left` ends with them |
+| `nl_left` | the repaired sentence up to the end of the reparandum, with no comma at the end |
+| `nl_right` | the repaired sentence from the start of the repair, with no comma at the start |
 | `sbn_repair` | the repaired SBN, on one line, no `%` comments, tokens separated by single spaces |
 | `devices` | the devices used, from: `d1_drop_role` (①), `d2_invert_role` (②), `d3_dummy_equ` (③), `d4_movement` (④), `d5_anchor_dummy` (⑤). `[]` if none |
 

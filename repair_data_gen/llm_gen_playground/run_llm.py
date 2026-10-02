@@ -88,7 +88,7 @@ DEVICE_TO_STRATEGY = (("d5_anchor_dummy", "anchor"), ("d4_movement", "hoist"))
 FIELDS = [
     "doc_id", "repair_type", "interregnum", "nl_clean", "sbn_clean",
     "status", "reason", "site_index", "repair_synset", "reparandum_synset",
-    "reparandum_value", "reparandum_surface", "nl_repair", "sbn_repair",
+    "reparandum_value", "reparandum_surface", "nl_repair", "repair_onset", "sbn_repair",
     "devices", "strategy", "model", "parse", "num_turns", "input_tokens",
     "output_tokens", "cache_read_tokens", "duration_s", "raw_file",
 ]
@@ -282,9 +282,10 @@ def strategy_of(devices: list[str]) -> str:
 
 
 def result_row(row: dict, model: str, raw: str, secs: float, raw_file: Path) -> dict:
-    out = {k: row.get(k, "") for k in ("doc_id", "repair_type", "interregnum",
-                                        "nl_clean", "sbn_clean")}
-    out.update({"model": model, "duration_s": f"{secs:.1f}",
+    out = {k: row.get(k, "") for k in ("doc_id", "repair_type", "nl_clean", "sbn_clean")}
+    # Base repairs only: the model writes no interregnum (README §1). The
+    # sample's assigned interregnum is not used in this round.
+    out.update({"interregnum": "none", "model": model, "duration_s": f"{secs:.1f}",
                 "raw_file": str(raw_file.relative_to(HERE))})
     try:
         meta = json.loads(raw)
@@ -304,6 +305,15 @@ def result_row(row: dict, model: str, raw: str, secs: float, raw_file: Path) -> 
         out["parse"] = "no_json"
         return out
     devices = ans.get("devices") or []
+    # The model gives the sentence in two parts, so the repair onset (the
+    # interruption point) comes from the split, not from a character count by
+    # the model. A stray comma at the join is kept as written, for
+    # check_repair_part.py to report.
+    left = str(ans.get("nl_left", "")).strip()
+    right = str(ans.get("nl_right", "")).strip()
+    nl_repair, onset = "", ""
+    if left and right:
+        nl_repair, onset = f"{left}, {right}", len(left) + 2
     out.update({
         "parse": "ok",
         "status": ans.get("status", ""),
@@ -313,7 +323,8 @@ def result_row(row: dict, model: str, raw: str, secs: float, raw_file: Path) -> 
         "reparandum_synset": ans.get("reparandum_synset", ""),
         "reparandum_value": ans.get("reparandum_value", ""),
         "reparandum_surface": ans.get("reparandum_surface", ""),
-        "nl_repair": ans.get("nl_repair", ""),
+        "nl_repair": nl_repair,
+        "repair_onset": onset,
         "sbn_repair": ans.get("sbn_repair", ""),
         "devices": "|".join(devices) if isinstance(devices, list) else str(devices),
         "strategy": strategy_of(devices) if ans.get("status") == "ok" else "",
