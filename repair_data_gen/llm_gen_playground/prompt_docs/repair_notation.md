@@ -137,6 +137,13 @@ concept of the same part of speech that fits the same slot: a word the
 speaker could have said by mistake, not a synonym. Check that its synset
 exists. Apply the toolkit (§3). Examples A–K.
 
+**In a wh-question**, the repaired concept may carry `?`, the slot the
+question asks about (manual §4.6): "What city, I mean, country …". The
+reparandum then carries the same `?`. The question word comes before both
+nouns, so the withdrawn version was a question too ("what city"), just as
+"new" in example F describes both nouns. Without `?` the reparandum would
+say "a city", which the speaker never said. Example R.
+
 ### 4.2 Constant
 
 Pick a concept that carries a constant: a name (`Name "Tom"`), a number
@@ -389,6 +396,20 @@ The abandoned clause "Jim bought" sits whole in the `CORRECTION` box. Its
 verb points to Jim, keeps its tense, and has no `Theme`: the gun was never
 said under that plan (①).
 
+### Content word in a question
+
+**R. Question slot: ⑤.** "What city, I mean, country was Catherine the Great
+from?"
+
+```
+gold:   country.n.02 Name ? be.v.03 Source -1 Time +1 Theme +2 time.n.08 TPR now female.n.02 Name "Catherine the Great"
+repair: entity.n.01 CORRECTION <1 city.n.01 Name ? EQU -1 CONJUNCTION <2 country.n.02 Name ? EQU -2 be.v.03 Source -3 Time +1 Theme +2 time.n.08 TPR now female.n.02 Name "Catherine the Great"
+```
+
+Both nouns carry `Name ?` (§4.1). `?` is a constant, so it does not connect
+the reparandum (R5); the only edge into `country.n.02` comes from after the
+repair, so the anchor carries the questioned referent, as in D.
+
 ---
 
 ## 6. Errors to avoid
@@ -409,6 +430,7 @@ complaint, so nothing will warn you.
 | (L) `CORRECTION <1 male.n.02 Name "Jim" CONJUNCTION <2 male.n.02 Name "Tom" kick.v.01 Agent -1 …` | the reparandum has only a constant and no edge to another concept (R5): Jim is not linked to the kicking | ⑤ |
 | (O) `dog.n.01 CORRECTION <1 chase.v.01 Agent -1 Time +2 CONJUNCTION <2 chase.v.01 Agent -2 Time +1 Theme +2 time.n.08 TPR now cat.n.01` | the reparandum has no `time.n.08` of its own and points to the repair's (R3), so both versions share one tense and nothing was corrected | give the reparandum its own `time.n.08` |
 | (P) `bee.n.01 fly.v.01 Theme -1 Time +1 Destination +2 time.n.08 TPR now flower.n.01 CORRECTION <1 …` | `Destination` was left on the event, so "to the flower" is asserted on the event as well as by the dummy | remove the role from the event |
+| (R) `entity.n.01 CORRECTION <1 city.n.01 EQU -1 CONJUNCTION <2 country.n.02 Name ? EQU -2 …` | the reparandum lost `?`: it now says "a city" instead of asking "what city". The SBN reader accepts it | `city.n.01 Name ? EQU -1` |
 
 ---
 

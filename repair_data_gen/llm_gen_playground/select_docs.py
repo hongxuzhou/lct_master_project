@@ -49,6 +49,7 @@ EXAMPLE_DOCS = {
     "p48/d3446", "p00/d2270", "p37/d0872", "p96/d0785", "p71/d2819",
     "p30/d2724", "p72/d2409", "p80/d1457", "p68/d3216", "p74/d1927",
     "p04/d3042", "p76/d2001", "p47/d1417", "p14/d2976",
+    "p18/d1394",   # example R (question slot), added 2026-10-02
 }
 
 INTERREGNA = ["I mean", "no", "no wait", "actually"]
@@ -90,7 +91,9 @@ def site_constant(doc, roles=None, value_re=None):
 
 
 def site_name(doc):
-    return site_constant(doc, roles={"Name"})
+    # `Name ?` marks the slot a wh-question asks about ("What country ..."),
+    # not a name that could be swapped for another one.
+    return site_constant(doc, roles={"Name"}, value_re=re.compile(r'^".*"$'))
 
 
 def site_number(doc):

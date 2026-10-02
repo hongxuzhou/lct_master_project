@@ -167,7 +167,8 @@ never repairs a sentence it has seen worked through: `p62/d1762`,
 `p98/d0867`, `p01/d0850`, `p49/d1783`, `p30/d2997`, `p48/d3446`,
 `p00/d2270`, `p37/d0872`, `p96/d0785`, `p71/d2819`, `p30/d2724`,
 `p72/d2409`, `p80/d1457`, `p68/d3216`, `p74/d1927`, `p04/d3042`,
-`p76/d2001`, `p47/d1417`, `p14/d2976`.
+`p76/d2001`, `p47/d1417`, `p14/d2976`, and `p18/d1394` (example R, added
+after the first Muse Glimmer round).
 
 Seven further gold documents are excluded because their gold SBN is itself
 broken as the SBN reader reads it: `p17/d2285` and `p82/d3242` have an index
@@ -267,6 +268,29 @@ attribution text). For Muse Glimmer the chat template adds one line,
 model card (temperature 1.0, top-p 0.95, top-k 64, seed 13). Each run writes
 `run_meta_<time>.json` with these settings and the server version next to
 the raw replies.
+
+### Prompt documents changed after the first Muse Glimmer round (2026-10-02)
+
+Reading the smoke-run reasoning showed the model guessing at `?` in
+`country.n.02 Name ?`. The rewritten `sbn_manual.md` had dropped it from the
+constants table (the original manual lists it, with a looser gloss), and no
+example had a question. `check_manual_coverage.py` classifies every token of
+train gold and reports any kind the manual does not document; it found `?`
+(437 occurrences, the slot a wh-question asks about) and two rare constant
+forms, scores `3-0` (13) and fractions `3/4` (5). All three are read by the
+SBN reader. Added: three rows to §2.2 and a §4.6 on questions (including that
+yes/no questions have no `?` and embedded wh-clauses do). The script now
+reports full coverage, and removing the `?` row makes it fail again.
+
+`repair_notation.md` gained a rule, decided here: a reparandum in a question
+slot carries the same `?` as the repair, since the question word precedes
+both (§4.1, example R, an error row in §6). Example R was checked like the
+others (reader, untouched edges, repair part). `select_docs.py` no longer
+counts `Name ?` as a `constant_name` site; no pinned row was affected.
+
+The first Muse Glimmer round (70 rows) ran with the earlier documents; 2 of
+its rows have `?` in gold (`p04/d2647`, `p33/d1381`). Results from later
+rounds are not directly comparable on those rows.
 
 `--tool-mode text` extracts Muse Glimmer's ATEM tool calls
 (`<atem:invoke ...>`) from the reply text, for a vLLM without a matching

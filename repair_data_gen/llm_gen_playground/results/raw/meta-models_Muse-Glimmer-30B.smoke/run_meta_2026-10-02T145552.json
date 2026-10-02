@@ -1,0 +1,18 @@
+{
+  "started": "2026-10-02T14:55:52",
+  "backend": "openai",
+  "model": "meta-models/Muse-Glimmer-30B",
+  "workers": 3,
+  "base_url": "http://127.0.0.1:36005/v1",
+  "tool_mode": "auto",
+  "reasoning": "high",
+  "temperature": 1.0,
+  "top_p": 0.95,
+  "top_k": 64,
+  "seed": 13,
+  "max_tokens": 16384,
+  "max_turns": 20,
+  "server_version": {
+    "version": "0.30.0"
+  }
+}

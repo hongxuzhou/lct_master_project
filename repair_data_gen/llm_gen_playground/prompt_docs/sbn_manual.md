@@ -75,6 +75,9 @@ A constant is a literal value at the end of a role or operator.
 | weekday | bare lower-case | `DayOfWeek monday` |
 | single capital letter | bare | `Value A` |
 | decade | single-quoted, last digit `X` | `YearOfCentury '198X'` ("the eighties") |
+| question | bare `?` (437) | `country.n.02 Name ?` ("what country"), `person.n.01 EQU ?` ("who"); the slot a wh-question asks about, see §4.6 |
+| score | two numbers joined by `-` (13) | `score.n.03 Value 3-0` ("3 to 0", "3:0") |
+| fraction | two numbers joined by `/` (5) | `entity.n.01 Quantity 3/4` ("three-fourths") |
 
 ### 2.3 Roles
 
@@ -385,6 +388,42 @@ male.n.02 give.v.03 Agent -1 Time +1 Recipient +2 Theme +3 time.n.08 TPR now mal
 
 A coordinated plural is an `entity.n.01` with one `Sub` hook per member. A
 pronoun that refers back is its own concept with `ANA` to its antecedent.
+
+### 4.6 Questions
+
+A wh-question marks the referent it asks about with the constant `?`, on the
+role or operator that the answer would fill:
+
+```
+country.n.02 Name ? be.v.03 Source -1 Time +1 Theme +2 time.n.08 TPR now female.n.02 Name "Catherine the Great"
+person.n.01 EQU ? be.v.08 Co-Theme -1 Time +1 Theme +2 time.n.08 EQU now male.n.02 Name "Niels Bohr"
+person.n.01 Quantity ? Role +1 inhabitant.n.01 time.n.08 EQU now country.n.02 Name "Chechnya" have.v.01 Theme -4 Time -2 Pivot -1
+old.a.01 Value ? Time +1 AttributeOf +2 time.n.08 EQU now male.n.02 Name "Brian Eno"
+```
+("What country was Catherine the Great from?" / "Who is Niels Bohr?" /
+"How many inhabitants does Chechnya have?" / "How old is Brian Eno?")
+
+| Question word | Written as (gold count) |
+|---|---|
+| which / what + noun | the noun with `Name ?` (`person.n.01` 105, `location.n.01` 32, `country.n.02` 6, `city.n.01` 5, …) |
+| what | `entity.n.01 EQU ?` (69) |
+| who | `person.n.01 EQU ?` (8) |
+| where / why / how (manner) | `location.n.01 EQU ?` (21) / `reason.n.01 EQU ?` / `manner.n.01 EQU ?` (13) |
+| how many / how much | `Quantity ?` on the counted concept (`person.n.01` 12); "how much" also `Unit ?` on `measure.n.02` |
+| how + adjective | the adjective with `Value ?` (`old.a.01` 8, `tall.a.01` 5) |
+| what time | `time.n.08 ClockTime ?` (5) |
+
+Two points to keep apart:
+
+- **Yes/no questions have no `?`.** "Is Tom retired?" is
+  `time.n.08 EQU now male.n.02 Name "Tom" retired.a.01 Time -2 AttributeOf -1`,
+  the same as the statement. The question mark in the sentence is not what
+  triggers `?`; a questioned slot is.
+- **Embedded questions do have `?`**, though the sentence is not a question:
+  "Nobody knows where he lives." is
+  `NEGATION <1 person.n.01 know.v.01 Proposition >1 Experiencer -1 Time +1 time.n.08 EQU now CONTINUATION <0 location.n.01 EQU ? male.n.02 live.v.01 Location -2 Theme -1 Time +1 time.n.08 EQU now`.
+
+`?` is a constant, so it is an anchor (§2.5), never an index target.
 
 ---
 
