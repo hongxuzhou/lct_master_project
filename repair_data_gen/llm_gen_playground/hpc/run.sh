@@ -24,8 +24,27 @@ export HF_HOME=$SCR/huggingface_cache
 export HF_HUB_OFFLINE=1
 export NLTK_DATA=$NETHOME/nltk_data
 export TOKENIZERS_PARALLELISM=false
+# FlashInfer's top-k/top-p sampler is JIT-compiled on first use with the
+# node's /usr/local/cuda nvcc (12.8), which rejects `--compress-mode=size`
+# (FlashInfer assumes nvcc >= 12.9, after torch cu129). The first smoke run
+# failed there. vLLM's PyTorch sampler needs no compilation; for one request
+# at a time the speed difference is negligible.
+export VLLM_USE_FLASHINFER_SAMPLER=0
 # wn_lookup.py is run with the venv's Python (sys.executable), which has nltk.
 export PATH=$VENV/bin:$PATH
+
+echo "script: $(md5sum "$0")"   # compare with `md5 hpc/run.sh` locally
+
+# HTCondor hands out GPUs by UUID in CUDA_VISIBLE_DEVICES; rename them to
+# indices, as the LST wiki's test_gpu.sh does (vLLM expects indices).
+echo "condor: CUDA_VISIBLE_DEVICES=$CUDA_VISIBLE_DEVICES"
+new_devices=""
+IFS=',' read -ra gpu_ids <<< "$CUDA_VISIBLE_DEVICES"
+for id in "${gpu_ids[@]}"; do
+    new_devices=${new_devices}$(nvidia-smi -L | grep "$id" | sed -E "s/^GPU ([0-9]+):.*$/\1/"),
+done
+export CUDA_VISIBLE_DEVICES=${new_devices%?}
+echo "now:    CUDA_VISIBLE_DEVICES=$CUDA_VISIBLE_DEVICES"
 
 nvidia-smi --query-gpu=name,memory.total,driver_version --format=csv
 python -c "import torch; assert torch.cuda.is_available(), 'torch sees no GPU'; print('torch', torch.__version__, 'CUDA', torch.version.cuda)"

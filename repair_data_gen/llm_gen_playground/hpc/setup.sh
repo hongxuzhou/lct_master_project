@@ -8,6 +8,7 @@
 #   - a report at the end: versions, and whether this vLLM knows the model's
 #     architecture and has a tool-call / reasoning parser for it.
 set -e
+echo "script: $(md5sum "$0")"   # compare with `md5 hpc/setup.sh` locally
 
 NETHOME=/nethome/honzhou
 SCR=/scratch/hongxuzhou
