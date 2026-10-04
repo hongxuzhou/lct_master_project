@@ -22,17 +22,22 @@ home folder is shared, so the submit node sees them. Only what the jobs need
 is copied, so the cluster's `results/` is never overwritten:
 ```bash
 # on the laptop, in repair_data_gen/llm_gen_playground/
-scp -r run_llm.py wn_lookup.py check_repair_part.py pinned_sample.tsv \
-    prompt_docs hpc honzhou@login.lst.uni-saarland.de:thesis_zone/llm_gen_playground/
+scp -r run_llm.py wn_lookup.py \
+    sample_train_full.tsv sample_r3_edge.tsv prompt_docs prompt_docs_edge_r3 hpc \
+    honzhou@login.lst.uni-saarland.de:thesis_zone/llm_gen_playground/
 md5 hpc/setup.sh hpc/run.sh        # the jobs print the same sums in .out
 
 # then: ssh honzhou@login.lst.uni-saarland.de, then: ssh submit
 chmod +x /nethome/honzhou/thesis_zone/llm_gen_playground/hpc/*.sh
 mkdir -p /scratch/hongxuzhou/logs/llm_gen
 ```
-Results come back the same way:
+Results come back the same way, **only the new run's files**: copying the
+whole `results/` once overwrote a newer local `claude-opus-5-5.checked.tsv`
+with the cluster's older copy (2026-10-04).
 ```bash
-scp -r honzhou@login.lst.uni-saarland.de:thesis_zone/llm_gen_playground/results .
+R=honzhou@login.lst.uni-saarland.de:thesis_zone/llm_gen_playground/results
+scp "$R/meta-models_Muse-Glimmer-30B.train_full.tsv" results/
+scp -r "$R/raw/meta-models_Muse-Glimmer-30B.train_full" results/raw/
 ```
 
 ## Run order
@@ -70,3 +75,12 @@ Monitor with `condor_q`, then read the `.out`/`.err` files under
 - **No tool calls in the transcript** (`turns=1` on every content-word item,
   ATEM text in `result`): try `TOOL_MODE=auto` with a parser from the setup
   log, or check what the raw `content` looks like before changing the regex.
+
+## Full run on train and round 3 (2026-10-04)
+```bash
+condor_submit hpc/run_train_full.sub   # six types, prompt_docs/
+condor_submit hpc/run_r3_edge.sub      # edge label, prompt_docs_edge_r3/
+```
+Both can run at once (one GPU each). Each `run_meta_*.json` records `docs`
+and `prompt_sha256`; locally `python3 -c "import run_llm; print(run_llm.prompt_hash())"`
+gives the hash of `prompt_docs/` (`6b17847a…`; edge round 3 `1886b812…`).

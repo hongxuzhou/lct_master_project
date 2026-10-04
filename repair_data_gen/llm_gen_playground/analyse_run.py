@@ -10,6 +10,22 @@ Per row it adds:
 - `oracle`: for content-word repairs, whether the SBN equals what
   repair_transform.build_repair writes for the same site and reparandum
   (`same`, `differs`, or `n/a` where build_repair cannot be run);
+- `untouched`: `ok`, or the gold edges away from the repair site that the
+  repaired SBN lost (check_untouched.missing_edges); `error: …` if the
+  check cannot run (e.g. a wrong self-reported site_index);
+- `repair_part`: `ok`, or the issues check_repair_part.problems finds in
+  the repaired part and the sentence (R5, empty reparandum, rest of the
+  sentence changed, …);
+- `withdraw`: `ok`, or how the repaired SBN differs from gold once the
+  CORRECTION box is removed and the dummies are merged
+  (check_withdraw.diff); stricter than `untouched` at the repair site;
+- `place_inside`: for name repairs, `yes` when WordNet places the
+  reparandum inside the repair ("Osaka, Japan": part holonyms), which reads
+  as an address, not a repair; counts as a failure. `no` otherwise, `n/a`
+  when WordNet has no place of that name (small places are not covered);
+- `site_ok`: `ok` if the model's `site_index` is one of the sites
+  select_docs.py offers for this type, else `outside`. Selection only makes
+  sure a document has a good site; the model picks among all of them;
 - `lookups`: tool calls the model made (num_turns - 1).
 Then it prints counts per repair type.
 """
@@ -32,9 +48,14 @@ from repair_transform import build_repair  # noqa: E402
 from sbn_lin import parse_sbn_line  # noqa: E402
 from validate_with_pmb_parser import check, strip_comments  # noqa: E402
 import wn_lookup  # noqa: E402
+import check_repair_part  # noqa: E402
+import check_untouched  # noqa: E402
+import check_withdraw  # noqa: E402
+import select_docs  # noqa: E402
 
 CONCEPT = re.compile(r"^[^\s\"]+\.[nvar]\.\d\d$")
 CHECKS = ("parse", "dag", "index", "magnitude", "edges", "boxes")
+EXTRA = ("untouched", "repair_part", "withdraw", "site_ok")   # ok, or what is wrong
 TYPES = ("content_word", "constant_name", "constant_number",
          "constant_temporal", "tense", "edge_label", "forwarding")
 
@@ -84,6 +105,40 @@ def wn_relation(row: dict) -> str:
     return "other"
 
 
+def _places(name: str):
+    from nltk.corpus import wordnet as wn
+    return [s for s in wn.synsets(name.strip('"').replace(" ", "_"), "n")
+            if s.instance_hypernyms()]
+
+
+def place_inside(row: dict) -> str:
+    """Is the reparandum place part of the repair place? (decided 2026-10-04:
+    "small place, large place" is a fluent address, even before any
+    interregnum is inserted)."""
+    if row["repair_type"] != "constant_name":
+        return ""
+    try:
+        site = parse_sbn_line(row["sbn_clean"]).concepts[int(row["site_index"])]
+        gold = next(v for r, v in site.roles if r == "Name")
+    except (StopIteration, IndexError, ValueError):
+        return "n/a"
+    inner, outer = _places(row["reparandum_value"]), set(_places(gold))
+    if not inner or not outer:
+        return "n/a"
+    hit = any(outer & set(s.closure(lambda x: x.part_holonyms())) for s in inner)
+    return "yes" if hit else "no"
+
+
+def site_ok(row: dict) -> str:
+    try:
+        doc = parse_sbn_line(row["sbn_clean"])
+        doc.sentence = row["nl_clean"]
+        sites = {p for p, _ in select_docs.SITES[row["repair_type"]](doc)}
+        return "ok" if int(row["site_index"]) in sites else "outside"
+    except Exception as e:  # noqa: BLE001
+        return f"error: {type(e).__name__}"
+
+
 def oracle(row: dict) -> str:
     if row["repair_type"] != "content_word":
         return ""
@@ -114,7 +169,8 @@ def main() -> None:
         r["reply"] = r.get("parse", "")
         answered = r["reply"] == "ok" and r.get("status") == "ok" and r.get("sbn_repair")
         if not answered:
-            for k in CHECKS + ("wn_ok", "wn_missing", "wn_relation", "oracle", "check_detail"):
+            for k in CHECKS + EXTRA + ("wn_ok", "wn_missing", "wn_relation", "oracle",
+                                       "check_detail", "place_inside"):
                 r[k] = ""
             continue
         r["wn_relation"] = wn_relation(r)
@@ -124,12 +180,32 @@ def main() -> None:
         r["check_detail"] = res["detail"]
         r["wn_ok"], r["wn_missing"] = new_concepts_exist(r["sbn_clean"], r["sbn_repair"])
         r["oracle"] = oracle(r)
+        r["place_inside"] = place_inside(r)
+        r["site_ok"] = site_ok(r)
+        try:
+            lost = check_untouched.missing_edges(r)
+            r["untouched"] = "ok" if not lost else "lost " + "; ".join(" ".join(t) for t in lost)
+        except Exception as e:  # noqa: BLE001
+            r["untouched"] = f"error: {type(e).__name__}: {e}"
+        try:
+            probs = check_repair_part.problems(r)
+            r["repair_part"] = "ok" if not probs else "; ".join(probs)
+        except Exception as e:  # noqa: BLE001
+            r["repair_part"] = f"error: {type(e).__name__}: {e}"
+        try:
+            missing, added = check_withdraw.diff(r)
+            fmt = lambda d: "; ".join(" ".join(t) for t in d)  # noqa: E731
+            r["withdraw"] = ("ok" if not (missing or added) else
+                             f"missing {fmt(missing)} | added {fmt(added)}")
+        except Exception as e:  # noqa: BLE001
+            r["withdraw"] = f"error: {type(e).__name__}: {e}"
 
     by = collections.defaultdict(list)
     for r in rows:
         by[r["repair_type"]].append(r)
     head = ("type", "n", "json", "no_site", "answered", "struct_ok", "wn_ok",
-            "oracle_same", "median_lookups")
+            "untouched_ok", "repair_part_ok", "withdraw_ok", "oracle_same",
+            "median_lookups")
     print("  ".join(f"{h:>15s}" if k else f"{h:18s}" for k, h in enumerate(head)))
     for t in TYPES + ("ALL",):
         rs = rows if t == "ALL" else by.get(t, [])
@@ -145,6 +221,9 @@ def main() -> None:
                  sum(r.get("status") == "no_site" for r in rs),
                  len(ans), len(struct),
                  sum(r["wn_ok"] == "ok" for r in ans),
+                 sum(r["untouched"] == "ok" for r in ans),
+                 sum(r["repair_part"] == "ok" for r in ans),
+                 sum(r["withdraw"] == "ok" for r in ans),
                  f"{same}/{len(cw)}" if cw else "-",
                  look[len(look) // 2] if look else "-"]
         print("  ".join(f"{str(c):>15s}" if k else f"{str(c):18s}" for k, c in enumerate(cells)))
@@ -154,8 +233,11 @@ def main() -> None:
         bad = [f"{k}={r[k]}" for k in CHECKS if r.get(k) not in ("", "ok")]
         if r.get("wn_ok") == "missing":
             bad.append(f"not in WordNet: {r['wn_missing']}")
+        bad += [f"{k}: {r[k]}" for k in EXTRA if r.get(k) not in ("", "ok")]
         if r.get("oracle", "").startswith("differs"):
             bad.append("oracle differs")
+        if r.get("place_inside") == "yes":
+            bad.append(f"place inside: {r['reparandum_value']} is part of the gold place")
         if r.get("wn_relation") == "same_synset":
             bad.append(f"synonym: {r['reparandum_synset']} is the same synset as {r['repair_synset']}")
         if r["reply"] != "ok":

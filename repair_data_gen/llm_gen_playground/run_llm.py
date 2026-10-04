@@ -36,6 +36,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import hashlib
 import json
 import re
 import shlex
@@ -92,6 +93,20 @@ FIELDS = [
     "devices", "strategy", "model", "parse", "num_turns", "input_tokens",
     "output_tokens", "cache_read_tokens", "duration_s", "raw_file",
 ]
+
+
+def use_docs(path: Path) -> None:
+    """Point the prompt at another set of prompt documents (`--docs`)."""
+    global DOCS
+    DOCS = path.resolve()
+
+
+def prompt_hash() -> str:
+    """sha256 of the system prompt plus the item template, so a result names
+    the exact prompt it ran with."""
+    h = hashlib.sha256(system_prompt().encode("utf-8"))
+    h.update((DOCS / "item_template.md").read_bytes())
+    return h.hexdigest()
 
 
 def system_prompt() -> str:
@@ -255,7 +270,8 @@ def write_run_meta(raw_dir: Path, args) -> None:
     model with a harness)."""
     meta = {"started": time.strftime("%Y-%m-%dT%H:%M:%S"), "backend": args.backend,
             "model": args.model, "workers": args.workers,
-            "sample": str(getattr(args, "sample", ""))}
+            "sample": str(getattr(args, "sample", "")),
+            "docs": str(DOCS), "prompt_sha256": prompt_hash()}
     if args.backend == "openai":
         meta |= {k: getattr(args, k) for k in (
             "base_url", "tool_mode", "reasoning", "temperature", "top_p",
@@ -339,6 +355,7 @@ def result_row(row: dict, model: str, raw: str, secs: float, raw_file: Path) -> 
 
 
 def cmd_run(args) -> None:
+    use_docs(args.docs)
     rows = list(csv.DictReader(open(args.sample, encoding="utf-8"), delimiter="\t"))
     if args.only:
         rows = [r for r in rows if r["doc_id"] in set(args.only)]
@@ -414,6 +431,8 @@ def main() -> None:
     add_backend_args(r)
     r.add_argument("--sample", type=Path, default=SAMPLE,
                    help="sample TSV from select_docs.py (default: the first round's)")
+    r.add_argument("--docs", type=Path, default=DOCS,
+                   help="prompt documents (default prompt_docs/, as validated in round 2)")
     r.add_argument("--limit", type=int, default=0)
     r.add_argument("--only", nargs="*")
     r.add_argument("--tag", default="",

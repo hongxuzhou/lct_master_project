@@ -535,7 +535,9 @@ had only reached that type, not because the others were ruled out.
     python3 audit.py stats audit/r2        # also writes audit/r2/merged.tsv
 
 - **Pool.** Only items that pass every automatic check (`auto_pass` in
-  `audit.py`; an oracle difference is not a failure). Items that fail a check
+  `audit.py`; an oracle difference is not a failure). Since 2026-10-04 this
+  includes `untouched` and `repair_part`, which `analyse_run.py` now writes
+  (before, the two scripts ran by hand and the pool did not see them). Items that fail a check
   are already counted as errors, so auditing them adds nothing; the audit
   measures what the checks cannot see. The 90% and 80% thresholds therefore
   apply to items that passed the checks.
@@ -567,6 +569,279 @@ answer on ≤ 3%; SBN meaning correct on ≥ 90% of audited items; natural on
 Larger synthesis does not mean every PMB document: the RP samples to a quota
 with at most two sites per document. Selection runs locally and only the
 sample TSV goes to the cluster, so PMB itself never needs to be there.
+
+# Round 2: results (Muse Glimmer 30B, 2026-10-04)
+
+350 documents, 50 per type, settings as planned above (`hpc/run_r2.sub`).
+Files: `results/meta-models_Muse-Glimmer-30B.r2.tsv`, `.r2.checked.tsv`, raw
+replies in `results/raw/meta-models_Muse-Glimmer-30B.r2/`.
+
+| type | n | no answer | answered | pass all checks | pass % | no answer % |
+|---|---|---|---|---|---|---|
+| content word | 50 | 0 | 50 | 44 | 88.0 | 0 |
+| constant: name | 50 | 0 | 50 | 48 | 96.0 | 0 |
+| constant: number | 50 | 0 | 50 | 49 | 98.0 | 0 |
+| constant: temporal | 50 | 1 | 49 | 48 | 98.0 | 2.0 |
+| tense | 50 | 0 | 50 | 48 | 96.0 | 0 |
+| edge label | 50 | 8 | 42 | 39 | 92.9 | 16.0 |
+| forwarding | 50 | 2 | 48 | 48 | 100 | 4.0 |
+| **all** | 350 | 11 | 339 | 324 | 95.6 | 3.1 |
+
+"Pass all checks" is `auto_pass` in `audit.py`: structural checks, WordNet,
+no `same_synset`, `untouched`, `repair_part`. No item failed for lack of an
+answer: every reply was JSON, and all eleven gaps are `no_site`.
+
+**Token limit.** Two items went past the old 16384 output tokens per turn
+(longest 18370, `p52/d2122`); median 5.8k against 7.8k in round 1. The limit
+of 32768 is enough.
+
+**Failures (15).**
+
+- *Synonyms* (4, content word): `compose`/`write`, `sweat`/`perspiration`,
+  `teller`/`bank_clerk`, `purchase`/`buy`. These are filtered, so they cost
+  items but do not reach the data. Without them content word passes 44 of 46
+  (95.7%).
+- *Reparandum and repair the wrong way round* (2): "the field of biology,
+  physics" (`p10/d2508`), "Thirteen Americans, Canadians" (`p25/d3091`). The
+  final reading is no longer the gold one. `wn_relation` reports
+  `biology`/`biology` as `same_synset` because the model wrote the gold
+  concept in both synset fields.
+- *Gold edges lost* (3): `p48/d2738` drops `person.n.01` ("famous sculptor,
+  painter"), `p17/d0919` drops `Value`, `p10/d3126` rewrites `meet.v.02` and
+  loses three edges. `p19/d3040` reports a `site_index` outside the gold SBN
+  (10 of 6 concepts), so the check cannot run; counted as a failure.
+- *Broken repair boxes* (3): no `CORRECTION` box (`p01/d2927`, tense), an
+  empty reparandum box (`p71/d2730`, tense), a reparandum box with no edge
+  to the rest (`p22/d2265`, "Paris, Rome is burning").
+- *Sentence changed* (2, edge label): "Tom handed from, to Mary a cup",
+  "Susan shined to, from your father's shoes". Both come from documents
+  whose role has no preposition in the sentence (see below).
+
+**`no_site` is mostly a selection error.** Of the eight edge-label
+`no_site` answers, seven are right: `site_edge_label` in `select_docs.py`
+takes any verb with an index-valued `Destination`/`Source`/`Location`, without
+looking at the sentence. PMB uses these roles where no preposition is
+written ("He shined his shoes", `Source` on the object; "We ran out of food",
+`Source` on the subject; "shear 150 sheep") and for prepositions built with a
+spatial operator ("under" = `SZN`, "near" = `APX`, through `location.n.01`).
+The eighth, "sitting on the desk", has a site. Of the two forwarding
+`no_site` answers, "What is the teacher's last name?" is right (`entity.n.01
+EQU ?`); "That is an epic novel" is a miss, since pronoun subjects are valid
+forwarding sites (decided 2026-10-02) and the model treated "That" as a
+placeholder. So the 16% for edge label
+measures the selection, not the model; the selection needs a surface check
+before a larger run, as for `p31/d1485` in round 1.
+
+**Oracle (content word).** 41 of 50 equal `build_repair`. The nine others
+go to the audit if they pass the checks; they include role kept in the
+reparandum (`spread, buttered`), a dummy anchor for `Name ?` (`town, city`)
+and inverted roles (`dog, the cat`).
+
+**Self-reported devices.** Content word now uses ⑤ in 5 and ④ in 1 of 50,
+so the round-1 impression that the model avoids hard sites does not hold
+at this sample size.
+
+**Checks changed in this round.** `check_untouched.py` and
+`check_repair_part.py` are now functions called by `analyse_run.py`, which
+writes `untouched` and `repair_part`; `auto_pass` requires both.
+`check_repair_part.py` no longer stops on an SBN without a `CORRECTION` box,
+compares sentences without quote marks and with contractions written out
+(the round-1 "Tom's" false alarm is gone), and requires the reparandum part
+to contain `reparandum_surface` rather than end with it ("He dug, They dug";
+"was from the table, on the table"). Round 1 is unchanged by this except for
+`p31/d1485`, which was already known.
+
+**Against the reference thresholds.** Checks ≥ 95%: all types except content
+word (88%, 95.7% without filtered synonyms) and edge label (92.9%). No
+answer ≤ 3%: all except edge label (16%, of which 2% are model misses) and
+forwarding (4%, one miss and one correct `no_site`). The audit (`audit/r2`, 105 items, 15 per type) is in the next section.
+
+## Round 2: human audit (2026-10-04)
+
+105 items labelled by one annotator (`audit/r2/labels.jsonl`, `merged.tsv`).
+Two items lack one answer: `a0017` (natural) and `a0038` (meaning, left out
+because the sentence is absurd). `audit.py stats`: meaning 95 yes, 1 no,
+8 unsure (99% of yes+no, interval 0.94–1.00); natural 96 yes, 3 no, 5 unsure
+(97%, 0.91–0.99). No type falls under a threshold, so the second stage does
+not run.
+
+**A missed error, and a new check.** `a0057` ("spread, buttered", marked
+unsure) is wrong: the repair box copies `butter.v.01 Agent -2` from gold,
+but after the inserted `spread.v.09` that index lands on `sister.n.01`, not
+`person.n.01`. `check_untouched.py` cannot see this, because it exempts
+every edge at the repair site. `check_withdraw.py` removes the CORRECTION
+box, merges the ③ and ⑤ dummies back, and requires exactly the gold edges,
+with no exemption. Over all three runs it flags only real errors: in round
+2, besides those already failing, `a0057`, `p02/d2102` (the ③ dummy's `EQU`
+lands on `time.n.08`) and `p05/d2605` (`Theme` renamed `Agent` in the
+repair box); in Muse round 1, `p12/d2070` (`Time` to "the late 1960s"
+dropped). `analyse_run.py` writes it as `withdraw` and `auto_pass` requires
+it. A node is compared as its synset plus its constant-valued roles
+(`person.n.01[EQU=speaker]`), since two concepts of one synset hid an index
+error otherwise: `p18/d3496` "Jean Reno was, is my favorite actor" points
+`Co-Theme` at the speaker instead of the actor, and was labelled correct in
+the audit (`a0070`); Opus round 1 `p31/d1973` sends `ANA` to the wrong
+`male.n.02`. With it, 320 of 339 answered round-2 items pass all checks
+(94.4%), against 324 in the table above; Opus round 1 67 of 68, Muse
+round 1 65 of 68. Since the annotator missed `a0070`, the audit's meaning
+rate is an upper bound for index errors between same-synset concepts.
+
+Box structure was added to the same check on 2026-10-04: every box operator
+other than the pair, and every box-valued role, is compared with gold as an
+edge between boxes named by their concepts. `check()` only looked at the
+CORRECTION/CONJUNCTION pair, so a renumbered pointer that makes no cycle
+passed. It found Muse round 1 `p60/d3120` ("John, Cat Stevens is not a cat.
+He's a singer."): gold `CONTINUATION <1` was raised to `<3` and now hangs
+off the withdrawn CORRECTION box. Round 2 is unchanged by it. `a0057` leaves the audit pool.
+
+**The unsure meaning labels, read again with the indices resolved.** All
+are correct against gold; `a0065` (marked no) too:
+- `a0065` "Tom was dozing off, is dozing off": the gold `time.n.08 EQU now`
+  stays before the CORRECTION box; the reparandum has its own
+  `time.n.08 TPR now`; the repair verb points back to the gold time.
+- `a0008` "18 May, June": PMB writes a date as two `time.n.08` joined by
+  `EQU` (day 18, month 6); both months carry `FinishOf` ("until") and `EQU`
+  to the day.
+- `a0018` "next Thursday, Friday": gold has `see.v.08 Theme` to the day (a
+  gold oddity; `Time` would be expected); the model keeps it, inverted.
+- `a0023`, `a0039`, `a0040`, `a0051` (`SY2` = "between"), `a0102`: correct;
+  in `a0039` the rest of the sentence falls into the repair box, as with
+  every in-place repair.
+- `a0043` "Carlos killed, Who killed …": the SBN is right; the item fails on
+  the sentence (below).
+
+The labels file is left as the annotator wrote it.
+
+**Selection rules suggested by the `no` items.** Each comes from a site the
+selection should not offer:
+- a `?` target or subject (`EQU ?`, `Name ?`): "Where on earth were you
+  from, where on earth were you?" (`a0002`) and "Carlos killed, Who
+  killed …" (`a0043`) are restarts that change the clause type, not
+  repairs within a clause. In `p90/d1638` the model's reasoning weighs
+  `no_site` four times and sees that the sentence has no preposition, then
+  picks `Source`, which can only surface as a stranded "from".
+- a `Quantity` with no numeral in the sentence: "Tom and Mary three, both
+  laughed" (`a0038`; "both" is `Quantity 2`).
+- edge label roles with no preposition in the sentence, and prepositions
+  built with a spatial operator (see round 2 results).
+
+**Open questions from the notes, for the user.**
+- *Edge label.* 7 notes call the preposition swaps awkward ("living from,
+  in Tokyo"; "spat from the ground, on the ground"). With three roles,
+  every swap is a large change of meaning, and the model takes `Source`
+  almost every time. Natural slips (in/at/on) are all `Location`, so they
+  are not edge-label repairs in SBN. Whether to keep the type as it is,
+  widen it (spatial operators, more roles) or weight it down is open.
+- *No interregnum.* "arrive in Osaka, Tokyo" (`a0095`) and "18 May, June"
+  read as a list or an address. The planned interregnum insertion removes
+  this; items that stay without one may need a filter for such pairs.
+- *Dummy necessity* (`a0017`, Koko's IQ): the reparandum "Molly" relates
+  only to `iq.n.01`, which comes after the repair box, and R3 forbids a
+  forward edge, so ⑤ (or moving `iq.n.01`, ④) is needed.
+
+# Full run on train: decisions and selection (2026-10-04)
+
+**Decided (user, 2026-10-04).** All repair types are generated by the LLM,
+content word included (the rule pipeline's core layer is no longer the plan
+for the data). Tense is back in, with the quota it had before it was cut
+(train 500): its reason for removal, the cost of a multi-concept rule
+operator, does not apply to LLM generation, and it passed round 2. Train
+first; dev and test follow PMB's split and reuse the same workflow later.
+Six types go to the full run with the round-2 prompt unchanged; edge label
+gets a small round 3 with its new site definition first. Place containment
+is a post-hoc check only, so the prompt the six types were validated on
+stays as it was.
+
+**Selection patches in `select_docs.py`.**
+- Edge label: gold `Source` or `Destination`, or `Location` of `be.v.03`;
+  the target after the verb, not a `?` slot, not `location.n.01`; the
+  sentence has a preposition for the role (Source: from/off/out;
+  Destination: to/into/onto/toward(s)/for, directional only; Location: in/on/
+  at/inside). Of the 50 round-2 documents, 18 remain, among them none of
+  the eight `no_site` answers and none of the static-verb swaps ("living
+  from, in Tokyo", "spat from, on the ground").
+- Forwarding: no `?` subject ("Carlos killed, Who killed …").
+- Number: the value is written as a numeral or number word in the sentence
+  ("both" = `Quantity 2` is not).
+- Temporal: no `?` value (`YearOfCentury ?`).
+
+**Post-hoc: `place_inside`** in `analyse_run.py` (WordNet part holonyms;
+"Osaka, Japan"); `auto_pass` fails it. WordNet knows large places only.
+
+**Supply on train** (pool 9,100 after examples and earlier samples), against
+the RP quota and what it needs at 70% headroom and 94% pass (quota / 0.7 /
+0.94):
+
+| type | quota | needed | eligible docs |
+|---|---|---|---|
+| content word | 2,200 | 3,343 | 9,086 |
+| name | 500 | 760 | 2,978 (755 at one doc per value) |
+| number | 400 | 608 | 650 (144 at one per value) |
+| temporal | 220 | 334 | 228 (111 at one per value) |
+| tense | 500 | 760 | 6,928 |
+| edge label | 500 | 760 | 642 |
+| forwarding | 200 | 304 | 4,188 |
+
+Number, temporal and edge label cannot reach their quota on train; the
+one-document-per-value rule, written for 10-item samples, cuts the constant
+types further. Open: a cap per value instead of one.
+
+**Post-hoc: `site_ok`.** The item gives the model the whole document and
+the model picks the site, so selection only guarantees that a good site
+exists. `analyse_run.py` now checks the chosen `site_index` against
+`select_docs.SITES` for the type; `auto_pass` requires it. On round 2 it
+applies the 2026-10-04 rules after the fact (29 rows outside, mostly edge
+label), so round-2 pass rates under the old and new site rules differ; the
+round-2 tables above are under the old ones.
+
+## Review before the full run (2026-10-04)
+
+Done in this session: `check_withdraw.py` (with node signatures and box
+structure), `site_ok`, `place_inside`, the selection patches.
+
+Before the full run:
+1. ~~`select_docs.py`: per-value cap and quotas.~~ Done: `--quota`, `--cap`.
+   All seven types were drawn together (seed 13, excluding rounds 1 and 2),
+   so edge label keeps its documents: `sample_train_full.tsv` (5,993: content
+   word 3,343, name 760, number 598, temporal 228, tense 760, forwarding
+   304), `sample_r3_edge.tsv` (50) and `sample_train_edge_reserve.tsv` (575,
+   for edge label's full run if round 3 passes).
+2. ~~Content word quota by device.~~ Decided 2026-10-04 (user): no device
+   axis. Content word is 2,200 in total and the device distribution is
+   reported as it comes out. The device follows from the site, which follows
+   from syntax (DESIGN.md step 4); forcing it would repeat the pilot's lesson
+   that pushing for a phenomenon produces awkward repairs. The prompt stays
+   as round 2 validated it.
+3. ~~Edge label prompt.~~ Done in `prompt_docs_edge_r3/` (§4.4 rewritten,
+   with two sentence-only negative examples; nothing else differs).
+   `prompt_docs/` stays as round 2 ran it, because the documents are one
+   system prompt for every type: editing them in place would have changed
+   the six types' validated condition. `run_llm.py --docs` picks the set and
+   `run_meta` records its sha256.
+4. ~~Job files.~~ `hpc/run_train_full.sub` (4-day limit; about 30 h
+   expected) and `hpc/run_r3_edge.sub`. Batch jobs may run up to one week
+   on LST (`+MaxWallTime = 604800`; 24 h is the interactive limit).
+5. Commit everything before submitting, so the run can name its commit.
+6. Audit plan for the full run: blind sample per type, as in round 2.
+
+After the full run, not to be lost:
+- round 2's six-type rows ran with the same `prompt_docs/`; those that pass
+  the current checks (including `site_ok`) can join the data, since their
+  documents were excluded from the full-run sample;
+- interregnum insertion, emitting paired base and marked rows (`pair_id`,
+  DESIGN.md §1 step 5); `sorry` reserved for the test set;
+- dev and test on PMB's split;
+- a second site per document where a type runs short (RP allows two);
+- the Deferred list below (name–concept table, Smatch operator
+  normalisation, anaphora and cross-turn);
+- evaluation: smatch++ needs `GenericStandardizer`; PMB's `INDEX_PATTERN`
+  reads one digit (the `magnitude` check keeps such SBN out of the data, so
+  documents with an index of 10 or more are not in the corpus, a limit to
+  report);
+- per-request seeds do not make vLLM runs reproducible under batching;
+- `documentation/model_experiment_pipeline.md` §5.3 still describes the rule
+  pipeline as the source of the core layer, and "Found here, for the
+  rule-pipeline upgrade" below no longer feeds the data.
 
 # Deferred
 

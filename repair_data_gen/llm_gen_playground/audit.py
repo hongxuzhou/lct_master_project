@@ -57,6 +57,9 @@ def auto_pass(r: dict) -> bool:
             and bool(r.get("sbn_repair"))
             and all(r.get(k) == "ok" for k in CHECKS)
             and r.get("wn_ok") == "ok"
+            and r.get("untouched") == "ok" and r.get("repair_part") == "ok"
+            and r.get("withdraw") == "ok" and r.get("site_ok") == "ok"
+            and r.get("place_inside") != "yes"
             and r.get("wn_relation") != "same_synset")
 
 

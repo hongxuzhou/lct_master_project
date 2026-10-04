@@ -1,0 +1,270 @@
+{"audit_id": "a0002", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T11:16:09"}
+{"audit_id": "a0002", "meaning": "yes", "natural": "no", "note": "", "annotator": "hz", "ts": "2026-10-04T11:16:11"}
+{"audit_id": "a0002", "meaning": "yes", "natural": "no", "note": "This should be considered a typical", "annotator": "hz", "ts": "2026-10-04T11:16:29"}
+{"audit_id": "a0002", "meaning": "yes", "natural": "no", "note": "This should be considered a typical negative example. What the model wrote is a within-clause RSR. This is a turn that contains two complete queries.", "annotator": "hz", "ts": "2026-10-04T11:17:31"}
+{"audit_id": "a0002", "meaning": "yes", "natural": "no", "note": "This should be considered a typical negative example. What the model wrote is a within-clause RSR. This is a turn that contains two complete queries. It's unexpected and should be avoided for future full-amount annotation. \nAnother thing important is to inspect why the model would generate like this. we need to dicuss 1. if this sentence itself is RSR-natural, that is, has the potential to insert a reparandum; 2.", "annotator": "hz", "ts": "2026-10-04T11:20:47"}
+{"audit_id": "a0002", "meaning": "yes", "natural": "no", "note": "This should be considered a typical negative example. What the model wrote is a within-clause RSR. This is a turn that contains two complete queries. It's unexpected and should be avoided for future full-amount annotation. \nAnother thing important is to inspect why the model would generate like this. we need to discuss: 1. if this sentence itself is RSR-natural, that is, has the potential to insert a reparandum; 2.", "annotator": "hz", "ts": "2026-10-04T11:20:49"}
+{"audit_id": "a0002", "meaning": "yes", "natural": "no", "note": "This should be considered a typical negative example. What the model wrote is a within-clause RSR. This is a turn that contains two complete queries. It's unexpected and should be avoided for future full-amount annotation. \nAnother thing important is to inspect why the model would generate like this. We need to discuss: 1. if this sentence itself is RSR-natural, that is, has the potential to insert a reparandum; 2.", "annotator": "hz", "ts": "2026-10-04T11:20:51"}
+{"audit_id": "a0002", "meaning": "yes", "natural": "no", "note": "This should be considered a typical negative example. What the model wrote is a within-clause RSR. This is a turn that contains two complete queries. It's unexpected and should be avoided for future full-amount annotation. \nAnother thing important is to inspect why the model would generate like this. We need to discuss: 1. if this sentence itself is RSR-natural, that is, has the potential to insert a reparandum; 2. the thinking trajectory of the model on this sample.", "annotator": "hz", "ts": "2026-10-04T11:21:05"}
+{"audit_id": "a0003", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T11:22:25"}
+{"audit_id": "a0003", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T11:22:32"}
+{"audit_id": "a0004", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T11:29:24"}
+{"audit_id": "a0004", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T11:29:26"}
+{"audit_id": "a0005", "meaning": "", "natural": "", "note": "Irrelevant question but how does SBN differentiate between the time of the speaking event and the time", "annotator": "hz", "ts": "2026-10-04T11:32:16"}
+{"audit_id": "a0005", "meaning": "", "natural": "", "note": "Irrelevant question but how does SBN differentiate between the time of the speaking event and the time being spoken? like if they are both", "annotator": "hz", "ts": "2026-10-04T11:32:35"}
+{"audit_id": "a0005", "meaning": "", "natural": "", "note": "Irrelevant question but how does SBN differentiate between the time of the speaking event and the time being spoken? like if they are both `time.n.08`, then how does the downstream component know it is not \"She", "annotator": "hz", "ts": "2026-10-04T11:33:10"}
+{"audit_id": "a0005", "meaning": "", "natural": "", "note": "Irrelevant question but how does SBN differentiate between the time of the speaking event and the time being spoken? like if they are both `time.n.08`, then how does the downstream component know it is not \"She gives birth in July --- this is said in the future\"?\n\nOther than that, I think this sample is fine. The TmeOf inverse looks decent.", "annotator": "hz", "ts": "2026-10-04T11:34:42"}
+{"audit_id": "a0006", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T11:35:00"}
+{"audit_id": "a0006", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T11:35:01"}
+{"audit_id": "a0007", "meaning": "", "natural": "unsure", "note": "", "annotator": "hz", "ts": "2026-10-04T11:36:01"}
+{"audit_id": "a0007", "meaning": "yes", "natural": "unsure", "note": "", "annotator": "hz", "ts": "2026-10-04T11:36:32"}
+{"audit_id": "a0007", "meaning": "yes", "natural": "unsure", "note": "Can \"kind of\" be followed by past tense? Also, I'm surprised that the model did not choose a way easier RSR, such as hate -> like, instead, it chooses a more complicated version.", "annotator": "hz", "ts": "2026-10-04T11:37:46"}
+{"audit_id": "a0007", "meaning": "yes", "natural": "unsure", "note": "Can \"kind of\" be followed by past tense? Also, I'm surprised that the model did not choose a much easier RSR, such as hate -> like, instead, it chooses a more complicated version.", "annotator": "hz", "ts": "2026-10-04T11:37:48"}
+{"audit_id": "a0007", "meaning": "yes", "natural": "unsure", "note": "Can \"kind of\" be followed by past tense? Also, I'm surprised that the model did not choose a much easier RSR, such as hate -> like, instead, it chose a more complicated version.", "annotator": "hz", "ts": "2026-10-04T11:37:53"}
+{"audit_id": "a0007", "meaning": "yes", "natural": "unsure", "note": "Can \"kind of\" be followed by the past tense? Also, I'm surprised that the model did not choose a much easier RSR, such as hate -> like, instead, it chose a more complicated version.", "annotator": "hz", "ts": "2026-10-04T11:37:55"}
+{"audit_id": "a0008", "meaning": "unsure", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T11:38:40"}
+{"audit_id": "a0008", "meaning": "unsure", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T11:38:42"}
+{"audit_id": "a0008", "meaning": "unsure", "natural": "yes", "note": "What does Finish mean in VerbNet & LICRICS?", "annotator": "hz", "ts": "2026-10-04T11:39:20"}
+{"audit_id": "a0008", "meaning": "unsure", "natural": "yes", "note": "What does Finish mean in VerbNet & LICRICS? Also, does the original gold SBN write DAY/MONTH as two time concpets being connected by EQU? It's like the time is the 18th of a certain month, which is equivalent to June?", "annotator": "hz", "ts": "2026-10-04T11:40:48"}
+{"audit_id": "a0009", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T11:41:30"}
+{"audit_id": "a0009", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T11:41:31"}
+{"audit_id": "a0010", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T11:43:00"}
+{"audit_id": "a0010", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T11:43:01"}
+{"audit_id": "a0010", "meaning": "yes", "natural": "yes", "note": "The two time concepts being embedded seem to be processed quite right here. I don't see a problem. But maybe we should check the RSR type distribution. I've seen several aspect/tense RSR in a row.", "annotator": "hz", "ts": "2026-10-04T11:43:56"}
+{"audit_id": "a0011", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T11:44:20"}
+{"audit_id": "a0011", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T11:44:21"}
+{"audit_id": "a0012", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T11:45:48"}
+{"audit_id": "a0012", "meaning": "yes", "natural": "unsure", "note": "", "annotator": "hz", "ts": "2026-10-04T11:45:48"}
+{"audit_id": "a0012", "meaning": "yes", "natural": "unsure", "note": "This is about the upper bound of RSR. Does", "annotator": "hz", "ts": "2026-10-04T11:46:10"}
+{"audit_id": "a0012", "meaning": "yes", "natural": "unsure", "note": "This is about the upper bound of RSR. Does \"Her husband is currently living from Tokyo\" or sentence alike count as a representitive RSR? I mean, it is certain possible for English learners to make a mistake like that then try to correct themseles, but I'm not sure about the boundary here.", "annotator": "hz", "ts": "2026-10-04T11:47:45"}
+{"audit_id": "a0013", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T11:56:51"}
+{"audit_id": "a0013", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T11:56:52"}
+{"audit_id": "a0014", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T11:57:21"}
+{"audit_id": "a0014", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T11:57:22"}
+{"audit_id": "a0015", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T11:59:57"}
+{"audit_id": "a0015", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T11:59:58"}
+{"audit_id": "a0016", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T12:00:32"}
+{"audit_id": "a0016", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T12:00:34"}
+{"audit_id": "a0016", "meaning": "yes", "natural": "yes", "note": "Does this count as forwarding?", "annotator": "hz", "ts": "2026-10-04T12:00:45"}
+{"audit_id": "a0017", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T12:06:56"}
+{"audit_id": "a0017", "meaning": "yes", "natural": "", "note": "Everything looks fine but is the dummy concept really necessary here?", "annotator": "hz", "ts": "2026-10-04T12:07:44"}
+{"audit_id": "a0018", "meaning": "unsure", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T12:08:33"}
+{"audit_id": "a0018", "meaning": "unsure", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T12:08:35"}
+{"audit_id": "a0018", "meaning": "unsure", "natural": "yes", "note": "Does gold SBN represent time as Theme here? Why?", "annotator": "hz", "ts": "2026-10-04T12:08:56"}
+{"audit_id": "a0019", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T12:14:39"}
+{"audit_id": "a0019", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T12:14:40"}
+{"audit_id": "a0020", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T12:22:40"}
+{"audit_id": "a0020", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T12:22:41"}
+{"audit_id": "a0021", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T12:23:25"}
+{"audit_id": "a0021", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T12:23:26"}
+{"audit_id": "a0022", "meaning": "", "natural": "", "note": "Again, this looks like the speaker first makes a mistake with the", "annotator": "hz", "ts": "2026-10-04T12:24:20"}
+{"audit_id": "a0022", "meaning": "", "natural": "", "note": "Again, this looks like the speaker first makes a mistake with the preposition, then self-corrects.", "annotator": "hz", "ts": "2026-10-04T12:24:51"}
+{"audit_id": "a0022", "meaning": "yes", "natural": "", "note": "Again, this looks like the speaker first makes a mistake with the preposition, then self-corrects.", "annotator": "hz", "ts": "2026-10-04T12:24:55"}
+{"audit_id": "a0022", "meaning": "yes", "natural": "unsure", "note": "Again, this looks like the speaker first makes a mistake with the preposition, then self-corrects.", "annotator": "hz", "ts": "2026-10-04T12:24:56"}
+{"audit_id": "a0023", "meaning": "unsure", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T12:26:16"}
+{"audit_id": "a0023", "meaning": "unsure", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T12:26:17"}
+{"audit_id": "a0023", "meaning": "unsure", "natural": "yes", "note": "1. Is \"from the street\" slang for prostitues and drug dealers? \n2. The SBN is complicated, need double check. That's why I marked it as unsure.", "annotator": "hz", "ts": "2026-10-04T12:27:19"}
+{"audit_id": "a0023", "meaning": "unsure", "natural": "yes", "note": "1. Is \"from the street\" slang for prostitutes and drug dealers? \n2. The SBN is complicated, need double check. That's why I marked it as unsure.", "annotator": "hz", "ts": "2026-10-04T12:27:21"}
+{"audit_id": "a0023", "meaning": "unsure", "natural": "yes", "note": "1. Is \"from the street\" slang for prostitutes and drug dealers? \n2. The SBN is complicated; need double check. That's why I marked it as unsure.", "annotator": "hz", "ts": "2026-10-04T12:27:22"}
+{"audit_id": "a0023", "meaning": "unsure", "natural": "yes", "note": "1. Is \"from the street\" slang for prostitutes and drug dealers? \n2. The SBN is complicated; need to double-check. That's why I marked it as unsure.", "annotator": "hz", "ts": "2026-10-04T12:27:24"}
+{"audit_id": "a0023", "meaning": "unsure", "natural": "yes", "note": "1. Is \"from the street\" slang for prostitutes and drug dealers? \n2. The SBN is complicated; I need to double-check. That's why I marked it as unsure.", "annotator": "hz", "ts": "2026-10-04T12:27:28"}
+{"audit_id": "a0024", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T12:27:48"}
+{"audit_id": "a0024", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T12:27:48"}
+{"audit_id": "a0025", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T12:35:51"}
+{"audit_id": "a0025", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T12:35:51"}
+{"audit_id": "a0026", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T12:36:54"}
+{"audit_id": "a0026", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T12:36:55"}
+{"audit_id": "a0027", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T12:42:48"}
+{"audit_id": "a0027", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T12:42:49"}
+{"audit_id": "a0027", "meaning": "yes", "natural": "yes", "note": "1. Again, the type of awkward preposition replacement \n2. Did we show the complte list of verbnet & lirics roles in the prompt?", "annotator": "hz", "ts": "2026-10-04T12:43:33"}
+{"audit_id": "a0028", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T12:43:54"}
+{"audit_id": "a0028", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T12:43:55"}
+{"audit_id": "a0029", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T12:48:31"}
+{"audit_id": "a0029", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T12:48:32"}
+{"audit_id": "a0030", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T12:48:59"}
+{"audit_id": "a0030", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T12:49:00"}
+{"audit_id": "a0031", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T12:49:28"}
+{"audit_id": "a0031", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T12:49:28"}
+{"audit_id": "a0032", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T12:51:11"}
+{"audit_id": "a0032", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T12:51:12"}
+{"audit_id": "a0033", "meaning": "", "natural": "", "note": "Does red ant count as a term (in wordnet)? In that case, can it be RSR-ed?", "annotator": "hz", "ts": "2026-10-04T12:51:59"}
+{"audit_id": "a0033", "meaning": "yes", "natural": "", "note": "Does red ant count as a term (in wordnet)? In that case, can it be RSR-ed?", "annotator": "hz", "ts": "2026-10-04T12:52:13"}
+{"audit_id": "a0033", "meaning": "yes", "natural": "yes", "note": "Does red ant count as a term (in wordnet)? In that case, can it be RSR-ed?", "annotator": "hz", "ts": "2026-10-04T12:52:13"}
+{"audit_id": "a0034", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T12:53:01"}
+{"audit_id": "a0034", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T12:53:01"}
+{"audit_id": "a0035", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T12:53:36"}
+{"audit_id": "a0035", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T12:53:36"}
+{"audit_id": "a0036", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T12:54:39"}
+{"audit_id": "a0036", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T12:54:40"}
+{"audit_id": "a0037", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T12:54:59"}
+{"audit_id": "a0037", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T12:55:00"}
+{"audit_id": "a0037", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T12:55:00"}
+{"audit_id": "a0038", "meaning": "", "natural": "", "note": "Put it in the hard negative examples. I didn't check the SBN becuase the NL is absurd enough.", "annotator": "hz", "ts": "2026-10-04T12:56:08"}
+{"audit_id": "a0038", "meaning": "", "natural": "no", "note": "Put it in the hard negative examples. I didn't check the SBN becuase the NL is absurd enough.", "annotator": "hz", "ts": "2026-10-04T12:56:15"}
+{"audit_id": "a0039", "meaning": "", "natural": "unsure", "note": "", "annotator": "hz", "ts": "2026-10-04T13:02:16"}
+{"audit_id": "a0039", "meaning": "", "natural": "unsure", "note": "I dont think it's a good RSR from the NL side.", "annotator": "hz", "ts": "2026-10-04T13:02:44"}
+{"audit_id": "a0039", "meaning": "unsure", "natural": "unsure", "note": "I dont think it's a good RSR from the NL side.", "annotator": "hz", "ts": "2026-10-04T13:02:44"}
+{"audit_id": "a0039", "meaning": "unsure", "natural": "unsure", "note": "I dont think it's a good RSR from the NL side. Didn't check the SBN.", "annotator": "hz", "ts": "2026-10-04T13:02:54"}
+{"audit_id": "a0040", "meaning": "", "natural": "", "note": "old.a.02Value + --- this line looks funny", "annotator": "hz", "ts": "2026-10-04T13:03:46"}
+{"audit_id": "a0040", "meaning": "", "natural": "unsure", "note": "old.a.02Value + --- this line looks funny", "annotator": "hz", "ts": "2026-10-04T13:03:46"}
+{"audit_id": "a0040", "meaning": "", "natural": "yes", "note": "old.a.02Value + --- this line looks funny", "annotator": "hz", "ts": "2026-10-04T13:03:49"}
+{"audit_id": "a0040", "meaning": "unsure", "natural": "yes", "note": "old.a.02Value + --- this line looks funny", "annotator": "hz", "ts": "2026-10-04T13:03:50"}
+{"audit_id": "a0040", "meaning": "unsure", "natural": "yes", "note": "old.a.02Value + --- this line looks funny. But maybe the gold SBN's issue. Not sure.", "annotator": "hz", "ts": "2026-10-04T13:04:03"}
+{"audit_id": "a0041", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T13:05:48"}
+{"audit_id": "a0041", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T13:05:49"}
+{"audit_id": "a0042", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T13:06:48"}
+{"audit_id": "a0042", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T13:06:48"}
+{"audit_id": "a0043", "meaning": "unsure", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T13:07:00"}
+{"audit_id": "a0043", "meaning": "unsure", "natural": "no", "note": "", "annotator": "hz", "ts": "2026-10-04T13:07:01"}
+{"audit_id": "a0043", "meaning": "unsure", "natural": "no", "note": "Didn't bother to read the SBN. The natural language side is odd. The added reparandum makes it more like a restart instead of a replacement (statement -> question).", "annotator": "hz", "ts": "2026-10-04T13:08:10"}
+{"audit_id": "a0000", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T13:15:44"}
+{"audit_id": "a0000", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T13:15:45"}
+{"audit_id": "a0001", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T13:16:42"}
+{"audit_id": "a0001", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T13:16:44"}
+{"audit_id": "a0001", "meaning": "yes", "natural": "yes", "note": "time.n.01Quantity + --- what does + in original sbn mean?", "annotator": "hz", "ts": "2026-10-04T13:17:15"}
+{"audit_id": "a0005", "meaning": "yes", "natural": "", "note": "Irrelevant question but how does SBN differentiate between the time of the speaking event and the time being spoken? like if they are both `time.n.08`, then how does the downstream component know it is not \"She gives birth in July --- this is said in the future\"?\n\nOther than that, I think this sample is fine. The TmeOf inverse looks decent.", "annotator": "hz", "ts": "2026-10-04T13:17:31"}
+{"audit_id": "a0005", "meaning": "yes", "natural": "yes", "note": "Irrelevant question but how does SBN differentiate between the time of the speaking event and the time being spoken? like if they are both `time.n.08`, then how does the downstream component know it is not \"She gives birth in July --- this is said in the future\"?\n\nOther than that, I think this sample is fine. The TmeOf inverse looks decent.", "annotator": "hz", "ts": "2026-10-04T13:17:32"}
+{"audit_id": "a0044", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T13:18:14"}
+{"audit_id": "a0044", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T13:18:16"}
+{"audit_id": "a0045", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T13:19:39"}
+{"audit_id": "a0045", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T13:19:40"}
+{"audit_id": "a0046", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T13:20:15"}
+{"audit_id": "a0046", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T13:20:16"}
+{"audit_id": "a0047", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T13:20:35"}
+{"audit_id": "a0047", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T13:20:36"}
+{"audit_id": "a0048", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T13:21:21"}
+{"audit_id": "a0048", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T13:21:22"}
+{"audit_id": "a0049", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T13:25:05"}
+{"audit_id": "a0049", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T13:25:06"}
+{"audit_id": "a0050", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T13:26:09"}
+{"audit_id": "a0050", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T13:26:09"}
+{"audit_id": "a0051", "meaning": "", "natural": "", "note": "SY2 +2 → 5 entity.n.01 --- what is sy2?", "annotator": "hz", "ts": "2026-10-04T13:27:01"}
+{"audit_id": "a0051", "meaning": "", "natural": "", "note": "SY2 +2 → 5 entity.n.01 --- what is sy2? \nOK this looks complicated, we need double check.", "annotator": "hz", "ts": "2026-10-04T13:28:27"}
+{"audit_id": "a0051", "meaning": "unsure", "natural": "", "note": "SY2 +2 → 5 entity.n.01 --- what is sy2? \nOK this looks complicated, we need double check.", "annotator": "hz", "ts": "2026-10-04T13:28:28"}
+{"audit_id": "a0051", "meaning": "unsure", "natural": "yes", "note": "SY2 +2 → 5 entity.n.01 --- what is sy2? \nOK this looks complicated, we need double check.", "annotator": "hz", "ts": "2026-10-04T13:28:30"}
+{"audit_id": "a0052", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T13:33:47"}
+{"audit_id": "a0052", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T13:33:47"}
+{"audit_id": "a0052", "meaning": "yes", "natural": "yes", "note": "Again, the awkward preposition", "annotator": "hz", "ts": "2026-10-04T13:33:58"}
+{"audit_id": "a0052", "meaning": "yes", "natural": "yes", "note": "Again, the awkward preposition repalcement.", "annotator": "hz", "ts": "2026-10-04T13:34:04"}
+{"audit_id": "a0052", "meaning": "yes", "natural": "yes", "note": "Again, the awkward preposition replacement.", "annotator": "hz", "ts": "2026-10-04T13:34:06"}
+{"audit_id": "a0053", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T13:34:56"}
+{"audit_id": "a0053", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T13:34:56"}
+{"audit_id": "a0054", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T13:35:12"}
+{"audit_id": "a0054", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T13:35:13"}
+{"audit_id": "a0055", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T13:35:29"}
+{"audit_id": "a0055", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T13:35:29"}
+{"audit_id": "a0056", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T13:36:10"}
+{"audit_id": "a0056", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T13:36:11"}
+{"audit_id": "a0057", "meaning": "unsure", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T13:40:44"}
+{"audit_id": "a0057", "meaning": "unsure", "natural": "", "note": "the spread and butter concepts connect to different concept, even though semantically maks sense. But i don't want to risk it. It's hard to tell if the model makes it right out of luck or it learns that they mean the same thing.", "annotator": "hz", "ts": "2026-10-04T13:42:19"}
+{"audit_id": "a0057", "meaning": "unsure", "natural": "yes", "note": "the spread and butter concepts connect to different concept, even though semantically maks sense. But i don't want to risk it. It's hard to tell if the model makes it right out of luck or it learns that they mean the same thing.", "annotator": "hz", "ts": "2026-10-04T13:42:23"}
+{"audit_id": "a0058", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T13:43:32"}
+{"audit_id": "a0058", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T13:43:34"}
+{"audit_id": "a0059", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T13:44:45"}
+{"audit_id": "a0059", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T13:44:45"}
+{"audit_id": "a0060", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T13:45:00"}
+{"audit_id": "a0060", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T13:45:00"}
+{"audit_id": "a0061", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T13:45:08"}
+{"audit_id": "a0061", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T13:45:09"}
+{"audit_id": "a0062", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T13:45:48"}
+{"audit_id": "a0062", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T13:45:48"}
+{"audit_id": "a0062", "meaning": "yes", "natural": "yes", "note": "Again, the awkward preposition repair.", "annotator": "hz", "ts": "2026-10-04T13:46:05"}
+{"audit_id": "a0063", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T13:46:27"}
+{"audit_id": "a0063", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T13:46:27"}
+{"audit_id": "a0064", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T13:46:47"}
+{"audit_id": "a0064", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T13:46:48"}
+{"audit_id": "a0065", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T13:52:36"}
+{"audit_id": "a0065", "meaning": "no", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T13:52:36"}
+{"audit_id": "a0065", "meaning": "no", "natural": "yes", "note": "Double check the time marker. The current one seems funny", "annotator": "hz", "ts": "2026-10-04T13:52:50"}
+{"audit_id": "a0066", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T13:53:42"}
+{"audit_id": "a0066", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T13:53:42"}
+{"audit_id": "a0067", "meaning": "no", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T13:54:02"}
+{"audit_id": "a0067", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T13:54:03"}
+{"audit_id": "a0067", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T13:54:03"}
+{"audit_id": "a0068", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T13:58:52"}
+{"audit_id": "a0068", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T13:58:52"}
+{"audit_id": "a0069", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T14:00:35"}
+{"audit_id": "a0069", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T14:00:36"}
+{"audit_id": "a0069", "meaning": "yes", "natural": "yes", "note": "Again, the prepostion replacement", "annotator": "hz", "ts": "2026-10-04T14:00:49"}
+{"audit_id": "a0070", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T14:01:46"}
+{"audit_id": "a0070", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T14:01:46"}
+{"audit_id": "a0071", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T14:03:06"}
+{"audit_id": "a0071", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T14:03:06"}
+{"audit_id": "a0072", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T14:04:03"}
+{"audit_id": "a0072", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T14:04:03"}
+{"audit_id": "a0073", "meaning": "", "natural": "", "note": "Sometimes, the preposotion in the reparandum can be really awkward, but I guess that's the point of RSR?", "annotator": "hz", "ts": "2026-10-04T14:08:03"}
+{"audit_id": "a0073", "meaning": "yes", "natural": "", "note": "Sometimes, the preposotion in the reparandum can be really awkward, but I guess that's the point of RSR?", "annotator": "hz", "ts": "2026-10-04T14:08:07"}
+{"audit_id": "a0073", "meaning": "yes", "natural": "yes", "note": "Sometimes, the preposotion in the reparandum can be really awkward, but I guess that's the point of RSR?", "annotator": "hz", "ts": "2026-10-04T14:08:08"}
+{"audit_id": "a0074", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T14:08:41"}
+{"audit_id": "a0074", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T14:08:41"}
+{"audit_id": "a0075", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T14:09:05"}
+{"audit_id": "a0075", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T14:09:06"}
+{"audit_id": "a0075", "meaning": "yes", "natural": "yes", "note": "The 'there exists/there costs/there takes' reparanda are few possible constructions for there be sentences.", "annotator": "hz", "ts": "2026-10-04T14:09:43"}
+{"audit_id": "a0076", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T14:10:04"}
+{"audit_id": "a0076", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T14:10:05"}
+{"audit_id": "a0077", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T14:12:58"}
+{"audit_id": "a0077", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T14:12:58"}
+{"audit_id": "a0078", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T14:13:32"}
+{"audit_id": "a0078", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T14:13:33"}
+{"audit_id": "a0079", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T14:13:43"}
+{"audit_id": "a0079", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T14:13:44"}
+{"audit_id": "a0080", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T14:14:14"}
+{"audit_id": "a0080", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T14:14:14"}
+{"audit_id": "a0081", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T14:14:29"}
+{"audit_id": "a0081", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T14:14:30"}
+{"audit_id": "a0082", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T14:14:40"}
+{"audit_id": "a0082", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T14:14:40"}
+{"audit_id": "a0083", "meaning": "", "natural": "", "note": "Again, the awkward preposition replacement.", "annotator": "hz", "ts": "2026-10-04T14:18:52"}
+{"audit_id": "a0083", "meaning": "yes", "natural": "", "note": "Again, the awkward preposition replacement.", "annotator": "hz", "ts": "2026-10-04T14:18:54"}
+{"audit_id": "a0083", "meaning": "yes", "natural": "yes", "note": "Again, the awkward preposition replacement.", "annotator": "hz", "ts": "2026-10-04T14:18:54"}
+{"audit_id": "a0084", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T14:19:04"}
+{"audit_id": "a0084", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T14:19:04"}
+{"audit_id": "a0085", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T14:19:14"}
+{"audit_id": "a0085", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T14:19:14"}
+{"audit_id": "a0086", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T14:19:34"}
+{"audit_id": "a0086", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T14:19:34"}
+{"audit_id": "a0087", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T14:19:51"}
+{"audit_id": "a0087", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T14:19:52"}
+{"audit_id": "a0088", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T14:20:07"}
+{"audit_id": "a0088", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T14:20:08"}
+{"audit_id": "a0089", "meaning": "", "natural": "", "note": "I think the original SBN can be used for showcasing using entity.n.01 as the dummy node for verb concept?", "annotator": "hz", "ts": "2026-10-04T14:21:48"}
+{"audit_id": "a0089", "meaning": "yes", "natural": "", "note": "I think the original SBN can be used for showcasing using entity.n.01 as the dummy node for verb concept?", "annotator": "hz", "ts": "2026-10-04T14:21:49"}
+{"audit_id": "a0089", "meaning": "yes", "natural": "yes", "note": "I think the original SBN can be used for showcasing using entity.n.01 as the dummy node for verb concept?", "annotator": "hz", "ts": "2026-10-04T14:21:49"}
+{"audit_id": "a0090", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T14:22:20"}
+{"audit_id": "a0090", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T14:22:20"}
+{"audit_id": "a0091", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T14:22:44"}
+{"audit_id": "a0091", "meaning": "yes", "natural": "no", "note": "", "annotator": "hz", "ts": "2026-10-04T14:22:44"}
+{"audit_id": "a0091", "meaning": "unsure", "natural": "no", "note": "", "annotator": "hz", "ts": "2026-10-04T14:22:45"}
+{"audit_id": "a0091", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T14:22:45"}
+{"audit_id": "a0091", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T14:22:46"}
+{"audit_id": "a0092", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T14:25:43"}
+{"audit_id": "a0092", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T14:25:43"}
+{"audit_id": "a0093", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T14:25:59"}
+{"audit_id": "a0093", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T14:25:59"}
+{"audit_id": "a0094", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T14:26:26"}
+{"audit_id": "a0094", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T14:26:26"}
+{"audit_id": "a0095", "meaning": "", "natural": "no", "note": "", "annotator": "hz", "ts": "2026-10-04T14:27:04"}
+{"audit_id": "a0095", "meaning": "", "natural": "unsure", "note": "", "annotator": "hz", "ts": "2026-10-04T14:27:05"}
+{"audit_id": "a0095", "meaning": "", "natural": "unsure", "note": "It reads naturally for sure, but I think we should avoid exmaples like smaller_position, larger_position. This looks identical to a standard fluent expression.", "annotator": "hz", "ts": "2026-10-04T14:27:58"}
+{"audit_id": "a0095", "meaning": "", "natural": "unsure", "note": "It reads naturally for sure, but I think we should avoid examples like smaller_position, larger_position. This looks identical to a standard fluent expression.", "annotator": "hz", "ts": "2026-10-04T14:27:59"}
+{"audit_id": "a0095", "meaning": "yes", "natural": "unsure", "note": "It reads naturally for sure, but I think we should avoid examples like smaller_position, larger_position. This looks identical to a standard fluent expression.", "annotator": "hz", "ts": "2026-10-04T14:28:10"}
+{"audit_id": "a0096", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T14:28:45"}
+{"audit_id": "a0096", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T14:28:45"}
+{"audit_id": "a0097", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T14:29:14"}
+{"audit_id": "a0097", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T14:29:14"}
+{"audit_id": "a0098", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T14:29:29"}
+{"audit_id": "a0098", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T14:29:29"}
+{"audit_id": "a0099", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T14:30:19"}
+{"audit_id": "a0099", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T14:30:19"}
+{"audit_id": "a0100", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T14:30:50"}
+{"audit_id": "a0100", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T14:30:50"}
+{"audit_id": "a0101", "meaning": "no", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T14:31:05"}
+{"audit_id": "a0101", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T14:31:05"}
+{"audit_id": "a0101", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T14:31:06"}
+{"audit_id": "a0102", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T14:33:41"}
+{"audit_id": "a0102", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T14:33:41"}
+{"audit_id": "a0102", "meaning": "yes", "natural": "yes", "note": "This needs double check. The original SBN is complicated enough.", "annotator": "hz", "ts": "2026-10-04T14:34:00"}
+{"audit_id": "a0103", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T14:34:18"}
+{"audit_id": "a0103", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T14:34:19"}
+{"audit_id": "a0104", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-04T14:35:05"}
+{"audit_id": "a0104", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-04T14:35:05"}

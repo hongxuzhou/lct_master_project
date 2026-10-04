@@ -91,6 +91,7 @@ ARGS=(run --backend openai --base-url "http://127.0.0.1:$PORT/v1"
 [ -n "$TAG" ] && ARGS+=(--tag "$TAG")
 [ -n "$SAMPLE" ] && ARGS+=(--sample "$SAMPLE")
 [ -n "$LIMIT" ] && ARGS+=(--limit "$LIMIT")
+[ -n "$DOCS" ] && ARGS+=(--docs "$DOCS")
 
 cd "$CODE"
 python run_llm.py "${ARGS[@]}"

@@ -3,6 +3,7 @@ Pick the gold documents for one LLM-playground run, by repair type.
 
     python3 select_docs.py [--per-type 10] [--seed 13] [--out pinned_sample.tsv]
                            [--exclude earlier_sample.tsv ...]
+                           [--quota type=n ...] [--cap type=n ...]
 
 For each repair type of prompt_docs/repair_notation.md §4, a document is
 eligible when its gold SBN offers at least one site of that type (the
@@ -16,8 +17,11 @@ Choices:
 - excluded: gold documents shown as examples in the prompt documents, and
   gold documents whose own SBN is broken (the reader rejects it, or an index
   points outside the sequence);
-- constant types draw at most one document per constant value, so that the
-  name cell is not mostly "Tom" (1673 of 2188 male names in gold);
+- constant types draw at most `--cap` documents per constant value (default
+  1), so that the name cell is not mostly "Tom" (1673 of 2188 male names in
+  gold); 0 means no cap. One per value was right for 10-item samples; the
+  full run uses name 3, number and temporal no cap (decided 2026-10-04);
+- `--quota` sets the number per type, overriding `--per-type`;
 - `--exclude` leaves out documents of earlier samples, so a later round
   draws fresh ones;
 - no interregnum: the model writes base repairs only, and editing
@@ -61,6 +65,24 @@ TYPES = ("content_word", "constant_name", "constant_number",
          "constant_temporal", "tense", "edge_label", "forwarding")
 TEMPORAL_ROLES = {"ClockTime", "DayOfWeek", "DayOfMonth", "MonthOfYear", "YearOfCentury"}
 EDGE_LABEL_ROLES = {"Destination", "Source", "Location"}
+# Edge label sites (decided 2026-10-04, after the round-2 audit): a gold
+# Source or Destination, where swapping direction is a change of intent
+# ("taken from, to the orphanage"), or the Location of be.v.03 ("in, from
+# China"). Location on other verbs gave "living from, in Tokyo".
+EDGE_LABEL_SITE_ROLES = {"Source", "Destination"}
+# The preposition that must be in the sentence for each gold role.
+EDGE_PREPS = {
+    "Source": {"from", "off", "out"},
+    # directional only: PMB also writes Destination for placement ("spat on
+    # the ground", "planting in his backyard"), where "from" reads wrong
+    "Destination": {"to", "into", "onto", "toward", "towards", "for"},
+    "Location": {"in", "on", "at", "inside"},
+}
+_UNITS = ("zero one two three four five six seven eight nine ten eleven twelve "
+          "thirteen fourteen fifteen sixteen seventeen eighteen nineteen").split()
+_TENS = "_ _ twenty thirty forty fifty sixty seventy eighty ninety".split()
+_ORD = {"one": "first", "two": "second", "three": "third", "five": "fifth",
+        "eight": "eighth", "nine": "ninth", "twelve": "twelfth"}
 SUBJECT_ROLES = {"Agent", "Theme", "Experiencer", "Patient", "Pivot"}
 TENSE_OPS = {"TPR", "EQU", "TSU"}
 NUMBER = re.compile(r"^\d+(\.\d+)?$")
@@ -77,6 +99,51 @@ def _target(c, val: str) -> int | None:
 def _is_tense_time(c) -> bool:
     return c.synset == "time.n.08" and any(
         r in TENSE_OPS and v == "now" for r, v in c.roles)
+
+
+def _has_wh(c) -> bool:
+    """The concept is the slot a question asks about (`EQU ?`, `Name ?`, …)."""
+    return any(v == "?" for _, v in c.roles)
+
+
+def _words(doc) -> list[str]:
+    # "thirty-four" and "1,500" stay one token
+    return [w.lower() for w in re.findall(r"[A-Za-z0-9]+(?:[-,.][A-Za-z0-9]+)*", doc.sentence)]
+
+
+def _number_words(n: int) -> set[str]:
+    """Spellings of n < 1,000,000 as words, cardinal and ordinal, one token
+    per word ("twenty-one" -> {"twenty-one"}, "one hundred" -> {"hundred"})."""
+    if n < 20:
+        w = _UNITS[n]
+    elif n < 100:
+        w = _TENS[n // 10] + ("-" + _UNITS[n % 10] if n % 10 else "")
+    elif n < 1000:
+        return {"hundred", "hundredth"}
+    elif n < 1_000_000:
+        return {"thousand", "thousandth"}
+    else:
+        return {"million", "millionth", "billion"}
+    last = w.split("-")[-1]
+    ordinal = _ORD.get(last, last.rstrip("y") + "ieth" if last.endswith("y") else last + "th")
+    return {w, w.rsplit("-", 1)[0] + "-" + ordinal if "-" in w else ordinal} \
+        | ({"dozen"} if n == 12 else set())
+
+
+def _numeral_said(doc, value: str) -> bool:
+    """The sentence writes the number as a numeral: digits ("3", "1,500",
+    "3rd") or a number word ("three", "third"). "Tom and Mary both laughed"
+    has `Quantity 2` but no numeral, and "Tom and Mary three, both" is not a
+    repair anyone makes (a0038)."""
+    words = _words(doc)
+    plain = {w.replace(",", "") for w in words}
+    if value in plain or any(re.fullmatch(re.escape(value) + r"(st|nd|rd|th)", w) for w in plain):
+        return True
+    try:
+        n = float(value)
+    except ValueError:
+        return False
+    return n.is_integer() and bool(_number_words(int(n)) & set(words))
 
 
 def site_content_word(doc):
@@ -103,13 +170,16 @@ def site_name(doc):
 
 
 def site_number(doc):
-    """A plain number (`Quantity 3`, `EQU 100`), not a year or clock time."""
+    """A plain number (`Quantity 3`, `EQU 100`), not a year or clock time,
+    written as a numeral in the sentence."""
     return [(p, s) for p, s in site_constant(doc, value_re=NUMBER)
-            if s.split()[0] not in TEMPORAL_ROLES]
+            if s.split()[0] not in TEMPORAL_ROLES and _numeral_said(doc, s.split()[1])]
 
 
 def site_temporal(doc):
-    return site_constant(doc, roles=TEMPORAL_ROLES)
+    # `YearOfCentury ?` is the slot of "In what year …", as with `Name ?`
+    return [(p, v) for p, v in site_constant(doc, roles=TEMPORAL_ROLES)
+            if not v.endswith(" ?")]
 
 
 def site_tense(doc):
@@ -128,11 +198,32 @@ def site_tense(doc):
 
 
 def site_edge_label(doc):
-    """A verb with an index-valued Destination/Source/Location role."""
-    return [(c.pos, f"{c.synset} {r}") for c in doc.concepts
-            if c.pos_tag == "v"
-            for r, v in c.roles
-            if r in EDGE_LABEL_ROLES and _target(c, v) is not None]
+    """A verb with a Source or Destination role, or be.v.03 with Location,
+    whose preposition is in the sentence.
+
+    The target must come after the verb and must not be the question slot:
+    PMB uses Source for a subject ("We ran out of food") and for objects
+    with no preposition ("He shined his shoes"), and a fronted wh-target
+    only takes a stranded preposition ("Where on earth were you from, where
+    on earth were you?", a0002). A `location.n.01` target is a preposition
+    built with a spatial operator ("under" = SZN, "near" = APX), not a role.
+    """
+    words = set(_words(doc))
+    out = []
+    for c in doc.concepts:
+        if c.pos_tag != "v":
+            continue
+        for r, v in c.roles:
+            t = _target(c, v)
+            if t is None or not 0 <= t < len(doc.concepts) or t < c.pos:
+                continue
+            if not (r in EDGE_LABEL_SITE_ROLES or (r == "Location" and c.synset == "be.v.03")):
+                continue
+            x = doc.concepts[t]
+            if _has_wh(x) or x.synset == "location.n.01" or not (EDGE_PREPS[r] & words):
+                continue
+            out.append((c.pos, f"{c.synset} {r}"))
+    return out
 
 
 def _quantifier_restrictor(doc, x) -> bool:
@@ -194,7 +285,10 @@ def site_forwarding(doc):
         subj = any(r in SUBJECT_ROLES and _target(v, val) == i for r, val in v.roles)
         tense = _is_tense_time(t) and any(
             r == "Time" and _target(v, val) == i + 2 for r, val in v.roles)
-        if subj and tense and not _quantifier_restrictor(doc, x) and _said_as_often(doc, v):
+        # a question subject ("Who killed …") restarts into a question:
+        # "Carlos killed, Who killed …" (a0043)
+        if subj and tense and not _quantifier_restrictor(doc, x) and not _has_wh(x) \
+                and _said_as_often(doc, v):
             out.append((i, x.synset))
     return out
 
@@ -223,7 +317,18 @@ def main() -> None:
     ap.add_argument("--out", type=Path, default=HERE / "pinned_sample.tsv")
     ap.add_argument("--exclude", type=Path, nargs="*", default=[],
                     help="earlier sample TSVs whose documents are not drawn again")
+    ap.add_argument("--quota", nargs="*", default=[], metavar="TYPE=N",
+                    help="documents per type, overriding --per-type")
+    ap.add_argument("--cap", nargs="*", default=[], metavar="TYPE=N",
+                    help="documents per constant value (default 1; 0 = no cap)")
     args = ap.parse_args()
+    quota = {t: args.per_type for t in TYPES}
+    quota.update({k: int(v) for k, v in (x.split("=") for x in args.quota)})
+    cap = {t: 1 for t in TYPES}
+    cap.update({k: int(v) for k, v in (x.split("=") for x in args.cap)})
+    for k in list(quota) + list(cap):
+        if k not in TYPES:
+            ap.error(f"unknown type {k}")
     rng = random.Random(args.seed)
 
     excluded = {r["doc_id"] for p in args.exclude
@@ -260,18 +365,18 @@ def main() -> None:
     for t in sorted(TYPES, key=lambda t: len(eligible[t])):
         cands = eligible[t][:]
         rng.shuffle(cands)
-        seen_values: set[str] = set()
+        per_value: collections.Counter = collections.Counter()
         picked = 0
         for d, sites in cands:
-            if picked >= args.per_type:
+            if picked >= quota[t]:
                 break
             if d.doc_id in used:
                 continue
             if t.startswith("constant_"):
                 vals = {s for _, s in sites}
-                if vals <= seen_values:
+                if cap[t] and all(per_value[v] >= cap[t] for v in vals):
                     continue
-                seen_values |= vals
+                per_value.update(vals)
             used.add(d.doc_id)
             picked += 1
             rows.append({
@@ -283,8 +388,8 @@ def main() -> None:
                 "n_tokens_nl": len(d.sentence.split()),
                 "eligible_sites": "; ".join(f"{p}:{s}" for p, s in sites),
             })
-        if picked < args.per_type:
-            print(f"  only {picked} documents for {t}")
+        if picked < quota[t]:
+            print(f"  only {picked} of {quota[t]} documents for {t}")
 
     rows.sort(key=lambda r: (TYPES.index(r["repair_type"]), r["doc_id"]))
     with open(args.out, "w", encoding="utf-8", newline="") as f:

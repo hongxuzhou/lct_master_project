@@ -50,22 +50,32 @@ def site_tokens(row):
     return toks
 
 
-rows = list(csv.DictReader(open(sys.argv[1]), delimiter="\t"))
-bad = 0
-for r in rows:
-    if r.get("status") != "ok":
-        continue
-    try:
-        site = site_tokens(r)
-        g, rep = triples(r["sbn_clean"]), triples(r["sbn_repair"])
-    except Exception as e:  # noqa: BLE001
-        print(f"{r['doc_id']}: could not check ({e})")
-        continue
+def missing_edges(r):
+    """Gold edges away from the repair site that the repaired SBN lost."""
+    site = site_tokens(r)
+    g, rep = triples(r["sbn_clean"]), triples(r["sbn_repair"])
     need = collections.Counter({t: n for t, n in g.items()
                                 if t[0] not in site and t[2] not in site})
-    missing = need - rep
-    if missing:
-        bad += 1
-        print(f"{r['doc_id']} [{r['repair_type']}] missing gold edges: {dict(missing)}")
-        print(f"    gold: {r['sbn_clean']}\n    rep : {r['sbn_repair']}")
-print(f"\n{bad} answered rows lose an untouched gold edge")
+    return dict(need - rep)
+
+
+def main():
+    rows = list(csv.DictReader(open(sys.argv[1]), delimiter="\t"))
+    bad = 0
+    for r in rows:
+        if r.get("status") != "ok" or not r.get("sbn_repair"):
+            continue
+        try:
+            missing = missing_edges(r)
+        except Exception as e:  # noqa: BLE001
+            print(f"{r['doc_id']}: could not check ({e})")
+            continue
+        if missing:
+            bad += 1
+            print(f"{r['doc_id']} [{r['repair_type']}] missing gold edges: {missing}")
+            print(f"    gold: {r['sbn_clean']}\n    rep : {r['sbn_repair']}")
+    print(f"\n{bad} answered rows lose an untouched gold edge")
+
+
+if __name__ == "__main__":
+    main()
