@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Repair Audit</title>
+<style>
+:root {
+  --bg: #f7f6f3; --card: #ffffff; --ink: #1d1d1f; --muted: #6b6b70; --line: #dedcd6;
+  --accent: #2f5fd0; --corr: #b4441f; --corr-bg: #fbeee8; --conj: #1f7a4d; --conj-bg: #e8f5ee;
+  --yes: #1f7a4d; --no: #b4441f; --unsure: #8a6d1a; --mark: #ffe08a;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #17171a; --card: #212125; --ink: #ececef; --muted: #9a9aa2; --line: #36363c;
+    --accent: #7ea2ff; --corr: #f08a66; --corr-bg: #3a2620; --conj: #62c999; --conj-bg: #1d3329;
+    --yes: #62c999; --no: #f08a66; --unsure: #e2c25c; --mark: #6b5a1a;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink);
+  font: 15px/1.5 -apple-system, "Segoe UI", system-ui, sans-serif; }
+header { position: sticky; top: 0; z-index: 2; background: var(--card); border-bottom: 1px solid var(--line);
+  padding: 10px 16px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+header .prog { font-variant-numeric: tabular-nums; color: var(--muted); }
+header .bar { flex: 1; min-width: 120px; height: 6px; background: var(--line); border-radius: 3px; overflow: hidden; }
+header .bar > div { height: 100%; background: var(--accent); }
+button { font: inherit; border: 1px solid var(--line); background: var(--card); color: var(--ink);
+  border-radius: 6px; padding: 5px 11px; cursor: pointer; }
+button:hover { border-color: var(--accent); }
+main { max-width: 1000px; margin: 0 auto; padding: 16px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 16px; margin-bottom: 14px; }
+.lbl { font-size: 12px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin-bottom: 4px; }
+.utt { font-size: 21px; line-height: 1.45; }
+.utt mark { background: var(--mark); color: inherit; border-radius: 3px; padding: 0 2px; }
+.utt .onset { color: var(--accent); font-weight: 600; }
+.orig { color: var(--muted); margin-top: 6px; }
+.meta { color: var(--muted); font-size: 12px; float: right; }
+.boxes { display: flex; flex-direction: column; gap: 8px; }
+.box { border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; }
+.box.CORRECTION { border-color: var(--corr); background: var(--corr-bg); }
+.box.CONJUNCTION { border-color: var(--conj); background: var(--conj-bg); }
+.box .bh { font-size: 12px; color: var(--muted); margin-bottom: 4px; font-family: ui-monospace, Menlo, monospace; }
+.box.CORRECTION .bh b { color: var(--corr); }
+.box.CONJUNCTION .bh b { color: var(--conj); }
+.c { font-family: ui-monospace, Menlo, monospace; font-size: 13.5px; padding: 2px 0; }
+.c .pos { display: inline-block; width: 2.2em; color: var(--muted); text-align: right; margin-right: 8px; }
+.c .syn { font-weight: 600; }
+.c .r { display: inline-block; margin-left: 14px; }
+.c .role { color: var(--accent); }
+.c .to { color: var(--muted); }
+.raw { font-family: ui-monospace, Menlo, monospace; font-size: 12px; color: var(--muted);
+  white-space: pre-wrap; word-break: break-word; margin-top: 8px; }
+details summary { cursor: pointer; color: var(--muted); font-size: 13px; margin-top: 8px; }
+.q { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 8px 0; }
+.q .qt { flex: 1 1 320px; }
+.q button { min-width: 84px; }
+.q button kbd { font-size: 11px; color: var(--muted); margin-left: 4px; }
+.q button.on.yes { background: var(--yes); border-color: var(--yes); color: #fff; }
+.q button.on.no { background: var(--no); border-color: var(--no); color: #fff; }
+.q button.on.unsure { background: var(--unsure); border-color: var(--unsure); color: #fff; }
+textarea { width: 100%; font: inherit; background: var(--bg); color: var(--ink); border: 1px solid var(--line);
+  border-radius: 6px; padding: 6px 8px; min-height: 44px; }
+.status { font-size: 13px; color: var(--muted); }
+.help { font-size: 12px; color: var(--muted); }
+.err { color: var(--no); }
+@media (max-width: 600px) { .c .r { display: block; margin-left: 3.2em; } .utt { font-size: 18px; } }
+</style>
+</head>
+<body>
+<header>
+  <button id="prev" title="previous (←)">←</button>
+  <button id="next" title="next (→ or Enter)">→</button>
+  <button id="todo" title="first item without both answers (u)">next unanswered</button>
+  <span class="prog" id="prog"></span>
+  <div class="bar"><div id="barfill" style="width:0"></div></div>
+  <span class="status" id="saved"></span>
+</header>
+<main id="main"><p>Loading…</p></main>
+
+<script>
+const Q = [
+  ["meaning", "(a) Does the SBN mean what the utterance says? Reparandum in the CORRECTION box, repair in the CONJUNCTION box, the rest unchanged.", "123"],
+  ["natural", "(b) As a spoken self-correction, does the utterance read naturally?", "456"],
+];
+const ANS = ["yes", "no", "unsure"];
+let S = { items: [], labels: {}, i: 0 };
+
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function utterance(it) {
+  const s = it.nl_repair, on = parseInt(it.repair_onset, 10), surf = it.reparandum_surface;
+  if (!Number.isFinite(on) || on < 0 || on > s.length) return esc(s);
+  const head = s.slice(0, on);
+  const k = surf ? head.toLowerCase().lastIndexOf(surf.toLowerCase()) : -1;
+  const pre = k >= 0 ? esc(head.slice(0, k)) + "<mark>" + esc(head.slice(k, k + surf.length)) + "</mark>" + esc(head.slice(k + surf.length))
+                     : esc(head);
+  return pre + '<span class="onset" title="repair starts here">▸</span>' + esc(s.slice(on));
+}
+
+function sbn(r) {
+  if (r.error) return `<div class="err">parse error: ${esc(r.error)}</div><div class="raw">${esc(r.raw)}</div>`;
+  const boxes = r.boxes.map(b => {
+    const head = b.op ? `b${b.id} <b>${b.op}</b> ${esc(b.ptr)} → b${b.target ?? "∅"}` : `b${b.id}`;
+    const cs = b.concepts.map(c => {
+      const roles = c.roles.map(x => `<span class="r"><span class="role">${esc(x.role)}</span> ${esc(x.val)}` +
+        (x.to !== undefined ? ` <span class="to">→ ${x.to} ${esc(x.to_name)}</span>` : "") + `</span>`).join("");
+      return `<div class="c"><span class="pos">${c.pos}</span><span class="syn">${esc(c.synset)}</span>${roles}</div>`;
+    }).join("");
+    return `<div class="box ${b.op || ""}"><div class="bh">${head}</div>${cs || '<div class="c help">(empty)</div>'}</div>`;
+  }).join("");
+  return `<div class="boxes">${boxes}</div><details><summary>raw line</summary><div class="raw">${esc(r.raw)}</div></details>`;
+}
+
+const lab = it => S.labels[it.audit_id] || {};
+const complete = it => { const l = lab(it); return !!(l.meaning && l.natural); };
+
+function render() {
+  const it = S.items[S.i], l = lab(it);
+  const done = S.items.filter(complete).length;
+  document.getElementById("prog").textContent = `${S.i + 1} / ${S.items.length} · ${done} done · ${S.annotator}`;
+  document.getElementById("barfill").style.width = (100 * done / S.items.length) + "%";
+  const qs = Q.map(([k, text, keys]) => `<div class="q"><div class="qt">${text}</div>` +
+    ANS.map((a, j) => `<button class="${a} ${l[k] === a ? "on" : ""}" data-q="${k}" data-a="${a}">${a}<kbd>${keys[j]}</kbd></button>`).join("") +
+    `</div>`).join("");
+  document.getElementById("main").innerHTML = `
+    <div class="card">
+      <span class="meta">${esc(it.audit_id)} · ${esc(it.doc_id)}</span>
+      <div class="lbl">Utterance</div>
+      <div class="utt">${utterance(it)}</div>
+      <div class="orig">original: ${esc(it.nl_clean)}</div>
+    </div>
+    <div class="card">
+      <div class="lbl">SBN of the utterance</div>
+      ${sbn(it.sbn_repair)}
+      <details><summary>gold SBN of the original</summary>${sbn(it.sbn_clean)}</details>
+    </div>
+    <div class="card">
+      ${qs}
+      <div class="lbl" style="margin-top:10px">Note (optional; saved when you leave the box)</div>
+      <textarea id="note">${esc(l.note || "")}</textarea>
+      <div class="help">Keys: 1 2 3 for (a), 4 5 6 for (b), Enter or → next, ← previous, u next unanswered. Every click is saved at once.</div>
+    </div>`;
+  document.querySelectorAll(".q button").forEach(b => b.onclick = () => answer(b.dataset.q, b.dataset.a));
+  document.getElementById("note").onblur = e => { if ((lab(it).note || "") !== e.target.value.trim()) save({ note: e.target.value }); };
+  try { localStorage.setItem("audit_pos", S.i); } catch (e) {}
+}
+
+async function save(patch) {
+  const it = S.items[S.i], l = lab(it);
+  const note = document.getElementById("note");
+  const rec = { audit_id: it.audit_id, meaning: l.meaning || "", natural: l.natural || "",
+                note: note ? note.value : (l.note || ""), ...patch };
+  const el = document.getElementById("saved");
+  try {
+    const r = await fetch("/api/label", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(rec) });
+    const j = await r.json();
+    if (!r.ok) throw new Error(j.error || r.status);
+    S.labels[it.audit_id] = j;
+    el.textContent = "saved " + j.ts.slice(11); el.className = "status";
+  } catch (e) {
+    el.textContent = "NOT SAVED: " + e.message; el.className = "status err";
+  }
+}
+
+async function answer(q, a) { await save({ [q]: a }); render(); }
+
+function go(i) {
+  const n = document.getElementById("note");
+  if (n && (lab(S.items[S.i]).note || "") !== n.value.trim()) save({ note: n.value });
+  S.i = Math.max(0, Math.min(S.items.length - 1, i)); render(); window.scrollTo(0, 0);
+}
+function nextTodo() {
+  for (let k = 1; k <= S.items.length; k++) { const j = (S.i + k) % S.items.length; if (!complete(S.items[j])) return go(j); }
+}
+
+document.getElementById("prev").onclick = () => go(S.i - 1);
+document.getElementById("next").onclick = () => go(S.i + 1);
+document.getElementById("todo").onclick = nextTodo;
+document.addEventListener("keydown", e => {
+  if (e.target.tagName === "TEXTAREA") { if (e.key === "Escape") e.target.blur(); return; }
+  if (e.metaKey || e.ctrlKey || e.altKey) return;
+  const k = "123456".indexOf(e.key);
+  if (k >= 0) { answer(Q[Math.floor(k / 3)][0], ANS[k % 3]); e.preventDefault(); }
+  else if (e.key === "ArrowRight" || e.key === "Enter") go(S.i + 1);
+  else if (e.key === "ArrowLeft") go(S.i - 1);
+  else if (e.key === "u") nextTodo();
+});
+
+(async () => {
+  try {
+    const st = await (await fetch("/api/state")).json();
+    S.items = st.items; S.labels = st.labels; S.annotator = st.annotator;
+    let pos = 0; try { pos = parseInt(localStorage.getItem("audit_pos") || "0", 10) || 0; } catch (e) {}
+    S.i = Math.min(pos, S.items.length - 1);
+    if (complete(S.items[S.i])) { const j = S.items.findIndex(x => !complete(x)); if (j >= 0) S.i = j; }
+    render();
+  } catch (e) {
+    document.getElementById("main").innerHTML = `<p class="err">Could not load items: ${esc(e.message)}. Is audit.py serve running?</p>`;
+  }
+})();
+</script>
+</body>
+</html>

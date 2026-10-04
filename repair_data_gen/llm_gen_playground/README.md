@@ -524,6 +524,40 @@ had only reached that type, not because the others were ruled out.
   the sentence says (the `p99/d2900` kind of error), and does the repair read
   naturally.
 
+## Human audit (decided 2026-10-02)
+
+`audit.py` with `audit_page.html`, run locally:
+
+    python3 analyse_run.py results/meta-models_Muse-Glimmer-30B.r2.tsv \
+        --out results/meta-models_Muse-Glimmer-30B.r2.checked.tsv
+    python3 audit.py sample results/meta-models_Muse-Glimmer-30B.r2.checked.tsv --out audit/r2
+    python3 audit.py serve audit/r2        # http://127.0.0.1:8765/
+    python3 audit.py stats audit/r2        # also writes audit/r2/merged.tsv
+
+- **Pool.** Only items that pass every automatic check (`auto_pass` in
+  `audit.py`; an oracle difference is not a failure). Items that fail a check
+  are already counted as errors, so auditing them adds nothing; the audit
+  measures what the checks cannot see. The 90% and 80% thresholds therefore
+  apply to items that passed the checks.
+- **Size.** 15 per type, 105 in all, seed 13. The overall rate is the main
+  figure (95% interval about ±6 points). With 15 items per type the interval
+  is about ±15 points, so a per-type rate only screens: a type is clearly
+  below the threshold only if the upper bound of its interval is below it.
+- **Second stage.** A type whose rate is under its threshold but whose
+  interval still reaches it gets 15 more items
+  (`audit.py sample … --per-type 30 --types <type>`). Items already drawn
+  are kept. The second stage is decided by this rule, not by looking at the
+  items.
+- **Blind.** The page shows the utterance, the original sentence and the
+  SBN with indices resolved, but not the repair type, the self-reported
+  devices or any check result. Items are shuffled across types.
+- **Storage.** Every click appends one line to `audit/<name>/labels.jsonl`
+  (`audit_id`, `meaning`, `natural`, `note`, `annotator`, `ts`). The last line
+  per item counts, so earlier answers stay on record. `unsure` is left out of
+  the rates and reported separately.
+- **Prototype.** `audit/r1_proto/` holds the 67 round-1 items that pass the
+  checks (all of them; the pool is smaller than 15 for every type).
+
 Reference thresholds for a type to go into larger synthesis, written down
 before the run so the results do not move them, but to be revisited once
 real output exists: automatic checks pass on ≥ 95% of answered items; no
