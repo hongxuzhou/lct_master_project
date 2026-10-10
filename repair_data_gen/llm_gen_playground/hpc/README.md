@@ -119,3 +119,22 @@ scp "$R/meta-models_Muse-Glimmer-30B.train_place.tsv" incoming/
 scp -r "$R/raw/meta-models_Muse-Glimmer-30B.train_place" incoming/
 mv -n incoming/*.tsv results/ && mv -n incoming/meta-models_Muse-Glimmer-30B.train_place results/raw/ && rmdir incoming
 ```
+
+## Temporal, second item per document (2026-10-10)
+New: the sample, the job file, and `prompt_docs_temporal_r2/` (sha256
+`8d49b9ac…`). Runs alongside the place job (one GPU each).
+```bash
+# laptop, in llm_gen_playground/
+L=honzhou@login.lst.uni-saarland.de:thesis_zone/llm_gen_playground
+scp sample_train_temporal_extra.tsv $L/
+scp hpc/run_train_temporal_extra.sub $L/hpc/
+scp -r prompt_docs_temporal_r2 $L/
+# submit node, in thesis_zone/llm_gen_playground/
+condor_submit hpc/run_train_temporal_extra.sub
+# back on the laptop, via a staging folder as before
+mkdir -p incoming
+R=$L/results
+scp "$R/meta-models_Muse-Glimmer-30B.train_temporal_extra.tsv" incoming/
+scp -r "$R/raw/meta-models_Muse-Glimmer-30B.train_temporal_extra" incoming/
+mv -n incoming/*.tsv results/ && mv -n incoming/meta-models_Muse-Glimmer-30B.train_temporal_extra results/raw/ && rmdir incoming
+```

@@ -1069,6 +1069,43 @@ type, 253 fresh), drawn with
 only "near". Job: `hpc/run_train_place.sub`, `prompt_docs_edge_r4/`
 (sha256 `24c14008…`).
 
+# Temporal: a second item per document (2026-10-10)
+
+**Target.** About 3,500 repair items on train (the middle of 1:2–1:4
+against 9,447 fluent documents, §5.4), about 500 per type. Temporal has 269
+passing items (full run 221, round 2 48) and cannot grow by new documents:
+under the current site rule only 297 train documents (388 sites) hold a
+temporal constant (`ClockTime` 147, `YearOfCentury` 120, `MonthOfYear` 59,
+`DayOfMonth` 47, `DayOfWeek` 15), and the first pass used nearly all of them.
+
+**Per-document cap (decided, user).** The "two items per source document"
+rule (`DESIGN.md` §4.3) guards against a cell whose count overstates its
+variety: 500 items from 148 documents is 148 sentence contexts. It is not
+a correctness constraint. It becomes a reporting requirement: each type
+gives items and distinct source documents. Use by other types is not
+counted. A second item at the same site with another reparandum is a
+minimal pair whose targets differ exactly at the reparandum value; at this
+scale (about 200 pairs in about 13,000 training rows) it adds a copying
+signal and little weight.
+
+**Run.** `sample_temporal_extra.py` → `sample_train_temporal_extra.tsv`, one
+row per eligible document (run_llm keys on `doc_id`): 80 `new_site` (a
+site no passing item uses: a second site, or a document with no passing
+item) and 217 `same_site` (the only site again, `avoid_value` = the first
+item's reparandum). The prompt is `prompt_docs_temporal_r2/`: a copy of
+`prompt_docs/` whose `item_template.md` adds `Repair site` and `Reparandum
+already used`, and whose `task.md` says to take that site (step 2) and
+avoid that value (step 3); sha256 `8d49b9ac…`. No new examples. Job
+`hpc/run_train_temporal_extra.sub`. These items come from a different
+prompt than the first 269 and are reported apart.
+
+**Check.** `analyse_run.py` as usual, then `check_temporal_extra.py` on its
+checked TSV adds `pin`: `site` (another site was repaired), `same_as_used`,
+`same_as_gold`, or `ok`. Tested with the first-pass rows of the same
+documents as input: all 217 `same_site` rows give `same_as_used`, the
+`new_site` rows give `site` except the 4 whose failed first item was at the
+pinned site.
+
 # Deferred
 
 Each of these was in an earlier draft. They are left out until a first-round
