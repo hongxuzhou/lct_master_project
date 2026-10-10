@@ -1,4 +1,5 @@
-"""Checks on the repaired part itself (R5, 'something changed', sentence).
+"""Checks on the repaired part itself (R5, 'something changed', place
+overlap for edge label, sentence).
 
     python3 check_repair_part.py results/<model>.tsv
 
@@ -51,6 +52,41 @@ def hooks(doc, c, others_pos):
     return n
 
 
+def shape(cs):
+    """Each concept's synset and roles, with index targets resolved: a
+    target inside the box by its place in the box, one outside by its
+    position in the document. Two boxes with the same shape say the same."""
+    pos = [c.pos for c in cs]
+    out = []
+    for c in cs:
+        roles = []
+        for r, v in c.roles:
+            if re.match(r"^[+-]\d+$", v):
+                t = c.pos + int(v)
+                v = ("in", pos.index(t)) if t in pos else ("out", t)
+            roles.append((r, v))
+        out.append((c.synset, sorted(roles, key=str)))
+    return out
+
+
+SPATIAL_OPS = {"SZN", "SZP", "SXP", "SXN", "APX", "SY1", "STI", "STO", "SXY"}
+IN_WORDS = {"in", "inside", "into"}
+
+
+def place(doc, cs):
+    """The place a box gives (edge label, third kind): the operator of a
+    `location.n.01` its Location/Destination points to, "plain" for a role
+    straight to the thing, None if the box has no such role."""
+    for c in cs:
+        for r, v in c.roles:
+            if r in ("Location", "Destination") and re.match(r"^[+-]\d+$", v):
+                t = doc.concepts[c.pos + int(v)]
+                if t.synset != "location.n.01":
+                    return "plain"
+                return next((rr for rr, _ in t.roles if rr in SPATIAL_OPS), None)
+    return None
+
+
 def in_order(sub, words):
     it = iter(words)
     return all(w in it for w in sub)
@@ -81,11 +117,24 @@ def problems(r):
     rep_pos = {c.pos for c in rep}
     if not any(hooks(doc, c, rep_pos) for c in rep):
         probs.append("R5: reparandum box has no edge to the rest")
-    sig = lambda cs: [(c.synset, sorted((rr, vv) for rr, vv in c.roles if not re.match(r"^[+-]\d+$", vv))) for c in cs]
-    # compare the reparandum box with the same number of leading repair-box concepts
-    if sig(rep) == sig(fix[:len(rep)]) and [ [x for x,_ in c.roles] for c in rep] == [[x for x,_ in c.roles] for c in fix[:len(rep)]]:
+    # compare the reparandum box with the same number of leading repair-box
+    # concepts. Targets count: "on, under the table" has the same roles on
+    # both dummies, but one points to the table and one to location.n.01
+    if shape(rep) == shape(fix)[:len(rep)]:
         probs.append("reparandum identical to repair")
     nl = r["nl_repair"]
+    # Edge label, place: one place must not include the other (§4.4).
+    # "on/in/at" against each other is caught above (both plain).
+    if r.get("repair_type") == "edge_label":
+        a, b = place(doc, rep), place(doc, fix)
+        if {a, b} == {"APX", "SY1"}:
+            probs.append("edge label: 'near' and 'beside' overlap (APX, SY1)")
+        if {a, b} == {"plain", "STI"}:
+            words = {w.lower() for w in WORD.findall(r.get("reparandum_surface", ""))}
+            onset = r.get("repair_onset")
+            first = WORD.findall(nl[int(onset):])[:1] if onset else []
+            if words & IN_WORDS and {w.lower() for w in first} & IN_WORDS:
+                probs.append("edge label: 'in' and 'inside' overlap (plain, STI)")
     inter = r.get("interregnum", "none")
     has = [m for m in INTER if re.search(rf"(^|[ ,]){re.escape(m)}([ ,]|$)", nl, re.I)]
     if inter != "none" and inter.lower() not in [h.lower() for h in has]:

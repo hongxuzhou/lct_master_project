@@ -991,6 +991,42 @@ Selection set: `audit/train_edge`, all 366 passing items. `audit.py serve
 --questions natural` shows only the naturalness question (the checks cover
 meaning); the user keeps the yes items, about 100–150.
 
+## Edge label: places (prompt_docs_edge_r4, 2026-10-10)
+
+The train target is about 500 per type and from/to gives 100–150, so §4.4
+gains a third kind: a different place relative to the same thing. PMB writes
+"on", "in" and "at" as a plain `Location`/`Destination` to the thing, and
+"under", "above", "behind", "near", "beside", "inside", "outside", "around"
+as `location.n.01` with `SZN`, `SZP`, `SXP`, `APX`, `SY1`, `STI`, `STO`,
+`SXY`. "Next to" (`next.a.02 Theme`) and "in front of" (`front.n.09
+PartOf`) use other concepts and are left out; `SXN` never occurs forward in
+gold. The committed version is the gold one, so the direction follows the
+gold: a gold operator gives "on, under" and operator swaps (106 train
+documents), a gold plain role gives "under, on" (907 sites).
+
+One template for all three: two ③ dummies keep the gold role, and a
+version with an operator carries its own `location.n.01` inside its box,
+pointing back to the thing, which moves in front (④). Examples S–U (gold
+`p61/d0863`, `p16/d2891`, `p91/d3375`, added to `EXAMPLE_DOCS`). Three
+negatives in §4.4: on/in/at against each other (same SBN), one place
+including the other (near/beside, in/inside), a preposition that belongs to
+the verb or a fixed phrase. `task.md`: `reparandum_value` for a place is
+the rejected operator or `plain`.
+
+`check_repair_part.py`: "reparandum identical to repair" now compares
+resolved targets. It used to compare role names only, so "on, under the
+table" (both dummies `EQU` + `Location`) counted as identical. New check:
+`APX`/`SY1` and plain/`STI` (when both words are "in"/"inside"/"into")
+flag as overlap. No verdict changed on the 6,885 answered rows in
+`results/`.
+
+Hand estimate (one judge, before the naturalness labels): about 95
+operator swaps and 55 "on, under" items on the 106 documents; about 39% of
+the 907 plain sites have a usable place (20 of 51 sampled), about 530
+items. That estimate still counted "in front of" and "next to", now left
+out, so it is a little high. Furniture and buildings give 2–3 options,
+cities "near" only, countries and fixed phrases none. Still to do: the
+site rule in `select_docs.py`.
 
 # Deferred
 

@@ -59,6 +59,7 @@ EXAMPLE_DOCS = {
     "p30/d2724", "p72/d2409", "p80/d1457", "p68/d3216", "p74/d1927",
     "p04/d3042", "p76/d2001", "p47/d1417", "p14/d2976",
     "p18/d1394",   # example R (question slot), added 2026-10-02
+    "p61/d0863", "p16/d2891", "p91/d3375",  # examples S-U (place), prompt_docs_edge_r4, 2026-10-10
 }
 
 TYPES = ("content_word", "constant_name", "constant_number",
