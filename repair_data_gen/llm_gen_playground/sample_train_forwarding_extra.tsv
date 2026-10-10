@@ -1,0 +1,186 @@
+doc_id	repair_type	nl_clean	sbn_clean	n_concepts	n_tokens_nl	eligible_sites
+p00/d0809	forwarding	The dog attacked the little boy.	dog.n.01 attack.v.04 Agent -1 Time +1 Patient +3 time.n.08 TPR now little.a.03 AttributeOf +1 boy.n.01	5	6	0:dog.n.01
+p00/d2007	forwarding	The girls reveled in dancing.	girl.n.01 revel.v.01 Experiencer -1 Time +1 Stimulus +2 time.n.08 TPR now dance.n.03	4	5	0:girl.n.01
+p00/d3495	forwarding	Tom honked the horn.	"male.n.02 Name ""Tom"" honk.v.02 Agent -1 Time +1 Theme +2 time.n.08 TPR now horn.n.11"	4	4	0:male.n.02
+p01/d3213	forwarding	I hate him.	person.n.01 EQU speaker hate.v.01 Experiencer -1 Time +1 Stimulus +2 time.n.08 EQU now male.n.02	4	3	0:person.n.01
+p01/d3251	forwarding	That's a nice T-shirt.	entity.n.01 be.v.01 Theme -1 Time +1 Co-Theme +3 time.n.08 EQU now nice.a.01 AttributeOf +1 t-shirt.n.01	5	4	0:entity.n.01
+p02/d2180	forwarding	I'm a friend of Tom and Mary's.	"person.n.01 EQU speaker be.v.02 Theme -1 Time +1 Co-Theme +2 time.n.08 EQU now person.n.01 Role +1 friend.n.01 Of +2 male.n.02 Name ""Tom"" entity.n.01 Sub -1 Sub +1 female.n.02 Name ""Mary"""	8	7	0:person.n.01
+p02/d2673	forwarding	Tom gave Mary plenty of money.	"male.n.02 Name ""Tom"" give.v.03 Agent -1 Time +1 Recipient +2 Theme +3 time.n.08 TPR now female.n.02 Name ""Mary"" entity.n.01 Quantity + EQU +1 money.n.01"	6	6	0:male.n.02
+p03/d0925	forwarding	Tom spilled the milk.	"male.n.02 Name ""Tom"" spill.v.01 Agent -1 Time +1 Theme +2 time.n.08 TPR now milk.n.01"	4	4	0:male.n.02
+p03/d2363	forwarding	Tom flirted with the waitress.	"male.n.02 Name ""Tom"" flirt.v.01 Agent -1 Time +1 Co-Agent +2 time.n.08 TPR now person.n.01 Role +1 waitress.n.01"	5	5	0:male.n.02
+p04/d0778	forwarding	Eat whatever you like.	person.n.01 EQU hearer NEGATION <1 NEGATION <1 eat.v.01 Agent -1 Patient +1 CONJUNCTION <2 entity.n.01 person.n.01 EQU hearer like.v.02 Stimulus -2 Experiencer -1 Time +1 time.n.08 EQU now	6	4	3:person.n.01
+p04/d0927	forwarding	Tom passed out from the heat.	"male.n.02 Name ""Tom"" pass_out.v.01 Patient -1 Time +1 Causer +2 time.n.08 TPR now heat.n.02"	4	6	0:male.n.02
+p04/d1590	forwarding	Tom applauded.	"male.n.02 Name ""Tom"" applaud.v.01 Agent -1 Time +1 time.n.08 TPR now"	3	2	0:male.n.02
+p04/d1883	forwarding	Tom showed us a picture of Mary.	"male.n.02 Name ""Tom"" show.v.04 Agent -1 Time +1 Recipient +2 Theme +3 time.n.08 TPR now person.n.01 Sub speaker picture.n.01 Theme +1 female.n.02 Name ""Mary"""	6	7	0:male.n.02
+p04/d2303	forwarding	I want a puppy.	person.n.01 EQU speaker want.v.01 Pivot -1 Time +1 Theme +2 time.n.08 EQU now puppy.n.01	4	4	0:person.n.01
+p04/d2532	forwarding	He earned it.	male.n.02 earn.v.02 Pivot -1 Time +1 Theme +2 time.n.08 TPR now entity.n.01	4	3	0:male.n.02
+p04/d2848	forwarding	You dropped something.	person.n.01 EQU hearer drop.v.01 Agent -1 Time +1 Theme +2 time.n.08 TPR now entity.n.01	4	3	0:person.n.01
+p04/d3388	forwarding	Is it true that he won the race?	time.n.08 EQU now entity.n.01 true.a.01 Time -2 Proposition >1 EQU -1 CONTINUATION <0 male.n.02 win.v.01 Agent -1 Time +1 Theme +2 time.n.08 TPR now race.n.01	7	8	3:male.n.02
+p05/d0848	forwarding	She picked flowers.	female.n.02 pick.v.02 Agent -1 Time +1 Theme +2 time.n.08 TPR now flower.n.01	4	3	0:female.n.02
+p05/d1993	forwarding	He wrote me a long letter.	male.n.02 write.v.02 Agent -1 Time +1 Recipient +2 Topic +4 time.n.08 TPR now person.n.01 EQU speaker long.a.02 Value + letter.n.01 Attribute -1	6	6	0:male.n.02
+p05/d2473	forwarding	Tom knew who the kidnappers were.	"male.n.02 Name ""Tom"" know.v.01 Proposition >1 Experiencer -1 Time +1 time.n.08 TPR now CONTINUATION <0 person.n.01 Name ? person.n.01 Role +1 kidnapper.n.01 be.v.02 Co-Theme -3 Theme -2 Time +1 time.n.08 TPR now"	8	6	0:male.n.02
+p05/d2979	forwarding	Tom kissed his cousin.	"male.n.02 Name ""Tom"" kiss.v.01 Agent -1 Time +1 Experiencer +3 time.n.08 TPR now male.n.02 ANA -3 person.n.01 Role +1 cousin.n.01 Of -2"	6	4	0:male.n.02
+p06/d1811	forwarding	Tom threw Mary the ball.	"male.n.02 Name ""Tom"" throw.v.01 Agent -1 Time +1 Recipient +2 Theme +3 time.n.08 TPR now female.n.02 Name ""Mary"" ball.n.01"	5	5	0:male.n.02
+p06/d2276	forwarding	I apologize again.	person.n.01 EQU speaker apologize.v.01 Agent -1 Time +1 time.n.08 EQU now	3	3	0:person.n.01
+p06/d2959	forwarding	You misunderstood me.	person.n.01 EQU hearer misunderstand.v.01 Experiencer -1 Time +1 Stimulus +2 time.n.08 TPR now person.n.01 EQU speaker	4	3	0:person.n.01
+p07/d2793	forwarding	Tom unbuckled his seatbelt.	"male.n.02 Name ""Tom"" unbuckle.v.01 Agent -1 Time +1 Patient +3 time.n.08 TPR now male.n.02 ANA -3 seatbelt.n.01 User -1"	5	4	0:male.n.02
+p07/d3554	forwarding	Jane wrote the letter herself.	"female.n.02 Name ""Jane"" write.v.05 Agent -1 Time +1 Result +2 time.n.08 TPR now letter.n.01 female.n.02 EQU -4"	5	5	0:female.n.02
+p07/d3558	forwarding	He insulted me in public.	male.n.02 insult.v.01 Agent -1 Time +1 Theme +2 Manner +3 time.n.08 TPR now person.n.01 EQU speaker in_public.r.01	5	5	0:male.n.02
+p08/d1699	forwarding	Perhaps he knows this story.	POSSIBILITY <1 male.n.02 know.v.01 Experiencer -1 Time +1 Stimulus +2 time.n.08 EQU now story.n.02	4	5	0:male.n.02
+p08/d3415	forwarding	"""Whose knives are these?"" ""They are the butcher's."""	person.n.01 Name ? knife.n.01 User -1 be.v.02 Co-Theme -1 Time +1 Theme +2 time.n.08 EQU now entity.n.01 CONTINUATION <1 person.n.01 be.v.02 Theme -1 Time +1 Co-Theme +4 time.n.08 EQU now person.n.01 Role +1 butcher.n.01 knife.n.01 User -2	11	8	5:person.n.01
+p08/d3432	forwarding	I think Tom said his last name is Jackson.	"person.n.01 EQU speaker think.v.04 Proposition >1 Agent -1 Time +1 time.n.08 EQU now CONTINUATION <0 male.n.02 Name ""Tom"" say.v.01 Proposition >1 Agent -1 Time +1 time.n.08 TPR now CONTINUATION <0 male.n.02 ANA -3 last_name.n.01 Bearer -1 be.v.02 Theme -1 Time +1 Co-Theme +2 time.n.08 EQU now name.n.01 EQU ""Jackson"""	11	9	0:person.n.01; 3:male.n.02; 7:last_name.n.01
+p09/d2371	forwarding	She turned down his invitation.	female.n.02 turn_down.v.01 Agent -1 Time +1 Theme +3 time.n.08 TPR now male.n.02 invitation.n.01 Creator -1	5	5	0:female.n.02
+p09/d2413	forwarding	Tom has a great sense of humour.	"male.n.02 Name ""Tom"" have.v.02 Pivot -1 Time +1 Theme +3 time.n.08 EQU now great.a.01 AttributeOf +1 sense_of_humour.n.01"	5	7	0:male.n.02
+p09/d3272	forwarding	Tom paid the bill.	"male.n.02 Name ""Tom"" pay.v.01 Agent -1 Time +1 Theme +2 time.n.08 TPR now bill.n.02"	4	4	0:male.n.02
+p10/d0959	forwarding	He has a son whose name is John.	"male.n.02 have.v.01 Pivot -1 Time +1 Theme +2 time.n.08 EQU now person.n.01 Role +1 son.n.01 name.n.01 Bearer -2 be.v.02 Theme -1 Time +1 Co-Theme +2 time.n.08 EQU now name.n.01 EQU ""John"""	9	8	0:male.n.02; 5:name.n.01
+p10/d1826	forwarding	A bunch of people died in the explosion.	bunch.n.01 person.n.01 Quantity -1 die.v.01 Patient -1 Time +1 Causer +2 time.n.08 TPR now explosion.n.01	5	8	1:person.n.01
+p10/d2561	forwarding	Tom has a boat.	"male.n.02 Name ""Tom"" have.v.04 Pivot -1 Time +1 Theme +2 time.n.08 EQU now boat.n.01"	4	4	0:male.n.02
+p10/d2786	forwarding	He walked along the river.	male.n.02 walk.v.01 Theme -1 Time +1 Path +2 time.n.08 TPR now river.n.01	4	5	0:male.n.02
+p10/d2815	forwarding	Tom suspected that his father was dyslexic.	"male.n.02 Name ""Tom"" suspect.v.01 Proposition >1 Agent -1 Time +1 time.n.08 TPR now CONTINUATION <0 male.n.02 ANA -3 person.n.01 Role +1 father.n.01 Of -2 time.n.08 TPR now dyslexic.a.01 AttributeOf -3 Time -1"	8	7	0:male.n.02
+p10/d2896	forwarding	I work at the post office.	person.n.01 EQU speaker work.v.02 Agent -1 Time +1 Location +2 time.n.08 EQU now post_office.n.01	4	6	0:person.n.01
+p10/d3170	forwarding	Tom sharpened the knife.	"male.n.02 Name ""Tom"" sharpen.v.01 Agent -1 Time +1 Patient +2 time.n.08 TPR now knife.n.01"	4	4	0:male.n.02
+p11/d1089	forwarding	"""I was a boy,"" he said impatiently."	person.n.01 EQU speaker be.v.01 Theme -1 Time +1 Co-Theme +2 time.n.08 TPR now boy.n.01 CONTINUATION <0 male.n.02 say.v.02 Proposition <1 Agent -1 Time +1 Manner +2 time.n.08 TPR now impatiently.r.01	8	7	0:person.n.01; 4:male.n.02
+p11/d1412	forwarding	He armed himself with a pistol.	male.n.02 arm.v.02 Agent -1 Time +1 Recipient +2 Theme +3 time.n.08 TPR now male.n.02 ANA -3 pistol.n.01	5	6	0:male.n.02
+p11/d1813	forwarding	When I heard it, I was dumbfounded.	person.n.01 EQU speaker hear.v.02 Experiencer -1 Time +1 Stimulus +2 time.n.08 TPR now entity.n.01 CONTINUATION <1 person.n.01 EQU speaker time.n.08 TPR now dumbfounded.a.01 Experiencer -2 Time -1	7	7	0:person.n.01
+p11/d2235	forwarding	She ran away with tears in her eyes.	female.n.02 run_away.v.01 Theme -1 Time +1 Manner +2 time.n.08 TPR now tear.n.01 Location +2 female.n.02 ANA -4 eye.n.01 PartOf -1	6	8	0:female.n.02
+p12/d1907	forwarding	Mary grabbed her purse and left.	"female.n.02 Name ""Mary"" grab.v.03 Agent -1 Time +1 Theme +3 time.n.08 TPR now female.n.02 ANA -3 purse.n.01 User -1 leave.v.01 Theme -5 Time +1 time.n.08 TPR now"	7	6	0:female.n.02
+p13/d1234	forwarding	The match lasted almost three and a half hours.	match.n.02 last.v.01 Theme -1 Time +1 Value +4 time.n.08 TPR now quantity.n.01 LES +1 quantity.n.01 EQU 3.5 hour.n.01 Quantity -2	6	9	0:match.n.02
+p13/d1659	forwarding	I like horses.	person.n.01 EQU speaker like.v.03 Experiencer -1 Time +1 Stimulus +2 time.n.08 EQU now horse.n.01	4	3	0:person.n.01
+p14/d2864	forwarding	Her car overtook ours.	female.n.02 car.n.01 User -1 overtake.v.01 Theme -1 Time +1 Co-Theme +2 time.n.08 TPR now entity.n.01 User +1 person.n.01 Sub speaker	6	4	1:car.n.01
+p15/d1688	forwarding	Tom drives a truck for a living.	"male.n.02 Name ""Tom"" drive.v.01 Agent -1 Time +1 Theme +2 Goal +3 time.n.08 EQU now truck.n.01 living.n.04"	5	7	0:male.n.02
+p15/d1937	forwarding	Kyiv is the capital of Ukraine.	"city.n.02 Name ""Kyiv"" be.v.02 Theme -1 Time +1 Co-Theme +2 time.n.08 EQU now national_capital.n.01 PartOf +1 country.n.02 Name ""Ukraine"""	5	6	0:city.n.02
+p15/d2205	forwarding	We chopped a tree down.	person.n.01 Sub speaker chop_down.v.01 Agent -1 Time +1 Patient +2 time.n.08 TPR now tree.n.01	4	5	0:person.n.01
+p15/d2222	forwarding	She always buys milk.	NEGATION <1 time.n.08 NEGATION <1 female.n.02 buy.v.01 Agent -1 Time +1 Theme +2 time.n.08 EQU now milk.n.01	5	4	1:female.n.02
+p15/d2427	forwarding	You cut down a cherry tree.	person.n.01 EQU hearer cut_down.v.06 Agent -1 Time +1 Patient +2 time.n.08 TPR now cherry_tree.n.01	4	6	0:person.n.01
+p15/d2888	forwarding	I obtained the painting at an auction.	person.n.01 EQU speaker obtain.v.01 Agent -1 Time +1 Theme +2 Source +3 time.n.08 TPR now painting.n.01 auction.n.02	5	7	0:person.n.01
+p16/d3310	forwarding	"""Whose pants are these?"" ""They are Ken's."""	"person.n.01 Name ? pant.n.02 User -1 be.v.02 Co-Theme -1 Time +1 Theme +2 time.n.08 EQU now entity.n.01 CONTINUATION <1 entity.n.01 ANA -4 be.v.02 Theme -1 Time +1 Co-Theme +3 time.n.08 EQU now male.n.02 Name ""Ken"" entity.n.01 User -1"	10	7	5:entity.n.01
+p17/d3156	forwarding	Tom left his wife a fortune.	"male.n.02 Name ""Tom"" leave.v.10 Agent -1 Time +1 Beneficiary +3 Theme +5 time.n.08 TPR now male.n.02 ANA -3 person.n.01 Role +1 wife.n.01 Of -2 fortune.n.02"	7	6	0:male.n.02
+p18/d1896	forwarding	She is a good dancer.	female.n.02 be.v.02 Theme -1 Time +1 Co-Theme +3 time.n.08 EQU now good.a.01 AttributeOf +1 person.n.01 Role +1 dancer.n.01	6	5	0:female.n.02
+p20/d0788	forwarding	Germany borders on France.	"country.n.02 Name ""Germany"" border.v.05 Theme -1 Time +1 Co-Theme +2 time.n.08 EQU now country.n.02 Name ""France"""	4	4	0:country.n.02
+p20/d0850	forwarding	She grew roses.	female.n.02 grow.v.07 Agent -1 Time +1 Result +2 time.n.08 TPR now rose.n.01	4	3	0:female.n.02
+p21/d1559	forwarding	This flower is a kind of rose.	flower.n.01 be.v.01 Theme -1 Time +1 Co-Theme +2 time.n.08 EQU now entity.n.01 InstanceOf +1 rose.n.01	5	7	0:flower.n.01
+p21/d1656	forwarding	I bumped into the window.	person.n.01 EQU speaker bump_into.v.01 Agent -1 Time +1 Patient +2 time.n.08 TPR now window.n.01	4	5	0:person.n.01
+p21/d1705	forwarding	It stinks.	entity.n.01 stink.v.02 Theme -1 Time +1 time.n.08 EQU now	3	2	0:entity.n.01
+p21/d2154	forwarding	I'm grateful for what she did.	person.n.01 EQU speaker time.n.08 EQU now grateful.a.01 Experiencer -2 Time -1 Stimulus +1 entity.n.01 female.n.02 do.v.02 Theme -2 Agent -1 Time +1 time.n.08 TPR now	7	6	4:female.n.02
+p22/d0783	forwarding	Mary understands Chinese.	"female.n.02 Name ""Mary"" understand.v.03 Experiencer -1 Time +1 Stimulus +2 time.n.08 EQU now chinese.n.01"	4	3	0:female.n.02
+p22/d0854	forwarding	Yoko is the captain of the volleyball team.	"female.n.02 Name ""Yoko"" be.v.02 Theme -1 Time +1 Co-Theme +2 time.n.08 EQU now person.n.01 Role +1 captain.n.05 Of +2 volleyball.n.01 team.n.01 Goal -1"	7	8	0:female.n.02
+p22/d1865	forwarding	The kitten rolled the yarn across the floor.	kitten.n.01 roll.v.01 Agent -1 Time +1 Theme +2 Path +3 time.n.08 TPR now yarn.n.02 floor.n.01	5	8	0:kitten.n.01
+p23/d2309	forwarding	She married a sailor.	female.n.02 marry.v.01 Agent -1 Time +1 Co-Agent +2 time.n.08 TPR now person.n.01 Role +1 sailor.n.01	5	4	0:female.n.02
+p24/d2067	forwarding	My robot's name is Multi.	"person.n.01 EQU speaker robot.n.01 User -1 name.n.01 Bearer -1 be.v.02 Theme -1 Time +1 Co-Theme +2 time.n.08 EQU now name.n.01 EQU ""Multi"""	6	5	2:name.n.01
+p24/d2303	forwarding	He blackmailed me.	male.n.02 blackmail.v.01 Agent -1 Time +1 Patient +2 time.n.08 TPR now person.n.01 EQU speaker	4	3	0:male.n.02
+p25/d1720	forwarding	Tom ironed his white shirt.	"male.n.02 Name ""Tom"" iron.v.01 Agent -1 Time +1 Patient +4 time.n.08 TPR now male.n.02 ANA -3 white.a.01 shirt.n.01 User -2 Colour -1"	6	5	0:male.n.02
+p25/d1854	forwarding	Her finger bleeds.	female.n.02 finger.n.01 PartOf -1 bleed.v.01 Patient -1 Time +1 time.n.08 EQU now	4	3	1:finger.n.01
+p25/d2462	forwarding	English abounds in idioms.	english.n.01 abound.v.01 Pivot -1 Time +1 Theme +2 time.n.08 EQU now idiom.n.04	4	4	0:english.n.01
+p25/d2773	forwarding	Tom danced on top of the bar.	"male.n.02 Name ""Tom"" dance.v.02 Theme -1 Time +1 Location +2 time.n.08 TPR now top.n.02 PartOf +1 bar.n.02"	5	7	0:male.n.02
+p25/d3177	forwarding	My last name is Wang.	"person.n.01 EQU speaker last_name.n.01 Bearer -1 be.v.06 Theme -1 Time +1 Co-Theme +2 time.n.08 EQU now name.n.01 EQU ""Wang"""	5	5	1:last_name.n.01
+p26/d2321	forwarding	We watched a movie.	person.n.01 Sub speaker watch.v.03 Agent -1 Time +1 Theme +2 time.n.08 TPR now movie.n.01	4	4	0:person.n.01
+p27/d2149	forwarding	War broke out when the treaty was ignored.	war.n.01 break_out.v.01 Theme -1 Time +1 time.n.08 TPR now treaty.n.01 time.n.08 TPR now ignore.v.04 TIN -4 Theme -2 Time -1	6	8	0:war.n.01
+p27/d3224	forwarding	I filled the bucket with water.	person.n.01 EQU speaker fill.v.01 Agent -1 Time +1 Destination +2 Theme +3 time.n.08 TPR now bucket.n.01 water.n.06	5	6	0:person.n.01
+p28/d2795	forwarding	He has set down everything that happened.	male.n.02 NEGATION <1 NEGATION <1 set_down.v.01 Agent -1 Time +1 Theme +2 time.n.08 TPR now CONJUNCTION <2 entity.n.01 happen.v.01 Theme -1 Time +1 time.n.08 TPR now	6	7	3:entity.n.01
+p29/d2028	forwarding	Tom noticed the front door was open.	"male.n.02 Name ""Tom"" notice.v.02 Proposition >1 Experiencer -1 Time +1 time.n.08 TPR now CONTINUATION <0 front_door.n.01 time.n.08 TPR now open.a.01 AttributeOf -2 Time -1"	6	7	0:male.n.02
+p29/d2065	forwarding	The company's profits soared.	company.n.01 profit.n.01 Creator -1 soar.v.01 Patient -1 Time +1 time.n.08 TPR now	4	4	1:profit.n.01
+p30/d0809	forwarding	I like languages.	person.n.01 EQU speaker like.v.02 Experiencer -1 Time +1 Stimulus +2 time.n.08 EQU now language.n.01	4	3	0:person.n.01
+p31/d3357	forwarding	She stirred the milk into her coffee.	female.n.02 stir.v.08 Agent -1 Time +1 Patient +2 Co-Patient +4 time.n.08 TPR now milk.n.01 female.n.02 ANA -4 coffee.n.01 User -1	6	7	0:female.n.02
+p32/d2799	forwarding	She stood up.	female.n.02 stand_up.v.01 Agent -1 Time +1 time.n.08 TPR now	3	3	0:female.n.02
+p32/d2848	forwarding	Tom's last name was Jackson.	"male.n.02 Name ""Tom"" last_name.n.01 User -1 be.v.06 Theme -1 Time +1 Co-Theme +2 time.n.08 TPR now name.n.01 EQU ""Jackson"""	5	5	1:last_name.n.01
+p32/d3007	forwarding	I have an up-to-date dictionary.	person.n.01 EQU speaker have.v.01 Pivot -1 Time +1 Theme +3 time.n.08 EQU now up-to-date.a.01 AttributeOf +1 dictionary.n.01	5	5	0:person.n.01
+p32/d3348	forwarding	Tom complained about the heat.	"male.n.02 Name ""Tom"" complain.v.01 Agent -1 Time +1 Theme +2 time.n.08 TPR now heat.n.02"	4	5	0:male.n.02
+p34/d1588	forwarding	Tom sneezed.	"male.n.02 Name ""Tom"" sneeze.v.01 Agent -1 Time +1 time.n.08 TPR now"	3	2	0:male.n.02
+p34/d3553	forwarding	She crumbled a biscuit.	female.n.02 crumble.v.02 Agent -1 Time +1 Patient +2 time.n.08 TPR now biscuit.n.02	4	4	0:female.n.02
+p35/d2463	forwarding	The throng protested against abortion.	throng.n.01 protest.v.02 Agent -1 Time +1 Beneficiary +2 time.n.08 TPR now abortion.n.01	4	5	0:throng.n.01
+p36/d1521	forwarding	Tom filled the bucket with water.	"male.n.02 Name ""Tom"" fill.v.01 Agent -1 Time +1 Destination +2 Theme +3 time.n.08 TPR now bucket.n.01 water.n.06"	5	6	0:male.n.02
+p36/d3102	forwarding	She twirled her hair.	female.n.02 twirl.v.01 Agent -1 Time +1 Theme +3 time.n.08 TPR now female.n.02 ANA -3 hair.n.01 PartOf -1	5	4	0:female.n.02
+p36/d3183	forwarding	He's a private detective.	male.n.02 be.v.08 Theme -1 Time +1 Co-Theme +2 time.n.08 EQU now person.n.01 Role +1 private_detective.n.01	5	4	0:male.n.02
+p36/d3382	forwarding	He ate poisonous mushrooms.	male.n.02 eat.v.01 Agent -1 Time +1 Patient +3 time.n.08 TPR now poisonous.a.02 AttributeOf +1 mushroom.n.02	5	4	0:male.n.02
+p37/d1498	forwarding	Mary slept with a coworker.	"female.n.02 Name ""Mary"" sleep_with.v.01 Agent -1 Time +1 Co-Agent +2 time.n.08 TPR now person.n.01 Role +1 co-worker.n.01"	5	5	0:female.n.02
+p37/d1913	forwarding	He repaired my watch for me.	male.n.02 repair.v.01 Agent -1 Time +1 Patient +3 Beneficiary +4 time.n.08 TPR now person.n.01 EQU speaker watch.n.01 User -1 person.n.01 EQU speaker	6	6	0:male.n.02
+p38/d3468	forwarding	She hates him.	female.n.02 hate.v.01 Experiencer -1 Time +1 Stimulus +2 time.n.08 EQU now male.n.02	4	3	0:female.n.02
+p39/d2609	forwarding	He formed the clay into a bowl.	male.n.02 form.v.04 Agent -1 Time +1 Material +2 Product +3 time.n.08 TPR now clay.n.01 bowl.n.01	5	7	0:male.n.02
+p39/d3087	forwarding	Tom hates you.	"male.n.02 Name ""Tom"" hate.v.01 Experiencer -1 Time +1 Stimulus +2 time.n.08 EQU now person.n.01 EQU hearer"	4	3	0:male.n.02
+p39/d3422	forwarding	She married a firefighter.	female.n.02 marry.v.01 Agent -1 Time +1 Co-Agent +2 time.n.08 TPR now person.n.01 Role +1 firefighter.n.01	5	4	0:female.n.02
+p41/d2310	forwarding	She warmed herself by the fire.	female.n.02 warm.v.02 Agent -1 Time +1 Patient +2 Location +3 time.n.08 TPR now female.n.02 ANA -3 fire.n.04	5	6	0:female.n.02
+p42/d2863	forwarding	She ironed her shirt.	female.n.02 iron.v.01 Agent -1 Time +1 Patient +3 time.n.08 TPR now female.n.02 ANA -3 shirt.n.01 User -1	5	4	0:female.n.02
+p42/d3160	forwarding	The dog growled.	dog.n.01 growl.v.01 Agent -1 Time +1 time.n.08 TPR now	3	3	0:dog.n.01
+p43/d1764	forwarding	The fairy changed the prince into a cat.	fairy.n.01 change.v.01 Agent -1 Time +1 Patient +2 Result +4 time.n.08 TPR now person.n.01 Role +1 prince.n.01 cat.n.01	6	8	0:fairy.n.01
+p44/d0912	forwarding	I slapped his face.	person.n.01 EQU speaker slap.v.01 Agent -1 Time +1 Location +3 time.n.08 TPR now male.n.02 face.n.01 PartOf -1	5	4	0:person.n.01
+p44/d1565	forwarding	He was very scared when he saw this big snake.	male.n.02 time.n.08 TPR now very.r.01 scared.a.01 Experiencer -3 Time -2 Degree -1 male.n.02 ANA -4 see.v.01 Experiencer -1 TIN -2 Time +1 Stimulus +3 time.n.08 TPR now big.a.01 Value + snake.n.01 Attribute -1	9	10	4:male.n.02
+p44/d2245	forwarding	He painted the door blue.	male.n.02 paint.v.02 Agent -1 Time +1 Patient +2 Result +3 time.n.08 TPR now door.n.01 blue.a.01 ColourOf -1	5	5	0:male.n.02
+p44/d2454	forwarding	He paid a bill.	male.n.02 pay.v.01 Agent -1 Time +1 Theme +2 time.n.08 TPR now bill.n.02	4	4	0:male.n.02
+p45/d2962	forwarding	She poisoned her husband.	female.n.02 poison.v.02 Agent -1 Time +1 Patient +3 time.n.08 TPR now female.n.02 ANA -3 person.n.01 Role +1 husband.n.01 Of -2	6	4	0:female.n.02
+p46/d2157	forwarding	I hate spiders.	person.n.01 EQU speaker hate.v.01 Experiencer -1 Time +1 Stimulus +2 time.n.08 EQU now spider.n.01	4	3	0:person.n.01
+p46/d2788	forwarding	He has a great sense of humour.	male.n.02 have.v.02 Pivot -1 Time +1 Theme +3 time.n.08 EQU now great.a.01 AttributeOf +1 sense_of_humour.n.01	5	7	0:male.n.02
+p47/d1671	forwarding	Tom understood the risks.	"male.n.02 Name ""Tom"" understand.v.01 Experiencer -1 Time +1 Stimulus +2 time.n.08 TPR now risk.n.01"	4	4	0:male.n.02
+p47/d2000	forwarding	You have a sense of humor.	person.n.01 EQU hearer have.v.02 Pivot -1 Time +1 Theme +2 time.n.08 EQU now sense_of_humor.n.01	4	6	0:person.n.01
+p47/d2900	forwarding	The cat clung to her dress.	cat.n.01 cling.v.03 Theme -1 Time +1 Co-Theme +3 time.n.08 TPR now female.n.02 dress.n.01 User -1	5	6	0:cat.n.01
+p47/d3384	forwarding	She repaired a ventilator.	female.n.02 repair.v.01 Agent -1 Time +1 Patient +2 time.n.08 TPR now ventilator.n.01	4	4	0:female.n.02
+p48/d0892	forwarding	I ate the apple.	person.n.01 EQU speaker eat.v.01 Agent -1 Time +1 Patient +2 time.n.08 TPR now apple.n.01	4	4	0:person.n.01
+p48/d1725	forwarding	The coffee shop is my favorite haunt.	coffee_shop.n.01 be.v.02 Theme -1 Time +1 Co-Theme +4 time.n.08 EQU now person.n.01 EQU speaker favorite.a.02 User -1 Stimulus +1 haunt.n.01	6	7	0:coffee_shop.n.01
+p48/d3410	forwarding	The cat meowed.	cat.n.01 meow.v.01 Agent -1 Time +1 time.n.08 TPR now	3	3	0:cat.n.01
+p50/d2041	forwarding	Tom counted the flowers in the garden.	"male.n.02 Name ""Tom"" count.v.01 Agent -1 Time +1 Theme +2 time.n.08 TPR now flower.n.01 Location +1 garden.n.01"	5	7	0:male.n.02
+p50/d3414	forwarding	Tom said it didn't matter.	"male.n.02 Name ""Tom"" say.v.01 Proposition >1 Agent -1 Time +1 time.n.08 TPR now CONTINUATION <0 entity.n.01 NEGATION <1 time.n.08 TPR now matter.v.01 Stimulus -2 Time -1"	6	5	0:male.n.02
+p51/d2707	forwarding	I failed chemistry.	person.n.01 EQU speaker fail.v.07 Agent -1 Time +1 Theme +2 time.n.08 TPR now chemistry.n.01	4	3	0:person.n.01
+p51/d3319	forwarding	I have a pair of mittens.	person.n.01 EQU speaker have.v.01 Pivot -1 Time +1 Theme +3 time.n.08 EQU now pair.n.02 entity.n.01 Sub -1 Sub +1 mitten.n.01	6	6	0:person.n.01
+p53/d3287	forwarding	The old woman knitted her brows.	old.a.01 Value + woman.n.01 Attribute -1 knit.v.03 Agent -1 Time +1 Patient +3 time.n.08 TPR now female.n.02 ANA -3 brow.n.01 PartOf -1	6	6	1:woman.n.01
+p56/d1799	forwarding	Tom rinsed his mouth.	"male.n.02 Name ""Tom"" rinse.v.03 Agent -1 Time +1 Patient +3 time.n.08 TPR now male.n.02 ANA -3 mouth.n.01 PartOf -1"	5	4	0:male.n.02
+p58/d3387	forwarding	Tom glanced at Mary.	"male.n.02 Name ""Tom"" glance.v.01 Agent -1 Time +1 Theme +2 time.n.08 TPR now female.n.02 Name ""Mary"""	4	4	0:male.n.02
+p59/d1682	forwarding	I provided him with food.	person.n.01 EQU speaker provide.v.02 Agent -1 Time +1 Recipient +2 Theme +3 time.n.08 TPR now male.n.02 food.n.02	5	5	0:person.n.01
+p59/d2293	forwarding	I always travel with travelers' checks instead of cash.	NEGATION <1 time.n.08 NEGATION <1 person.n.01 EQU speaker travel.v.01 Theme -1 Time +1 Instrument +2 time.n.08 EQU now traveler's_check.n.01 NEGATION <1 entity.n.01 EQU -3 Instrument +1 cash.n.01	7	9	1:person.n.01
+p59/d3416	forwarding	Something bit me.	entity.n.01 bite.v.01 Agent -1 Time +1 Patient +2 time.n.08 TPR now person.n.01 EQU speaker	4	3	0:entity.n.01
+p61/d0812	forwarding	My baby has a hereditary disease.	person.n.01 EQU speaker baby.n.01 Creator -1 have.v.16 Experiencer -1 Time +1 Stimulus +3 time.n.08 EQU now hereditary.a.01 AttributeOf +1 disease.n.01	6	6	1:baby.n.01
+p62/d2060	forwarding	I lost my sunglasses.	person.n.01 EQU speaker lose.v.05 Agent -1 Time +1 Theme +3 time.n.08 TPR now person.n.01 EQU speaker sunglasses.n.01 User -1	5	4	0:person.n.01
+p62/d2524	forwarding	She married an American.	"female.n.02 marry.v.01 Agent -1 Time +1 Co-Agent +2 time.n.08 TPR now person.n.01 Source +1 country.n.02 Name ""america"""	5	4	0:female.n.02
+p64/d3029	forwarding	Tom sprained his ankle.	"male.n.02 Name ""Tom"" sprain.v.01 Experiencer -1 Time +1 Patient +3 time.n.08 TPR now male.n.02 ANA -3 ankle.n.01 PartOf -1"	5	4	0:male.n.02
+p64/d3510	forwarding	It's the story of a boy, a girl, and a cat.	entity.n.01 be.v.02 Theme -1 Time +1 Co-Theme +2 time.n.08 EQU now story.n.02 Topic +3 boy.n.01 girl.n.01 entity.n.01 Sub -2 Sub -1 Sub +1 cat.n.01	8	11	0:entity.n.01
+p66/d1435	forwarding	I brushed my hair.	person.n.01 EQU speaker brush.v.01 Agent -1 Time +1 Patient +3 time.n.08 TPR now person.n.01 EQU speaker hair.n.01 PartOf -1	5	4	0:person.n.01
+p67/d1513	forwarding	I majored in chemistry.	person.n.01 EQU speaker major.v.01 Agent -1 Time +1 Theme +2 time.n.08 TPR now chemistry.n.01	4	4	0:person.n.01
+p70/d1849	forwarding	She speaks German.	female.n.02 speak.v.03 Agent -1 Time +1 Theme +2 time.n.08 EQU now german.n.02	4	3	0:female.n.02
+p70/d2873	forwarding	His lips touched hers.	male.n.02 lip.n.01 PartOf -1 touch.v.01 Theme -1 Time +1 Co-Theme +2 time.n.08 TPR now entity.n.01 PartOf +1 female.n.02	6	4	1:lip.n.01
+p70/d3116	forwarding	All at once the ship left the pier.	all_at_once.r.02 ship.n.01 leave.v.01 Manner -2 Theme -1 Time +1 Source +2 time.n.08 TPR now pier.n.01	5	8	1:ship.n.01
+p71/d1662	forwarding	They quarreled.	person.n.01 quarrel.v.01 Agent -1 Time +1 time.n.08 TPR now	3	2	0:person.n.01
+p72/d1882	forwarding	She slapped him.	female.n.02 slap.v.01 Agent -1 Time +1 Patient +2 time.n.08 TPR now male.n.02	4	3	0:female.n.02
+p72/d2957	forwarding	Tom washed himself.	"male.n.02 Name ""Tom"" wash.v.02 Agent -1 Time +1 Patient +2 time.n.08 TPR now male.n.02 ANA -3"	4	3	0:male.n.02
+p72/d3010	forwarding	She stabbed him with a knife.	female.n.02 stab.v.02 Agent -1 Time +1 Patient +2 Instrument +3 time.n.08 TPR now male.n.02 knife.n.02	5	6	0:female.n.02
+p73/d1428	forwarding	Tom put his shoes on with his shoe horn.	"male.n.02 Name ""Tom"" put_on.v.01 Agent -1 Time +1 Theme +3 Instrument +5 time.n.08 TPR now male.n.02 ANA -3 shoe.n.01 User -1 male.n.02 ANA -5 shoehorn.n.01 User -1"	7	9	0:male.n.02
+p73/d1701	forwarding	My name is Maria Sara.	"person.n.01 EQU speaker name.n.01 Bearer -1 be.v.06 Theme -1 Time +1 Co-Theme +2 time.n.08 EQU now name.n.01 EQU ""Maria Sara"""	5	5	1:name.n.01
+p75/d2310	forwarding	Tom brought Mary some juice.	"male.n.02 Name ""Tom"" bring.v.01 Agent -1 Time +1 Destination +2 Theme +3 time.n.08 TPR now female.n.02 Name ""Mary"" juice.n.01"	5	5	0:male.n.02
+p75/d3261	forwarding	She attempted to kill herself.	female.n.02 attempt.v.01 Agent -1 Time +1 Theme +2 time.n.08 TPR now kill.v.01 Agent -3 Patient +1 female.n.02 ANA -4	5	5	0:female.n.02
+p77/d3042	forwarding	They're lesbians.	person.n.01 be.v.01 Theme -1 Time +1 Co-Theme +2 time.n.08 EQU now person.n.01 Role +1 lesbian.n.01	5	2	0:person.n.01
+p80/d1646	forwarding	Tom paid by credit card.	"male.n.02 Name ""Tom"" pay.v.01 Agent -1 Time +1 Instrument +2 time.n.08 TPR now credit_card.n.01"	4	5	0:male.n.02
+p80/d1745	forwarding	That cut looks infected.	cut.n.05 look.v.02 Theme -1 Time +1 Attribute +2 time.n.08 EQU now infected.a.01 AttributeOf -3	4	4	0:cut.n.05
+p80/d1929	forwarding	Tom despises lies.	"male.n.02 Name ""Tom"" despise.v.01 Experiencer -1 Time +1 Stimulus +2 time.n.08 EQU now lie.n.01"	4	3	0:male.n.02
+p80/d2593	forwarding	I hugged Tom.	"person.n.01 EQU speaker hug.v.01 Agent -1 Time +1 Co-Agent +2 time.n.08 TPR now male.n.02 Name ""Tom"""	4	3	0:person.n.01
+p80/d3164	forwarding	I see him from time to time.	person.n.01 EQU speaker see.v.08 Theme -1 Time +1 Co-Theme +2 Manner +3 time.n.08 EQU now male.n.02 from_time_to_time.r.01	5	7	0:person.n.01
+p82/d2278	forwarding	We had bacon and eggs.	person.n.01 Sub speaker have.v.06 Agent -1 Time +1 Patient +2 time.n.08 TPR now bacon_and_eggs.n.02	4	5	0:person.n.01
+p82/d2570	forwarding	I want to buy this toy doll.	person.n.01 EQU speaker want.v.01 Pivot -1 Time +1 Theme +2 time.n.08 EQU now buy.v.01 Agent -3 Theme +1 toy.n.01 doll.n.01 EQU -1	6	7	0:person.n.01
+p82/d3009	forwarding	Tom burped.	"male.n.02 Name ""Tom"" burp.v.01 Agent -1 Time +1 time.n.08 TPR now"	3	2	0:male.n.02
+p82/d3517	forwarding	Tom chased after Mary.	"male.n.02 Name ""Tom"" chase.v.02 Agent -1 Time +1 Theme +2 time.n.08 TPR now female.n.02 Name ""Mary"""	4	4	0:male.n.02
+p83/d2097	forwarding	It's her favorite Italian word.	entity.n.01 be.v.02 Theme -1 Time +1 Co-Theme +5 time.n.08 EQU now female.n.02 favorite.a.02 Experiencer -1 Stimulus +2 italian.n.02 word.n.01 PartOf -1	7	5	0:entity.n.01
+p83/d3414	forwarding	Convenience stores sell candy bars.	convenience_store.n.01 sell.v.01 Agent -1 Time +1 Theme +2 time.n.08 EQU now candy_bar.n.01	4	5	0:convenience_store.n.01
+p84/d0784	forwarding	Brian took some roses.	"male.n.02 Name ""Brian"" take.v.04 Agent -1 Time +1 Theme +2 time.n.08 TPR now rose.n.01"	4	4	0:male.n.02
+p86/d1982	forwarding	These horses are theirs.	horse.n.01 be.v.02 Theme -1 Time +1 Co-Theme +2 time.n.08 EQU now entity.n.01 Owner +1 person.n.01	5	4	0:horse.n.01
+p86/d2662	forwarding	Tom's attention wandered.	"male.n.02 Name ""Tom"" attention.n.01 Creator -1 wander.v.05 Theme -1 Time +1 time.n.08 TPR now"	4	3	1:attention.n.01
+p87/d2162	forwarding	Mary is sensitive to light, so she wears sunglasses.	"female.n.02 Name ""Mary"" time.n.08 EQU now sensitive.a.01 Experiencer -2 Time -1 Stimulus +1 light.n.01 CONTINUATION <1 female.n.02 ANA -4 wear.v.02 Agent -1 Time +1 Theme +2 time.n.08 EQU now sunglasses.n.01"	8	9	4:female.n.02
+p88/d0823	forwarding	I made a desk of wood.	person.n.01 EQU speaker make.v.06 Agent -1 Time +1 Product +2 Material +3 time.n.08 TPR now desk.n.01 wood.n.01	5	6	0:person.n.01
+p88/d0931	forwarding	Just as Max predicted, our team lost.	max.n.01 predict.v.01 Agent -1 Time +1 time.n.08 TPR now CONTINUATION <1 person.n.01 Sub speaker team.n.01 User -1 lose.v.01 Theme -1 Time +1 time.n.08 TPR now	7	7	0:max.n.01; 4:team.n.01
+p89/d2177	forwarding	John gave Mary some money.	"male.n.02 Name ""John"" give.v.03 Agent -1 Time +1 Recipient +2 Theme +3 time.n.08 TPR now female.n.02 Name ""Mary"" money.n.01"	5	5	0:male.n.02
+p89/d3372	forwarding	Tom punched Mary in the face.	"male.n.02 Name ""Tom"" punch.v.01 Agent -1 Time +1 Patient +2 Location +3 time.n.08 TPR now female.n.02 Name ""Mary"" face.n.01"	5	6	0:male.n.02
+p90/d2851	forwarding	Tom keeps a black cat.	"male.n.02 Name ""Tom"" keep.v.16 Agent -1 Time +1 Theme +3 time.n.08 EQU now black.a.01 cat.n.01 Colour -1"	5	5	0:male.n.02
+p91/d1703	forwarding	The supermarket hired many part-timers.	supermarket.n.01 hire.v.01 Agent -1 Time +1 Theme +2 time.n.08 TPR now person.n.01 Quantity + Role +1 part-timer.n.01	5	5	0:supermarket.n.01
+p91/d3257	forwarding	The owl hoots.	owl.n.01 hoot.v.02 Agent -1 Time +1 time.n.08 EQU now	3	3	0:owl.n.01
+p93/d2676	forwarding	The fire alarm rang.	fire_alarm.n.02 ring.v.01 Theme -1 Time +1 time.n.08 TPR now	3	4	0:fire_alarm.n.02
+p94/d1417	forwarding	Tom's phone number has changed.	"male.n.02 Name ""Tom"" phone_number.n.01 User -1 change.v.06 Patient -1 Time +1 time.n.08 TPR now"	4	5	1:phone_number.n.01
+p94/d2026	forwarding	He resigned.	male.n.02 resign.v.01 Agent -1 Time +1 time.n.08 TPR now	3	2	0:male.n.02
+p94/d2626	forwarding	I like Tom's subtle humor.	"person.n.01 EQU speaker like.v.02 Experiencer -1 Time +1 Stimulus +4 time.n.08 EQU now male.n.02 Name ""Tom"" subtle.a.02 AttributeOf +1 humor.n.02 PartOf -2"	6	5	0:person.n.01
+p95/d2064	forwarding	That girl smiled and waved to me.	girl.n.01 smile.v.02 Agent -1 Time +1 time.n.08 TPR now wave.v.01 Agent -3 Time +1 Recipient +2 time.n.08 TPR now person.n.01 EQU speaker	6	7	0:girl.n.01
+p95/d2086	forwarding	I beat him at chess.	person.n.01 EQU speaker beat.v.01 Agent -1 Time +1 Co-Agent +2 Theme +3 time.n.08 TPR now male.n.02 chess.n.02	5	5	0:person.n.01
+p95/d2676	forwarding	He threw me the apple.	male.n.02 throw.v.01 Agent -1 Time +1 Destination +2 Theme +3 time.n.08 TPR now person.n.01 EQU speaker apple.n.01	5	5	0:male.n.02
+p96/d1410	forwarding	The play lasts two and a half hours.	play.n.01 last.v.01 Theme -1 Time +1 Value +3 time.n.08 EQU now quantity.n.01 EQU 2.5 hour.n.01 Quantity -1	5	8	0:play.n.01
+p96/d1649	forwarding	Tom ironed his shirt.	"male.n.02 Name ""Tom"" iron.v.01 Agent -1 Time +1 Patient +3 time.n.08 TPR now male.n.02 ANA -3 shirt.n.01 User -1"	5	4	0:male.n.02
+p96/d1815	forwarding	Tom has a good sense of humor.	"male.n.02 Name ""Tom"" have.v.02 Pivot -1 Time +1 Theme +3 time.n.08 EQU now good.a.01 AttributeOf +1 sense_of_humor.n.01"	5	7	0:male.n.02
+p96/d3265	forwarding	Turtles are reptiles.	turtle.n.02 be.v.01 Theme -1 Time +1 Co-Theme +2 time.n.08 EQU now reptile.n.01	4	3	0:turtle.n.02
+p97/d2098	forwarding	He nodded to me.	male.n.02 nod.v.02 Agent -1 Time +1 Recipient +2 time.n.08 TPR now person.n.01 EQU speaker	4	4	0:male.n.02
+p97/d3258	forwarding	Tom went instead of Mary.	"male.n.02 Name ""Tom"" go.v.01 Theme -1 Time +1 time.n.08 TPR now NEGATION <1 entity.n.01 EQU -2 Theme +1 female.n.02 Name ""Mary"""	5	5	0:male.n.02
+p99/d0879	forwarding	He's my friend.	male.n.02 be.v.02 Theme -1 Time +1 Co-Theme +3 time.n.08 EQU now person.n.01 EQU speaker person.n.01 Role +1 friend.n.01 Of -2	6	3	0:male.n.02
+p99/d1859	forwarding	She grabbed my ass!	female.n.02 grab.v.05 Agent -1 Time +1 Theme +3 time.n.08 TPR now person.n.01 EQU speaker ass.n.01 PartOf -1	5	4	0:female.n.02
+p99/d2835	forwarding	He shaved his mustache.	male.n.02 shave.v.01 Agent -1 Time +1 Theme +3 time.n.08 TPR now male.n.02 ANA -3 mustache.n.01 PartOf -1	5	4	0:male.n.02
+p99/d2915	forwarding	I ripped my pants.	person.n.01 EQU speaker rip.v.01 Agent -1 Time +1 Patient +3 time.n.08 TPR now person.n.01 EQU speaker pant.n.02 User -1	5	4	0:person.n.01

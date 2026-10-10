@@ -1106,6 +1106,28 @@ documents as input: all 217 `same_site` rows give `same_as_used`, the
 `new_site` rows give `site` except the 4 whose failed first item was at the
 pinned site.
 
+# Forwarding: more documents (2026-10-10)
+
+Forwarding has 333 passing items (full run 288, round 2 45), about 170
+short of 500. Supply is not the limit: 899 eligible train documents were
+never drawn for any sample. `sample_train_forwarding_extra.tsv` takes 185
+of them (`select_docs.py --per-type 0 --quota forwarding=185 --seed 13`,
+every earlier sample excluded); `hpc/run_train_forwarding_extra.sub` runs
+them with `prompt_docs/` unchanged (sha256 `6b17847a…`), so the new items
+pool with the first 333. Repairs whose predicate holds a pronoun bound to
+the subject ("I warmed myself") are not filtered here; they are handled
+for all forwarding items when the dataset is assembled.
+
+**Position.** The site rule is structural (subject, verb and tense
+`time.n.08` adjacent, one box), so a subject inside a sentence qualifies.
+In the data, 320 of the 333 passing items repair the sentence-initial
+subject. About 5% of eligible documents (227 of 4,399) have a site past
+the first clause, and the 13 medial items (4%) are close to that share, so
+the skew follows PMB, whose sentences are short and mostly open with the
+subject. Three of the 13 are not forwarding but pass the checks ("He had
+his molar pulled, his tooth pulled"; "Another aspect is, Another focal
+point is"; "Give the book to child wants, whomever wants it").
+
 # Deferred
 
 Each of these was in an earlier draft. They are left out until a first-round

@@ -138,3 +138,20 @@ scp "$R/meta-models_Muse-Glimmer-30B.train_temporal_extra.tsv" incoming/
 scp -r "$R/raw/meta-models_Muse-Glimmer-30B.train_temporal_extra" incoming/
 mv -n incoming/*.tsv results/ && mv -n incoming/meta-models_Muse-Glimmer-30B.train_temporal_extra results/raw/ && rmdir incoming
 ```
+
+## Forwarding, extra documents (2026-10-10)
+New: the sample and the job file only; `prompt_docs/` is the full run's.
+```bash
+# laptop, in llm_gen_playground/
+L=honzhou@login.lst.uni-saarland.de:thesis_zone/llm_gen_playground
+scp sample_train_forwarding_extra.tsv $L/
+scp hpc/run_train_forwarding_extra.sub $L/hpc/
+# submit node, in thesis_zone/llm_gen_playground/
+condor_submit hpc/run_train_forwarding_extra.sub
+# back on the laptop
+mkdir -p incoming
+R=$L/results
+scp "$R/meta-models_Muse-Glimmer-30B.train_forwarding_extra.tsv" incoming/
+scp -r "$R/raw/meta-models_Muse-Glimmer-30B.train_forwarding_extra" incoming/
+mv -n incoming/*.tsv results/ && mv -n incoming/meta-models_Muse-Glimmer-30B.train_forwarding_extra results/raw/ && rmdir incoming
+```
