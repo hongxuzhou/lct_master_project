@@ -1,0 +1,93 @@
+{"audit_id": "a0033", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-06T15:18:30"}
+{"audit_id": "a0033", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-06T15:18:30"}
+{"audit_id": "a0000", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-06T15:18:48"}
+{"audit_id": "a0000", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-06T15:19:46"}
+{"audit_id": "a0001", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-06T16:25:10"}
+{"audit_id": "a0001", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-06T16:25:10"}
+{"audit_id": "a0002", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-06T16:34:14"}
+{"audit_id": "a0002", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-06T16:38:22"}
+{"audit_id": "a0003", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-06T16:48:08"}
+{"audit_id": "a0003", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-06T16:48:08"}
+{"audit_id": "a0004", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-06T16:51:52"}
+{"audit_id": "a0004", "meaning": "yes", "natural": "no", "note": "", "annotator": "hz", "ts": "2026-10-06T16:51:53"}
+{"audit_id": "a0004", "meaning": "yes", "natural": "no", "note": "The verb \"go\" entails destination, but \"from\" shows source. It could only be natural when it is spoken by some sort of English learner who said it wrong, then corrected it by themselves.", "annotator": "hz", "ts": "2026-10-06T16:54:42"}
+{"audit_id": "a0005", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-06T17:05:22"}
+{"audit_id": "a0005", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-06T17:05:22"}
+{"audit_id": "a0006", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-06T17:05:45"}
+{"audit_id": "a0006", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-06T17:05:45"}
+{"audit_id": "a0007", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-06T17:05:59"}
+{"audit_id": "a0007", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-06T17:06:00"}
+{"audit_id": "a0008", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-06T17:13:05"}
+{"audit_id": "a0008", "meaning": "yes", "natural": "no", "note": "", "annotator": "hz", "ts": "2026-10-06T17:13:06"}
+{"audit_id": "a0008", "meaning": "yes", "natural": "no", "note": "Again, let's just call it \"awkward preposition", "annotator": "hz", "ts": "2026-10-06T17:13:27"}
+{"audit_id": "a0008", "meaning": "yes", "natural": "no", "note": "Again, let's just call it \"awkward preposition\", or ap in short.", "annotator": "hz", "ts": "2026-10-06T17:13:41"}
+{"audit_id": "a0009", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-06T17:14:33"}
+{"audit_id": "a0009", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-06T17:14:33"}
+{"audit_id": "a0010", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-06T17:15:02"}
+{"audit_id": "a0010", "meaning": "yes", "natural": "no", "note": "", "annotator": "hz", "ts": "2026-10-06T17:15:02"}
+{"audit_id": "a0010", "meaning": "yes", "natural": "no", "note": "AP", "annotator": "hz", "ts": "2026-10-06T17:15:06"}
+{"audit_id": "a0011", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-06T17:16:51"}
+{"audit_id": "a0011", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-06T17:16:51"}
+{"audit_id": "a0012", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-06T17:17:34"}
+{"audit_id": "a0012", "meaning": "yes", "natural": "no", "note": "", "annotator": "hz", "ts": "2026-10-06T17:17:37"}
+{"audit_id": "a0012", "meaning": "yes", "natural": "no", "note": "AP", "annotator": "hz", "ts": "2026-10-06T17:17:40"}
+{"audit_id": "a0013", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-06T17:18:01"}
+{"audit_id": "a0013", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-06T17:18:01"}
+{"audit_id": "a0014", "meaning": "", "natural": "", "note": "AP", "annotator": "hz", "ts": "2026-10-06T17:19:02"}
+{"audit_id": "a0014", "meaning": "yes", "natural": "", "note": "AP", "annotator": "hz", "ts": "2026-10-06T17:19:02"}
+{"audit_id": "a0014", "meaning": "yes", "natural": "no", "note": "AP", "annotator": "hz", "ts": "2026-10-06T17:19:04"}
+{"audit_id": "a0015", "meaning": "", "natural": "", "note": "2", "annotator": "hz", "ts": "2026-10-06T17:19:22"}
+{"audit_id": "a0015", "meaning": "no", "natural": "", "note": "2", "annotator": "hz", "ts": "2026-10-06T17:19:22"}
+{"audit_id": "a0015", "meaning": "no", "natural": "no", "note": "2", "annotator": "hz", "ts": "2026-10-06T17:19:23"}
+{"audit_id": "a0015", "meaning": "no", "natural": "no", "note": "Interesting mistake. The wipe_out is one concept in WordNet, or at least in WN style in this SBN. But the LLM-generated RSR detached the superfical tokens with the synset.", "annotator": "hz", "ts": "2026-10-06T17:20:36"}
+{"audit_id": "a0016", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-06T17:21:06"}
+{"audit_id": "a0016", "meaning": "yes", "natural": "unsure", "note": "", "annotator": "hz", "ts": "2026-10-06T17:21:07"}
+{"audit_id": "a0016", "meaning": "yes", "natural": "unsure", "note": "Not a native speaker of English, hard to decide if this is natural.", "annotator": "hz", "ts": "2026-10-06T17:21:33"}
+{"audit_id": "a0017", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-06T17:21:49"}
+{"audit_id": "a0017", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-06T17:21:50"}
+{"audit_id": "a0018", "meaning": "", "natural": "", "note": "AP", "annotator": "hz", "ts": "2026-10-06T17:26:13"}
+{"audit_id": "a0018", "meaning": "", "natural": "no", "note": "AP", "annotator": "hz", "ts": "2026-10-06T17:26:13"}
+{"audit_id": "a0018", "meaning": "yes", "natural": "no", "note": "AP", "annotator": "hz", "ts": "2026-10-06T17:26:14"}
+{"audit_id": "a0019", "meaning": "", "natural": "", "note": "AP", "annotator": "hz", "ts": "2026-10-06T17:26:40"}
+{"audit_id": "a0019", "meaning": "yes", "natural": "", "note": "AP", "annotator": "hz", "ts": "2026-10-06T17:27:03"}
+{"audit_id": "a0019", "meaning": "yes", "natural": "no", "note": "AP", "annotator": "hz", "ts": "2026-10-06T17:27:03"}
+{"audit_id": "a0020", "meaning": "", "natural": "", "note": "AP", "annotator": "hz", "ts": "2026-10-06T17:27:11"}
+{"audit_id": "a0020", "meaning": "yes", "natural": "", "note": "AP", "annotator": "hz", "ts": "2026-10-06T17:27:32"}
+{"audit_id": "a0020", "meaning": "yes", "natural": "no", "note": "AP", "annotator": "hz", "ts": "2026-10-06T17:27:32"}
+{"audit_id": "a0021", "meaning": "", "natural": "no", "note": "", "annotator": "hz", "ts": "2026-10-06T17:27:40"}
+{"audit_id": "a0021", "meaning": "no", "natural": "no", "note": "", "annotator": "hz", "ts": "2026-10-06T17:27:41"}
+{"audit_id": "a0021", "meaning": "yes", "natural": "no", "note": "", "annotator": "hz", "ts": "2026-10-06T17:27:43"}
+{"audit_id": "a0021", "meaning": "yes", "natural": "no", "note": "Import - from/export - to. The lexical semantic issue is not considered here.", "annotator": "hz", "ts": "2026-10-06T17:28:40"}
+{"audit_id": "a0022", "meaning": "no", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-06T17:28:48"}
+{"audit_id": "a0022", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-06T17:28:49"}
+{"audit_id": "a0022", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-06T17:28:49"}
+{"audit_id": "a0023", "meaning": "", "natural": "", "note": "AP", "annotator": "hz", "ts": "2026-10-06T17:29:08"}
+{"audit_id": "a0023", "meaning": "yes", "natural": "", "note": "AP", "annotator": "hz", "ts": "2026-10-06T17:29:18"}
+{"audit_id": "a0023", "meaning": "yes", "natural": "unsure", "note": "AP", "annotator": "hz", "ts": "2026-10-06T17:29:19"}
+{"audit_id": "a0024", "meaning": "", "natural": "no", "note": "", "annotator": "hz", "ts": "2026-10-06T17:29:37"}
+{"audit_id": "a0024", "meaning": "yes", "natural": "no", "note": "", "annotator": "hz", "ts": "2026-10-06T17:29:38"}
+{"audit_id": "a0025", "meaning": "unsure", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-06T17:29:57"}
+{"audit_id": "a0025", "meaning": "unsure", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-06T17:29:58"}
+{"audit_id": "a0025", "meaning": "unsure", "natural": "yes", "note": "Shouldn't it be something like showing the tent concept twice in each CORRECTION/CONJUNCTION box? This is definitely not wrong, but it abstracted the repeated part, making the MR more like AMR.", "annotator": "hz", "ts": "2026-10-06T17:31:04"}
+{"audit_id": "a0026", "meaning": "", "natural": "unsure", "note": "", "annotator": "hz", "ts": "2026-10-06T17:31:49"}
+{"audit_id": "a0026", "meaning": "yes", "natural": "unsure", "note": "", "annotator": "hz", "ts": "2026-10-06T17:31:50"}
+{"audit_id": "a0026", "meaning": "yes", "natural": "unsure", "note": "OK, boundary case.", "annotator": "hz", "ts": "2026-10-06T17:31:57"}
+{"audit_id": "a0027", "meaning": "yes", "natural": "", "note": "", "annotator": "hz", "ts": "2026-10-06T17:32:07"}
+{"audit_id": "a0027", "meaning": "yes", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-06T17:32:09"}
+{"audit_id": "a0028", "meaning": "", "natural": "unsure", "note": "", "annotator": "hz", "ts": "2026-10-06T17:33:50"}
+{"audit_id": "a0028", "meaning": "", "natural": "unsure", "note": "Boundary case.", "annotator": "hz", "ts": "2026-10-06T17:34:11"}
+{"audit_id": "a0029", "meaning": "", "natural": "unsure", "note": "", "annotator": "hz", "ts": "2026-10-06T17:34:22"}
+{"audit_id": "a0029", "meaning": "yes", "natural": "unsure", "note": "", "annotator": "hz", "ts": "2026-10-06T17:34:23"}
+{"audit_id": "a0029", "meaning": "yes", "natural": "unsure", "note": "I mean, if she wants, she can. But I just lost the sense of justification now.", "annotator": "hz", "ts": "2026-10-06T17:34:56"}
+{"audit_id": "a0030", "meaning": "", "natural": "no", "note": "", "annotator": "hz", "ts": "2026-10-06T17:35:08"}
+{"audit_id": "a0030", "meaning": "yes", "natural": "no", "note": "", "annotator": "hz", "ts": "2026-10-06T17:35:10"}
+{"audit_id": "a0030", "meaning": "yes", "natural": "no", "note": "AP", "annotator": "hz", "ts": "2026-10-06T17:35:19"}
+{"audit_id": "a0031", "meaning": "", "natural": "no", "note": "", "annotator": "hz", "ts": "2026-10-06T17:35:25"}
+{"audit_id": "a0031", "meaning": "yes", "natural": "no", "note": "", "annotator": "hz", "ts": "2026-10-06T17:35:26"}
+{"audit_id": "a0031", "meaning": "yes", "natural": "no", "note": "AP", "annotator": "hz", "ts": "2026-10-06T17:35:30"}
+{"audit_id": "a0032", "meaning": "", "natural": "no", "note": "", "annotator": "hz", "ts": "2026-10-06T17:35:40"}
+{"audit_id": "a0032", "meaning": "yes", "natural": "no", "note": "", "annotator": "hz", "ts": "2026-10-06T17:35:40"}
+{"audit_id": "a0032", "meaning": "yes", "natural": "no", "note": "AP", "annotator": "hz", "ts": "2026-10-06T17:36:01"}
+{"audit_id": "a0033", "meaning": "yes", "natural": "no", "note": "", "annotator": "hz", "ts": "2026-10-06T17:36:11"}
+{"audit_id": "a0033", "meaning": "yes", "natural": "no", "note": "AP", "annotator": "hz", "ts": "2026-10-06T17:36:16"}
+{"audit_id": "a0028", "meaning": "yes", "natural": "unsure", "note": "Boundary case.", "annotator": "hz", "ts": "2026-10-06T17:36:28"}

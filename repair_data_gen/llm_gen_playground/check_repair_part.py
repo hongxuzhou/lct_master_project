@@ -57,10 +57,14 @@ def in_order(sub, words):
 
 
 def norm(text):
-    """Surface normalisation for the sentence checks: no quote marks, and
-    contractions written out, so "He's" and "He is" compare equal. A
+    """Surface normalisation for the sentence checks: no quote marks, no
+    final punctuation, plain apostrophes, and contractions written out, so "He's" and "He is" compare equal. A
     possessive 's is expanded too; both sides get the same treatment."""
+    # typographic apostrophes and quotes as plain ones ("That’s" = "That's"),
+    # and sentence-final punctuation ignored ("slicing tofu" = "slicing tofu.")
+    text = text.translate(str.maketrans("’‘“”", "''\"\""))
     text = text.replace('"', "").strip()
+    text = re.sub(r"\s*[.?!]+$", "", text)
     for a, b in CONTRACTIONS:
         text = re.sub(a, b, text)
     return text
@@ -102,8 +106,12 @@ def problems(r):
         # when it includes gold text before it ("October the fourth").
         surf = [w.lower() for w in WORD.findall(norm(r["reparandum_surface"]))]
         gold, right_n = norm(r["nl_clean"]), norm(right)
-        prefix = gold[:max(len(gold) - len(right_n), 0)].rstrip()
-        part = norm(left)[len(prefix):] if norm(left).startswith(prefix) else norm(left)
+        # the gold prefix is known only when the repair part ends the gold
+        # sentence; otherwise read the whole left side (the rest-of-sentence
+        # check below reports the mismatch)
+        fits = gold.lower().endswith(right_n.lower()) and len(right_n) <= len(gold)
+        prefix = gold[:len(gold) - len(right_n)].rstrip() if fits else ""
+        part = norm(left)[len(prefix):] if prefix and norm(left).startswith(prefix) else norm(left)
         words = [w.lower() for w in WORD.findall(part)]
         sub = lambda a, b: any(b[i:i + len(a)] == a for i in range(len(b) - len(a) + 1))  # noqa: E731
         # either way round: "October the fourth" reported, "the fourth" repeated

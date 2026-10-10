@@ -84,3 +84,18 @@ condor_submit hpc/run_r3_edge.sub      # edge label, prompt_docs_edge_r3/
 Both can run at once (one GPU each). Each `run_meta_*.json` records `docs`
 and `prompt_sha256`; locally `python3 -c "import run_llm; print(run_llm.prompt_hash())"`
 gives the hash of `prompt_docs/` (`6b17847a…`; edge round 3 `1886b812…`).
+
+## Edge label on train (2026-10-08)
+```bash
+# laptop, in llm_gen_playground/: only the new sample and the job file
+scp sample_train_edge.tsv honzhou@login.lst.uni-saarland.de:thesis_zone/llm_gen_playground/
+scp hpc/run_train_edge.sub honzhou@login.lst.uni-saarland.de:thesis_zone/llm_gen_playground/hpc/
+# submit node, in thesis_zone/llm_gen_playground/
+condor_submit hpc/run_train_edge.sub
+# back on the laptop, via a staging folder as before
+mkdir -p incoming
+R=honzhou@login.lst.uni-saarland.de:thesis_zone/llm_gen_playground/results
+scp "$R/meta-models_Muse-Glimmer-30B.train_edge.tsv" incoming/
+scp -r "$R/raw/meta-models_Muse-Glimmer-30B.train_edge" incoming/
+mv -n incoming/*.tsv results/ && mv -n incoming/meta-models_Muse-Glimmer-30B.train_edge results/raw/ && rmdir incoming
+```

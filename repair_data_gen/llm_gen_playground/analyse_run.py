@@ -26,6 +26,12 @@ Per row it adds:
 - `site_ok`: `ok` if the model's `site_index` is one of the sites
   select_docs.py offers for this type, else `outside`. Selection only makes
   sure a document has a good site; the model picks among all of them;
+- `ambiguous`: why the repair, read without an editing expression, has a
+  fluent reading (`number_range`: "two, three brothers", "10, 15 years";
+  `initial_name`: "Jim, Tom broke it", read as a vocative), or empty. Not a
+  failure: such items go to the marked share of the training data and are
+  reported separately at test time (decided 2026-10-08). Apposition and
+  lists are not detected yet;
 - `lookups`: tool calls the model made (num_turns - 1).
 Then it prints counts per repair type.
 """
@@ -139,6 +145,51 @@ def site_ok(row: dict) -> str:
         return f"error: {type(e).__name__}"
 
 
+_NUM_ROLES = ("EQU", "Quantity", "APX")
+
+
+def _box_numbers(concepts) -> list[float]:
+    out = []
+    for c in concepts:
+        for r, v in c.roles:
+            if r in _NUM_ROLES:
+                try:
+                    out.append(float(v))
+                except ValueError:
+                    pass
+    return out
+
+
+def ambiguous(row: dict) -> str:
+    """A fluent reading of the base form (no editing expression), or "".
+
+    number_range: reparandum and repair ascend like an approximate range,
+    "n, n+1" up to 20 ("two, three brothers") or two multiples of 5 no
+    further apart than the smaller ("10, 15 years", "five, ten dollars").
+    initial_name: a name repair at the very start of the sentence, which
+    reads as someone being addressed ("Jim, Tom broke it").
+    """
+    t = row["repair_type"]
+    try:
+        if t == "constant_number":
+            bx = check_repair_part.boxes(parse_sbn_line(strip_comments(row["sbn_repair"])))
+            if not bx:
+                return ""
+            for a in _box_numbers(bx[0]):
+                for g in _box_numbers(bx[1]):
+                    if a < g and ((g - a == 1 and a <= 20)
+                                  or (a % 5 == 0 and g % 5 == 0 and g - a <= a)):
+                        return "number_range"
+        if t == "constant_name" and row.get("repair_onset"):
+            right = row["nl_repair"][int(row["repair_onset"]):]
+            norm = check_repair_part.norm
+            if norm(right).lower() == norm(row["nl_clean"]).lower():
+                return "initial_name"
+    except Exception:  # noqa: BLE001
+        return ""
+    return ""
+
+
 def oracle(row: dict) -> str:
     if row["repair_type"] != "content_word":
         return ""
@@ -170,7 +221,7 @@ def main() -> None:
         answered = r["reply"] == "ok" and r.get("status") == "ok" and r.get("sbn_repair")
         if not answered:
             for k in CHECKS + EXTRA + ("wn_ok", "wn_missing", "wn_relation", "oracle",
-                                       "check_detail", "place_inside"):
+                                       "check_detail", "place_inside", "ambiguous"):
                 r[k] = ""
             continue
         r["wn_relation"] = wn_relation(r)
@@ -182,6 +233,7 @@ def main() -> None:
         r["oracle"] = oracle(r)
         r["place_inside"] = place_inside(r)
         r["site_ok"] = site_ok(r)
+        r["ambiguous"] = ambiguous(r)
         try:
             lost = check_untouched.missing_edges(r)
             r["untouched"] = "ok" if not lost else "lost " + "; ".join(" ".join(t) for t in lost)
@@ -251,6 +303,11 @@ def main() -> None:
     if rel:
         print("\ncontent word, reparandum -> repair in WordNet (same_synset fails; the rest recorded):")
         print("  " + ", ".join(f"{k} {n}" for k, n in rel.most_common()))
+
+    amb = collections.Counter((r["repair_type"], r["ambiguous"]) for r in rows if r.get("ambiguous"))
+    if amb:
+        print("\nfluent reading without an editing expression (not a failure; marked share):")
+        print("  " + ", ".join(f"{t} {k} {n}" for (t, k), n in sorted(amb.items())))
 
     print("\nno_site answers:")
     for r in rows:

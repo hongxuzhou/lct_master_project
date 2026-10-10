@@ -1,0 +1,21 @@
+{
+  "started": "2026-10-04T15:54:50",
+  "backend": "openai",
+  "model": "meta-models/Muse-Glimmer-30B",
+  "workers": 16,
+  "sample": "sample_train_full.tsv",
+  "docs": "/nethome/honzhou/thesis_zone/llm_gen_playground/prompt_docs",
+  "prompt_sha256": "6b17847a1fcf0d49bd4e546ddbdb8c67e4381a93690b800578099e3e9868a12d",
+  "base_url": "http://127.0.0.1:34883/v1",
+  "tool_mode": "auto",
+  "reasoning": "high",
+  "temperature": 1.0,
+  "top_p": 0.95,
+  "top_k": 64,
+  "seed": 13,
+  "max_tokens": 32768,
+  "max_turns": 20,
+  "server_version": {
+    "version": "0.30.0"
+  }
+}

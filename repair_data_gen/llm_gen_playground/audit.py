@@ -181,7 +181,8 @@ def cmd_serve(args: argparse.Namespace) -> None:
                 labels = {k: v for k, v in read_labels(d).items()
                           if v.get("annotator") == args.annotator}
                 self._json({"items": items, "labels": labels,
-                            "annotator": args.annotator, "dir": str(d)})
+                            "annotator": args.annotator, "dir": str(d),
+                            "questions": args.questions})
             else:
                 self._send(404, b"not found", "text/plain")
 
@@ -236,7 +237,8 @@ def cmd_stats(args: argparse.Namespace) -> None:
                "note": labels.get(i["audit_id"], {}).get("note", "")} for i in items]
 
     done = sum(bool(m["meaning"] and m["natural"]) for m in merged)
-    print(f"{done}/{len(merged)} items have both answers\n")
+    print(f"{done}/{len(merged)} items have both answers; "
+          + ", ".join(f"{q} {sum(bool(m[q]) for m in merged)}" for q in QUESTIONS) + "\n")
     for q, thr in QUESTIONS.items():
         print(f"{q}  (threshold {thr:.0%}; share of yes among yes+no)")
         print(f"  {'type':18s} {'yes':>4s} {'no':>4s} {'unsure':>6s} {'rate':>6s}  {'95% CI':>13s}")
@@ -287,6 +289,9 @@ def main() -> None:
     v.add_argument("dir", type=Path)
     v.add_argument("--annotator", default="hz")
     v.add_argument("--port", type=int, default=8765)
+    v.add_argument("--questions", nargs="+", choices=list(QUESTIONS), default=list(QUESTIONS),
+                   help="questions shown on the page (default both); e.g. `natural` "
+                        "for the edge-label selection, where the checks already cover meaning")
     v.set_defaults(fn=cmd_serve)
 
     t = sub.add_parser("stats")

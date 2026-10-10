@@ -15,3 +15,12 @@ repair_data_gen/pool_*.tsv
 
 __pycache__/
 *.pyc
+# Switchboard-derived tables (CC BY-NC-SA 3.0); rebuild with swbd_flatten.py
+repair_data_gen/llm_gen_playground/natural_rsr_check/swbd/
+
+# Raw model responses, one JSON per item (train_full alone is 168 MB).  The
+# parsed answers are in results/<model>.<tag>.tsv; run_meta (prompt sha,
+# flags) is kept as the provenance record.  Raw files committed before
+# 2026-10-10 stay tracked.  Back up locally / on the cluster.
+repair_data_gen/llm_gen_playground/results/raw/*/*
+!repair_data_gen/llm_gen_playground/results/raw/*/run_meta_*.json

@@ -843,6 +843,155 @@ After the full run, not to be lost:
   pipeline as the source of the core layer, and "Found here, for the
   rule-pipeline upgrade" below no longer feeds the data.
 
+# Edge label round 3 (2026-10-05)
+
+50 documents of `sample_r3_edge.tsv` with `prompt_docs_edge_r3/` (sha256
+`1886b812…`, confirmed in `run_meta`). 49 answered, one `no_site`; 48 of 49
+pass the automatic checks (one repair box writes `Destination` for gold
+`Location`).
+
+**The `no_site` was right, and showed a mismatch.** "This woman is from
+China" is `be.v.03 Source`: selection offered it (any `Source`), §4.4 allows
+only be's `Location`. Selection now follows the prompt.
+
+**Reading all 49.** Direction swaps on motion and transfer verbs (27–30)
+read naturally ("Tom walked from, into Mary's room", "He withdrew his hand
+to, from the table"). The 19 `be.v.03` repairs split by subject: with a
+person they work ("She's from, in Boston", "I'm from, in Modena"); with an
+existential or a thing they do not ("There are eleven rooms from, in this
+house", "There's a cat from, on the desk", "My room is from, on the fourth
+floor"). `select_docs._be_person` now requires a person subject (not a
+NEGATION quantifier) and no existential `EQU` for `be.v.03`; this changes
+selection only, not the prompt. Under it, 35 of the 49 sites remain, 34
+pass every check (97%), and the edge reserve keeps 405 of 575 documents.
+
+All 34 go to a blind audit (`audit/r3_edge`): naturalness is the open
+question for this type and the set is small enough to read whole.
+
+# Full run on train: first analysis (2026-10-06)
+
+`results/meta-models_Muse-Glimmer-30B.train_full.tsv`: 5,991 of 5,993
+documents (`p69/d0350`, `p94/d2611` have no row and no raw reply, probably a
+request error; a resubmit would retry them). `run_meta` confirms
+`prompt_docs/` with sha256 `6b17847a…`, the round-2 prompt. 6 `no_site`
+(0.1%; round 2 had up to 4% for these types), one `error_max_turns`.
+
+| type | answered | pass all checks | % | % without synonyms | RP quota |
+|---|---|---|---|---|---|
+| content word | 3,341 | 3,114 | 93.2 | 96.5 | 2,200 |
+| name | 759 | 725 | 95.5 | 95.5 | 500 |
+| number | 597 | 565 | 94.6 | 94.6 | 400 |
+| temporal | 228 | 221 | 96.9 | 96.9 | 220 |
+| tense | 760 | 730 | 96.1 | 96.1 | 500 |
+| forwarding | 299 | 288 | 96.3 | 96.3 | 200 |
+| **all** | 5,984 | 5,643 | 94.3 | 96.1 | 4,020 |
+
+Every type has more passing items than its quota. Synonyms (112 content
+words) are the largest single failure; the next is the reparandum and the
+repair written the wrong way round ("covered in pigeon, crow poop", "is
+missing, empty!"), which `repair_part` catches through the onset and the
+rest-of-sentence checks.
+
+**Check fix.** At this size `repair_part` raised two false alarms that the
+small rounds had not shown: a final full stop the gold sentence lacks
+("slicing tofu"), and typographic apostrophes ("That’s"). `norm()` now
+drops final punctuation and maps curly quotes to plain ones.
+
+Earlier runs, re-analysed with the current checks and site rules, pass
+fewer items than their own sections report (Opus round 1 61 of 68, Muse
+round 1 58, round 2 285 of 339), because `site_ok` applies the narrowed
+site rules after the fact.
+
+Blind audit sample: `audit/train_full`, 15 per type (90).
+
+# Audits of edge round 3 and the full run (2026-10-08)
+
+Labelled by the user: `audit/r3_edge` (34, all), `audit/train_full` (90,
+15 per type; `a0001` left blank on purpose, `a0073` and `a0076` without
+answers). Claude labelled the edge set independently and read every item
+of both sets with the indices resolved.
+
+**Edge label: natural 48%** (14 yes, 15 no, 5 unsure; threshold 80%).
+Claude's independent labels give 55%; on the 25 items both decided, 21
+agree. Both reject verbs that carry a direction ("escaped to, from the
+zoo", "imports clothes to, from Turkey"). They differ on direction-neutral
+verbs: the user rejects "Tom has gone from, to Boston" because "have gone"
+is a near-fixed construction for having left and not returned; tense and
+aspect move the judgement, so no verb list can stand in for it.
+`a0015` ("wiped him into, out of her memory") is a meaning error: "out" is
+part of `wipe_out.v.04`, not a role preposition.
+
+**Full run: meaning 100% (72 yes, 15 unsure), natural 97%.** Every unsure
+meaning label was checked against the notation and is correct. Eleven are
+forwarding repairs whose repeated verb points to its own subject rather
+than to the anchor: the user's own notation (`repair_sbn_notation.qmd`,
+"Josh drove, no, Marsha drove …") does exactly this, while the subject
+repair ("Josh, no, Mary plays tennis well") points the verb to the anchor.
+The rule behind the difference: a predicate said once is shared by both
+versions and attaches to the anchor; a predicate said in each version
+attaches to that version's subject. After withdrawal both give the same
+graph.
+
+## Decided (2026-10-08, user)
+
+- **Edge label** stays in train as a small, human-selected sample:
+  `sample_train_edge.tsv` (403 reserve documents still meeting the site
+  rules) runs with `prompt_docs_edge_r3/` (`hpc/run_train_edge.sub`); the
+  user then labels naturalness and keeps the yes items (about 100–150). No
+  verb list: it would approximate a judgement that depends on tense and
+  context. Not covered by the notation and noted for later: spatial
+  operator swaps ("on, actually, under the desk": `Location` against
+  `location.n.01 SZN`), which may be the most natural preposition repairs.
+- **"Natural"** means natural for fluent speakers, in van Leusen's sense of
+  incompatibility in context: grammatical, recognisable as a repair, with
+  the withdrawn and the committed content recoverable. Repairs only a
+  second-language learner would make are out of scope: disfluency can
+  fall anywhere, and widening the speaker population would make the data
+  unrepresentative.
+- **Fluent readings without an editing expression.** Text has no focus or
+  prosody, so some base forms are the same string as a fluent construction:
+  "two, three brothers" (a range), "Jim, Tom broke it" (a vocative),
+  apposition, lists. The experimental design is not changed: training is
+  already unpaired with about 30% marked items (`model_experiment_pipeline.md`
+  §457), so these items are assigned to the marked share; the test set
+  keeps its marked/unmarked pairs and reports them as a separate
+  `ambiguous` stratum. Left unrouted, about 570 bare items would teach the
+  juxtaposition template that the hard-negative set tests for, and the
+  hard-negative set excludes numbers, so ranges would go unmeasured.
+  `analyse_run.py` writes `ambiguous` (`number_range`, `initial_name`; not a
+  failure). Full run, passing items: 293 and 279. Apposition and lists are
+  not detected yet. The earlier plan to drop n, n+1 numbers is replaced by
+  this; randomising the reparandum number was rejected because it edits
+  model output and pushes the distribution away from real number repairs.
+- **Forwarding**: the predicate follows its own subject (above). Open, for
+  later: repairs that change a subject bound by a pronoun in the predicate
+  ("John warmed, I warmed myself", "my homework") read more like a restart.
+
+Still to do after these: capitalisation of the repair onset ("She needed,
+He needed money": 78 of 288 passing forwarding items) in the post-processing
+script, with the interregnum and the marked/base assignment.
+
+## Edge label on train: run and selection set (2026-10-08)
+
+`results/meta-models_Muse-Glimmer-30B.train_edge.tsv`, 403 documents,
+`prompt_docs_edge_r3/` (sha256 `1886b812…` in `run_meta`). 377 answered,
+26 `no_site`: nearly all refuse verbs that are not motion or transfer
+("graduated from", "expelled from", "resigned from", "drank from") or that
+carry a direction ("escaped from"), as §4.4's "the first version must be
+something a speaker could have meant" asks. 366 of 377 pass every check
+(97%). The failures are swaps (the gold "from" taken as the reparandum:
+"Tom stole something from, to my house"), a role renamed in the repair box,
+and one ③ dummy whose `EQU` lands on `time.n.08`.
+
+`check_repair_part.py`: when the repair part is not the end of the gold
+sentence, the onset message printed a cut-off fragment ("'om the east'");
+it now reads the whole left side. Verdicts are unchanged.
+
+Selection set: `audit/train_edge`, all 366 passing items. `audit.py serve
+--questions natural` shows only the naturalness question (the checks cover
+meaning); the user keeps the yes items, about 100–150.
+
+
 # Deferred
 
 Each of these was in an earlier draft. They are left out until a first-round

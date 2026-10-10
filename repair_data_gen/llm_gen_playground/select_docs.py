@@ -67,8 +67,9 @@ TEMPORAL_ROLES = {"ClockTime", "DayOfWeek", "DayOfMonth", "MonthOfYear", "YearOf
 EDGE_LABEL_ROLES = {"Destination", "Source", "Location"}
 # Edge label sites (decided 2026-10-04, after the round-2 audit): a gold
 # Source or Destination, where swapping direction is a change of intent
-# ("taken from, to the orphanage"), or the Location of be.v.03 ("in, from
-# China"). Location on other verbs gave "living from, in Tokyo".
+# ("taken from, to the orphanage"), or the Location of be.v.03 with a person
+# subject ("She's from, in Boston"; narrowed 2026-10-05 after round 3).
+# Location on other verbs gave "living from, in Tokyo".
 EDGE_LABEL_SITE_ROLES = {"Source", "Destination"}
 # The preposition that must be in the sentence for each gold role.
 EDGE_PREPS = {
@@ -197,9 +198,33 @@ def site_tense(doc):
     return out
 
 
+PERSONS = {"person.n.01", "male.n.02", "female.n.02"}
+
+
+def _be_person(doc, c) -> bool:
+    """be.v.03 whose subject is a person, not an existential "there is".
+
+    "In" against "from" is a change of intent only for something that can
+    come from a place: "She's from, in Boston", but not "There's a cat from,
+    on the desk" or "My room is from, on the fourth floor" (round 3,
+    2026-10-05: 6 of 19 be.v.03 sites read naturally, all with a person
+    subject). Existential be has `EQU` to its `entity.n.01`; a NEGATION
+    quantifier subject ("Nobody is …") is excluded as for forwarding.
+    """
+    if any(r == "EQU" for r, _ in c.roles):
+        return False
+    theme = [_target(c, v) for r, v in c.roles if r == "Theme"]
+    if not theme or theme[0] is None or not 0 <= theme[0] < len(doc.concepts):
+        return False
+    x = doc.concepts[theme[0]]
+    return x.synset in PERSONS and not _quantifier_restrictor(doc, x)
+
+
 def site_edge_label(doc):
-    """A verb with a Source or Destination role, or be.v.03 with Location,
-    whose preposition is in the sentence.
+    """A verb with a Source or Destination role, or be.v.03 with Location and
+    a person subject, whose preposition is in the sentence. be.v.03 with
+    Source ("She is from China") is not offered: §4.4 of the edge-label
+    prompt allows only its Location, and the model rightly said `no_site`.
 
     The target must come after the verb and must not be the question slot:
     PMB uses Source for a subject ("We ran out of food") and for objects
@@ -217,7 +242,10 @@ def site_edge_label(doc):
             t = _target(c, v)
             if t is None or not 0 <= t < len(doc.concepts) or t < c.pos:
                 continue
-            if not (r in EDGE_LABEL_SITE_ROLES or (r == "Location" and c.synset == "be.v.03")):
+            if c.synset == "be.v.03":
+                if r != "Location" or not _be_person(doc, c):
+                    continue
+            elif r not in EDGE_LABEL_SITE_ROLES:
                 continue
             x = doc.concepts[t]
             if _has_wh(x) or x.synset == "location.n.01" or not (EDGE_PREPS[r] & words):
