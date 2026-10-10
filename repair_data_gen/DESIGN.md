@@ -507,6 +507,14 @@ documents would mean each sentence appearing three or four times with different
 substitutions — near-duplicates that inflate the count without adding
 information.
 
+> **Revised 2026-10-10.** The cap is now a reporting requirement, not a
+> selection rule: each type reports its items and its distinct source
+> documents. The concern above is that a count overstates variety, which
+> reporting both numbers addresses. A second item at the same site with
+> another reparandum is a minimal pair whose targets differ exactly at the
+> reparandum, so at this scale it adds a useful signal rather than
+> redundancy. See `documentation/model_experiment_pipeline.md` §15.1.
+
 ### 4.4 What counts as a cell: the device, not the notation case
 
 Step 4 of §1 records that within concept substitution, which notation case a

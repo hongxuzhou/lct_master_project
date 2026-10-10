@@ -1128,6 +1128,66 @@ subject. Three of the 13 are not forwarding but pass the checks ("He had
 his molar pulled, his tooth pulled"; "Another aspect is, Another focal
 point is"; "Give the book to child wants, whomever wants it").
 
+# Train: status and open items (2026-10-10)
+
+The design-level record is `documentation/model_experiment_pipeline.md`
+§15; this section is the playground's view. Where earlier sections of this
+README give quotas (the 10-04 supply table: content word 2,200, name 500,
+number 400, temporal 220, tense 500, edge label 500, forwarding 200) or the
+two-per-document cap as a selection rule, this section replaces them.
+
+**Target.** About 3,500 repair items on train, about 500 per type; quotas
+are caps. The per-document cap is a reporting requirement (items and
+distinct source documents per type).
+
+| type | passing (full + r2) | extra run | expected |
+|---|---:|---|---:|
+| content word | 3,114 + 43 | – | enough |
+| name | 725 + 48 | – | enough |
+| number | 565 + 46 | – | enough |
+| tense | 730 + 47 | – | enough |
+| temporal | 221 + 48 | `train_temporal_extra` (297, new prompt) | ~557 |
+| forwarding | 288 + 45 | `train_forwarding_extra` (185, same prompt) | ~510 |
+| edge label | 112 + 14 (r3 yes) | `train_place` (other thread) | < 500 |
+
+**Thresholds.** The four reference thresholds (checks ≥ 95%, `no_site`
+≤ 3%, meaning ≥ 90%, natural ≥ 80%) were set here before round 2 and have
+no outside source. They decide whether a type goes to larger synthesis;
+they are not a quality benchmark. Edge label is the only type below them
+and was moved to human selection rather than given a lower bar.
+
+**train_edge labels (user, 2026-10-09).** 363 of 366 labelled
+(`a0035` blank; `a0062`, `a0352` have a note but no label): yes 112, no
+199, unsure 52 (natural 36% of yes+no, 95% CI 0.31–0.41). The labels are
+first-impression judgements: unsure means "needed a second thought". By
+labelling time the yes rate moves 31%, 20%, 32%, 40% over four quarters
+(Fisher Q2 against Q4, p = .004; items were shuffled), and near-identical
+templates are spread over all three labels (bare "X go from, to Y": 5 no,
+11 unsure, 8 yes). Systematic no's: `be.v.03` with a time adverbial ("I'm
+from Hong Kong, in Hong Kong right now" reads as a fluent apposition),
+imperatives and "Let's", and verbs that carry a direction (escape, steal,
+put, wipe, head for). A reported rate needs the single-annotator,
+intuition-only caveat.
+
+**Open, for dataset assembly (separate thread).**
+- Marked share: 30% overall (as §5.5 reads) or per type. Per type, the
+  ambiguous items of number (317) and name (295) exceed it; overall, the
+  marker would correlate with type.
+- `ambiguous` (`analyse_run.py`): thresholds (≤ 20, multiples of 5) not
+  validated against human judgement, so check about 30 items before a
+  stratum is reported. `initial_name` fires on any sentence-initial name,
+  including cities ("Geneva, Bern is the capital of Switzerland") and lists
+  ("Guan Yu, Liu Bei and Zhuge Liang …"); still a fluent reading, but the
+  docstring says vocative only. Not detected: medial apposition and lists
+  ("arrive in Osaka, Tokyo"), temporal ("18 May, June", which the temporal
+  extra run will also produce), content-word lists.
+- Forwarding: onset capitalisation (78 items), pronouns bound to the
+  subject in the predicate.
+- Audit of the temporal extra run (new prompt, about 20 items, half per
+  `kind`). The forwarding extra run uses the full run's prompt and pools
+  with its audit.
+- dev/test: not started.
+
 # Deferred
 
 Each of these was in an earlier draft. They are left out until a first-round
