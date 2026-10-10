@@ -139,7 +139,15 @@ def site_ok(row: dict) -> str:
     try:
         doc = parse_sbn_line(row["sbn_clean"])
         doc.sentence = row["nl_clean"]
-        sites = {p for p, _ in select_docs.SITES[row["repair_type"]](doc)}
+        fn = select_docs.SITES[row["repair_type"]]
+        if row["repair_type"] == "edge_label":
+            # the kind of repair picks the rule: a place answer gives an
+            # operator or "plain" (task.md), a direction answer a role; "There's
+            # a cat from, on the desk" is a place site but not a direction one
+            place = row.get("reparandum_value", "") in select_docs.PLACE_OPS \
+                or row.get("reparandum_value", "") == "plain"
+            fn = select_docs.site_place if place else select_docs.site_direction
+        sites = {p for p, _ in fn(doc)}
         return "ok" if int(row["site_index"]) in sites else "outside"
     except Exception as e:  # noqa: BLE001
         return f"error: {type(e).__name__}"

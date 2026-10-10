@@ -99,3 +99,23 @@ scp "$R/meta-models_Muse-Glimmer-30B.train_edge.tsv" incoming/
 scp -r "$R/raw/meta-models_Muse-Glimmer-30B.train_edge" incoming/
 mv -n incoming/*.tsv results/ && mv -n incoming/meta-models_Muse-Glimmer-30B.train_edge results/raw/ && rmdir incoming
 ```
+
+## Edge label, places (2026-10-10)
+New: the sample, the job file, and the r4 prompt documents (sha256
+`24c14008…`). `select_docs.py` and `analyse_run.py` changed too, but run
+locally only.
+```bash
+# laptop, in llm_gen_playground/
+L=honzhou@login.lst.uni-saarland.de:thesis_zone/llm_gen_playground
+scp sample_train_place.tsv $L/
+scp hpc/run_train_place.sub $L/hpc/
+scp -r prompt_docs_edge_r4 $L/
+# submit node, in thesis_zone/llm_gen_playground/
+condor_submit hpc/run_train_place.sub
+# back on the laptop, via a staging folder as before
+mkdir -p incoming
+R=$L/results
+scp "$R/meta-models_Muse-Glimmer-30B.train_place.tsv" incoming/
+scp -r "$R/raw/meta-models_Muse-Glimmer-30B.train_place" incoming/
+mv -n incoming/*.tsv results/ && mv -n incoming/meta-models_Muse-Glimmer-30B.train_place results/raw/ && rmdir incoming
+```

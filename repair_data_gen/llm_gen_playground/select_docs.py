@@ -2,8 +2,9 @@
 Pick the gold documents for one LLM-playground run, by repair type.
 
     python3 select_docs.py [--per-type 10] [--seed 13] [--out pinned_sample.tsv]
-                           [--exclude earlier_sample.tsv ...]
+                           [--exclude earlier_sample.tsv ...] [--exclude-type type ...]
                            [--quota type=n ...] [--cap type=n ...]
+                           [--edge-sites direction|place]
 
 For each repair type of prompt_docs/repair_notation.md §4, a document is
 eligible when its gold SBN offers at least one site of that type (the
@@ -23,7 +24,12 @@ Choices:
   full run uses name 3, number and temporal no cap (decided 2026-10-04);
 - `--quota` sets the number per type, overriding `--per-type`;
 - `--exclude` leaves out documents of earlier samples, so a later round
-  draws fresh ones;
+  draws fresh ones; with `--exclude-type`, only those of the given types,
+  and a document used once for another type can be drawn again (at most two
+  items per source document; decided 2026-10-10 for places);
+- `--edge-sites place` draws edge-label documents whose only sites are
+  places (§4.4 third kind, prompt_docs_edge_r4); the default `direction` is
+  the rule of the earlier runs and draws the same as before;
 - no interregnum: the model writes base repairs only, and editing
   expressions are inserted later by script (README §1, decided 2026-10-02).
   The first round's sample still has the column, from when the interregnum
@@ -222,6 +228,15 @@ def _be_person(doc, c) -> bool:
 
 
 def site_edge_label(doc):
+    """Every edge-label site: a direction (`site_direction`) or a place
+    (`site_place`). `analyse_run.site_ok` uses this, so an answer of either
+    kind counts as on site; what a run draws is set by `--edge-sites`."""
+    direction = site_direction(doc)
+    seen = {p for p, _ in direction}
+    return direction + [s for s in site_place(doc) if s[0] not in seen]
+
+
+def site_direction(doc):
     """A verb with a Source or Destination role, or be.v.03 with Location and
     a person subject, whose preposition is in the sentence. be.v.03 with
     Source ("She is from China") is not offered: §4.4 of the edge-label
@@ -253,6 +268,110 @@ def site_edge_label(doc):
                 continue
             out.append((c.pos, f"{c.synset} {r}"))
     return out
+
+
+# Places (§4.4 third kind, prompt_docs_edge_r4, 2026-10-10). The operators of
+# a gold `location.n.01`, with the words that must be in the sentence for it.
+PLACE_OPS = {
+    "SZN": {"under", "below", "beneath", "underneath"},
+    "SZP": {"above", "over"},
+    "SXP": {"behind"},
+    "APX": {"near", "close", "by", "besides"},
+    "SY1": {"beside", "by"},
+    "STI": {"in", "inside", "into", "within"},
+    "STO": {"outside"},
+    "SXY": {"around", "round"},
+}
+# A plain role is a place only with one of these right before the thing.
+PLAIN_PLACE_PREPS = {"on", "in", "at", "into", "onto"}
+# Things no other place fits: a part of the body ("patted me on the shoulder",
+# "under his arm"), a country or larger region ("born in Switzerland": not
+# "near"), and nouns that are themselves a place relative to something ("in
+# the middle", "on the right").
+NO_PLACE_GROUND = {"body_part.n.01", "country.n.02", "state.n.01", "continent.n.01"}
+RELATIONAL_NOUNS = {"middle", "center", "centre", "side", "right", "left", "top",
+                    "bottom", "front", "back", "rear", "edge", "end", "corner",
+                    "inside", "outside", "interior", "exterior", "surface"}
+
+
+def _place_ground_ok(x) -> bool:
+    """The thing can have another place by it: a physical thing, not a body
+    part, country or relational noun, and not the question slot. PMB names
+    are lemma.pos.NN, which nltk resolves by sense number."""
+    if _has_wh(x) or x.lemma in RELATIONAL_NOUNS or x.synset in PERSONS:
+        return False
+    try:
+        s = wn.synset(x.synset)
+    except Exception:  # noqa: BLE001 -- PMB-only names
+        return False
+    hyp = {h.name() for h in s.closure(lambda y: y.hypernyms() + y.instance_hypernyms())}
+    hyp.add(s.name())
+    return "physical_entity.n.01" in hyp and not hyp & NO_PLACE_GROUND
+
+
+def _prep_before(doc, x) -> str | None:
+    """The preposition nearest before the thing's head word (5 words back);
+    the head is the last word of the lemma or the first word of a name."""
+    words = [w.lower() for w in re.findall(r"[A-Za-z]+", doc.sentence)]
+    heads = {x.lemma.split("_")[-1].lower()}
+    heads |= {v.strip('"').split()[0].lower() for r, v in x.roles
+              if r == "Name" and v.strip('"')}
+    for i, w in enumerate(words):
+        if w in heads or (wn.morphy(w, wn.NOUN) or w) in heads:
+            for j in range(i - 1, max(-1, i - 6), -1):
+                if words[j] in PLAIN_PLACE_PREPS | set().union(*PLACE_OPS.values()) \
+                        | {"of", "from", "to", "with", "for", "through", "across"}:
+                    return words[j]
+            return None
+    return None
+
+
+def site_place(doc):
+    """A verb with a Location or Destination that is a place by a thing.
+
+    Two forms, as the gold writes them: `location.n.01` with a spatial
+    operator whose word is in the sentence (the reparandum is "on" or
+    another operator), or a plain role to the thing with "on", "in", "at",
+    "into" or "onto" right before it (the reparandum is an operator). The
+    thing must pass `_place_ground_ok`, and, as for directions, it comes
+    after the verb. The site string gives the form and the thing.
+    """
+    words = set(_words(doc))
+    cs = doc.concepts
+    out = []
+    for c in cs:
+        if c.pos_tag != "v":
+            continue
+        for r, v in c.roles:
+            t = _target(c, v)
+            if r not in ("Location", "Destination") or t is None \
+                    or not 0 <= t < len(cs) or t < c.pos:
+                continue
+            x = cs[t]
+            if x.synset == "location.n.01":
+                if _has_wh(x):
+                    continue                       # "where": location.n.01 EQU ?
+                ops = [(o, _target(x, w)) for o, w in x.roles if o in PLACE_OPS]
+                if not ops or ops[0][1] is None or not 0 <= ops[0][1] < len(cs):
+                    continue
+                op, g = ops[0]
+                if PLACE_OPS[op] & words and _place_ground_ok(cs[g]):
+                    out.append((c.pos, f"{c.synset} {r} {op} {cs[g].synset}"))
+            elif x.pos_tag == "n" and _place_ground_ok(x):
+                p = _prep_before(doc, x)
+                if p in PLAIN_PLACE_PREPS:
+                    out.append((c.pos, f"{c.synset} {r} plain:{p} {x.synset}"))
+    return out
+
+
+def site_place_only(doc):
+    """Place sites of a document with no direction site, so that the model,
+    which picks the site itself, cannot fall back on "from, to"."""
+    return [] if site_direction(doc) else site_place(doc)
+
+
+# What `--edge-sites` draws for edge_label.
+EDGE_SITES = {"direction": site_direction, "place": site_place_only}
 
 
 def _quantifier_restrictor(doc, x) -> bool:
@@ -346,22 +465,35 @@ def main() -> None:
     ap.add_argument("--out", type=Path, default=HERE / "pinned_sample.tsv")
     ap.add_argument("--exclude", type=Path, nargs="*", default=[],
                     help="earlier sample TSVs whose documents are not drawn again")
+    ap.add_argument("--exclude-type", nargs="*", default=[], metavar="TYPE",
+                    help="leave out only earlier documents of these types; others "
+                         "may be drawn again if used once")
     ap.add_argument("--quota", nargs="*", default=[], metavar="TYPE=N",
                     help="documents per type, overriding --per-type")
     ap.add_argument("--cap", nargs="*", default=[], metavar="TYPE=N",
                     help="documents per constant value (default 1; 0 = no cap)")
+    ap.add_argument("--edge-sites", choices=sorted(EDGE_SITES), default="direction",
+                    help="edge_label sites to draw: direction (from/to, as before "
+                         "2026-10-10) or place (documents with place sites only)")
     args = ap.parse_args()
     quota = {t: args.per_type for t in TYPES}
     quota.update({k: int(v) for k, v in (x.split("=") for x in args.quota)})
     cap = {t: 1 for t in TYPES}
     cap.update({k: int(v) for k, v in (x.split("=") for x in args.cap)})
-    for k in list(quota) + list(cap):
+    for k in list(quota) + list(cap) + args.exclude_type:
         if k not in TYPES:
             ap.error(f"unknown type {k}")
     rng = random.Random(args.seed)
 
-    excluded = {r["doc_id"] for p in args.exclude
-                for r in csv.DictReader(open(p, encoding="utf-8"), delimiter="\t")}
+    earlier = [r for p in args.exclude
+               for r in csv.DictReader(open(p, encoding="utf-8"), delimiter="\t")]
+    # With --exclude-type, a document drawn earlier for another type may be
+    # drawn again (decided 2026-10-10), up to two items per source document
+    # (model_experiment_pipeline.md §5.3): one used twice is always left out.
+    uses = collections.Counter(r["doc_id"] for r in earlier)
+    excluded = {r["doc_id"] for r in earlier
+                if not args.exclude_type or r["repair_type"] in args.exclude_type}
+    excluded |= {d for d, n in uses.items() if n >= 2}
     docs = read_split(GOLD)
     unreadable = [d for d, _ in read_split.skipped]  # type: ignore[attr-defined]
     pool, broken = [], []
@@ -373,8 +505,9 @@ def main() -> None:
         (pool if gold_is_sound(d) else broken).append(d)
 
     eligible = {t: [] for t in TYPES}
+    draw = dict(SITES, edge_label=EDGE_SITES[args.edge_sites])
     for d in pool:
-        for t, fn in SITES.items():
+        for t, fn in draw.items():
             sites = fn(d)
             if sites:
                 eligible[t].append((d, sites))

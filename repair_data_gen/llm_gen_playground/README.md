@@ -1025,8 +1025,49 @@ operator swaps and 55 "on, under" items on the 106 documents; about 39% of
 the 907 plain sites have a usable place (20 of 51 sampled), about 530
 items. That estimate still counted "in front of" and "next to", now left
 out, so it is a little high. Furniture and buildings give 2–3 options,
-cities "near" only, countries and fixed phrases none. Still to do: the
-site rule in `select_docs.py`.
+cities "near" only, countries and fixed phrases none.
+
+**Site rule** (`select_docs.site_place`). A verb's `Location` or
+`Destination`, after the verb, that is either `location.n.01` with a
+spatial operator whose word is in the sentence, or a plain role with "on",
+"in", "at", "into" or "onto" right before the thing. The thing must be a
+physical entity and not a body part ("on the shoulder", "under his arm"), a
+country, state or continent ("born in Switzerland"), a relational noun ("in
+the middle", "on the right"), a person or the question slot.
+`--edge-sites place` draws only documents with no direction site, since the
+model picks the site itself and would otherwise fall back on "from, to"; the
+default `direction` draws exactly what it did before (checked: same output
+for the same seed). `site_edge_label` is now the union, and
+`analyse_run.site_ok` picks the rule by the answer's kind (`reparandum_value`
+an operator or `plain` → place). Without that, ten round-2 answers like
+"There's a cat from, on the desk" would turn from `outside` to `ok`; with it
+all 6,885 stored verdicts are unchanged.
+
+Supply (train gold, examples excluded): 778 documents with a place site,
+666 with no direction site (705 plain, 79 operator sites). Only 254 of the
+666 are in no earlier sample: 412 were drawn for other types, mostly
+`sample_train_full` (content word 174, name 64, tense 44), and 38 for edge
+label in rounds 1–3.
+
+**Decided (2026-10-10, user): documents may be reused across types**, up
+to two items per source document (`model_experiment_pipeline.md` §5.3).
+`select_docs.py --exclude-type edge_label` leaves out only earlier
+edge-label documents; a document already used twice is always left out.
+The two items sit at different sites of the same sentence.
+
+Sample: `sample_train_place.tsv`, 627 documents (374 used once for another
+type, 253 fresh), drawn with
+
+    python3 select_docs.py --edge-sites place --exclude-type edge_label \
+      --quota content_word=0 constant_name=0 constant_number=0 \
+              constant_temporal=0 tense=0 forwarding=0 edge_label=1000 \
+      --exclude sample_train_full.tsv sample_train_edge.tsv \
+                sample_r3_edge.tsv pinned_sample.tsv pinned_sample_r2.tsv \
+      --out sample_train_place.tsv
+
+(seed 13). Cities are the largest group of things (95), which mostly allow
+only "near". Job: `hpc/run_train_place.sub`, `prompt_docs_edge_r4/`
+(sha256 `24c14008…`).
 
 # Deferred
 
