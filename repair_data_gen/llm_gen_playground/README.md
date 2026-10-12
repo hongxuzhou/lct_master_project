@@ -1128,6 +1128,337 @@ subject. Three of the 13 are not forwarding but pass the checks ("He had
 his molar pulled, his tooth pulled"; "Another aspect is, Another focal
 point is"; "Give the book to child wants, whomever wants it").
 
+# Extra runs and place round 4: results (2026-10-11)
+
+All three prompt hashes in `run_meta` match (`6b17847a…`, `8d49b9ac…`,
+`24c14008…`). Pass = `audit.auto_pass`.
+
+| run | sample | returned | answered | pass | type total |
+|---|---:|---:|---:|---:|---:|
+| `train_forwarding_extra` | 185 | 185 | 184 | 179 | 333 + 179 = 512 |
+| `train_temporal_extra` | 297 | 296 | 296 | 289 | 269 + 289 = 558 |
+| `train_place` | 627 | 625 | 348 | 121 | 126 + 121 = 247 |
+
+Not returned, no raw file: `p30/d0317` (temporal), `p08/d1668` and
+`p88/d1995` (place). `check_temporal_extra.py` gives `ok` on all 296
+temporal rows (79 `new_site`, 217 `same_site`). Forwarding failures are
+single cases (an index past the sequence, R5, one site outside).
+
+**Temporal extra: values next to the gold, and an audit.** In 209 of the
+289 passing items the reparandum is one step from the gold value (an hour,
+a day, a month, a year). Where no preposition is repeated, some read as a
+range or a list rather than a repair ("It was two, three in the morning",
+"on 12, 13 May", "the 1978, 1979 Pan American Games"); "in 1978, in 1977"
+does not. `ambiguous` has no temporal rule yet. Audit `audit/train_temporal_extra`
+(21 items, blind, drawn 2026-10-11): 7 each from three disjoint strata of
+the passing items, `new_site` (24), `same_site` (163) and
+`adjacent_no_prep` (102: one step from the gold, no preposition repeated at
+the onset; either kind). The strata are in `strata.tsv` next to the items,
+not shown on the page. Question (b) presumes a self-correction, so a fluent
+non-repair reading goes in the note. If such readings are common, add a
+`temporal_range` rule to `ambiguous` (it also applies to the first 269).
+
+*Labelled (user, 2026-10-11), 21/21.* Meaning 19 yes, 2 unsure; natural
+19 yes, 2 unsure; no "no" (both 100% of yes+no, 95% CI 0.83–1.00, above
+the 90%/80% thresholds). The two meaning-unsure items are questions about
+the gold, not the repair: a0013 has a bare `time.n.08 EQU` to the date, a
+pattern of the "the 22nd of February" date in gold (7 documents); a0018
+has `take_place.v.01 EQU +2 entity.n.01`, the pattern of expletive "there"
+and "it" (206 verbs in gold), and the repair leaves it untouched. Natural
+unsure: a0002 "It's nine-thirty, it's eight-thirty" (in a short sentence a
+whole-clause restart reads as a retelling; the user leans to no) and a0008
+"The ship left every Wednesday, Monday" (also a list). In the
+`adjacent_no_prep` stratum no item was read as a range (6 yes, 1 unsure,
+a0002, which is a restart, not a range), so the range reading assumed
+above is not borne out and `adjacent` is not a rule. The one fluent
+reading noted is a weekday list. User's note (a0020): a repeated
+preposition makes it more repair-like. Weekday repairs with no repeated
+preposition at the onset: 11 of 13 in this run, 9 of 10 in the full run, 1
+in round 2 ("every Saturday, Sunday", "I hate Wednesdays, Mondays").
+
+*Added (user, 2026-10-11): `ambiguous = weekday_list`* in `analyse_run.py`:
+a weekday repair whose repair part starts with the weekday itself, so no
+word before it is said again ("next Monday, next Friday" is not marked). A
+label for dataset assembly (marked share, test stratum), not a check and
+not a filter. Rerun on `train_full`, `r2` and `train_temporal_extra`: 9, 1
+and 10 rows marked, no other column changed.
+
+The forwarding extra run uses the full run's prompt and pools with that
+audit; 33 of its 179 passing items have a capitalised function word at the
+onset ("John insulted, He insulted me"), an assembly item.
+
+**Place, round 4.** The passing items read well ("I left the cat in,
+outside the house", "She lives on, near the beach"), but most documents
+gave none. By how the gold writes the place:
+
+| gold | answers |
+|---|---|
+| operator (about 73) | 66 place items on site |
+| plain, `be.v.03` (about 131) | 113 `Source` ("The eggs are from, in the basket"), 15 place |
+| plain, other verb (about 421) | 275 `no_site`, 87 `Source`, 56 place |
+
+Three causes, each a condition that selection applies and the prompt does
+not state:
+
+- `be.v.03` with a thing as subject: §4.4 allows its `Location` → "from"
+  with no person condition (`_be_person` is selection only). 78 of the 114
+  are existentials ("There are rats from, in the kitchen").
+- placement `Destination` ("He put the key from, in the lock"): PMB writes
+  `Destination` for "put in"; selection counts it as a direction only with
+  "to", "into", "onto", "toward" or "for" (`EDGE_PREPS`), the prompt lists
+  these words but does not say they are a condition. 83 of the 90 non-be
+  `Source` answers.
+- plain "on"/"in"/"at" on a verb other than `be.v.03`: the `no_site`
+  reasons say "no be.v.03 Location or operator-based spatial relation"
+  (263 of 277 mention the operator). Examples S–T are `be.v.03`, U is
+  operator to operator, and the negative "Tom lives to, I mean, in Boston"
+  is live + "in".
+
+**Decided (2026-10-11, user).** `be.v.03` "from"/"in" keeps the person
+subject. The documents are not lost: "The eggs are in the basket" is a
+place site and goes to round 5. Place items are counted under the
+edge-label type and recorded with `repaired_material = spatial_operator`
+(`DESIGN.md` §6.3).
+
+# Place round 5 (2026-10-11)
+
+The site is given, as for the temporal extra run, so the model cannot fall
+back on "from".
+
+- `prompt_docs_place_r5/` (sha256 `cf0cb470…`): a copy of r4. The item
+  gives `Repair site` (`<verb pos> <verb> <role> <plain:prep | operator>
+  <thing>`, as `select_docs.site_place` writes it); `task.md` step 2 says
+  to take that site and keep the gold role. §4.4 covers places only: any
+  verb, the gold role kept, "from"/"to" named as not a place repair, the
+  place must suit the thing, `no_site` when no other place makes a repair.
+  The live + "in" negative is gone. New example V, "The dog slept under, I
+  mean, on the bed" (`dog.n.01`, `bed.n.01` are gold's majority senses),
+  passes every check of `analyse_run.py`; a "from" version of the same
+  sentence fails `site_ok`. Example P (bee, "from" → "to") stays, since the
+  common-mistakes table cites it.
+- `sample_place_r5.py`: the 506 r4 documents with no passing item
+  (including the two not returned), pinned to their first place site.
+  Cells (form/verb): plain/other 370, plain/be 115, operator/other 18,
+  operator/be 3. Pilot `sample_place_r5_pilot.tsv` (48: 25, 10, 10, 3),
+  rest `sample_place_r5.tsv` (458). The two do not overlap, so pilot items
+  pool with the full run if the prompt stays unchanged.
+- `check_place_r5.py`, after `analyse_run.py`, adds `pin`: `site`,
+  `not_place` (a role swap), `role` (another role in the CORRECTION box),
+  `same_as_gold`, or `ok`. On the r4 rows (first place site as the pin) it
+  gives `not_place` for 203 of the 204 `Source` answers (the other is
+  `site`) and `ok` for 120 of the 121 passing items (one used another
+  site). The `role` and `same_as_gold` branches were tested on made-up
+  rows.
+- Jobs: `hpc/run_place_r5_pilot.sub`, then `hpc/run_place_r5.sub`.
+
+Check the pilot for `no_site` and `pin` per cell, and read the items
+(naturalness), before the full run.
+
+**Run (2026-10-11, user).** The pilot was skipped; `run_place_r5.sub`
+(458 documents) was submitted directly. The 48 pilot documents are not in
+that sample. With the prompt unchanged they can still be run with
+`run_place_r5_pilot.sub` and pooled; until then round 5 covers 458 of the
+506 documents.
+
+# Place round 5: results (2026-10-12)
+
+`results/meta-models_Muse-Glimmer-30B.place_r5.tsv`, `run_meta` sha256
+`cf0cb470…`, sample `sample_place_r5.tsv` (pilot skipped). 456 of 458
+returned (`p01/d2312`, `p28/d3262` have no raw reply). Answered 440,
+`no_site` 16 (3.5%, round 4: 44%), all checks and `pin = ok` 427 (round
+4: 121), each from a different document.
+
+| cell (form/verb) | pass |
+|---|---:|
+| plain/other | 322 |
+| plain/be | 99 |
+| operator/other | 6 |
+
+`pin`: no `not_place`, no `site`; 6 `role`, all a placement `Destination`
+written as `Location` in the dummies ("spilled on the carpet", "arrived in
+Chicago"), which `withdraw` also fails. The `no_site` reasons are mostly
+sound: fixed phrases ("in the wash", "wrap in paper", "on her way home"),
+and things that allow only another plain preposition ("in the sea", "in
+the world", "in the sand").
+
+Reparanda: `APX` 194 ("near"), `SZN` 112, `SY1` 76, `STO` 26, `SXY` 7,
+others 12. Read in a sample: many are natural ("Tom was born near, in
+Boston", "I heard a noise outside, in the bedroom", "My brother is working
+near, at a gas station"), some are not ("Stars were twinkling under the
+sky, in the sky", "Nebraska is beside the plains", "How many time zones
+are there around the world, in the world?"), and "Pskov is near the south
+of Russia" has a relational noun the site rule does not list. Like every
+edge-label item, these go to human selection (natural only) before they
+count.
+
+**Selection page (2026-10-12).** `audit/train_place`: all 548 passing
+place items (round 4 121, round 5 427), one shuffled order, labelled with
+`python3 audit.py serve audit/train_place --questions natural`, as
+`train_edge`. The round of each item is in `provenance.tsv`, not on the
+page. The user labels the first 100 first (70 round 5, 30 round 4, 31
+`APX`, close to the whole set) to estimate the yes rate before labelling
+the rest.
+
+*First 100 labels (user, 2026-10-12).* a0000–a0099 all labelled (a0020–
+a0099 first, a0000–a0019 last): yes 58, no 27, unsure 15; natural 68% of
+yes+no (95% CI 0.58–0.77), 58% of all (0.48–0.67). `merged.tsv`
+refreshed with `audit.py stats`. The user reports labelling leniently
+(yes when no reason for no came to mind). Counts are yes/no/unsure, rate
+is yes/(yes+no):
+
+| split | | |
+|---|---|---|
+| verb | `be.v.03` 19/3/3 (.86) | other 39/24/12 (.62); Fisher p = .037 |
+| reparandum | full 33/11/7 (.75) | bare 25/16/8 (.61); p = .24 |
+| round | r5 45/18/7 (.71) | r4 13/9/8 (.59); p = .30 |
+| operator | `APX` 20/6/5 (.77), `STO` 5/0/0 | `SZN` 16/11/7 (.59), `SY1` 11/7/2 (.61) |
+
+Only the verb split is reliable at this n. Within `SZN`, "under, on" is
+10/6/2 and "under, in" 6/5/4. By labelling time the quarters are 16/7/2,
+12/8/5, 11/8/6, 19/4/2; the last quarter is mostly a0000–a0019 (14/4/2),
+so time and item are confounded (q3 against q4, p = .10), and nothing
+points to drift.
+
+The 27 no's fall into four groups (Claude's reading of the items and the
+user's notes):
+- the preposition belongs to the verb or construction, 10: all four
+  `arrive` items, `run_into` (2), `get_on`, `lean`, `wrap`, `spread`;
+- the first version is not possible for this thing, 11: "resting under a
+  chair", "drifting under the ocean", "lives under a huge house", "under
+  the human body", "near the sky" and "under the sky" (3), "under the
+  stage" (2), "stole my wallet under the train", "hid the book above his
+  pillow" (the user: what is above is not hidden);
+- a whole-clause restart, 1 (a0061; 5 in the 548, found by a repair part
+  that starts with "the");
+- other, 5: "tossed another log beside the fire", "vehicles beside this
+  road", "Don't blow near a beehive", "read a book on, under a tree"
+  (r4, plain reparandum), and a0040 "at, in the White House" (passes
+  because gold writes this "in" as `STI`; the user calls it a model
+  mistake).
+
+The unsure items are mostly first versions that are possible but odd
+("stayed near home", "picked flowers near the garden", "put a stamp under
+the letter"), or ones where the user doubted their own English (a0008,
+a0050, a0064). The user's notes (a0053, a0076, a0085) raise the
+criterion question: the SBN says the first version is a place relative to
+the same thing, while a listener may hear an abandoned phrase about
+another thing ("We live near, on planet Earth" as "near the Sun"). The
+second group of no's is what the proposed substitution test (reparandum
+preposition with the same thing must give a sentence the speaker could
+mean) would reject; the first group mostly passes it ("arrived near
+Tokyo" is a sentence) and is rejected for the verb.
+
+*Projection.* Round 4 is over-represented in the first 100 (30%, against
+22% of the 548). Weighting the per-round yes share by round size gives
+about 327 yes in the 548 (about 400 if unsure counts as yes). Edge label
+needs about 374 on top of the 126 it has, so raw yes alone falls short,
+and the unsure policy decides whether the target is reached. Items with
+the six verbs of the first group (no in every labelled case): 18 in the
+548 (10 `arrive`).
+
+**Criterion (decided 2026-10-12, user).** Generation stays as it is; the
+data keeps one reading, the first version is a place relative to the same
+thing (`SZN` etc. point back to the gold landmark). Selection checks that
+reading with the substitution test: the first preposition with the same
+thing must give a sentence the speaker could mean. An unsaid, different
+landmark ("under [the shed], in the barn") does not rescue an item. The
+other reading is expressible (the operator points to a fresh `entity.n.01`
+inside the `CORRECTION` box; parses with `sbn_lin`) and is left for the
+thesis discussion, since the surface of a bare repair cannot tell the two
+apart.
+
+**Labels for the remaining 448 (Claude, 2026-10-12, at the user's
+request).** Six sub-agents labelled all 548 items blind (no access to the
+user's labels or this README), with `audit/train_place/claude_guideline.md`
+(the checks above in order: restart, substitution test, verb or fixed
+phrase, same place, then yes / unsure for odd; lenient; calibration
+examples invented, none from the data). Items were shuffled over six
+chunks of 91–92.
+
+- All 548: yes 324, no 128, unsure 96. Codes: `first_impossible` 74,
+  `verb_locked` 35, `same_place` 14, `restart` 5.
+- Against the user on the first 100: raw agreement 75%, κ = 0.56; where
+  both said yes or no, 69 of 76 agree. Confusion (user rows, Claude
+  columns yes/no/unsure): yes 48/3/7, no 4/21/2, unsure 5/4/6. Claude's
+  marginals on these 100 (57/28/15) are close to the user's (58/27/15).
+- Yes/no disagreements: four user no's Claude passes ("tossed another
+  log beside, on the fire", "read a book on, under a tree", "vehicles
+  beside, on this road", "Don't blow near, in a beehive"; the user's
+  "other" group), and three user yes's Claude rejects (a0053 tractor,
+  by the new criterion; a0064 "under, in the sun" and a0099 "moored
+  beside, at the pier" as `same_place`).
+- Consistency across chunks: every `arrive` item no (10), every "sky"
+  item no, all 5 restarts no. Yes per chunk 47–61 of 91–92.
+
+`audit/train_place/selection.tsv` holds both labels and a `final` column:
+the user's label where there is one, Claude's otherwise. Two user labels
+are revised to no under the new criterion, since the user's own notes
+read an abandoned landmark: a0053 (yes) and a0076 (unsure); a0085 stays
+unsure. `labels.jsonl` is unchanged. Final: yes 324 (57 human, 267
+Claude), no 129, unsure 95. Edge label then has 126 + 324 = 450, short of
+500 by about 50; the 95 unsure decide the rest. For the thesis, the
+selection of 448 of the 548 is model judgement checked against one human
+on 100 items, and has to be reported that way.
+
+**Closing the gap (planned 2026-10-12, user).** Easy step first: the user
+relabels the 95 `final = unsure` items (14 own, 81 Claude's) in
+`audit/train_place_unsure` (same `audit_id`s, no earlier labels shown;
+`python3 audit.py serve audit/train_place_unsure --questions natural`);
+yes there replaces unsure in `selection.tsv`. Only if that gives fewer
+than about 50 yes does the place pilot run (48 documents of
+`sample_place_r5_pilot.tsv`, plus the 2 not returned, same prompt, so it
+pools with round 5); expected yield about 48 × 0.93 × 0.6 ≈ 26.
+
+*Result (user, 2026-10-12).* All 95 relabelled: yes 26, no 69 (of the
+user's own 14: 7/7; of Claude's 81: 19/62). Merged into `selection.tsv`
+(`relabel` column, `final_source = human_relabel`): yes 350 (57 human, 26
+human_relabel, 267 Claude), no 198. Edge label 126 + 350 = 476, 24 short.
+User notes: several first versions would be natural with "outside"
+instead ("beside the coffee shop", "beside the classroom"), i.e. the
+model picked a poor operator rather than a poor site. Next: the pilot,
+with the 2 missing documents (`sample_place_r5_rerun.tsv`, 50;
+`hpc/run_place_r5_rerun.sub`; steps in `hpc/README.md`).
+
+*Rerun results (2026-10-12).* `results/meta-models_Muse-Glimmer-30B.place_r5_rerun.tsv`,
+prompt sha256 `cf0cb470…` (same as round 5). 49 of 50 returned:
+`p01/d2312` again has no reply (second run without one). Answered 48,
+`no_site` 1 ("a city only allows near", Stockholm). Failures: index
+magnitude 10 (2, incl. `p28/d3262`, the other missing document), index
+past the sequence (1), `site_ok: outside` (2). `pin`: 2 `not_place`, rest
+ok. Pass and `pin = ok`: 43 (88% of 49), none from a document already in
+`train_place`. Reparanda `APX` 22, `SZN` 7, plain 6, `SY1` 3, others 5.
+"poured onto, into the bowl" is a real repair (gold "into" is `STI`).
+Worth a look while labelling: `arrive` (p17/d2899), and "near, on the east
+of the village" (p31/d1523, relational noun, as "Pskov is near the south
+of Russia"). Selection page `audit/train_place_rerun` (43, ids
+`b0000`–`b0042`, shuffled): 24 yes reach 500.
+
+*Rerun labels (user, 2026-10-12).* 16 yes, 16 no, 11 unsure (50% of
+yes+no, against 68% on the first 100). Appended to `selection.tsv` as
+rows `b0000`–`b0042` (`final_source = human_rerun`; their text is in
+`audit/train_place_rerun/items.tsv`, not `audit/train_place/items.tsv`):
+591 rows, yes 366, no 214, unsure 11. Edge label 126 + 366 = 492. Some
+rerun labels differ from earlier labels on near-identical items: "about
+460,000 millionaires near Tokyo, in Tokyo" yes, "three thousand mosques
+near Istanbul, in Istanbul" unsure; "a lot of eggs under, in the box" yes,
+"the eggs are under, in the basket" no; "Tom now lives near Boston, in
+Boston" yes, "Mr. Spencer works near a shop, in a shop" unsure.
+
+Claude's second look at the 11 rerun unsure (2026-10-12, at the user's
+request; scored 1–5 first, then 4–5 yes, 3 unsure, 1–2 no): yes 3 (b0011
+Istanbul, b0021 stamps, b0039 stone near the dog), unsure 2, no 6
+(mostly first and second place nearly the same, or a first place with no
+reason to be said). In `selection.tsv` as `claude` / `claude_code =
+scoreN` / `claude_note`; `final` unchanged until the user confirms. With
+the 3, edge label is 495.
+
+**Decided (user, 2026-10-12).** The 3 are accepted (`final = yes`,
+`final_source = claude_rescue`); `selection.tsv` final yes 369, so edge
+label = 126 + 369 = 495, and it stays at 495 (no further run). Train RSR
+total 6 × 500 + 495 = 3,495, against 9,447 PMB train documents (about
+1 : 2.7). The ratio and the per-type 500 were set by hand before any
+training result (pipeline record §5.4 note, 2026-10-10), not tuned.
+
 # Train: status and open items (2026-10-10)
 
 The design-level record is `documentation/model_experiment_pipeline.md`
@@ -1148,7 +1479,7 @@ distinct source documents per type).
 | tense | 730 + 47 | – | enough |
 | temporal | 221 + 48 | `train_temporal_extra` (297, new prompt) | ~557 |
 | forwarding | 288 + 45 | `train_forwarding_extra` (185, same prompt) | ~510 |
-| edge label | 112 + 14 (r3 yes) | `train_place` (other thread) | < 500 |
+| edge label | 112 + 14 (r3 yes) | `train_place` (548 passing; `selection.tsv` final yes 350) + rerun (50 docs) | 476 (126 + 350) |
 
 **Thresholds.** The four reference thresholds (checks ≥ 95%, `no_site`
 ≤ 3%, meaning ≥ 90%, natural ≥ 80%) were set here before round 2 and have
@@ -1175,7 +1506,7 @@ intuition-only caveat.
   marker would correlate with type.
 - `ambiguous` (`analyse_run.py`): thresholds (≤ 20, multiples of 5) not
   validated against human judgement, so check about 30 items before a
-  stratum is reported. `initial_name` fires on any sentence-initial name,
+  stratum is reported. `weekday_list` added 2026-10-11 (20 items). `initial_name` fires on any sentence-initial name,
   including cities ("Geneva, Bern is the capital of Switzerland") and lists
   ("Guan Yu, Liu Bei and Zhuge Liang …"); still a fluent reading, but the
   docstring says vocative only. Not detected: medial apposition and lists

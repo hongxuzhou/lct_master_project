@@ -1,0 +1,25 @@
+universe = vanilla
+initialdir = /nethome/honzhou
+
+executable = /nethome/honzhou/thesis_zone/llm_gen_playground/hpc/run.sh
+
+# Edge label, places, round 5 (2026-10-11), pilot: 48 documents in four
+# strata (form x verb). Documents of sample_train_place.tsv without a
+# passing r4 item, the site given (sample_place_r5.py),
+# prompt_docs_place_r5/ (place-only §4.4, sha256 cf0cb470...). Results go to
+# results/meta-models_Muse-Glimmer-30B.place_r5_pilot.tsv; resumable. About
+# 20 min at 16 workers.
+environment = "SAMPLE=sample_place_r5_pilot.tsv TAG=place_r5_pilot DOCS=prompt_docs_place_r5 WORKERS=16 TOOL_MODE=auto TOOL_PARSER=muse_glimmer REASONING_PARSER=muse_glimmer"
+
+output = /scratch/hongxuzhou/logs/llm_gen/place_r5_pilot.$(ClusterId).out
+error  = /scratch/hongxuzhou/logs/llm_gen/place_r5_pilot.$(ClusterId).err
+log    = /scratch/hongxuzhou/logs/llm_gen/place_r5_pilot.$(ClusterId).log
+
+request_CPUs   = 8
+request_memory = 64G
+request_GPUs   = 1
+requirements = (GPUs_Capability >= 8.0) && (GPUs_GlobalMemoryMb >= 80000)
+
++MaxWallTime = 86400
+
+queue 1

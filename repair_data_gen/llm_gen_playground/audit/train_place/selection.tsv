@@ -1,0 +1,592 @@
+audit_id	human	claude	claude_code	claude_note	final	final_source	relabel
+a0000	no	no	first_impossible	a man cannot rest under a chair	no	human	
+a0001	yes	yes	ok		yes	human	
+a0002	yes	yes	ok		yes	human	
+a0003	yes	yes	ok		yes	human	
+a0004	yes	yes	ok		yes	human	
+a0005	yes	unsure	odd	trapped near a mine is unlikely	yes	human	
+a0006	yes	yes	ok		yes	human	
+a0007	yes	yes	ok		yes	human	
+a0008	unsure	no	first_impossible	holes cannot be under a roof	no	human_relabel	no
+a0009	yes	yes	ok		yes	human	
+a0010	yes	yes	ok		yes	human	
+a0011	yes	unsure	odd	near a region of a country is odd	yes	human	
+a0012	yes	yes	ok		yes	human	
+a0013	unsure	unsure	odd	person hiding under a rock is odd	yes	human_relabel	yes
+a0014	yes	yes	ok		yes	human	
+a0015	yes	yes	ok		yes	human	
+a0016	yes	yes	ok		yes	human	
+a0017	no	yes	ok		no	human	
+a0018	no	no	first_impossible	a drifting boat cannot be under the ocean	no	human	
+a0019	no	no	verb_locked	get on the bus	no	human	
+a0020	no	no	verb_locked	arrive in	no	human	
+a0021	yes	yes	ok		yes	human	
+a0022	yes	yes	ok		yes	human	
+a0023	yes	yes	ok		yes	human	
+a0024	yes	yes	ok		yes	human	
+a0025	yes	yes	ok		yes	human	
+a0026	yes	yes	ok		yes	human	
+a0027	no	unsure	odd	living under a house is odd	no	human	
+a0028	yes	yes	ok		yes	human	
+a0029	yes	unsure	odd	writing name under the blackboard is odd	yes	human	
+a0030	yes	yes	ok		yes	human	
+a0031	yes	unsure	odd	jotting something beside a notebook is odd	yes	human	
+a0032	yes	yes	ok		yes	human	
+a0033	yes	yes	ok		yes	human	
+a0034	yes	unsure	odd	hat hanging under a rack is odd	yes	human	
+a0035	yes	yes	ok		yes	human	
+a0036	no	no	first_impossible	wallet cannot be stolen under the train	no	human	
+a0037	unsure	no	same_place	under the sea and in the sea are practically the same	yes	human_relabel	yes
+a0038	no	no	verb_locked	run into someone in the street	no	human	
+a0039	unsure	yes	ok		yes	human_relabel	yes
+a0040	no	no	same_place	at and in the White House practically same	no	human	
+a0041	yes	unsure	odd	jotting beside a notebook is odd	yes	human	
+a0042	no	yes	ok		no	human	
+a0043	yes	yes	ok		yes	human	
+a0044	no	no	first_impossible	near the sky	no	human	
+a0045	unsure	unsure	odd	stayed near home is odd	no	human_relabel	no
+a0046	no	yes	ok		no	human	
+a0047	yes	yes	ok		yes	human	
+a0048	yes	yes	ok		yes	human	
+a0049	unsure	yes	ok		no	human_relabel	no
+a0050	unsure	unsure	odd	under the dungeon is odd	yes	human_relabel	yes
+a0051	yes	yes	ok		yes	human	
+a0052	yes	yes	ok		yes	human	
+a0053	yes	no	first_impossible	a barn has no under	no	human_revised	
+a0054	unsure	yes	ok		yes	human_relabel	yes
+a0055	yes	yes	ok		yes	human	
+a0056	yes	yes	ok		yes	human	
+a0057	no	yes	ok		no	human	
+a0058	no	no	verb_locked	spread on is fixed; under the bread absurd	no	human	
+a0059	yes	yes	ok		yes	human	
+a0060	yes	yes	ok		yes	human	
+a0061	no	no	restart	subject and verb repeated	no	human	
+a0062	yes	yes	ok		yes	human	
+a0063	no	no	verb_locked	run into someone on the street	no	human	
+a0064	yes	no	same_place	under the sun and in the sun practically same	yes	human	
+a0065	no	unsure	odd	standing under a stage is unlikely	no	human	
+a0066	no	no	verb_locked	arrive in	no	human	
+a0067	no	no	first_impossible	muscles under the body is absurd	no	human	
+a0068	yes	yes	ok		yes	human	
+a0069	unsure	unsure	odd	hanging a picture near the wall is strange	no	human_relabel	no
+a0070	yes	yes	ok		yes	human	
+a0071	yes	yes	ok		yes	human	
+a0072	no	no	first_impossible	near the sky	no	human	
+a0073	no	no	verb_locked	arrive at	no	human	
+a0074	yes	yes	ok		yes	human	
+a0075	no	no	verb_locked	wrapped in paper is fixed; under paper is broken	no	human	
+a0076	unsure	no	first_impossible	we cannot live near Earth	no	human_revised	
+a0077	yes	yes	ok		yes	human	
+a0078	no	no	first_impossible	hiding a book above a pillow leaves it in view	no	human	
+a0079	yes	yes	ok		yes	human	
+a0080	yes	unsure	odd	students counted near the university is odd	yes	human	
+a0081	no	no	verb_locked	arrive in a city	no	human	
+a0082	yes	yes	ok		yes	human	
+a0083	unsure	unsure	odd	stamp under the letter	no	human_relabel	no
+a0084	yes	yes	ok		yes	human	
+a0085	unsure	unsure	odd	sitting under a bench is odd	no	human_relabel	no
+a0086	no	no	first_impossible	dancing under the stage	no	human	
+a0087	unsure	yes	ok		yes	human_relabel	yes
+a0088	unsure	yes	ok		yes	human_relabel	yes
+a0089	no	no	verb_locked	lean on	no	human	
+a0090	yes	yes	ok		yes	human	
+a0091	yes	yes	ok		yes	human	
+a0092	no	no	first_impossible	stars cannot twinkle under the sky	no	human	
+a0093	yes	yes	ok		yes	human	
+a0094	unsure	no	first_impossible	cats cannot live above a house	no	human_relabel	no
+a0095	yes	yes	ok		yes	human	
+a0096	yes	yes	ok		yes	human	
+a0097	yes	yes	ok		yes	human	
+a0098	yes	yes	ok		yes	human	
+a0099	yes	no	same_place	moored beside and at the pier are the same	yes	human	
+a0100		no	verb_locked	fixed phrase in the open air	no	claude	
+a0101		yes	ok		yes	claude	
+a0102		yes	ok		yes	claude	
+a0103		yes	ok		yes	claude	
+a0104		yes	ok		yes	claude	
+a0105		yes	ok		yes	claude	
+a0106		yes	ok		yes	claude	
+a0107		yes	ok		yes	claude	
+a0108		unsure	odd	sprinkling sugar beside toast is odd	no	human_relabel	no
+a0109		no	first_impossible	islands cannot be under the sea	no	claude	
+a0110		yes	ok		yes	claude	
+a0111		yes	ok		yes	claude	
+a0112		yes	ok		yes	claude	
+a0113		no	first_impossible	china displayed under a cabinet is absurd	no	claude	
+a0114		yes	ok		yes	claude	
+a0115		yes	ok		yes	claude	
+a0116		no	first_impossible	picture under the wall	no	claude	
+a0117		yes	ok		yes	claude	
+a0118		yes	ok		yes	claude	
+a0119		yes	ok		yes	claude	
+a0120		unsure	odd	manufactured near an island is odd	yes	human_relabel	yes
+a0121		no	restart	subject and verb repeated	no	claude	
+a0122		yes	ok		yes	claude	
+a0123		yes	ok		yes	claude	
+a0124		no	verb_locked	alight on the flower	no	claude	
+a0125		no	first_impossible	cannot wipe hands under a towel	no	claude	
+a0126		yes	ok		yes	claude	
+a0127		yes	ok		yes	claude	
+a0128		yes	ok		yes	claude	
+a0129		yes	ok		yes	claude	
+a0130		yes	ok		yes	claude	
+a0131		unsure	odd	writing under an envelope is unlikely	no	human_relabel	no
+a0132		yes	ok		yes	claude	
+a0133		yes	ok		yes	claude	
+a0134		no	first_impossible	apple beside a pocket is absurd	no	claude	
+a0135		yes	ok		yes	claude	
+a0136		yes	ok		yes	claude	
+a0137		yes	ok		yes	claude	
+a0138		no	verb_locked	fixed phrase in bed	no	claude	
+a0139		yes	ok		yes	claude	
+a0140		no	verb_locked	arrive in	no	claude	
+a0141		yes	ok		yes	claude	
+a0142		yes	ok		yes	claude	
+a0143		yes	ok		yes	claude	
+a0144		no	first_impossible	a boat dancing under the water	no	claude	
+a0145		unsure	odd	swimming near a river is odd	no	human_relabel	no
+a0146		unsure	odd	lives inside Yokohama is unidiomatic	no	human_relabel	no
+a0147		yes	ok		yes	claude	
+a0148		unsure	odd	sitting under a desk is odd; sit at desk is near-fixed	yes	human_relabel	yes
+a0149		yes	ok		yes	claude	
+a0150		yes	ok		yes	claude	
+a0151		unsure	odd	name under the box is odd	yes	human_relabel	yes
+a0152		no	first_impossible	meeting a friend under the bus is absurd	no	claude	
+a0153		no	first_impossible	a doll cannot lie under the floor	no	claude	
+a0154		no	first_impossible	cannot see oneself under a mirror	no	claude	
+a0155		yes	ok		yes	claude	
+a0156		unsure	odd	monkey under the cage is odd	no	human_relabel	no
+a0157		yes	ok		yes	claude	
+a0158		no	first_impossible	putting ice cream under the freezer is absurd	no	claude	
+a0159		yes	ok		yes	claude	
+a0160		unsure	odd	apples under the basket is odd	no	human_relabel	no
+a0161		yes	ok		yes	claude	
+a0162		yes	ok		yes	claude	
+a0163		yes	ok		yes	claude	
+a0164		yes	ok		yes	claude	
+a0165		no	first_impossible	under the moon	no	claude	
+a0166		no	same_place	near bedside and at bedside are the same	no	claude	
+a0167		yes	ok		yes	claude	
+a0168		unsure	odd	warming oneself beside a bath is odd	no	human_relabel	no
+a0169		yes	ok		yes	claude	
+a0170		no	verb_locked	knock on the door	no	claude	
+a0171		yes	ok		yes	claude	
+a0172		yes	ok		yes	claude	
+a0173		no	first_impossible	near the south of Russia is not a sensible place	no	claude	
+a0174		unsure	odd	dining near a restaurant is odd	no	human_relabel	no
+a0175		yes	ok		yes	claude	
+a0176		yes	ok		yes	claude	
+a0177		yes	ok		yes	claude	
+a0178		unsure	odd	hole under the ground is close to in the ground	no	human_relabel	no
+a0179		yes	ok		yes	claude	
+a0180		yes	ok		yes	claude	
+a0181		yes	ok		yes	claude	
+a0182		no	first_impossible	steps cannot be clearly marked under the snow	no	claude	
+a0183		yes	ok		yes	claude	
+a0184		no	verb_locked	swing at	no	claude	
+a0185		yes	ok		yes	claude	
+a0186		unsure	odd	eggs under the box is odd	yes	human_relabel	yes
+a0187		unsure	odd	counting pandas outside the zoo is an odd question	no	human_relabel	no
+a0188		no	first_impossible	fish cannot abound near a river; abound in	no	claude	
+a0189		yes	ok		yes	claude	
+a0190		yes	ok		yes	claude	
+a0191		yes	ok		yes	claude	
+a0192		yes	ok		yes	claude	
+a0193		yes	ok		yes	claude	
+a0194		unsure	odd	under the third floor is an odd way to locate a room	no	human_relabel	no
+a0195		yes	ok		yes	claude	
+a0196		yes	ok		yes	claude	
+a0197		unsure	odd	living under a house is unusual	no	human_relabel	no
+a0198		yes	ok		yes	claude	
+a0199		yes	ok		yes	claude	
+a0200		yes	ok		yes	claude	
+a0201		yes	ok		yes	claude	
+a0202		yes	ok		yes	claude	
+a0203		no	same_place	beside and at the pier are practically the same	no	claude	
+a0204		unsure	odd	sitting under a bench is odd	no	human_relabel	no
+a0205		no	same_place	around the yard and in the yard overlap	no	claude	
+a0206		unsure	odd	food under the house is unlikely	no	human_relabel	no
+a0207		yes	ok		yes	claude	
+a0208		no	first_impossible	cannot lay a racket under the ground	no	claude	
+a0209		yes	ok		yes	claude	
+a0210		yes	ok		yes	claude	
+a0211		unsure	odd	sitting under a bench is unusual	no	human_relabel	no
+a0212		yes	ok		yes	claude	
+a0213		yes	ok		yes	claude	
+a0214		yes	ok		yes	claude	
+a0215		yes	ok		yes	claude	
+a0216		unsure	odd	cooking near the kitchen is unlikely	no	human_relabel	no
+a0217		no	first_impossible	luggage cannot be under a car boot	no	claude	
+a0218		no	first_impossible	lying under the witness stand absurd; on the stand is fixed	no	claude	
+a0219		unsure	odd	tossing clothes under a hamper is odd	no	human_relabel	no
+a0220		no	verb_locked	wipe on his sleeve	no	claude	
+a0221		yes	ok		yes	claude	
+a0222		unsure	odd	swimming beside a river is odd	no	human_relabel	no
+a0223		no	same_place	under the ocean means in the ocean	no	claude	
+a0224		no	first_impossible	sleeping under a boat is absurd for this event	no	claude	
+a0225		yes	ok		yes	claude	
+a0226		unsure	odd	flowers on a vase only if painted	no	human_relabel	no
+a0227		no	same_place	around the world and in the world are the same	no	claude	
+a0228		yes	ok		yes	claude	
+a0229		no	first_impossible	nothing is under the sky	no	claude	
+a0230		yes	ok		yes	claude	
+a0231		no	verb_locked	check in at the hotel	no	claude	
+a0232		yes	ok		yes	claude	
+a0233		yes	ok		yes	claude	
+a0234		unsure	odd	beside a bank is vague and near the same place	no	human_relabel	no
+a0235		yes	ok		yes	claude	
+a0236		yes	ok		yes	claude	
+a0237		yes	ok		yes	claude	
+a0238		yes	ok		yes	claude	
+a0239		yes	ok		yes	claude	
+a0240		no	first_impossible	meeting a friend under a train is absurd	no	claude	
+a0241		yes	ok		yes	claude	
+a0242		yes	ok		yes	claude	
+a0243		yes	ok		yes	claude	
+a0244		yes	ok		yes	claude	
+a0245		yes	ok		yes	claude	
+a0246		yes	ok		yes	claude	
+a0247		yes	ok		yes	claude	
+a0248		yes	ok		yes	claude	
+a0249		unsure	odd	born near an island means at sea	no	human_relabel	no
+a0250		no	first_impossible	fish live in water, not near the lake	no	claude	
+a0251		no	first_impossible	cannot sit under a log	no	claude	
+a0252		yes	ok		yes	claude	
+a0253		unsure	odd	sat next to him beside the bus is awkward	no	human_relabel	no
+a0254		yes	ok		yes	claude	
+a0255		yes	ok		yes	claude	
+a0256		yes	ok		yes	claude	
+a0257		no	first_impossible	hiding on the couch would be in plain view	no	claude	
+a0258		yes	ok		yes	claude	
+a0259		no	first_impossible	hiding on top of a table, where one is seen	no	claude	
+a0260		yes	ok		yes	claude	
+a0261		unsure	odd	living in a library is unlikely	yes	human_relabel	yes
+a0262		yes	ok		yes	claude	
+a0263		yes	ok		yes	claude	
+a0264		no	first_impossible	ammunition under the gun absurd	no	claude	
+a0265		no	first_impossible	bait under a hook absurd	no	claude	
+a0266		no	verb_locked	arrive in a city	no	claude	
+a0267		unsure	odd	growing tomatoes near the garden is odd	yes	human_relabel	yes
+a0268		no	first_impossible	a tossing boat cannot be under the sea	no	claude	
+a0269		yes	ok		yes	claude	
+a0270		unsure	odd	jotting under the envelope is odd	yes	human_relabel	yes
+a0271		yes	ok		yes	claude	
+a0272		yes	ok		yes	claude	
+a0273		yes	ok		yes	claude	
+a0274		yes	ok		yes	claude	
+a0275		yes	ok		yes	claude	
+a0276		yes	ok		yes	claude	
+a0277		yes	ok		yes	claude	
+a0278		yes	ok		yes	claude	
+a0279		unsure	odd	apples under a box is odd	no	human_relabel	no
+a0280		yes	ok		yes	claude	
+a0281		no	first_impossible	nobody can be under the front door	no	claude	
+a0282		unsure	odd	living under a dam is odd	yes	human_relabel	yes
+a0283		yes	ok		yes	claude	
+a0284		unsure	odd	trapped outside a cave is odd	yes	human_relabel	yes
+a0285		yes	ok		yes	claude	
+a0286		unsure	odd	blade under a pocket is strange	no	human_relabel	no
+a0287		yes	ok		yes	claude	
+a0288		yes	ok		yes	claude	
+a0289		yes	ok		yes	claude	
+a0290		yes	ok		yes	claude	
+a0291		yes	ok		yes	claude	
+a0292		yes	ok		yes	claude	
+a0293		yes	ok		yes	claude	
+a0294		yes	ok		yes	claude	
+a0295		yes	ok		yes	claude	
+a0296		yes	ok		yes	claude	
+a0297		unsure	odd	writing something near a notebook is odd	no	human_relabel	no
+a0298		yes	ok		yes	claude	
+a0299		unsure	odd	beside the riverbank nearly same as on it	no	human_relabel	no
+a0300		yes	ok		yes	claude	
+a0301		yes	ok		yes	claude	
+a0302		yes	ok		yes	claude	
+a0303		yes	ok		yes	claude	
+a0304		no	same_place	buried under and in a graveyard are the same	no	claude	
+a0305		yes	ok		yes	claude	
+a0306		no	verb_locked	wrap around is the verb pattern; over is near-identical	no	claude	
+a0307		yes	ok		yes	claude	
+a0308		yes	ok		yes	claude	
+a0309		no	first_impossible	fish cannot be near a lake	no	claude	
+a0310		no	verb_locked	arrive at the station	no	claude	
+a0311		no	first_impossible	a grown man cannot nap under a sofa	no	claude	
+a0312		no	verb_locked	arrive in a city	no	claude	
+a0313		no	first_impossible	seated under the table absurd	no	claude	
+a0314		yes	ok		yes	claude	
+a0315		yes	ok		yes	claude	
+a0316		yes	ok		yes	claude	
+a0317		no	first_impossible	stars cannot be under the sky	no	claude	
+a0318		no	first_impossible	champagne cannot bubble beside the glass	no	claude	
+a0319		unsure	odd	volcanoes under an island is a strange question	yes	human_relabel	yes
+a0320		no	first_impossible	drowning near a river is absurd	no	claude	
+a0321		no	restart	subject and verb repeated	no	claude	
+a0322		unsure	odd	plane landing near the airport implies off-runway landing	no	human_relabel	no
+a0323		unsure	odd	pictures beside a wall is odd	no	human_relabel	no
+a0324		yes	ok		yes	claude	
+a0325		yes	ok		yes	claude	
+a0326		unsure	odd	room under the attic is an unlikely place to mean	no	human_relabel	no
+a0327		no	first_impossible	putting keys beside one's pocket is absurd	no	claude	
+a0328		yes	ok		yes	claude	
+a0329		unsure	odd	sitting under a bench is unusual	yes	human_relabel	yes
+a0330		yes	ok		yes	claude	
+a0331		yes	ok		yes	claude	
+a0332		yes	ok		yes	claude	
+a0333		unsure	odd	growing strawberries beside the garden is odd	no	human_relabel	no
+a0334		yes	ok		yes	claude	
+a0335		yes	ok		yes	claude	
+a0336		no	first_impossible	hiding toys on top of the bed, where seen	no	claude	
+a0337		yes	ok		yes	claude	
+a0338		unsure	odd	sleeping under the bed is unusual	yes	human_relabel	yes
+a0339		yes	ok		yes	claude	
+a0340		yes	ok		yes	claude	
+a0341		yes	ok		yes	claude	
+a0342		unsure	odd	putting a key under the lock is strange	no	human_relabel	no
+a0343		no	first_impossible	mountain cannot rise below the plain	no	claude	
+a0344		yes	ok		yes	claude	
+a0345		yes	ok		yes	claude	
+a0346		no	same_place	inside and on the train are the same	no	claude	
+a0347		yes	ok		yes	claude	
+a0348		yes	ok		yes	claude	
+a0349		unsure	odd	kite caught under a tree is odd	no	human_relabel	no
+a0350		yes	ok		yes	claude	
+a0351		yes	ok		yes	claude	
+a0352		yes	ok		yes	claude	
+a0353		yes	ok		yes	claude	
+a0354		yes	ok		yes	claude	
+a0355		yes	ok		yes	claude	
+a0356		no	first_impossible	nothing is under the universe	no	claude	
+a0357		unsure	odd	taking cover on a dumpster is unlikely	no	human_relabel	no
+a0358		yes	ok		yes	claude	
+a0359		unsure	odd	sleeping under a train is odd	yes	human_relabel	yes
+a0360		no	first_impossible	a name is not under an envelope	no	claude	
+a0361		yes	ok		yes	claude	
+a0362		yes	ok		yes	claude	
+a0363		unsure	odd	farting beside the classroom is odd	no	human_relabel	no
+a0364		yes	ok		yes	claude	
+a0365		yes	ok		yes	claude	
+a0366		yes	ok		yes	claude	
+a0367		yes	ok		yes	claude	
+a0368		no	first_impossible	a hole cannot be under the sock	no	claude	
+a0369		yes	ok		yes	claude	
+a0370		no	verb_locked	arrive at	no	claude	
+a0371		yes	ok		yes	claude	
+a0372		yes	ok		yes	claude	
+a0373		yes	ok		yes	claude	
+a0374		no	verb_locked	call at a port	no	claude	
+a0375		unsure	odd	living above the sea is odd	no	human_relabel	no
+a0376		yes	ok		yes	claude	
+a0377		unsure	odd	buying milk beside the supermarket is odd	no	human_relabel	no
+a0378		unsure	odd	baby sleeping on top of a cradle is odd	no	human_relabel	no
+a0379		no	first_impossible	a closet as a room has no under	no	claude	
+a0380		no	verb_locked	out in the garden is a fixed phrase	no	claude	
+a0381		no	first_impossible	cannot land near a planet	no	claude	
+a0382		unsure	odd	near the snow is odd when snow covers the ground	no	human_relabel	no
+a0383		yes	ok		yes	claude	
+a0384		yes	ok		yes	claude	
+a0385		yes	ok		yes	claude	
+a0386		yes	ok		yes	claude	
+a0387		yes	ok		yes	claude	
+a0388		yes	ok		yes	claude	
+a0389		unsure	odd	cat under the mat is unlikely	yes	human_relabel	yes
+a0390		yes	ok		yes	claude	
+a0391		yes	ok		yes	claude	
+a0392		unsure	odd	city above the foot of a mountain is unusual	no	human_relabel	no
+a0393		no	first_impossible	fish cannot live near the sea	no	claude	
+a0394		yes	ok		yes	claude	
+a0395		no	first_impossible	being under the train for twelve hours is absurd	no	claude	
+a0396		unsure	odd	cats near Mars is a strange place	no	human_relabel	no
+a0397		no	same_place	under the water and in the water are the same	no	claude	
+a0398		yes	ok		yes	claude	
+a0399		yes	ok		yes	claude	
+a0400		unsure	odd	chickens under the house is unusual	no	human_relabel	no
+a0401		unsure	odd	bread under the oven is unlikely	no	human_relabel	no
+a0402		yes	ok		yes	claude	
+a0403		unsure	odd	pouring milk near cereal is strange	no	human_relabel	no
+a0404		yes	ok		yes	claude	
+a0405		yes	ok		yes	claude	
+a0406		yes	ok		yes	claude	
+a0407		yes	ok		yes	claude	
+a0408		unsure	odd	making a note beside a notebook is odd	no	human_relabel	no
+a0409		yes	ok		yes	claude	
+a0410		unsure	odd	dancing beside the room is odd	no	human_relabel	no
+a0411		unsure	odd	swimming beside a river is odd	no	human_relabel	no
+a0412		yes	ok		yes	claude	
+a0413		yes	ok		yes	claude	
+a0414		yes	ok		yes	claude	
+a0415		no	first_impossible	under the sky	no	claude	
+a0416		no	first_impossible	no room for milk under a fridge	no	claude	
+a0417		no	verb_locked	shoot at marks the target, not a place	no	claude	
+a0418		yes	ok		yes	claude	
+a0419		yes	ok		yes	claude	
+a0420		no	first_impossible	footprints cannot be found under the Himalayas	no	claude	
+a0421		yes	ok		yes	claude	
+a0422		yes	ok		yes	claude	
+a0423		yes	ok		yes	claude	
+a0424		yes	ok		yes	claude	
+a0425		yes	ok		yes	claude	
+a0426		unsure	odd	metal detector near rather than at the airport is unlikely	no	human_relabel	no
+a0427		no	first_impossible	cannot jump under a rock	no	claude	
+a0428		unsure	odd	seeing a hippo near the zoo is unlikely	yes	human_relabel	yes
+a0429		yes	ok		yes	claude	
+a0430		yes	ok		yes	claude	
+a0431		yes	ok		yes	claude	
+a0432		no	first_impossible	drowning someone beside a bathtub absurd	no	claude	
+a0433		unsure	odd	stevia beside coffee clashes with instead of sugar	no	human_relabel	no
+a0434		unsure	odd	carving a name under a tree is odd	no	human_relabel	no
+a0435		yes	ok		yes	claude	
+a0436		yes	ok		yes	claude	
+a0437		yes	ok		yes	claude	
+a0438		no	first_impossible	a tunnel cannot be above the Alps	no	claude	
+a0439		no	first_impossible	sun rising below the horizon is not sensible	no	claude	
+a0440		yes	ok		yes	claude	
+a0441		yes	ok		yes	claude	
+a0442		yes	ok		yes	claude	
+a0443		unsure	odd	under the eighth floor is an odd way to name a place	no	human_relabel	no
+a0444		unsure	odd	under the 4th floor is an odd way to name a place	no	human_relabel	no
+a0445		yes	ok		yes	claude	
+a0446		no	first_impossible	cannot drown near a lake	no	claude	
+a0447		unsure	odd	swimming near a river is odd	no	human_relabel	no
+a0448		yes	ok		yes	claude	
+a0449		yes	ok		yes	claude	
+a0450		yes	ok		yes	claude	
+a0451		no	verb_locked	hang on the wall; near the wall has no support	no	claude	
+a0452		yes	ok		yes	claude	
+a0453		yes	ok		yes	claude	
+a0454		yes	ok		yes	claude	
+a0455		yes	ok		yes	claude	
+a0456		no	same_place	around and in the world practically same	no	claude	
+a0457		yes	ok		yes	claude	
+a0458		yes	ok		yes	claude	
+a0459		yes	ok		yes	claude	
+a0460		yes	ok		yes	claude	
+a0461		no	verb_locked	wrap in	no	claude	
+a0462		unsure	odd	hanged outside jail is odd; in jail near-fixed	yes	human_relabel	yes
+a0463		yes	ok		yes	claude	
+a0464		yes	ok		yes	claude	
+a0465		unsure	odd	sitting under a bench is odd	no	human_relabel	no
+a0466		yes	ok		yes	claude	
+a0467		yes	ok		yes	claude	
+a0468		yes	ok		yes	claude	
+a0469		yes	ok		yes	claude	
+a0470		yes	ok		yes	claude	
+a0471		yes	ok		yes	claude	
+a0472		no	verb_locked	carve in a tree is fixed; under a tree breaks it	no	claude	
+a0473		yes	ok		yes	claude	
+a0474		yes	ok		yes	claude	
+a0475		yes	ok		yes	claude	
+a0476		no	verb_locked	shoot at the deer	no	claude	
+a0477		yes	ok		yes	claude	
+a0478		yes	ok		yes	claude	
+a0479		yes	ok		yes	claude	
+a0480		unsure	odd	living in a school is unusual	yes	human_relabel	yes
+a0481		yes	ok		yes	claude	
+a0482		yes	ok		yes	claude	
+a0483		yes	ok		yes	claude	
+a0484		yes	ok		yes	claude	
+a0485		unsure	odd	tape under the VCR is odd	no	human_relabel	no
+a0486		yes	ok		yes	claude	
+a0487		yes	ok		yes	claude	
+a0488		yes	ok		yes	claude	
+a0489		yes	ok		yes	claude	
+a0490		unsure	odd	living under the ground floor is odd phrasing	no	human_relabel	no
+a0491		no	verb_locked	arrive in a city	no	claude	
+a0492		yes	ok		yes	claude	
+a0493		no	verb_locked	wash up on the beach	no	claude	
+a0494		unsure	odd	bumping into someone under the station is odd	no	human_relabel	no
+a0495		yes	ok		yes	claude	
+a0496		yes	ok		yes	claude	
+a0497		no	restart	repeats subject and verb	no	claude	
+a0498		no	restart	subject and verb repeated	no	claude	
+a0499		yes	ok		yes	claude	
+a0500		yes	ok		yes	claude	
+a0501		yes	ok		yes	claude	
+a0502		no	verb_locked	throw a stone at	no	claude	
+a0503		yes	ok		yes	claude	
+a0504		yes	ok		yes	claude	
+a0505		no	same_place	under the water and in the water are the same; quote broken	no	claude	
+a0506		no	first_impossible	cannot put a key under a lock	no	claude	
+a0507		unsure	odd	water mill under a bridge is unlikely	yes	human_relabel	yes
+a0508		unsure	odd	fighting around a ring is odd	no	human_relabel	no
+a0509		no	verb_locked	draw on a surface; beside the wall is broken	no	claude	
+a0510		no	first_impossible	hole under a sock impossible	no	claude	
+a0511		yes	ok		yes	claude	
+a0512		no	first_impossible	cannot wipe hands under a handkerchief	no	claude	
+a0513		yes	ok		yes	claude	
+a0514		yes	ok		yes	claude	
+a0515		no	first_impossible	flying under the sky	no	claude	
+a0516		no	first_impossible	a map cannot be under a wall	no	claude	
+a0517		yes	ok		yes	claude	
+a0518		yes	ok		yes	claude	
+a0519		yes	ok		yes	claude	
+a0520		yes	ok		yes	claude	
+a0521		unsure	odd	having coffee beside the shop is odd	no	human_relabel	no
+a0522		yes	ok		yes	claude	
+a0523		unsure	odd	rain near a region of England is strange	no	human_relabel	no
+a0524		yes	ok		yes	claude	
+a0525		yes	ok		yes	claude	
+a0526		yes	ok		yes	claude	
+a0527		yes	ok		yes	claude	
+a0528		yes	ok		yes	claude	
+a0529		no	first_impossible	no room for milk under a fridge	no	claude	
+a0530		yes	ok		yes	claude	
+a0531		no	first_impossible	an older man cannot sit under a bench	no	claude	
+a0532		yes	ok		yes	claude	
+a0533		yes	ok		yes	claude	
+a0534		unsure	odd	trash under the floor is unlikely	yes	human_relabel	yes
+a0535		yes	ok		yes	claude	
+a0536		yes	ok		yes	claude	
+a0537		yes	ok		yes	claude	
+a0538		unsure	odd	living beside a cabin is odd	no	human_relabel	no
+a0539		no	first_impossible	oil cannot be discovered above the sea	no	claude	
+a0540		yes	ok		yes	claude	
+a0541		no	verb_locked	get on a bike	no	claude	
+a0542		yes	ok		yes	claude	
+a0543		unsure	odd	possessions under a chest is odd	no	human_relabel	no
+a0544		yes	ok		yes	claude	
+a0545		unsure	odd	honey beside the tea as a sugar replacement is odd	no	human_relabel	no
+a0546		yes	ok		yes	claude	
+a0547		no	first_impossible	dipped under a poison absurd; dip in is fixed	no	claude	
+b0000	no				no	human_rerun	
+b0001	no				no	human_rerun	
+b0002	no				no	human_rerun	
+b0003	yes				yes	human_rerun	
+b0004	no				no	human_rerun	
+b0005	no				no	human_rerun	
+b0006	yes				yes	human_rerun	
+b0007	yes				yes	human_rerun	
+b0008	no				no	human_rerun	
+b0009	yes				yes	human_rerun	
+b0010	no				no	human_rerun	
+b0011	unsure	yes	score4	near the city area, then the city itself	yes	claude_rescue	
+b0012	yes				yes	human_rerun	
+b0013	unsure	no	score2	beside/on the street same place for a house	unsure	human_rerun	
+b0014	yes				yes	human_rerun	
+b0015	yes				yes	human_rerun	
+b0016	no				no	human_rerun	
+b0017	no				no	human_rerun	
+b0018	unsure	unsure	score3	near an island = sea or other islands	unsure	human_rerun	
+b0019	yes				yes	human_rerun	
+b0020	yes				yes	human_rerun	
+b0021	unsure	yes	score4	negated claim holds near the store	yes	claude_rescue	
+b0022	yes				yes	human_rerun	
+b0023	yes				yes	human_rerun	
+b0024	no				no	human_rerun	
+b0025	unsure	no	score2	no reason to study near her room	unsure	human_rerun	
+b0026	yes				yes	human_rerun	
+b0027	unsure	unsure	score3	repeated indefinite reads as two shops	unsure	human_rerun	
+b0028	no				no	human_rerun	
+b0029	yes				yes	human_rerun	
+b0030	no				no	human_rerun	
+b0031	yes				yes	human_rerun	
+b0032	no				no	human_rerun	
+b0033	yes				yes	human_rerun	
+b0034	yes				yes	human_rerun	
+b0035	unsure	no	score2	born near an island = at sea	unsure	human_rerun	
+b0036	no				no	human_rerun	
+b0037	no				no	human_rerun	
+b0038	unsure	no	score2	shaving tied to the bathroom	unsure	human_rerun	
+b0039	unsure	yes	score4	threw near to scare, corrected to at	yes	claude_rescue	
+b0040	no				no	human_rerun	
+b0041	unsure	no	score2	bustle about is inside a space	unsure	human_rerun	
+b0042	unsure	no	score2	around/in this area nearly same	unsure	human_rerun	

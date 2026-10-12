@@ -155,3 +155,56 @@ scp "$R/meta-models_Muse-Glimmer-30B.train_forwarding_extra.tsv" incoming/
 scp -r "$R/raw/meta-models_Muse-Glimmer-30B.train_forwarding_extra" incoming/
 mv -n incoming/*.tsv results/ && mv -n incoming/meta-models_Muse-Glimmer-30B.train_forwarding_extra results/raw/ && rmdir incoming
 ```
+
+## Edge label, places, round 5 (2026-10-11)
+New: two samples, two job files, and `prompt_docs_place_r5/` (sha256
+`cf0cb470…`). Planned: pilot first (48 documents), the full job (458)
+after. Done (2026-10-11): pilot skipped, `run_place_r5.sub` submitted
+directly; for its results, replace `place_r5_pilot` with `place_r5` in the
+commands below. `sample_place_r5.py` and `check_place_r5.py` run
+locally only.
+```bash
+# laptop, in llm_gen_playground/
+L=honzhou@login.lst.uni-saarland.de:thesis_zone/llm_gen_playground
+scp sample_place_r5_pilot.tsv sample_place_r5.tsv $L/
+scp hpc/run_place_r5_pilot.sub hpc/run_place_r5.sub $L/hpc/
+scp -r prompt_docs_place_r5 $L/
+# submit node, in thesis_zone/llm_gen_playground/
+condor_submit hpc/run_place_r5_pilot.sub
+# back on the laptop
+mkdir -p incoming
+R=$L/results
+scp "$R/meta-models_Muse-Glimmer-30B.place_r5_pilot.tsv" incoming/
+scp -r "$R/raw/meta-models_Muse-Glimmer-30B.place_r5_pilot" incoming/
+mv -n incoming/*.tsv results/ && mv -n incoming/meta-models_Muse-Glimmer-30B.place_r5_pilot results/raw/ && rmdir incoming
+# check
+python3 analyse_run.py results/meta-models_Muse-Glimmer-30B.place_r5_pilot.tsv \
+  --out results/meta-models_Muse-Glimmer-30B.place_r5_pilot.checked.tsv
+python3 check_place_r5.py results/meta-models_Muse-Glimmer-30B.place_r5_pilot.checked.tsv
+```
+
+## Edge label, places, round 5 rerun (2026-10-12)
+The 48 pilot documents plus the 2 round-5 documents with no reply
+(`p01/d2312`, `p28/d3262`): `sample_place_r5_rerun.tsv` (50),
+`hpc/run_place_r5_rerun.sub`, same prompt (`prompt_docs_place_r5/`, already
+on the cluster), so the results pool with round 5. Edge label needs about 24
+more selected items.
+```bash
+# laptop, in llm_gen_playground/
+L=honzhou@login.lst.uni-saarland.de:thesis_zone/llm_gen_playground
+scp sample_place_r5_rerun.tsv $L/
+scp hpc/run_place_r5_rerun.sub $L/hpc/
+# submit node, in thesis_zone/llm_gen_playground/
+condor_submit hpc/run_place_r5_rerun.sub
+# back on the laptop
+mkdir -p incoming
+R=$L/results
+scp "$R/meta-models_Muse-Glimmer-30B.place_r5_rerun.tsv" incoming/
+scp -r "$R/raw/meta-models_Muse-Glimmer-30B.place_r5_rerun" incoming/
+mv -n incoming/*.tsv results/ && mv -n incoming/meta-models_Muse-Glimmer-30B.place_r5_rerun results/raw/ && rmdir incoming
+# check (check_place_r5.py reads both r5 samples by default; the rerun's
+# documents are all in them)
+python3 analyse_run.py results/meta-models_Muse-Glimmer-30B.place_r5_rerun.tsv \
+  --out results/meta-models_Muse-Glimmer-30B.place_r5_rerun.checked.tsv
+python3 check_place_r5.py results/meta-models_Muse-Glimmer-30B.place_r5_rerun.checked.tsv
+```

@@ -1,0 +1,147 @@
+{"audit_id": "a0020", "meaning": "", "natural": "", "note": "I think arrive is locked with in, because the status of arrive is like boolean. It is either here or not.", "annotator": "hz", "ts": "2026-10-12T14:01:05"}
+{"audit_id": "a0020", "meaning": "", "natural": "no", "note": "I think arrive is locked with in, because the status of arrive is like boolean. It is either here or not.", "annotator": "hz", "ts": "2026-10-12T14:01:15"}
+{"audit_id": "a0021", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T14:01:22"}
+{"audit_id": "a0022", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T14:01:26"}
+{"audit_id": "a0023", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T14:02:08"}
+{"audit_id": "a0024", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T14:03:49"}
+{"audit_id": "a0025", "meaning": "", "natural": "no", "note": "", "annotator": "hz", "ts": "2026-10-12T14:04:49"}
+{"audit_id": "a0025", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T14:04:52"}
+{"audit_id": "a0026", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T14:05:32"}
+{"audit_id": "a0027", "meaning": "", "natural": "no", "note": "", "annotator": "hz", "ts": "2026-10-12T14:05:42"}
+{"audit_id": "a0028", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T14:06:12"}
+{"audit_id": "a0029", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T14:06:26"}
+{"audit_id": "a0030", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T14:06:30"}
+{"audit_id": "a0031", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T14:07:21"}
+{"audit_id": "a0032", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T14:07:30"}
+{"audit_id": "a0033", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T14:07:38"}
+{"audit_id": "a0034", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T14:08:02"}
+{"audit_id": "a0035", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T14:08:06"}
+{"audit_id": "a0036", "meaning": "", "natural": "no", "note": "", "annotator": "hz", "ts": "2026-10-12T14:08:11"}
+{"audit_id": "a0037", "meaning": "", "natural": "unsure", "note": "", "annotator": "hz", "ts": "2026-10-12T14:08:21"}
+{"audit_id": "a0038", "meaning": "", "natural": "no", "note": "", "annotator": "hz", "ts": "2026-10-12T14:08:30"}
+{"audit_id": "a0039", "meaning": "", "natural": "unsure", "note": "", "annotator": "hz", "ts": "2026-10-12T14:08:39"}
+{"audit_id": "a0040", "meaning": "", "natural": "no", "note": "", "annotator": "hz", "ts": "2026-10-12T14:08:49"}
+{"audit_id": "a0040", "meaning": "", "natural": "no", "note": "This may signify a mistake the model makes.", "annotator": "hz", "ts": "2026-10-12T14:09:03"}
+{"audit_id": "a0041", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T14:15:06"}
+{"audit_id": "a0042", "meaning": "", "natural": "no", "note": "", "annotator": "hz", "ts": "2026-10-12T14:15:18"}
+{"audit_id": "a0043", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T14:16:06"}
+{"audit_id": "a0044", "meaning": "", "natural": "no", "note": "", "annotator": "hz", "ts": "2026-10-12T14:16:17"}
+{"audit_id": "a0045", "meaning": "", "natural": "unsure", "note": "", "annotator": "hz", "ts": "2026-10-12T14:16:50"}
+{"audit_id": "a0045", "meaning": "", "natural": "unsure", "note": "I just find the \"stay neat home\" expression not very common. But I think it is fine for people to stay around there place especially when they are sick?", "annotator": "hz", "ts": "2026-10-12T14:18:14"}
+{"audit_id": "a0046", "meaning": "", "natural": "no", "note": "", "annotator": "hz", "ts": "2026-10-12T14:29:39"}
+{"audit_id": "a0047", "meaning": "", "natural": "no", "note": "", "annotator": "hz", "ts": "2026-10-12T14:29:50"}
+{"audit_id": "a0047", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T14:29:50"}
+{"audit_id": "a0048", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T14:30:04"}
+{"audit_id": "a0049", "meaning": "", "natural": "unsure", "note": "", "annotator": "hz", "ts": "2026-10-12T14:30:13"}
+{"audit_id": "a0050", "meaning": "", "natural": "unsure", "note": "", "annotator": "hz", "ts": "2026-10-12T14:30:26"}
+{"audit_id": "a0050", "meaning": "", "natural": "unsure", "note": "I call this unsure simply because of my English skills. I mean, a dungeon must be underground, so is it ok to say \"under the dungeon\"?", "annotator": "hz", "ts": "2026-10-12T14:31:12"}
+{"audit_id": "a0051", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T14:31:18"}
+{"audit_id": "a0052", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T14:31:29"}
+{"audit_id": "a0053", "meaning": "", "natural": "no", "note": "", "annotator": "hz", "ts": "2026-10-12T14:31:40"}
+{"audit_id": "a0053", "meaning": "", "natural": "no", "note": "I see the interesting point of this type of RSR. When I read the \"under\", my mind subconsciously prepares a list of items and instruments that a tractor can be put under, such as a", "annotator": "hz", "ts": "2026-10-12T14:34:16"}
+{"audit_id": "a0053", "meaning": "", "natural": "no", "note": "I see the interesting point of this type of RSR. When I read the \"under\", my mind subconsciously prepares a list of items and instruments that a tractor can be put under, such as a huge shed. Then, when the word \"barn\" comes up, I find it surprising, and immediately feel that \"under\" is not appropriate in this context. Further more, it feels like this type of RSR is differernt from the content word RSR in that", "annotator": "hz", "ts": "2026-10-12T14:38:16"}
+{"audit_id": "a0053", "meaning": "", "natural": "yes", "note": "I see the interesting point of this type of RSR. When I read the \"under\", my mind subconsciously prepares a list of items and instruments that a tractor can be put under, such as a huge shed. Then, when the word \"barn\" comes up, I find it surprising, and immediately feel that \"under\" is not appropriate in this context. Further more, it feels like this type of RSR is differernt from the content word RSR in that", "annotator": "hz", "ts": "2026-10-12T14:38:16"}
+{"audit_id": "a0053", "meaning": "", "natural": "yes", "note": "I see the interesting point of this type of RSR. When I read the \"under\", my mind subconsciously prepares a list of items and instruments that a tractor can be put under, such as a huge shed. Then, when the word \"barn\" comes up, I find it surprising, and immediately feel that \"under\" is not appropriate in this context. That is, it feels like this type of RSR is different from the content word RSR in that", "annotator": "hz", "ts": "2026-10-12T14:38:38"}
+{"audit_id": "a0053", "meaning": "", "natural": "yes", "note": "I see the interesting point of this type of RSR. When I read the \"under\", my mind subconsciously prepares a list of items and instruments that a tractor can be put under, such as a huge shed. Then, when the word \"barn\" comes up, I find it surprising, and immediately feel that \"under\" is not appropriate in this context. That is, it feels like this type of RSR is different from the content word RSR. Accordinly, the natural-ness criteria should be discussed.", "annotator": "hz", "ts": "2026-10-12T14:39:08"}
+{"audit_id": "a0054", "meaning": "", "natural": "unsure", "note": "", "annotator": "hz", "ts": "2026-10-12T14:39:14"}
+{"audit_id": "a0055", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T14:39:19"}
+{"audit_id": "a0056", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T14:39:23"}
+{"audit_id": "a0057", "meaning": "", "natural": "no", "note": "", "annotator": "hz", "ts": "2026-10-12T14:39:32"}
+{"audit_id": "a0058", "meaning": "", "natural": "no", "note": "", "annotator": "hz", "ts": "2026-10-12T14:41:36"}
+{"audit_id": "a0059", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T14:43:58"}
+{"audit_id": "a0060", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T14:44:07"}
+{"audit_id": "a0061", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T14:44:12"}
+{"audit_id": "a0061", "meaning": "", "natural": "no", "note": "", "annotator": "hz", "ts": "2026-10-12T14:44:14"}
+{"audit_id": "a0061", "meaning": "", "natural": "no", "note": "It's a re-writting. The model completely re-write the whole thing.", "annotator": "hz", "ts": "2026-10-12T14:44:41"}
+{"audit_id": "a0061", "meaning": "", "natural": "no", "note": "It's a re-writting. The model completely re-writes the whole thing.", "annotator": "hz", "ts": "2026-10-12T14:44:45"}
+{"audit_id": "a0062", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T14:44:51"}
+{"audit_id": "a0063", "meaning": "", "natural": "no", "note": "", "annotator": "hz", "ts": "2026-10-12T14:46:33"}
+{"audit_id": "a0063", "meaning": "", "natural": "no", "note": "I don't think this works because \"ran into someone on the street\" is more like a constrction to me. It does not have to any specific street.", "annotator": "hz", "ts": "2026-10-12T14:47:19"}
+{"audit_id": "a0063", "meaning": "", "natural": "no", "note": "I don't think this works because \"ran into someone on the street\" is more like a construction to me. It does not have to any specific street.", "annotator": "hz", "ts": "2026-10-12T14:47:21"}
+{"audit_id": "a0063", "meaning": "", "natural": "no", "note": "I don't think this works because \"ran into someone on the street\" is more like a construction to me. It does not have to any specific street, but more of a fixed expression of unexpectedly meeting someone in public, particularly on the pedastrain. Beside the street sounds like there is a place", "annotator": "hz", "ts": "2026-10-12T14:48:25"}
+{"audit_id": "a0063", "meaning": "", "natural": "no", "note": "I don't think this works because \"ran into someone on the street\" is more like a construction to me. It doesn't have to be a specific street; it's more of a fixed expression for unexpectedly meeting someone in public, particularly on the pedestrian street. Beside the street sounds like there is a place", "annotator": "hz", "ts": "2026-10-12T14:48:31"}
+{"audit_id": "a0063", "meaning": "", "natural": "no", "note": "I don't think this works because \"ran into someone on the street\" is more like a construction to me. It doesn't have to be a specific street; it's more of a fixed expression for unexpectedly meeting someone in public, particularly on a pedestrian street. Beside the street sounds like there is a place", "annotator": "hz", "ts": "2026-10-12T14:48:37"}
+{"audit_id": "a0063", "meaning": "", "natural": "no", "note": "I don't think this works because \"ran into someone on the street\" is more like a construction to me. It doesn't have to be a specific street; it's more of a fixed expression for unexpectedly meeting someone in public, particularly on a pedestrian street. Beside the street sounds like there is a place, specifically exisiting, beside a specific street.", "annotator": "hz", "ts": "2026-10-12T14:48:56"}
+{"audit_id": "a0064", "meaning": "", "natural": "", "note": "My English is not strong enough to tell if this works or not. I feel \"under the sun is fine\", but not sure if \"in the sun\" is a fixed expression, like \"melt in the sun\".", "annotator": "hz", "ts": "2026-10-12T14:49:48"}
+{"audit_id": "a0065", "meaning": "", "natural": "no", "note": "", "annotator": "hz", "ts": "2026-10-12T14:49:57"}
+{"audit_id": "a0066", "meaning": "", "natural": "no", "note": "", "annotator": "hz", "ts": "2026-10-12T14:50:45"}
+{"audit_id": "a0067", "meaning": "", "natural": "no", "note": "", "annotator": "hz", "ts": "2026-10-12T14:50:49"}
+{"audit_id": "a0068", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T14:52:13"}
+{"audit_id": "a0069", "meaning": "", "natural": "no", "note": "", "annotator": "hz", "ts": "2026-10-12T14:52:19"}
+{"audit_id": "a0069", "meaning": "", "natural": "unsure", "note": "", "annotator": "hz", "ts": "2026-10-12T14:52:21"}
+{"audit_id": "a0070", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T14:53:05"}
+{"audit_id": "a0071", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T14:53:08"}
+{"audit_id": "a0072", "meaning": "", "natural": "no", "note": "", "annotator": "hz", "ts": "2026-10-12T14:53:24"}
+{"audit_id": "a0073", "meaning": "", "natural": "no", "note": "", "annotator": "hz", "ts": "2026-10-12T14:53:30"}
+{"audit_id": "a0074", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T14:53:37"}
+{"audit_id": "a0075", "meaning": "", "natural": "no", "note": "", "annotator": "hz", "ts": "2026-10-12T14:53:50"}
+{"audit_id": "a0076", "meaning": "", "natural": "no", "note": "", "annotator": "hz", "ts": "2026-10-12T14:53:53"}
+{"audit_id": "a0076", "meaning": "", "natural": "no", "note": "This echos my thinking in the \"tractor\" example. It feels like the speaker wanted to say something like \"we live near the Sun\", but changed their mind in the middle and say \"on Earth\". How does this count?", "annotator": "hz", "ts": "2026-10-12T14:55:03"}
+{"audit_id": "a0076", "meaning": "", "natural": "unsure", "note": "This echos my thinking in the \"tractor\" example. It feels like the speaker wanted to say something like \"we live near the Sun\", but changed their mind in the middle and say \"on Earth\". How does this count?", "annotator": "hz", "ts": "2026-10-12T14:55:03"}
+{"audit_id": "a0077", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T14:55:06"}
+{"audit_id": "a0078", "meaning": "", "natural": "no", "note": "", "annotator": "hz", "ts": "2026-10-12T14:57:14"}
+{"audit_id": "a0078", "meaning": "", "natural": "no", "note": "I mean, if something is above something else, it is not hidden right?", "annotator": "hz", "ts": "2026-10-12T14:57:38"}
+{"audit_id": "a0079", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T14:57:44"}
+{"audit_id": "a0080", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T14:57:53"}
+{"audit_id": "a0081", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T14:57:58"}
+{"audit_id": "a0081", "meaning": "", "natural": "no", "note": "", "annotator": "hz", "ts": "2026-10-12T14:58:08"}
+{"audit_id": "a0082", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T14:58:13"}
+{"audit_id": "a0083", "meaning": "", "natural": "no", "note": "", "annotator": "hz", "ts": "2026-10-12T14:58:18"}
+{"audit_id": "a0084", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T14:58:20"}
+{"audit_id": "a0083", "meaning": "", "natural": "unsure", "note": "", "annotator": "hz", "ts": "2026-10-12T14:58:22"}
+{"audit_id": "a0083", "meaning": "", "natural": "unsure", "note": "It's not like he can not do that, but still awkward.", "annotator": "hz", "ts": "2026-10-12T14:58:38"}
+{"audit_id": "a0085", "meaning": "", "natural": "", "note": "the tractor example.", "annotator": "hz", "ts": "2026-10-12T14:58:56"}
+{"audit_id": "a0085", "meaning": "", "natural": "unsure", "note": "the tractor example.", "annotator": "hz", "ts": "2026-10-12T14:58:56"}
+{"audit_id": "a0086", "meaning": "", "natural": "no", "note": "", "annotator": "hz", "ts": "2026-10-12T15:03:31"}
+{"audit_id": "a0087", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T15:03:36"}
+{"audit_id": "a0087", "meaning": "", "natural": "unsure", "note": "", "annotator": "hz", "ts": "2026-10-12T15:03:36"}
+{"audit_id": "a0087", "meaning": "", "natural": "unsure", "note": "It can, even awkward, it still can.", "annotator": "hz", "ts": "2026-10-12T15:03:52"}
+{"audit_id": "a0088", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T15:03:57"}
+{"audit_id": "a0088", "meaning": "", "natural": "yes", "note": "I feel that storing something usually means having something in a sensible, restricted space. Beside, on the other hand, can be in open space.", "annotator": "hz", "ts": "2026-10-12T15:04:37"}
+{"audit_id": "a0088", "meaning": "", "natural": "unsure", "note": "I feel that storing something usually means having something in a sensible, restricted space. Beside, on the other hand, can be in open space.", "annotator": "hz", "ts": "2026-10-12T15:04:38"}
+{"audit_id": "a0089", "meaning": "", "natural": "no", "note": "", "annotator": "hz", "ts": "2026-10-12T15:04:46"}
+{"audit_id": "a0089", "meaning": "", "natural": "no", "note": "syntactic issue right? lean cannot be followd by beside ?", "annotator": "hz", "ts": "2026-10-12T15:05:08"}
+{"audit_id": "a0090", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T15:05:13"}
+{"audit_id": "a0091", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T15:05:16"}
+{"audit_id": "a0092", "meaning": "", "natural": "no", "note": "", "annotator": "hz", "ts": "2026-10-12T15:05:23"}
+{"audit_id": "a0093", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T15:05:26"}
+{"audit_id": "a0094", "meaning": "", "natural": "", "note": "What's the difference between above and on? Because, if this is \"on, under my neighbour's house\", i would let it pass.", "annotator": "hz", "ts": "2026-10-12T15:06:06"}
+{"audit_id": "a0094", "meaning": "", "natural": "unsure", "note": "What's the difference between above and on? Because, if this is \"on, under my neighbour's house\", i would let it pass.", "annotator": "hz", "ts": "2026-10-12T15:06:06"}
+{"audit_id": "a0095", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T15:06:51"}
+{"audit_id": "a0096", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T15:06:55"}
+{"audit_id": "a0097", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T15:06:59"}
+{"audit_id": "a0098", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T15:07:06"}
+{"audit_id": "a0099", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T15:07:19"}
+{"audit_id": "a0000", "meaning": "", "natural": "no", "note": "", "annotator": "hz", "ts": "2026-10-12T15:23:19"}
+{"audit_id": "a0000", "meaning": "", "natural": "unsure", "note": "", "annotator": "hz", "ts": "2026-10-12T15:23:28"}
+{"audit_id": "a0000", "meaning": "", "natural": "unsure", "note": "He can, but it doesn't make sense.", "annotator": "hz", "ts": "2026-10-12T15:23:45"}
+{"audit_id": "a0000", "meaning": "", "natural": "no", "note": "He can, but it doesn't make sense.", "annotator": "hz", "ts": "2026-10-12T15:23:46"}
+{"audit_id": "a0001", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T15:23:50"}
+{"audit_id": "a0002", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T15:23:55"}
+{"audit_id": "a0003", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T15:23:58"}
+{"audit_id": "a0003", "meaning": "", "natural": "yes", "note": "It's odd and I may blame the person, but it is sensible.", "annotator": "hz", "ts": "2026-10-12T15:24:25"}
+{"audit_id": "a0004", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T15:24:33"}
+{"audit_id": "a0005", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T15:24:36"}
+{"audit_id": "a0006", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T15:24:41"}
+{"audit_id": "a0007", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T15:24:46"}
+{"audit_id": "a0008", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T15:24:53"}
+{"audit_id": "a0008", "meaning": "", "natural": "no", "note": "", "annotator": "hz", "ts": "2026-10-12T15:24:55"}
+{"audit_id": "a0008", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T15:25:02"}
+{"audit_id": "a0008", "meaning": "", "natural": "unsure", "note": "", "annotator": "hz", "ts": "2026-10-12T15:25:04"}
+{"audit_id": "a0008", "meaning": "", "natural": "unsure", "note": "I don't know about this. My English canot tell if \"under the roof\" is possible to holes.", "annotator": "hz", "ts": "2026-10-12T15:25:29"}
+{"audit_id": "a0009", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T15:25:33"}
+{"audit_id": "a0010", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T15:25:38"}
+{"audit_id": "a0011", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T15:25:40"}
+{"audit_id": "a0012", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T15:25:44"}
+{"audit_id": "a0013", "meaning": "", "natural": "unsure", "note": "", "annotator": "hz", "ts": "2026-10-12T15:25:59"}
+{"audit_id": "a0013", "meaning": "", "natural": "unsure", "note": "It's odd. I can accpet it if Tom actually hid in a hole with a rock on that.", "annotator": "hz", "ts": "2026-10-12T15:26:24"}
+{"audit_id": "a0013", "meaning": "", "natural": "unsure", "note": "It's odd. I can accept it if Tom actually hid in a hole with a rock on that.", "annotator": "hz", "ts": "2026-10-12T15:26:28"}
+{"audit_id": "a0014", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T15:26:40"}
+{"audit_id": "a0015", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T15:26:44"}
+{"audit_id": "a0016", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T15:26:49"}
+{"audit_id": "a0017", "meaning": "", "natural": "yes", "note": "", "annotator": "hz", "ts": "2026-10-12T15:26:56"}
+{"audit_id": "a0017", "meaning": "", "natural": "no", "note": "", "annotator": "hz", "ts": "2026-10-12T15:26:58"}
+{"audit_id": "a0018", "meaning": "", "natural": "no", "note": "", "annotator": "hz", "ts": "2026-10-12T15:28:33"}
+{"audit_id": "a0019", "meaning": "", "natural": "", "note": "I hope not.", "annotator": "hz", "ts": "2026-10-12T15:30:56"}
+{"audit_id": "a0019", "meaning": "", "natural": "no", "note": "I hope not.", "annotator": "hz", "ts": "2026-10-12T15:30:56"}
+{"audit_id": "a0064", "meaning": "", "natural": "yes", "note": "My English is not strong enough to tell if this works or not. I feel \"under the sun is fine\", but not sure if \"in the sun\" is a fixed expression, like \"melt in the sun\".", "annotator": "hz", "ts": "2026-10-12T15:31:30"}
