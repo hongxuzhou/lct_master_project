@@ -154,6 +154,7 @@ def site_ok(row: dict) -> str:
 
 
 _NUM_ROLES = ("EQU", "Quantity", "APX")
+_WEEKDAY = re.compile(r"(monday|tuesday|wednesday|thursday|friday|saturday|sunday)s?")
 
 
 def _box_numbers(concepts) -> list[float]:
@@ -176,9 +177,20 @@ def ambiguous(row: dict) -> str:
     further apart than the smaller ("10, 15 years", "five, ten dollars").
     initial_name: a name repair at the very start of the sentence, which
     reads as someone being addressed ("Jim, Tom broke it").
+    weekday_list: a weekday repair whose repair part starts with the weekday
+    itself, so nothing before it is said again; it reads as a list ("every
+    Saturday, Sunday", "I hate Wednesdays, Mondays"). With a word repeated
+    ("on Tuesday, on Monday", "next Monday, next Friday") it does not.
+    Added 2026-10-11 after the temporal-extra audit (a0008).
     """
     t = row["repair_type"]
     try:
+        if t == "constant_temporal" and row.get("repair_onset"):
+            bx = check_repair_part.boxes(parse_sbn_line(strip_comments(row["sbn_repair"])))
+            if bx and any(r == "DayOfWeek" for c in bx[0] for r, _ in c.roles):
+                right = row["nl_repair"][int(row["repair_onset"]):].split()
+                if right and _WEEKDAY.fullmatch(right[0].strip(",.?!").lower()):
+                    return "weekday_list"
         if t == "constant_number":
             bx = check_repair_part.boxes(parse_sbn_line(strip_comments(row["sbn_repair"])))
             if not bx:
