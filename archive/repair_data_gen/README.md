@@ -18,7 +18,7 @@ and are kept as they were; they are not maintained.
 | `wn_candidates.py`, `inflect_en.py` | WordNet candidates and inflection |
 | `nli_filter.py`, `test_nli_filter.py`, `calib_*`, `sample_for_calibration.py` | NLI/surprisal filter and its calibration (not used as a filter, see `DECISIONS.md`) |
 | `analyse_feasibility.py`, `nonfinite_probe.py`, `explore_lexical_resources.ipynb` | feasibility probes |
-| `FINDINGS.md` (+ `FINDINGS_files/`) | write-up of the generator's results |
+| `FINDINGS.md` (+ `FINDINGS_files/`), `DESIGN.md` | the generator's results, and the dataset design written for it (replaced by `repair_data_gen/DESIGN.md`) |
 | `pool_*.tsv` | regenerable candidate pools (not in git) |
 
 Still in use and therefore not archived: `repair_data_gen/repair_transform.py`

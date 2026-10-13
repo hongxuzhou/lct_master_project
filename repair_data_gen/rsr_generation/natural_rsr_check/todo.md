@@ -114,7 +114,7 @@ model such as E5. What is measured is how close the two words are as
 words, apart from any sentence. How well a word fits its context is already
 measured by predictability, and a contextual measure would overlap with it.
 Comparing two sentences that differ in one word mostly measures the shared
-words (`DESIGN.md` §5.2). Like any distributional measure, GloVe puts
+words (`archive/repair_data_gen/rule_pipeline/DESIGN.md` §5.2). Like any distributional measure, GloVe puts
 antonyms close together, so it is read together with B2.
 
 The 2014 vectors are used rather than the 2024 release (Carlson, Bauer and
@@ -265,7 +265,7 @@ score for a single repair.
 - B1: the reparandum word and the repair word are scored at the same
   position, given the same left context, which ends before the repair site.
   This is the SPACER design, and it keeps the context constant as
-  `DESIGN.md` §5.2 requires.
+  `archive/repair_data_gen/rule_pipeline/DESIGN.md` §5.2 requires.
 - A2: the word after the repair is scored given the fluent left context, with
   the reparandum removed. This measures whether the repair comes before a
   hard word (Dammalapati et al.). With the reparandum left in, it would
@@ -350,7 +350,7 @@ Nothing is downloaded locally.
 
 # 5. The real comparison set
 
-The real set is defined by the repair types of `prompt_docs/repair_notation.md`
+The real set is defined by the repair types of `prompts/base/repair_notation.md`
 §4, because the synthetic data is drawn from the repairs the notation can
 represent. The usual Switchboard categories (repetition, substitution,
 deletion) are only used to drop items. Every step selects from the converted

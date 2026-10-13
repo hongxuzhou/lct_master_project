@@ -14,9 +14,9 @@ cluster, and nowhere else (todo §7).
 ## Copy
 
 ```bash
-# on the laptop, in repair_data_gen/llm_gen_playground/natural_rsr_check/
+# on the laptop, in repair_data_gen/rsr_generation/natural_rsr_check/
 L=honzhou@login.lst.uni-saarland.de
-D=thesis_zone/llm_gen_playground/natural_rsr_check
+D=thesis_zone/rsr_generation/natural_rsr_check
 ssh $L "mkdir -p $D/swbd $D/lm"
 scp build_sets.py lm_items.py score_lm.py lexical.py synth_typed.tsv $L:$D/
 scp -r hpc $L:$D/
@@ -24,7 +24,7 @@ scp swbd/sentences.tsv swbd/disfluencies.tsv swbd/real_set.tsv $L:$D/swbd/
 md5 hpc/setup_rsr.sh hpc/run_rsr.sh lm_items.py score_lm.py lexical.py
 
 # then: ssh $L, then: ssh submit
-chmod +x ~/thesis_zone/llm_gen_playground/natural_rsr_check/hpc/*.sh
+chmod +x ~/thesis_zone/rsr_generation/natural_rsr_check/hpc/*.sh
 mkdir -p /scratch/hongxuzhou/logs/rsr
 ```
 
