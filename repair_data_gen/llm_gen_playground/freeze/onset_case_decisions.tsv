@@ -1,0 +1,182 @@
+doc_id	repair_type	repair_onset	onset_word	decision	fixed_nl_repair	reason
+p03/d3329	content_word	6	Pick	lower	Lift, pick it up.	verb
+p21/d1657	content_word	8	Japanese	keep	Korean, Japanese is our mother tongue.	language name
+p22/d3257	content_word	8	Golf	lower	Tennis, golf isn't my cup of tea.	common noun (sport)
+p25/d3329	content_word	7	Urdu	keep	Hindi, Urdu is my mother tongue.	language name
+p30/d0867	content_word	8	Summer	lower	Winter, summer has ended.	season, common noun
+p36/d2086	content_word	8	English	keep	French, English is my mother tongue.	language name
+p40/d2584	content_word	11	Her	lower	Her skirt, her dress is above the knee.	
+p90/d2786	content_word	7	Urdu	keep	Hindi, Urdu is our mother tongue.	language name
+p93/d3441	content_word	11	Detectives	lower	Policemen, detectives are still investigating.	common noun
+p99/d3382	content_word	8	Vegetarians	lower	Vegans, vegetarians are some of the healthiest people in the world.	common noun
+p01/d0879	constant_name	13	Mr	keep	Mr. Smith's, Mr. Johnson's room was a large one.	title + name
+p01/d1822	constant_name	17	Senator	keep	Senator Edwards, Senator Kerry was considered a liberal.	title + name
+p01/d2147	constant_name	12	Mrs	keep	Mrs. Smith, Mrs. Baker had her purse stolen.	title + name
+p06/d3484	constant_name	21	The	lower	The Brooklyn Bridge, the Golden Gate Bridge is made of iron.	"article, not part of name (Name ""Golden Gate Bridge"")"
+p12/d2136	constant_name	10	Mr	keep	Mr Jones, Mr Smith lives in Kyoto now.	title + name
+p16/d1402	constant_name	11	Mr	keep	Mr. Smith, Mr. Ford owns this land.	title + name
+p16/d2221	constant_name	11	Mr	keep	Mr Tanaka, Mr Yamaha gave some walnuts to a beggar.	title + name
+p17/d2624	constant_name	12	Mrs	keep	Mrs. Brown, Mrs. Green taught me English.	title + name
+p16/d1524	constant_name	11	Mr	keep	Mr. Jones, Mr. Smith is liked by all the students.	title + name
+p19/d0762	constant_name	16	Lady	keep	Lady Elizabeth, Lady Diana died in Paris.	title + name
+p21/d0854	constant_name	11	Aunt	keep	Aunt Yumi, Aunt Yoko is too weak to work.	title + name
+p23/d3006	constant_name	13	The	lower	The Pacific, the Caribbean abounds with islands.	"article, not part of name (Name ""Caribbean"")"
+p23/d3033	constant_name	10	Mr	keep	Mr Smith, Mr Briggs is not a doctor, he is a vet.	title + name
+p30/d0795	constant_name	8	Mr	keep	Mr Jim, Mr Joel is now on duty.	title + name
+p38/d1840	constant_name	10	Mr	keep	Mr Jones, Mr Smith was bereaved of his wife.	title + name
+p44/d1443	constant_name	11	Dr	keep	Dr. Smith, Dr. Patterson, a psychologist, tested Koko's intelligence.	title + name
+p47/d1718	constant_name	12	Miss	keep	Miss Smith, Miss Jackson did not appear.	title + name
+p51/d1485	constant_name	19	J	keep	Ernest Rutherford, J. J. Thomson was an English scientist.	initials of a name
+p62/d2973	constant_name	19	Hurricane	keep	Hurricane Katrina, Hurricane Sandy is coming.	Hurricane + name
+p65/d0878	constant_name	12	Mrs	keep	Mrs Tanaka, Mrs Ogawa is really good at tennis.	title + name
+p82/d3306	constant_name	10	Mr	keep	Mr. John, Mr. Cameron forgot his daughter at the pub.	title + name
+p90/d0854	constant_name	11	Mr	keep	Mr Tanaka, Mr Suzuki is a great scientist.	title + name
+p94/d3126	constant_name	8	Mr	keep	Mr. Li, Mr. Wang teaches us Chinese.	title + name
+p10/d1214	constant_number	22	Approximately	lower	Approximately 50,000, approximately 60,000 Saxon farmers were disowned during the agricultural reform.	
+p16/d0057	constant_number	6	Three	lower	Four, three teenage girls are dancing in the room	
+p16/d2739	constant_number	8	Forty	lower	Thirty, forty people attended.	
+p32/d2926	constant_number	7	Two	lower	Three, two is the fourth root of sixteen.	
+p38/d3440	constant_number	9	About	lower	About 5, about 10 people are waiting.	
+p00/d1178	constant_temporal	9	In	lower	In 1921, in 1922, the site was acquired by Produits Chimiques Bozel Lamotte.	
+p59/d0807	constant_temporal	9	In	lower	In 1970, in 1972, Dr. Francine Patterson started to teach sign language to Koko.	
+p67/d2470	constant_temporal	11	Tuesday	keep	Wednesday, Tuesday we will go to the clubhouse.	day name
+p84/d2360	constant_temporal	8	Thursday	keep	Friday, Thursday, we will go to a swimming pool.	day name
+p89/d2760	constant_temporal	19	It's	lower	It's seven-thirty, it's eight-thirty.	
+p00/d2296	forwarding	12	He	lower	She needed, he needed money.	
+p01/d0845	forwarding	16	They	lower	Soldiers armed, they armed themselves with guns.	
+p00/d2643	forwarding	17	He	lower	The boy reached, he reached for the pistol.	
+p02/d1962	forwarding	10	She	lower	He asked, she asked me for money.	
+p03/d3238	forwarding	12	She	lower	He punched, she punched me in the face.	
+p03/d2280	forwarding	13	She	lower	John looked, she looked ravishing.	
+p05/d2985	forwarding	21	She	lower	He has marginalized, she has marginalized herself.	
+p07/d3319	forwarding	16	He	lower	She showed off, he showed off his new watch.	
+p07/d0879	forwarding	12	She	lower	He mistook, she mistook my brother for me.	
+p08/d3046	forwarding	11	She	lower	He bought, she bought a hair brush and a tooth brush.	
+p08/d3492	forwarding	11	He	lower	She tried, he tried to seduce me.	
+p10/d2230	forwarding	7	He's	lower	She's, he's a very talented man.	
+p09/d3370	forwarding	30	The	lower	The football match attracted, the soccer game attracted a large crowd.	
+p12/d0837	forwarding	9	He	lower	She had, he had his shirt on inside out.	
+p15/d3558	forwarding	15	She	lower	He sneaked up, she sneaked up behind me.	
+p16/d0837	forwarding	13	He	lower	She married, he married a stewardess.	
+p20/d1452	forwarding	13	He	lower	She married, he married my sister.	
+p17/d2629	forwarding	21	The	lower	The other boys call, the other children call her Piggy.	
+p18/d3346	forwarding	17	His	lower	Her name headed, his name headed the list.	
+p21/d3054	forwarding	15	Many	lower	People admire, many admire her.	
+p22/d1652	forwarding	11	We	lower	You named, we named our dog White.	
+p23/d2196	forwarding	12	She	lower	He skinned, she skinned a wolf.	
+p25/d2787	forwarding	11	He	lower	She hired, he hired me.	
+p25/d1874	forwarding	10	She	lower	He hated, she hated vanilla.	
+p26/d2173	forwarding	11	She	lower	He shaves, she shaves her legs.	
+p23/d2914	forwarding	13	He	lower	John robbed, he robbed me of my bag.	
+p29/d2967	forwarding	10	She	lower	He likes, she likes blue dresses.	
+p29/d0264	forwarding	8	You	lower	I have, you have such beautiful, hazel eyes.	
+p26/d3371	forwarding	9	They're	lower	John is, they're Tom's.	
+p31/d1903	forwarding	12	French	keep	English is, French is her mother tongue.	language name
+p30/d2967	forwarding	13	He	lower	She dropped, he dropped the cup and broke it.	
+p29/d2687	forwarding	9	She	lower	He shot, she shot a glance at her mother.	
+p34/d2743	forwarding	10	She	lower	He ached, she ached for home.	
+p37/d2995	forwarding	12	She	lower	He pinched, she pinched him.	
+p38/d1908	forwarding	13	He	lower	She slapped, he slapped my ass.	
+p40/d0833	forwarding	9	He	lower	She won, he won the race again.	
+p36/d2451	forwarding	17	His	lower	His title heads, his name heads the list.	
+p39/d1532	forwarding	11	We	lower	I climbed, we climbed a sharp slope.	
+p41/d3123	forwarding	23	This	lower	This company produces, this factory produces CD players.	
+p42/d2781	forwarding	12	She	lower	He stirred, she stirred the soup with a spoon.	
+p44/d2185	forwarding	13	He	lower	She chopped, he chopped the carrot.	
+p47/d0840	forwarding	10	He	lower	She died, he died from lack of oxygen.	
+p47/d0837	forwarding	11	He	lower	She tried, he tried in vain to lift up the stone.	
+p48/d0844	forwarding	16	They	lower	The crew named, they named the ship the Mayflower.	
+p45/d1910	forwarding	11	He	lower	She tires, he tires easily.	
+p48/d3512	forwarding	14	They	lower	John decided, they decided to pull down the old building.	
+p50/d1566	forwarding	15	We	lower	John captured, we captured the thief.	
+p56/d0160	forwarding	15	She	lower	He gave birth, she gave birth to a daughter.	
+p56/d1572	forwarding	12	She	lower	He bragged, she bragged about it.	
+p60/d2753	forwarding	12	He	lower	John spoke, he spoke to the teacher.	
+p60/d1315	forwarding	15	He	lower	She quickened, he quickened his pace and reached his bed.	
+p60/d3423	forwarding	13	Rugby	lower	Football is, rugby is a sport which is never called off by rain.	common noun (sport)
+p68/d1582	forwarding	15	He	lower	She organized, he organized a summer rock festival.	
+p62/d3287	forwarding	12	We	lower	John added, we added something new.	
+p68/d1997	forwarding	12	He	lower	She turned, he turned a somersault.	
+p69/d1441	forwarding	10	She	lower	He likes, she likes potato salad.	
+p69/d1691	forwarding	12	She	lower	He decided, she decided to keep a diary.	
+p70/d1962	forwarding	11	She	lower	He washed, she washed the dishes herself.	
+p73/d2698	forwarding	10	He	lower	She tied, he tied the dog to a tree.	
+p68/d0322	forwarding	17	Her	lower	Her nose waters, her eyes water constantly, now.	
+p80/d2022	forwarding	11	She	lower	He bought, she bought it at the butcher's.	
+p79/d2415	forwarding	8	He	lower	She is, he is a fast runner.	
+p80/d2670	forwarding	27	The	lower	The beans have germinated, the seeds have germinated.	
+p88/d1964	forwarding	13	He	lower	She married, he married his daughter to a bank clerk.	
+p89/d0935	forwarding	15	He	lower	She stretched, he stretched his arms and welcomed us.	
+p89/d0920	forwarding	8	She	lower	He was, she was a child, but she wasn't afraid.	
+p91/d1742	forwarding	15	She	lower	He complained, she complained about my low salary.	
+p94/d2768	forwarding	11	She	lower	He bought, she bought him a dog.	
+p90/d1195	forwarding	19	Another	lower	Another aspect is, another focal point is the avoidance of industrial accidents.	determiner
+p94/d0956	forwarding	10	She	lower	He plays, she plays tennis every day.	
+p94/d3272	forwarding	8	He	lower	She is, he is a teacher rather than a writer.	
+p96/d3215	forwarding	15	He	lower	Boy scratched, he scratched his head.	
+p98/d2756	forwarding	13	He	lower	The boy hit, he hit the bull's-eye.	
+p97/d1642	forwarding	14	He	lower	She whistled, he whistled for his dog.	
+p37/d3327	constant_name	11	In	lower	In Europe, in Africa there are many lions.	
+p86/d3082	constant_name	13	In	lower	In Pakistan, in India, the cow is a sacred animal.	
+p05/d2172	constant_temporal	9	In	lower	In July, in August, I'm going to Japan with my friends.	
+p75/d2660	constant_temporal	9	In	lower	In 1957, in 1958, the statue was built in the Hiroshima Peace Park.	
+p09/d3199	forwarding	15	He	lower	She conquered, he conquered Mt. Everest.	
+p01/d2972	forwarding	12	Someone	lower	John stole, someone stole my driving licence.	pronoun
+p07/d0960	forwarding	13	God	keep	Man created, God created the world in six days.	God
+p13/d2719	forwarding	8	They	lower	He dug, they dug a grave.	
+p15/d2708	forwarding	11	He	lower	She likes, he likes my jokes.	
+p18/d3160	forwarding	11	He	lower	She threw, he threw a stone into the lake.	
+p38/d1984	forwarding	13	We	lower	John rented, we rented the apartment.	
+p48/d1439	forwarding	12	She	lower	He slapped, she slapped her friend in the face.	
+p29/d1575	forwarding	9	He	lower	She did, he did a cartwheel.	
+p49/d3156	forwarding	8	She	lower	He has, she has an ancient family name.	
+p44/d2494	forwarding	16	We	lower	John estimated, we estimated the damage at 1000 dollars.	
+p71/d3001	forwarding	11	He	lower	She drove, he drove his car to Yokohama.	
+p80/d2514	forwarding	17	The	lower	The snow lasted, the rain lasted three days.	
+p94/d1522	forwarding	11	She	lower	"He called, she called the kitten ""Jaguar""."	
+p90/d2255	forwarding	11	He	lower	She wrote, he wrote me four letters.	
+p07/d3558	forwarding	15	He	lower	John insulted, he insulted me in public.	
+p11/d2235	forwarding	13	She	lower	He ran away, she ran away with tears in her eyes.	
+p11/d1412	forwarding	11	He	lower	She armed, he armed himself with a pistol.	
+p15/d2205	forwarding	14	We	lower	John chopped, we chopped a tree down.	
+p11/d1813	forwarding	17	When	lower	When John heard, when I heard it, I was dumbfounded.	conjunction
+p21/d1559	forwarding	15	This	lower	This plant is, this flower is a kind of rose.	
+p23/d2309	forwarding	12	She	lower	He married, she married a sailor.	
+p24/d2303	forwarding	17	He	lower	She blackmailed, he blackmailed me.	
+p25/d2462	forwarding	16	English	keep	French abounds, English abounds in idioms.	language name
+p26/d2321	forwarding	14	We	lower	John watched, we watched a movie.	
+p27/d2149	forwarding	20	War	lower	Conflict broke out, war broke out when the treaty was ignored.	common noun
+p31/d3357	forwarding	12	She	lower	He stirred, she stirred the milk into her coffee.	
+p24/d2067	forwarding	27	My	lower	My robot's designation is, my robot's name is Multi.	
+p25/d3177	forwarding	18	My	lower	My first name is, my last name is Wang.	
+p34/d3553	forwarding	13	She	lower	He crumbled, she crumbled a biscuit.	
+p36/d3382	forwarding	9	He	lower	She ate, he ate poisonous mushrooms.	
+p39/d2609	forwarding	12	He	lower	She formed, he formed the clay into a bowl.	
+p39/d3422	forwarding	12	She	lower	He married, she married a firefighter.	
+p44/d2245	forwarding	13	He	lower	She painted, he painted the door blue.	
+p47/d3384	forwarding	13	She	lower	He repaired, she repaired a ventilator.	
+p46/d2788	forwarding	9	He	lower	She has, he has a great sense of humour.	
+p42/d2863	forwarding	11	She	lower	He ironed, she ironed her shirt.	
+p62/d2524	forwarding	14	She	lower	John married, she married an American.	
+p70/d1849	forwarding	11	She	lower	He speaks, she speaks German.	
+p59/d3416	forwarding	11	Something	lower	A dog bit, something bit me.	pronoun
+p71/d1662	forwarding	14	They	lower	He quarreled, they quarreled.	
+p72/d3010	forwarding	12	She	lower	He stabbed, she stabbed him with a knife.	
+p77/d3042	forwarding	7	They're	lower	He is, they're lesbians.	
+p75/d3261	forwarding	14	She	lower	He attempted, she attempted to kill herself.	
+p83/d3414	forwarding	19	Convenience	lower	Supermarkets sell, convenience stores sell candy bars.	common noun (convenience_store)
+p73/d1701	forwarding	14	My	lower	Your name is, my name is Maria Sara.	
+p86/d1982	forwarding	18	These	lower	These ponies are, these horses are theirs.	
+p94/d2026	forwarding	14	He	lower	She resigned, he resigned.	
+p95/d2064	forwarding	17	That	lower	That boy smiled, that girl smiled and waved to me.	
+p96/d1410	forwarding	17	The	lower	The movie lasts, the play lasts two and a half hours.	
+p96/d3265	forwarding	13	Turtles	lower	Lizards are, turtles are reptiles.	common noun
+p97/d2098	forwarding	12	He	lower	She nodded, he nodded to me.	
+p99/d1859	forwarding	12	She	lower	He grabbed, she grabbed my ass!	
+p49/d1681	constant_temporal	15	On	lower	On August 3rd, on September 3rd, I will go from Los Angeles to Seoul with a friend.	
+p00/d1178	constant_temporal	9	In	lower	In 1923, in 1922, the site was acquired by Produits Chimiques Bozel Lamotte.	
+p67/d2470	constant_temporal	8	Tuesday	keep	Monday, Tuesday we will go to the clubhouse.	day name
+p92/d2157	constant_temporal	13	This	lower	This Monday, this Wednesday I'll see Carla.	
+p84/d2360	constant_temporal	8	Thursday	keep	Monday, Thursday, we will go to a swimming pool.	day name
+p59/d0807	constant_temporal	9	In	lower	In 1971, in 1972, Dr. Francine Patterson started to teach sign language to Koko.	
+p75/d2660	constant_temporal	9	In	lower	In 1959, in 1958, the statue was built in the Hiroshima Peace Park.	

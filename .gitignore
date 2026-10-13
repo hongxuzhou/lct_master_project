@@ -24,3 +24,6 @@ repair_data_gen/llm_gen_playground/natural_rsr_check/swbd/
 # 2026-10-10 stay tracked.  Back up locally / on the cluster.
 repair_data_gen/llm_gen_playground/results/raw/*/*
 !repair_data_gen/llm_gen_playground/results/raw/*/run_meta_*.json
+
+# Fixed pass pool, rebuilt by freeze/apply_fixes.py (5.6 MB)
+repair_data_gen/llm_gen_playground/freeze/pool_fixed.tsv
