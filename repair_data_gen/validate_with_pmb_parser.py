@@ -202,7 +202,11 @@ def report(results: list[tuple[str, str, dict]]) -> None:
 
 
 def generated_samples(n_samples: int) -> list[tuple[str, str]]:
-    """(doc_id, repaired SBN) from build_repair, as the script always did."""
+    """(doc_id, repaired SBN) from build_repair, as the script always did.
+
+    Needs analyse_feasibility and wn_candidates, which moved to
+    archive/repair_data_gen/rule_pipeline/ on 2026-10-13 (add it to sys.path).
+    """
     from analyse_feasibility import NON_LEXICAL, POS_OK, WORD_RE, surface_forms, token_match
     from repair_transform import build_repair
     from wn_candidates import candidates

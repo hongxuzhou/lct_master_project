@@ -1,0 +1,24 @@
+universe = vanilla
+initialdir = /nethome/honzhou
+
+executable = /nethome/honzhou/thesis_zone/rsr_generation/hpc/run.sh
+
+# Temporal constants on train, one more item per eligible document with the
+# site given (2026-10-10): sample_train_temporal_extra.tsv (297 documents),
+# prompts/temporal_r2/ (site and used reparandum as input).
+# Results go to results/meta-models_Muse-Glimmer-30B.train_temporal_extra.tsv;
+# resumable. About 1.5 h at 16 workers.
+environment = "SAMPLE=samples/sample_train_temporal_extra.tsv TAG=train_temporal_extra DOCS=prompts/temporal_r2 WORKERS=16 TOOL_MODE=auto TOOL_PARSER=muse_glimmer REASONING_PARSER=muse_glimmer"
+
+output = /scratch/hongxuzhou/logs/llm_gen/train_temporal_extra.$(ClusterId).out
+error  = /scratch/hongxuzhou/logs/llm_gen/train_temporal_extra.$(ClusterId).err
+log    = /scratch/hongxuzhou/logs/llm_gen/train_temporal_extra.$(ClusterId).log
+
+request_CPUs   = 8
+request_memory = 64G
+request_GPUs   = 1
+requirements = (GPUs_Capability >= 8.0) && (GPUs_GlobalMemoryMb >= 80000)
+
++MaxWallTime = 86400
+
+queue 1

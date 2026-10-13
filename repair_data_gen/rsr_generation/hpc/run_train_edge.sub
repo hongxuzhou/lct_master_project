@@ -1,0 +1,24 @@
+universe = vanilla
+initialdir = /nethome/honzhou
+
+executable = /nethome/honzhou/thesis_zone/rsr_generation/hpc/run.sh
+
+# Edge label on train, for a small human-selected sample (decided
+# 2026-10-08): the reserve documents that still meet the site rules after
+# round 3 (sample_train_edge.tsv), with prompts/edge_r3/ as in round 3.
+# Results go to results/meta-models_Muse-Glimmer-30B.train_edge.tsv;
+# resumable. About 2 h at 16 workers.
+environment = "SAMPLE=samples/sample_train_edge.tsv TAG=train_edge DOCS=prompts/edge_r3 WORKERS=16 TOOL_MODE=auto TOOL_PARSER=muse_glimmer REASONING_PARSER=muse_glimmer"
+
+output = /scratch/hongxuzhou/logs/llm_gen/train_edge.$(ClusterId).out
+error  = /scratch/hongxuzhou/logs/llm_gen/train_edge.$(ClusterId).err
+log    = /scratch/hongxuzhou/logs/llm_gen/train_edge.$(ClusterId).log
+
+request_CPUs   = 8
+request_memory = 64G
+request_GPUs   = 1
+requirements = (GPUs_Capability >= 8.0) && (GPUs_GlobalMemoryMb >= 80000)
+
++MaxWallTime = 86400
+
+queue 1
