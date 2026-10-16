@@ -1,12 +1,13 @@
 # Train RSR, base version
 
-`train_rsr.base.tsv`: 3,495 English sentences with a replacement self-repair
+`train_rsr.base.tsv`: 3,489 English sentences with a replacement self-repair
 (RSR), each paired with its repair-aware SBN, built from PMB 5.1.0 train
 gold. "Base" means no editing expression ("The cat, the dog barks"); a
 version with editing expressions ("The cat, I mean, the dog barks") is a
 later step.
 
-Frozen 2026-10-13. sha256 `93733f7ecab2e61ba3063eed3438ea09e47455fc02556a760f727c5b934b9f58`
+Frozen 2026-10-13; hard-negative documents removed 2026-10-16 (below).
+sha256 `565ddd28c70d87d4eefa1412683ca3bbb4b62a7ddcfbfd15ae219fd2b3199ca2`
 (also in `train_rsr.base.manifest.json`).
 
 ## Contents
@@ -16,25 +17,32 @@ Frozen 2026-10-13. sha256 `93733f7ecab2e61ba3063eed3438ea09e47455fc02556a760f727
 | content word | 500 | 500 | 3,157 | A baby is sleeping in the basket, the cradle. |
 | name | 500 | 500 | 773 | Vladivostok is a city in Ukraine, Russia. |
 | number | 500 | 500 | 611 | The bank lent her 300, 500 dollars. |
-| temporal | 500 | 290 | 558 | I was born in 1971, in 1972. |
+| temporal | 500 | 287 | 558 | I was born in 1971, in 1972. |
 | tense | 500 | 500 | 777 | Hebrew was, is my mother tongue. |
 | forwarding | 500 | 500 | 512 | John hates, I hate spiders. |
-| edge label | 495 | 495 | 991 | He jumped from, into the train. / Tom was born near, in Boston. |
-| **all** | **3,495** | **3,170** | 7,379 | |
+| edge label | 489 | 489 | 991 | He jumped from, into the train. / Tom was born near, in Boston. |
+| **all** | **3,489** | **3,165** | 7,379 | |
 
 - One repair per sentence. Median sentence length 7 words.
 - The types are balanced on purpose (about 500 each), so that differences
   between types are not differences in training data size. Within a type,
   proportions follow the candidate pool (simple random sample, seed
   20261013); the manifest lists pool and sample shares side by side.
-- Temporal: only 297 train documents contain a time constant, so 210 of
+- Temporal: only 297 train documents contain a time constant, so 213 of
   them carry two items (a second site, or the same site with another
   reparandum).
 - Edge label covers two kinds: a role swap (`Source` against `Destination`,
   "from, into") and a place (`location.n.01` with a spatial operator against
   a plain role, "near, in"). It is the only type selected by hand (below),
-  and it falls 5 short of 500.
-- PMB train has 9,552 documents; 9,447 remain after a planned hard-negative
+  and it falls 11 short of 500.
+- No item comes from a document in the hard-negative hold-out
+  (`../../hard_negatives/`, 66 documents). The set was first frozen
+  without this filter; on 2026-10-16 its 27 items on held-out documents
+  were dropped. Six types were refilled from their remaining candidates
+  (second random sample, seed 20261016); edge label could not be (no other
+  candidate is labelled natural) and went from 495 to 489. The candidates
+  column counts the pool before the filter.
+- PMB train has 9,552 documents; 9,486 remain after the hard-negative
   hold-out, so RSR to fluent is about 1 : 2.7.
 
 ## How it was made
@@ -51,8 +59,9 @@ Frozen 2026-10-13. sha256 `93733f7ecab2e61ba3063eed3438ea09e47455fc02556a760f727
 4. **Fix the surface.** `apply_fixes.py` makes the text outside the repair
    identical to the PMB sentence, and lower-cases the first word of the
    repair where the model kept a sentence-initial capital (175 items changed).
-5. **Sample.** `assemble.py` draws 500 per type and re-runs every check on
-   the result; it stops if any row fails.
+5. **Sample.** `assemble.py` draws 500 per type, drops and refills items on
+   held-out documents, and re-runs every check on the result; it stops if
+   any row fails or a held-out document is present.
 
 ### Automatic checks
 
@@ -88,7 +97,14 @@ rates). Thresholds were set before the first audit and not moved: meaning ≥
 | round 2, 15 per type (`../audit/r2`) | 105 | 99% | 97% |
 | main run, 15 per type (`../audit/train_full`) | 90 | 100% | 97% |
 | temporal extra (`../audit/train_temporal_extra`) | 21 | 100% | 100% |
+| forwarding, frozen set (`../audit/train_forwarding_reaudit`) | 15 | 100% | 100% |
 | edge label, role swaps, round 3 (`../audit/r3_edge`) | 34 | – | 48% |
+
+In the main-run audit, 11 of 15 forwarding items were `unsure` for meaning,
+over which subject each version's predicate points to; the meaning rate
+there rests on 4 items. Once that rule was settled (each version's predicate
+points to its own subject), 15 new forwarding items from the frozen set
+were audited (not blind to type; `../sample_forwarding_reaudit.py`).
 
 Edge label failed the naturalness threshold, so it was selected item by item
 instead:
@@ -99,13 +115,17 @@ instead:
 | role swaps, `train_edge` (user) | 363 | 112 |
 | places (`../audit/train_place/selection.tsv`) | 591 | 369 |
 
-Of the 495 kept, the naturalness label came from the user for 225 (26 of
-them after a second look at items first marked unsure) and from Claude for
-270 (3 of them rescued unsure items, accepted by the user). Claude
-labelled blind, with a written guideline
-(`../audit/train_place/claude_guideline.md`); on the 100 items both labelled,
-κ = 0.56 and yes/no agreement 69 of 76. `label_source` in the data says
-which.
+Of the 495 kept, 6 places were later dropped for the hard-negative
+hold-out, leaving 489 (126 role swaps, 363 places). Of these, the
+naturalness label came from the user for 225 (26 of them after a second
+look at items first marked unsure) and from Claude for 264 (3 of them
+rescued unsure items, accepted by the user). Claude labelled blind, with a
+written guideline (`../audit/train_place/claude_guideline.md`); on the 100
+items both labelled independently, κ = 0.56 and yes/no agreement 69 of 76.
+The user then read all 270 Claude-labelled items kept before the drop and
+accepted them without change (by hand, not recorded in a file), so every
+kept item is approved by the user.
+`label_source` in the data says who gave the first label.
 
 ## Files
 
@@ -127,7 +147,7 @@ Rebuild from `rsr_generation/`:
 
 | column | meaning |
 |---|---|
-| `item_id` | `rsr_train_0000` … `rsr_train_3494` |
+| `item_id` | `rsr_train_0000` … `rsr_train_3488` |
 | `repair_type` | `content_word`, `constant_name`, `constant_number`, `constant_temporal`, `tense`, `forwarding`, `edge_label` |
 | `doc_id` | PMB document (`p63/d1502`) |
 | `nl_clean`, `sbn_clean` | gold sentence and SBN |
@@ -138,7 +158,7 @@ Rebuild from `rsr_generation/`:
 | `site_index` | position of the repaired concept in `sbn_clean` |
 | `devices`, `strategy` | notation devices ①–⑤, as the model reports them (not verified) |
 | `wn_relation` | WordNet relation of reparandum and repair (content word) |
-| `ambiguous` | the bare form has a fluent reading: `number_range` (258), `initial_name` (201), `weekday_list` (19). A label, not a filter |
+| `ambiguous` | the bare form has a fluent reading: `number_range` (260), `initial_name` (203), `weekday_list` (19). A label, not a filter |
 | `interregnum` | `none` in this version |
 | `label_source`, `audit_ref` | `auto_pass` for the six automatic types; for edge label who judged it, and the audit item |
 | `source_file` | the run the item comes from (`../results/`) |
@@ -147,7 +167,8 @@ Rebuild from `rsr_generation/`:
 ## Limitations
 
 - **One annotator.** Every audit and the edge-label selection rest on one
-  person's intuition; most edge-label labels are Claude's (above). Labels
+  person's intuition; most edge-label labels were proposed by Claude and
+  reviewed, not labelled independently, by the user (above). Labels
   drifted during the first edge-label session (yes rate 31%, 20%, 32%, 40% by
   quarter).
 - **Audits are samples.** Apart from edge label, no type was read in full;

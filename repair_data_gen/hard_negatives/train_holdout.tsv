@@ -1,0 +1,67 @@
+doc_id	label	sentence
+p00/d0317	apposition	Padalecki was born in San Antonio, Texas, to Gerald and Sherri Padalecki. [1] [2]
+p01/d1880	apposition	Two small rabbits, a white rabbit and a black rabbit, lived in a large forest.
+p02/d0795	contrast_correction	John is not my brother, but my cousin.
+p02/d1144	borderline	Machine guns were mounted on window-sills, rifles stacked between the mattresses.
+p02/d2856	borderline	Some animals, as tigers, eat meat.
+p05/d0919	list	The cow moos, the rooster crows, the pig oinks, the duck quacks, and the cat meows.
+p05/d2534	apposition	I'm from Wellington, the capital of New Zealand.
+p05/d2605	list	Mike entered the room, took off the coat and put in on the chair.
+p05/d3380	apposition	A group of foreigners arrived in Edo, that is to say Tokyo.
+p08/d3109	apposition	Al Gore was born in Washington, DC.
+p10/d2978	list	Lungs, heart, veins, arteries and capillaries form the cardiovascular system.
+p13/d1260	borderline	Steffi Graf defeated Conchita Martinez of Spain 6:3, 6:1.
+p13/d2857	contrast_correction	America isn't a country, it's a continent.
+p14/d1811	list	Tom, Mary and John were playing tag on the playground.
+p17/d2285	list	Rice, noodles, and potatoes are typical side dishes.
+p17/d2808	contrast_correction	I prefer to go by subway, rather than by train.
+p19/d0130	apposition	The capital of the U.S. is Washington, D.C.
+p19/d2498	list	Two, four, six and eight are even numbers.
+p19/d2717	borderline	I am very, very sorry.
+p20/d1760	contrast_correction	She is not a nurse, but a doctor.
+p21/d1909	apposition	I am from Rio de Janeiro, Brazil.
+p23/d1469	list	Helium, neon, argon, krypton, xenon and radon are noble gases.
+p23/d3033	contrast_correction	Mr Briggs is not a doctor, he is a vet.
+p25/d3277	list	Osiris, Anubis, and Horus are some of the most famous ancient Egyptian deities.
+p29/d0264	asyndetic	You have such beautiful, hazel eyes.
+p29/d0709	list	The 24-year-old forest guard was shot in the head, face and shoulder.
+p30/d0317	apposition	Their son, Thomas Colton Padalecki, was born on March 19, 2012.
+p30/d1945	list	Ethnic minorities struggle against prejudice, poverty, and oppression.
+p32/d2805	list	They sell apples, oranges, eggs, and so on.
+p34/d3200	list	One, three, five, seven and nine are odd numbers.
+p36/d1389	apposition	Which Iraqi nuclear expert disappeared in Athens, the Greek capital?
+p36/d2203	apposition	Roger Miller was born on January 2, 1936 in the western city of Fort Worth, Texas.
+p38/d2805	list	Tom is allergic to bees, hornets and wasps.
+p40/d1979	contrast_correction	This transaction was carried out in yen, rather than US dollars.
+p43/d1493	apposition	The Australian actor, Andy Whitfield, has passed away.
+p44/d1443	apposition	Dr. Patterson, a psychologist, tested Koko's intelligence.
+p47/d2419	list	The store sells foodstuffs, such as butter, cheese, and sugar.
+p50/d1916	apposition	The great Roman hero, Julius Caesar, was assassinated.
+p54/d3533	apposition	Dr. Patterson, a psychologist, has tested Koko's IQ.
+p56/d3086	list	She bought a toaster, a coffeemaker, an egg cooker and a hand mixer.
+p60/d2533	apposition	Boiling lobsters is illegal in the town of Reggio Emilia, Italy.
+p62/d2653	list	A typical Bavarian breakfast consists of white sausage, wheat beer and pretzels.
+p64/d3510	list	It's the story of a boy, a girl, and a cat.
+p69/d1719	asyndetic	If a philosopher doesn't have a long, white beard, I don't trust him.
+p69/d3332	apposition	A group of foreigners arrived in Edo, in other words Tokyo.
+p70/d1727	asyndetic	Mary adores her baby's cute, round face.
+p71/d0885	list	The U.S. government has three branches: the executive, the legislative, and the judicial.
+p74/d0312	apposition	Nida was born in Oklahoma City, Oklahoma on November 11, 1914.
+p77/d1664	list	The vessel was loaded with coal, lumber, and so on.
+p77/d2204	apposition	My uncle lived in Washington, D. C. for two years.
+p78/d2303	apposition	She felt ashamed of her mother, a poorly clad woman, who picked up wood in the forest.
+p79/d2997	list	He fell for it hook, line, and sinker.
+p82/d1623	contrast_correction	This is a cargo ship, not a passenger ship.
+p88/d1847	apposition	Then we visited Washington, D.C., the capital of the United States of America.
+p89/d1260	borderline	Today, Stich won 6:3, 6:4 and 6:2 over Marc Rosset from Switzerland.
+p93/d2681	list	Our sister bought some eggplants, potatoes, zucchinis and Chinese cabbage at the market.
+p95/d1388	apposition	Who killed Andres Escobar, the Colombian soccer player?
+p95/d1491	apposition	Italy has two mountain ranges, the Alps and the Apennines.
+p96/d0127	apposition	Washington, D.C., is the capital of the United States of America.
+p96/d1502	list	She swallowed it hook, line and sinker.
+p96/d2500	asyndetic	Her very long, black eyelashes set off the aristocratic pallor of her cheeks.
+p96/d3019	apposition	A group of foreigners arrived in Edo, i.e. Tokyo.
+p97/d1948	asyndetic	She wore a long, loose coat.
+p97/d3141	list	They kidnapped me, drugged me, and then brainwashed me.
+p98/d3255	list	I am allergic to aspirin, penicillin, and sulfa drugs.
+p99/d2111	list	I speak English, a little Italian and Spanish.

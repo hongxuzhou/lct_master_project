@@ -12,6 +12,8 @@ these is the playground README at git tag `rsr-train-base-log`.
 | 10-04 | Train first; dev and test later, on PMB's own split | One problem at a time; PMB's split keeps test sentences unseen in training |
 | 10-04 | Tense is back in the data | It was cut for the cost of a rule operator, which LLM generation does not have |
 | 10-01 | Anaphora and cross-turn repairs are left out | They need a second sentence or turn with no gold to check against |
+| 10-16 | 66 surface-similar non-repair train documents are held out of all training data, RSR included (`hard_negatives/`); builders read the list through `holdout.load()` | A hard-negative test on documents seen in training measures memory; the hold-out was planned for 10-13 but never implemented |
+| 10-16 | `contrast_correction` and `borderline` documents are held out too | Test use is decided later; a trained-on document can never be used |
 
 ## Generation
 
@@ -50,6 +52,8 @@ these is the playground README at git tag `rsr-train-base-log`.
 | 10-10 | Place repairs ("under, on") count as edge label, recorded as `spatial_operator` | Role swaps alone gave 100–150 natural items |
 | 10-12 | Place selection uses the substitution test: the first preposition with the same thing must be a sentence the speaker could mean; shared landmark only | The bare form cannot show an abandoned, different landmark |
 | 10-12 | Edge label closes at 495 | Nearly every eligible train document has been run |
+| 10-16 | Hold-out applied to the frozen set by drop and refill (seed 20261016): 27 items dropped, 21 refilled; edge label not refilled (489) | Equivalent to a simple random sample from the filtered pool and keeps the other 3,468 items and their audits; no other edge item is labelled natural |
+| 10-15 | The 270 kept items Claude labelled were read by the user and all accepted; reported as "proposed by Claude, reviewed by the user", κ = 0.56 kept | Review is not independent labelling; κ shows how subjective the judgement is |
 
 ## The dataset
 

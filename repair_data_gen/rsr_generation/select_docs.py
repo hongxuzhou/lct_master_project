@@ -15,7 +15,8 @@ Choices:
 - no length filter: documents are drawn uniformly from the eligible ones, so
   lengths follow gold and any length preference of the model shows up;
 - a document is used for one type only;
-- excluded: gold documents shown as examples in the prompt documents, and
+- excluded: gold documents shown as examples in the prompt documents, the
+  hard-negative hold-out (`../hard_negatives/`, added 2026-10-16), and
   gold documents whose own SBN is broken (the reader rejects it, or an index
   points outside the sequence);
 - constant types draw at most `--cap` documents per constant value (default
@@ -49,11 +50,13 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
 sys.path.insert(0, str(ROOT / "repair_data_gen"))
 sys.path.insert(0, str(HERE))
+sys.path.insert(0, str(ROOT / "repair_data_gen" / "hard_negatives"))
 
 from nltk.corpus import wordnet as wn  # noqa: E402
 from sbn_lin import IDX_PATTERN, read_split  # noqa: E402
 from validate_with_pmb_parser import check  # noqa: E402
 from wn_lookup import PLACEHOLDERS, PMB_ONLY  # noqa: E402
+import holdout  # noqa: E402
 
 GOLD = ROOT / "data/pmb-5.1.0/split/en/train/gold.sbn"
 
@@ -494,11 +497,12 @@ def main() -> None:
     excluded = {r["doc_id"] for r in earlier
                 if not args.exclude_type or r["repair_type"] in args.exclude_type}
     excluded |= {d for d, n in uses.items() if n >= 2}
+    held = holdout.load()
     docs = read_split(GOLD)
     unreadable = [d for d, _ in read_split.skipped]  # type: ignore[attr-defined]
     pool, broken = [], []
     for d in docs:
-        if d.doc_id in EXAMPLE_DOCS or d.doc_id in excluded:
+        if d.doc_id in EXAMPLE_DOCS or d.doc_id in excluded or d.doc_id in held:
             continue
         # check() looks for CORRECTION/CONJUNCTION too; only the gold-level
         # checks matter here.
@@ -514,7 +518,7 @@ def main() -> None:
 
     print(f"gold docs {len(docs) + len(unreadable)}: unreadable by sbn_lin "
           f"{len(unreadable)}, used as prompt examples {len(EXAMPLE_DOCS)}, "
-          f"in earlier samples {len(excluded)}, "
+          f"in earlier samples {len(excluded)}, hard-negative hold-out {len(held)}, "
           f"broken gold {len(broken)} {[d.doc_id for d in broken]}, "
           f"pool {len(pool)}")
     print("eligible documents per type:")

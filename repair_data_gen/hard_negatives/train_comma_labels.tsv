@@ -1,0 +1,353 @@
+doc_id	has_digit	label	sentence
+p00/d0317	yes	apposition	Padalecki was born in San Antonio, Texas, to Gerald and Sherri Padalecki. [1] [2]
+p00/d1178	yes	excluded	In 1922, the site was acquired by Produits Chimiques Bozel Lamotte.
+p00/d1470	no	excluded	Tom is being silly, isn't he?
+p00/d1974	no	excluded	All the passengers died, but he survived.
+p00/d2036	no	excluded	He is rich, but he is unkind.
+p00/d2243	no	excluded	You lied to us, didn't you?
+p00/d2265	no	excluded	Whoever is born in Austria, is an Austrian.
+p00/d2484	yes	excluded	I'm 17, too.
+p00/d2701	no	excluded	If the text doesn't make sense, it isn't coherent.
+p00/d3038	yes	excluded	There are over 800,000 Basque speakers in the world.
+p00/d3050	no	excluded	Despite their great wealth, they are not happy.
+p00/d3351	no	excluded	Tom's eyes are red, and he looks very tired.
+p01/d0875	no	excluded	When I entered the room, she was playing the piano.
+p01/d1872	no	excluded	Tom is timid, isn't he?
+p01/d1880	no	apposition	Two small rabbits, a white rabbit and a black rabbit, lived in a large forest.
+p01/d2708	no	excluded	If you're tired, go to bed.
+p01/d2941	no	excluded	As soon as he sat down, he picked up the telephone.
+p01/d3051	yes	excluded	I was born on April 3, 1950.
+p02/d0795	no	contrast_correction	John is not my brother, but my cousin.
+p02/d1144	no	borderline	Machine guns were mounted on window-sills, rifles stacked between the mattresses.
+p02/d1229	yes	excluded	The organizers expect more than 300,000 visitors.
+p02/d1309	no	excluded	"Terrible weather," said Baron von S. His wife looked nervous.
+p02/d2070	no	excluded	He promised to come, but he didn't come.
+p02/d2856	no	borderline	Some animals, as tigers, eat meat.
+p02/d3222	no	excluded	Tom is angry at you, isn't he?
+p03/d0764	yes	excluded	More than 200,000 people were killed in the air attack in the Darfur region.
+p03/d0837	yes	excluded	He paid 1,000 yen for this book.
+p03/d3285	no	excluded	If you need money, I'll lend you some.
+p04/d0227	no	excluded	Apart from English, he speaks German.
+p04/d1685	yes	excluded	You owe me $1,000.
+p04/d1899	no	excluded	Tom is very fast, isn't he?
+p04/d2620	no	excluded	He's two years older than me, but he's shorter.
+p04/d3160	yes	excluded	This desk cost me 20,000 yen.
+p05/d0822	no	excluded	I live in a town, but my parents live in the country.
+p05/d0890	yes	excluded	I was born in Barcelona on March 23, 1969.
+p05/d0919	no	list	The cow moos, the rooster crows, the pig oinks, the duck quacks, and the cat meows.
+p05/d1390	yes	excluded	Which female tennis player was stabbed in the back with a knife on April 30, 1993?
+p05/d1792	no	excluded	Tom is angry at me, isn't he?
+p05/d2172	no	excluded	In August, I'm going to Japan with my friends.
+p05/d2534	no	apposition	I'm from Wellington, the capital of New Zealand.
+p05/d2605	no	list	Mike entered the room, took off the coat and put in on the chair.
+p05/d3085	no	excluded	My aunt, who lives in Tokyo, sent me a beautiful blouse.
+p05/d3380	no	apposition	A group of foreigners arrived in Edo, that is to say Tokyo.
+p05/d3418	no	excluded	Tom is very late, isn't he?
+p06/d2816	no	excluded	Tom ordered apple pie, and so did I.
+p06/d2983	no	excluded	If you don't hurry, you'll miss the train.
+p06/d3132	yes	excluded	It was very expensive; in fact, I paid 100 dollars.
+p07/d0198	no	excluded	Even though she grew up in Japan, she speaks fluent English.
+p07/d1655	yes	excluded	The Great Wall of China is over 5,500 miles long.
+p07/d1959	no	excluded	Tom hid under his bed, but his mother found him.
+p07/d1974	no	excluded	Despite all his setbacks, he remains an optimist.
+p07/d2499	no	excluded	Tom carved a pipe for Mary, but she doesn't smoke.
+p08/d1499	no	excluded	Whenever I visited the island, I was impressed with the beauty of nature.
+p08/d2137	no	excluded	He spoke, and all were silent.
+p08/d2429	no	excluded	If the cap fits, wear it.
+p08/d3109	no	apposition	Al Gore was born in Washington, DC.
+p09/d1086	no	excluded	Scrooge shivered, and wiped the perspiration from his brow."
+p09/d1837	no	excluded	As I entered the room, they applauded.
+p09/d2150	no	excluded	According to the paper, it will snow tomorrow.
+p09/d3007	no	excluded	I returned the books I borrowed from the library, and I borrowed some new ones.
+p10/d0895	no	excluded	According to the radio, it will rain tomorrow.
+p10/d1214	yes	excluded	Approximately 60,000 Saxon farmers were disowned during the agricultural reform.
+p10/d1708	yes	excluded	I was born on June 4, 1974.
+p10/d2978	no	list	Lungs, heart, veins, arteries and capillaries form the cardiovascular system.
+p11/d1089	no	excluded	"I was a boy," he said impatiently.
+p11/d1542	yes	excluded	According to a survey, 1 billion people are suffering from poverty in the world.
+p11/d1734	no	excluded	I called her, but the line was busy.
+p11/d1813	no	excluded	When I heard it, I was dumbfounded.
+p11/d1930	no	excluded	He is a good violinist, isn't he?
+p11/d2490	no	excluded	I'm happy, too.
+p11/d3472	no	excluded	The bell rang, and the train began to move.
+p12/d0324	no	excluded	“We need a plan,” I said.
+p12/d0929	no	excluded	I took a taxi, because it was raining.
+p12/d1910	no	excluded	I'm kind of excited, too.
+p12/d2112	no	excluded	If I don't have a bow, I can't play the violin.
+p12/d2786	no	excluded	Besides being a great statesman, Sir Winston Churchill was a great writer.
+p12/d3026	yes	excluded	I paid 2,000 yen for this atlas.
+p12/d3250	no	excluded	It's raining, but she's not wearing a coat.
+p12/d3353	no	excluded	Whenever he comes up to Tokyo, he stays with us.
+p12/d3550	no	excluded	If you are wrong, then so am I.
+p13/d0827	no	excluded	According to the papers, the man has finally confessed.
+p13/d1260	yes	borderline	Steffi Graf defeated Conchita Martinez of Spain 6:3, 6:1.
+p13/d1920	yes	excluded	Tom Jackson was born in Boston on October 20, 1995.
+p13/d1966	no	excluded	Despite his wealth, he is not at all happy.
+p13/d1992	no	excluded	Tom doesn't have a cat. However, Tom does have a dog, doesn't he?
+p13/d2548	yes	excluded	I owe her 100,000 yen.
+p13/d2857	no	contrast_correction	America isn't a country, it's a continent.
+p14/d1811	no	list	Tom, Mary and John were playing tag on the playground.
+p14/d2005	no	excluded	He who pays the piper, calls the tune.
+p14/d2478	no	excluded	I want beef, too.
+p14/d3239	yes	excluded	Japan declared war on the United States in December, 1941.
+p15/d0902	no	excluded	If the phone rings again, I plan to ignore it.
+p15/d2905	no	excluded	He, as well as his sister, are invited to the party.
+p16/d1879	no	excluded	He is tall, but his brother is much taller.
+p16/d3542	no	excluded	Though I failed, I will try again.
+p17/d1724	no	excluded	If you flatter him, he'll do anything.
+p17/d2285	no	list	Rice, noodles, and potatoes are typical side dishes.
+p17/d2808	no	contrast_correction	I prefer to go by subway, rather than by train.
+p18/d1708	yes	excluded	The restaurant billed me 250,000 yen for the party.
+p18/d2192	no	excluded	This rope is strong, isn't it?
+p18/d2987	yes	excluded	I bought this camera for 25,000 yen.
+p18/d3146	no	excluded	Roger Vercel, whose true name is Roger Crétin, is a French writer.
+p19/d0130	no	apposition	The capital of the U.S. is Washington, D.C.
+p19/d1455	no	excluded	Tom doesn't drink much beer, but he sure drinks a lot of wine.
+p19/d2157	no	excluded	Ellen likes to play tennis, too.
+p19/d2498	no	list	Two, four, six and eight are even numbers.
+p19/d2717	no	borderline	I am very, very sorry.
+p19/d3270	no	excluded	Because he lied, he was punished.
+p20/d1191	yes	excluded	Some 2,000 people are currently employed at the Suzano industrial park.
+p20/d1760	no	contrast_correction	She is not a nurse, but a doctor.
+p20/d2418	no	excluded	Tom is crying, too.
+p20/d2434	no	excluded	I'm fed up with this winter, I want spring right now!
+p20/d3237	yes	excluded	His debts amount to $2,000.
+p20/d3515	no	excluded	When I was a boy, I was addicted to reading detective stories.
+p21/d1909	no	apposition	I am from Rio de Janeiro, Brazil.
+p21/d2737	no	excluded	Whoever comes, say I am away from home.
+p21/d2841	no	excluded	This book has a number of mistakes, but it's interesting.
+p21/d3057	no	excluded	According to Tom's will, Mary will inherit his entire estate.
+p22/d2746	no	excluded	All of a sudden, she began to laugh.
+p22/d3342	no	excluded	This is my coat, and that is my father's.
+p23/d1258	no	excluded	Experts are still cooling the wagons with water, the fire brigade reports.
+p23/d1469	no	list	Helium, neon, argon, krypton, xenon and radon are noble gases.
+p23/d2513	no	excluded	"Are you still cold," she asked, as she kissed him on the forehead.
+p23/d3033	no	contrast_correction	Mr Briggs is not a doctor, he is a vet.
+p25/d1564	no	excluded	Anna has chestnut brown hair, but Magdalena has blonde hair.
+p25/d2518	no	excluded	If you want a pen, I will lend you one.
+p25/d2946	no	excluded	If you run fast, you can catch the train.
+p25/d3277	no	list	Osiris, Anubis, and Horus are some of the most famous ancient Egyptian deities.
+p26/d1497	no	excluded	Thanks to technological innovations, maximum outputs of the factory have doubled.
+p26/d1851	no	excluded	For further details, call Gisèle.
+p26/d3340	no	excluded	If you take this medicine, the stomach ache will be healed.
+p27/d3203	no	excluded	If that's false, she's a liar.
+p27/d3234	no	excluded	Oh, it's snowing!
+p29/d0264	no	asyndetic	You have such beautiful, hazel eyes.
+p29/d0709	yes	list	The 24-year-old forest guard was shot in the head, face and shoulder.
+p29/d2348	no	excluded	The phone rang, but nobody answered it.
+p30/d0317	yes	apposition	Their son, Thomas Colton Padalecki, was born on March 19, 2012.
+p30/d1945	no	list	Ethnic minorities struggle against prejudice, poverty, and oppression.
+p30/d2082	no	excluded	The two policemen were exhausted, too.
+p30/d2762	no	excluded	Tom started to walk away, but Mary stopped him.
+p31/d0757	yes	excluded	More than 1,500 people died when the Titanic sank in 1912.
+p31/d0881	no	excluded	In Australia, English is spoken.
+p31/d1357	yes	excluded	A typical reception of prisoners took place on May 24, 1945.
+p31/d1601	yes	excluded	Ken was fined 7,000 yen for speeding.
+p31/d3309	no	excluded	Tom threw a rock at Mary, but it didn't hit her.
+p32/d1658	yes	excluded	Subway fares will be raised as of April 1st, 1999.
+p32/d2121	no	excluded	The bag was big, and moreover, it was heavy.
+p32/d2805	no	list	They sell apples, oranges, eggs, and so on.
+p33/d1182	yes	excluded	In 1960, the company added polyacrylonitrile staple fibers to its range.
+p33/d1721	no	excluded	Tom sat under a tree, strumming his ukulele.
+p33/d1902	no	excluded	If you're captured, don't say anything.
+p34/d0859	no	excluded	Even though he was poor, he was happy.
+p34/d2225	no	excluded	The telephone rang, but no one answered.
+p34/d2491	no	excluded	Some went on foot, and others by bicycle.
+p34/d3200	no	list	One, three, five, seven and nine are odd numbers.
+p34/d3368	no	excluded	Tom offered me a cookie, but I refused.
+p35/d0168	no	excluded	Even though she is dieting, the chocolate cake still tempts her.
+p35/d1956	no	excluded	I'm busy, too.
+p35/d3246	no	excluded	According to the police, no one was injured.
+p36/d1185	yes	excluded	The annual capacity for polyester staple fibers is currently around 45,000 metric tons.
+p36/d1389	no	apposition	Which Iraqi nuclear expert disappeared in Athens, the Greek capital?
+p36/d1985	no	excluded	Nobody is in the living room, but the TV is on.
+p36/d2203	yes	apposition	Roger Miller was born on January 2, 1936 in the western city of Fort Worth, Texas.
+p36/d2572	no	excluded	Tom wrote Mary a love letter, but he did not send it.
+p37/d1861	no	excluded	Even though he was tired, he worked.
+p37/d2434	yes	excluded	This offer expires on August 15, 1999.
+p37/d2825	no	excluded	Besides fruit, we're going to have ice cream.
+p38/d1673	no	excluded	I'm sorry, I dialed the wrong number.
+p38/d2564	no	excluded	If these books were stolen, then don't give them to me.
+p38/d2805	no	list	Tom is allergic to bees, hornets and wasps.
+p38/d3381	yes	excluded	I owe you 3,000 yen.
+p39/d1422	no	excluded	Her name was Linda, and she was a year younger than Tony.
+p39/d2297	no	excluded	She likes chocolate, too.
+p39/d2847	no	excluded	Tom wasn't wearing a wedding ring, but Mary noticed a white circle on his ring finger.
+p40/d0912	no	excluded	There are cats on Mars, too.
+p40/d1481	no	excluded	Besides being a surgeon, he was a famous writer.
+p40/d1500	no	excluded	In other words, he's lazy.
+p40/d1918	no	excluded	I grabbed my little sister's hand, and the two of us started to run.
+p40/d1951	yes	excluded	They fined him 5,000 yen for illegal parking.
+p40/d1979	no	contrast_correction	This transaction was carried out in yen, rather than US dollars.
+p40/d2598	no	excluded	He loves her. She loves him, too.
+p40/d2979	yes	excluded	Mary is 21 years younger than Tom, but Tom is 22 times richer than Mary.
+p40/d2982	yes	excluded	Tom was born on May 5, 2010.
+p41/d0799	yes	excluded	When I painted this picture, I was 23 years old.
+p41/d0920	no	excluded	If it rains, he won't come.
+p41/d2557	no	excluded	I was born on the twenty second of November, nineteen forty eight.
+p41/d2712	no	excluded	If he is not ill, he will come.
+p41/d2984	no	excluded	That was incredible, wasn't it?
+p41/d3041	no	excluded	Then Robert woke up again, and all of his limbs were hurting.
+p42/d2835	no	excluded	I, too, like candy.
+p43/d1493	no	apposition	The Australian actor, Andy Whitfield, has passed away.
+p43/d2051	no	excluded	He who has the money, also has the power.
+p44/d1443	no	apposition	Dr. Patterson, a psychologist, tested Koko's intelligence.
+p44/d2924	no	excluded	Whenever I meet her, she smiles at me.
+p46/d1798	no	excluded	If the weather is good, I'll go.
+p47/d2419	no	list	The store sells foodstuffs, such as butter, cheese, and sugar.
+p48/d2738	no	excluded	Besides being an actress, she was a famous painter.
+p48/d3509	yes	excluded	The expenditure totaled 200,000 yen.
+p49/d1681	yes	excluded	On September 3rd, I will go from Los Angeles to Seoul with a friend.
+p49/d1783	no	excluded	Whenever they meet, they quarrel.
+p49/d2237	no	excluded	In other words, he betrayed us.
+p49/d3121	no	excluded	Natasha was born in Russia, but she doesn’t speak Russian.
+p49/d3219	no	excluded	Um, is the room quiet?
+p50/d1916	no	apposition	The great Roman hero, Julius Caesar, was assassinated.
+p50/d2397	no	excluded	In other words, she's dumb.
+p50/d2563	no	excluded	For years, Tom suffered from migraine headaches.
+p50/d2916	no	excluded	She was worn out, and leaned against the apple tree.
+p50/d3043	no	excluded	My wife has faults. None the less, I love her.
+p51/d3342	no	excluded	If you invite him, he may come.
+p52/d0782	no	excluded	If I were a boy, I could join a baseball team.
+p52/d0808	no	excluded	My brother is two years older than I, but he is three centimeters shorter.
+p52/d0947	no	excluded	Many are called, but few are chosen.
+p53/d0949	no	excluded	Although she is rich, she is not happy.
+p53/d2310	yes	excluded	The treaty was signed on November 18, 1903.
+p53/d2326	no	excluded	In his fantasy, Mars is like Australia.
+p53/d2694	no	excluded	He likes jazz, and so do I.
+p53/d2743	no	excluded	Whenever Tom comes to Boston, he stays at our place.
+p54/d3533	no	apposition	Dr. Patterson, a psychologist, has tested Koko's IQ.
+p56/d1145	no	excluded	"Some delegates are present," he said.
+p56/d3086	no	list	She bought a toaster, a coffeemaker, an egg cooker and a hand mixer.
+p57/d0782	no	excluded	If I had money, I could buy it.
+p57/d0862	no	excluded	I found a note on my desk, but I don't know whose it is.
+p57/d1557	no	excluded	Some believed his story, and others did not.
+p57/d3334	yes	excluded	Taro drew 10,000 yen from the bank.
+p58/d1526	no	excluded	If the ceiling fell, he would be crushed.
+p59/d0175	no	excluded	Though he is clever, he isn't wise.
+p59/d0807	yes	excluded	In 1972, Dr. Francine Patterson started to teach sign language to Koko.
+p59/d3172	yes	excluded	I was born on October 10, 1972.
+p60/d0924	no	excluded	He had a cold, but he went to work.
+p60/d1872	no	excluded	The price is low, but the quality isn't very good.
+p60/d1923	no	excluded	She bought the dictionary, too.
+p60/d2468	no	excluded	She loves chocolate, too.
+p60/d2533	no	apposition	Boiling lobsters is illegal in the town of Reggio Emilia, Italy.
+p61/d2425	no	excluded	Tom is coming to the party, too.
+p62/d2006	no	excluded	In other words, he is lazy.
+p62/d2653	no	list	A typical Bavarian breakfast consists of white sausage, wheat beer and pretzels.
+p63/d1588	yes	excluded	I was born on February 14, 1960.
+p64/d0895	yes	excluded	I was born on October 10th, 1972.
+p64/d2039	no	excluded	Manchester United won the match, four to two.
+p64/d2402	no	excluded	You freaked out, didn't you?
+p64/d3510	no	list	It's the story of a boy, a girl, and a cat.
+p65/d0897	no	excluded	In Esperanto, nouns end with "o". Plurals are formed with the addition of "j".
+p65/d1638	no	excluded	If he is not rich, he is at any rate happy.
+p65/d2642	no	excluded	Besides being a statesman, he is a well-known painter.
+p66/d3377	no	excluded	Tom was right, wasn't he?
+p67/d2005	no	excluded	Money and I are strangers; in other words, I am poor.
+p68/d0322	no	excluded	Her eyes water constantly, now.
+p68/d0935	no	excluded	If you take this bus, you will reach the village.
+p68/d2821	no	excluded	He shot at the bird, but missed it.
+p69/d1719	no	asyndetic	If a philosopher doesn't have a long, white beard, I don't trust him.
+p69/d3149	yes	excluded	I paid 40,000 yen for this tape recorder.
+p69/d3332	no	apposition	A group of foreigners arrived in Edo, in other words Tokyo.
+p70/d1727	no	asyndetic	Mary adores her baby's cute, round face.
+p70/d2234	no	excluded	Tom saw it, too.
+p70/d3234	yes	excluded	Tom gave Mary $1,000 in a brown paper bag.
+p71/d0885	no	list	The U.S. government has three branches: the executive, the legislative, and the judicial.
+p71/d2169	no	excluded	If we don't hurry, we'll miss our train.
+p71/d2278	no	excluded	She lives near the beach, but she can't swim.
+p71/d2966	no	excluded	If you are hungry, you can eat the bread.
+p72/d0129	no	excluded	If you had a time machine, where would you go?
+p72/d1176	no	excluded	The main product is polyphosphoric acid, which is used to manufacture gasoline in South Africa.
+p72/d2965	no	excluded	She has no children, does she?
+p72/d3088	no	excluded	He's clever, and so is his brother.
+p73/d0788	no	excluded	Dick tried to solve the problem, in vain.
+p73/d1294	yes	excluded	In December 1941, he again fled to Switzerland.
+p73/d1603	yes	excluded	There are about 460,000 millionaires in Tokyo.
+p73/d1730	no	excluded	Cycling is good exercise. Moreover, it doesn't pollute the air.
+p74/d0312	yes	apposition	Nida was born in Oklahoma City, Oklahoma on November 11, 1914.
+p74/d1860	no	excluded	Even though it's small, it's still a great car.
+p75/d0914	no	excluded	My uncle is slim, but my aunt is fat.
+p75/d1419	no	excluded	Besides loving sports, my son also loves art.
+p75/d2594	no	excluded	That was your plan, wasn't it?
+p75/d2660	yes	excluded	In 1958, the statue was built in the Hiroshima Peace Park.
+p76/d3097	no	excluded	If the phone rings again, I will ignore it.
+p76/d3161	no	excluded	When we landed, we saw our friend on the pier.
+p77/d1664	no	list	The vessel was loaded with coal, lumber, and so on.
+p77/d2204	no	apposition	My uncle lived in Washington, D. C. for two years.
+p77/d2957	no	excluded	Tom won't go, will he?
+p78/d2303	no	apposition	She felt ashamed of her mother, a poorly clad woman, who picked up wood in the forest.
+p78/d2430	yes	excluded	I paid 1,500 yen for this dictionary.
+p78/d3210	yes	excluded	The Japanese attacked Pearl Harbor on December 7, 1941.
+p79/d0205	no	excluded	If you sing, we'll sing with you.
+p79/d2997	no	list	He fell for it hook, line, and sinker.
+p79/d3267	no	excluded	Tom can speak French, too.
+p80/d0831	no	excluded	All of a sudden, the lights went out.
+p80/d0854	no	excluded	He is a good boy, and he is very strong.
+p80/d1409	no	excluded	My name's not 'girl,' either.
+p80/d1632	no	excluded	If he is proficient in English, I'll employ him.
+p80/d2136	no	excluded	As soon as Tom heard the phone, he answered it.
+p80/d2175	no	excluded	Ah, I forgot my mobile phone.
+p80/d2462	no	excluded	All of a sudden, my mother began to sing.
+p81/d1154	no	excluded	We will defend the city also, but we won't support the Bolsheviki.
+p81/d3147	no	excluded	I warned him, but he ignored the warning.
+p82/d1623	no	contrast_correction	This is a cargo ship, not a passenger ship.
+p83/d0164	no	excluded	If you hear hoofbeats, don't look for zebras.
+p84/d0228	no	excluded	Besides the rain, we experienced heavy winds.
+p84/d2360	no	excluded	Thursday, we will go to a swimming pool.
+p84/d2424	no	excluded	Tom is overweight, but not as overweight as Mary.
+p85/d2724	no	excluded	Tom drives a sports car, doesn't he?
+p85/d3297	no	excluded	In other words, you're a fool.
+p86/d3082	no	excluded	In India, the cow is a sacred animal.
+p86/d3167	no	excluded	Treasure chests abound in the dungeon, but so do horrible monsters.
+p87/d2162	no	excluded	Mary is sensitive to light, so she wears sunglasses.
+p87/d2198	no	excluded	All of a sudden, a fire broke out in the movie theater.
+p88/d0920	no	excluded	She was a child, but she was brave.
+p88/d0931	no	excluded	Just as Max predicted, our team lost.
+p88/d1482	no	excluded	I tried to call him up, but the line was busy.
+p88/d1847	no	apposition	Then we visited Washington, D.C., the capital of the United States of America.
+p89/d0920	no	excluded	She was a child, but she wasn't afraid.
+p89/d1260	yes	borderline	Today, Stich won 6:3, 6:4 and 6:2 over Marc Rosset from Switzerland.
+p89/d2353	no	excluded	He is very intelligent, as is his brother.
+p90/d0181	no	excluded	We all caught flu, and so did the teacher.
+p90/d0942	no	excluded	It's a cliche, but it's true.
+p90/d2068	no	excluded	Pochi and Moko are in the kennel, and other dogs are playing in the garden.
+p90/d2729	no	excluded	The little girl, deeply moved by the old man's pitiful story, burst into tears.
+p90/d3208	yes	excluded	This hotel can accommodate over 1,000 guests.
+p91/d1239	yes	excluded	According to the police, 89 people were temporarily detained.
+p92/d0923	yes	excluded	He was paid 10,000 dollars.
+p92/d2088	no	excluded	If you are honest, I will hire you.
+p92/d2380	no	excluded	Tom named his squirrel Hazelnut, because it likes hazelnuts.
+p93/d0115	no	excluded	If I had money, I'd buy this computer.
+p93/d0201	no	excluded	I, as well as he, am not convinced.
+p93/d0913	yes	excluded	She has about 2,000 books.
+p93/d2681	no	list	Our sister bought some eggplants, potatoes, zucchinis and Chinese cabbage at the market.
+p94/d0704	yes	excluded	As of Friday, January 12, three people in Saskatchewan had succumbed to the storm.
+p94/d0835	no	excluded	Besides being a doctor, he was a very famous novelist.
+p94/d1295	yes	excluded	On October 2, 1942, he was at the Swiss border once again.
+p94/d1474	no	excluded	If a dog bites you, wash the wound with soap and water.
+p94/d2611	no	excluded	Three pieces, including a small one.
+p94/d2931	no	excluded	Even though we tried hard, we couldn't beat Jane.
+p95/d0849	no	excluded	She is from Hokkaido, but is now living in Tokyo.
+p95/d1388	no	apposition	Who killed Andres Escobar, the Colombian soccer player?
+p95/d1491	no	apposition	Italy has two mountain ranges, the Alps and the Apennines.
+p95/d3215	no	excluded	Though I am old, you are still young.
+p96/d0127	no	apposition	Washington, D.C., is the capital of the United States of America.
+p96/d1502	no	list	She swallowed it hook, line and sinker.
+p96/d1687	no	excluded	I was sixteen in this picture, and Tom was ten.
+p96/d1949	no	excluded	Tom hasn't eaten yet, has he?
+p96/d2500	no	asyndetic	Her very long, black eyelashes set off the aristocratic pallor of her cheeks.
+p96/d3009	no	excluded	Tom wrote a love letter to Mary, but she didn't read it.
+p96/d3019	no	apposition	A group of foreigners arrived in Edo, i.e. Tokyo.
+p97/d1143	no	excluded	One had a bottle of white Burgundy, evidently filched from the cellars of the Palace.
+p97/d1948	no	asyndetic	She wore a long, loose coat.
+p97/d3141	no	list	They kidnapped me, drugged me, and then brainwashed me.
+p97/d3194	no	excluded	In case of a fire, use the stairs.
+p98/d1926	no	excluded	Tom isn't leaving, is he?
+p98/d3222	no	excluded	All of a sudden, I saw a hare running across the field.
+p98/d3255	no	list	I am allergic to aspirin, penicillin, and sulfa drugs.
+p99/d1407	no	excluded	You had been smoking, hadn't you?
+p99/d2111	no	list	I speak English, a little Italian and Spanish.
+p99/d2531	no	excluded	She said, "He is handsome."
+p99/d2700	yes	excluded	Iceland has an area of about 103,000 square kilometres.

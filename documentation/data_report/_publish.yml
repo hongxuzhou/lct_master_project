@@ -1,0 +1,4 @@
+- source: train-rsr-base.qmd
+  posit-connect-cloud:
+    - id: 01a145e3-6bf4-2059-9611-1003b6279167
+      url: https://connect.posit.cloud/hongxuzhou/content/01a145e3-6bf4-2059-9611-1003b6279167

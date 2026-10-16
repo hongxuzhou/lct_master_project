@@ -1,0 +1,443 @@
+---
+title: "Base RSR Training Data"
+subtitle: "Construction and validation of the train set (PMB 5.1.0)"
+author: "Hongxu Zhou"
+date: last-modified
+date-format: "YYYY-MM-DD"
+lang: en-GB
+format:
+  html:
+    theme: cosmo
+    css: ../knowledge_base/styles.css
+    toc: true
+    number-sections: true
+    embed-resources: true
+---
+
+<!--
+First full draft 2026-10-15, built on Hongxu's text. Numbers from
+report_numbers.py. Switchboard comparison still to write.
+Main line: can an LLM generate RSR + SBN data good enough to be this
+project's main data source (aim 1)? If yes, use it (aim 2).
+Arc: question and answer → why → what the data look like → how they are
+generated → how quality is judged → results (edge label as the one
+complication; the training set in one paragraph) → limits, next steps.
+No round numbers, run names, file names or hashes in the main text.
+-->
+
+# At a Glance
+
+This document reports how I generated base replacement self-repair (RSR)
+data with an open-weights language model, starting from the gold train split
+of PMB 5.1.0. "Base" means that the repairs carry no editing expression such
+as "I mean" or "actually". These will be added by script in a later step.
+
+The training set now holds 3,489 RSR items, about 500 in each of seven
+categories, against 9,486 fluent PMB train sentences, a ratio of about
+1 : 2.7.^[PMB 5.1.0 has 9,552 train documents. I hold out 66 of them that
+look like a repair on the surface but are not one, such as appositions ("I'm from Wellington, the capital of New Zealand"), lists, and contrasts like "not a nurse,
+but a doctor". They are kept for a hard-negative test and appear in no
+training data.] This experiment shows that, for this project,
+generating RSR data with an LLM is a workable method. Six of the seven
+categories meet my quality thresholds through generation and automatic
+checks alone, and the seventh, edge label, meets them after I selected its
+items by hand. I will therefore build the dev and test sets in the same way.
+Before that, the next steps are to add editing expressions and to compare
+the generated repairs with repairs in Switchboard.
+
+@sec-why explains why I moved from rules to an LLM, and @sec-data shows what
+an item looks like. @sec-generation and @sec-qa describe how the items were
+generated and how I judged their quality. @sec-results gives the results. The last section covers
+limitations and next steps, and closes with one question on which I would
+like your advice (@sec-questions).
+
+# Why I do this {#sec-why}
+
+My first data pipeline was entirely rule-based. Each RSR category needed its
+own transformation script, so I had five or six scripts to maintain, and
+some categories, such as tense, still needed items written by hand. During
+my research proposal presentation, Prof Koller suggested that I consider
+generating the data with an LLM instead. Given the workload of the rule-based
+system and the number of places where it could go wrong, the suggestion made
+a lot of sense.
+
+My aim is therefore two-fold, and the second part depends on the first. I
+first want to find out how well an LLM, run on the computing resources
+available to me, can generate RSR data. Quality has two sides in this task,
+naturalness and correctness, and correctness applies to both ends, the
+sentence and its SBN. If the quality is good enough, I will then make LLM
+generation the main data source of the project.
+
+Two design principles follow from these aims, and they run through the rest
+of the document. The first is about generation. I give the model as much
+freedom as possible, so that the results measure the model's own ability. It
+is constrained only by its input, a PMB sentence with its SBN and the
+category to produce, and by a single tool, a WordNet lookup
+(@sec-generation). The second is about quality control, which follows the
+rule "selection, not correction". An item that fails a check is dropped and
+never fixed, so every item in the data is the model's own output, and the
+failure rate becomes evidence of how well the model does the task. To judge
+how correct and how natural the items are, I combine three kinds of
+evidence: automatic structural checks, manual annotation, and a comparison
+with repairs in Switchboard, which is still in progress.
+
+# What the data look like {#sec-data}
+
+In early versions of my research proposal, I used "replacement" and
+"repair" loosely for the phenomenon as a whole. From now on, RSR stands for
+replacement self-repair only, and "repair" means only the part of the
+utterance that reflects the speaker's final intention. The repair site is
+the place in the gold SBN that the repair changes, such as a concept, a name
+or the tense of a verb.
+
+Each item is built from one PMB sentence and its gold SBN. The gold sentence
+supplies the repair, and the model invents the reparandum in front of it.
+Take the gold sentence "Hebrew is my mother tongue", which becomes "Hebrew
+was, is my mother tongue". The two SBNs are shown below.
+
+```sbn
+% gold: Hebrew is my mother tongue.
+hebrew.n.01
+be.v.02             Theme -1 Time +1 Co-Theme +3
+time.n.08           EQU now
+person.n.01         EQU speaker
+mother_tongue.n.01  Creator -1
+
+% RSR: Hebrew was, is my mother tongue.
+hebrew.n.01
+                    CORRECTION <1
+be.v.02             Theme -1 Time +1
+time.n.08           TPR now
+                    CONJUNCTION <2
+be.v.02             Theme -3 Time +1 Co-Theme +3
+time.n.08           EQU now
+person.n.01         EQU speaker
+mother_tongue.n.01  Creator -1
+```
+
+If the `CORRECTION` box is deleted, what remains is exactly the gold SBN of
+"Hebrew is my mother tongue". The notation is designed so that this holds
+for every item, once any placeholder concept is merged back. Because every
+item starts from a PMB sentence with a gold SBN, a script can test this
+property automatically on each item, and most of the checks in @sec-qa rest
+on it.
+
+A good item therefore meets three conditions. The sentence and the SBN are
+both correct and agree with each other; deleting the withdrawn version gives
+back the gold meaning; and the repair sounds natural to a fluent speaker.
+
+## The seven categories
+
+I defined seven RSR categories, derived from my formalism. Each category is
+defined by what the repair replaces in the SBN, which is why the names mix
+linguistic terms such as tense with SBN terms such as edge label
+(@tbl-categories).
+
+| category | what is replaced in the SBN | example | items |
+|---|---|---|---:|
+| content word | a concept, by another of the same part of speech that is not a synonym | A baby is sleeping in *the basket*, the cradle. | 500 |
+| name | the value of a name | Were these pictures taken *in France*, in Germany? | 500 |
+| number | a quantity | The bank lent her *300*, 500 dollars. | 500 |
+| temporal | a clock time, day, month or year | I was born *in 1971*, in 1972. | 500 |
+| tense | the tense of a verb | Hebrew *was*, is my mother tongue. | 500 |
+| forwarding | the subject, with the verb said again | *John hates*, I hate spiders. | 500 |
+| edge label | the role between two concepts, or a place relation | He jumped *from*, into the train. / Tom was born *near*, in Boston. | 489 |
+| **all** | | | **3,489** |
+
+: The seven RSR categories and their size in the training set. Reparanda are shown in italics. {#tbl-categories}
+
+Two categories need a word of explanation. In forwarding, the speaker
+restarts the clause with a new subject and says the verb again. In edge
+label, the repaired word is a preposition, and in SBN the change falls on
+the role that links two concepts, such as `Source` ("from") and
+`Destination` ("into").
+
+With the balanced categories, the differences between them in
+the parsing experiments cannot come from differences in training data size.
+
+# Data generation setting {#sec-generation}
+
+@fig-pipeline shows the whole process. This section covers generation, and
+@sec-qa covers the checks and annotation that follow.
+
+```{mermaid}
+%%| label: fig-pipeline
+%%| fig-cap: "From a PMB entry to the training set."
+flowchart LR
+  P["PMB entry<br/>+ category"] --> L["LLM<br/>(+ WordNet lookup)"]
+  L --> C{"automatic<br/>checks"}
+  C -- fail --> X["dropped"]
+  C -- pass --> A["six categories:<br/>sample annotated"]
+  C -- pass --> S["edge label:<br/>every item judged"]
+  A --> T["sampling<br/>(about 500 per category)"]
+  S --> T
+  T --> D["training set"]
+```
+
+From the items that pass, I drew a simple random sample of 500 per category
+with a fixed seed. Edge label, with fewer items kept, contributes all of its
+489. Before sampling, small surface slips such as letter case and quote
+marks were fixed.
+
+## Model and data
+
+I used [Muse-Glimmer-30B](https://huggingface.co/meta-models/Muse-Glimmer-30B),
+an open-weights model, on PMB 5.1.0 train gold. I chose it for what the task
+needs. It can call an external tool over several turns, which the WordNet
+lookup requires, and it returns its answer in a fixed structure that holds
+the sentence and the SBN together. As a 30B model, it can also run on a single
+GPU of the LST cluster, and because the weights are open, every run can be
+repeated on university hardware. All runs use the same sampling
+settings.^[Reasoning effort high, temperature 1.0, top-p 0.95, top-k 64,
+seed 13.] The results in @sec-results show that the model is up to the task.
+
+## Input and prompt
+
+Each request consists of the prompt and one PMB entry, that is, a gold
+sentence and its gold SBN, together with the category to produce. The prompt
+is shared by all categories and has three parts.
+
+1. An SBN manual, which tells the model how to annotate a sentence in SBN.
+   It is a stand-alone document based on Bos' papers ([2021](https://www.semanticscholar.org/paper/Variable-free-Discourse-Representation-Structures-*-Bos/6d3b8e54d183a9fdda186f986b319c55c85a6c06),  [2023](https://aclanthology.org/2023.iwcs-1.20/)) and
+   the annotation practice in PMB gold.
+2. The repair notation, which explains how to annotate an utterance with RSR
+   in the `CORRECTION`–`CONJUNCTION` construction. It is derived from my
+   [notation document](https://hongxuzhou.github.io/lct_master_project/).
+3. The task, which asks the model to read both sides of the PMB entry and
+   add an RSR of the given category to both.
+
+Every example in the prompt was checked automatically for well-formed SBN,
+and the PMB documents that supply these examples are excluded from the data.
+
+Within the given category, the model decides everything else: where the
+repair occurs, which word it uses as the reparandum, and how the sentence
+and the SBN are written. If a sentence offers no suitable site, the prompt
+allows the model to decline. It has one attempt per item, with no retry and
+no self-check, because retrying until an item passes would hide how often
+the model fails.
+
+Two categories have less freedom. For some temporal items and for the place
+repairs in edge label, the input also names the site to repair, and these
+make up more than half of the final items in both categories. Temporal
+needed this because only 297 train documents contain a usable time
+expression, so many of them had to yield a second item. The reason for
+edge label is given in @sec-edge.
+
+## Tool calling
+
+The model's only tool is a WordNet lookup. Concepts in SBN are WordNet 3.0
+synsets, so a concept outside WordNet cannot be represented, and the model
+needs a way to check what it writes. The lookup lists the senses of a word
+with their definitions and confirms whether a concept exists. It shows no
+synonyms or hypernyms and offers no list of candidate replacements, so the
+model has to come up with the reparandum itself. I kept the tool this narrow
+on purpose. A list of candidates would decide in advance which slips are
+believable, and that judgement is part of what I want to test.
+
+# Quality assurance setting {#sec-qa}
+
+Each kind of evidence answers a different question.
+
+1. The automatic checks run on every item and ask whether it is well-formed
+   and faithful to its gold SBN. An item that fails is dropped.
+2. The manual annotation reads a sample of the items that pass and asks what
+   the checks cannot see: whether the SBN is correct and whether the
+   repair sounds natural.
+3. The Switchboard comparison will describe how the generated repairs relate
+   to repairs in real speech. 
+
+Whether a category can enter the data is decided by four thresholds
+(@tbl-thresholds). 
+
+
+::: {.callout-caution}
+
+The figures come from my experience as an annotator, as I
+know of no established standard for data of this kind.
+
+:::
+
+I fixed them before
+seeing any results, so that I could not adjust them to fit.
+
+| evidence | measure | threshold |
+|---|---|---:|
+| automatic checks | answered items that pass every check | ≥ 95% |
+| automatic checks | sentences the model declines | ≤ 3% |
+| manual annotation | items correct in meaning | ≥ 90% |
+| manual annotation | items that sound natural | ≥ 80% |
+
+: Thresholds for admitting a category. {#tbl-thresholds}
+
+## Structural checks
+
+The checks fall into five groups (@tbl-checks).
+
+| check group | an item fails if |
+|---|---|
+| well-formed graph | the SBN is not well-formed or has a cycle, a pointer lands on no concept, or a concept is not in WordNet |
+| graph returns to gold | deleting the withdrawn version, and merging back any placeholder concept, does not give back exactly the gold SBN, or something away from the repair site has changed |
+| sentence and graph agree | the sentence does not match the SBN, for example because the words out of the RSR span are also changed by the model, or the model chooses a reparandum that is identical to the repair (i.e., resulting in a repetition). |
+| site within the category | the repair site is not one the category allows, such as one place inside the other ("Osaka, Japan") |
+| a repair, not a synonym | the reparandum and the repair belong to the same WordNet synset, as "sofa" and "couch" do; however, a more general or a more specific word is allowed |
+
+: The five groups of automatic checks. {#tbl-checks}
+
+## Manual annotation
+
+From the items that pass every check, I draw 15 per category at random and
+read them one at a time, without seeing the category or any check result.
+For each item I answer two questions: does the repaired SBN mean what the
+repaired sentence says, and is the repair natural? By natural I mean
+acceptable to a fluent speaker, that is, grammatical, recognisable as a
+repair, and with both versions recoverable. This is different from typical
+of speech, which is a question for the Switchboard comparison. Either answer
+may be "unsure", and I compute the rates over yes and no answers only. No
+sampled item was used to develop the prompt.
+
+## Switchboard comparison
+
+🚧 Under construction. 🚧
+
+I compare the synthesised items with the RSR in NXT Switchboard. Each
+measure looks at the head word of the reparandum and of the repair, and
+follows [SPACER](https://aclanthology.org/2025.cmcl-1.19/), which describes
+single-word substitution repairs from Switchboard in the same way.
+
+ - Word frequency: how common each word is in English, as its Zipf
+   frequency in SUBTLEXus.
+ - Semantic distance: how far apart the two words are in meaning, as the
+   cosine distance between their GloVe vectors.
+ - Phonetic distance: how different the two words sound, as the edit
+   distance between their pronunciations in the CMU dictionary.
+ - Surprisal: how unexpected each word is in its place, as scored by a
+   language model given the same left context, which ends before the
+   repair site.
+
+The comparison is descriptive. This project is about a meaning
+representation for RSR and a parser for it, not about how closely the data
+matches natural speech. So, I will not remove data for being unlike Switchboard.
+
+
+# Results {#sec-results}
+
+## Quality by category
+
+@tbl-results sets each category against the thresholds.
+
+| category | passed checks | correct in meaning | natural |
+|---|---:|---:|---:|
+| content word | 93.2% | 14/14 | 14/14 |
+| name | 95.5% | 11/11 | 14/14 |
+| number | 94.6% | 13/13 | 10/11 |
+| temporal | 96.9% | 15/15 | 14/14 |
+| tense | 96.1% | 15/15 | 14/14 |
+| forwarding | 96.3% | 4/4 | 11/12 |
+| edge label | 97.1% | 32/33 | **14/29** |
+| *threshold* | *≥ 95%* | *≥ 90%* | *≥ 80%* |
+
+: Automatic checks and manual annotation by category. Check rates are over
+answered items, from one run per category (5,984 items for the first six,
+377 for edge label). Annotation counts are yes / (yes + no) on 15 items per
+category (34 for edge label), with unsure answers left out. Edge label was
+annotated on a run with the same prompt as its check rate. {#tbl-results}
+
+All six categories other than edge label pass both annotation thresholds.
+The samples are small, though. With 15 items even a perfect score is
+compatible with a true rate as low as 80% (95% Wilson interval), so the
+annotation shows that no category is clearly failing but cannot rank them.
+
+Content word and number fall just short of the check threshold. For content
+word this is due to synonyms, which only this category can produce; without
+them it passes 96.5%. Since failing items are dropped, the shortfall costs
+items but does not lower the quality of those kept. The model declined fewer
+than ten of nearly 6,000 sentences. What the failures consist of is more
+telling.  
+
+::: {.callout}
+Ill-formed SBN is rare (30 items). More often the model changed
+something the repair did not ask for, for instance by putting the two
+versions the wrong way round ("covered in pigeon, crow poop" for a gold
+sentence about pigeon poop). The model finds it harder to change exactly
+what the repair requires than to write well-formed SBN.
+:::
+
+
+## Edge label: the exception {#sec-edge}
+
+Edge label was the hardest category to generate. It is the only one that
+does not meet the thresholds through generation and automatic checks alone.
+Its repairs pass the checks (97.1%) and are almost always correct in
+meaning, but many do not sound natural. In the final round of iteration, of the 988 edge-label items that
+passed the checks, I judged only 489 natural, about half.
+
+No simple rule separates the natural items from the unnatural ones. Verbs
+that express a direction rarely allow a natural swap (e.g., "A lion escaped to, from the zoo"). For other
+verbs the judgement depends on tense and aspect. "Tom has gone from, to
+Boston" also sounds odd because "has gone" is close to a fixed expression for
+having left. No list of verbs could capture this.
+
+Several rounds of prompt revision did not raise this share. The only way to
+a usable set was therefore to read every item that passed the checks and
+keep the natural ones. I expect that I need to do the same for dev/test sets. 
+
+# Limitations and next steps {#sec-limits}
+
+The evidence behind this answer has at least three main limits.
+
+- **One annotator.** All annotation and the edge-label selection rest on my
+  intuition. Considering that 1. I am not a native speaker of English, 2. intra-annotator drift exists, and 3. I only annotated the dataset once, the quality of the dataset can be questionable.
+- **Samples and upper bounds.** Apart from edge label, no category was read
+  in full. There might exist data that in fact be wrong but can pass the structural check. 
+- **Written source.** PMB sentences are short written text, and the repairs
+  are constructed, not observed. Natural here means acceptable to a fluent
+  speaker, which the Switchboard comparison can complement but not replace.
+
+
+Three steps come next. I will first add editing expressions ("I mean", "no",
+"no wait", "actually") by script to a fixed share of the items (10%), which gives
+matched pairs of the same repair with and without an expression. "Sorry" is
+kept back for the test set as an unseen expression. 
+
+After that, I plan to mix the synthesised RSR data with PMB Train Gold and upload it to HuggingFace as the train set. 
+
+I will then build the dev and test sets from PMB's own
+splits with the same prompts and checks, after completing the Switchboard
+comparison.
+
+## Questions for my supervisors {#sec-questions}
+
+1. Should dev and test be annotated more heavily than train, for example in
+   full? They are smaller, and an error there affects the evaluation
+   directly.
+
+# Appendix {.appendix}
+
+## Examples per category
+
+| category | examples |
+|---|---|
+| content word | My wife is a good baker, cook. / They hugged, kissed inside the planetarium. |
+| name | Were these pictures taken in France, in Germany? / I do a training at General Motors, Ford. |
+| number | My watch is three, five minutes fast. / Tom was 25, 30 years old. |
+| temporal | I'll pick you up at 3:30, 2:30. / We have lunch at eleven, midday. |
+| tense | Tom loved, loves tulips. / He bows, bowed to the Queen. |
+| forwarding | Jim passed out, Tom passed out from the heat. / John slapped, I slapped his face. |
+| edge label | There is a glass under, on the table. / She used to live near, in Tel Aviv. |
+
+: Examples from the training set, drawn at random. {#tbl-examples}
+
+## Failures per category
+
+| category | answered | well-formed graph | graph returns to gold | sentence and graph agree | site within the category | a repair, not a synonym |
+|---|---:|---:|---:|---:|---:|---:|
+| content word | 3,341 | 15 | 78 | 78 | 19 | 113 |
+| name | 759 | 3 | 10 | 15 | 11 | 0 |
+| number | 597 | 4 | 21 | 12 | 5 | 0 |
+| temporal | 228 | 1 | 4 | 3 | 1 | 0 |
+| tense | 760 | 5 | 8 | 22 | 4 | 0 |
+| forwarding | 299 | 2 | 6 | 6 | 5 | 0 |
+
+: Failures by category and check group for the first six categories (an
+item can fail more than one group). {#tbl-failcat}
+

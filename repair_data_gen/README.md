@@ -18,7 +18,8 @@ person.n.01 EQU speaker mother_tongue.n.01 Creator -1
 
 | file | items | status |
 |---|---:|---|
-| [`rsr_generation/dataset/train_rsr.base.tsv`](rsr_generation/dataset/README.md) | 3,495 (7 repair types, ~500 each) | frozen 2026-10-13; no editing expressions yet |
+| [`rsr_generation/dataset/train_rsr.base.tsv`](rsr_generation/dataset/README.md) | 3,489 (7 repair types, ~500 each) | frozen 2026-10-13, hard negatives removed 2026-10-16; no editing expressions yet |
+| [`hard_negatives/train_holdout.tsv`](hard_negatives/README.md) | 66 train documents | held out of all training data |
 | dev, test | – | not built |
 
 How it was made, in one paragraph: an LLM (Muse-Glimmer-30B) received a gold

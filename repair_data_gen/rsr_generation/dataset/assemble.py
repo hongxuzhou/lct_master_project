@@ -13,6 +13,13 @@ Decided by the user, 2026-10-13:
   new subject.
 No interregnum, no marked/base assignment: this is the base set.
 
+Decided by the user, 2026-10-16: no item comes from a document in the
+hard-negative hold-out (`../hard_negatives/`). The 2026-10-13 draw is kept as
+it was; its items on held-out documents are dropped and the gap is filled by a
+second simple random sample (seed REFILL_SEED) from the type's remaining
+pool items on other documents. Edge label is not refilled (no other item is
+labelled natural), so it has fewer than 495.
+
 Every row is checked again here (all automatic checks, `pin`, the repair-part
 check, and the text outside the repair against gold); the script stops if any
 row fails. The manifest records the seed, sha256, counts, distinct source
@@ -30,11 +37,14 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 PLAY = HERE.parent
 sys.path.insert(0, str(PLAY))
+sys.path.insert(0, str(PLAY.parent / 'hard_negatives'))
+import holdout  # noqa: E402
 from audit import auto_pass, read_labels  # noqa: E402
 from check_repair_part import problems  # noqa: E402
 
 csv.field_size_limit(10 ** 9)
 SEED = 20261013
+REFILL_SEED = 20261016
 QUOTA = 500
 TYPES = ['content_word', 'constant_name', 'constant_number', 'constant_temporal',
          'tense', 'forwarding', 'edge_label']
@@ -116,16 +126,26 @@ def prop(r):
 
 def main():
     pool = read(HERE / 'pool_fixed.tsv')
+    held = holdout.load()
     rng = random.Random(SEED)
-    rows = []
+    refill_rng = random.Random(REFILL_SEED)
+    rows, dropped, refilled = [], Counter(), Counter()
     for t in TYPES:
         if t == 'edge_label':
-            rows += edge_selection(pool)
+            picked = edge_selection(pool)
+            rows += [r for r in picked if r['doc_id'] not in held]
+            dropped[t] = len(picked) - sum(r['doc_id'] not in held for r in picked)
             continue
         cand = sorted((r for r in pool if r['repair_type'] == t),
                       key=lambda r: (r['source_file'], r['doc_id'], r['nl_repair_model']))
-        for r in rng.sample(cand, QUOTA):
+        drawn = rng.sample(cand, QUOTA)
+        kept = [r for r in drawn if r['doc_id'] not in held]
+        rest = [r for r in cand if r['doc_id'] not in held and not any(r is d for d in drawn)]
+        extra = refill_rng.sample(rest, QUOTA - len(kept))
+        dropped[t], refilled[t] = QUOTA - len(kept), len(extra)
+        for r in kept + extra:
             rows.append(dict(r, label_source='auto_pass', audit_ref=''))
+    assert not {r['doc_id'] for r in rows} & held, 'held-out document in the set'
     rows.sort(key=lambda r: (TYPES.index(r['repair_type']), r['doc_id'], r['nl_repair']))
     for i, r in enumerate(rows):
         r['item_id'] = f'rsr_train_{i:04d}'
@@ -165,9 +185,14 @@ def main():
         file=OUT.name, sha256=hashlib.sha256(OUT.read_bytes()).hexdigest(),
         pool_file='pool_fixed.tsv',
         pool_sha256=hashlib.sha256((HERE / 'pool_fixed.tsv').read_bytes()).hexdigest(),
-        seed=SEED, quota=QUOTA, items=len(rows),
+        seed=SEED, refill_seed=REFILL_SEED, quota=QUOTA, items=len(rows),
+        holdout_file='../hard_negatives/train_holdout.tsv', holdout_sha256=holdout.SHA256,
+        holdout_docs=len(held), dropped_for_holdout=dict(dropped),
+        refilled=dict(refilled),
         distinct_docs=len({r['doc_id'] for r in rows}),
-        sampling='simple random per type (fixed seed); edge label = all 495 labelled natural',
+        sampling='simple random per type (fixed seed); items on held-out documents '
+                 'dropped and refilled by a second random sample (refill_seed); '
+                 'edge label = all items labelled natural, minus held-out documents',
         per_type=per_type)
     MANIFEST.write_text(json.dumps(manifest, indent=1, ensure_ascii=False) + '\n')
     print(f'{len(rows)} items, {manifest["distinct_docs"]} documents, all checks pass')

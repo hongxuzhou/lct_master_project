@@ -4,7 +4,7 @@
 
 > **2026-09-28 更新**：第十四节根据 RP v3 对照结果裁定了若干冲突。**凡与前面各节冲突之处，以第十四节为准**（取代关系见 14.1）。
 >
-> **2026-10-13 更新**：训练数据改由 LLM 生成，train 已冻结（3,495 条）。第五节已按现状重写；数据的完整说明在 [`repair_data_gen/`](../repair_data_gen/README.md)。
+> **2026-10-13 更新**：训练数据改由 LLM 生成，train 已冻结（3,489 条；2026-10-16 去掉了硬负例文档上的条目）。第五节已按现状重写；数据的完整说明在 [`repair_data_gen/`](../repair_data_gen/README.md)。
 
 这份文档记录的是论文 Model 部分经过几轮讨论后**确定下来**的实验方案。它不是论文草稿，也不是代码说明，而是一份给未来的自己看的工作记录：几周之后回来看，你会记得做了什么决定，但很可能忘记**为什么**那么决定。所以下面每个决定后面都跟着一行理由。
 
@@ -368,7 +368,7 @@ PMB 5.1.0 的 gold 部分：
 
 ### 5.3 语料规模
 
-**train 已冻结（2026-10-13）**：`train_rsr.base.tsv`，3,495 条，3,170 篇源文档，尚未插入改口标记词。
+**train 已冻结（2026-10-13）**：`train_rsr.base.tsv`，3,489 条，3,165 篇源文档，尚未插入改口标记词。2026-10-16 按硬负例留出删去 27 条、补回 21 条（边标签无可补，见 7.1）。
 
 | 类型 | train |
 |---|---:|
@@ -378,13 +378,13 @@ PMB 5.1.0 的 gold 部分：
 | 常量 × 时间 | 500 |
 | 时体（tense） | 500 |
 | 转发（forwarding） | 500 |
-| 边标签（含空间介词） | 495 |
-| **合计** | **3,495** |
+| 边标签（含空间介词） | 489 |
+| **合计** | **3,489** |
 
 - **七类均分**，是为了让类型之间的比较少一个"训练量不同"的解释。类内按候选池比例简单随机抽样（seed 20261013），不做类内平衡。
 - **时体恢复**：当初移出它，是因为规则生成器缺多概念 span 的支持；LLM 生成没有这个限制。
 - **边标签**是唯一人工筛选的类型（自然度审核 48%，低于 80% 的阈值），差 5 条到 500。
-- **每源文档最多 2 条**改为报告要求，不再是筛选规则：temporal 只有 297 篇合格文档，其中 210 篇各出 2 条。
+- **每源文档最多 2 条**改为报告要求，不再是筛选规则：temporal 只有 297 篇合格文档，其中 213 篇各出 2 条。
 - **dev / test 尚未生成**，按 PMB 自己的划分、用同一流程另做。原先 dev / test 的配额没有重新评估。
 
 **重要原则：配额是上限，不是必须凑满的硬指标。** 某一类合格条目不够就让它少，不为凑数放松质量标准。
@@ -392,7 +392,7 @@ PMB 5.1.0 的 gold 部分：
 ### 5.4 改口数据和流利数据的比例
 
 **目标比例约为 改口 : 流利 = 1 : 2 到 1 : 4。**
-**实际比例**：3,495 : 9,447 ≈ **1 : 2.7**。总量 3,500、每类 500 是在任何训练结果出来之前定的（2026-10-10），没有调过；论文里报告"在这个比例下"的结果。
+**实际比例**：3,489 : 9,486 ≈ **1 : 2.7**。总量 3,500、每类 500 是在任何训练结果出来之前定的（2026-10-10），没有调过；论文里报告"在这个比例下"的结果。
 
 **为什么改口数据不能占多数**——这是整个数据设计里最重要的一条理由：
 
@@ -400,7 +400,7 @@ pilot 已经证明模型**已经在过度生成结构**。要扭转的先验是"
 
 **必须保留流利数据作为负例。** 也就是目标里**完全不含** `CORRECTION` 的样本。没有它们，就没有"什么时候**不该**产出这个构式"的信号。
 
-**关于两组训练数据量不等的问题**（C1 是 9,447 篇，C3 是 9,447 + N 条）：
+**关于两组训练数据量不等的问题**（C1 是 9,486 篇，C3 是 9,486 + N 条）：
 
 这个不等是**故意保留**的。强行配平只有两种做法，都更糟：砍掉等量的 PMB（破坏上面的负例论证），或者复制 PMB 凑数（引入重复曝光这个新混淆）。
 
@@ -622,7 +622,9 @@ C2 和 C3 的 **dev 目标分布不同**——C2 的 RSR 条目配的是流利�
 3. 从 **RSR 生成的源句池中删除**，否则它们的改口变体会从另一条路径漏回训练集；
 4. 在**任何 smoke run 或检查点选择之前**把名单**冻结**并存档。
 
-**结果**：留出的 105 篇 + test_standard 的 30 篇 = **135 篇候选**，筛选后估计 **40–50 篇**真正可用。训练集从 9,552 降到 **9,447**（−1.1%）。
+**结果**：留出的 105 篇 + test_standard 的 30 篇 = **135 篇候选**，筛选后估计 **40–50 篇**真正可用。训练集从 9,552 降到 **9,447**（−1.1%）。（原计划数字；实施结果见下。）
+
+> **2026-10-16 实施**：上面 105 的筛选规则没有记录，无法复现。按本节标准对 train gold 全部 352 个含逗号文档逐句重标，留出 66 篇（含 7 篇对比纠正和 5 篇边界句），训练集 **9,486** 篇（−0.7%）。名单与加载器在 [`repair_data_gen/hard_negatives/`](../repair_data_gen/hard_negatives/README.md)；第 3 条（RSR 源句池）由 `select_docs.py` 和 `assemble.py` 执行。
 
 > ⏰ **这条有时效。** 它改变的是数据划分，**必须在冻结语料之前定**，之后改不了。
 
@@ -633,7 +635,7 @@ C2 和 C3 的 **dev 目标分布不同**——C2 的 RSR 条目配的是流利�
 >
 > 论文里应当称它为 **custom held-out diagnostic set**，不要暗示训练用的还是原封不动的 PMB train split：
 >
-> > Surface-similar non-repair controls are held out at the document level before fine-tuning, yielding a custom training partition of 9,447 documents. All training conditions use this identical reduced partition; absolute figures are therefore not directly comparable with parsers trained on the standard PMB split.
+> > Surface-similar non-repair controls are held out at the document level before fine-tuning, yielding a custom training partition of 9,486 documents. All training conditions use this identical reduced partition; absolute figures are therefore not directly comparable with parsers trained on the standard PMB split.
 
 **这个取舍值得做吗**——我的判断是值得：用 1.1% 的训练数据换一个**全新的评测维度**（模型会不会在像改口但不是改口的句子上误报），而这个维度目前完全没有被测到。但如果你更看重与既有 PMB 数字的可比性，可以只用 test_standard 那 8–10 篇做**定性探针**，不改划分——那样就拿不到任何统计量。**二选一，不能两全。**
 
@@ -1060,7 +1062,7 @@ pilot 就是这么做的：2,499 条输入先折成 833 个配对观测再检验
 
 ### 10.1 两个训练条件的数据量不等
 
-C1 是 9,447 篇，C3 更多。这个混淆**不可能**靠配平消除（见 5.4），只能靠 C2 隔离。
+C1 是 9,486 篇，C3 更多。这个混淆**不可能**靠配平消除（见 5.4），只能靠 C2 隔离。
 
 > The two supervision conditions necessarily differ in training volume, since removing the fluent negatives from the mixture would remove the very signal the design depends on. C1 vs C3 therefore measures *the effect of adding repair-aware training data*. The term *supervision effect* is reserved for C2 vs C3, which holds inputs, example count and optimizer steps fixed and varies only the target representation.
 
@@ -1134,7 +1136,7 @@ oracle-cleaned 参照条件使用了推理时**不可获得**的 gold 改口信�
 
 ### 10.10 训练用的不是原封不动的 PMB 划分
 
-为了让硬负例不泄漏，105 篇表面相似的非改口文档在训练前被**按文档留出**，训练划分因此是 **9,447** 篇而非标准的 9,552 篇。
+为了让硬负例不泄漏，66 篇表面相似的非改口文档在训练前被**按文档留出**，训练划分因此是 **9,486** 篇而非标准的 9,552 篇。
 
 **三个后果，都要写明**：
 
@@ -1142,7 +1144,7 @@ oracle-cleaned 参照条件使用了推理时**不可获得**的 gold 改口信�
 2. pilot 的流利基线（F1 0.950 / 合法率 97.5%）是在完整划分上测的，与新的 C1 不严格可比——**内部**比较（C1/C2/C3 之间）不受影响，因为三者共用同一个缩减集；
 3. 这个缩减集对**所有条件**都必须完全一致，否则会引入一个新的条件间差异。
 
-> Surface-similar non-repair controls are held out at the document level before fine-tuning, yielding a custom training partition of 9,447 documents. All training conditions use this identical reduced partition. Absolute figures are therefore not directly comparable with parsers trained on the standard PMB split; comparisons within this study are unaffected.
+> Surface-similar non-repair controls are held out at the document level before fine-tuning, yielding a custom training partition of 9,486 documents. All training conditions use this identical reduced partition. Absolute figures are therefore not directly comparable with parsers trained on the standard PMB split; comparisons within this study are unaffected.
 
 **替代方案**（若更看重与既有数字的可比性）：不改划分，只用 test_standard 里那 8–10 篇做**定性探针**。代价是拿不到任何关于误报的统计量。二选一。
 
@@ -1164,7 +1166,7 @@ oracle-cleaned 参照条件使用了推理时**不可获得**的 gold 改口信�
 
 ### 第 3 步：冻结语料范围
 
-**已完成（train，2026-10-13）**：七类、3,495 条，见 5.3。时体恢复；NLI 不作过滤器（5.6）。
+**已完成（train，2026-10-13）**：七类、3,489 条，见 5.3。时体恢复；NLI 不作过滤器（5.6）。
 
 ### 第 4 步：补评分代码
 
@@ -1182,14 +1184,14 @@ oracle-cleaned 参照条件使用了推理时**不可获得**的 gold 改口信�
 
 ### 第 5b 步：硬负例（**有时效，必须在冻结数据前做**）
 
-1. 在 train_gold 里找出那 105 篇"不含数字的逗号并置句"文档，**训练前按文档整体留出**；
+1. ✅（2026-10-16，66 篇，见 7.1）在 train_gold 里找出那 105 篇"不含数字的逗号并置句"文档，**训练前按文档整体留出**；
 2. 从 **C1 / C2 / C3 的全部训练数据**中删除——三个条件必须用**完全相同**的缩减训练集；
 3. 同时把它们**从 RSR 生成的源句池里排除**（否则改口变体会从另一条路漏回训练集）；
 4. **冻结名单并存档**，且必须在任何 smoke run 或检查点选择**之前**完成；
 5. 和 test_standard 的 30 篇合并，筛掉反义疑问句／状语前置／条件从句／日期，估计剩 **40–50 篇**；
 6. 带着原有 gold SBN 直接进测试集。
 
-训练集从 9,552 降到 **9,447**（−1.1%）。**这不是零成本**：它改动了 PMB 的标准划分，所有条件必须在同一个缩减集上重建，且与其他 PMB 解析器的公开数字不再完全可比（见 7.1 的 ⚠️ 和 10.10）。
+训练集从 9,552 降到 **9,486**（−0.7%）。**这不是零成本**：它改动了 PMB 的标准划分，所有条件必须在同一个缩减集上重建，且与其他 PMB 解析器的公开数字不再完全可比（见 7.1 的 ⚠️ 和 10.10）。
 
 ### 第 5c 步：补挑战集控制样本
 
@@ -1234,13 +1236,13 @@ oracle-cleaned 参照条件使用了推理时**不可获得**的 gold 改口信�
 | PMB gold train 里含 `CONTINUATION` 的多句文档 | 337（3.53%） |
 | 训练划分里合法的改口站点 | 16,425 |
 | 只能用移位装置的站点 | 525（481 形容词、44 动词、0 名词） |
-| RSR 训练集（已冻结，2026-10-13） | 3,495 条（七类，边标签 495，其余各 500） |
+| RSR 训练集（已冻结，2026-10-13） | 3,489 条（七类，边标签 489，其余各 500） |
 | 改口 : 流利 比例 | 约 1:2.7 |
 | 挑战集（主类） | 40 anaphora + 40 cross-turn |
 | 挑战集控制样本（新增） | 15–20 + 15–20 |
 | 逗号并置句（去数字后）train / dev / test | 105 / 24 / 30 |
-| 硬负例：train 留出 105 + test 30，筛后估 | **40–50 篇** |
-| **留出后的训练集（三个条件共用）** | **9,447 篇**（−1.1%） |
+| 硬负例：train 留出（2026-10-16 实施） | **66 篇** |
+| **留出后的训练集（三个条件共用）** | **9,486 篇**（−0.7%） |
 | train_gold 记录数 = 唯一文档 id 数 | 9,552 = 9,552（留出单位＝文档） |
 | PMB gold 里 `I mean` / `no wait` / `actually` 出现次数 | **0 / 0 / 1**（共 11,940 条） |
 
@@ -1354,7 +1356,7 @@ oracle-cleaned 参照条件使用了推理时**不可获得**的 gold 改口信�
 - accepted-meaning（Metric B）的**定义域**：只对句内改口有定义，挑战集按定义不计算。闸门一划的界线恰好是"改口止于本句"vs"改口之上还建了语篇"——**一个从句同时交代指标定义域和挑战集边界**；
 - anaphora 证据规模（核心主张只压在这一类上）；
 - fluent-only 是**重训**，不是复用 pilot checkpoint；
-- 9,447 缩减划分 + 评分器副本 ⟹ pilot 数字仅作诊断参照。**一句封两条**：
+- 9,486 缩减划分 + 评分器副本 ⟹ pilot 数字仅作诊断参照。**一句封两条**：
 
   > All main-study conditions, including the fluent-only baselines, are trained on the same reduced partition and scored with a single current toolkit. The completed pilot used the standard PMB partition and a frozen scorer snapshot, so its figures provide diagnostic context rather than directly comparable baselines.
 
@@ -1391,7 +1393,7 @@ oracle-cleaned 参照条件使用了推理时**不可获得**的 gold 改口信�
 | "remaining work will add … **tense, aspect**" | 5.3 | 时体需多概念转换，列为后续扩展 |
 | quotas over "… and **reparandum position**" | 10.5 | 只按替换类型；并说明位置不作采样轴的理由 |
 
-**必须补的**：marked/unmarked 两版共享同一 target（测试配对、训练不配对，带标记约占三成）；marker 封闭集合 + 留出一个；同一 WordNet 词对不跨划分；hard negatives 按文档留出 → **9,447**，所有条件共用；challenge 四类（含两类控制），第三类给规模；流利数据作为负例保留的理由；配额是**上限**不是产量承诺；同一流程也应用于 dev/test；funnel 表后说明 9,552 与 9,447 的关系。
+**必须补的**：marked/unmarked 两版共享同一 target（测试配对、训练不配对，带标记约占三成）；marker 封闭集合 + 留出一个；同一 WordNet 词对不跨划分；hard negatives 按文档留出 → **9,486**，所有条件共用；challenge 四类（含两类控制），第三类给规模；流利数据作为负例保留的理由；配额是**上限**不是产量承诺；同一流程也应用于 dev/test；funnel 表后说明 9,552 与 9,486 的关系。
 
 **必须收紧**：删掉语料构造段里 "allowing errors to propagate between stages" + "By contrast"——那是不会被检验的比较性优势断言，且原文 "Evaluating **it**" 的 *it* 指的是规则转换，并没有声明"不与 detect-then-parse 基线比较"。改为明写**本研究不比较 inference architectures**。
 
@@ -1411,7 +1413,7 @@ oracle-cleaned 参照条件使用了推理时**不可获得**的 gold 改口信�
 
 ### 13.7 RP 通过后的执行顺序
 
-1. **冻结并存档硬负例文档清单** → 生成 9,447 缩减划分；
+1. **冻结并存档硬负例文档清单** → 生成 9,486 缩减划分；
 2. 从三个条件的训练数据**与 RSR 源句池**中一致排除；
 3. 2B / 9B / 27B 三个 smoke run（含终止符回归测试）；
 4. 据实测资源在 13 / 10 / 7 中**冻结 tier**；
@@ -1538,7 +1540,7 @@ window.n.01
 
 ### 14.7 保持不变
 
-- 硬负例按文档留出 105 篇，训练集为 **9,447** 篇（7.1、10.10）
+- 硬负例按文档留出 66 篇，训练集为 **9,486** 篇（7.1、10.10）
 - oracle-cleaned 参照条件与预测式 pipeline baseline（8.9、8.10）
 - 后续指代挑战集的四类设计与三个二值指标（7.1、8.8）
 - A1 精确率只在正负混合的集合上算（7.1、8.11）
@@ -1580,10 +1582,10 @@ window.n.01
 20. **不要说端到端优于"pipeline 方法"** —— 只优于**一个具体实例化的零样本 detect-then-parse pipeline**。而且检测器要跑在 Qwen3.5 上，否则混入家族差异。
 21. **不要写"C1 和 C2 的 Metric A 必然为 0"** —— 写 *expected to obtain little repair-structure credit; their scores function as controls*。它们的分是测出来的，不是定义出来的。
 22. **不要同时报误报率和 specificity** —— 互为补数，选**误报率**（与流利 PMB 口径一致）。
-23. **不要说训练用的是标准 PMB 划分** —— 留出 105 篇之后是 **9,447** 篇的 custom partition，绝对值与他人数字不再直接可比（见 10.10）。
-24. **不要把硬负例留出说成"几乎免费"** —— 1.1% 的数据代价很小，但它改动了标准划分，这是要在论文里交代的。
+23. **不要说训练用的是标准 PMB 划分** —— 留出 66 篇之后是 **9,486** 篇的 custom partition，绝对值与他人数字不再直接可比（见 10.10）。
+24. **不要把硬负例留出说成"几乎免费"** —— 0.7% 的数据代价很小，但它改动了标准划分，这是要在论文里交代的。
 25. **不要把 controls 的分数叫 lower bound / floor / 分母** —— recall 不惩罚多余结构 + 模型倾向过度生成 ⟹ control 可能反超。叫 *empirical reference points without repair-aware target supervision*（见 13.2）。
-26. **不要把每类 500 条说成产量承诺** —— 5.3 写的是"**配额是上限**"（边标签就只有 495）。写 *targets up to …; quotas are caps rather than minimum yields*。
+26. **不要把每类 500 条说成产量承诺** —— 5.3 写的是"**配额是上限**"（边标签就只有 489）。写 *targets up to …; quotas are caps rather than minimum yields*。
 27. **不要把 NLI 的校准失败推广到 plausibility 过滤器** —— 5.6 只处置了 NLI。plausibility 的状态未定，既不能写"已校准"也不能写"已取消"（见 13.8）。
 28. **不要把"未完整传播训练随机性"这条限定写进单一 tier 分支** —— 它对所有 tier 成立。写进分支会生成"多 run 就估计了训练变异"的反向暗示（见 13.4）。
 29. **不要把 normalisation-target parser 叫 pipeline baseline** —— 它是 RSR 输入直接生成 SBN 的端到端解析器，只是目标是流利 SBN。
