@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RSR Hand Check</title>
+<style>
+:root {
+  --bg: #f7f6f3; --card: #ffffff; --ink: #1d1d1f; --muted: #6b6b70; --line: #dedcd6;
+  --accent: #2f5fd0; --rm: #b4441f; --rm-bg: #fbeee8; --rp: #1f7a4d; --rp-bg: #e8f5ee;
+  --yes: #1f7a4d; --no: #b4441f; --unsure: #8a6d1a;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #17171a; --card: #212125; --ink: #ececef; --muted: #9a9aa2; --line: #36363c;
+    --accent: #7ea2ff; --rm: #f08a66; --rm-bg: #3a2620; --rp: #62c999; --rp-bg: #1d3329;
+    --yes: #62c999; --no: #f08a66; --unsure: #e2c25c;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink);
+  font: 15px/1.5 -apple-system, "Segoe UI", system-ui, sans-serif; }
+header { position: sticky; top: 0; z-index: 2; background: var(--card); border-bottom: 1px solid var(--line);
+  padding: 10px 16px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+header .prog { font-variant-numeric: tabular-nums; color: var(--muted); }
+header .bar { flex: 1; min-width: 120px; height: 6px; background: var(--line); border-radius: 3px; overflow: hidden; }
+header .bar > div { height: 100%; background: var(--accent); }
+button { font: inherit; border: 1px solid var(--line); background: var(--card); color: var(--ink);
+  border-radius: 6px; padding: 5px 11px; cursor: pointer; }
+button:hover { border-color: var(--accent); }
+main { max-width: 900px; margin: 0 auto; padding: 16px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 16px; margin-bottom: 14px; }
+.lbl { font-size: 12px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin-bottom: 4px; }
+.meta { color: var(--muted); font-size: 12px; float: right; }
+.ctx { color: var(--muted); font-size: 14px; margin: 2px 0; }
+.ctx b, .target b { display: inline-block; width: 1.6em; font-weight: 600; }
+.target { font-size: 21px; line-height: 1.8; margin: 8px 0; }
+.rm { background: var(--rm-bg); border-bottom: 2px solid var(--rm); border-radius: 3px; padding: 1px 3px; }
+.rp { background: var(--rp-bg); border-bottom: 2px solid var(--rp); border-radius: 3px; padding: 1px 3px; }
+.ip { color: var(--muted); font-style: italic; }
+.core { font-weight: 700; }
+.pair { font-size: 17px; margin-top: 6px; }
+.pair .a { color: var(--rm); font-weight: 700; } .pair .b { color: var(--rp); font-weight: 700; }
+.legend { font-size: 12px; color: var(--muted); margin-top: 6px; }
+.q { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 8px 0; }
+.q .qt { flex: 1 1 320px; }
+.q button { min-width: 92px; }
+.q button kbd { font-size: 11px; color: var(--muted); margin-left: 4px; }
+.q button.on.rsr { background: var(--yes); border-color: var(--yes); color: #fff; }
+.q button.on.not { background: var(--no); border-color: var(--no); color: #fff; }
+.q button.on.unclear { background: var(--unsure); border-color: var(--unsure); color: #fff; }
+textarea { width: 100%; font: inherit; background: var(--bg); color: var(--ink); border: 1px solid var(--line);
+  border-radius: 6px; padding: 6px 8px; min-height: 44px; }
+.status { font-size: 13px; color: var(--muted); }
+.help { font-size: 12px; color: var(--muted); }
+.err { color: var(--no); }
+@media (max-width: 600px) { .target { font-size: 18px; } }
+</style>
+</head>
+<body>
+<header>
+  <button id="prev" title="previous (←)">←</button>
+  <button id="next" title="next (→ or Enter)">→</button>
+  <button id="todo" title="next unlabelled (u)">next unlabelled</button>
+  <span class="prog" id="prog"></span>
+  <div class="bar"><div id="barfill" style="width:0"></div></div>
+  <span class="status" id="saved"></span>
+</header>
+<main id="main"><p>Loading…</p></main>
+
+<script>
+const ANS = ["rsr", "not", "unclear"];
+let S = { items: [], labels: {}, i: 0 };
+
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function sentence(it) {
+  // wrap reparandum, interregnum and repair spans; bold the two core words
+  const w = it.words, out = [];
+  const span = (cls, [a, b]) => {
+    if (b <= a) return;
+    const ws = w.slice(a, b).map((x, j) => it.cores.includes(a + j) ? `<span class="core">${esc(x)}</span>` : esc(x));
+    out.push(`<span class="${cls}">${ws.join(" ")}</span>`);
+  };
+  out.push(esc(w.slice(0, it.rm[0]).join(" ")));
+  span("rm", it.rm); span("ip", it.ip); span("rp", it.rp);
+  out.push(esc(w.slice(it.rp[1]).join(" ")));
+  return out.filter(Boolean).join(" ");
+}
+
+const lab = it => S.labels[it.check_id] || {};
+const done = it => !!lab(it).label;
+
+function render() {
+  const it = S.items[S.i], l = lab(it);
+  const n = S.items.filter(done).length;
+  document.getElementById("prog").textContent = `${S.i + 1} / ${S.items.length} · ${n} done`;
+  document.getElementById("barfill").style.width = (100 * n / S.items.length) + "%";
+  const ctx = xs => xs.map(x => `<div class="ctx"><b>${esc(x.side)}</b>${esc(x.text)}</div>`).join("");
+  const btns = ANS.map((a, j) => `<button class="${a} ${l.label === a ? "on" : ""}" data-a="${a}">${a}<kbd>${j + 1}</kbd></button>`).join("");
+  document.getElementById("main").innerHTML = `
+    <div class="card">
+      <span class="meta">#${esc(it.check_id)} · ${esc(it.disf_id)}</span>
+      <div class="lbl">Conversation</div>
+      ${ctx(it.before)}
+      <div class="target"><b>${esc(it.side)}</b>${sentence(it)}</div>
+      ${ctx(it.after)}
+      <div class="pair">core: <span class="a">${esc(it.rm_core)}</span> → <span class="b">${esc(it.rp_core)}</span></div>
+      <div class="legend"><span class="rm">reparandum</span> <span class="ip">interregnum</span> <span class="rp">repair</span>; bold = the core words that differ</div>
+    </div>
+    <div class="card">
+      <div class="q"><div class="qt">Is this a replacement self-repair: one expression replaced by another, with an optional editing expression between them?</div>${btns}</div>
+      <div class="lbl" style="margin-top:10px">Note (optional; saved when you leave the box)</div>
+      <textarea id="note">${esc(l.note || "")}</textarea>
+      <div class="help">Keys: 1 rsr, 2 not, 3 unclear; Enter or → next, ← previous, u next unlabelled. Every click is saved at once.</div>
+    </div>`;
+  document.querySelectorAll(".q button").forEach(b => b.onclick = () => answer(b.dataset.a));
+  document.getElementById("note").onblur = e => { if ((lab(it).note || "") !== e.target.value.trim()) save({ note: e.target.value }); };
+  try { localStorage.setItem("hand_check_pos", S.i); } catch (e) {}
+}
+
+async function save(patch) {
+  const it = S.items[S.i], l = lab(it);
+  const note = document.getElementById("note");
+  const rec = { check_id: it.check_id, label: l.label || "", note: note ? note.value : (l.note || ""), ...patch };
+  const el = document.getElementById("saved");
+  try {
+    const r = await fetch("/api/label", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(rec) });
+    const j = await r.json();
+    if (!r.ok) throw new Error(j.error || r.status);
+    S.labels[it.check_id] = j;
+    el.textContent = "saved " + j.ts.slice(11); el.className = "status";
+  } catch (e) {
+    el.textContent = "NOT SAVED: " + e.message; el.className = "status err";
+  }
+}
+
+async function answer(a) { await save({ label: a }); render(); }
+
+function go(i) {
+  const n = document.getElementById("note");
+  if (n && (lab(S.items[S.i]).note || "") !== n.value.trim()) save({ note: n.value });
+  S.i = Math.max(0, Math.min(S.items.length - 1, i)); render(); window.scrollTo(0, 0);
+}
+function nextTodo() {
+  for (let k = 1; k <= S.items.length; k++) { const j = (S.i + k) % S.items.length; if (!done(S.items[j])) return go(j); }
+}
+
+document.getElementById("prev").onclick = () => go(S.i - 1);
+document.getElementById("next").onclick = () => go(S.i + 1);
+document.getElementById("todo").onclick = nextTodo;
+document.addEventListener("keydown", e => {
+  if (e.target.tagName === "TEXTAREA") { if (e.key === "Escape") e.target.blur(); return; }
+  if (e.metaKey || e.ctrlKey || e.altKey) return;
+  const k = "123".indexOf(e.key);
+  if (k >= 0) { answer(ANS[k]); e.preventDefault(); }
+  else if (e.key === "ArrowRight" || e.key === "Enter") go(S.i + 1);
+  else if (e.key === "ArrowLeft") go(S.i - 1);
+  else if (e.key === "u") nextTodo();
+});
+
+(async () => {
+  try {
+    const st = await (await fetch("/api/state")).json();
+    S.items = st.items; S.labels = st.labels;
+    let pos = 0; try { pos = parseInt(localStorage.getItem("hand_check_pos") || "0", 10) || 0; } catch (e) {}
+    S.i = Math.min(pos, S.items.length - 1);
+    if (done(S.items[S.i])) { const j = S.items.findIndex(x => !done(x)); if (j >= 0) S.i = j; }
+    render();
+  } catch (e) {
+    document.getElementById("main").innerHTML = `<p class="err">Could not load items: ${esc(e.message)}. Is hand_check.py serve running?</p>`;
+  }
+})();
+</script>
+</body>
+</html>
