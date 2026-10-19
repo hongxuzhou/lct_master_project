@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Hongxu Zhou">
-<meta name="dcterms.date" content="2026-10-16">
+<meta name="dcterms.date" content="2026-10-19">
 
 <title>Base RSR Training Data</title>
 <style>
@@ -5307,12 +5307,13 @@ color: #333333;
   <ul class="collapse">
   <li><a href="#structural-checks" id="toc-structural-checks" class="nav-link" data-scroll-target="#structural-checks"><span class="header-section-number">5.1</span> Structural checks</a></li>
   <li><a href="#manual-annotation" id="toc-manual-annotation" class="nav-link" data-scroll-target="#manual-annotation"><span class="header-section-number">5.2</span> Manual annotation</a></li>
-  <li><a href="#switchboard-comparison" id="toc-switchboard-comparison" class="nav-link" data-scroll-target="#switchboard-comparison"><span class="header-section-number">5.3</span> Switchboard comparison</a></li>
+  <li><a href="#sec-switchboard" id="toc-sec-switchboard" class="nav-link" data-scroll-target="#sec-switchboard"><span class="header-section-number">5.3</span> Switchboard comparison</a></li>
   </ul></li>
   <li><a href="#sec-results" id="toc-sec-results" class="nav-link" data-scroll-target="#sec-results"><span class="header-section-number">6</span> Results</a>
   <ul class="collapse">
   <li><a href="#quality-by-category" id="toc-quality-by-category" class="nav-link" data-scroll-target="#quality-by-category"><span class="header-section-number">6.1</span> Quality by category</a></li>
   <li><a href="#sec-edge" id="toc-sec-edge" class="nav-link" data-scroll-target="#sec-edge"><span class="header-section-number">6.2</span> Edge label: the exception</a></li>
+  <li><a href="#sec-switchboard-results" id="toc-sec-switchboard-results" class="nav-link" data-scroll-target="#sec-switchboard-results"><span class="header-section-number">6.3</span> Comparison with Switchboard</a></li>
   </ul></li>
   <li><a href="#sec-limits" id="toc-sec-limits" class="nav-link" data-scroll-target="#sec-limits"><span class="header-section-number">7</span> Limitations and next steps</a>
   <ul class="collapse">
@@ -5344,7 +5345,7 @@ color: #333333;
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">2026-10-16</p>
+      <p class="date">2026-10-19</p>
     </div>
   </div>
   
@@ -5358,7 +5359,7 @@ color: #333333;
 
 <!--
 First full draft 2026-10-15, built on Hongxu's text. Numbers from
-report_numbers.py. Switchboard comparison still to write.
+report_numbers.py; Switchboard figures from natural_rsr_check/report_1to1.md.
 Main line: can an LLM generate RSR + SBN data good enough to be this
 project's main data source (aim 1)? If yes, use it (aim 2).
 Arc: question and answer → why → what the data look like → how they are
@@ -5369,14 +5370,14 @@ No round numbers, run names, file names or hashes in the main text.
 <section id="at-a-glance" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> At a Glance</h1>
 <p>This document reports how I generated base replacement self-repair (RSR) data with an open-weights language model, starting from the gold train split of PMB 5.1.0. “Base” means that the repairs carry no editing expression such as “I mean” or “actually”. These will be added by script in a later step.</p>
-<p>The training set now holds 3,489 RSR items, about 500 in each of seven categories, against 9,486 fluent PMB train sentences, a ratio of about 1 : 2.7.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> This experiment shows that, for this project, generating RSR data with an LLM is a workable method. Six of the seven categories meet my quality thresholds through generation and automatic checks alone, and the seventh, edge label, meets them after I selected its items by hand. I will therefore build the dev and test sets in the same way. Before that, the next steps are to add editing expressions and to compare the generated repairs with repairs in Switchboard.</p>
+<p>The training set now holds 3,489 RSR items, about 500 in each of seven categories, against 9,486 fluent PMB train sentences, a ratio of about 1 : 2.7.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> This experiment shows that, for this project, generating RSR data with an LLM is a workable method. Six of the seven categories meet my quality thresholds through generation and automatic checks alone, and the seventh, edge label, meets them after I selected its items by hand. I will therefore build the dev and test sets in the same way. The Switchboard comparison shows that these data should not be treated as representative of conversational RSR. Their main use is to train and test the parser for the proposed representation. The next step is to add editing expressions.</p>
 <p><a href="#sec-why" class="quarto-xref">Section 2</a> explains why I moved from rules to an LLM, and <a href="#sec-data" class="quarto-xref">Section 3</a> shows what an item looks like. <a href="#sec-generation" class="quarto-xref">Section 4</a> and <a href="#sec-qa" class="quarto-xref">Section 5</a> describe how the items were generated and how I judged their quality. <a href="#sec-results" class="quarto-xref">Section 6</a> gives the results. The last section covers limitations and next steps, and closes with one question on which I would like your advice (<a href="#sec-questions" class="quarto-xref">Section 7.1</a>).</p>
 </section>
 <section id="sec-why" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Why I do this</h1>
 <p>My first data pipeline was entirely rule-based. Each RSR category needed its own transformation script, so I had five or six scripts to maintain, and some categories, such as tense, still needed items written by hand. During my research proposal presentation, Prof Koller suggested that I consider generating the data with an LLM instead. Given the workload of the rule-based system and the number of places where it could go wrong, the suggestion made a lot of sense.</p>
 <p>My aim is therefore two-fold, and the second part depends on the first. I first want to find out how well an LLM, run on the computing resources available to me, can generate RSR data. Quality has two sides in this task, naturalness and correctness, and correctness applies to both ends, the sentence and its SBN. If the quality is good enough, I will then make LLM generation the main data source of the project.</p>
-<p>Two design principles follow from these aims, and they run through the rest of the document. The first is about generation. I give the model as much freedom as possible, so that the results measure the model’s own ability. It is constrained only by its input, a PMB sentence with its SBN and the category to produce, and by a single tool, a WordNet lookup (<a href="#sec-generation" class="quarto-xref">Section 4</a>). The second is about quality control, which follows the rule “selection, not correction”. An item that fails a check is dropped and never fixed, so every item in the data is the model’s own output, and the failure rate becomes evidence of how well the model does the task. To judge how correct and how natural the items are, I combine three kinds of evidence: automatic structural checks, manual annotation, and a comparison with repairs in Switchboard, which is still in progress.</p>
+<p>Two design principles follow from these aims, and they run through the rest of the document. The first is about generation. I give the model as much freedom as possible, so that the results measure the model’s own ability. It is constrained only by its input, a PMB sentence with its SBN and the category to produce, and by a single tool, a WordNet lookup (<a href="#sec-generation" class="quarto-xref">Section 4</a>). The second is about quality control, which follows the rule “selection, not correction”. An item that fails a check is dropped and never fixed, so every item in the data is the model’s own output, and the failure rate becomes evidence of how well the model does the task. To judge how correct and how natural the items are, I combine three kinds of evidence: automatic structural checks, manual annotation, and a comparison with repairs in Switchboard.</p>
 </section>
 <section id="sec-data" class="level1" data-number="3">
 <h1 data-number="3"><span class="header-section-number">3</span> What the data look like</h1>
@@ -5539,7 +5540,7 @@ Figure 1: From a PMB entry to the training set.
 <ol type="1">
 <li>The automatic checks run on every item and ask whether it is well-formed and faithful to its gold SBN. An item that fails is dropped.</li>
 <li>The manual annotation reads a sample of the items that pass and asks what the checks cannot see: whether the SBN is correct and whether the repair sounds natural.</li>
-<li>The Switchboard comparison will describe how the generated repairs relate to repairs in real speech.</li>
+<li>The Switchboard comparison describes how the generated repairs relate to repairs in real speech.</li>
 </ol>
 <p>Whether a category can enter the data is decided by four thresholds (<a href="#tbl-thresholds" class="quarto-xref">Table 2</a>).</p>
 <div class="callout callout-style-default callout-caution callout-titled">
@@ -5647,17 +5648,10 @@ Table 3: The five groups of automatic checks.
 <h2 data-number="5.2" class="anchored" data-anchor-id="manual-annotation"><span class="header-section-number">5.2</span> Manual annotation</h2>
 <p>From the items that pass every check, I draw 15 per category at random and read them one at a time, without seeing the category or any check result. For each item I answer two questions: does the repaired SBN mean what the repaired sentence says, and is the repair natural? By natural I mean acceptable to a fluent speaker, that is, grammatical, recognisable as a repair, and with both versions recoverable. This is different from typical of speech, which is a question for the Switchboard comparison. Either answer may be “unsure”, and I compute the rates over yes and no answers only. No sampled item was used to develop the prompt.</p>
 </section>
-<section id="switchboard-comparison" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="switchboard-comparison"><span class="header-section-number">5.3</span> Switchboard comparison</h2>
-<p>🚧 Under construction. 🚧</p>
-<p>I compare the synthesised items with the RSR in NXT Switchboard. Each measure looks at the head word of the reparandum and of the repair, and follows <a href="https://aclanthology.org/2025.cmcl-1.19/">SPACER</a>, which describes single-word substitution repairs from Switchboard in the same way.</p>
-<ul>
-<li>Word frequency: how common each word is in English, as its Zipf frequency in SUBTLEXus.</li>
-<li>Semantic distance: how far apart the two words are in meaning, as the cosine distance between their GloVe vectors.</li>
-<li>Phonetic distance: how different the two words sound, as the edit distance between their pronunciations in the CMU dictionary.</li>
-<li>Surprisal: how unexpected each word is in its place, as scored by a language model given the same left context, which ends before the repair site.</li>
-</ul>
-<p>The comparison is descriptive. This project is about a meaning representation for RSR and a parser for it, not about how closely the data matches natural speech. So, I will not remove data for being unlike Switchboard.</p>
+<section id="sec-switchboard" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="sec-switchboard"><span class="header-section-number">5.3</span> Switchboard comparison</h2>
+<p>I compared the generated repairs with RSR in NXT Switchboard, restricted to one word replaced by one word, where the measures below are defined. After shared words at the start and end are removed, one word must be left on each side; nested disfluencies, repetitions, fragments and filled pauses are excluded. This leaves 1,858 of about 28,000 Switchboard disfluencies and 3,249 of the 3,489 training items.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> Of 100 Switchboard items drawn at random, I judged 94 to be RSR, 3 not and 3 unclear.</p>
+<p>The measures follow <a href="https://aclanthology.org/2025.cmcl-1.19/">SPACER</a>, with small differences in implementation: word frequency (SUBTLEXus), semantic distance (GloVe), phonemic distance (CMU pronunciations), and surprisal under GPT-2 small, given the sentence up to the changed word.</p>
 </section>
 </section>
 <section id="sec-results" class="level1" data-number="6">
@@ -5753,6 +5747,56 @@ Table 4: Automatic checks and manual annotation by category. Check rates are ov
 <p>No simple rule separates the natural items from the unnatural ones. Verbs that express a direction rarely allow a natural swap (e.g., “A lion escaped to, from the zoo”). For other verbs the judgement depends on tense and aspect. “Tom has gone from, to Boston” also sounds odd because “has gone” is close to a fixed expression for having left. No list of verbs could capture this.</p>
 <p>Several rounds of prompt revision did not raise this share. The only way to a usable set was therefore to read every item that passed the checks and keep the natural ones. I expect that I need to do the same for dev/test sets.</p>
 </section>
+<section id="sec-switchboard-results" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="sec-switchboard-results"><span class="header-section-number">6.3</span> Comparison with Switchboard</h2>
+<p>The two sets are close in how far the replacement goes, but differ in what is replaced and in which direction (<a href="#tbl-switchboard" class="quarto-xref">Table 5</a>). Switchboard replacements are mostly verbs, pronouns, conjunctions and determiners, and a third of them change part of speech; the synthetic ones are mostly numbers, names, verbs and prepositions, and almost all keep it. In Switchboard the repair also tends to be less frequent and less predictable than the word it replaces. The synthetic data show the opposite, which fits how they were made: the repair is the word the PMB sentence was written with, and the reparandum is invented afterwards. The gap is largest for edge label and remains without it (median −0.41 bits).</p>
+<div id="tbl-switchboard" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-switchboard-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table 5: One-word replacements. Δ is repair minus reparandum. Words missing from a resource are left out of that measure; for Δ frequency these are a sixth of the synthetic items, mostly numbers, years and rare names.
+</figcaption>
+<div aria-describedby="tbl-switchboard-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>measure (median)</th>
+<th style="text-align: right;">Switchboard</th>
+<th style="text-align: right;">synthetic</th>
+<th style="text-align: right;">Cliff’s δ</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Δ frequency (Zipf)</td>
+<td style="text-align: right;">−0.32</td>
+<td style="text-align: right;">+0.23</td>
+<td style="text-align: right;">+0.38</td>
+</tr>
+<tr class="even">
+<td>semantic distance</td>
+<td style="text-align: right;">0.42</td>
+<td style="text-align: right;">0.43</td>
+<td style="text-align: right;">−0.06</td>
+</tr>
+<tr class="odd">
+<td>phonemic distance</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">+0.15</td>
+</tr>
+<tr class="even">
+<td>Δ surprisal (bits)</td>
+<td style="text-align: right;">+0.44</td>
+<td style="text-align: right;">−0.69</td>
+<td style="text-align: right;">−0.30</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>The data therefore suit training and testing a parser for the proposed representation, but they are not a sample of conversational RSR. Before the findings are extended to natural speech, the parser should be checked on observed RSR.</p>
+</section>
 </section>
 <section id="sec-limits" class="level1" data-number="7">
 <h1 data-number="7"><span class="header-section-number">7</span> Limitations and next steps</h1>
@@ -5764,7 +5808,7 @@ Table 4: Automatic checks and manual annotation by category. Check rates are ov
 </ul>
 <p>Three steps come next. I will first add editing expressions (“I mean”, “no”, “no wait”, “actually”) by script to a fixed share of the items (10%), which gives matched pairs of the same repair with and without an expression. “Sorry” is kept back for the test set as an unseen expression.</p>
 <p>After that, I plan to mix the synthesised RSR data with PMB Train Gold and upload it to HuggingFace as the train set.</p>
-<p>I will then build the dev and test sets from PMB’s own splits with the same prompts and checks, after completing the Switchboard comparison.</p>
+<p>I will then build the dev and test sets from PMB’s own splits with the same prompts and checks.</p>
 <section id="sec-questions" class="level2" data-number="7.1">
 <h2 data-number="7.1" class="anchored" data-anchor-id="sec-questions"><span class="header-section-number">7.1</span> Questions for my supervisors</h2>
 <ol type="1">
@@ -5782,7 +5826,7 @@ Table 4: Automatic checks and manual annotation by category. Check rates are ov
 <div id="tbl-examples" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-examples-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table 5: Examples from the training set, drawn at random.
+Table 6: Examples from the training set, drawn at random.
 </figcaption>
 <div aria-describedby="tbl-examples-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
@@ -5836,7 +5880,7 @@ Table 5: Examples from the training set, drawn at random.
 <div id="tbl-failcat" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-failcat-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table 6: Failures by category and check group for the first six categories (an item can fail more than one group).
+Table 7: Failures by category and check group for the first six categories (an item can fail more than one group).
 </figcaption>
 <div aria-describedby="tbl-failcat-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
@@ -5926,6 +5970,7 @@ Table 6: Failures by category and check group for the first six categories (an 
 <ol>
 <li id="fn1"><p>PMB 5.1.0 has 9,552 train documents. I hold out 66 of them that look like a repair on the surface but are not one, such as appositions (“I’m from Wellington, the capital of New Zealand”), lists, and contrasts like “not a nurse, but a doctor”. They are kept for a hard-negative test and appear in no training data.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>Reasoning effort high, temperature 1.0, top-p 0.95, top-k 64, seed 13.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>The synthetic extraction sometimes cuts a multi-word repair short, such as “ninety, one hundred” becoming “ninety → one”; these cases remain in the figures.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main>
 <!-- /main column -->

@@ -1,0 +1,10 @@
+[mcp_servers.notion]
+url = "https://mcp.notion.com/mcp"
+
+[mcp_servers.positron]
+command = "/Applications/Positron.app/Contents/Resources/app/extensions/positron-supervisor/resources/kallichore/kcserver"
+args = [
+    "mcp-stdio",
+    "--connections",
+    "/Users/hongxuzhou/Library/Application Support/Positron/User/globalStorage/positron.positron-supervisor/mcp",
+]

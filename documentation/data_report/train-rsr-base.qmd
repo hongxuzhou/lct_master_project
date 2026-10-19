@@ -16,7 +16,7 @@ format:
 
 <!--
 First full draft 2026-10-15, built on Hongxu's text. Numbers from
-report_numbers.py. Switchboard comparison still to write.
+report_numbers.py; Switchboard figures from natural_rsr_check/report_1to1.md.
 Main line: can an LLM generate RSR + SBN data good enough to be this
 project's main data source (aim 1)? If yes, use it (aim 2).
 Arc: question and answer → why → what the data look like → how they are
@@ -42,8 +42,10 @@ generating RSR data with an LLM is a workable method. Six of the seven
 categories meet my quality thresholds through generation and automatic
 checks alone, and the seventh, edge label, meets them after I selected its
 items by hand. I will therefore build the dev and test sets in the same way.
-Before that, the next steps are to add editing expressions and to compare
-the generated repairs with repairs in Switchboard.
+The Switchboard comparison shows that these data should not be treated as
+representative of conversational RSR. Their main use is to train and test
+the parser for the proposed representation. The next step is to add editing
+expressions.
 
 @sec-why explains why I moved from rules to an LLM, and @sec-data shows what
 an item looks like. @sec-generation and @sec-qa describe how the items were
@@ -79,7 +81,7 @@ never fixed, so every item in the data is the model's own output, and the
 failure rate becomes evidence of how well the model does the task. To judge
 how correct and how natural the items are, I combine three kinds of
 evidence: automatic structural checks, manual annotation, and a comparison
-with repairs in Switchboard, which is still in progress.
+with repairs in Switchboard.
 
 # What the data look like {#sec-data}
 
@@ -243,7 +245,7 @@ Each kind of evidence answers a different question.
 2. The manual annotation reads a sample of the items that pass and asks what
    the checks cannot see: whether the SBN is correct and whether the
    repair sounds natural.
-3. The Switchboard comparison will describe how the generated repairs relate
+3. The Switchboard comparison describes how the generated repairs relate
    to repairs in real speech. 
 
 Whether a category can enter the data is decided by four thresholds
@@ -295,28 +297,23 @@ of speech, which is a question for the Switchboard comparison. Either answer
 may be "unsure", and I compute the rates over yes and no answers only. No
 sampled item was used to develop the prompt.
 
-## Switchboard comparison
+## Switchboard comparison {#sec-switchboard}
 
-🚧 Under construction. 🚧
+I compared the generated repairs with RSR in NXT Switchboard, restricted
+to one word replaced by one word, where the measures below are defined.
+After shared words at the start and end are removed, one word must be left
+on each side; nested disfluencies, repetitions, fragments and filled pauses
+are excluded. This leaves 1,858 of about 28,000 Switchboard disfluencies
+and 3,249 of the 3,489 training items.^[The synthetic extraction sometimes
+cuts a multi-word repair short, such as "ninety, one hundred" becoming
+"ninety → one"; these cases remain in the figures.] Of 100 Switchboard
+items drawn at random, I judged 94 to be RSR, 3 not and 3 unclear.
 
-I compare the synthesised items with the RSR in NXT Switchboard. Each
-measure looks at the head word of the reparandum and of the repair, and
-follows [SPACER](https://aclanthology.org/2025.cmcl-1.19/), which describes
-single-word substitution repairs from Switchboard in the same way.
-
- - Word frequency: how common each word is in English, as its Zipf
-   frequency in SUBTLEXus.
- - Semantic distance: how far apart the two words are in meaning, as the
-   cosine distance between their GloVe vectors.
- - Phonetic distance: how different the two words sound, as the edit
-   distance between their pronunciations in the CMU dictionary.
- - Surprisal: how unexpected each word is in its place, as scored by a
-   language model given the same left context, which ends before the
-   repair site.
-
-The comparison is descriptive. This project is about a meaning
-representation for RSR and a parser for it, not about how closely the data
-matches natural speech. So, I will not remove data for being unlike Switchboard.
+The measures follow
+[SPACER](https://aclanthology.org/2025.cmcl-1.19/), with small differences
+in implementation: word frequency (SUBTLEXus), semantic distance (GloVe),
+phonemic distance (CMU pronunciations), and surprisal under GPT-2 small,
+given the sentence up to the changed word.
 
 
 # Results {#sec-results}
@@ -379,7 +376,36 @@ having left. No list of verbs could capture this.
 
 Several rounds of prompt revision did not raise this share. The only way to
 a usable set was therefore to read every item that passed the checks and
-keep the natural ones. I expect that I need to do the same for dev/test sets. 
+keep the natural ones. I expect that I need to do the same for dev/test sets.
+
+## Comparison with Switchboard {#sec-switchboard-results}
+
+The two sets are close in how far the replacement goes, but differ in what
+is replaced and in which direction (@tbl-switchboard). Switchboard
+replacements are mostly verbs, pronouns, conjunctions and determiners, and
+a third of them change part of speech; the synthetic ones are mostly
+numbers, names, verbs and prepositions, and almost all keep it. In
+Switchboard the repair also tends to be less frequent and less predictable
+than the word it replaces. The synthetic data show the opposite, which fits
+how they were made: the repair is the word the PMB sentence was written
+with, and the reparandum is invented afterwards. The gap is largest for
+edge label and remains without it (median −0.41 bits).
+
+| measure (median) | Switchboard | synthetic | Cliff's δ |
+|---|---:|---:|---:|
+| Δ frequency (Zipf) | −0.32 | +0.23 | +0.38 |
+| semantic distance | 0.42 | 0.43 | −0.06 |
+| phonemic distance | 3 | 3 | +0.15 |
+| Δ surprisal (bits) | +0.44 | −0.69 | −0.30 |
+
+: One-word replacements. Δ is repair minus reparandum. Words missing from a
+resource are left out of that measure; for Δ frequency these are a sixth
+of the synthetic items, mostly numbers, years and rare names. {#tbl-switchboard}
+
+The data therefore suit training and testing a parser for the proposed
+representation, but they are not a sample of conversational RSR. Before
+the findings are extended to natural speech, the parser should be checked
+on observed RSR.
 
 # Limitations and next steps {#sec-limits}
 
@@ -402,8 +428,7 @@ kept back for the test set as an unseen expression.
 After that, I plan to mix the synthesised RSR data with PMB Train Gold and upload it to HuggingFace as the train set. 
 
 I will then build the dev and test sets from PMB's own
-splits with the same prompts and checks, after completing the Switchboard
-comparison.
+splits with the same prompts and checks.
 
 ## Questions for my supervisors {#sec-questions}
 

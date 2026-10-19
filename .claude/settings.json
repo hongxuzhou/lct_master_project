@@ -65,7 +65,9 @@
       "Bash(git -C ../.. ls-files repair_data_gen/rsr_generation/audit)",
       "Bash(awk '/^# Generation/{f=1} /^# Assembly/{f=0} f' train_rsr_base.qmd)",
       "Bash(sed -n '/## Final set/,$p')",
-      "Bash(shasum -a 256 dataset/train_rsr.base.tsv)"
+      "Bash(shasum -a 256 dataset/train_rsr.base.tsv)",
+      "Bash(/Users/hongxuzhou/miniconda3/envs/repairsbn/bin/python measures_1to1.py report)",
+      "Bash(/Users/hongxuzhou/miniconda3/envs/repairsbn/bin/python -c ' *)"
     ],
     "additionalDirectories": [
       "/Users/hongxuzhou/Documents/GitHub/lct_master_project",

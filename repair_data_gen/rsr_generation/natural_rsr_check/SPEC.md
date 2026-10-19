@@ -103,6 +103,9 @@ Code: `lexical.py` and `score_lm.py`, fed by the new selection.
 
 No significance tests, no thresholds for "natural", no regression.
 
+Added 2026-10-19, after the results (exploratory): Δ surprisal per
+synthetic repair type, and without edge label.
+
 ## Expected before computing
 
 - The real side is mostly closed class (SPACER: 344 of 576); ours is not,

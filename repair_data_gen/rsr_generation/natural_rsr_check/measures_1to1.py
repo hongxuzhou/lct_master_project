@@ -258,8 +258,17 @@ def cmd_report(args):
     out += table('Reparandum word class', 'rm_class', ['open', 'closed'])
     out += table('WordNet relation (n/v/a pairs with the same PoS; n/a otherwise)',
                  'wn_rel', RELATIONS)
-    out += ['## Synthetic items per repair type', '', '| type | items |', '|---|---:|']
-    out += [f'| {t} | {n} |' for t, n in sorted(Counter(i['repair_type'] for i in synth).items())]
+    # added 2026-10-19 after the results, not in SPEC §5
+    out += ['## Δ surprisal per synthetic repair type (exploratory)', '',
+            "Cliff's δ against all real items.", '',
+            "| type | items | Δ surprisal | Cliff's δ |", '|---|---:|---|---:|']
+    r = values(real, 'd_surprisal')
+    types = sorted({i['repair_type'] for i in synth})
+    for t in types + ['all but edge_label']:
+        s = values([i for i in synth if i['repair_type'] == t or
+                    (t == 'all but edge_label' and i['repair_type'] != 'edge_label')],
+                   'd_surprisal')
+        out.append(f'| {t} | {len(s)} | {summary(s)} | {cliffs_delta(s, r):+.2f} |')
     REPORT.write_text('\n'.join(out) + '\n')
     print('\n'.join(out))
 

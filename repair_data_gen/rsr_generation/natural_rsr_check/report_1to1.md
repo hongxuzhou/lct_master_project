@@ -78,14 +78,17 @@ Median [IQR]; n = items with both words in the resource. Cliff's δ > 0: synthet
 | none | 9.7% | 8.6% | 11.7% |
 | n/a | 73.7% | 68.7% | 70.2% |
 
-## Synthetic items per repair type
+## Δ surprisal per synthetic repair type (exploratory)
 
-| type | items |
-|---|---:|
-| constant_name | 400 |
-| constant_number | 487 |
-| constant_temporal | 487 |
-| content_word | 477 |
-| edge_label | 487 |
-| forwarding | 446 |
-| tense | 465 |
+Cliff's δ against all real items.
+
+| type | items | Δ surprisal | Cliff's δ |
+|---|---:|---|---:|
+| constant_name | 400 | 0.46 [-1.14, 2.38] | -0.00 |
+| constant_number | 487 | -0.04 [-0.92, 0.80] | -0.17 |
+| constant_temporal | 487 | -0.15 [-0.68, 0.25] | -0.23 |
+| content_word | 477 | -0.61 [-3.17, 1.37] | -0.24 |
+| edge_label | 487 | -5.07 [-7.42, -2.70] | -0.72 |
+| forwarding | 446 | -0.88 [-1.92, 1.39] | -0.33 |
+| tense | 465 | -1.14 [-2.60, 0.15] | -0.39 |
+| all but edge_label | 2762 | -0.41 [-1.65, 0.83] | -0.23 |
