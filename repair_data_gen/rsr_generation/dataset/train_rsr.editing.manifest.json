@@ -1,0 +1,137 @@
+{
+  "base_file": "train_rsr.base.tsv",
+  "base_sha256": "565ddd28c70d87d4eefa1412683ca3bbb4b62a7ddcfbfd15ae219fd2b3199ca2",
+  "script_sha256": "022bdb56d68fffda27c65d935aa6a267ef23e6d055fa4982ad950773fd47ffad",
+  "seed": 20261024,
+  "marker_seed": 20261025,
+  "holdout_sha256": "9a29eab567953f7e1df42194328e8ebbf58690314c2f118dd3612546bce91f7d",
+  "holdout_overlap": 0,
+  "selection": "30% of base rows, rounded half up; all ambiguous rows first; remaining quota proportional to non-ambiguous pool sizes by repair type; largest remainders with lexical ties; random sample within type",
+  "marker_assignment": "cycle through markers across types; shuffle selected IDs within type",
+  "markers": [
+    "I mean",
+    "no",
+    "no wait",
+    "actually"
+  ],
+  "base_items": 3489,
+  "marked_items": 1047,
+  "ambiguous_items": 482,
+  "sampled_items": 565,
+  "selected_share_of_base": 0.3000859845227859,
+  "augmented_items": 4536,
+  "marked_share_of_augmented": 0.23082010582010581,
+  "recipe_status": "append all selected marked variants; retain every base row, including unmarked ambiguous rows; no fluent component yet",
+  "outputs": [
+    {
+      "file": "train_rsr.marked30.tsv",
+      "items": 1047,
+      "sha256": "21c67d9f735a34e967a5ef1ba3e7d9493008022b85688868b75755100b9e565b"
+    },
+    {
+      "file": "train_rsr.augmented.tsv",
+      "items": 4536,
+      "sha256": "5ecf035d705d2f0ebe31a2ff41654599ffec5c3c9a47325644a831816a69f75e"
+    }
+  ],
+  "per_type": {
+    "constant_name": {
+      "base": 500,
+      "ambiguous": 203,
+      "remaining_pool": 297,
+      "sampled": 56,
+      "marked": 259,
+      "augmented": 759,
+      "markers": {
+        "no": 65,
+        "I mean": 65,
+        "actually": 64,
+        "no wait": 65
+      }
+    },
+    "constant_number": {
+      "base": 500,
+      "ambiguous": 260,
+      "remaining_pool": 240,
+      "sampled": 45,
+      "marked": 305,
+      "augmented": 805,
+      "markers": {
+        "no": 76,
+        "actually": 77,
+        "I mean": 76,
+        "no wait": 76
+      }
+    },
+    "constant_temporal": {
+      "base": 500,
+      "ambiguous": 19,
+      "remaining_pool": 481,
+      "sampled": 90,
+      "marked": 109,
+      "augmented": 609,
+      "markers": {
+        "actually": 27,
+        "I mean": 28,
+        "no wait": 27,
+        "no": 27
+      }
+    },
+    "content_word": {
+      "base": 500,
+      "ambiguous": 0,
+      "remaining_pool": 500,
+      "sampled": 94,
+      "marked": 94,
+      "augmented": 594,
+      "markers": {
+        "no wait": 24,
+        "actually": 23,
+        "I mean": 23,
+        "no": 24
+      }
+    },
+    "edge_label": {
+      "base": 489,
+      "ambiguous": 0,
+      "remaining_pool": 489,
+      "sampled": 92,
+      "marked": 92,
+      "augmented": 581,
+      "markers": {
+        "no wait": 23,
+        "actually": 23,
+        "no": 23,
+        "I mean": 23
+      }
+    },
+    "forwarding": {
+      "base": 500,
+      "ambiguous": 0,
+      "remaining_pool": 500,
+      "sampled": 94,
+      "marked": 94,
+      "augmented": 594,
+      "markers": {
+        "I mean": 24,
+        "actually": 24,
+        "no": 23,
+        "no wait": 23
+      }
+    },
+    "tense": {
+      "base": 500,
+      "ambiguous": 0,
+      "remaining_pool": 500,
+      "sampled": 94,
+      "marked": 94,
+      "augmented": 594,
+      "markers": {
+        "no wait": 24,
+        "no": 24,
+        "actually": 23,
+        "I mean": 23
+      }
+    }
+  }
+}

@@ -1,0 +1,413 @@
+#!/usr/bin/env python3
+"""Download, inspect, and smoke-test the text backbone of Qwen3.5 models.
+
+The actions intentionally have different resource profiles:
+
+* ``download`` stores model snapshots in the shared Hugging Face cache.
+* ``inspect`` builds the text model on the meta device and records its real
+  module names and tensor shapes without loading checkpoint weights.
+* ``verify`` loads one text model on one CUDA GPU and runs a short generation.
+"""
+
+import argparse
+import gc
+import importlib.metadata
+import json
+import os
+import re
+from collections import Counter, defaultdict
+from pathlib import Path
+
+
+DEFAULT_CACHE_DIR = Path("/scratch/common_models/HuggingFace")
+DEFAULT_REPORT_DIR = Path(__file__).resolve().parent / "architecture_reports"
+
+MODELS = {
+    "2b": "Qwen/Qwen3.5-2B",
+    "9b": "Qwen/Qwen3.5-9B",
+    "27b": "Qwen/Qwen3.5-27B",
+}
+
+# Conservative preflight limits. They are not training-memory estimates; they
+# only prevent a smoke test from silently spilling a bf16 model to CPU/disk.
+MIN_VERIFY_VRAM_GIB = {
+    "2b": 8,
+    "9b": 24,
+    "27b": 64,
+}
+
+
+def dependency_versions():
+    """Return versions needed to reproduce an architecture/runtime report."""
+    versions = {}
+    for distribution in (
+        "torch",
+        "transformers",
+        "accelerate",
+        "huggingface_hub",
+        "safetensors",
+    ):
+        try:
+            versions[distribution] = importlib.metadata.version(distribution)
+        except importlib.metadata.PackageNotFoundError:
+            versions[distribution] = None
+    return versions
+
+
+def require_qwen_text_model_class():
+    """Import the exact class used later for text-only LoRA experiments."""
+    try:
+        from transformers import Qwen3_5ForCausalLM
+    except ImportError as error:
+        raise RuntimeError(
+            "This Transformers installation does not support Qwen3.5. "
+            "Install a current Transformers release in the Qwen3.5 venv."
+        ) from error
+    return Qwen3_5ForCausalLM
+
+
+def resolve_snapshot(model_id, cache_dir, revision):
+    """Resolve an already downloaded revision without making a network call."""
+    from huggingface_hub import snapshot_download
+
+    try:
+        return Path(
+            snapshot_download(
+                repo_id=model_id,
+                cache_dir=cache_dir,
+                revision=revision,
+                local_files_only=True,
+            )
+        )
+    except Exception as error:
+        raise RuntimeError(
+            f"No complete local snapshot found for {model_id}@{revision}. "
+            "Run the download action first."
+        ) from error
+
+
+def download_model(model_id, cache_dir, revision):
+    from huggingface_hub import snapshot_download
+
+    cache_dir.mkdir(parents=True, exist_ok=True)
+    if not os.access(cache_dir, os.W_OK):
+        raise PermissionError(
+            f"Shared cache is not writable: {cache_dir}. "
+            "Ask the cluster administrators to add the model or grant access."
+        )
+    print(f"\nDownloading {model_id}@{revision}", flush=True)
+    snapshot = Path(
+        snapshot_download(
+            repo_id=model_id,
+            cache_dir=cache_dir,
+            revision=revision,
+        )
+    )
+    print(f"Snapshot location: {snapshot}")
+    return snapshot
+
+
+def normalise_layer_number(module_name):
+    """Replace decoder layer indices so repeated module shapes can be grouped."""
+    return re.sub(r"\.layers\.\d+\.", ".layers.*.", module_name)
+
+
+def linear_module_report(model):
+    """Describe every Linear module and aggregate repeated layer patterns."""
+    import torch
+
+    modules = []
+    grouped = defaultdict(lambda: {"count": 0, "parameters": 0})
+    suffixes = defaultdict(lambda: {"count": 0, "shapes": Counter()})
+
+    for name, module in model.named_modules():
+        if not isinstance(module, torch.nn.Linear):
+            continue
+
+        shape = [module.out_features, module.in_features]
+        parameter_count = module.weight.numel()
+        if module.bias is not None:
+            parameter_count += module.bias.numel()
+
+        modules.append(
+            {
+                "name": name,
+                "weight_shape": shape,
+                "bias": module.bias is not None,
+                "parameters": parameter_count,
+            }
+        )
+
+        pattern = normalise_layer_number(name)
+        group_key = (pattern, tuple(shape), module.bias is not None)
+        grouped[group_key]["count"] += 1
+        grouped[group_key]["parameters"] += parameter_count
+
+        suffix = name.rsplit(".", 1)[-1]
+        suffixes[suffix]["count"] += 1
+        suffixes[suffix]["shapes"][str(shape)] += 1
+
+    groups = []
+    for (pattern, shape, has_bias), values in sorted(grouped.items()):
+        groups.append(
+            {
+                "pattern": pattern,
+                "weight_shape": list(shape),
+                "bias": has_bias,
+                **values,
+            }
+        )
+
+    suffix_summary = []
+    for suffix, values in sorted(suffixes.items()):
+        suffix_summary.append(
+            {
+                "suffix": suffix,
+                "count": values["count"],
+                "shapes": dict(sorted(values["shapes"].items())),
+            }
+        )
+
+    return modules, groups, suffix_summary
+
+
+def inspect_model(model_key, model_id, cache_dir, report_dir, revision):
+    """Build a weightless text model and report its actual module structure."""
+    from accelerate import init_empty_weights
+    from transformers import AutoConfig
+
+    snapshot = resolve_snapshot(model_id, cache_dir, revision)
+    print(f"\nInspecting {model_id} from {snapshot}", flush=True)
+
+    full_config = AutoConfig.from_pretrained(snapshot, local_files_only=True)
+    text_config = getattr(full_config, "text_config", full_config)
+    model_class = require_qwen_text_model_class()
+
+    # Parameters and buffers are meta tensors: shapes exist, storage does not.
+    with init_empty_weights(include_buffers=True):
+        model = model_class(text_config)
+
+    linear_modules, linear_groups, suffix_summary = linear_module_report(model)
+    unique_parameter_count = sum(parameter.numel() for parameter in model.parameters())
+    layer_types = list(getattr(text_config, "layer_types", []))
+
+    summary = {
+        "model_key": model_key,
+        "model_id": model_id,
+        "requested_revision": revision,
+        "resolved_snapshot": str(snapshot),
+        "full_model_type": full_config.model_type,
+        "text_model_type": text_config.model_type,
+        "inspection_scope": "text_backbone",
+        "inspection_class": model.__class__.__name__,
+        "versions": dependency_versions(),
+        "architecture": {
+            "hidden_size": getattr(text_config, "hidden_size", None),
+            "num_hidden_layers": getattr(text_config, "num_hidden_layers", None),
+            "intermediate_size": getattr(text_config, "intermediate_size", None),
+            "vocab_size": getattr(text_config, "vocab_size", None),
+            "layer_type_counts": dict(Counter(layer_types)),
+            "layer_types": layer_types,
+            "unique_parameter_count": unique_parameter_count,
+            "estimated_bf16_parameter_gib": round(
+                unique_parameter_count * 2 / 1024**3, 3
+            ),
+        },
+        # The full list is evidence; the grouped views are easier to compare and
+        # later use when deciding LoRA targets.
+        "linear_modules": linear_modules,
+        "linear_module_groups": linear_groups,
+        "linear_module_suffixes": suffix_summary,
+        "full_config": full_config.to_dict(),
+        "text_config": text_config.to_dict(),
+    }
+
+    report_dir.mkdir(parents=True, exist_ok=True)
+    model_name = model_id.split("/")[-1]
+    output = report_dir / f"{model_name}_architecture.json"
+    with output.open("w", encoding="utf-8") as handle:
+        json.dump(summary, handle, indent=2, ensure_ascii=False)
+        handle.write("\n")
+
+    print("Model class:", summary["inspection_class"])
+    print("Layer types:", summary["architecture"]["layer_type_counts"])
+    print("Unique parameters:", f"{unique_parameter_count:,}")
+    print("Linear module suffixes:")
+    for item in suffix_summary:
+        print(f"  {item['suffix']}: {item['count']}  {item['shapes']}")
+    print(f"Saved architecture report to {output}")
+
+    del model
+    gc.collect()
+
+
+def verify_model(model_key, model_id, cache_dir, report_dir, revision):
+    """Load one text-only checkpoint on one GPU and run a short generation."""
+    import torch
+    from transformers import AutoTokenizer
+
+    if not torch.cuda.is_available():
+        raise RuntimeError("GPU verification requires CUDA")
+    if not torch.cuda.is_bf16_supported():
+        raise RuntimeError("Verification requires a bf16-capable GPU (A100 or newer)")
+
+    device_properties = torch.cuda.get_device_properties(0)
+    total_vram_gib = device_properties.total_memory / 1024**3
+    required_vram_gib = MIN_VERIFY_VRAM_GIB[model_key]
+    if total_vram_gib < required_vram_gib:
+        raise RuntimeError(
+            f"{model_key} verification requires at least {required_vram_gib} GiB "
+            f"VRAM; allocated GPU has {total_vram_gib:.1f} GiB"
+        )
+
+    snapshot = resolve_snapshot(model_id, cache_dir, revision)
+    model_class = require_qwen_text_model_class()
+
+    print(f"\nVerifying {model_id} from {snapshot}", flush=True)
+    print(f"GPU: {device_properties.name} ({total_vram_gib:.1f} GiB)")
+    print("dtype: torch.bfloat16")
+
+    torch.cuda.empty_cache()
+    torch.cuda.reset_peak_memory_stats(0)
+
+    tokenizer = AutoTokenizer.from_pretrained(snapshot, local_files_only=True)
+    tokenizer.padding_side = "left"
+    if tokenizer.pad_token_id is None:
+        tokenizer.pad_token = tokenizer.eos_token
+
+    # This is the exact text-only model class relevant to sentence-to-SBN LoRA.
+    # A fixed device map forbids silent CPU/disk offload in the smoke test.
+    model = model_class.from_pretrained(
+        snapshot,
+        local_files_only=True,
+        dtype=torch.bfloat16,
+        device_map={"": 0},
+        low_cpu_mem_usage=True,
+    )
+
+    messages = [
+        {
+            "role": "user",
+            "content": (
+                "Convert this sentence to a simplified semantic representation: "
+                "A student reads a book."
+            ),
+        }
+    ]
+    inputs = tokenizer.apply_chat_template(
+        messages,
+        tokenize=True,
+        add_generation_prompt=True,
+        return_dict=True,
+        return_tensors="pt",
+        enable_thinking=False,
+    ).to("cuda:0")
+
+    model.eval()
+    with torch.inference_mode():
+        output = model.generate(
+            **inputs,
+            max_new_tokens=80,
+            do_sample=False,
+        )
+
+    new_tokens = output[0, inputs["input_ids"].shape[-1] :]
+    result = tokenizer.decode(new_tokens, skip_special_tokens=True)
+    peak_memory_gib = torch.cuda.max_memory_allocated(0) / 1024**3
+
+    print("Loaded class:", model.__class__.__name__)
+    print("\nVerification output:")
+    print(result)
+    print("Peak GPU memory (GiB):", round(peak_memory_gib, 2))
+
+    runtime_report = {
+        "model_key": model_key,
+        "model_id": model_id,
+        "requested_revision": revision,
+        "resolved_snapshot": str(snapshot),
+        "loaded_class": model.__class__.__name__,
+        "versions": dependency_versions(),
+        "gpu": device_properties.name,
+        "gpu_total_memory_gib": round(total_vram_gib, 2),
+        "dtype": "bfloat16",
+        "peak_gpu_memory_gib": round(peak_memory_gib, 3),
+        "prompt": messages[0]["content"],
+        "max_new_tokens": 80,
+        "generation": result,
+    }
+    report_dir.mkdir(parents=True, exist_ok=True)
+    model_name = model_id.split("/")[-1]
+    output_path = report_dir / f"{model_name}_runtime.json"
+    with output_path.open("w", encoding="utf-8") as handle:
+        json.dump(runtime_report, handle, indent=2, ensure_ascii=False)
+        handle.write("\n")
+    print(f"Saved runtime report to {output_path}")
+
+    del model, tokenizer, inputs, output, new_tokens
+    gc.collect()
+    torch.cuda.empty_cache()
+
+
+def parse_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("action", choices=["download", "inspect", "verify"])
+    parser.add_argument(
+        "--model",
+        choices=["2b", "9b", "27b", "all"],
+        default="2b",
+    )
+    parser.add_argument(
+        "--cache-dir",
+        type=Path,
+        default=Path(os.environ.get("QWEN35_CACHE_DIR", DEFAULT_CACHE_DIR)),
+    )
+    parser.add_argument(
+        "--report-dir",
+        type=Path,
+        default=Path(os.environ.get("QWEN35_REPORT_DIR", DEFAULT_REPORT_DIR)),
+    )
+    parser.add_argument(
+        "--revision",
+        default=os.environ.get("QWEN35_REVISION", "main"),
+        help="Hugging Face branch, tag, or commit (default: main)",
+    )
+    return parser.parse_args()
+
+
+def main():
+    args = parse_args()
+    selected = list(MODELS) if args.model == "all" else [args.model]
+
+    if args.action == "verify" and len(selected) > 1:
+        raise SystemExit("verify accepts one model per Python process")
+
+    print("Dependency versions:", dependency_versions())
+    print("Cache directory:", args.cache_dir)
+    print("Report directory:", args.report_dir)
+
+    for key in selected:
+        model_id = MODELS[key]
+        if args.action == "download":
+            download_model(model_id, args.cache_dir, args.revision)
+        elif args.action == "inspect":
+            inspect_model(
+                key,
+                model_id,
+                args.cache_dir,
+                args.report_dir,
+                args.revision,
+            )
+        else:
+            verify_model(
+                key,
+                model_id,
+                args.cache_dir,
+                args.report_dir,
+                args.revision,
+            )
+
+    print("\nDone.")
+
+
+if __name__ == "__main__":
+    main()

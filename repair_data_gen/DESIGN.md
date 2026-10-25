@@ -64,7 +64,7 @@ one sentence (anaphora, a repair across speaker turns) are not generated.
 | 3. Check every item automatically; drop failures | done (train) |
 | 4. Select edge-label items by hand for naturalness | done (train) |
 | 5. Align the text outside the repair with PMB; sample about 500 per type | done: `rsr_generation/dataset/train_rsr.base.tsv` |
-| 6. Insert editing expressions | next |
+| 6. Insert editing expressions | scripted, 2026-10-24 |
 | 7. Repeat 1–6 on PMB dev and test | later |
 
 **Why an LLM.** A rule-based generator reached content words only:
@@ -99,17 +99,28 @@ selection rather than given a lower bar. Results:
 "Natural" means acceptable to a fluent speaker: grammatical, recognisable as
 a repair, with both versions recoverable. It does not mean typical of speech.
 
-## 6. Next: editing expressions
+## 6. Editing expressions
 
-Planned, not built. Settled so far:
+Built by `rsr_generation/dataset/insert_editing_expressions.py`:
 
 - Markers for training: *I mean*, *no*, *no wait*, *actually*. *Sorry* is
   kept for the test set, as an unseen marker.
-- Training: about 30% of items get a marker; marked and unmarked items are
-  not paired. Test: every item appears in both forms.
+- Select 1,047 of 3,489 base items (30% globally, rounded): all 482
+  ambiguous items, then 565 sampled proportionally to the remaining pool
+  sizes by repair type. Use largest remainders and seed 20261024.
+- Four markers are balanced within type and globally (counts differ by at
+  most one); assignment uses seed 20261025. Test keeps paired forms.
 - Items whose bare form has a fluent reading (`ambiguous`: number ranges,
-  sentence-initial names, weekday lists) go to the marked share in training
-  and form a separate stratum in test.
+  sentence-initial names, weekday lists) all receive an additional marked
+  variant. Their unmarked versions remain in training. Test reports them
+  as a separate stratum.
 
-Open: whether the 30% applies overall or per type (the ambiguous items of
-number and name exceed 30% of their type).
+The script preserves the frozen base, writes 1,047 marked variants, and
+appends them to all 3,489 base rows in `train_rsr.augmented.tsv` (4,536 rows).
+This additive recipe was chosen on 2026-10-24: keep fluent data, add base
+RSR, then add marked RSR with unchanged targets. The 30% denominator is
+base items; marked rows are 23.1% of augmented RSR. Selected items have two
+surface variants and greater training weight. The 482 ambiguous base inputs
+are retained, so textual ambiguity remains a limitation. C2 and C3 use the
+same inputs and sampling. `training_dataset/build.py` combines these rows
+with the 9,486 eligible fluent PMB rows in one typed Parquet table.

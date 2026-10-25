@@ -1,0 +1,19 @@
+universe = vanilla
+initialdir = /nethome/honzhou
+
+executable = /nethome/honzhou/thesis_zone/load_qwen35/hpc/verify_small.sh
+
+# Run 2B and 9B sequentially on an A100 40 GB. The upper bound avoids taking
+# an 80 GB card that is needed by 27B jobs.
+output = /scratch/hongxuzhou/logs/qwen35_inspection/verify_small.$(ClusterId).out
+error  = /scratch/hongxuzhou/logs/qwen35_inspection/verify_small.$(ClusterId).err
+log    = /scratch/hongxuzhou/logs/qwen35_inspection/verify_small.$(ClusterId).log
+
+request_CPUs   = 4
+request_memory = 64G
+request_GPUs   = 1
+requirements = (GPUs_Capability >= 8.0) && (GPUs_GlobalMemoryMb > 39000) && (GPUs_GlobalMemoryMb <= 41000)
+
++MaxWallTime = 7200
+
+queue 1

@@ -19,7 +19,7 @@ Done so far:
 |---|---|
 | RSR source pool (`../rsr_generation/select_docs.py`) | reads `load()` |
 | base RSR train set (`../rsr_generation/dataset/assemble.py`) | reads `load()`, asserts none present |
-| fluent PMB part of C1 / C2 / C3 | not built yet; must read `load()` |
+| unified fluent PMB part (`../training_dataset/build.py`) | reads `load()`, asserts 9,486 rows and no overlap |
 
 Train after the hold-out: 9,552 − 66 = **9,486** documents. All conditions
 use this same partition.

@@ -1,0 +1,5 @@
+JOB PREPARE hpc/prepare.sub
+JOB VERIFY_SMALL hpc/verify_small.sub
+JOB VERIFY_27B hpc/verify_27b.sub
+
+PARENT PREPARE CHILD VERIFY_SMALL VERIFY_27B

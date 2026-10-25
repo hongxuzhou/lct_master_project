@@ -18,8 +18,11 @@ person.n.01 EQU speaker mother_tongue.n.01 Creator -1
 
 | file | items | status |
 |---|---:|---|
-| [`rsr_generation/dataset/train_rsr.base.tsv`](rsr_generation/dataset/README.md) | 3,489 (7 repair types, ~500 each) | frozen 2026-10-13, hard negatives removed 2026-10-16; no editing expressions yet |
+| [`rsr_generation/dataset/train_rsr.base.tsv`](rsr_generation/dataset/README.md) | 3,489 (7 repair types, ~500 each) | frozen 2026-10-13, hard negatives removed 2026-10-16; base without editing expressions |
 | [`hard_negatives/train_holdout.tsv`](hard_negatives/README.md) | 66 train documents | held out of all training data |
+| `rsr_generation/dataset/train_rsr.marked30.tsv` | 1,047 | scripted marked variants, including all 482 ambiguous items |
+| `rsr_generation/dataset/train_rsr.augmented.tsv` | 4,536 | all base rows plus 1,047 marked variants; current RSR training component |
+| [`training_dataset/data/train.parquet`](training_dataset/README.md) | 14,022 | 9,486 fluent + 3,489 base RSR + 1,047 editing-expression RSR |
 | dev, test | – | not built |
 
 How it was made, in one paragraph: an LLM (Muse-Glimmer-30B) received a gold
@@ -45,6 +48,7 @@ aligned with PMB, and 500 items per type were sampled.
 | path | contents |
 |---|---|
 | `rsr_generation/` | prompts, samples, runs, checks, audits, the dataset |
+| `training_dataset/` | unified train Parquet, manifest and reproducible builder |
 | `sbn_lin.py` | SBN reader and PMB split paths |
 | `validate_with_pmb_parser.py` | structural checks used on every item |
 | `repair_transform.py`, `test_against_doc.py` | rule-based repair of one site; used as a reference for content-word items |

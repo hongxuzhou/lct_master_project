@@ -1,0 +1,16 @@
+universe = vanilla
+initialdir = /nethome/honzhou
+
+executable = /nethome/honzhou/thesis_zone/load_qwen35/hpc/prepare.sh
+
+# CPU-only download and meta-device architecture inspection.
+output = /scratch/hongxuzhou/logs/qwen35_inspection/prepare.$(ClusterId).out
+error  = /scratch/hongxuzhou/logs/qwen35_inspection/prepare.$(ClusterId).err
+log    = /scratch/hongxuzhou/logs/qwen35_inspection/prepare.$(ClusterId).log
+
+request_CPUs   = 4
+request_memory = 16G
+
++MaxWallTime = 21600
+
+queue 1

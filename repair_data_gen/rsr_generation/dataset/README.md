@@ -2,9 +2,8 @@
 
 `train_rsr.base.tsv`: 3,489 English sentences with a replacement self-repair
 (RSR), each paired with its repair-aware SBN, built from PMB 5.1.0 train
-gold. "Base" means no editing expression ("The cat, the dog barks"); a
-version with editing expressions ("The cat, I mean, the dog barks") is a
-later step.
+gold. "Base" means no editing expression ("The cat, the dog barks"); derived version with editing expressions ("The cat, I mean, the dog barks")
+is built by `insert_editing_expressions.py` (below).
 
 Frozen 2026-10-13; hard-negative documents removed 2026-10-16 (below).
 sha256 `565ddd28c70d87d4eefa1412683ca3bbb4b62a7ddcfbfd15ae219fd2b3199ca2`
@@ -188,3 +187,57 @@ Rebuild from `rsr_generation/`:
   `ambiguous`, not removed.
 - **PMB limits.** A repair that needs an index of 10 or more is rejected
   (the reader truncates it), so long sentences are under-represented.
+
+## Editing-expression derivatives
+
+Run after rebuilding the base:
+
+    python3 dataset/insert_editing_expressions.py
+
+The script checks the frozen base hash and `holdout.load()`. It selects
+1,047 base items (30% globally, rounded to the nearest integer): all 482
+ambiguous items, then 565 from the remaining 3,007. Remaining quotas are
+proportional to each repair type's non-ambiguous pool, rounded by largest
+remainders (lexical type order breaks ties). Sampling uses seed 20261024.
+Marker assignment shuffles selected IDs within type with seed 20261025 and
+cycles through `I mean`, `no`, `no wait`, `actually` across types. Counts
+per marker differ by at most one globally and within each type. `sorry`
+is never inserted as an editing expression.
+
+| file | contents |
+|---|---|
+| `train_rsr.marked30.tsv` | 1,047 marked variants only |
+| `train_rsr.augmented.tsv` | 4,536 rows: all 3,489 base rows followed by 1,047 marked variants |
+| `train_rsr.editing.manifest.json` | seeds, rules, per-type counts, source/script/output hashes |
+
+Both targets remain byte-for-byte unchanged. `repair_onset` moves past the
+inserted marker and comma-space. `editing_expression` contains the inserted
+marker and is empty on base rows. New fields also include `variant_id`
+(unique surface variant), `nl_repair_base`, `repair_onset_base`, `editing_start`,
+`editing_end` (half-open character offsets for the marker only), and
+`selection_reason`. `item_id` retains the base identity for pairing.
+Model-output and audit fields retain base provenance; they are not an audit
+of the inserted marker. Removing the inserted segment must recover the exact
+base text. Insertion does not establish that every marker resolves every
+ambiguity or sounds equally natural; marker-specific human review is pending.
+
+The training recipe is additive: retain every base row, including all 482
+unmarked ambiguous items, and append the selected marked variants. The 30%
+refers to selected base items; marked rows are 23.1% of the resulting 4,536
+RSR rows. This preserves the full base distribution while adding examples
+whose target is invariant to the inserted editing expression. Selected items
+have two surface variants and thus twice the row weight of unselected items;
+the augmented type counts are not balanced. These are surface variants, not
+new independent source documents. Use `variant_id` as the unique row key and
+`item_id` to link versions. C2 and C3 must use the same rows and sampling.
+
+The superseded replacement mixture is archived under
+`archive/repair_data_gen/dataset_recipes/`; it is not a training input.
+The augmented file does not contain the fluent PMB component. Adding the
+9,486 eligible fluent rows later gives 14,022 rows per C2/C3 condition and
+RSR : fluent = 4,536 : 9,486 (about 1 : 2.1).
+
+The frozen base retains its historical `interregnum = none` column because
+renaming it would change the recorded base hash. All derived files and the
+unified training Parquet use `editing_expression`; the legacy column is not
+published.
