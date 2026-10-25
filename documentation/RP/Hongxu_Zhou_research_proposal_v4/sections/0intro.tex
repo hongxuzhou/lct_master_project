@@ -1,0 +1,127 @@
+\section{Introduction}
+\label{sec:introduction}
+%============high level big picture
+This interdisciplinary project brings together formal and computational semantics with natural language processing (NLP). It examines how formal meaning representations can capture replacement self-repair (RSR) in natural language.
+
+%=============intro starts with general definition
+Speakers sometimes revise an utterance before they have finished it. This
+process is called self-repair, a type of disfluency with three parts
+\citep{shribergPreliminariesTheorySpeech1994,
+leveltMonitoringSelfrepairSpeech1983}. The \emph{reparandum} is the abandoned
+material. The \emph{interregnum} is the interval between the end of the reparandum and the onset of the coming repair. It may contain an editing
+expression such as \textit{I mean} \citep{clarkPausesHesitationsPsycholinguistic2006}.
+The \emph{repair} is the material with which the speaker resumes the utterance.
+This project focuses on replacement self-repair (RSR) within a clause, in which the
+repair replaces the reparandum and changes the intended meaning.
+
+Figure~\ref{fig:siri-repair} illustrates an RSR: 
+the speaker begins by asking Siri about the weather in Berlin, then replaces
+Berlin with Dublin. In the utterance, \textit{in Berlin} is the reparandum,
+\textit{I mean} is the editing expression occupying the interregnum, and
+\textit{in Dublin} is the repair. Although
+Dublin expresses the speaker's final intention, Siri returns the weather for
+Berlin.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.45\textwidth]{viz/siri-b-i-d.png}
+    \caption{Siri responds to the withdrawn location, Berlin, after the speaker
+    replaces it with Dublin.}
+    \label{fig:siri-repair}
+\end{figure}
+
+%=========quick LR showing previous method and limitations
+Mainstream computational approaches commonly detect the reparandum and
+editing expression for subsequent processing. One approach removes them while
+retaining the repair, producing fluent text intended to express the speaker's
+final intention \citep{johnsonTAGbasedNoisychannelModel2004}. Another retains
+the spoken words and marks disfluent spans or tokens
+\citep{futamiStreamingJointSpeech2023}. In the weather example, the first
+approach retains only \textit{in Dublin}, while the second would preserve both cities but marks
+\textit{in Berlin} as disfluent.
+
+Explicit MRs remain useful in LLM-based systems because they make
+model-interpreted meaning inspectable beyond surface text. They organise
+entities, events and their relations into structures that can be examined
+formally \citep{bosSequenceNotationCatching2023}. In recent work, explicit MRs
+have been used to detect unsupported relations in generated database queries
+\citep{reganMASSIVEMultilingualAbstract2024}, evaluate the contextual
+appropriateness of dialogue responses
+\citep{yangEmphasisingStructuredInformation2025} and construct
+paraphrase-resistant semantic watermarks
+\citep{yeSWANSemanticWatermarking2026}. These uses illustrate why explicit
+semantic structure remains useful for verification, evaluation and subsequent
+processing.
+
+For applications using explicit MRs, self-repair raises the question of what
+information should remain after a speaker revises an utterance.
+The reparandum can continue to affect comprehension, as shown by
+psycholinguistic evidence \citep{lauLingeringEffectsDisfluent2005}. It may also
+remain available for later reference in dialogue
+\citep{purverComputationalModelsMiscommunication2018}.
+
+Returning to Figure~\ref{fig:siri-repair}, suppose the speaker receives the
+correct response and follows with \textit{``Show me the airports of these two
+cities''}, referring to both locations. Cleaned text would retain Dublin but
+lose Berlin, leaving only one explicit antecedent for the plural expression
+\textit{these two cities}. A transcript marked with disfluency labels would
+preserve both names \citep{futamiStreamingJointSpeech2023}, but the labels would
+not specify how Berlin's semantic role has been revised.
+
+%==========turn back to my own work -- Claim
+Thus, I argue that an MR for RSR should encode the semantic content of the
+reparandum and repair, together with the structural configuration through which the
+utterance is revised. In the running example, both cities should be linked to the weather
+request, with an ordered replacement structure designating Berlin as the
+withdrawn location and Dublin as the accepted one. This representation keeps
+Berlin available for later reference while recording that Dublin has replaced
+it in the original role. The same distinctions make a parser's output
+inspectable: its errors can be traced to omitted content, incorrect status
+assignments or incorrect links to shared content. The project has developed a
+formal representation of within-clause RSR. The proposed thesis will validate
+its coverage and train and evaluate semantic parsers that generate it.
+
+%================WHY SBN
+Simplified Box Notation (SBN)
+\citep{bosQuantificationAnnotationDiscourse2021,bosSequenceNotationCatching2023}
+is a suitable starting point because it combines a structured meaning
+representation with a sequential format suitable for LLM generation. Its
+structure can be extended to distinguish withdrawn from accepted content while
+preserving their connections to the surrounding utterance. SBN is also used
+for semantic annotation in the Parallel Meaning Bank (PMB), whose existing
+sentence--SBN pairs provide a basis for synthesising RSR data
+\citep{abzianidzeParallelMeaningBank2017}.
+
+%=========================================RQs & Contribution
+
+The proposed thesis will address two research questions.
+
+\begin{enumerate}
+  \item \textbf{Representation:} How should within-clause RSR
+        be represented in SBN, and what are the coverage and
+        limitations of the representation?
+  \item \textbf{Parsing:} How well can LLM-based semantic parsers learn this
+        representation from synthesised meaning-banked data, and what errors
+        remain?
+\end{enumerate}
+
+This thesis aims to make three contributions.
+
+\begin{enumerate}[itemsep=0.2em]
+  \item A representation of within-clause RSR in SBN,
+        together with an account of its coverage and limitations.
+  \item A completed diagnostic study of how an LLM-based semantic parser
+        trained on fluent sentence--SBN pairs processes RSR.
+  \item A data-generation and training pipeline that constructs paired RSR
+        utterances and repair-aware SBNs from meaning-banked data and trains
+        LLM-based parsers to produce the repair-aware representation.
+\end{enumerate}
+
+%============Section Navigation
+
+Section~\ref{sec:related-work} (\emph{Related Work}) reviews disfluency
+processing and semantic accounts of repair. Section~\ref{sec:formalism}
+(\emph{Formalism}) defines the repair-aware SBN. Section~\ref{sec:methodology}
+(\emph{Methodology}) presents the diagnostic pilot, corpus construction and
+model experiment. Section~\ref{sec:timeline} (\emph{Timeline}) records
+completed work and remaining milestones.

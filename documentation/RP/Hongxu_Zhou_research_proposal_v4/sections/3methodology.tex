@@ -1,0 +1,398 @@
+\section{Methodology}
+\label{sec:methodology}
+
+The methodology proceeds from diagnosis to supervised testing. It begins with
+a completed pilot (Section~\ref{sec:pilot}) that identifies errors in
+fluent-only parsing, proceeds to corpus construction (Section~\ref{sec:data})
+that converts the formal account into paired supervision, and ends with a model
+experiment (Section~\ref{sec:model}) comparing normalising and repair-aware
+targets.
+
+\subsection{Pilot Study (Completed)}
+\label{sec:pilot}
+
+The completed pilot tested whether a Gemma-2 9B semantic parser
+\citep{gemmateamGemma2Improving2024}, fine-tuned with LoRA only on fluent
+sentence--SBN pairs \citep{huLoRALowRankAdaptation2021}, could recover the
+fluent meaning from an input containing RSR. Following
+\citet{senSemanticParsingDisfluent2021}, the RSR variants changed only the
+natural-language input and were evaluated against the original fluent gold
+SBN. Appendix~\ref{app:pilot-training}
+reports the pilot training configuration.
+
+\subsubsection{Parsing Results and Output Diagnosis}
+
+The materials came from the English train-gold portion of PMB 5.1.0
+\citep{abzianidzeParallelMeaningBank2017}. Because the source sentences and
+their fluent SBN targets were included in the LoRA fine-tuning data, the parser
+had been trained on the underlying fluent sentence--SBN mappings; only the
+RSR-modified inputs were new. Qwen3-32B
+\citep{yangQwen3TechnicalReport2025} selected a repair word and inserted a
+different word of the same part of speech immediately before it as the
+reparandum. The repair remained in place, keeping the intended meaning aligned
+with the fluent gold SBN. After three distinct variants were generated for each source
+and filtered, 833 sentences yielded 2,499 unmarked RSR inputs. Adding
+\textit{I mean} between each reparandum and repair produced another 2,499.
+Appendix~\ref{app:pilot-results} gives the full condition-level
+results.
+
+Each output was converted into a graph and compared with the fluent reference
+SBN. The \emph{scorable rate} records how many outputs could be converted and
+scored. For those outputs, SMATCH++ measures concept and relation overlap with
+the reference \citep{opitzSMATCHStandardizedExtended2023}.
+\emph{Failure-penalised F1} assigns zero to unscoreable outputs before averaging,
+so graph-generation failures remain visible.
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabular}{lrr}
+\toprule
+Condition & Scorable (\%) & Failure-penalised F1 \\
+\midrule
+Fluent      & 97.5 & 0.950$^{***}$ \\
+Unmarked RSR & 94.6 & 0.786$^{***}$ \\
+RSR + editing expression & 76.5 & 0.609$^{***}$ \\
+\bottomrule
+\end{tabular}
+\caption{Parser performance across the Fluent, unmarked-RSR and
+RSR-with-editing-expression input conditions. Asterisks indicate that all
+three pairwise Wilcoxon signed-rank comparisons of failure-penalised F1 gave
+$p<.001$.}
+\label{tab:pilot}
+\end{table}
+
+Table~\ref{tab:pilot} shows a stepwise decline in both measures.
+RSR lowered F1 while leaving most outputs scorable; adding \textit{I mean}
+produced a further loss driven mainly by graph-generation failures. Among
+outputs that remained scorable, the additional decline in F1 was much smaller.
+
+The output patterns point to a common source of this decline. The parser often
+mapped the words in the input into SBN without distinguishing their roles in
+the repair. Of the 2,363 scorable RSR outputs, 90.1\% contained more concepts
+than the parser's output for the corresponding fluent source sentence, with a median
+of two additional concepts. Much of the fluent proposition therefore remained
+recoverable, but the reparandum was often added to the asserted content rather
+than interpreted as withdrawn.
+
+Including \textit{I mean} introduced further errors into this surface-based
+mapping.
+Figure~\ref{fig:pilot-output} shows a parse that recovers the accepted
+proposition about a cow giving birth, but also asserts the \textit{goat} and
+interprets \textit{I mean} as a meaning event involving the speaker. No
+structure records that the cow replaces the goat. The SBN is formally
+possible, but it does not express the intended RSR.
+
+
+
+\begin{figure}[htbp]
+\centering
+\small\textbf{Input:} A goat, I mean, a cow gave birth to a calf with two heads.
+\par\smallskip
+\begin{minipage}[t]{0.485\textwidth}
+\centering
+\footnotesize\textbf{Fluent reference SBN}
+\begin{lstlisting}[style=sbn,basicstyle=\ttfamily\footnotesize,columns=fullflexible,breaklines=true,breakatwhitespace=true,breakindent=1em,xleftmargin=0pt,xrightmargin=0pt,framexleftmargin=2pt,framexrightmargin=2pt,aboveskip=0.25em,belowskip=0.2em]
+cow.n.01    % A cow
+...
+\end{lstlisting}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.485\textwidth}
+\centering
+\footnotesize\textbf{RSR + editing-expression parse}
+\begin{lstlisting}[style=sbn,basicstyle=\ttfamily\footnotesize,columns=fullflexible,breaklines=true,breakatwhitespace=true,breakindent=1em,xleftmargin=0pt,xrightmargin=0pt,framexleftmargin=2pt,framexrightmargin=2pt,aboveskip=0.25em,belowskip=0.2em,escapeinside={(*@}{@*)}]
+(*@\colorbox{yellow!30}{\strut\texttt{goat.n.01}}@*)    % A goat
+(*@\colorbox{yellow!30}{\strut\texttt{person.n.01 EQU speaker}}@*)      %I
+(*@\colorbox{yellow!30}{\strut\texttt{mean.v.01 Theme -2 Agent -1 Time +1}}@*)     % mean
+(*@\colorbox{yellow!30}{\strut\texttt{time.n.08 EQU now}}@*)
+cow.n.01    % A cow
+...
+\end{lstlisting}
+\end{minipage}
+\caption{Excerpts from the fluent reference and RSR parse. Highlighting marks
+content incorrectly asserted from the reparandum and editing expression; shared
+content is omitted.}
+\label{fig:pilot-output}
+\end{figure}
+
+The output still receives a SMATCH++ score of 0.764 because the accepted
+proposition continues to receive credit while the added content only lowers
+the overlap. A substantial graph score can therefore conceal the semantic
+error central to RSR. Appendix~\ref{app:pilot-goat-cow} gives the complete
+RSR and fluent-input outputs.
+
+\subsubsection{Recognition Probe and Implications}
+
+The parsing results do not show whether the model failed to recognise RSR or
+lacked an SBN pattern for representing it. I therefore removed the LoRA
+adapter and asked the instruction-tuned Gemma-2 9B to mark the reparandum,
+editing expression and repair in plain text. The probe detected 100.0\% of inputs
+with an editing expression and 44.8\% without one, while falsely identifying RSR
+in 1.0\% of fluent inputs. The editing expression was therefore a strong cue,
+although detection did not ensure accurate segmentation.
+
+The two surface forms exposed different weaknesses. Without an editing expression,
+the base model missed more than half of the RSRs, while the parser often folded
+both candidates into a fluent-looking graph. With \textit{I mean}, the probe
+detected every RSR, but the parser often represented the expression as semantic
+content. Because the probe changed both the task and the adaptation state, it
+cannot isolate SBN generation as the source of error. The pilot also covered
+one model size and included no repair-aware supervision. The main experiment
+will therefore test repair-aware training across model sizes; the next section
+describes its targets.
+
+%==============NEW DATA SECTION
+\subsection{Repair-Aware Corpus Construction}
+\label{sec:data}
+
+\subsubsection{Paired Construction}
+
+No existing corpus pairs replacement self-repair utterances with SBN targets
+that distinguish withdrawn from accepted content. The PMB contains fluent
+sentence--SBN pairs \citep{abzianidzeParallelMeaningBank2017}, while speech and
+disfluency resources contain self-repairs without corresponding SBN annotations
+\citep{deshmukhResegmentationSWITCHBOARD1998,
+passaliLARDLargescaleArtificial2022,guptaDisflQABenchmarkDataset2021}. Each PMB
+source pair is therefore transformed in parallel into an RSR utterance and the
+repair-aware SBN defined in Section~\ref{sec:paired-configuration}. Unlike the
+pilot, which altered only the utterance, this construction changes both sides
+of the pair.
+
+Figure~\ref{fig:paired-transformation} summarises this parallel construction.
+
+\begin{figure}[ht]
+\centering
+\begin{tikzcd}[column sep=8em, row sep=normal]
+\text{fluent sentence} \arrow[r, "\text{insert reparandum}"] \arrow[d, "\text{PMB gold}"'] &
+\text{RSR utterance} \arrow[d, dashed, "?"] \\
+\text{fluent gold SBN} \arrow[r, "\text{RSR transformation}"'] &
+\text{repair-aware SBN}
+\end{tikzcd}
+\caption{Parallel construction of an RSR utterance and repair-aware target.}
+\label{fig:paired-transformation}
+\end{figure}
+
+Construction will start from a fluent sentence, its fluent gold SBN and its word--concept
+alignment. An aligned noun, verb or adjective is selected as the repair, and a
+different expression of the same part of speech is drawn from WordNet
+\citep{millerWordNetLexicalDatabase1994} and inserted immediately before it.
+For example, \textit{``She prefers tea''} becomes \textit{``She prefers
+coffee, tea''}. The implemented corpus transformation replaces one aligned
+lexical concept at a time; the repair follows the inserted reparandum either
+immediately or after an intervening editing expression.
+
+The repair keeps its gold representation. The transformation adds the
+reparandum in the paired \sbnterm{CORRECTION} and \sbnterm{CONJUNCTION}
+contexts, using the direct construction where possible and the anchor or
+movement construction where required. It preserves the source graph
+outside the selected replacement site. Each record stores the original and
+repair-aware SBNs, the two replacement concepts, their status, their links to
+shared content and the construction used. These fields pair each RSR input
+with either target in the model comparison and record the information needed
+to compute the structural scores in Section~\ref{sec:model}.
+Appendix~\ref{app:generated-record}
+shows a complete record.
+
+\subsubsection{Validation and Selection}
+
+Structural validation checks that the target forms a well-defined graph,
+contains the paired RSR contexts, assigns withdrawn and accepted status
+correctly and preserves the source graph elsewhere. It also checks the links
+that connect both replacement concepts to shared content. A target that fails
+any check is excluded.
+
+A legal graph can still contain a poor training example. The competing
+expressions must differ in meaning, yet both must fit the sentence context.
+Bidirectional NLI scores identify replacements that remain mutually entailing
+\citep{laurerLessAnnotatingMore2024}, while a causal language model measures
+contextual fit as the mean token surprisal of the reparandum conditioned on
+its left context. The NLI boundaries and the upper surprisal threshold are set
+on a manually labelled calibration sample and frozen before the corpus is filtered. A separate sample
+from the retained data estimates the proportion that satisfies both criteria.
+Appendix~\ref{app:corpus-selection} gives the calibration and audit procedure.
+
+\subsubsection{Experimental Partitions}
+
+Every generated item inherits the train, development or test split of its PMB
+source document. All variants of a source remain together, preventing a
+training document from reappearing in evaluation. Every model condition also
+retains the same fluent PMB component. Two training conditions receive
+identical RSR utterances. The \emph{normalising} condition pairs each utterance
+with its fluent gold SBN, whereas the \emph{repair-aware} condition pairs it
+with the generated SBN that retains the replacement structure.
+
+% 2026-10-24: additive recipe supersedes the original one-variant rule.
+Every base RSR training item is retained without an editing expression.
+An additional marked variant is constructed for approximately 30\% of base
+items using one of four editing expressions---\textit{I mean}, \textit{no},
+\textit{no wait} or \textit{actually}---with the same SBN target.
+The current set contains 3,489 base items and 1,047 additional marked
+variants, for 4,536 RSR training rows; marked variants account for 23.1\%
+of these rows. Thus training retains the fluent component, adds base RSR,
+and then adds marked variants. Selected items have greater row weight;
+the normalising and repair-aware conditions use identical inputs and sampling.
+Each test item contributes
+two matched utterances with the same repair content and target.
+One contains no editing expression, while the other contains one. The test
+expressions include both forms seen during training and the held-out
+\textit{sorry}, allowing the effect of an editing expression and
+generalisation to an unseen expression to be evaluated separately.
+
+Two test-only challenge sets contain adversarial examples that examine
+behaviour that positive, sentence-local RSR examples cannot establish. The
+non-RSR set contains lists, appositions and similar fluent sequences that
+exhibit local surface patterns resembling RSR without expressing replacement.
+It tests whether the parser distinguishes genuine repair from superficial
+similarity; assigning an RSR configuration to these items counts as a false
+positive. The discourse set contains controls without RSR, later reference to
+the accepted referent, reference to both replacement candidates and
+corrections between discourse turns. The last condition tests whether the
+within-clause configuration is applied outside its scope.
+Appendix~\ref{app:corpus-selection} documents selection of these cases, and
+Appendix~\ref{app:later-reference} gives a complete later-reference target.
+
+\subsubsection{Feasibility and Scope}
+
+I have applied the implemented single-concept operator to all 9,552 English
+gold documents in the PMB training partition. Table~\ref{tab:coverage-funnel}
+shows the resulting structural yield before the non-RSR hold-out.
+
+\begin{table}[ht]
+\centering
+\small
+\begin{tabular}{@{}lrr@{}}
+\toprule
+Stage & Count & \% of lexical concepts \\
+\midrule
+Lexical concepts (noun, verb, adjective) & 23,232 & 100.0 \\
+Aligned to an uttered word               & 17,886 & 77.0 \\
+Usable site with a WordNet reparandum    & 16,481 & 70.9 \\
+Structurally legal transformation        & 16,425 & 70.7 \\
+\bottomrule
+\end{tabular}
+\caption{Yield of the single-concept operator over the PMB training
+partition. Of the usable sites, 99.7\% produce a legal transformation.}
+\label{tab:coverage-funnel}
+\end{table}
+
+The 16,425 legal transformations form the candidate pool and include the
+direct, anchor and movement constructions defined in
+Section~\ref{sec:paired-configuration}. Structural generation and validation are complete;
+linguistic filtering, the independent audit and final sampling remain. The
+sampling rule limits repeated use of a source document and is fixed before
+model training.
+
+The main corpus covers immediate replacements of aligned noun, verb and
+adjective concepts. It does not include role, tense, aspect or delayed
+replacements. Its WordNet-derived reparanda and written PMB contexts also
+differ from spontaneous speech. The experiments will therefore test learnability
+within these boundaries, not coverage of naturally occurring RSR as a whole.
+
+
+%==============New Model
+\subsection{Model Experiment}
+\label{sec:model}
+
+The model experiment will test whether an LLM-based semantic parser can learn
+the repair-aware representation from Section~\ref{sec:data}. A parse will count
+as successful only if it recovers the withdrawn and accepted content, assigns
+their status and links both to the surrounding clause. The evaluation will
+also test later reference, accepted meaning and generalisation beyond the
+training patterns.
+
+\subsubsection{Experimental Design}
+
+The experiment will use instruction-tuned Qwen3.5 models at three parameter
+scales: 2B, 9B and 27B \citep{qwenQwen35Native2026}. Each model size will be
+trained under all three conditions, allowing the effect of the training target
+to be compared across model capacities.
+
+All conditions will retain the fluent PMB pairs (Table~\ref{tab:model-experiment}).
+RSR normalisation will add the generated utterances with fluent gold SBN targets that omit
+the reparandum. Repair-aware training will use the same utterances with the
+repair-aware targets from Section~\ref{sec:paired-configuration}.
+
+\begin{table}[ht]
+\centering
+\small
+\begin{tabular}{@{}p{0.22\textwidth}p{0.16\textwidth}p{0.28\textwidth}ccc@{}}
+\toprule
+Training condition & RSR inputs & Target for RSR inputs & 2B & 9B & 27B \\
+\midrule
+Fluent only
+  & No  & ---                 & $\checkmark$ & $\checkmark$ & $\checkmark$ \\
+RSR normalisation
+  & Yes & Fluent gold SBN    & $\checkmark$ & $\checkmark$ & $\checkmark$ \\
+Repair-aware
+  & Yes & Repair-aware SBN    & $\checkmark$ & $\checkmark$ & $\checkmark$ \\
+\bottomrule
+\end{tabular}
+\caption{Training conditions and model sizes. Every model size is trained
+under all three conditions with three matched random seeds. The two RSR
+conditions receive the same inputs and differ in the target assigned to each
+RSR item.}
+\label{tab:model-experiment}
+\end{table}
+
+Within each model size, the normalising and repair-aware conditions have their
+inputs, example counts and training procedure held constant, so their
+comparison isolates the effect of retaining withdrawn content and its ordered
+replacement structure. The fluent-only condition provides a reference without
+RSR supervision, but its comparison with repair-aware training combines new
+examples and new targets. Results therefore pair gains in RSR representation
+with changes in accepted-meaning and fluent-input accuracy.
+
+All conditions will use the same parsing instruction and LoRA adaptation procedure
+\citep{huLoRALowRankAdaptation2021}. The instruction does not identify an input
+as fluent or RSR-containing. Each model--condition combination will use three
+matched random seeds, giving 27 runs in total. Outputs will be evaluated
+without automatic output correction. Appendix~\ref{app:model-config}
+specifies the full procedure.
+
+\subsubsection{Evaluation}
+
+The primary measure is \emph{RSR-structure accuracy}. An item is correct
+only if its output is a well-formed graph with the paired
+\sbnterm{CORRECTION}--\sbnterm{CONJUNCTION} structure. It must also assign the
+reparandum and repair to the withdrawn and accepted contexts and give both the
+required links to shared content. Component scores show which requirement
+failed.
+Graph validity and failure-penalised SMATCH++ are complementary measures
+of generation success and agreement with the complete target
+\citep{opitzSMATCHStandardizedExtended2023}. Appendix~\ref{app:model-metrics}
+gives the metric definitions and a worked scoring example.
+
+Two controls assess how repair-aware training affects accepted-meaning
+recovery and ordinary semantic parsing. For the
+automatically generated RSR items, the accepted content of each prediction is
+compared with the fluent gold PMB graph after RSR-specific structure is
+removed. This measures recovery of the speaker's final intention independently
+of success on the reparandum. The parsers are also evaluated on the unmodified
+PMB test partition. Its graph score measures ordinary semantic parsing, while
+the spurious-RSR rate records fluent inputs that are incorrectly assigned RSR
+structure.
+
+The later-reference challenge set tests the main functional motivation for
+retaining withdrawn material. It checks links to the accepted referent, the
+withdrawn referent and both referents where the target requires them. At each
+model size, the normalising and repair-aware parsers are compared because only
+the latter is trained to retain the withdrawn referent and its discourse
+status.
+
+Further tests examine whether the parser has learned an RSR distinction rather
+than a narrow surface pattern. Paired versions of each test item measure the
+effect of an editing expression while holding its lexical content constant, and
+\textit{sorry} tests a marker excluded from training. The non-RSR set
+measures false alarms on lists, appositions and coordination. Cross-turn
+corrections test whether the within-clause configuration is applied outside
+its intended scope.
+
+The error diagnosis distinguishes failures of RSR structure, status and
+semantic-role attachment from representations of editing expressions, spurious
+RSR analyses and malformed SBN. Statistical comparisons use the original PMB
+source document as the unit of observation, with its variants aggregated
+before testing. For each model size, the three matched seeds are compared
+separately and their mean difference and range are reported; a result is
+treated as stable only when its direction is consistent across seeds.
+Appendix~\ref{app:model-statistics} records the full error scheme and
+statistical procedure.

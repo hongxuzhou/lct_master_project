@@ -1,0 +1,209 @@
+\section{Formalism (Completed)}
+\label{sec:formalism}
+The proposed representation has three requirements. It must retain the
+reparandum without asserting it as part of the speaker's final commitment,
+identify the repair as accepted content and connect both candidates to the
+structure they share. Meeting these requirements depends on SBN's treatment of
+semantic roles, contexts and accessibility. Section~\ref{sec:sbn-brief}
+introduces only the notation needed for this account; readers familiar with
+SBN contexts and accessibility may begin with
+Section~\ref{sec:paired-configuration}. Section~\ref{sec:formalism-coverage}
+separates the representation's coverage from the narrower scope implemented
+in the main experiment.
+
+\subsection{SBN Requirements for the Representation}
+\label{sec:sbn-brief}
+
+SBN represents meaning as a sequence of concepts and their relations
+\citep{bosSequenceNotationCatching2023}. Concepts introduce entities, events
+or properties. Their labels record type and sense. In
+Figure~\ref{fig:weather-rsr-comparison}(a), \sbnterm{city.n.01} introduces a
+city concept and \sbnterm{Name "Dublin"} records its name. Roles connect concepts by
+relative indices: \sbnterm{Location +1} points forward to the city, while
+\sbnterm{Theme -1} points back to \sbnterm{weather.n.01}. Expressions such as
+\sbnterm{EQU now} assign a value. The sequence therefore describes the request
+without using explicit variables.
+
+\begin{figure}[H]
+\centering
+\begin{minipage}[t]{0.53\textwidth}
+\raggedright
+\textbf{(a) No RSR}\par\smallskip
+\parbox[t][3\baselineskip][t]{\linewidth}{\small\raggedright
+\textit{``What is the weather like in Dublin?''}}
+\begin{lstlisting}[style=sbn,
+    basicstyle=\ttfamily\fontsize{7}{9}\selectfont,
+    xleftmargin=0pt, xrightmargin=0pt, framexleftmargin=3pt,
+    columns=fullflexible]
+entity.n.01 EQU ?                                   % What
+time.n.08 EQU now                                   % is
+weather.n.01                                        % the weather
+like.a.01 Co-Theme -3 Time -2 Theme -1 Location +1  % like 
+city.n.01 Name "Dublin"                             % in Dublin?
+\end{lstlisting}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.42\textwidth}
+\raggedright
+\textbf{(b) Replacement self-repair}\par\smallskip
+\parbox[t][3\baselineskip][t]{\linewidth}{\small\raggedright
+\textit{``What is the weather like in Berlin, in Dublin?''}}
+\begin{lstlisting}[style=sbn,
+    basicstyle=\ttfamily\fontsize{7}{9}\selectfont,
+    xleftmargin=0pt, xrightmargin=0pt, framexleftmargin=3pt,
+    columns=fullflexible, escapeinside={(*@}{@*)}]
+entity.n.01 EQU ?                       % What
+time.n.08 EQU now                       % is
+weather.n.01                            % the weather
+like.a.01 Co-Theme -3 Time -2 Theme -1  % like 
+    (*@\colorbox{blue!10}{\textcolor{blue!60!black}{\bfseries CORRECTION <1}}@*)
+city.n.01 Name "Berlin" LocationOf -1   % in Berlin
+    (*@\colorbox{blue!10}{\textcolor{blue!60!black}{\bfseries CONJUNCTION <2}}@*)                    % I mean, 
+city.n.01 Name "Dublin" LocationOf -2   % in Dublin?
+\end{lstlisting}
+\end{minipage}
+\caption{Fluent and repair-aware SBNs for the weather example. The highlighted
+separators introduce the withdrawn Berlin material and the accepted Dublin
+material.}
+\label{fig:weather-rsr-comparison}
+\end{figure}
+
+The fluent request occupies one \emph{context}, which groups concepts with the
+conditions that describe them. A \emph{separator} starts a new context when
+part of the meaning requires separate interpretation. Its \emph{connector}
+points to the context to which the new one relates. SBN has no closing
+separator, so subsequent concepts remain in the new context until another
+separator occurs or the sequence ends. For example, \sbnterm{NEGATION} places
+the buying event and car in a context whose content is denied, while John
+remains in the enclosing context
+\citep{bosVariablefreeDiscourseRepresentation2021}:
+
+\begin{lstlisting}[style=sbn]
+male.n.02 Name "John"                  % John
+    NEGATION <1                        % did not
+time.n.08 TPR now
+buy.v.01 Agent -2 Time -1 Theme +1     % buy
+car.n.01                               % a car
+\end{lstlisting}
+
+The \sbnterm{Agent -2} link reaches out from the negated context to John. A
+link in the opposite direction cannot directly reach the car introduced only
+inside that context. These \emph{accessibility} restrictions determine which
+concepts can be linked across context boundaries. They are central to RSR
+because the reparandum must connect to shared content without becoming part of
+the accepted proposition.
+
+\subsection{The Paired RSR Configuration}
+\label{sec:paired-configuration}
+
+I propose a representation that pairs the existing separators
+\sbnterm{CORRECTION} and \sbnterm{CONJUNCTION}; it introduces no new
+separator.\footnote{A fuller
+specification and additional examples are available at
+\url{https://hongxuzhou.github.io/lct_master_project/}.} In
+Figure~\ref{fig:weather-rsr-comparison}(b), \sbnterm{CORRECTION} introduces the
+context containing Berlin, while \sbnterm{CONJUNCTION} introduces the context
+containing Dublin. The two connectors point to the initial context containing
+the shared request. Berlin and Dublin therefore occupy separate contexts with
+the same parent.
+
+The second separator is necessary because SBN does not close a context
+automatically. Without it, Dublin and the continuation would remain inside
+the withdrawn context. \sbnterm{CONJUNCTION} starts the accepted context and
+merges its content with the shared parent
+\citep{bosSequenceNotationCatching2023}. Following the treatment of corrected
+content as denied in SDRT
+\citep{lascaridesAgreementDisputesCommitments2009}, I give the
+\sbnterm{CORRECTION} context an implicit negative interpretation. Berlin is
+withdrawn; Dublin is accepted.
+
+Both cities remain connected to the weather request. Berlin carries
+\sbnterm{LocationOf -1} from the withdrawn context, and Dublin carries
+\sbnterm{LocationOf -2} from the accepted context. These links identify the
+role being revised. Berlin's location relation remains inside the withdrawn
+content, so it does not entail that Berlin is the requested location. Dublin's
+relation contributes to the accepted proposition. The representation thus
+preserves the two candidates and records the change in their discourse status.
+
+The paired configuration is realised through three constructions: the direct,
+anchor and movement constructions. The direct construction requires each
+candidate to carry a suitable link to shared content. A bare-subject RSR such
+as \textit{``Josh, I mean, Mary
+bought a cake''} lacks such a link on the subject concept itself. The
+\emph{anchor construction} places a neutral \sbnterm{entity.n.01} in the shared
+context and links Josh and Mary to it with \sbnterm{EQU}. The buying event
+keeps one agent; Josh is withdrawn as its identification and Mary is accepted.
+The PMB already uses neutral entity concepts for underspecified participants
+\citep{abzianidzeParallelMeaningBank2017}. Appendix~\ref{app:devices-anchor}
+gives the full construction.
+
+A different problem occurs when the repair concept points forward to an
+argument. In \textit{``Tom opened, no, broke the window''}, a copy of the
+verb inside the withdrawn context cannot reach forward through both separators
+to \textit{the window}. The \emph{movement construction} places the window before
+the paired RSR contexts, allowing both verbs to link back to it. This preserves the
+shared argument but departs from surface word order. Direct construction is
+tried first. Where it fails, referential nouns can use the anchor construction,
+while properties and events use the movement construction when their arguments
+can be moved safely.
+Appendix~\ref{app:devices} gives the listings and selection rules.
+
+The treatment also supports later reference to accessible withdrawn
+referents. Proper names can be interpreted outside the scope of negation
+through presupposition
+\citep[Section~7]{bosVariablefreeDiscourseRepresentation2021}. Berlin and
+Dublin can therefore serve as antecedents for \textit{these two cities}, while
+Berlin's location role remains withdrawn. Later reference does not restore
+Berlin as the accepted location. Appendix~\ref{app:later-reference} gives the
+complete \sbnterm{ANA} links. The same account does not make every item inside
+a withdrawn context accessible; the challenge set is restricted to referents
+for which the formal account licenses access.
+
+Following \citet{maschlerMetalanguagingDiscourseMarkers1994},
+\textit{I mean} is treated as a metalinguistic marker when it functions as an
+editing expression. It is excluded from the propositional content under repair
+and recorded in a \sbnterm{\%} comment on the \sbnterm{CONJUNCTION} line, as
+illustrated in Figure~\ref{fig:weather-rsr-comparison}(b).
+
+\subsection{Coverage, Implementation and Remaining Validation}
+\label{sec:formalism-coverage}
+
+The configuration can represent replacement of content expressed by SBN
+concepts or roles, provided that the two candidates can connect to a shared
+parent without violating accessibility. This includes replacements inside an
+existing context such as negation. The corpus used in the main experiment has
+a narrower implemented scope: it transforms aligned noun, verb and adjective
+concepts. Role replacement is part of the representational account but is not
+included in the present training data.
+
+The paired configuration does not cover replacement of an SBN separator.
+Under the current SBN rules, separators organise relations between contexts
+rather than contribute content within them, so the
+\sbnterm{CORRECTION}--\sbnterm{CONJUNCTION} structure cannot embed competing
+separators as the reparandum and repair. Representing such cases would require
+modifying SBN itself and falls outside the scope of the proposed thesis. This
+limitation applies to changes in modality, such as \textit{must} to
+\textit{might}, and changes in discourse relation, such as \textit{when} to
+\textit{even though}, because they revise the structures that organise the
+contexts. Tense and aspect replacements can also require several coordinated
+concept changes and are excluded from the current corpus.
+
+Timing sets a further boundary. The configuration covers an immediate RSR,
+where the repair follows before the speaker commits intervening material.
+Consider \textit{``I bought three apples from Lidl yesterday---actually,
+four.''} Starting the withdrawn context at \textit{three} would also place the
+location and time inside it. Moving that committed span before the context
+would depart too far from the utterance order. Delayed self-repairs of this kind,
+including corrections made after a completed clause, fall outside the scope of
+the proposed thesis. They could be forced into the current notation only by
+moving intervening committed material across contexts, at the cost of a
+substantial departure from word order and SBN's preference for alignment with
+the natural-language input.
+
+The paired configuration and the direct, anchor and movement constructions
+have been proposed and implemented. The completed corpus pass in
+Section~\ref{sec:data} initially tests their structural applicability. The
+thesis will complete the answer to the first research
+question stated in Section~\ref{sec:introduction} by validating the retained corpus, examining where the constructions
+succeed or fail and consolidating the resulting coverage and limitation
+account. The parsing experiment then tests whether models can learn the
+distinctions that the representation makes explicit.

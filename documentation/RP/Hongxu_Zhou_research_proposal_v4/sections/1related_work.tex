@@ -1,0 +1,156 @@
+\section{Related Work}
+\label{sec:related-work}
+
+The review supports two design decisions. Section~\ref{sec:rw-disfluency}
+examines what NLP systems remove, preserve or recover when processing
+self-repair. Section~\ref{sec:rw-representation-choice} then asks which
+semantic accounts can encode the missing distinction between withdrawn and
+accepted content. Readers familiar with disfluency detection may begin with
+the second subsection; readers familiar with semantic representation can use
+the first to locate the project's NLP task.
+
+\subsection{Disfluency Detection and Downstream Processing}
+\label{sec:rw-disfluency}
+
+Mainstream NLP approaches use \emph{disfluency} as an umbrella term for a
+range of phenomena that interrupt the fluent flow of speech, including
+self-repair
+\citep{shribergPreliminariesTheorySpeech1994,senSemanticParsingDisfluent2021}.
+The studies reviewed below differ in their coverage of these phenomena, but
+typically address them within a shared processing task. Their outputs range
+from cleaned text and annotated transcripts to meaning representations for
+downstream applications
+\citep{johnsonTAGbasedNoisychannelModel2004,futamiStreamingJointSpeech2023,senSemanticParsingDisfluent2021}.
+
+In a task-oriented NLP pipeline, a downstream component that books a ticket
+or retrieves information typically only needs the user's final intention: which
+ticket to book or which information to return. When that is the output
+requirement, an upstream disfluency detector can mark material for omission
+from subsequent interpretation. Recovering the user's
+final intention is therefore an appropriate objective for these immediate
+downstream tasks. Applied to Figure~\ref{fig:siri-repair}, however, this
+objective yields a request for Dublin's weather without recording that Berlin
+was first proposed and then withdrawn. The following discussion traces this
+representational issue through correction models, transcript annotation and
+semantic parsing from disfluent input.
+
+Early computational models used the structural correspondences between
+reparandum and repair described by \citet{leveltMonitoringSelfrepairSpeech1983}
+to guide detection and correction. \citet{heemanDetectingCorrectingSpeech1994},
+for example, used them to detect self-repairs as speech unfolded and identify
+material to remove. Noisy-channel approaches modelled the reparandum as
+material introduced into a fluent source and recovered that source for
+subsequent language understanding
+\citep{johnsonTAGbasedNoisychannelModel2004,honalCorrectionDisfluenciesSpontaneous2003}.
+Across these approaches, structural correspondence guides the recovery of
+fluent text.
+
+Later neural methods reduced the need for hand-designed matching features.
+For example, \citet{zayatsRobustCrossdomainDisfluency2018} learned similarity
+patterns useful for identifying reparanda, while retaining detection as the
+output task. The scope of the output labels, however, had already received
+attention. \citet{zayatsMultidomainDisfluencyRepair2014} criticised the focus
+on reparandum detection without type distinctions. Their model distinguished
+repetitions from other types of disfluency and added labels for repair spans,
+providing a richer account of self-repair in the transcript.
+\citet{futamiStreamingJointSpeech2023} likewise preserved disfluent material
+in joint speech recognition and disfluency detection, using either span
+boundary markers or token-level fluent/disfluent labels. These approaches
+preserve information that deletion would remove, with varying detail about
+disfluency types and spans. Their labels do not, however, explicitly
+represent how the repair replaces the reparandum's contribution to the
+utterance's meaning.
+
+An alternative is to let language models handle disfluency implicitly,
+without a separate detection stage.
+\citet{senSemanticParsingDisfluent2021} used a sequence-to-sequence parser
+with a pre-trained RoBERTa encoder to map disfluent queries directly to
+the intent-and-slot representations of their fluent counterparts. When
+trained only on fluent data, it achieved 2\% exact-match accuracy on 56
+disfluent queries, compared with 81\% on their fluent counterparts.
+Adding targeted disfluency training data improved performance. More recent
+end-to-end voice systems integrate spoken input, tool calls and spoken
+responses, likewise handling disfluency without a separate detection
+output. Yet in Full-Duplex-Bench-v3 \citep{linFullDuplexBenchv3BenchmarkingTool2026}, the highest task-completion rate on
+scenarios containing self-repair was 58.8\%, achieved by GPT-Realtime. Reported errors include
+premature commitment to tool arguments, allowing reparanda to enter
+API calls. These findings indicate that reliable disfluency handling
+remains a challenge across both pre-trained semantic parsers and
+end-to-end voice systems.
+
+The approaches reviewed above offer ways to detect disfluency and recover
+the speaker's final intention, but leave the semantic status of withdrawn
+content largely outside their output requirements. Together with the
+continuing contextual role of the reparandum discussed in the introduction,
+this motivates exploring alternative ways of representing self-repair.
+
+\subsection{Formal and Computational Semantic Accounts of RSR}
+\label{sec:rw-representation-choice}
+
+This subsection compares semantic accounts of RSR and related forms of
+revision, focusing on whether their representations can serve as targets for
+LLM-based semantic parsing.
+
+Dynamic Syntax with Type Theory with Records (DS-TTR) builds meaning word by
+word through DS parsing actions and expresses the resulting content as TTR
+record types \citep{purverIncrementalSemanticConstruction2011}.
+\citet{houghProcessingSelfrepairsIncremental2012} handle RSR by
+returning to an earlier parse state and continuing along a new path.
+Their processing record links words, parsing actions and semantic
+representations, keeping the reparandum accessible. The final accepted TTR
+record type alone, however, does not identify the withdrawn path and its
+replacement; that information remains in the processing history.
+
+This project requires the final meaning representation itself to retain the
+reparandum, repair and replacement structure for inspection, comparison and
+scoring. DS-TTR is therefore not adopted as the basis for the target
+representation because it would shift the learning and evaluation target from
+a final repair-aware semantic structure to a grammar-constrained derivation.
+
+AMR represents sentence meaning as a graph
+\citep{banarescuAbstractMeaningRepresentation2013} and can be linearised for
+generation by pre-trained sequence-to-sequence models
+\citep{fanLeveragingAMRGraph2024}, making it a potential candidate for this project. A
+close precedent comes from work on disrupted sentences.
+\citet{addleseeUnderstandingDisruptedSentences2023} use underspecified AMR
+graphs to represent sentences with missing content and complete them using
+follow-up input. Their task recovers missing content, whereas RSR replaces
+content already expressed. In Figure~\ref{fig:siri-repair}, a repair-aware
+representation must therefore retain both locations and mark the status of
+each.
+
+Standard AMR nevertheless requires extension on two points. First, its
+limited treatment of scope \citep{bosSquibExpressivePower2016} lacks the
+separate semantic contexts needed to \emph{quarantine} the reparandum.
+Its content must be retained without entering the accepted meaning. Second,
+AMR abstracts away from surface word order
+\citep{banarescuAbstractMeaningRepresentation2013}, so a graph and its
+linearisation do not record the order of replacement updates. This order matters
+because reversing which expression replaces the other changes the accepted
+meaning. An AMR extension would therefore need an explicit directed relation
+or a constrained linearisation. These requirements favour a context-based
+framework that already separates semantic contexts and relates successive
+updates.
+
+Within such a framework, correction must distinguish the content that is
+given up from the content that replaces it.
+\citet{vanleusenIncompatibilityContextDiagnosis2004} characterises this
+relation through contextual incompatibility. Accepting the new proposal
+requires giving up the content being revised, whether that content was stated
+explicitly or inferred. In Figure~\ref{fig:siri-repair}, this means withdrawing
+Berlin as the location and accepting Dublin while the surrounding request
+remains unchanged.
+
+Segmented Discourse Representation Theory (SDRT)
+\citep{asherLogicsConversation2003} encodes connections between discourse
+units through rhetorical relations. \citet{lascaridesAgreementDisputesCommitments2009}
+use \textsc{Correction} to link the corrected unit to the correcting one,
+representing the incompatibility condition proposed by
+\citet{vanleusenIncompatibilityContextDiagnosis2004} as the denial of prior
+content and the acceptance of its correction. Their account principally concerns
+corrections across conversational turns. SBN inherits this theoretical
+machinery by adopting SDRT's discourse-relation inventory to connect semantic
+contexts \citep{bosSequenceNotationCatching2023}. The remaining task is to
+specify how the reparandum and repair connect to the shared semantic structure
+of one unfinished clause. Section~\ref{sec:formalism} develops this
+configuration and its interpretation.

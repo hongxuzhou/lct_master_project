@@ -392,7 +392,7 @@ PMB 5.1.0 的 gold 部分：
 ### 5.4 改口数据和流利数据的比例
 
 **目标比例约为 改口 : 流利 = 1 : 2 到 1 : 4。**
-**实际比例**：3,489 : 9,486 ≈ **1 : 2.7**。总量 3,500、每类 500 是在任何训练结果出来之前定的（2026-10-10），没有调过；论文里报告"在这个比例下"的结果。
+**Base ratio:** 3,489 : 9,486 ≈ **1 : 2.7**. **Augmented training ratio (2026-10-24):** 4,536 : 9,486 ≈ **1 : 2.1**. 总量 3,500、每类 500 是在任何训练结果出来之前定的（2026-10-10），没有调过；论文里报告"在这个比例下"的结果。
 
 **为什么改口数据不能占多数**——这是整个数据设计里最重要的一条理由：
 
@@ -431,16 +431,32 @@ I mean · no · no wait · sorry · actually
 
 **为什么留一个**：pilot 已经测出有标记时识别率 100%、无标记时 44.8%。这个 55 个百分点的落差**已经证实**了词汇捷径的风险，不是假想。留一个没见过的标记词，才能区分"学会了结构"和"记住了词表"。
 
-**训练集不做配对，只做少数层**：
+**2026-10-24 — additive training recipe (supersedes the one-variant rule):**
 
-- 训练集里约 **30%** 的改口样本带标记词，且这些样本**来自不同的站点**（不是同一个句子的有标记/无标记两版）。
-- **为什么不在训练集里配对**：(1) 设计文档明确论证"有标记的是**容易**的那一类"，不应占多数，全配对会让它占到 50%；(2) 配对产生的两行除了一个插入词之外完全相同，这正是"每源文档最多 2 条"规则要防的近重复。
+Retain all 3,489 base RSR rows and append 1,047 marked variants in
+`train_rsr.augmented.tsv`, giving 4,536 RSR rows. Select 30% of base items
+(rounded): all 482 ambiguous items (`number_range`: 260, `initial_name`: 203,
+`weekday_list`: 19), then 565 proportionally to remaining per-type pools,
+using largest remainders and fixed-seed sampling. The four markers are
+balanced within type and globally. Both SBN targets remain unchanged.
 
-**配对放在测试集**（详见第七节）。配对是**评测**的需求，不是学习的需求。
+All unmarked base inputs remain, including the 482 ambiguous items. The
+ambiguity labels control which items receive an additional marked version;
+they do not exclude any base input. The labels are heuristic and have not
+been validated for precision; adding a marker does not guarantee that every
+ambiguity disappears. Test keeps paired forms and reports ambiguous items
+separately.
 
-**无标记时有流利读法的条目（`ambiguous`）**：没有标记词时，有些改口句的字面和一个流利结构相同，例如数字范围（"two, three pounds"）、句首呼语（"Jim, Tom broke it"）、星期列举。SBN 本身是对的，只是纯文本没有重音和停顿。train 里共 478 条（`number_range` 258、`initial_name` 201、`weekday_list` 19）。处理：**标注不删除**；训练时放进带标记的约 30%（插入标记词后歧义消失），测试集保留配对并单列为 `ambiguous` 层。规则的阈值是自定的，没有用人工判断验证过；句中同位、列举和 temporal 范围没有检测。
-
-**待定**：30% 按全局算还是按类型算。按类型算，number 和 name 的 `ambiguous` 条目超出各自 30% 的名额；按全局算，标记词会和类型相关。插入标记词时决定。
+The construction is additive: fluent pairs, then base RSR, then marked RSR.
+The 30% denominator is base items, not the final RSR set (23.1% marked).
+Selected items receive two surface variants and greater row weight. These
+are not independent semantic examples, and ordinary SFT adds no explicit
+pair-consistency loss. C2 and C3 must share inputs, sampling and training
+budget. With 9,486 fluent rows, each contains 14,022 rows. The unified table
+is built by `repair_data_gen/training_dataset/build.py`; its
+`editing_expression` field replaces the legacy source-column name. This
+revises RP v3/v4's original
+one-surface-form-per-training-site rule; current v4 text is updated.
 
 ### 5.6 NLI 过滤：降级为启发式
 
@@ -1179,7 +1195,7 @@ oracle-cleaned 参照条件使用了推理时**不可获得**的 gold 改口信�
 - 数据生成已改为 LLM（5.2）；以下各项在插入标记词这一步实现
 - 测试集**完全配对**（同一站点两个表面形式）
 - 训练集标记词**均衡采样**（四个词之间），`sorry` 完全排除
-- 训练集保持约 30% 带标记，来自不同站点
+- Append marked variants for 30% of base items; retain every base row (5.5).
 - **加词对留出约束**：同一 WordNet 词对不跨划分（采样时一个过滤条件）
 
 ### 第 5b 步：硬负例（**有时效，必须在冻结数据前做**）
@@ -1237,7 +1253,8 @@ oracle-cleaned 参照条件使用了推理时**不可获得**的 gold 改口信�
 | 训练划分里合法的改口站点 | 16,425 |
 | 只能用移位装置的站点 | 525（481 形容词、44 动词、0 名词） |
 | RSR 训练集（已冻结，2026-10-13） | 3,489 条（七类，边标签 489，其余各 500） |
-| 改口 : 流利 比例 | 约 1:2.7 |
+| Augmented RSR train | 4,536 rows = 3,489 base + 1,047 marked |
+| Augmented RSR : fluent | About 1:2.1; 14,022 total rows per C2/C3 after fluent assembly |
 | 挑战集（主类） | 40 anaphora + 40 cross-turn |
 | 挑战集控制样本（新增） | 15–20 + 15–20 |
 | 逗号并置句（去数字后）train / dev / test | 105 / 24 / 30 |
@@ -1552,7 +1569,7 @@ window.n.01
 
 本节原先以"取代关系"的形式记录 2026-10-01 至 10-10 的数据决定。2026-10-13 起这些内容已并入第五节（5.2、5.3、5.5、5.6、5.7），决定与理由逐条列在 [`repair_data_gen/DECISIONS.md`](../repair_data_gen/DECISIONS.md)。旧文本见 git tag `rsr-train-base-log`。
 
-仍未解决、与数据有关的事：dev / test 未生成；30% 标记比例按全局还是按类型（5.5）；`ambiguous` 规则的精确率未验证（5.5）；词对留出仍搁置（14.6）。
+仍未解决、与数据有关的事：dev / test 未生成；`ambiguous` 规则的精确率未验证（5.5）；词对留出仍搁置（14.6）。
 
 ---
 
