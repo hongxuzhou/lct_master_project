@@ -1,0 +1,18 @@
+universe = vanilla
+initialdir = /nethome/honzhou
+
+executable = /nethome/honzhou/thesis_zone/smoke_test/lst/prepare.sh
+output = /scratch/hongxuzhou/logs/qwen35_lora_prepare.$(ClusterId).out
+error  = /scratch/hongxuzhou/logs/qwen35_lora_prepare.$(ClusterId).err
+log    = /scratch/hongxuzhou/logs/qwen35_lora_prepare.$(ClusterId).log
+
+request_cpus = 2
+request_memory = 16G
+request_gpus = 0
+requirements = (TARGET.UidDomain == "coli.uni-saarland.de")
+
++MaxWallTime = 7200
+notification = Never
+should_transfer_files = NO
+
+queue 1

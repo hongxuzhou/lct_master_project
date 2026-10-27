@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""CPU-only offline preflight for the Habrok smoke-test tokenization."""
+"""Cluster-neutral CPU/offline preflight for smoke-test tokenization."""
 
 from __future__ import annotations
 
@@ -11,8 +11,7 @@ from collections import Counter
 from pathlib import Path
 
 
-HABROK_DIR = Path(__file__).resolve().parent
-SMOKE_DIR = HABROK_DIR.parent
+SMOKE_DIR = Path(__file__).resolve().parent
 sys.path.insert(0, str(SMOKE_DIR))
 
 # Hugging Face reads these switches during import, so set them before importing
@@ -31,45 +30,37 @@ from qwen35_lora_smoke_test import (  # noqa: E402
 )
 
 
-MODEL_REVISIONS = {
-    "2B": "15852e8c16360a2fea060d615a32b45270f8a8fc",
-    "9B": "c202236235762e1c871ad0ccb60c8ee5ba337b9a",
-}
+DEFAULT_MANIFEST = SMOKE_DIR / "revisions.json"
+
+
+def load_manifest(path: Path) -> dict[str, object]:
+    manifest = json.loads(path.read_text(encoding="utf-8"))
+    assert manifest["dataset"]["id"] == "Shrikes/repair-sbn"
+    assert set(manifest["models"]) == set(MODEL_SPECS)
+    return manifest
 
 
 def parse_args() -> argparse.Namespace:
-    user = os.environ.get("USER")
-    if not user:
-        raise RuntimeError("USER is unset")
-    scratch = Path("/scratch") / user
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--model-size", choices=tuple(MODEL_REVISIONS), default="2B")
+    parser.add_argument("--model-size", choices=tuple(MODEL_SPECS), default="2B")
     parser.add_argument("--condition", choices=("all", "clean", "repair"), default="all")
     parser.add_argument("--examples-per-variant", type=int, default=32)
     parser.add_argument("--max-length", type=int, default=512)
     parser.add_argument("--seed", type=int, default=17)
-    parser.add_argument(
-        "--model-cache", type=Path, default=scratch / "huggingface" / "hub"
-    )
-    parser.add_argument(
-        "--dataset-cache", type=Path, default=scratch / "huggingface" / "datasets"
-    )
-    parser.add_argument(
-        "--revision-dir",
-        type=Path,
-        default=scratch / "thesis" / "qwen35_lora_smoke" / "revisions",
-    )
+    parser.add_argument("--model-cache", type=Path, required=True)
+    parser.add_argument("--dataset-cache", type=Path, required=True)
+    parser.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
     return parser.parse_args()
 
 
 def main() -> None:
     args = parse_args()
-    revision_file = args.revision_dir / "repair-sbn.revision"
-    if not revision_file.is_file():
-        raise FileNotFoundError(f"missing {revision_file}; run prepare.sh first")
-    dataset_revision = revision_file.read_text(encoding="utf-8").strip()
-    model_revision = MODEL_REVISIONS[args.model_size]
-    model_id = MODEL_SPECS[args.model_size]["model_id"]
+    manifest = load_manifest(args.manifest)
+    dataset_revision = manifest["dataset"]["revision"]
+    model_entry = manifest["models"][args.model_size]
+    model_revision = model_entry["revision"]
+    model_id = model_entry["id"]
+    assert model_id == MODEL_SPECS[args.model_size]["model_id"]
 
     subset, _ = load_balanced_smoke_subset(
         args.examples_per_variant,

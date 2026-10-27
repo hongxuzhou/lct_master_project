@@ -1,7 +1,7 @@
 universe = vanilla
 initialdir = /nethome/honzhou
 
-executable = /nethome/honzhou/thesis_zone/model/smoke_test/qwen35_lora_smoke_test.sh
+executable = /nethome/honzhou/thesis_zone/smoke_test/lst/run_smoke.sh
 arguments = $(MODEL_SIZE) $(CONDITION) $(ClusterId)-$(ProcId)
 
 # Keep every model/condition run isolated. The parent log directory already
@@ -16,17 +16,19 @@ request_gpus   = 1
 
 # 2B/9B use 40 GB cards; 27B bf16 plus training and reload validation uses an
 # 80 GB card. Capability >= 8.0 is required for bf16.
-requirements = (GPUs_Capability >= 8.0) && (GPUs_GlobalMemoryMb >= $(MIN_GPU_MB)) && (GPUs_GlobalMemoryMb <= $(MAX_GPU_MB))
+requirements = (TARGET.UidDomain == "coli.uni-saarland.de") && \
+               (GPUs_Capability >= 8.0) && \
+               (GPUs_GlobalMemoryMb >= $(MIN_GPU_MB)) && \
+               (GPUs_GlobalMemoryMb <= $(MAX_GPU_MB))
 
 +MaxWallTime = $(MAX_WALL_TIME)
 notification = Never
 should_transfer_files = NO
 
-# This is a smoke-test matrix over the dataset's two supervision conditions,
-# not a train/dev/test experiment split.
+# Submit only after the separate 2B repair canary passes. Together, the canary
+# and these five jobs cover the full model-size/condition smoke matrix.
 queue MODEL_SIZE, CONDITION, REQUEST_CPUS, REQUEST_MEMORY, MIN_GPU_MB, MAX_GPU_MB, MAX_WALL_TIME from (
     2B  clean   4 48G 39000 41000  7200
-    2B  repair  4 48G 39000 41000  7200
     9B  clean   4 64G 39000 41000 10800
     9B  repair  4 64G 39000 41000 10800
     27B clean   8 96G 79000 85000 14400

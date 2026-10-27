@@ -32,10 +32,9 @@ chmod +x prepare.sh run_smoke.sh
 ./prepare.sh 2B
 ```
 
-`prepare.sh` uses `hf download`, verifies the fixed model revision, resolves
-the current dataset commit, and records that commit under
-`/scratch/$USER/thesis/qwen35_lora_smoke/revisions/`. The Hugging Face token
-stays in the user's home directory. Model and dataset caches live under
+`prepare.sh` reads the fixed model and dataset commits from the shared
+`../revisions.json`, downloads/verifies them, and leaves the Hugging Face token
+in the user's home directory. Model and dataset caches live under
 `/scratch/$USER/huggingface/`.
 
 Prepare the 9B checkpoint only after the 2B smoke test passes:
@@ -48,7 +47,11 @@ Before requesting another GPU, validate the deterministic 96-row subset and
 both supervision conditions on a login or CPU node:
 
 ```bash
-python preflight_tokenization.py --model-size 2B --max-length 512
+python ../preflight_tokenization.py \
+  --model-size 2B \
+  --max-length 512 \
+  --model-cache /scratch/$USER/huggingface/hub \
+  --dataset-cache /scratch/$USER/huggingface/datasets
 ```
 
 This reads only the offline caches. A passing report must show a positive

@@ -7,12 +7,7 @@ CONDITION=${2:?usage: run_smoke.sh MODEL_SIZE CONDITION [RUN_ID]}
 RUN_ID=${3:-${SLURM_JOB_ID:-manual}-$(date -u +%Y%m%dT%H%M%SZ)}
 
 case "$MODEL_SIZE" in
-    2B)
-        MODEL_REVISION=15852e8c16360a2fea060d615a32b45270f8a8fc
-        ;;
-    9B)
-        MODEL_REVISION=c202236235762e1c871ad0ccb60c8ee5ba337b9a
-        ;;
+    2B|9B) ;;
     *)
         echo "MODEL_SIZE must be 2B or 9B on Habrok (got: $MODEL_SIZE)" >&2
         exit 2
@@ -30,13 +25,12 @@ esac
 HABROK_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 SMOKE_DIR=$(cd "$HABROK_DIR/.." && pwd)
 SCRIPT=$SMOKE_DIR/qwen35_lora_smoke_test.py
+MANIFEST=$SMOKE_DIR/revisions.json
 PYTHON=${PYTHON:-$HOME/miniconda3/envs/thesis/bin/python}
 SCRATCH_ROOT=${SCRATCH_ROOT:-/scratch/$USER}
 HF_HUB_CACHE=${HF_HUB_CACHE:-$SCRATCH_ROOT/huggingface/hub}
 HF_DATASETS_CACHE=${HF_DATASETS_CACHE:-$SCRATCH_ROOT/huggingface/datasets}
-REVISION_DIR=${REVISION_DIR:-$SCRATCH_ROOT/thesis/qwen35_lora_smoke/revisions}
 OUTPUT_DIR=${OUTPUT_DIR:-$SCRATCH_ROOT/thesis/qwen35_lora_smoke/$MODEL_SIZE-$CONDITION-$RUN_ID}
-DATASET_REVISION_FILE=$REVISION_DIR/repair-sbn.revision
 
 if [[ ! -x "$PYTHON" ]]; then
     echo "Missing thesis Python interpreter: $PYTHON" >&2
@@ -46,13 +40,18 @@ if [[ ! -f "$SCRIPT" ]]; then
     echo "Missing smoke-test script: $SCRIPT" >&2
     exit 1
 fi
-if [[ ! -f "$DATASET_REVISION_FILE" ]]; then
-    echo "Missing dataset revision file: $DATASET_REVISION_FILE" >&2
-    echo "Run habrok/prepare.sh first" >&2
+if [[ ! -f "$MANIFEST" ]]; then
+    echo "Missing revision manifest: $MANIFEST" >&2
     exit 1
 fi
 
-DATASET_REVISION=$(<"$DATASET_REVISION_FILE")
+readarray -t REVISIONS < <(
+    "$PYTHON" -c \
+        'import json, sys; m=json.load(open(sys.argv[1])); print(m["models"][sys.argv[2]]["revision"]); print(m["dataset"]["revision"])' \
+        "$MANIFEST" "$MODEL_SIZE"
+)
+MODEL_REVISION=${REVISIONS[0]}
+DATASET_REVISION=${REVISIONS[1]}
 mkdir -p "$HF_HUB_CACHE" "$HF_DATASETS_CACHE" "$(dirname "$OUTPUT_DIR")"
 
 export HF_HUB_CACHE HF_DATASETS_CACHE
@@ -67,6 +66,7 @@ echo "host=$(hostname)"
 echo "model_size=$MODEL_SIZE condition=$CONDITION run_id=$RUN_ID"
 echo "model_revision=$MODEL_REVISION"
 echo "dataset_revision=$DATASET_REVISION"
+echo "code_sha256=$(sha256sum "$SCRIPT" | cut -d' ' -f1)"
 echo "script=$SCRIPT"
 echo "output_dir=$OUTPUT_DIR"
 echo "CUDA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES:-unset}"

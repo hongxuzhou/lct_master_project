@@ -31,8 +31,6 @@ from torch.utils.data import DataLoader
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 
-MODEL_CACHE = Path("/scratch/common_models/HuggingFace")
-OUTPUT_ROOT = Path("/scratch/hongxuzhou/thesis")
 DATASET_ID = "Shrikes/repair-sbn"
 
 MODEL_SPECS: dict[str, dict[str, Any]] = {
@@ -134,25 +132,24 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--max-grad-norm", type=float, default=1.0)
     parser.add_argument("--seed", type=int, default=17)
     parser.add_argument("--device", default="cuda:0")
-    parser.add_argument("--model-cache", type=Path, default=MODEL_CACHE)
+    parser.add_argument("--model-cache", type=Path, required=True)
     parser.add_argument(
         "--model-revision",
-        default="main",
-        help="Hugging Face model revision. Cluster wrappers should pass a commit hash.",
+        required=True,
+        help="Pinned Hugging Face model commit.",
     )
     parser.add_argument(
         "--dataset-cache",
         type=Path,
-        default=None,
-        help="Optional datasets cache. Model loading remains offline regardless.",
+        required=True,
+        help="Datasets cache prepared before the GPU job.",
     )
     parser.add_argument(
         "--dataset-revision",
-        default="main",
-        help="Hugging Face dataset revision. Cluster wrappers should pass a commit hash.",
+        required=True,
+        help="Pinned Hugging Face dataset commit.",
     )
-    parser.add_argument("--output-root", type=Path, default=OUTPUT_ROOT)
-    parser.add_argument("--output-dir", type=Path, default=None)
+    parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--generation-max-new-tokens", type=int, default=64)
     parser.add_argument(
         "--strict-versions",
@@ -490,11 +487,7 @@ def move_batch(batch: dict[str, torch.Tensor], device: torch.device) -> dict[str
 
 
 def make_output_dir(args: argparse.Namespace) -> Path:
-    if args.output_dir is not None:
-        path = args.output_dir
-    else:
-        stamp = time.strftime("%Y%m%d-%H%M%S")
-        path = args.output_root / "qwen35_lora_smoke" / f"{args.model_size}-{args.condition}-{stamp}"
+    path = args.output_dir
     path.mkdir(parents=True, exist_ok=False)
     return path
 
