@@ -1,0 +1,21 @@
+{
+  "model_key": "9b",
+  "model_id": "Qwen/Qwen3.5-9B",
+  "requested_revision": "main",
+  "resolved_snapshot": "/scratch/common_models/HuggingFace/models--Qwen--Qwen3.5-9B/snapshots/c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+  "loaded_class": "Qwen3_5ForCausalLM",
+  "versions": {
+    "torch": "2.14.1",
+    "transformers": "5.20.2",
+    "accelerate": "1.15.0",
+    "huggingface_hub": "2.3.0",
+    "safetensors": "0.8.0"
+  },
+  "gpu": "NVIDIA A100-PCIE-40GB",
+  "gpu_total_memory_gib": 39.49,
+  "dtype": "bfloat16",
+  "peak_gpu_memory_gib": 16.755,
+  "prompt": "Convert this sentence to a simplified semantic representation: A student reads a book.",
+  "max_new_tokens": 80,
+  "generation": "Here is a simplified semantic representation of the sentence \"A student reads a book,\" broken down by its core logical components:\n\n### Logical Form\n**∃x (Student(x) ∧ Read(x, y) ∧ ∃y (Book(y)))**\n\n### Breakdown of Components\n*   **∃x**: There exists an entity $x$.\n*   **Student(x)**"
+}

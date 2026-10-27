@@ -10,7 +10,7 @@ CACHE_DIR=${QWEN35_CACHE_DIR:-/scratch/common_models/HuggingFace}
 
 if [[ ! -x "$QWEN35_PYTHON" ]]; then
     echo "Missing Python environment: $QWEN35_PYTHON" >&2
-    echo "Create the Qwen3.5 venv described in hpc/README.md first." >&2
+    echo "Set QWEN35_PYTHON to a compatible Python environment." >&2
     exit 1
 fi
 

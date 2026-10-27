@@ -1,0 +1,21 @@
+{
+  "model_key": "27b",
+  "model_id": "Qwen/Qwen3.5-27B",
+  "requested_revision": "main",
+  "resolved_snapshot": "/scratch/common_models/HuggingFace/models--Qwen--Qwen3.5-27B/snapshots/fc05daec18b0a78c049392ed2e771dde82bdf654",
+  "loaded_class": "Qwen3_5ForCausalLM",
+  "versions": {
+    "torch": "2.14.1",
+    "transformers": "5.20.2",
+    "accelerate": "1.15.0",
+    "huggingface_hub": "2.3.0",
+    "safetensors": "0.8.0"
+  },
+  "gpu": "NVIDIA H100 PCIe",
+  "gpu_total_memory_gib": 79.18,
+  "dtype": "bfloat16",
+  "peak_gpu_memory_gib": 50.308,
+  "prompt": "Convert this sentence to a simplified semantic representation: A student reads a book.",
+  "max_new_tokens": 80,
+  "generation": "**read(student, book)**\n\n*Breakdown:*\n*   **Action:** read\n*   **Agent (Subject):** student\n*   **Patient (Object):** book"
+}
