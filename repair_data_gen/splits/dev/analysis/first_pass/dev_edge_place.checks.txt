@@ -1,0 +1,12 @@
+type                              n             json          no_site         answered        struct_ok            wn_ok     untouched_ok   repair_part_ok      withdraw_ok      oracle_same   median_lookups
+edge_label                       28               28                0               28               28               28               28               28               28                -                0
+ALL                              28               28                0               28               28               28               28               28               28                -                0
+
+failures (rows without an answer, or answered rows failing a check):
+
+no_site answers:
+
+self-reported devices by type:
+  edge_label         d1_drop_role 7, d3_dummy_equ 28, d4_movement 6
+
+wrote /Users/hongxuzhou/Documents/GitHub/lct_master_project/repair_data_gen/splits/dev/analysis/first_pass/dev_edge_place.checked.tsv

@@ -1,0 +1,5 @@
+request_id	doc_id	repair_type	nl_clean	sbn_clean	n_concepts	n_tokens_nl	eligible_sites
+dev_base::constant_number::p34/d1918	p34/d1918	constant_number	Tom speaks five languages, including Russian.	"male.n.02 Name ""Tom"" speak.v.03 Agent -1 Time +1 Theme +3 time.n.08 EQU now quantity.n.01 EQU 5 language.n.01 Quantity -1 Sub +1 russian.n.02"	6	6	3:EQU 5
+dev_base::constant_number::p45/d1107	p45/d1107	constant_number	Two of them pleased me especially.	entity.n.01 Quantity 2 SubOf +1 person.n.01 please.v.01 Stimulus -2 Time +1 Experiencer +2 Manner +3 time.n.08 TPR now person.n.01 EQU speaker especially.r.01	6	6	0:Quantity 2
+dev_base::constant_number::p62/d3296	p62/d3296	constant_number	The building is twenty stories high.	building.n.01 time.n.08 EQU now quantity.n.01 EQU 20 story.n.03 Quantity -1 high.a.02 Theme -4 Time -3 Value -1	5	6	2:EQU 20
+dev_base::forwarding::p06/d0074	p06/d0074	forwarding	Hanoi is the capital city of Vietnam.	"city.n.01 Name ""Hanoi"" be.v.02 Theme -1 Time +1 Co-Theme +3 time.n.08 EQU now national_capital.n.01 city.n.01 PartOf -1 PartOf +1 country.n.02 Name ""Vietnam"""	6	7	0:city.n.01

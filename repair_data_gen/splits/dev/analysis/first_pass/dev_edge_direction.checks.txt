@@ -1,0 +1,16 @@
+type                              n             json          no_site         answered        struct_ok            wn_ok     untouched_ok   repair_part_ok      withdraw_ok      oracle_same   median_lookups
+edge_label                       44               44                3               41               41               41               41               41               40                -                0
+ALL                              44               44                3               41               41               41               41               41               40                -                0
+
+failures (rows without an answer, or answered rows failing a check):
+  p22/d2422 [edge_label] withdraw: missing receive.v.01 Source male.n.02[Name="Tom"] | added receive.v.01 Destination male.n.02[Name="Tom"]
+
+no_site answers:
+  p78/d1424 [edge_label] The sentence contains Source on graduate.v.01, which is not a verb of motion or transfer, and a Source/Destination swap would not be a plaus
+  p79/d0842 [edge_label] The only prepositional role in the sentence is Source on graduate.v.01, and graduate is not a verb of motion or transfer and the event is no
+  p82/d0139 [edge_label] The sentence has no motion or transfer verb with a Source or Destination role and no be.v.03 Location role suitable for an edge_label repair
+
+self-reported devices by type:
+  edge_label         d1_drop_role 3, d3_dummy_equ 41, d4_movement 4
+
+wrote /Users/hongxuzhou/Documents/GitHub/lct_master_project/repair_data_gen/splits/dev/analysis/first_pass/dev_edge_direction.checked.tsv

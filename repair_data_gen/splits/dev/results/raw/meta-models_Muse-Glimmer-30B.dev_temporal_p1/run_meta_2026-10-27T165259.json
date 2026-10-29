@@ -1,0 +1,25 @@
+{
+  "started": "2026-10-27T16:52:59",
+  "backend": "openai",
+  "model": "meta-models/Muse-Glimmer-30B",
+  "workers": 16,
+  "sample": "../splits/dev/samples/dev_temporal_p1.tsv",
+  "sample_sha256": "6a12e7849221122a0238820f74001a0ce481f8759fae989e2f89d4011e110635",
+  "config": "../splits/dev/config.json",
+  "config_sha256": "a272886e5f62abcbc837f021bce0bfebdd06224f6da0c964ea979656d368f78f",
+  "results_dir": "../splits/dev/results",
+  "docs": "/nethome/honzhou/thesis_zone/rsr_generation/prompts/temporal_r2",
+  "prompt_sha256": "8d49b9ac2f1b677bea78a7f2f2effeaaeb3e56fba4bd80eb8d69d49d0a6e9913",
+  "base_url": "http://127.0.0.1:53511/v1",
+  "tool_mode": "auto",
+  "reasoning": "high",
+  "temperature": 1.0,
+  "top_p": 0.95,
+  "top_k": 64,
+  "seed": 13,
+  "max_tokens": 32768,
+  "max_turns": 20,
+  "server_version": {
+    "version": "0.30.0"
+  }
+}

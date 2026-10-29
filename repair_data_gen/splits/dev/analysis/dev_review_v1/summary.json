@@ -1,0 +1,71 @@
+{
+  "status": "ready for formal human review; not frozen",
+  "policy": {
+    "version": "dev_review_v1",
+    "pair_overlap_action": "report_only",
+    "context_near_duplicate_check": "deferred",
+    "surface_policy": "train_aligned_nonsemantic",
+    "human_review": "all_machine_eligible",
+    "hard_checks": [
+      "reply",
+      "status",
+      "parse",
+      "dag",
+      "index",
+      "magnitude",
+      "edges",
+      "boxes",
+      "wn_ok",
+      "untouched",
+      "withdraw",
+      "site_ok",
+      "pin",
+      "declared_site"
+    ],
+    "allow_surface_variants": [
+      "punctuation",
+      "quotation",
+      "apostrophes",
+      "citation_markers",
+      "case",
+      "contraction_expansion",
+      "tense_auxiliary_realisation",
+      "repeated_boundary_article"
+    ],
+    "reject": [
+      "same_synset",
+      "place_containment",
+      "structural_repair_part_failure",
+      "changed_content_or_repair_direction"
+    ]
+  },
+  "returned": 490,
+  "review_pool": 466,
+  "excluded": 24,
+  "no_site": 7,
+  "rejected_model_ok": 17,
+  "reclassified_from_legacy_failure": 6,
+  "normalised_surfaces": 10,
+  "unaligned_surface_for_human_review": 10,
+  "pair_overlap_exclusions": 0,
+  "context_near_duplicate_check": "deferred",
+  "per_type": {
+    "content_word": 68,
+    "constant_name": 74,
+    "constant_number": 67,
+    "tense": 72,
+    "forwarding": 70,
+    "constant_temporal": 47,
+    "edge_label": 68
+  },
+  "input_sha256": {
+    "/Users/hongxuzhou/Documents/GitHub/lct_master_project/repair_data_gen/splits/dev/analysis/first_pass/all_checked.tsv": "dbaf27420d9d0625deee6fb328bcd72ae87c87dd3828b16eaef7386a929e7bc6",
+    "/Users/hongxuzhou/Documents/GitHub/lct_master_project/repair_data_gen/splits/dev/analysis/first_pass/summary.json": "9bd5c0832cf655f9c741995135e6afdc5b5fdec0afe4a09e6b11ecb9b7c980dd",
+    "/Users/hongxuzhou/Documents/GitHub/lct_master_project/repair_data_gen/splits/dev/review_policy.json": "3a04d3e9f537e25d4ac47691e3725513f99aba8be4b4363550590b32438c7e26"
+  },
+  "code_sha256": {
+    "/Users/hongxuzhou/Documents/GitHub/lct_master_project/repair_data_gen/shared_pipeline/prepare_dev_review.py": "8f86f9b40f1b2383911df6397e456c2913ebceb73766e0790aad6aeab7265b5d",
+    "/Users/hongxuzhou/Documents/GitHub/lct_master_project/repair_data_gen/rsr_generation/dataset/apply_fixes.py": "3264447d5c70af5bde02a4aa59ba21b9bd47a3efc81b9116c5d6b9688664e805"
+  },
+  "audit_items_sha256": "9bc6e31b0375c74d029ab18ca3567cfb25ba3d192df53031868cd1dbfe35661c"
+}

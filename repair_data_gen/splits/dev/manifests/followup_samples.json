@@ -1,0 +1,37 @@
+{
+  "status": "prepared locally; not submitted",
+  "split": "dev",
+  "seed": 20261027,
+  "config_sha256": "a272886e5f62abcbc837f021bce0bfebdd06224f6da0c964ea979656d368f78f",
+  "review_policy_sha256": "3a04d3e9f537e25d4ac47691e3725513f99aba8be4b4363550590b32438c7e26",
+  "source_pool_sha256": "7fd85f575d49276732ae669ce5bc405d660dcd790d419690bc804586237baf3c",
+  "missing_sha256": "1e71c5a01a75ea8952d4e6cb26f621c74748a35cfb2faaf7b870ad4a4e5127f3",
+  "builder_sha256": "58f63975a4cb2ba680c47d86979dadc3b95396b42fc4d12542f26636868f3ee1",
+  "temporal_kinds": {
+    "same_site": 42,
+    "new_site": 5
+  },
+  "total_requests": 53,
+  "outputs": [
+    {
+      "path": "repair_data_gen/splits/dev/samples/dev_base_retry1.tsv",
+      "rows": 4,
+      "sha256": "2a70dd65ef4821e034d35f0138c9ad3e3940f0b21dd442fc5c4cb12ca9c427b9"
+    },
+    {
+      "path": "repair_data_gen/splits/dev/samples/dev_temporal_p1_retry1.tsv",
+      "rows": 2,
+      "sha256": "4d35c4336fef356a5a81e2c1b918f2e5caf47b6beafb731560cbe5b98f3207c0"
+    },
+    {
+      "path": "repair_data_gen/splits/dev/samples/dev_temporal_p2.tsv",
+      "rows": 47,
+      "sha256": "528d4605440241b2a90e7493c0b7d94d4cbafea0e2b9ed6bb3dff2b4e0d79e06"
+    }
+  ],
+  "prompt_versions": {
+    "base": "base",
+    "temporal": "temporal_r2"
+  },
+  "dag": "repair_data_gen/splits/dev/hpc/run_dev_followup.dag"
+}

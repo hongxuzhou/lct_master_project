@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "status": "working candidates; not final RSR data",
+  "split": "dev",
+  "seed": 20261027,
+  "config": "repair_data_gen/splits/dev/config.json",
+  "config_sha256": "a272886e5f62abcbc837f021bce0bfebdd06224f6da0c964ea979656d368f78f",
+  "builder": "repair_data_gen/shared_pipeline/select_candidates.py",
+  "builder_sha256": "3b717d44f536cc6bb5d416f694d3b4dc9dc8c5ab10bf3a4d85cadf5fd7696b92",
+  "pmb_source": "data/pmb-5.1.0/split/en/dev/standard.sbn",
+  "pmb_sha256": "111167f3a42b5c61db3567205ed2c1463e01d93f4e06b8c2aae8c0c6217b1770",
+  "pmb_documents": 1194,
+  "prompt_sha256": {
+    "base": "6b17847a1fcf0d49bd4e546ddbdb8c67e4381a93690b800578099e3e9868a12d",
+    "edge_r3": "1886b8124819f721fa5aacc23bd22c6e24c940028b3d33776582bd058d9a8e2c",
+    "place_r5": "cf0cb4700e94321eb573821348cae59b72102338f1ea2ad40387af4e392446d8",
+    "temporal_r2": "8d49b9ac2f1b677bea78a7f2f2effeaaeb3e56fba4bd80eb8d69d49d0a6e9913"
+  },
+  "selection": {
+    "base": "fixed quotas, rarest type first, no source document reused across base types",
+    "temporal_p1": "all eligible documents; first sorted site pinned",
+    "temporal_p2": "deferred until pass-1 generated reparanda are checked",
+    "edge_direction": "all eligible direction documents",
+    "edge_place": "all place-only documents; first sorted site pinned"
+  },
+  "base_stats": {
+    "content_word": 1191,
+    "constant_name": 478,
+    "constant_number": 85,
+    "tense": 861,
+    "forwarding": 457,
+    "selected:content_word": 75,
+    "selected:constant_name": 75,
+    "selected:constant_number": 75,
+    "selected:tense": 75,
+    "selected:forwarding": 75
+  },
+  "candidate_counts": {
+    "base": 375,
+    "temporal_p1": 49,
+    "edge_direction": 44,
+    "edge_place": 28,
+    "total_requests": 496
+  },
+  "outputs": [
+    {
+      "path": "repair_data_gen/splits/dev/samples/dev_base.tsv",
+      "rows": 375,
+      "sha256": "cc2a753f79989d071faa592a8c656963828d0e9ceb761547ca4290b192e32f1e"
+    },
+    {
+      "path": "repair_data_gen/splits/dev/samples/dev_temporal_p1.tsv",
+      "rows": 49,
+      "sha256": "6a12e7849221122a0238820f74001a0ce481f8759fae989e2f89d4011e110635"
+    },
+    {
+      "path": "repair_data_gen/splits/dev/samples/dev_edge_direction.tsv",
+      "rows": 44,
+      "sha256": "271bbf1816f361c43fb52be8ce56a66d852c97f2bcb28175c055641e4b955668"
+    },
+    {
+      "path": "repair_data_gen/splits/dev/samples/dev_edge_place.tsv",
+      "rows": 28,
+      "sha256": "33ed928802884ebed55079dfcba0b8fa3047cd7506968c66b7b169d733d58287"
+    }
+  ]
+}

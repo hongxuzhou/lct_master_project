@@ -1,0 +1,13 @@
+type                              n             json          no_site         answered        struct_ok            wn_ok     untouched_ok   repair_part_ok      withdraw_ok      oracle_same   median_lookups
+constant_temporal                47               47                0               47               47               47               47               46               47                -                0
+ALL                              47               47                0               47               47               47               47               46               47                -                0
+
+failures (rows without an answer, or answered rows failing a check):
+  p96/d0316 [constant_temporal] repair_part: rest of the sentence changed: repair part is not the end of the gold sentence; gold words not kept in order
+
+no_site answers:
+
+self-reported devices by type:
+  constant_temporal  d1_drop_role 3, d2_invert_role 41, d5_anchor_dummy 6
+
+wrote /Users/hongxuzhou/Documents/GitHub/lct_master_project/repair_data_gen/splits/dev/analysis/first_pass/dev_temporal_p1.checked.tsv
