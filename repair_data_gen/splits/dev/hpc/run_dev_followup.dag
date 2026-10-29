@@ -1,0 +1,6 @@
+# Prepared follow-up DAG; no jobs have been submitted by this builder.
+JOB DEV_BASE_RETRY1 /nethome/honzhou/thesis_zone/splits/dev/hpc/run_dev_base_retry1.sub
+JOB DEV_TEMPORAL_P1_RETRY1 /nethome/honzhou/thesis_zone/splits/dev/hpc/run_dev_temporal_p1_retry1.sub
+JOB DEV_TEMPORAL_P2 /nethome/honzhou/thesis_zone/splits/dev/hpc/run_dev_temporal_p2.sub
+PARENT DEV_BASE_RETRY1 CHILD DEV_TEMPORAL_P1_RETRY1
+PARENT DEV_TEMPORAL_P1_RETRY1 CHILD DEV_TEMPORAL_P2

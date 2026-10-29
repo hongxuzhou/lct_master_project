@@ -25,5 +25,9 @@ repair_data_gen/rsr_generation/natural_rsr_check/swbd/
 repair_data_gen/rsr_generation/results/raw/*/*
 !repair_data_gen/rsr_generation/results/raw/*/run_meta_*.json
 
+# Split workspaces use the same raw-response policy as the legacy train run.
+repair_data_gen/splits/*/results/raw/*/*
+!repair_data_gen/splits/*/results/raw/*/run_meta_*.json
+
 # Fixed pass pool, rebuilt by freeze/apply_fixes.py (5.6 MB)
 repair_data_gen/rsr_generation/dataset/pool_fixed.tsv

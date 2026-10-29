@@ -1,0 +1,11 @@
+# Run the four dev synthesis stages sequentially on the one-job student quota.
+# A child is released only when its parent exits successfully. There is no
+# automatic retry: a systemic canary failure must not consume more GPU jobs.
+JOB EDGE_PLACE /nethome/honzhou/thesis_zone/splits/dev/hpc/run_dev_edge_place.sub
+JOB TEMPORAL_P1 /nethome/honzhou/thesis_zone/splits/dev/hpc/run_dev_temporal_p1.sub
+JOB EDGE_DIRECTION /nethome/honzhou/thesis_zone/splits/dev/hpc/run_dev_edge_direction.sub
+JOB BASE /nethome/honzhou/thesis_zone/splits/dev/hpc/run_dev_base.sub
+
+PARENT EDGE_PLACE CHILD TEMPORAL_P1
+PARENT TEMPORAL_P1 CHILD EDGE_DIRECTION
+PARENT EDGE_DIRECTION CHILD BASE

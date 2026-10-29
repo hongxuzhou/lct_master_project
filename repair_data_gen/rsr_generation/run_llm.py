@@ -6,10 +6,10 @@ or with an open model behind an OpenAI-compatible server (vLLM).
     python3 run_llm.py probe --model MODEL "PROMPT" [--stream]
     python3 run_llm.py run --backend openai --base-url URL --model MODEL [--workers N]
 
-`run` sends one request per row and appends one result row per document to
-results/<model>.tsv; documents already there are skipped, so an interrupted
-run resumes where it stopped. The full JSON reply of every call is kept in
-results/raw/<model>/.
+`run` sends one request per row and appends one result row per request to
+results/<model>.tsv. Samples with `request_id` resume by that stable key;
+legacy samples resume by `doc_id`. The full JSON reply of every call is kept
+in results/raw/<model>/. Use `--results-dir` to isolate another split.
 
 `probe` sends one free-form prompt in exactly the same environment, to check
 that the environment is clean (README §5).
@@ -93,6 +93,7 @@ FIELDS = [
     "devices", "strategy", "model", "parse", "num_turns", "input_tokens",
     "output_tokens", "cache_read_tokens", "duration_s", "raw_file",
 ]
+REQUEST_FIELDS = ["request_id", *FIELDS]
 
 
 def use_docs(path: Path) -> None:
@@ -268,9 +269,16 @@ def call_model(prompt: str, args, stream: bool = False) -> tuple[str, float]:
 def write_run_meta(raw_dir: Path, args) -> None:
     """Record the harness with the results (README §5: a result is about a
     model with a harness)."""
+    sample_path = Path(getattr(args, "sample", ""))
+    config_path = getattr(args, "config", None)
     meta = {"started": time.strftime("%Y-%m-%dT%H:%M:%S"), "backend": args.backend,
             "model": args.model, "workers": args.workers,
-            "sample": str(getattr(args, "sample", "")),
+            "sample": str(sample_path),
+            "sample_sha256": hashlib.sha256(sample_path.read_bytes()).hexdigest(),
+            "config": str(config_path) if config_path else None,
+            "config_sha256": hashlib.sha256(config_path.read_bytes()).hexdigest()
+            if config_path else None,
+            "results_dir": str(args.results_dir),
             "docs": str(DOCS), "prompt_sha256": prompt_hash()}
     if args.backend == "openai":
         meta |= {k: getattr(args, k) for k in (
@@ -304,11 +312,21 @@ def strategy_of(devices: list[str]) -> str:
 
 
 def result_row(row: dict, model: str, raw: str, secs: float, raw_file: Path) -> dict:
-    out = {k: row.get(k, "") for k in ("doc_id", "repair_type", "nl_clean", "sbn_clean")}
+    keys = ("doc_id", "repair_type", "nl_clean", "sbn_clean")
+    if "request_id" in row:
+        keys = ("request_id", *keys)
+    out = {k: row.get(k, "") for k in keys}
     # Base repairs only: the model writes no interregnum (README §1). The
     # sample's assigned interregnum is not used in this round.
+    try:
+        raw_label = str(raw_file.relative_to(HERE))
+    except ValueError:
+        try:
+            raw_label = str(raw_file.relative_to(HERE.parent))
+        except ValueError:
+            raw_label = str(raw_file)
     out.update({"interregnum": "none", "model": model, "duration_s": f"{secs:.1f}",
-                "raw_file": str(raw_file.relative_to(HERE))})
+                "raw_file": raw_label})
     try:
         meta = json.loads(raw)
     except json.JSONDecodeError:
@@ -356,32 +374,51 @@ def result_row(row: dict, model: str, raw: str, secs: float, raw_file: Path) -> 
 
 def cmd_run(args) -> None:
     use_docs(args.docs)
-    rows = list(csv.DictReader(open(args.sample, encoding="utf-8"), delimiter="\t"))
+    with open(args.sample, encoding="utf-8") as sample_file:
+        reader = csv.DictReader(sample_file, delimiter="\t")
+        sample_fields = reader.fieldnames or []
+        rows = list(reader)
+    keyed = "request_id" in sample_fields
+    key_name = "request_id" if keyed else "doc_id"
+    keys = [row[key_name] for row in rows]
+    if not all(keys) or len(keys) != len(set(keys)):
+        raise ValueError(f"sample {key_name} values must be present and unique")
     if args.only:
-        rows = [r for r in rows if r["doc_id"] in set(args.only)]
+        only = set(args.only)
+        rows = [r for r in rows if r[key_name] in only or r["doc_id"] in only]
     safe_model = re.sub(r"[^\w.-]", "_", args.model) + (f".{args.tag}" if args.tag else "")
-    out_path = RESULTS / f"{safe_model}.tsv"
-    raw_dir = RESULTS / "raw" / safe_model
+    results_dir = args.results_dir.resolve()
+    out_path = results_dir / f"{safe_model}.tsv"
+    raw_dir = results_dir / "raw" / safe_model
     raw_dir.mkdir(parents=True, exist_ok=True)
     write_run_meta(raw_dir, args)
     done = set()
     if out_path.exists():
-        done = {r["doc_id"] for r in csv.DictReader(open(out_path, encoding="utf-8"),
-                                                     delimiter="\t")}
-    todo = [r for r in rows if r["doc_id"] not in done][: args.limit or None]
+        with open(out_path, encoding="utf-8") as existing_file:
+            existing = csv.DictReader(existing_file, delimiter="\t")
+            existing_fields = existing.fieldnames or []
+            if keyed and "request_id" not in existing_fields:
+                raise ValueError("cannot resume request_id sample into a legacy result file")
+            done = {r[key_name] for r in existing}
+    todo = [r for r in rows if r[key_name] not in done][: args.limit or None]
     print(f"{len(done)} done, running {len(todo)} with {args.model}")
     new_file = not out_path.exists()
     with open(out_path, "a", encoding="utf-8", newline="") as f:
-        w = csv.DictWriter(f, fieldnames=FIELDS, delimiter="\t")
+        w = csv.DictWriter(f, fieldnames=REQUEST_FIELDS if keyed else FIELDS, delimiter="\t")
         if new_file:
             w.writeheader()
         # Rows are written as they finish, so with --workers > 1 the TSV order
-        # differs from the sample; downstream code joins on doc_id.
+        # differs from the sample; new downstream code joins on request_id.
         with ThreadPoolExecutor(max_workers=args.workers) as ex:
             futures = {ex.submit(call_model, item_prompt(r), args): r for r in todo}
             for k, fut in enumerate(as_completed(futures), 1):
                 row = futures[fut]
-                raw_file = raw_dir / (row["doc_id"].replace("/", "_") + ".json")
+                if keyed:
+                    stem = re.sub(r"[^\w.-]+", "_", row["request_id"]).strip("_")
+                    stem += "_" + hashlib.sha256(row["request_id"].encode()).hexdigest()[:12]
+                else:
+                    stem = row["doc_id"].replace("/", "_")
+                raw_file = raw_dir / f"{stem}.json"
                 try:
                     raw, secs = fut.result()
                 except (RuntimeError, OSError, subprocess.TimeoutExpired) as e:
@@ -391,7 +428,7 @@ def cmd_run(args) -> None:
                 res = result_row(row, args.model, raw, secs, raw_file)
                 w.writerow(res)
                 f.flush()
-                print(f"[{k}/{len(todo)}] {row['doc_id']} {row['repair_type']}: "
+                print(f"[{k}/{len(todo)}] {row[key_name]} {row['repair_type']}: "
                       f"parse={res.get('parse')} status={res.get('status', '')} "
                       f"turns={res.get('num_turns', '')} {secs:.0f}s", flush=True)
 
@@ -431,6 +468,10 @@ def main() -> None:
     add_backend_args(r)
     r.add_argument("--sample", type=Path, default=SAMPLE,
                    help="sample TSV from select_docs.py (default: the first round's)")
+    r.add_argument("--results-dir", type=Path, default=RESULTS,
+                   help="output directory for parsed and raw results")
+    r.add_argument("--config", type=Path,
+                   help="split config to hash into run metadata")
     r.add_argument("--docs", type=Path, default=DOCS,
                    help="prompt documents (default prompts/base/, as validated in round 2)")
     r.add_argument("--limit", type=int, default=0)

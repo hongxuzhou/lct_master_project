@@ -1,0 +1,20 @@
+universe = vanilla
+initialdir = /nethome/honzhou
+
+executable = /nethome/honzhou/thesis_zone/rsr_generation/hpc/run.sh
+
+# Every eligible PMB dev direction site, using the validated edge_r3 prompt.
+environment = "SAMPLE=../splits/dev/samples/dev_edge_direction.tsv RESULTS_DIR=../splits/dev/results CONFIG=../splits/dev/config.json TAG=dev_edge_direction DOCS=prompts/edge_r3 WORKERS=16 TOOL_MODE=auto TOOL_PARSER=muse_glimmer REASONING_PARSER=muse_glimmer"
+
+output = /scratch/hongxuzhou/logs/llm_gen/dev_edge_direction.$(ClusterId).out
+error  = /scratch/hongxuzhou/logs/llm_gen/dev_edge_direction.$(ClusterId).err
+log    = /scratch/hongxuzhou/logs/llm_gen/dev_edge_direction.$(ClusterId).log
+
+request_CPUs   = 8
+request_memory = 64G
+request_GPUs   = 1
+requirements = (GPUs_Capability >= 8.0) && (GPUs_GlobalMemoryMb >= 80000)
+
++MaxWallTime = 86400
+
+queue 1

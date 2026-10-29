@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "status": "working",
+  "split": "dev",
+  "pmb_source": "data/pmb-5.1.0/split/en/dev/standard.sbn",
+  "item_id_prefix": "rsr_dev",
+  "seed": 20261027,
+  "base_cap_per_type": {
+    "content_word": 60,
+    "constant_name": 60,
+    "constant_number": 60,
+    "constant_temporal": 60,
+    "tense": 60,
+    "edge_label": 60,
+    "forwarding": 60
+  },
+  "candidate_plan": {
+    "base_per_type": {
+      "content_word": 75,
+      "constant_name": 75,
+      "constant_number": 75,
+      "tense": 75,
+      "forwarding": 75
+    },
+    "constant_value_caps": {
+      "constant_name": 3,
+      "constant_number": 0
+    },
+    "temporal": "all_eligible_first_site",
+    "edge_direction": "all_eligible",
+    "edge_place": "all_eligible_place_only"
+  },
+  "prompt_versions": {
+    "default": "base",
+    "constant_temporal": "temporal_r2",
+    "edge_label_direction": "edge_r3",
+    "edge_label_place": "place_r5"
+  },
+  "marker_policy": {
+    "mode": "append_share",
+    "share_of_base": 0.3,
+    "markers": [
+      "I mean",
+      "no",
+      "no wait",
+      "actually"
+    ],
+    "held_out_markers": [
+      "sorry"
+    ]
+  },
+  "audit_policy": "all_auto_pass",
+  "pair_exclusion_sources": [
+    "repair_data_gen/rsr_generation/dataset/train_rsr.base.tsv"
+  ]
+}

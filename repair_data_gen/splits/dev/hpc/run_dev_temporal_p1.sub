@@ -1,0 +1,20 @@
+universe = vanilla
+initialdir = /nethome/honzhou
+
+executable = /nethome/honzhou/thesis_zone/rsr_generation/hpc/run.sh
+
+# Every eligible PMB dev temporal document, with the first site pinned.
+environment = "SAMPLE=../splits/dev/samples/dev_temporal_p1.tsv RESULTS_DIR=../splits/dev/results CONFIG=../splits/dev/config.json TAG=dev_temporal_p1 DOCS=prompts/temporal_r2 WORKERS=16 TOOL_MODE=auto TOOL_PARSER=muse_glimmer REASONING_PARSER=muse_glimmer"
+
+output = /scratch/hongxuzhou/logs/llm_gen/dev_temporal_p1.$(ClusterId).out
+error  = /scratch/hongxuzhou/logs/llm_gen/dev_temporal_p1.$(ClusterId).err
+log    = /scratch/hongxuzhou/logs/llm_gen/dev_temporal_p1.$(ClusterId).log
+
+request_CPUs   = 8
+request_memory = 64G
+request_GPUs   = 1
+requirements = (GPUs_Capability >= 8.0) && (GPUs_GlobalMemoryMb >= 80000)
+
++MaxWallTime = 86400
+
+queue 1

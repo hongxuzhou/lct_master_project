@@ -1,0 +1,21 @@
+# Prepared follow-up; submit separately from the original DAG.
+universe = vanilla
+initialdir = /nethome/honzhou
+
+executable = /nethome/honzhou/thesis_zone/rsr_generation/hpc/run.sh
+
+# Retry the four missing base requests only; keep original outputs unchanged.
+environment = "SAMPLE=../splits/dev/samples/dev_base_retry1.tsv RESULTS_DIR=../splits/dev/results CONFIG=../splits/dev/config.json TAG=dev_base_retry1 DOCS=prompts/base WORKERS=16 TOOL_MODE=auto TOOL_PARSER=muse_glimmer REASONING_PARSER=muse_glimmer"
+
+output = /scratch/hongxuzhou/logs/llm_gen/dev_base_retry1.$(ClusterId).out
+error  = /scratch/hongxuzhou/logs/llm_gen/dev_base_retry1.$(ClusterId).err
+log    = /scratch/hongxuzhou/logs/llm_gen/dev_base_retry1.$(ClusterId).log
+
+request_CPUs   = 8
+request_memory = 64G
+request_GPUs   = 1
+requirements = (GPUs_Capability >= 8.0) && (GPUs_GlobalMemoryMb >= 80000)
+
++MaxWallTime = 86400
+
+queue 1

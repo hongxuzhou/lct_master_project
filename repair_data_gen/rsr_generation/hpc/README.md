@@ -31,9 +31,14 @@ admins to add the model.
 ## One run
 
 Each `.sub` file sets `SAMPLE` (relative to the code folder), `DOCS` (prompt
-version), `TAG` (results suffix) and the parser options. Results go to
-`results/meta-models_Muse-Glimmer-30B.<TAG>.tsv` and `results/raw/…<TAG>/`;
-an interrupted run resumes.
+version), `TAG` (results suffix) and the parser options. `RESULTS_DIR` may
+isolate another split; it defaults to `results/`. `CONFIG` records and hashes
+that split's config in `run_meta`. New split samples carry `request_id`, which
+is the resume key and permits separate requests from one source document.
+Legacy samples without it continue to resume by `doc_id`.
+
+Results go to `<RESULTS_DIR>/meta-models_Muse-Glimmer-30B.<TAG>.tsv` and
+`<RESULTS_DIR>/raw/…<TAG>/`; an interrupted run resumes.
 
 ```bash
 # laptop, in repair_data_gen/rsr_generation/: copy only what is new

@@ -1,0 +1,10 @@
+{
+  "version": "dev_review_v1",
+  "pair_overlap_action": "report_only",
+  "context_near_duplicate_check": "deferred",
+  "surface_policy": "train_aligned_nonsemantic",
+  "human_review": "all_machine_eligible",
+  "hard_checks": ["reply", "status", "parse", "dag", "index", "magnitude", "edges", "boxes", "wn_ok", "untouched", "withdraw", "site_ok", "pin", "declared_site"],
+  "allow_surface_variants": ["punctuation", "quotation", "apostrophes", "citation_markers", "case", "contraction_expansion", "tense_auxiliary_realisation", "repeated_boundary_article"],
+  "reject": ["same_synset", "place_containment", "structural_repair_part_failure", "changed_content_or_repair_direction"]
+}

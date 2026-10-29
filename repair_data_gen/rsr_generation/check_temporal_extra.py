@@ -48,12 +48,13 @@ def main() -> None:
     ap.add_argument("--out", type=Path)
     args = ap.parse_args()
     csv.field_size_limit(10**9)
-    sample = {r["doc_id"]: r for r in csv.DictReader(open(args.sample, encoding="utf-8"),
-                                                     delimiter="\t")}
+    key = lambda r: r.get("request_id") or r["doc_id"]  # noqa: E731
+    sample = {key(r): r for r in csv.DictReader(open(args.sample, encoding="utf-8"),
+                                                 delimiter="\t")}
     rows = list(csv.DictReader(open(args.checked, encoding="utf-8"), delimiter="\t"))
     tally = collections.Counter()
     for r in rows:
-        s = sample[r["doc_id"]]
+        s = sample[key(r)]
         r["pin"] = pin(r, s)
         tally[(s["kind"], r["pin"])] += 1
     out = args.out or args.checked.with_suffix(".pin.tsv")

@@ -6,6 +6,8 @@
 #   TAG        (optional) results file suffix, e.g. smoke
 #   SAMPLE     (optional) sample TSV, relative to the playground; default
 #              pinned_sample.tsv (round 1)
+#   RESULTS_DIR (optional) parsed/raw result directory; default results/
+#   CONFIG      (optional) split config recorded and hashed in run metadata
 #   LIMIT      (optional) only the first N sample rows
 #   WORKERS    (optional) parallel items, default 8
 #   REASONING  (optional) low/medium/high/xhigh, default high
@@ -90,6 +92,8 @@ ARGS=(run --backend openai --base-url "http://127.0.0.1:$PORT/v1"
       --workers "${WORKERS:-8}")
 [ -n "$TAG" ] && ARGS+=(--tag "$TAG")
 [ -n "$SAMPLE" ] && ARGS+=(--sample "$SAMPLE")
+[ -n "$RESULTS_DIR" ] && ARGS+=(--results-dir "$RESULTS_DIR")
+[ -n "$CONFIG" ] && ARGS+=(--config "$CONFIG")
 [ -n "$LIMIT" ] && ARGS+=(--limit "$LIMIT")
 [ -n "$DOCS" ] && ARGS+=(--docs "$DOCS")
 

@@ -23,7 +23,8 @@ person.n.01 EQU speaker mother_tongue.n.01 Creator -1
 | `rsr_generation/dataset/train_rsr.marked30.tsv` | 1,047 | scripted marked variants, including all 482 ambiguous items |
 | `rsr_generation/dataset/train_rsr.augmented.tsv` | 4,536 | all base rows plus 1,047 marked variants; current RSR training component |
 | [`training_dataset/data/train.parquet`](training_dataset/README.md) | 14,022 | 9,486 fluent + 3,489 base RSR + 1,047 editing-expression RSR |
-| dev, test | – | not built |
+| [`splits/dev/`](splits/dev/README.md) | – | working scaffold; data not built |
+| [`splits/test/`](splits/test/README.md) | – | deliberately not built |
 
 How it was made, in one paragraph: an LLM (Muse-Glimmer-30B) received a gold
 PMB sentence, its SBN and a repair type, and wrote the repaired sentence and
@@ -49,6 +50,8 @@ aligned with PMB, and 500 items per type were sampled.
 |---|---|
 | `rsr_generation/` | prompts, samples, runs, checks, audits, the dataset |
 | `training_dataset/` | unified train Parquet, manifest and reproducible builder |
+| `shared_pipeline/` | split-aware configuration and shared pipeline components |
+| `splits/` | split-specific configuration, run records and derived data; frozen train remains in its legacy paths |
 | `sbn_lin.py` | SBN reader and PMB split paths |
 | `validate_with_pmb_parser.py` | structural checks used on every item |
 | `repair_transform.py`, `test_against_doc.py` | rule-based repair of one site; used as a reference for content-word items |

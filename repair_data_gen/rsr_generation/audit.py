@@ -40,7 +40,7 @@ csv.field_size_limit(sys.maxsize)
 TYPES = ("content_word", "constant_name", "constant_number",
          "constant_temporal", "tense", "edge_label", "forwarding")
 CHECKS = ("parse", "dag", "index", "magnitude", "edges", "boxes")
-ITEM_FIELDS = ("audit_id", "doc_id", "repair_type", "nl_clean", "nl_repair",
+ITEM_FIELDS = ("audit_id", "request_id", "doc_id", "repair_type", "nl_clean", "nl_repair",
                "repair_onset", "reparandum_surface", "sbn_clean", "sbn_repair",
                "source")
 QUESTIONS = {"meaning": 0.90, "natural": 0.80}   # README.md, round 2 thresholds
@@ -80,6 +80,11 @@ def read_labels(d: Path) -> dict[str, dict]:
     return out
 
 
+def source_key(row: dict) -> str:
+    """Stable generated-request key, with legacy fallback."""
+    return row.get("request_id") or f"legacy::{row['repair_type']}::{row['doc_id']}"
+
+
 # ---------------------------------------------------------------- sample
 
 def cmd_sample(args: argparse.Namespace) -> None:
@@ -90,7 +95,7 @@ def cmd_sample(args: argparse.Namespace) -> None:
     out.mkdir(parents=True, exist_ok=True)
     items_path = out / "items.tsv"
     items = read_tsv(items_path) if items_path.exists() else []
-    have = {(i["doc_id"], i["repair_type"]) for i in items}
+    have = {source_key(i) for i in items}
 
     rng = random.Random(args.seed)
     types = args.types or TYPES
@@ -101,7 +106,7 @@ def cmd_sample(args: argparse.Namespace) -> None:
         pool = sorted((r for r in rs if auto_pass(r)), key=lambda r: r["doc_id"])
         rng.shuffle(pool)
         had = sum(i["repair_type"] == t for i in items)
-        fresh = [r for r in pool if (r["doc_id"], t) not in have]
+        fresh = [r for r in pool if source_key(r) not in have]
         take = fresh[:max(0, args.per_type - had)]
         new += take
         answered = sum(r.get("status") == "ok" for r in rs)
