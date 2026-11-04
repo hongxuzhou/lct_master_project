@@ -17,17 +17,13 @@ format:
 ## Component Definition
 
 ### `CORRECTION` 
-By adopting the definition by Lascarides & Asher (2009), `CORRECTION` is considered as divergent (non-veridical) subordinating rhetorical relation embedding a denial, as quoted here:
-
-> Asher and Lascarides (2003, p363) stipulates that in the absence of divergent rhetorical relations (in other words, speech acts of denial such as *Correction* and *Counterevidence*), all the content is agreed upon.
-
-and:
-
->Let 〈Π, F, last〉 be an SDRS. Furthermore, where π1, π2 ∈ Π, we say that π1 > π2 iff either: (i) R(π1, π2) is within the range of F , where R is a subordinating relation (e.g., Q-Elab, Plan-Elab, IQAP, Correction, Background, Elaboration, Explanation); or ... 
-
-According to the same paper, the semantics of Correction is defined as 
+The extension draws on Lascarides & Asher (2009), who treat *Correction* as a divergent, non-veridical rhetorical relation and classify it as subordinating. Its interpretation includes denial of the first argument and acceptance of the second:
 
 $$(w, f) \llbracket \mathit{Correction}(\pi_1, \pi_2) \rrbracket_m (w', g) \text{ iff } (w, f) \llbracket (\neg K_{\pi_1}) \land K_{\pi_2} \land \varphi_{\mathit{Correction}(\pi_1, \pi_2)} \rrbracket_m (w', g)$$
+
+**Incompatibility in context.** Following [van Leusen (2004)](https://doi.org/10.1093/jos/21.4.415), the antecedent and corrective claim are competing descriptions within a common local setting. They need not be intrinsically contradictory: contextual interpretation, pragmatic strengthening and accommodation can make them incompatible. This motivates replacing the relevant prior contribution while retaining the shared background.
+
+**Representation and commitment.** In the present notation, the reparandum remains structurally represented after repair, while its original contribution to the assertion is withdrawn and the repair supplies the accepted alternative. Structural retention does not itself assert the existence of a corresponding referent in the enclosing context. Van Leusen distinguishes the monotonic accumulation of discourse descriptions from nonmonotonic changes to discourse meaning; this distinction motivates retaining material whose earlier contribution is no longer endorsed. The paired SBN construction below is this project's implementation of replacement self-repair, rather than a direct transcription of the SDRT relation.
 
 ### The two tasks of `CORRECTION`
 
@@ -43,23 +39,45 @@ A single `CORRECTION` token carries two distinct jobs. They are told apart **str
 
 **On the direction of the relation.** The parser emits box-to-box edges as `target_box → new_box`. In the cross-turn case this means the connector's target is $\pi_1$ (denied) and the newly opened box is $\pi_2$ (committed), reflecting the argument order of the definition above, so no extra convention is needed. In the intra-turn case the newly opened box holds the quarantined reparandum, and the Correction relation proper is recovered from the `CORRECTION`/`CONJUNCTION` pair rather than from the single edge.
 
+## Abstract Description
+
+:::{.text-center}
+$$
+K = K_{\pi_{\text{pre}}} \land \neg K_{\pi_m} \land \bigl(K_{\pi_n} \land K_{\pi_{\text{post}}}\bigr) \land \varphi_{\mathit{Corr}(\pi_m,\pi_n)}
+$$
+:::
+
+Here, $K_{\pi_{\text{pre}}}$ represents the material before the reparandum, $K_{\pi_m}$ the reparandum, $K_{\pi_n}$ the repair, and $K_{\pi_{\text{post}}}$ the continuation after the repair. The condition $\varphi_{\mathit{Corr}(\pi_m,\pi_n)}$ constrains the corrective relation between the two alternatives, including their incompatibility in context.
+
+This is a schematic description of the repair contribution within its enclosing context. The components may depend on shared referents and background; they need not be independent, closed propositions. `CORRECTION` isolates the reparandum contribution, while `CONJUNCTION` merges the repair and subsequent material into the existing context. If the repair occurs within negation or another embedding context, the construction is interpreted there rather than automatically at the discourse root.
+
 ## Fundamental Rules of SBN
 * Accessibility: (a) neither positive nor negative indices can enter negated context, and (b) only negative indices in negated contexts can refer to discourse referents outside the negation.
 
 
 ### Clarifications
 
-The rule above is quoted verbatim from Bos (2021). The following are operational clarifications of it, plus one counting rule of SBN.
+The rule above is quoted verbatim from Bos (2021). The following distinguish SBN index conventions from this project's repair constraints. C3 applies negation-based accessibility to ordinary argument links; C4 specifies a restricted permission for subsequent reference.
 
 **C1: Index counting is linear and boxes never reset it.** `Role -n` / `Role +n` counts *all* preceding concepts in raw sequence order. Separators do not reset, restrict, or partition the counting domain; concepts sitting in already-closed, non-ancestor sibling boxes still occupy positions and still count. 
 
 Do not conflate the two index spaces: **angle brackets index boxes, `+`/`-` index concepts.** `Proposition >1` and `CONTINUATION <0` are box pointers, not concept indices, which is why a `Proposition >1` target can sit two or more concept positions forward.
 
-**C2 — "Outside the negation" means an *ancestor* box.** Referents in *sibling* boxes are equally inaccessible, even when they precede the current concept in linear order.
+**C2 — Ordinary outward access targets an accessible ancestor context.** Linear precedence alone does not make a referent accessible: a negative index to a sibling box does not become legal merely because its target occurs earlier. For repair, apply C3 to ordinary argument links and C4 to subsequent reference.
 
-**C3 — `CONJUNCTION` boundaries are permeable, `CORRECTION` boundaries are not.** A positive index representing a thematic role shall **never cross into** a `CORRECTION` box. A negative index inside a `CORRECTION` box is permitted to cross out as long as it targets an ancestor box (e.g., `BOX 0`). However, indices shall never cross laterally between sibling boxes (e.g., from a `CORRECTION` box into a `CONJUNCTION` box). See the repair toolkit below for how to resolve illegal inbound or lateral links.
+**C3 — Ordinary argument links respect the withdrawal boundary.** The negation of $K_{\pi_1}$ in the borrowed *Correction* semantics motivates treating the reparandum as a subordinate context for ordinary argument access. In the present SBN serialisation, an earlier concept must not point forward into the `CORRECTION` box through a thematic role. A concept inside that box may use a negative index to an accessible ancestor context. It must not point forward into the sibling `CONJUNCTION` box to acquire arguments supplied only after the repair. `CONJUNCTION` merges its content into its target context; it does not impose the same withdrawal boundary. See the repair toolkit for representing argument links under these constraints.
 
-**C4 — Under certain conditions, the content nested in a`CORRECTION` box can be referred to.** However, discourse referents inside a CORRECTION box survive and remain anaphorically accessible. Quarantining a reparandum removes what the speaker commits to propositionally, but it does not remove the uttered entities from the discourse referent domain. According to SBN, entities like proper nouns or definites naturally project to BOX 0. For self-repairs, we extend this: entities introduced in a reparandum project their referential availability to the enclosing context. Therefore, anaphoric indices (like ANA) referencing these entities do not technically violate the structural barrier of C3, as they pick up the projected referent. This is where `CORRECTION` genuinely differs from `NEGATION`, and it is a positive property of the relation, not a loophole.  
+Accessibility depends on context structure, not index sign alone. SDRT rhetorical subordination, semantic negation scope and the parser's box edges are distinct notions; this project uses the paired box configuration to implement the repair interpretation. The restricted later-reference links in C4 are specified separately from ordinary outward access.
+
+**C4 — Retained reparanda permit restricted subsequent reference.** A later expression may refer back to a referent associated with the reparandum when the intended reference is supported by the discourse context. The link targets the retained referent itself. No automatic projection into an enclosing box is assumed, and the link does not restore the withdrawn assertion. This permission is specific to the repair extension; it does not follow from ordinary DRT access out of a subordinate context.
+
+In the current serialisation, such links point backwards from the later expression. A negative index is necessary for this configuration but is not sufficient to license a reading. Check the referent, the relation expressed by the continuation, and whether the interpretation preserves the withdrawal. Retention alone does not license arbitrary later predication or argument links into the reparandum. This remains subject to restrictions from any enclosing contexts, including negation; it does not make all nested referents globally accessible.
+
+Use `ANA` for identity reference. When a later plural expression first constructs a group from separately introduced referents, use multiple `Sub` links from the group to its intended members, including a reparandum referent when licensed. A subsequent mention of that established group may use `ANA`.[^later-reference-sub] Encode `Quantity` when the language explicitly supplies it, such as *both* or *two*; do not infer a numerical constraint from the number of links alone. Distinguish particular-object from kind reference using the full context; an evaluative predicate alone does not force a kind reading.
+
+[Keshet & Abney (2024)](https://doi.org/10.3765/sp.17.9) motivate separating the availability of antecedent descriptions from their truth and from the felicity of subsequent reference. They also distinguish kind reference from reference to particular individuals in non-veridical contexts. Their analysis informs these checks; it does not supply a repair-specific accessibility rule or a PIP interpretation for the SBN links.
+
+[^later-reference-sub]: This replaces the earlier double-`ANA` analysis of first-time group construction. Multiple `Sub` links follow existing SBN group representations; `ANA` retains its identity-reference function. The change concerns group construction, not a new accessibility permission.
 
 **C5 — The `CONJUNCTION` box has a tail.** Everything from `CONJUNCTION` up to the next separator stays inside that box, including material that has nothing to do with the repair (in the subject-repair example below, the predicate `play.v.01`, its tense referent and its object all land there). Because `CONJUNCTION` merges, this is semantically equivalent to putting that material directly in the box one level above `CORRECTION` (the box the merge targets, not necessarily `BOX0`; under a `NEGATION`, for instance, that target is the negated box, see the Negation case below).
 
@@ -67,7 +85,7 @@ Do not conflate the two index spaces: **angle brackets index boxes, `+`/`-` inde
 
 ## Rules of Annotating Self-Repair
 * Always use `CORRECTION` to quarantine the reparandum, and use `CONJUNCTION` to merge the content afterwards back to the upper context.
-* Always follow the Fundamental Rules of SBN
+* Follow the SBN conventions and the repair constraints in C1–C6, including the restricted later-reference permission in C4.
 * Always ignore interregna in the transcription, but in the cases where they exsit, retain them in the annotation on the right hand side of `%`. They should be put in the comment area of `CONJUNCTION` separator, making it roughly between the reparandum and the repair, reflecting the natural language order. Common English interregna include but are not limited to "I mean", "well", "actually", "no", and "in fact".
 * Only material the speaker actually uttered within the reparandum span belongs inside the `CORRECTION` box.
 * Mind the two ways a `%` can break the parse. `SBNSpec.COMMENT` is the three-character string `" % "`, so a `%` is recognised as a comment marker **only** when it has whitespace on both sides.
@@ -76,7 +94,7 @@ Do not conflate the two index spaces: **angle brackets index boxes, `+`/`-` inde
 
 ### The repair toolkit
 
-Clarification **C3** forbids a positive index from crossing a `CORRECTION` boundary. Four devices keep annotations on the right side of that constraint. They are **not interchangeable alternatives**: the first three each answer a different question, and the choice among them is determined by *which direction* the offending link runs. Only the fourth is a fallback in the ordinary sense.
+Clarification **C3** constrains ordinary argument links across the withdrawal boundary. The four devices below address those links; they do not replace or broaden the subsequent-reference permission in C4. They are **not interchangeable alternatives**: the first three each answer a different question, and the choice among them is determined by *which direction* the offending link runs. Only the fourth is a fallback in the ordinary sense.
 
 Diagnose first, then apply:
 
@@ -367,14 +385,27 @@ banana_bread.n.01 Co-ThemeOf -1            % banana bread, (reparandum)
 cherry_pie.n.01 Co-ThemeOf -2              % cherry pie (repair)
 %%% Utterance 2
     CONTINUATION <1                        % 
-entity.n.01 ANA -2 ANA -1                  % B: They  — picks up both reparandum and repair
+entity.n.01 Sub -2 Sub -1 Quantity 2        % B: They ... both — groups reparandum and repair
 time.n.08 EQU now                          % are
 be.v.02 Theme -2 Time -1 Co-Theme +2       % 
-good.a.01 AttributeOf +1                   % both good
+good.a.01 AttributeOf +1                   % good
 dessert.n.01                               % desserts
 ```
 
-![DAG: anaphora referring to both reparandum and repair — "My favourite dessert is banana bread, actually, cherry pie. They are both good desserts"](images/anaphora-reparandum-repair.png)
+The following schematic shows the reference links; the complete SBN above also represents the two clauses and their predicates.
+
+```{mermaid}
+flowchart LR
+    subgraph withdrawn[CORRECTION: retained reparandum]
+        bread[banana_bread.n.01]
+    end
+    subgraph accepted[CONJUNCTION: accepted repair]
+        pie[cherry_pie.n.01]
+    end
+    group["entity.n.01: later plural referent, Quantity 2"]
+    group -->|Sub| bread
+    group -->|Sub| pie
+```
 
 Both candidate objects now reach the copula through `Co-ThemeOf` (device ②), symmetrically.
 
@@ -382,7 +413,7 @@ Both candidate objects now reach the copula through `Co-ThemeOf` (device ②), s
 
 The final `dessert.n.01` needs the copula to attach to; without it the concept carries no edges at all and "desserts" contributes nothing to the representation. Gold writes plural predicate nominals this way — "Those are not fish." is `entity.n.01 … be.v.01 Theme -1 Time +1 Co-Theme +2 time.n.08 EQU now fish.n.01`.
 
-This example is the evidence for clarification **C4**: `entity.n.01 ANA -2` reaches into the `CORRECTION` box to pick up the discarded reparandum, and the discourse is entirely natural. To mark "both" explicitly, gold would add `Quantity 2` to the `entity.n.01` ("My parents are both doctors.").
+This example illustrates C4: `Sub -2` reaches the retained reparandum and `Sub -1` reaches the repair. The continuation constructs a group and evaluates its members; it does not reinstate banana bread as the speaker's favourite dessert. `Quantity 2` represents the explicit *both*. The dessert expressions permit a kind reading here; this example alone does not establish unrestricted access to particular objects in reparanda.
 
 ###  Intra-utterance Self-Repair Combined with Cross-turn
 "A: Joe bought a Ferrari, I mean, a Jaguar, as a birthday gift. B: No, he bought it as a wedding gift."
@@ -414,29 +445,39 @@ The second one is written `<1`, which yields `BOX2 →CORRECTION→ BOX3`. Its t
 
 # Noted Limitations
 
-## Topological Limitations: The "Separator vs. Concept" Divide
-The `CORRECTION` mechanism proposed in this notation is designed to quarantine node-level Concepts and their argument edges. Therefore, it is mathematically and structurally impossible to encapsulate a topological Separator inside a concept-level `CORRECTION` box. Attempting to do so would destroy the validity of the underlying Directed Acyclic Graph (DAG). This architectural divide restricts the notation from handling repairs that involve logical operators or discourse structures.
+## Replacing Scope or Discourse Structure
+
+Under the SBN rules and local repair construction adopted here, the extension does not support repairs that replace a separator's scope-forming or discourse-organising contribution.
+
+The abstract description above separates the withdrawn contribution $K_{\pi_m}$ from the accepted contribution $K_{\pi_n}$ and its continuation. The local SBN construction implements this separation within an existing context structure. Concept replacements and replacements of values such as names or quantities can be represented by placing the relevant concept-and-relation conditions in the two repair boxes, using the toolkit where needed. Values contribute through conditions on a host concept; a bare value is not itself a $K$ component.
+
+A separator instead determines how contexts are connected or how material is scoped. Replacing that contribution may require changing the context structure governing shared material and the continuation. The current `CORRECTION–CONJUNCTION` pair provides no operation for replacing that structure while preserving the appropriate scope of the unrepaired material.
+
+This restriction concerns the current local encoding. The abstract formula does not itself prohibit complex scoped contents, and nesting a separator within another context does not by itself create a cycle. A different construction that reconstructs larger alternatives would require a separate analysis. Repairs to concepts or values *within* an existing separator's context remain supported, as illustrated by the Negation and Donkey sentence examples.
 
 ### Quantifier Replacement
 "Every, no, some dishes are tasty"
-Reason:  In SBN, universal quantification (e.g., "every") is not represented as a single concept node, but is constructed using double `NEGATION` separators that open new nested context boxes. When the speaker repairs the quantifier to "some" (an existential quantifier that does not require new boxes), it is impossible to use a `CORRECTION` box to retrospectively "undo" or quarantine the topological boundaries of the already-opened NEGATION boxes.
+
+Universal quantification is represented using nested `NEGATION` contexts, whereas existential quantification does not require the same structure. Replacing *every* with *some* therefore changes the scope structure governing the shared noun and predicate. The current local pair cannot replace the quantifier by isolating a concept or value alone, and it does not define how to rebuild the two alternative scope structures around the shared continuation.
 
 ### Rhetorical Relation Replacement
 "I helped my mum when, even though I was busy."
 
-Reason: Rhetorical relations (such as `EXPLANATION`, `CONTRAST`, or `CONCESSION`) act as Separators that connect two distinct discourse contexts. They cannot be quarantined inside a `CORRECTION` box that is meant for semantic concepts.
+On the intended reading, the repair replaces the relation between the clauses while retaining their content. When that relation is encoded by a separator, its contribution is a connection between contexts. The local repair pair does not define how to withdraw that connection and introduce an alternative connection over the shared clauses. A device for repairing a concept-level role does not by itself provide a device for repairing a box-to-box relation.
 
-## Modal Verb Replacement
+### Modal Replacement
 "I think you would, well, should work harder"
 
-Reason: Similar to quantifiers and rhetorical relations, modal verbs (like "should" or "would") are frequently treated as structural separators (e.g., `NECESSITY` or `POSSIBILITY`) in formal semantics. For the same reason above, they are immune to the current CORRECTION boxing mechanism.
+Where the intended modal readings are encoded through separators such as `NECESSITY` or `POSSIBILITY`, replacing the modal changes the operator governing the shared clause. The current pair does not specify how to replace that operator while retaining the clause under the appropriate scope. The restriction follows the semantic encoding, not the presence of a modal verb: an English modal form does not automatically identify a particular SBN separator.
 
 ## Linear Serialisation Limitations: Discontinuous (Delayed) Repair
 "I bought three apples from Lidl yesterday, actually, four"
 
-Every case covered so far is an *instant* repair: the interregnum follows its reparandum immediately, so `CORRECTION` opens right where the trouble source ends. Here the reparandum is just `Quantity 3` on `apple.n.01` — device-wise no different from the Adjunct case's `DayOfWeek monday → tuesday` — but "actually, four" arrives only after "from Lidl yesterday" has already been uttered and committed, and that material is not itself being repaired.
+The examples above use local repairs: the repair follows the reparandum, with an optional interregnum between them. Here *three* is replaced by *four*, but unrepaired material intervenes. The quantity replacement is not itself the difficulty; the delay is.
 
-`CORRECTION` can only quarantine what comes after it in the sequence. Opened where "actually" actually occurs, it can no longer reach back and quarantine "three". It is already asserted. Opened right after "three" instead (mimicking the instant-repair cases), it quarantines "from Lidl" and "yesterday" along with it, wrongly marking them as retracted. Device ④ does not rescue this either: it would have to postpone an entire adjunct span past the whole `CORRECTION`/`CONJUNCTION` pair, not just move one argument's index, which is a far larger break from surface order than anything the toolkit currently licenses.
+In the current serialisation, `CORRECTION` precedes the reparandum material and the paired `CONJUNCTION` introduces the accepted continuation. Placing `CORRECTION` at *actually* cannot retrospectively isolate the earlier quantity condition. Placing it before that condition and leaving the intervening material in surface order would also quarantine *from Lidl yesterday*, although that material is not withdrawn.
+
+This requires a richer segmentation than the local pre–reparandum–repair–post pattern: the encoding must preserve unrepaired intervening content while withdrawing only the earlier contribution. The current toolkit does not define that operation. Its movement device relocates argument concepts to resolve access constraints; it does not specify how to relocate an entire intervening span for delayed repair. The limitation is therefore one of the present serialisation and alignment conventions.
 
 
 
