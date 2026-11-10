@@ -12,34 +12,35 @@ format:
     html-math-method: katex
 ---
 
-# The Mechanism of `CORRECTION + CONJUNCTION` 
+# Extension goals and design principles {#sec-goals}
 
-## Component Definition
+This project extends SBN to represent replacement self-repair while preserving as much of its existing design as possible. The representation retains the reparandum, marks its contribution as withdrawn, and incorporates the repair into the speaker's accepted content.
 
-### `CORRECTION` 
-The extension draws on Lascarides & Asher (2009), who treat *Correction* as a divergent, non-veridical rhetorical relation and classify it as subordinating. Its interpretation includes denial of the first argument and acceptance of the second:
+The extension adds `CORRECTION` and pairs it with the existing `CONJUNCTION` separator. It uses SBN concepts, roles, context boxes and relative indices to encode the repair. The main design preferences are to follow surface order, retain shared material, and respect scope and accessibility when connecting arguments across contexts.
 
-$$(w, f) \llbracket \mathit{Correction}(\pi_1, \pi_2) \rrbracket_m (w', g) \text{ iff } (w, f) \llbracket (\neg K_{\pi_1}) \land K_{\pi_2} \land \varphi_{\mathit{Correction}(\pi_1, \pi_2)} \rrbracket_m (w', g)$$
+This document defines the repair notation used in the project. The [SBN Annotation Working Manual](https://github.com/hongxuzhou/lct_master_project/blob/main/SBN_Annotation_Working_Manual.md) supplies the underlying SBN conventions. Parser requirements are collected in [Appendix A](#sec-tools).
 
-**Incompatibility in context.** Following [van Leusen (2004)](https://doi.org/10.1093/jos/21.4.415), the antecedent and corrective claim are competing descriptions within a common local setting. They need not be intrinsically contradictory: contextual interpretation, pragmatic strengthening and accommodation can make them incompatible. This motivates replacing the relevant prior contribution while retaining the shared background.
+# Representation mechanism {#sec-mechanism}
 
-**Representation and commitment.** In the present notation, the reparandum remains structurally represented after repair, while its original contribution to the assertion is withdrawn and the repair supplies the accepted alternative. Structural retention does not itself assert the existence of a corresponding referent in the enclosing context. Van Leusen distinguishes the monotonic accumulation of discourse descriptions from nonmonotonic changes to discourse meaning; this distinction motivates retaining material whose earlier contribution is no longer endorsed. The paired SBN construction below is this project's implementation of replacement self-repair, rather than a direct transcription of the SDRT relation.
+## Correction and commitment
 
-### The two tasks of `CORRECTION`
+Van Leusen (2004) analyses correction through incompatibility in context. The antecedent and corrective claim compete as descriptions of a common local setting. Pragmatic strengthening and accommodation can make them incompatible even when their literal contents are compatible in other settings.
 
-A single `CORRECTION` token carries two distinct jobs. They are told apart **structurally**. Annotating the separator itself (e.g. `CORRECTION-intra`) would violate SBN's design philosophy, which admits only the fixed separator inventory.
+A correction changes which contribution is accepted while retaining a record of the earlier material. Van Leusen distinguishes the accumulation of discourse descriptions from changes to discourse meaning: the description can grow as an earlier entailment is withdrawn. This distinction motivates keeping the reparandum in the representation after repair.
 
-| | Intra-turn self-repair | Cross-turn repair / correction |
-|---|---|---|
-| Structural signature | **has** a sibling `CONJUNCTION` | **no** sibling `CONJUNCTION` |
-| What `CORRECTION` does | quarantines the reparandum | Lascarides & Asher proper: denies $\pi_1$, commits $\pi_2$ |
-| What `CONJUNCTION` does | merges the repair *and everything after it* back into the box one level above `CORRECTION` | n/a |
+The semantic basis comes from the SDRT relation *Correction*. Lascarides & Asher (2009) classify it as divergent and subordinating, with the following interpretation:
 
-**Recognition, not disambiguation.** `CONJUNCTION` has one semantics throughout SBN: per Bos (2021, 2023) it does not open a new DRS, it merges subsequent material into the DRS of its target box (cf. Zeevat 1991 on DRS merging). This holds identically whether or not a `CORRECTION` precedes it — there is no separate "repair-`CONJUNCTION`" reading. What differs is the discourse configuration: when a `CONJUNCTION` shares a parent box with a `CORRECTION`, the merge it performs happens to resolve a self-repair, because its target is exactly the box that was live before the reparandum was quarantined. Tooling that needs to detect *that a `CONJUNCTION` is part of a repair* (for QC or scoring) can use parent-box co-occurrence with `CORRECTION` as its test — but that is a test for recognising a repair configuration, not a fork in what `CONJUNCTION` means.
+$$
+(w, f) \llbracket \mathit{Correction}(\pi_1, \pi_2) \rrbracket_m (w', g)
+\quad\text{iff}\quad
+(w, f) \llbracket \neg K_{\pi_1} \land K_{\pi_2} \land \varphi_{\mathit{Correction}(\pi_1,\pi_2)} \rrbracket_m (w', g)
+$$
 
-**On the direction of the relation.** The parser emits box-to-box edges as `target_box → new_box`. In the cross-turn case this means the connector's target is $\pi_1$ (denied) and the newly opened box is $\pi_2$ (committed), reflecting the argument order of the definition above, so no extra convention is needed. In the intra-turn case the newly opened box holds the quarantined reparandum, and the Correction relation proper is recovered from the `CORRECTION`/`CONJUNCTION` pair rather than from the single edge.
+The first argument is denied and the second is accepted. The condition $\varphi_{\mathit{Correction}(\pi_1,\pi_2)}$ supplies the constraints on the corrective relation. The SBN extension implements self-repair through the paired construction below.
 
-## Abstract Description
+## Abstract description
+
+The contribution of a replacement self-repair is represented schematically as:
 
 :::{.text-center}
 $$
@@ -47,155 +48,155 @@ K = K_{\pi_{\text{pre}}} \land \neg K_{\pi_m} \land \bigl(K_{\pi_n} \land K_{\pi
 $$
 :::
 
-Here, $K_{\pi_{\text{pre}}}$ represents the material before the reparandum, $K_{\pi_m}$ the reparandum, $K_{\pi_n}$ the repair, and $K_{\pi_{\text{post}}}$ the continuation after the repair. The condition $\varphi_{\mathit{Corr}(\pi_m,\pi_n)}$ constrains the corrective relation between the two alternatives, including their incompatibility in context.
+| Component | Contribution |
+|---|---|
+| $K_{\pi_{\text{pre}}}$ | Material before the reparandum |
+| $K_{\pi_m}$ | Reparandum |
+| $K_{\pi_n}$ | Repair |
+| $K_{\pi_{\text{post}}}$ | Continuation after the repair |
+| $\varphi_{\mathit{Corr}(\pi_m,\pi_n)}$ | Constraints on the correction, including incompatibility in context |
 
-This is a schematic description of the repair contribution within its enclosing context. The components may depend on shared referents and background; they need not be independent, closed propositions. `CORRECTION` isolates the reparandum contribution, while `CONJUNCTION` merges the repair and subsequent material into the existing context. If the repair occurs within negation or another embedding context, the construction is interpreted there rather than automatically at the discourse root.
+These components can depend on shared referents and background. The formula describes the repair within its enclosing context. A repair inside negation, for example, is interpreted within that negated context.
 
-## Fundamental Rules of SBN
-* Accessibility: (a) neither positive nor negative indices can enter negated context, and (b) only negative indices in negated contexts can refer to discourse referents outside the negation.
+## The paired box construction {#sec-pair}
 
+`CORRECTION` opens a box containing the reparandum. The paired `CONJUNCTION` returns the repair and subsequent content to the context that was active before `CORRECTION`. Both separators point to that context, giving the two boxes a common parent in the parsed graph.
 
-### Clarifications
+For a local pair, `CORRECTION <1` targets the preceding box and `CONJUNCTION <2` targets the same box from two box positions later. The target can be the root or an embedded context.
 
-The rule above is quoted verbatim from Bos (2021). The following distinguish SBN index conventions from this project's repair constraints. C3 applies negation-based accessibility to ordinary argument links; C4 specifies a restricted permission for subsequent reference.
+`CONJUNCTION` retains its SBN merge function (Bos 2021, 2023). The parser records a box for its material; semantically, that material is merged into the target context. Material following `CONJUNCTION` remains in its parsed box until the next separator. This includes predicates and arguments beyond the repair itself.
 
-**C1: Index counting is linear and boxes never reset it.** `Role -n` / `Role +n` counts *all* preceding concepts in raw sequence order. Separators do not reset, restrict, or partition the counting domain; concepts sitting in already-closed, non-ancestor sibling boxes still occupy positions and still count. 
+## Basic example
 
-Do not conflate the two index spaces: **angle brackets index boxes, `+`/`-` index concepts.** `Proposition >1` and `CONTINUATION <0` are box pointers, not concept indices, which is why a `Proposition >1` target can sit two or more concept positions forward.
-
-**C2 — Ordinary outward access targets an accessible ancestor context.** Linear precedence alone does not make a referent accessible: a negative index to a sibling box does not become legal merely because its target occurs earlier. For repair, apply C3 to ordinary argument links and C4 to subsequent reference.
-
-**C3 — Ordinary argument links respect the withdrawal boundary.** The negation of $K_{\pi_1}$ in the borrowed *Correction* semantics motivates treating the reparandum as a subordinate context for ordinary argument access. In the present SBN serialisation, an earlier concept must not point forward into the `CORRECTION` box through a thematic role. A concept inside that box may use a negative index to an accessible ancestor context. It must not point forward into the sibling `CONJUNCTION` box to acquire arguments supplied only after the repair. `CONJUNCTION` merges its content into its target context; it does not impose the same withdrawal boundary. See the repair toolkit for representing argument links under these constraints.
-
-Accessibility depends on context structure, not index sign alone. SDRT rhetorical subordination, semantic negation scope and the parser's box edges are distinct notions; this project uses the paired box configuration to implement the repair interpretation. The restricted later-reference links in C4 are specified separately from ordinary outward access.
-
-**C4 — Retained reparanda permit restricted subsequent reference.** A later expression may refer back to a referent associated with the reparandum when the intended reference is supported by the discourse context. The link targets the retained referent itself. No automatic projection into an enclosing box is assumed, and the link does not restore the withdrawn assertion. This permission is specific to the repair extension; it does not follow from ordinary DRT access out of a subordinate context.
-
-In the current serialisation, such links point backwards from the later expression. A negative index is necessary for this configuration but is not sufficient to license a reading. Check the referent, the relation expressed by the continuation, and whether the interpretation preserves the withdrawal. Retention alone does not license arbitrary later predication or argument links into the reparandum. This remains subject to restrictions from any enclosing contexts, including negation; it does not make all nested referents globally accessible.
-
-Use `ANA` for identity reference. When a later plural expression first constructs a group from separately introduced referents, use multiple `Sub` links from the group to its intended members, including a reparandum referent when licensed. A subsequent mention of that established group may use `ANA`.[^later-reference-sub] Encode `Quantity` when the language explicitly supplies it, such as *both* or *two*; do not infer a numerical constraint from the number of links alone. Distinguish particular-object from kind reference using the full context; an evaluative predicate alone does not force a kind reading.
-
-[Keshet & Abney (2024)](https://doi.org/10.3765/sp.17.9) motivate separating the availability of antecedent descriptions from their truth and from the felicity of subsequent reference. They also distinguish kind reference from reference to particular individuals in non-veridical contexts. Their analysis informs these checks; it does not supply a repair-specific accessibility rule or a PIP interpretation for the SBN links.
-
-[^later-reference-sub]: This replaces the earlier double-`ANA` analysis of first-time group construction. Multiple `Sub` links follow existing SBN group representations; `ANA` retains its identity-reference function. The change concerns group construction, not a new accessibility permission.
-
-**C5 — The `CONJUNCTION` box has a tail.** Everything from `CONJUNCTION` up to the next separator stays inside that box, including material that has nothing to do with the repair (in the subject-repair example below, the predicate `play.v.01`, its tense referent and its object all land there). Because `CONJUNCTION` merges, this is semantically equivalent to putting that material directly in the box one level above `CORRECTION` (the box the merge targets, not necessarily `BOX0`; under a `NEGATION`, for instance, that target is the negated box, see the Negation case below).
-
-**C6 — `ThemeOf` / `TimeOf` / `MannerOf` / `Co-ThemeOf` are extensions of this project, not PMB 5.1.0 practice.** The inverted roles actually attested in gold are `AttributeOf` (1802), `PartOf` (572), `SubOf` (120), `ColourOf` (80), `MadeOf` (38), `InstanceOf` (37), `ContentOf` (4), `CauserOf` (2), `FeatureOf` (1), `AgentOf` (1). `ThemeOf`, `TimeOf`, `MannerOf` and `Co-ThemeOf` occur **zero** times. Relying on them to avoid positive indices is sound, but note that `to_penman_string` normalises `Of → -of` **only** for members of `SBNSpec.INVERTIBLE_ROLES`; an inverted role missing from that set is scored by Smatch as a wholly different edge.
-
-## Rules of Annotating Self-Repair
-* Always use `CORRECTION` to quarantine the reparandum, and use `CONJUNCTION` to merge the content afterwards back to the upper context.
-* Follow the SBN conventions and the repair constraints in C1–C6, including the restricted later-reference permission in C4.
-* Always ignore interregna in the transcription, but in the cases where they exsit, retain them in the annotation on the right hand side of `%`. They should be put in the comment area of `CONJUNCTION` separator, making it roughly between the reparandum and the repair, reflecting the natural language order. Common English interregna include but are not limited to "I mean", "well", "actually", "no", and "in fact".
-* Only material the speaker actually uttered within the reparandum span belongs inside the `CORRECTION` box.
-* Mind the two ways a `%` can break the parse. `SBNSpec.COMMENT` is the three-character string `" % "`, so a `%` is recognised as a comment marker **only** when it has whitespace on both sides.
-    * A line-initial `%` is not a comment — it is tokenised as SBN and aborts the whole document. Write standalone comment lines as `%%%` (`SBNSpec.COMMENT_LINE`).
-    * A trailing `%` with nothing after it is likewise not a comment, for the same reason: there is no space following it. Leave the column empty rather than writing an empty marker for alignment.
-
-### The repair toolkit
-
-Clarification **C3** constrains ordinary argument links across the withdrawal boundary. The four devices below address those links; they do not replace or broaden the subsequent-reference permission in C4. They are **not interchangeable alternatives**: the first three each answer a different question, and the choice among them is determined by *which direction* the offending link runs. Only the fourth is a fallback in the ordinary sense.
-
-Diagnose first, then apply:
-
-| # | Situation | Device | Notes |
-|---|---|---|---|
-| ① | The argument had not yet been uttered when the reparandum was abandoned. This is more commonly seen in VP self-repairs | **Leave the role unwritten** | First choice, and the linguistically correct analysis: the speaker never committed to that argument under the abandoned plan. Attested in PMB gold |
-| ② | A concept *outside* the `CORRECTION` box must link to the reparandum *inside* it | **Invert the role** (`ThemeOf`, `TimeOf`, `Co-ThemeOf`, …) | Puts the role on the inner concept so it points backward into an ancestor box. Cf. **C6** |
-| ③ | What is being repaired is an *edge label* (a preposition, a case role, etc.), not a concept | **Dummy concept + `EQU`** | Bos's own device, also used for logical disjunction in the Sequence Notation paper. SBN has no way to place a bare role inside a box |
-| ④ | None of the above applies | **Movement**: reorder so the target precedes the `CORRECTION`, turning the index negative | Last resort. It breaks the surface-order alignment the notation otherwise preserves, and it inflates index magnitudes |
-
-Why ①–③ cannot be swapped for one another. First, the structure both bullets below turn on: `CORRECTION <1` and `CONJUNCTION <2` both resolve to the *same* target box (the box live before `CORRECTION` opened), so the box they each open — the `CORRECTION` box and the `CONJUNCTION` box — are siblings, neither an ancestor of the other.
-
-* ② only fixes *inbound* links (a concept in an ancestor box pointing into the reparandum) — inverting the role turns that into a negative index that still terminates on an ancestor, which C2 always permits. It cannot fix an *outbound* link, i.e. a concept *inside* the `CORRECTION` box that needs to reach a concept in the sibling `CONJUNCTION` box. Inverting `put.v.01 Theme +2 → ball.n.01` yields `ball.n.01 ThemeOf -n`: the index sign flips, but the target is still the sibling `CORRECTION` box, not an ancestor, so **C2** still blocks it. Outbound links are fixed by ① or ④ only.
-* ① cannot fix an *inbound* link. If the reparandum *is* the argument (an object repair, say), declining to write the role leaves it a dangling concept with no edges at all.
-* ④ cannot fix an inbound link either: moving the reparandum before the `CORRECTION` takes it out of the box that is supposed to quarantine it.
-
-On ④'s cost: index magnitude grows monotonically with movement, and `SBNSpec.INDEX_PATTERN` matches only a single digit, so an index that reaches `-10` or beyond is silently truncated to its first digit rather than raising an error. Prefer ①–③ wherever they apply.
-
-# Covered Cases 
-**For demonstration purpose, all the synstets in the examples are written as `.01`, with a few exceptions, which does not represent the actual synset in WordNet.**
-## One-Sentence Cases
-
-### SV Sentence
-"The boy sneezed, I mean, coughed"
+> The boy sneezed, I mean, coughed.
 
 ```sbn
 boy.n.01                       % The boy
-time.n.08 TPR now              % 
-    CORRECTION <1              % 
+time.n.08 TPR now
+    CORRECTION <1
 sneeze.v.01 Agent -2 Time -1   % sneezed,
     CONJUNCTION <2             % I mean,
 cough.v.01 Agent -3 Time -2    % coughed
 ```
 
-![DAG: SV sentence self-repair — "The boy sneezed, I mean, coughed"](images/sv-sentence-self-repair.png)
+![Verb repair in a basic sentence](images/sv-sentence-self-repair.png)
 
+The boy and past-time referent are shared. The sneezing event is represented in the `CORRECTION` box; the coughing event is supplied by the repair and merged into the enclosing context. Both events connect backwards to the shared subject and time.
 
-### SVO Sentence
+# Annotation rules and construction methods {#sec-rules}
 
-#### Subject Self-repair 
-"Josh, no, Mary plays tennis well"
+## Relative indices
+
+Concept indices count positions in the complete concept sequence. `Role -n` counts backwards and `Role +n` forwards. Separators leave this count unchanged, so concepts in other boxes still occupy positions in the sequence.
+
+Box indices use angle brackets. `CORRECTION <1` and `CONJUNCTION <2` count boxes; their numbers are independent of the concept count. `Proposition >1` also points to a box. The embedded-clause example in [Section 4](#sec-embedded) shows its use with `CONTINUATION <0`.
+
+## Argument accessibility {#sec-access}
+
+Bos (2021) states the SBN accessibility rule for negation:
+
+> Accessibility: (a) neither positive nor negative indices can enter negated context, and (b) only negative indices in negated contexts can refer to discourse referents outside the negation.
+
+The denial in *Correction* motivates the following constraints on ordinary argument links in the repair extension:
+
+- An earlier concept cannot use a forward thematic-role link into the reparandum box.
+- A concept in the reparandum box can refer backwards to an accessible ancestor context.
+- A concept in the reparandum box cannot take an argument from the later sibling `CONJUNCTION` box.
+
+A negative index must still satisfy accessibility: an earlier sibling box is not an ancestor. The paired `CONJUNCTION` merges into its target and permits the corresponding argument connections. [Subsequent reference](#sec-reference) has a separate, restricted permission to refer to retained reparandum material.
+
+## Reparandum content and shared arguments
+
+The reparandum box contains the contribution of the abandoned span. Arguments that have not yet been uttered under that span are left unwritten. In *The cat chases, actually, hunts the rat*, the abandoned `chase` predicate has no `Theme`; the rat is introduced with the repair continuation.
+
+Shared referents can remain in the enclosing context. The repair and reparandum then connect to them through the permitted links. The following methods handle cases where a direct link would cross the reparandum boundary.
+
+## Constructing the argument links {#sec-methods}
+
+| Situation | Method | Example |
+|---|---|---|
+| An argument has not been uttered when the span is abandoned | Leave its role unwritten | Verb repair |
+| A shared predicate precedes a repaired argument | Put the inverted role on each candidate argument | Object repair with `ThemeOf` |
+| A role itself is repaired | Attach each competing role to a dummy concept linked to the shared host by `EQU` | Preposition repair |
+| An argument must precede the repair boxes to remain accessible | Move the argument concept before the pair | The pronoun in the conditional example |
+
+Role inversion expresses the same relation from the other endpoint: `Theme(x,y)` corresponds to `ThemeOf(y,x)`. In object repair, it places the withdrawn role condition inside the reparandum box while keeping its predicate in the enclosing context. Inversion alone cannot make a sibling target accessible.
+
+A dummy linked by `EQU` lets a condition be represented in the box where it belongs. For role repair, it carries the competing role. The subject example uses an outer dummy to anchor a shared argument position. The identity conditions remain within their respective contexts.
+
+Movement changes concept order, so it is reserved for connections that the other methods cannot represent. The conditional example moves the pronoun referent before the repair pair. Parser limits on index magnitude are listed in [Appendix A](#sec-tools).
+
+## Interregna
+
+Interregna such as *I mean*, *no* and *actually* are recorded in the `%` comment on `CONJUNCTION`. They receive no separate semantic content in this notation. The comment position preserves their place between reparandum and repair.
+
+# Construction examples {#sec-examples}
+
+## Repairs within a clause
+
+### Subject repair
+
+> Josh, no, Mary plays tennis well.
 
 ```sbn
 entity.n.01
     CORRECTION <1
-male.n.02 Name "Josh" EQU -1                  % Josh, 
+male.n.02 Name "Josh" EQU -1                  % Josh,
     CONJUNCTION <2                            % no,
 female.n.02 Name "Mary" EQU -2                % Mary
 play.v.01 Agent -3 Time +1 Theme +2 Manner +3 % plays
-time.n.08 EQU now                             % 
+time.n.08 EQU now
 tennis.n.01                                   % tennis
 well.r.01                                     % well
 ```
 
-![DAG: subject self-repair — "Josh, no, Mary plays tennis well"](images/subject-self-repair.png)
+![Subject repair](images/subject-self-repair.png)
 
-The manner adverb attaches through the `Manner` role, following gold (`p94/d2703`, "I play the piano well."): `play.v.07 Agent -1 Time +1 Theme +2 Manner +3 time.n.08 EQU now piano.n.01 well.r.10`.
+The outer `entity.n.01` anchors the Agent position of `play.v.01`. Josh and Mary each have an `EQU` condition linking them to that position. Josh's condition is withdrawn inside `CORRECTION`; Mary's condition is supplied by the repair. The predicate, time, object and manner adverb follow in the `CONJUNCTION` box and merge into the enclosing context.
 
-This example also illustrates clarification **C5**: the predicate, its tense referent, its object and the adverb all sit inside the `CONJUNCTION` box, not `BOX 0`. However, they will be merged back to the box that `CONJUNCTION` indexes to. 
+### Object repair
 
-#### Verb Self-repair
-"The cat chases, actually, hunts the rat"
+> I ordered a banana bread, I mean, a cherry pie.
+
+```sbn
+person.n.01 EQU speaker              % I
+time.n.08 TPR now
+order.v.01 Agent -2 Time -1          % ordered
+    CORRECTION <1
+banana_bread.n.01 ThemeOf -1         % a banana bread,
+    CONJUNCTION <2                   % I mean,
+cherry_pie.n.01 ThemeOf -2           % a cherry pie
+```
+
+![Object repair](images/object-self-repair.png)
+
+The ordering event precedes both candidate objects. Each object uses `ThemeOf` to point backwards to it. This places the withdrawn Theme condition with banana bread and the accepted Theme condition with cherry pie.
+
+### Verb repair
+
+> The cat chases, actually, hunts the rat.
 
 ```sbn
 cat.n.01                            % The cat
-time.n.08 EQU now                   % 
-    CORRECTION <1                   % 
+time.n.08 EQU now
+    CORRECTION <1
 chase.v.01 Agent -2 Time -1         % chases,
     CONJUNCTION <2                  % actually,
 hunt.v.01 Agent -3 Theme +1 Time -2 % hunts
 rat.n.01                            % the rat
 ```
 
-![DAG: verb self-repair — "The cat chases, actually, hunts the rat"](images/verb-self-repair.png)
+![Verb repair with a later object](images/verb-self-repair.png)
 
-`chase.v.01` carries no `Theme`. This is device ① of the repair toolkit, and it is the correct analysis rather than a concession: the rat was never uttered under the abandoned "chases" plan. PMB gold does the same for arguments that go unrealised: `p62/d1986`, "I also did not call.", is annotated `call.v.03 Agent … Time …` with no recipient, even though `call.v.03` is transitive.
+Both predicates share the cat and the present-time referent. Only `hunt.v.01` takes the rat as its Theme, because that object is uttered after the repair. PMB examples of predicates with unexpressed arguments are collected in [Appendix B](#sec-pmb).
 
+### Tense replacement
 
-#### Object Self-repair
-"I ordered a banana bread, I mean, a cherry pie"
-
-```sbn
-person.n.01 EQU speaker              % I
-time.n.08 TPR now                    % 
-order.v.01 Agent -2 Time -1          % ordered
-    CORRECTION <1                    % 
-banana_bread.n.01 ThemeOf -1         % a banana bread,
-    CONJUNCTION <2                   % I mean,
-cherry_pie.n.01 ThemeOf -2           % a cherry pie
-```
-
-![DAG: object self-repair — "I ordered a banana bread, I mean, a cherry pie"](images/object-self-repair.png)
-
-`ThemeOf` here is device ② of the toolkit: the object *is* the reparandum, so it must be linked, and inverting the role lets both candidate objects point backward at `order.v.01` in `Box 0` instead of forcing a positive index down into the `CORRECTION` box.
-
-#### Tense & Aspect Replacement
-"She will go to, well, went to the church"
+> She will go to, well, went to the church.
 
 ```sbn
 female.n.02                                % She
-    CORRECTION <1                          % 
+    CORRECTION <1
 time.n.08 TSU now                          % [will]
 go.v.01 Theme -2 Time -1                   % go to,
     CONJUNCTION <2                         % well,
@@ -204,13 +205,79 @@ go.v.01 Theme -4 Time -1 Destination +1    % went to
 church.n.02                                % the church
 ```
 
-![DAG: Time & aspect replacement - "She will go to, well, went to the church"](images/time_aspect_replace.png)
+![Tense replacement](images/time_aspect_replace.png)
 
-This case demonstrates device ①. The speaker abandons the phrase *will go to* before uttering the destination. Therefore, the first predicate (go.v.01) takes no Destination role.
-This example illustrates why tense and aspect self-repairs do not suffer from the topological limitations that affect separators. In SBN, tense and aspect are not topological separators but ordinary concepts (time.n.08) and edge labels (Time). Consequently, a tense/aspect self-repair is structurally identical to a standard verb self-repair. The initial event concept and its associated time node are smoothly quarantined inside the `CORRECTION` box, while the corrected event and its new time node are introduced safely in the `CONJUNCTION` box. All indices remain perfectly legal and natural.
+The two alternatives contain an event and a time referent. The future time condition is withdrawn and the past time condition is accepted. The church appears after the repair, so only the second event has a Destination.
+
+Here the tense contrast is expressed through `time.n.08`, temporal operators and the `Time` role. The existing context structure can therefore be retained while the event-and-time contributions are replaced.
+
+### Time-value replacement
+
+> The class is on Monday, no, on Tuesday.
+
+```sbn
+class.n.01                                % The class
+time.n.08 EQU now
+be.v.01 Theme -2 Time -1                  % is on
+    CORRECTION <1
+time.n.08 DayOfWeek monday TimeOf -1      % Monday,
+    CONJUNCTION <2                        % no,
+time.n.08 DayOfWeek tuesday TimeOf -2     % on Tuesday
+```
+
+![Time-value replacement](images/adjunct-self-repair.png)
+
+Each alternative supplies a weekday value on a time concept and links it to the shared predicate through `TimeOf`. The values are lower-case constants, `monday` and `tuesday`.
+
+### Semantic-role replacement
+
+> I ran to, I mean, from the school.
+
+```sbn
+person.n.01 EQU speaker              % I
+time.n.08 TPR now
+run.v.01 Theme -2 Time -1            % ran
+school.n.02                          % the school
+    CORRECTION <1
+entity.n.01 EQU -2 Destination -1    % to,
+    CONJUNCTION <2                   % I mean,
+entity.n.01 EQU -3 Source -2         % from
+```
+
+![Replacement of Destination by Source](images/preposition-replacement.png)
+
+The repaired preposition contributes an event-participant relation. A dummy `entity.n.01` in each box is linked to the running event by `EQU`. The first carries `Destination` and the second `Source`, so the competing role conditions receive their respective withdrawal and acceptance status.
+
+The school is placed before the pair so both alternatives can reach it. The use of a dummy follows the SBN device for assigning conditions to a shared referent across contexts (Bos 2021). It uses the legal concept `entity.n.01`.
+
+## Repairs extending across a phrase
+
+> Josh drove, no, Marsha drove the old car to the church.
+
+```sbn
+entity.n.01
+    CORRECTION <1
+male.n.02 Name "Josh" EQU -1                         % Josh
+time.n.08 TPR now
+drive.v.03 Agent -2 Time -1                          % drove,
+    CONJUNCTION <2                                   % no,
+female.n.02 Name "Marsha" EQU -4                     % Marsha
+time.n.08 TPR now
+drive.v.03 Agent -2 Time -1 Theme +2 Destination +3  % drove
+old.a.02 AttributeOf +1                              % the old
+car.n.01                                             % car
+church.n.02                                          % to the church
+```
+
+![Forwarding self-repair](images/forwarding-self-repair.png)
+
+This forwarding repair replaces a larger span containing the subject and predicate. Each alternative has its own driving event and past-time referent. The car and church are supplied after the repair, so only the accepted driving event has Theme and Destination links. The adjective attaches to the car through `AttributeOf`.
+
+## Repairs in embedded contexts {#sec-embedded}
 
 ### Negation
-"I didn't order a banana bread, I mean, a cherry pie"
+
+> I didn't order a banana bread, I mean, a cherry pie.
 
 ```sbn
 person.n.01 EQU speaker              % I
@@ -223,56 +290,21 @@ banana_bread.n.01 ThemeOf -1         % a banana bread,
 cherry_pie.n.01 ThemeOf -2           % a cherry pie
 ```
 
-![DAG: negation self-repair — "I didn't order a banana bread, I mean, a cherry pie"](images/negation-self-repair.png)
+![Object repair within negation](images/negation-self-repair.png)
 
-Note the resulting box structure: `BOX0 →NEGATION→ BOX1`, `BOX1 →CORRECTION→ BOX2`, `BOX1 →CONJUNCTION→ BOX3`. Because `CONJUNCTION <2` counts back two boxes from the box it opens, the repair merges into the **negated** box rather than the matrix box, which is what the sentence means. Getting this wrong is easy and produces no parse error.
+The ordering event is inside the negated context. Both repair boxes target that context:
 
-(`ThemeOf -1` needs the space. `ThemeOf-1` is tokenised as a single unknown token and aborts the parse.)
-
-### Adjunct 
-"The class is on Monday, no, on Tuesday"
-
-```sbn
-class.n.01                                % The class
-time.n.08 EQU now                         % 
-be.v.01 Theme -2 Time -1                  % is on
-    CORRECTION <1                         % 
-time.n.08 DayOfWeek monday TimeOf -1      % Monday,
-    CONJUNCTION <2                        % no,
-time.n.08 DayOfWeek tuesday TimeOf -2     % on Tuesday
+```text
+BOX0 → NEGATION → BOX1
+BOX1 → CORRECTION → BOX2
+BOX1 → CONJUNCTION → BOX3
 ```
 
-![DAG: adjunct self-repair — "The class is on Monday, no, on Tuesday"](images/adjunct-self-repair.png)
+`CONJUNCTION <2` merges the cherry-pie alternative into BOX1, preserving the scope of *didn't* over the accepted ordering claim.
 
-The role is `DayOfWeek`, and its value is a **bare lower-case constant**, not a quoted string. Gold data writes `time.n.08 DayOfWeek monday` (16 occurrences across the weekdays). There is no `Day` role in `SBNSpec.ROLES`, so `Day "Monday"` aborts the parse.
+### Conditional
 
-### Preposition replacement
-"I ran to, I mean, from the school"
-
-What is repaired here is not a concept but an **edge label** — `Destination` gives way to `Source`. SBN has no way to place a bare role inside a box, so this calls for device ③: introduce a dummy concept, tie it to the event with `EQU`, and hang the competing role on the dummy. Bos (2021) uses the same construction for logical disjunction.
-
-```sbn
-person.n.01 EQU speaker              % I
-time.n.08 TPR now                    % 
-run.v.01 Theme -2 Time -1            % ran
-school.n.02                          % the school
-    CORRECTION <1                    % 
-entity.n.01 EQU -2 Destination -1    % to,
-    CONJUNCTION <2                   % I mean,
-entity.n.01 EQU -3 Source -2         % from
-```
-
-![DAG: preposition replacement — "I ran to, I mean, from the school"](images/preposition-replacement.png)
-
-Both dummies are `EQU` to the same running event. Inside the `CORRECTION` box the dummy bears `Destination` and is denied; inside the merged box it bears `Source` and is committed. Every index is negative and every target lies in the superordinate `BOX0`, so no accessibility constraint is touched.
-
-The dummy must be a legal synset: `entity.n.01` is the general-purpose placeholder of the notation and occurs 1315 times in gold, whereas `event.v.01`, being a more intuitive dummy for a predicate, is not a WordNet entry since it has no verbal sense. Following SBN routine, we retain the usage of `entity.n.01`, instead of introducing a new top concept for all activities, e.g., `action.v.01`. 
-
-Note also that PMB never reifies a preposition as its own node in the ordinary case; `Source` and `Destination` attach directly to the verb (`fly.v.01 … Source +2 Destination +3`). The dummy is introduced here *only* because the repair needs two mutually exclusive versions of one edge.
-
-### Universal Quantification - Donkey sentence
-"If a farmer owns a donkey, he beats, I mean, feeds it."
-Notice the difference with the SBN of verb self-repair. In the current case, the reparandum verb *beat* locates in the consequence (right) clause. It means the reparandum needs to travel across two boxex (`NEGATION` and `CORRECTION`) to reach all the nodes. 
+> If a farmer owns a donkey, he beats, I mean, feeds it.
 
 ```sbn
     NEGATION <1                          % If
@@ -282,40 +314,36 @@ donkey.n.01                              % donkey,
     NEGATION <1
 entity.n.01 EQU -1                       % it
     CORRECTION <1
-beat.v.01 Agent -4 Patient -1            % he beats, 
+beat.v.01 Agent -4 Patient -1            % he beats,
     CONJUNCTION <2                       % I mean,
 feed.v.01 Agent -5 Patient -2            % he feeds it
 ```
 
-![DAG: donkey sentence self-repair — "If a farmer owns a donkey, he beats, I mean, feeds it"](images/donkey-sentence-self-repair.png)
+![Verb repair in a conditional](images/donkey-sentence-self-repair.png)
 
-Look at the second `NEGATION`, the one right before `entity.n.01 EQU -1` ("it"). It has to be written `<1`.
+SBN represents the conditional through two nested negations. The first opens BOX1 for the restrictor; the second opens BOX2 inside it for the consequent. The repair pair belongs to BOX2, and both predicates reach the farmer and donkey through their accessible contexts.
 
-SBN builds a universal conditional out of two *nested* negations. It reads as "no donkey-owner who doesn't beat it", being equivalent to "every farmer who owns a donkey beats it." The first `NEGATION <1` opens `BOX1` and targets `BOX0` (`BOX0 →NEGATION→ BOX1`); `BOX1` holds the restrictor, "a farmer owns a donkey." The second `NEGATION` then opens `BOX2`. Writing `<1` counts back one box from `BOX2` and lands on `BOX1`, giving `BOX1 →NEGATION→ BOX2`. That is, `BOX2` sits *inside* `BOX1`, not beside it. That nesting is what makes the two clauses one conditional: `BOX2` (the consequent, "he beats it") falls under the restrictor's own negation, so the whole thing reads roughly as "there is no farmer-and-donkey pair such that he doesn't beat it" — i.e. a universal conditional.
+The second `NEGATION <1` is essential to this nesting. A connector of `<2` would attach the second negation to the root, producing two separate negated contexts.
 
-If the second `NEGATION` were written `<2` instead, it would count back two boxes from `BOX2` and land on `BOX0`: `BOX0 →NEGATION→ BOX2`. Now `BOX1` and `BOX2` both hang directly off `BOX0` as siblings, each negated independently (e.g., "no farmer owns a donkey" and, separately, "he doesn't beat it"). There are two unrelated denials instead of one conditional. The parser accepts this without complaint. Nevertheless, it's a different, wrong meaning.
-
-Compared to an ordinary donkey sentence without self-repair, extracted from Bos (2021):
-"Every farmer who owns a donkey beats it" 
+For comparison, Bos's (2021) example *Every farmer who owns a donkey beats it* has the following sequence:
 
 ```sbn
-NEGATION -1                     % Every 
+NEGATION -1                     % Every
 farmer.n.01                     % farmer
 own.v.01 Pivot -1  Theme +1     % who owns
 donkey.n.01                     % a donkey
-NEGATION -1                     % 
+NEGATION -1
 beat.v.01 Agent -3  Patient +1  % beats
 entity.n.01 EQU -2              % it
 ```
 
-![DAG: donkey sentence baseline (no repair) — "Every farmer who owns a donkey beats it"](images/donkey-sentence-baseline.png)
+![Conditional without repair](images/donkey-sentence-baseline.png)
 
-It is noteworthy that in the "ordinary" donkey sentence, the pronoun "it" follows the natural language oder by appearing by the end of the SBN sequence. However, in the sel-repair variety, it is moved forward to satisfy the two rules above. 
+The baseline places the pronoun referent after the predicate. The repair example moves it before `CORRECTION`, allowing both competing predicates to reach it without a forward link from the reparandum into the repair continuation.
 
-### Retracting and Forwarding Repairs
+### Embedded proposition and retracting repair
 
-#### Retracting Repair 
-"Bill said you will put, I mean, you will drop the ball on the table" (Husband, 2015)
+> Bill said you will put, I mean, you will drop the ball on the table. (Husband 2015)
 
 ```sbn
 male.n.02 Name "Bill"                              % Bill
@@ -325,74 +353,60 @@ time.n.08 TPR now
 person.n.01 EQU hearer                             % you
 time.n.08 TSU now                                  % will
     CORRECTION <1
-put.v.01 Agent -2 Time -1                          % put, 
+put.v.01 Agent -2 Time -1                          % put,
     CONJUNCTION <2                                 % I mean,
 drop.v.01 Agent -3 Time -2 Theme +1 Destination +2 % you will drop
 ball.n.01                                          % the ball
 table.n.02                                         % on the table
 ```
 
-![DAG: retracting repair — "Bill said you will put, I mean, you will drop the ball on the table"](images/retracting-repair.png)
+![Retracting repair in an embedded proposition](images/retracting-repair.png)
 
-This case demonstrates device ①. Giving `put.v.01` a `Theme +2` and a `Destination +3` reaches forward out of the `CORRECTION` box into a sibling, which breaks the accessibility rules. A more serious issue is the speaker abandoned the utterance after "you will put" and never said what was to be put or where, so assigning it a theme and a destination would be the annotator reconstructing an intention, not transcribing a commitment. Dropping the two roles resolves the accessibility violation and yields the more faithful analysis at the same time.
+`Proposition >1` points to the embedded clause introduced by `CONTINUATION <0`. The repair pair is constructed inside that clause. The shared hearer and future-time referents precede the pair.
 
-The forward indices that remain on `drop.v.01` are unproblematic: `drop`, `ball` and `table` all sit in the same `CONJUNCTION` box, so nothing crosses a boundary.
+The abandoned `put` predicate has no Theme or Destination: neither argument has been uttered at that point. The accepted `drop` predicate takes the later ball and table within its own `CONJUNCTION` box.
 
-PMB gold shows the same asymmetry between a subordinate and a matrix occurrence of one predicate — `p79/d0205`, "If you sing, we'll sing with you.", has `sing.v.02 Agent -1 Time +1` in the antecedent box against `sing.v.02 Agent -2 Time -1 Co-Agent +1` in the consequent.
+# Subsequent reference and cross-turn correction {#sec-discourse}
 
-#### Forwarding Self-Repair
-"Josh drove, no, Marsha drove the old car to the church"
+## Reference to the reparandum {#sec-reference}
 
-```sbn
-entity.n.01
-    CORRECTION <1
-male.n.02 Name "Josh" EQU -1                         % Josh
-time.n.08 TPR now                                    % 
-drive.v.03 Agent -2 Time -1                          % drove,
-    CONJUNCTION <2                                   % no,
-female.n.02 Name "Marsha" EQU -4                     % Marsha
-time.n.08 TPR now                                    % 
-drive.v.03 Agent -2 Time -1 Theme +2 Destination +3  % drove
-old.a.02 AttributeOf +1                              % the old
-car.n.01                                             % car
-church.n.02                                          % to the church
-```
+A reparandum remains represented after its original contribution is withdrawn. A later expression can refer to an associated referent when the discourse supports that interpretation. The reference targets the retained referent directly; it leaves the original assertion withdrawn.
 
-![DAG: forwarding self-repair — "Josh drove, no, Marsha drove the old car to the church"](images/forwarding-self-repair.png)
+In this serialisation, the later reference uses a backward index. Its interpretation also depends on the intended referent and the relation expressed by the continuation. Enclosing scope constraints still apply. Structural retention supplies a possible target for reference without automatically asserting its existence in the enclosing context.
 
-Device ① again: the car and the church were never uttered under the abandoned "Josh drove" plan, so the first `drive.v.03` takes no `Theme` and no `Destination`.
+Keshet & Abney (2024) show why antecedent descriptions and the conditions on subsequent reference matter in non-veridical contexts. Their distinction between particular-individual and kind reference also informs the interpretation of repair continuations.
 
-Three more pitfalls worth naming, all of which parse silently with no error:
+## Group construction
 
-* A `Theme` on the first `drive.v.03` resolved to the *second* `drive.v.03` (making the event its own theme), and a `Theme` on the second resolved to `old.a.02`, the adjective — both indices landed on whatever concept sat at that raw offset, not on the intended argument.
-* Giving the same adjective both a `Value` role and its host concept an `Attribute` role creates two contradictory edges between the same pair of nodes. Gold writes a single inverted edge for an attributive adjective instead: `new.a.01 AttributeOf +1 museum.n.01`.
-* `Destination` belongs on the driving event, not on the car. Gold: `go.v.01 … Destination +2 city.n.01`.
+`ANA` expresses identity reference. When a later plural expression constructs a group from separately introduced referents, the group has a `Sub` link to each member.[^later-reference-sub] A later mention of that established group can use `ANA`.
 
-## Multiple-Sentence (Discourse) Cases
-### Anaphora referring to both reparandum and repair 
-"A: My favourite dessert is banana bread, actually, cherry pie. B: They are both good desserts"
+Explicit numerical expressions such as *both* or *two* receive a `Quantity` condition. A plain *they* does not acquire an explicit quantity solely from the number of antecedents. Whether the members are particular objects or kinds is determined from the discourse; an evaluative predicate alone does not settle the reading.
+
+> A: My favourite dessert is banana bread, actually, cherry pie.
+>
+> B: They are both good desserts.
 
 ```sbn
 %%% Utterance 1
 person.n.01 EQU speaker                    % A: My
 favorite.a.02 Experiencer -1 Stimulus +1   % favourite
 dessert.n.01                               % dessert
-time.n.08 EQU now                          % 
+time.n.08 EQU now
 be.v.02 Theme -2 Time -1                   % is
-    CORRECTION <1                          % 
+    CORRECTION <1
 banana_bread.n.01 Co-ThemeOf -1            % banana bread, (reparandum)
     CONJUNCTION <2                         % actually,
 cherry_pie.n.01 Co-ThemeOf -2              % cherry pie (repair)
 %%% Utterance 2
-    CONTINUATION <1                        % 
+    CONTINUATION <1
 entity.n.01 Sub -2 Sub -1 Quantity 2        % B: They ... both — groups reparandum and repair
 time.n.08 EQU now                          % are
-be.v.02 Theme -2 Time -1 Co-Theme +2       % 
+be.v.02 Theme -2 Time -1 Co-Theme +2
 good.a.01 AttributeOf +1                   % good
 dessert.n.01                               % desserts
 ```
 
-The following schematic shows the reference links; the complete SBN above also represents the two clauses and their predicates.
+The schematic below shows the member links. The SBN above also represents the predicates and clause structure.
 
 ```{mermaid}
 flowchart LR
@@ -407,25 +421,35 @@ flowchart LR
     group -->|Sub| pie
 ```
 
-Both candidate objects now reach the copula through `Co-ThemeOf` (device ②), symmetrically.
+`Sub -2` reaches banana bread and `Sub -1` reaches cherry pie. `Quantity 2` records *both*. The continuation evaluates the two members without making banana bread the speaker's favourite dessert again. The example permits a kind reading.
 
-`Co-ThemeOf` is not part of stock PMB and has to be declared in `sbn_spec.py` in **both** `ROLES` and `INVERTIBLE_ROLES`. Adding it to `ROLES` alone lets the sequence parse but leaves the Penman output as `:Co-ThemeOf`, which Smatch will not normalise against a gold `:Co-Theme`. Cf. **C6**.
+In the first clause, both alternatives connect to the copula through `Co-ThemeOf`. In the second, `Co-Theme` connects the plural referent to the predicate nominal *good desserts*.
 
-The final `dessert.n.01` needs the copula to attach to; without it the concept carries no edges at all and "desserts" contributes nothing to the representation. Gold writes plural predicate nominals this way — "Those are not fish." is `entity.n.01 … be.v.01 Theme -1 Time +1 Co-Theme +2 time.n.08 EQU now fish.n.01`.
+[^later-reference-sub]: Earlier versions used two `ANA` links for this example. Multiple `Sub` links bring group construction into line with existing SBN practice. The accessibility convention is unchanged by this revision.
 
-This example illustrates C4: `Sub -2` reaches the retained reparandum and `Sub -1` reaches the repair. The continuation constructs a group and evaluates its members; it does not reinstate banana bread as the speaker's favourite dessert. `Quantity 2` represents the explicit *both*. The dessert expressions permit a kind reading here; this example alone does not establish unrestricted access to particular objects in reparanda.
+## Cross-turn correction
 
-###  Intra-utterance Self-Repair Combined with Cross-turn
-"A: Joe bought a Ferrari, I mean, a Jaguar, as a birthday gift. B: No, he bought it as a wedding gift."
+The same `CORRECTION` token is used for correction across turns. The configurations differ as follows:
+
+| | Replacement self-repair | Cross-turn correction |
+|---|---|---|
+| Construction | `CORRECTION` followed by a paired `CONJUNCTION`, both targeting the enclosing context | `CORRECTION` connects the disputed context to the correcting contribution |
+| Interpretation | The pair isolates the reparandum and incorporates the repair | The earlier claim is denied and the correcting claim is accepted |
+
+In the parsed graph, separator edges run from their target box to the new box. In cross-turn correction, these endpoints correspond to the first and second arguments of the SDRT relation. In self-repair, the new `CORRECTION` box contains the reparandum; the two separator edges together encode the correction.
+
+> A: Joe bought a Ferrari, I mean, a Jaguar, as a birthday gift.
+>
+> B: No, he bought it as a wedding gift.
 
 ```sbn
 %%% A's utterance
 male.n.02 Name "Joe"                     % Joe
-time.n.08 TPR now                        % 
+time.n.08 TPR now
 buy.v.01 Agent -2 Time -1 Attribute +3   % bought
     CORRECTION <1                        % [intra-turn: has a sibling CONJUNCTION]
 car.n.01 Name "Ferrari" ThemeOf -1       % a Ferrari  (reparandum)
-    CONJUNCTION <2                       % I mean, 
+    CONJUNCTION <2                       % I mean,
 car.n.01 Name "Jaguar" ThemeOf -2        % a Jaguar   (merged back into BOX0)
 gift.n.01 Of +1                          % as a
 birthday.n.01                            % birthday gift
@@ -437,47 +461,115 @@ gift.n.01 Of +1                          % as a
 wedding.n.01                             % wedding gift
 ```
 
-![DAG: intra-turn + cross-turn CORRECTION combined — "A: Joe bought a Ferrari, I mean, a Jaguar, as a birthday gift. B: No, he bought it as a wedding gift"](images/intra-cross-turn-correction.png)
+![Self-repair followed by cross-turn correction](images/intra-cross-turn-correction.png)
 
-Both uses of `CORRECTION` occur in one sequence, and the structural test of the Mechanism section separates them without any annotation on the token itself: the first has a sibling `CONJUNCTION` and therefore quarantines a reparandum; the second has none and is the Lascarides & Asher relation proper.
+A's self-repair creates sibling boxes for Ferrari and Jaguar. B's `CORRECTION <1` then targets BOX2, A's `CONJUNCTION` box, and opens BOX3 for the correcting contribution. BOX2 contains the Jaguar and birthday-gift material; B refers to that car and restates the purchase with the wedding-gift description. The correcting utterance and its context identify the disputed purpose.
 
-The second one is written `<1`, which yields `BOX2 →CORRECTION→ BOX3`. Its target ($\pi_1$ in Lascarides & Asher's terms) is A's `CONJUNCTION` box — the box that, per **C5**, holds `gift.n.01 Of birthday.n.01`, which is exactly what B objects to. As **C5** already established, this `CONJUNCTION` box has no content of its own. Everything in it is merged into whatever box it targets, so "targeting A's `CONJUNCTION` box" means the denial reaches that merged content. Writing `<3` would instead target `BOX0` and deny A's utterance wholesale. Both parse, and after the merge the two readings share the same meaning but are different graphs, scored differently by Smatch; `<1` is the choice made here, because it localises the denial to the constituent under dispute. As with **C6**, this construction has no PMB precedent (it does not occur in gold), so it is a project-internal stipulation rather than received annotation practice — fixed for the same reason **C5** is fixed: leaving it open would let two annotators produce differently-scored graphs for the same discourse.
+The first `CORRECTION` has a following paired `CONJUNCTION`; B's correction has no such partner. An earlier `CONJUNCTION` elsewhere in the sequence does not form a pair with a later correction. The current scorer's same-parent check and its scope are documented in [Appendix A](#sec-tools).
 
-# Noted Limitations
+# Coverage and limitations {#sec-limits}
 
-## Replacing Scope or Discourse Structure
+The examples cover replacements of concepts, values on concepts, semantic roles and larger spans. They also show repairs inside negation, conditionals and embedded propositions, together with subsequent reference and a cross-turn correction.
+
+## Replacing scope or discourse structure
 
 Under the SBN rules and local repair construction adopted here, the extension does not support repairs that replace a separator's scope-forming or discourse-organising contribution.
 
-The abstract description above separates the withdrawn contribution $K_{\pi_m}$ from the accepted contribution $K_{\pi_n}$ and its continuation. The local SBN construction implements this separation within an existing context structure. Concept replacements and replacements of values such as names or quantities can be represented by placing the relevant concept-and-relation conditions in the two repair boxes, using the toolkit where needed. Values contribute through conditions on a host concept; a bare value is not itself a $K$ component.
+The abstract description separates the withdrawn contribution from the accepted contribution and its continuation. Concept and value replacements can place their conditions in the two repair boxes while retaining the existing context structure. A value contributes through a condition on its host concept.
 
-A separator instead determines how contexts are connected or how material is scoped. Replacing that contribution may require changing the context structure governing shared material and the continuation. The current `CORRECTION–CONJUNCTION` pair provides no operation for replacing that structure while preserving the appropriate scope of the unrepaired material.
+A separator determines how contexts are connected or how material is scoped. Replacing that contribution can require changes to the structure governing shared material and the continuation. The current pair supplies no operation for making those changes. The restriction applies to replacing the separator's contribution; repairs within an existing embedded context are shown in [Section 4](#sec-embedded).
 
-This restriction concerns the current local encoding. The abstract formula does not itself prohibit complex scoped contents, and nesting a separator within another context does not by itself create a cycle. A different construction that reconstructs larger alternatives would require a separate analysis. Repairs to concepts or values *within* an existing separator's context remain supported, as illustrated by the Negation and Donkey sentence examples.
+### Quantifier replacement
 
-### Quantifier Replacement
-"Every, no, some dishes are tasty"
+> Every, no, some dishes are tasty.
 
-Universal quantification is represented using nested `NEGATION` contexts, whereas existential quantification does not require the same structure. Replacing *every* with *some* therefore changes the scope structure governing the shared noun and predicate. The current local pair cannot replace the quantifier by isolating a concept or value alone, and it does not define how to rebuild the two alternative scope structures around the shared continuation.
+Universal quantification uses nested `NEGATION` contexts, while existential quantification does not require the same structure. The change affects the scope of the shared noun and predicate. The current local pair does not rebuild these alternative scope structures around the shared continuation.
 
-### Rhetorical Relation Replacement
-"I helped my mum when, even though I was busy."
+### Rhetorical-relation replacement
 
-On the intended reading, the repair replaces the relation between the clauses while retaining their content. When that relation is encoded by a separator, its contribution is a connection between contexts. The local repair pair does not define how to withdraw that connection and introduce an alternative connection over the shared clauses. A device for repairing a concept-level role does not by itself provide a device for repairing a box-to-box relation.
+> I helped my mum when, even though I was busy.
 
-### Modal Replacement
-"I think you would, well, should work harder"
+On the intended reading, the repair changes the relation between the clauses while retaining their content. If that relation is encoded by a separator, it connects contexts. The local repair pair does not replace that connection with an alternative over the shared clauses.
 
-Where the intended modal readings are encoded through separators such as `NECESSITY` or `POSSIBILITY`, replacing the modal changes the operator governing the shared clause. The current pair does not specify how to replace that operator while retaining the clause under the appropriate scope. The restriction follows the semantic encoding, not the presence of a modal verb: an English modal form does not automatically identify a particular SBN separator.
+### Modal replacement
 
-## Linear Serialisation Limitations: Discontinuous (Delayed) Repair
-"I bought three apples from Lidl yesterday, actually, four"
+> I think you would, well, should work harder.
 
-The examples above use local repairs: the repair follows the reparandum, with an optional interregnum between them. Here *three* is replaced by *four*, but unrepaired material intervenes. The quantity replacement is not itself the difficulty; the delay is.
+Where the intended readings use `NECESSITY`, `POSSIBILITY` or another separator, replacing the modal changes the operator governing the shared clause. The current pair does not replace that operator while preserving the required scope. The restriction depends on the SBN encoding of the reading.
 
-In the current serialisation, `CORRECTION` precedes the reparandum material and the paired `CONJUNCTION` introduces the accepted continuation. Placing `CORRECTION` at *actually* cannot retrospectively isolate the earlier quantity condition. Placing it before that condition and leaving the intervening material in surface order would also quarantine *from Lidl yesterday*, although that material is not withdrawn.
+## Delayed repair
 
-This requires a richer segmentation than the local pre–reparandum–repair–post pattern: the encoding must preserve unrepaired intervening content while withdrawing only the earlier contribution. The current toolkit does not define that operation. Its movement device relocates argument concepts to resolve access constraints; it does not specify how to relocate an entire intervening span for delayed repair. The limitation is therefore one of the present serialisation and alignment conventions.
+> I bought three apples from Lidl yesterday, actually, four.
 
+Here *four* replaces *three* after unrepaired material has intervened. The delay falls outside the local pre–reparandum–repair–post pattern.
 
+`CORRECTION` at *actually* cannot retrospectively isolate the earlier quantity condition. Placing it before that condition would also withdraw *from Lidl yesterday* if the material stays in surface order until the repair. An encoding must therefore separate the intervening content from the earlier contribution being withdrawn.
 
+The current movement method relocates argument concepts to satisfy access constraints. It does not define how to relocate an intervening span for delayed repair. This remains a limitation of the present serialisation and alignment conventions.
+
+# Appendix A. Tool compatibility {#sec-tools .unnumbered}
+
+## Comments
+
+The parser recognises an inline comment at ` % `, with whitespace on both sides. Use `%%%` for standalone comment lines. An empty trailing `%` can be treated as a token when its following whitespace is removed, so empty comments should be omitted from parser input.
+
+## Index magnitude
+
+The current `SBNSpec.INDEX_PATTERN` reads one digit. Indices with magnitude 10 or greater can be truncated during parsing. The validator checks this limit alongside unresolved indices, graph acyclicity and lost edges. Movement can increase index magnitudes, so moved examples need the same checks.
+
+## Inverted roles and scoring
+
+The parser must accept an inverted role in `ROLES` and register it in `INVERTIBLE_ROLES`. Penman conversion then writes the corresponding `-of` edge for scoring. The project's current parser registers inverses automatically for eligible roles, including the thematic roles used in these examples. This extends the parser's role coverage using the SBN inversion mechanism.
+
+Scoring also requires inverse-edge normalisation. See the [evaluation documentation](https://github.com/hongxuzhou/lct_master_project/blob/main/evaluation/README.md) for the configured standardiser and repair metrics.
+
+## Repair-pair detection
+
+The current scorer detects repairs through `CORRECTION` and `CONJUNCTION` edges with the same parent. In a mixed discourse, a later cross-turn correction can share that parent with an earlier `CONJUNCTION`; the implementation can then pair them incorrectly. More general pair detection needs to enforce the order of the two separators and resolve their pairing.
+
+## Example conventions
+
+The existing example sequences retain their illustrative sense numbers. A complete WordNet sense review is still pending. The July example audit is retained in the [review record](repair_sbn_notation_review.md).
+
+# Appendix B. PMB comparisons {#sec-pmb .unnumbered}
+
+The following gold examples support the construction choices discussed in the text. Their document identifiers allow comparison with the local PMB 5.1.0 data.
+
+| Feature | PMB example | Relevant annotation |
+|---|---|---|
+| Unexpressed argument | `p62/d1986`, *I also did not call.* | `call.v.03` has Agent and Time without a recipient |
+| Different role sets on repeated predicates | `p79/d0205`, *If you sing, we'll sing with you.* | The antecedent has Agent and Time; the consequent also has Co-Agent |
+| Manner adverb | `p94/d2703`, *I play the piano well.* | `play.v.07 ... Manner +3 ... well.r.10` |
+
+The earlier gold audit also records `time.n.08 DayOfWeek monday` with a bare weekday constant, `new.a.01 AttributeOf +1 museum.n.01` for an attributive adjective, and copular predicate nominals such as *Those are not fish*. These provide comparisons for the time-value, modifier and later-reference examples.
+
+The same audit reported the following inverted-role counts. These describe the audited gold data and its observed forms.
+
+| Inverted role | Count |
+|---|---:|
+| `AttributeOf` | 1802 |
+| `PartOf` | 572 |
+| `SubOf` | 120 |
+| `ColourOf` | 80 |
+| `MadeOf` | 38 |
+| `InstanceOf` | 37 |
+| `ContentOf` | 4 |
+| `CauserOf` | 2 |
+| `FeatureOf` | 1 |
+| `AgentOf` | 1 |
+
+`ThemeOf`, `TimeOf`, `MannerOf` and `Co-ThemeOf` were absent from that audit. The general role-inversion rule and parser support are discussed in [Section 3](#sec-methods) and [Appendix A](#sec-tools).
+
+# References {.unnumbered}
+
+Bos, Johan. 2021. *Variable-free Discourse Representation Structures*.
+
+Bos, Johan. 2023. [*The Sequence Notation: Catching Complex Meanings in Simple Graphs*](https://aclanthology.org/2023.iwcs-1.20/). Proceedings of IWCS.
+
+Husband, E. Matthew. 2015. [*Self-repairs as right node raising constructions*](https://doi.org/10.1016/j.lingua.2015.03.007). Lingua 160, 20–37.
+
+Keshet, Ezra & Steven Abney. 2024. [*Intensional anaphora*](https://doi.org/10.3765/sp.17.9). Semantics and Pragmatics 17, Article 9.
+
+Lascarides, Alex & Nicholas Asher. 2009. [*Agreement, Disputes and Commitments in Dialogue*](https://doi.org/10.1093/jos/ffn013). Journal of Semantics 26(2), 109–158.
+
+van Leusen, Noor. 2004. [*Incompatibility in context: A diagnosis of correction*](https://doi.org/10.1093/jos/21.4.415). Journal of Semantics 21(4).
