@@ -110,21 +110,28 @@ def decision(row, policy):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--workspace", type=Path, default=ROOT / "repair_data_gen/splits/dev")
+    parser.add_argument("--analysis", type=Path, action="append",
+                        help="checked analysis directory; repeat to combine batches (default first_pass)")
     args = parser.parse_args()
     workspace = args.workspace.resolve()
     policy_path = workspace / "review_policy.json"
     policy = json.loads(policy_path.read_text())
     assert policy["pair_overlap_action"] == "report_only"
-    checked = workspace / "analysis/first_pass/all_checked.tsv"
-    source_summary = workspace / "analysis/first_pass/summary.json"
-    source = json.loads(source_summary.read_text())
-    assert not source["integrity_errors"]
-    for path, digest in source["input_sha256"].items():
-        assert sha(path) == digest, f"analysis input changed: {path}"
+    source_paths, rows = [], []
+    for analysis in args.analysis or [workspace / "analysis/first_pass"]:
+        checked = analysis / "all_checked.tsv"
+        source_summary = analysis / "summary.json"
+        source = json.loads(source_summary.read_text())
+        assert not source["integrity_errors"]
+        for path, digest in source["input_sha256"].items():
+            assert sha(path) == digest, f"analysis input changed: {path}"
+        rows.extend(read(checked))
+        source_paths.extend((checked, source_summary))
+    assert len({r["request_id"] for r in rows}) == len(rows), "duplicate request across batches"
     out = workspace / "analysis" / policy["version"]
     out.mkdir(parents=True, exist_ok=True)
     pool, excluded, changes, revived = [], [], [], []
-    for row in read(checked):
+    for row in rows:
         eligible, reason = decision(row, policy)
         record = dict(row, review_eligible=str(eligible), review_reason=reason)
         if not eligible:
@@ -175,7 +182,7 @@ def main():
                    normalised_surfaces=len(changes), unaligned_surface_for_human_review=sum(r["surface_aligned"] == "False" for r in pool),
                    pair_overlap_exclusions=0, context_near_duplicate_check="deferred",
                    per_type=dict(Counter(r["repair_type"] for r in pool)),
-                   input_sha256={str(p): sha(p) for p in (checked, source_summary, policy_path)},
+                   input_sha256={str(p): sha(p) for p in [*source_paths, policy_path]},
                    code_sha256={str(Path(__file__)): sha(__file__), str(GEN / "dataset/apply_fixes.py"): sha(GEN / "dataset/apply_fixes.py")},
                    audit_items_sha256=sha(items_path))
     (out / "summary.json").write_text(json.dumps(summary, indent=2) + "\n")

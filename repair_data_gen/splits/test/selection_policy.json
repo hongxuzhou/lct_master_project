@@ -1,0 +1,24 @@
+{
+  "version": "test_selection_v1",
+  "review": {
+    "meaning": "yes",
+    "natural": "yes",
+    "naturalness": "train_dev_standard: plausible spoken replacement with recoverable old and new material",
+    "alternative_reading": "record_only",
+    "existing_double_yes": "retain",
+    "unsure_or_no": "exclude_unless_resolved_in_separate_adjudication"
+  },
+  "selection": {
+    "sampling_target_per_type": 60,
+    "base_selection": "retain_all_eligible",
+    "unique_source_type_site": true,
+    "freeze_before_model_predictions": true
+  },
+  "evaluation": {
+    "target": "intended_synthetic_repair",
+    "primary_aggregation": "equal_weight_mean_over_repair_types",
+    "report_per_type": true,
+    "comparison_unit": "source_document",
+    "reading_preference_under_nontext_cues": "out_of_scope"
+  }
+}

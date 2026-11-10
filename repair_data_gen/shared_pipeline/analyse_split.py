@@ -187,6 +187,10 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, required=True)
     parser.add_argument("--out", type=Path)
+    parser.add_argument("--results-dir", type=Path,
+                        help="read returned TSV/raw files from an external staging directory")
+    parser.add_argument("--followup-manifest", type=Path,
+                        help="analyse follow-up samples using the original source/prompt hashes")
     parser.add_argument("--logs", type=Path, help="downloaded HTCondor logs (read only)")
     args = parser.parse_args()
     config = load_config(args.config, check_inputs=True)
@@ -196,12 +200,23 @@ def main():
     out.mkdir(parents=True, exist_ok=True)
     manifest_path = config.workspace / "manifests/candidate_samples.json"
     manifest = json.loads(manifest_path.read_text())
+    outputs = manifest["outputs"]
+    if args.followup_manifest:
+        followup = json.loads(args.followup_manifest.read_text())
+        if followup["config_sha256"] != sha(args.config):
+            raise ValueError("follow-up config hash mismatch")
+        outputs = followup["outputs"]
     gold = {d.doc_id: d for d in read_split(config.pmb_source)}
     integrity, stages, all_rows, missing, inputs = [], [], [], [], {}
     log_evidence = []
     pair_sources = config.pair_exclusion_sources
-    train_rows = [r for path in pair_sources for r in read(path)]
-    train_ids = {r["doc_id"] for r in train_rows}
+    reference_rows = [
+        ("dev" if "splits/dev" in path.as_posix() else "train", path, row)
+        for path in pair_sources for row in read(path)
+    ]
+    train_rows = [r for _, _, r in reference_rows]
+    train_ids = {r["doc_id"] for split, _, r in reference_rows if split == "train"}
+    dev_ids = {r["doc_id"] for split, _, r in reference_rows if split == "dev"}
     held_out = holdout.load()
     fluent_train = [d for d in read_split(GOLD) if d.doc_id not in held_out]
     if set(gold) & {d.doc_id for d in fluent_train}:
@@ -212,17 +227,19 @@ def main():
     clean_overlaps = [dict(dev_doc_id=d.doc_id, train_doc_ids=";".join(train_sentences[d.sentence]),
                            nl_clean=d.sentence) for d in gold.values() if d.sentence in train_sentences]
     inputs[str(args.config)] = sha(args.config)
+    if args.followup_manifest:
+        inputs[str(args.followup_manifest)] = sha(args.followup_manifest)
     inputs[str(config.pmb_source)] = sha(config.pmb_source)
     inputs[str(GOLD)] = sha(GOLD)
     if sha(args.config) != manifest["config_sha256"]:
         integrity.append("config differs from candidate manifest")
     if sha(config.pmb_source) != manifest["pmb_sha256"]:
         integrity.append("PMB differs from candidate manifest")
-    for entry in manifest["outputs"]:
+    for entry in outputs:
         sample_path = ROOT / entry["path"]
         samples = read(sample_path)
         tag = sample_path.stem
-        results = list((config.workspace / "results").glob(f"*.{tag}.tsv"))
+        results = list((args.results_dir or config.workspace / "results").glob(f"*.{tag}.tsv"))
         if len(results) != 1:
             raise ValueError(f"expected one result for {tag}, found {results}")
         result = results[0]
@@ -284,6 +301,8 @@ def main():
                 integrity.append(f"{request}: not identical to PMB source")
             if row["doc_id"] in train_ids:
                 integrity.append(f"{request}: source document in frozen train RSR")
+            if row["doc_id"] in dev_ids:
+                integrity.append(f"{request}: source document in dev RSR")
             if "pinned_site" in sample:
                 row["pin"] = (temporal_pin if row["repair_type"] == "constant_temporal" else place_pin)(row, sample)
             else:
@@ -323,11 +342,11 @@ def main():
                          "disposition": "hold_quote_policy" if quote_only else "exclude_under_current_checks"})
     collisions, unresolved = [], []
     reference = defaultdict(list)
-    for row in train_rows:
+    for reference_split, reference_path, row in reference_rows:
         try:
-            reference[pair_key(row)].append(row["item_id"])
+            reference[pair_key(row)].append((reference_split, row["item_id"]))
         except (ValueError, IndexError, TypeError) as error:
-            unresolved.append(dict(split="train", item_id=row["item_id"], error=str(error)))
+            unresolved.append(dict(split=reference_split, item_id=row["item_id"], error=str(error)))
     for row in passed:
         try:
             key = pair_key(row)
@@ -335,9 +354,17 @@ def main():
             row["pair_key"] = json.dumps(key, ensure_ascii=False)
             for direction, candidate in (("same_direction", key), ("reverse_direction", reverse)):
                 if candidate in reference:
-                    collisions.append(dict(request_id=row["request_id"], repair_type=row["repair_type"],
-                                           direction=direction, key=json.dumps(key, ensure_ascii=False),
-                                           train_item_ids=";".join(reference[candidate])))
+                    if config.split == "test":
+                        for ref_split in sorted({s for s, _ in reference[candidate]}):
+                            collisions.append(dict(request_id=row["request_id"], repair_type=row["repair_type"],
+                                                   direction=direction, key=json.dumps(key, ensure_ascii=False),
+                                                   comparison_split=ref_split,
+                                                   comparison_item_ids=";".join(i for s, i in reference[candidate]
+                                                                              if s == ref_split)))
+                    else:
+                        collisions.append(dict(request_id=row["request_id"], repair_type=row["repair_type"],
+                                               direction=direction, key=json.dumps(key, ensure_ascii=False),
+                                               train_item_ids=";".join(i for _, i in reference[candidate])))
         except (ValueError, IndexError, TypeError) as error:
             unresolved.append(dict(split=config.split, item_id=row["request_id"], error=str(error)))
     duplicates = []
@@ -352,7 +379,10 @@ def main():
     write(out / "failure_review.tsv", failures)
     write(out / "surface_review.tsv", [r for r in passed if r["exact_surface"] == "False"])
     write(out / "missing.tsv", missing)
-    write(out / "pair_collisions.tsv", collisions, ["request_id", "repair_type", "direction", "key", "train_item_ids"])
+    collision_fields = (["comparison_split", "comparison_item_ids"] if config.split == "test"
+                        else ["train_item_ids"])
+    write(out / "pair_collisions.tsv", collisions,
+          ["request_id", "repair_type", "direction", "key", *collision_fields])
     write(out / "pair_unresolved.tsv", unresolved, ["split", "item_id", "error"])
     write(out / "duplicates.tsv", duplicates, ["check", "request_ids"])
     write(out / "clean_text_overlap.tsv", clean_overlaps, ["dev_doc_id", "train_doc_ids", "nl_clean"])
@@ -377,7 +407,8 @@ def main():
                    fluent_source_document_overlap=0 if not set(gold) & {d.doc_id for d in fluent_train} else 1,
                    fluent_clean_text_overlap=len(clean_overlaps),
                    scheduler_evidence=log_evidence,
-                   pair_policy="diagnostic only; exclusion scope and direction are not frozen",
+                   pair_policy=("report_only; no replacement-pair exclusions" if config.split == "test"
+                                else "diagnostic only; exclusion scope and direction are not frozen"),
                    pair_unresolved=dict(Counter(r["split"] for r in unresolved)),
                    pair_collision_items_by_type=dict(Counter(r["repair_type"] for r in passed
                        if r["request_id"] in {c["request_id"] for c in collisions})),

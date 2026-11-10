@@ -163,7 +163,9 @@ def public_item(i: dict) -> dict:
 
 def cmd_serve(args: argparse.Namespace) -> None:
     d: Path = args.dir
-    items = [public_item(i) for i in read_tsv(d / "items.tsv")]
+    rows = read_tsv(d / "items.tsv")
+    items = ([{k: row[k] for k in ("audit_id", "nl_repair")} for row in rows]
+             if args.text_only else [public_item(row) for row in rows])
     ids = {i["audit_id"] for i in items}
     page = (HERE / "audit_page.html").read_bytes()
     labels_path = d / "labels.jsonl"
@@ -187,7 +189,8 @@ def cmd_serve(args: argparse.Namespace) -> None:
                           if v.get("annotator") == args.annotator}
                 self._json({"items": items, "labels": labels,
                             "annotator": args.annotator, "dir": str(d),
-                            "questions": args.questions})
+                            "questions": ["natural"] if args.text_only else args.questions,
+                            "text_only": args.text_only})
             else:
                 self._send(404, b"not found", "text/plain")
 
@@ -294,6 +297,8 @@ def main() -> None:
     v.add_argument("dir", type=Path)
     v.add_argument("--annotator", default="hz")
     v.add_argument("--port", type=int, default=8765)
+    v.add_argument("--text-only", action="store_true",
+                   help="show bare utterances and ask only about naturalness")
     v.add_argument("--questions", nargs="+", choices=list(QUESTIONS), default=list(QUESTIONS),
                    help="questions shown on the page (default both); e.g. `natural` "
                         "for the edge-label selection, where the checks already cover meaning")

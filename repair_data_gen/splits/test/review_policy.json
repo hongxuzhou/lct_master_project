@@ -1,0 +1,55 @@
+{
+  "version": "test_review_v1",
+  "pair_overlap_action": "report_only",
+  "context_near_duplicate_check": "report_only",
+  "surface_policy": "train_aligned_nonsemantic",
+  "human_review": "all_machine_eligible",
+  "hard_checks": [
+    "reply",
+    "status",
+    "parse",
+    "dag",
+    "index",
+    "magnitude",
+    "edges",
+    "boxes",
+    "wn_ok",
+    "untouched",
+    "withdraw",
+    "site_ok",
+    "pin",
+    "declared_site"
+  ],
+  "allow_surface_variants": [
+    "punctuation",
+    "quotation",
+    "apostrophes",
+    "citation_markers",
+    "case",
+    "contraction_expansion",
+    "tense_auxiliary_realisation",
+    "repeated_boundary_article"
+  ],
+  "reject": [
+    "same_synset",
+    "place_containment",
+    "structural_repair_part_failure",
+    "changed_content_or_repair_direction"
+  ],
+  "acceptance": {
+    "meaning": "yes",
+    "natural": "yes",
+    "unsure": "exclude_until_resolved",
+    "base_cap_per_type": 60,
+    "unique_source_type_site": true,
+    "selection": "seeded_selection_from_fully_reviewed_eligible_pool",
+    "seed": 20261104,
+    "scarce_types": "retain_shortfall; do_not_relax_checks",
+    "source_document_reuse": "report_counts; aggregate_variants_by_source_in_evaluation"
+  },
+  "followup": {
+    "transport_or_empty_response": "at_most_one_retry_under_new_tag",
+    "answered_failed_or_no_site": "do_not_retry",
+    "extra_sites_or_reparanda": "not_in_initial_batch; require_separate_manifest_and_decision"
+  }
+}

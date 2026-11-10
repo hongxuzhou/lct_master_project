@@ -120,10 +120,15 @@ function render() {
   const done = S.items.filter(complete).length;
   document.getElementById("prog").textContent = `${S.i + 1} / ${S.items.length} · ${done} done · ${S.annotator}`;
   document.getElementById("barfill").style.width = (100 * done / S.items.length) + "%";
-  const qs = Q.map(([k, text, keys]) => `<div class="q"><div class="qt">${text}</div>` +
-    ANS.map((a, j) => `<button class="${a} ${l[k] === a ? "on" : ""}" data-q="${k}" data-a="${a}">${a}<kbd>${keys[j]}</kbd></button>`).join("") +
-    `</div>`).join("");
-  document.getElementById("main").innerHTML = `
+  const context = S.textOnly ? `
+    <div class="card">
+      <span class="meta">${esc(it.audit_id)}</span>
+      <div class="lbl">Unmarked utterance</div>
+      <div class="utt">${esc(it.nl_repair)}</div>
+      <p class="help">Yes: a replacement reading is well supported without special context.
+        Unsure: replacement and another ordinary reading are similarly plausible.
+        No: the replacement reading is implausible.</p>
+    </div>` : `
     <div class="card">
       <span class="meta">${esc(it.audit_id)} · ${esc(it.doc_id)}</span>
       <div class="lbl">Utterance</div>
@@ -134,12 +139,17 @@ function render() {
       <div class="lbl">SBN of the utterance</div>
       ${sbn(it.sbn_repair)}
       <details><summary>gold SBN of the original</summary>${sbn(it.sbn_clean)}</details>
-    </div>
+    </div>`;
+  const qs = Q.map(([k, text, keys]) => `<div class="q"><div class="qt">${text}</div>` +
+    ANS.map((a, j) => `<button class="${a} ${l[k] === a ? "on" : ""}" data-q="${k}" data-a="${a}">${a}<kbd>${keys[j]}</kbd></button>`).join("") +
+    `</div>`).join("");
+  document.getElementById("main").innerHTML = `
+    ${context}
     <div class="card">
       ${qs}
       <div class="lbl" style="margin-top:10px">Note (optional; saved when you leave the box)</div>
       <textarea id="note">${esc(l.note || "")}</textarea>
-      <div class="help">Keys: 1 2 3 for (a), 4 5 6 for (b), Enter or → next, ← previous, u next unanswered. Every click is saved at once.</div>
+      <div class="help">Keys: ${S.textOnly ? "4 yes, 5 no, 6 unsure" : "1 2 3 for (a), 4 5 6 for (b)"}, Enter or → next, ← previous, u next unanswered. Every click is saved at once.</div>
     </div>`;
   document.querySelectorAll(".q button").forEach(b => b.onclick = () => answer(b.dataset.q, b.dataset.a));
   document.getElementById("note").onblur = e => { if ((lab(it).note || "") !== e.target.value.trim()) save({ note: e.target.value }); };
@@ -191,6 +201,7 @@ document.addEventListener("keydown", e => {
   try {
     const st = await (await fetch("/api/state")).json();
     S.items = st.items; S.labels = st.labels; S.annotator = st.annotator;
+    S.textOnly = st.text_only === true;
     if (st.questions) Q = Q.filter(([k]) => st.questions.includes(k));
     let pos = 0; try { pos = parseInt(localStorage.getItem("audit_pos") || "0", 10) || 0; } catch (e) {}
     S.i = Math.min(pos, S.items.length - 1);

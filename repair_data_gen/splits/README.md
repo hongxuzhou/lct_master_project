@@ -8,7 +8,7 @@ audits and derived datasets. Pipeline code is shared from
 - `train/` indexes the existing frozen train lineage. It does not duplicate or
   move train data.
 - `dev/` is the active workspace for development-data construction.
-- `test/` is deliberately non-executable until its protocol is frozen.
+- `test/` contains the first PMB synthesis batch, policies and LST submit files.
 
 Keeping outputs separate does not imply that train, dev and test use identical
 sampling policies. Their shared transformations and checks must be the same;

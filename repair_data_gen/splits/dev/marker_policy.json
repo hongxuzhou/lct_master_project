@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "version": "dev_markers_v2",
+  "status": "confirmed",
+  "mode": "cover_identified_ambiguity",
+  "nominal_share_of_base": 0.3,
+  "nominal_share_is_hard_cap": false,
+  "base_items": 390,
+  "target_marked_items": 122,
+  "random_topup": false,
+  "markers": [
+    "I mean",
+    "no",
+    "no wait",
+    "actually"
+  ],
+  "held_out_markers": [
+    "sorry"
+  ],
+  "seed": 20261027,
+  "assignment": "Shuffle selected IDs within repair type with the fixed seed; cycle markers across types, balancing global and per-type counts.",
+  "selection": "Every final base item with a recorded alternative reading or machine ambiguity flag receives one additional marked version.",
+  "confirmed_at": "2026-10-31T22:03:08+08:00",
+  "confirmation_source": "chat",
+  "coverage_review_sha256": "e3f09454750ed9b1e9a9124eefae8ee06247d1b31f1c3f1ef302a61092b02939"
+}

@@ -22,9 +22,19 @@ person.n.01 EQU speaker mother_tongue.n.01 Creator -1
 | [`hard_negatives/train_holdout.tsv`](hard_negatives/README.md) | 66 train documents | held out of all training data |
 | `rsr_generation/dataset/train_rsr.marked30.tsv` | 1,047 | scripted marked variants, including all 482 ambiguous items |
 | `rsr_generation/dataset/train_rsr.augmented.tsv` | 4,536 | all base rows plus 1,047 marked variants; current RSR training component |
-| [`training_dataset/data/train.parquet`](training_dataset/README.md) | 14,022 | 9,486 fluent + 3,489 base RSR + 1,047 editing-expression RSR |
-| [`splits/dev/`](splits/dev/README.md) | – | working scaffold; data not built |
-| [`splits/test/`](splits/test/README.md) | – | deliberately not built |
+| [`training_dataset/data/train.parquet`](training_dataset/README.md) | 14,222 | 9,486 PMB + 3,489 base RSR + 1,047 marked RSR + 200 fluent split-reference |
+| [`training_dataset/data/validation.parquet`](training_dataset/README.md) | 1,746 | 1,194 PMB + 390 base RSR + 122 marked RSR + 40 fluent split-reference; local integrated version |
+| [`splits/dev/`](splits/dev/README.md) | 1,706 | unchanged PMB/RSR dev source component; the earlier published validation baseline |
+| [`training_dataset/data/test.parquet`](splits/test/README.md) | 1,118 | 559 accepted PMB test repairs and their marked counterparts |
+
+The accepted fluent split-reference supplement comes from
+`fluent_group_synthesis_v1/`. Its 240 formal documents are appended through
+`training_dataset/`; the earlier 6-case pilot and 60-case review rounds are not
+appended. See the [unified schema](training_dataset/SCHEMA.md) for provenance,
+variant labels and condition targets. Publication status is recorded in
+`training_dataset/publication.json` after Hub readback; the previous snapshot is
+preserved under `training_dataset/releases/`. Local build and publication commands are in
+[`training_dataset/MAINTENANCE.md`](training_dataset/MAINTENANCE.md).
 
 How it was made, in one paragraph: an LLM (Muse-Glimmer-30B) received a gold
 PMB sentence, its SBN and a repair type, and wrote the repaired sentence and
@@ -49,13 +59,18 @@ aligned with PMB, and 500 items per type were sampled.
 | path | contents |
 |---|---|
 | `rsr_generation/` | prompts, samples, runs, checks, audits, the dataset |
-| `training_dataset/` | unified train Parquet, manifest and reproducible builder |
+| `training_dataset/` | unified train and local dev Parquet, manifests and reproducible builders |
 | `shared_pipeline/` | split-aware configuration and shared pipeline components |
 | `splits/` | split-specific configuration, run records and derived data; frozen train remains in its legacy paths |
 | `sbn_lin.py` | SBN reader and PMB split paths |
 | `validate_with_pmb_parser.py` | structural checks used on every item |
 | `repair_transform.py`, `test_against_doc.py` | rule-based repair of one site; used as a reference for content-word items |
 | `reference/` | papers (not in git) |
+
+The published Parquets and release records are kept with the builders.
+Re-running the annotation and release workflows requires the local research
+archive for review queues, human labels, intermediate exports and staging
+packages. Raw model replies stay in their ignored local directories.
 
 The rule-based generator that came first, and its findings, are in
 `archive/repair_data_gen/`.

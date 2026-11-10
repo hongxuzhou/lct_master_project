@@ -46,21 +46,27 @@ use this same partition.
 | **held out** | **66** | |
 | excluded | 286 | Tom is angry, isn't he? |
 
-`contrast_correction` and `borderline` are outside the §7.1 criteria. They
-are held out anyway: whether they join the test set is decided later, but a
-document trained on can never be used.
+The original §7.1 criteria focused on apposition, lists and asyndetic
+coordination. For the diagnostic, retain all 66 held-out candidates that
+have intelligible English, a defensible non-RSR reading and faithful,
+scorable gold SBN. Do not rank or prune them by perceived difficulty.
+Keep the original categories, including `contrast_correction` and
+`borderline`, so their results can be reported separately.
 
 No vocatives ("Jason, ...") occur in train, dev or test gold.
 
-## Not done
+## Diagnostic acceptance
 
-- The test side: selecting from these 66 plus the test_standard candidates
-  (§7.1), with gold SBN, into the hard-negative test set. Dev is not used.
-- One annotator (Claude), no second pass. Labels can be reviewed in
-  `train_comma_labels.tsv`; a change is a new list, a new sha256 and a
-  rebuild of everything that reads it.
-- The design record's earlier figure of 105 candidates came from a rule that
-  was not written down and could not be reproduced; this list replaces it.
+63 of the 66 original gold graphs pass the structural checks. The other
+three are `p17/d2285` (unresolved index), `p23/d1469` (index overflow), and
+`p69/d1719` (cycle and index overflow). The pass count does not establish
+text and graph fidelity. Record any defects and validated fixes in a
+separate evaluation record. Items not ready to score remain held out of
+training.
+
+The diagnostic export still needs text and meaning verification. A
+`test_standard` supplement may be evaluated as a separate subset; dev
+is not used. The 66-document training hold-out remains fixed.
 
 ## Files
 

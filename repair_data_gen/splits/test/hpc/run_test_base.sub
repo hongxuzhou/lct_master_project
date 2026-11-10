@@ -1,0 +1,21 @@
+universe = vanilla
+initialdir = /nethome/honzhou
+
+executable = /nethome/honzhou/thesis_zone/test_synthesis_v1/rsr_generation/hpc/run.sh
+
+# Five base-prompt types, 75 candidates each, except number (all 72 eligible). Output is isolated from the
+# train and dev lineages under ../splits/test/results/.
+environment = "SAMPLE=../splits/test/samples/test_base.tsv RESULTS_DIR=../splits/test/results CONFIG=../splits/test/config.json TAG=test_base DOCS=prompts/base WORKERS=16 TOOL_MODE=auto TOOL_PARSER=muse_glimmer REASONING_PARSER=muse_glimmer"
+
+output = /scratch/hongxuzhou/logs/llm_gen/test_base.$(ClusterId).out
+error  = /scratch/hongxuzhou/logs/llm_gen/test_base.$(ClusterId).err
+log    = /scratch/hongxuzhou/logs/llm_gen/test_base.$(ClusterId).log
+
+request_CPUs   = 8
+request_memory = 64G
+request_GPUs   = 1
+requirements = (GPUs_Capability >= 8.0) && (GPUs_GlobalMemoryMb >= 80000)
+
++MaxWallTime = 86400
+
+queue 1

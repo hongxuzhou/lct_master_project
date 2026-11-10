@@ -1,0 +1,238 @@
+{
+  "status": "marked RSR built and validated; fluent component not yet assembled",
+  "base_items": 390,
+  "marked_items": 122,
+  "augmented_items": 512,
+  "marked_share_of_base": 0.3128205128205128,
+  "covered_ambiguity_items": 122,
+  "random_topup_items": 0,
+  "marker_counts": {
+    "no wait": 30,
+    "I mean": 31,
+    "no": 31,
+    "actually": 30
+  },
+  "per_type": {
+    "constant_name": {
+      "base": 60,
+      "marked": 33,
+      "markers": {
+        "I mean": 9,
+        "no": 8,
+        "no wait": 8,
+        "actually": 8
+      }
+    },
+    "constant_number": {
+      "base": 60,
+      "marked": 38,
+      "markers": {
+        "I mean": 9,
+        "no": 10,
+        "no wait": 10,
+        "actually": 9
+      }
+    },
+    "constant_temporal": {
+      "base": 47,
+      "marked": 3,
+      "markers": {
+        "I mean": 1,
+        "no": 1,
+        "no wait": 0,
+        "actually": 1
+      }
+    },
+    "content_word": {
+      "base": 60,
+      "marked": 45,
+      "markers": {
+        "I mean": 11,
+        "no": 11,
+        "no wait": 12,
+        "actually": 11
+      }
+    },
+    "edge_label": {
+      "base": 43,
+      "marked": 0,
+      "markers": {
+        "I mean": 0,
+        "no": 0,
+        "no wait": 0,
+        "actually": 0
+      }
+    },
+    "forwarding": {
+      "base": 60,
+      "marked": 3,
+      "markers": {
+        "I mean": 1,
+        "no": 1,
+        "no wait": 0,
+        "actually": 1
+      }
+    },
+    "tense": {
+      "base": 60,
+      "marked": 0,
+      "markers": {
+        "I mean": 0,
+        "no": 0,
+        "no wait": 0,
+        "actually": 0
+      }
+    }
+  },
+  "checks": {
+    "exact_base_recovery": 122,
+    "unchanged_semantic_targets": 122,
+    "unique_variants": 512,
+    "held_out_marker_occurrences": 0
+  },
+  "outputs": [
+    {
+      "file": "repair_data_gen/splits/dev/dataset/dev_rsr.marked.tsv",
+      "rows": 122,
+      "sha256": "0ced134de42c43545f41daf1c331c17a85de68aea607bf26fa89a7d818c7b207"
+    },
+    {
+      "file": "repair_data_gen/splits/dev/dataset/dev_rsr.augmented.tsv",
+      "rows": 512,
+      "sha256": "d265032c8a3ecf704abf29f766c11ee7abb581081dc90f72b74a0bd2d7fd6525"
+    }
+  ],
+  "assignments": {
+    "rsr_dev_fab1a8eaa48d": "I mean",
+    "rsr_dev_f01e6e1cf3db": "no",
+    "rsr_dev_3be78e5d3ba9": "no wait",
+    "rsr_dev_e3cd00c6708e": "actually",
+    "rsr_dev_d8dec99a9440": "I mean",
+    "rsr_dev_b7d293bab478": "no",
+    "rsr_dev_bbb537d471b3": "no wait",
+    "rsr_dev_a5a50f4da43a": "actually",
+    "rsr_dev_a5b5c587f1e9": "I mean",
+    "rsr_dev_4d1a9c2c8502": "no",
+    "rsr_dev_1e2047e47a47": "no wait",
+    "rsr_dev_74c7b713a535": "actually",
+    "rsr_dev_410e8af1c66a": "I mean",
+    "rsr_dev_2a8dcd57495e": "no",
+    "rsr_dev_8558897268c1": "no wait",
+    "rsr_dev_a788d781b867": "actually",
+    "rsr_dev_a0fc39c65690": "I mean",
+    "rsr_dev_ab589969cac2": "no",
+    "rsr_dev_ecec435c10b8": "no wait",
+    "rsr_dev_9db28389aa2e": "actually",
+    "rsr_dev_2c320253fbd1": "I mean",
+    "rsr_dev_a0ac458272e4": "no",
+    "rsr_dev_39f81cb8a467": "no wait",
+    "rsr_dev_76ee84f12675": "actually",
+    "rsr_dev_010dfd77b46b": "I mean",
+    "rsr_dev_3a2bcd5b07a6": "no",
+    "rsr_dev_b9f5d9ccf8dc": "no wait",
+    "rsr_dev_22a809b9884e": "actually",
+    "rsr_dev_9913f60bdca5": "I mean",
+    "rsr_dev_7e16248e3c69": "no",
+    "rsr_dev_0e0721c8da67": "no wait",
+    "rsr_dev_760b93a74013": "actually",
+    "rsr_dev_1a9e27031fef": "I mean",
+    "rsr_dev_0e1e31ac740f": "no",
+    "rsr_dev_f76e091128d7": "no wait",
+    "rsr_dev_644cfb7c3e6f": "actually",
+    "rsr_dev_2b1417c5ff99": "I mean",
+    "rsr_dev_0a86692cefe9": "no",
+    "rsr_dev_69c51d57f021": "no wait",
+    "rsr_dev_7425a83dea75": "actually",
+    "rsr_dev_1ab3183e100a": "I mean",
+    "rsr_dev_b48b29c70dea": "no",
+    "rsr_dev_a19731acf074": "no wait",
+    "rsr_dev_4759b4e5e8a6": "actually",
+    "rsr_dev_1dadcecac53a": "I mean",
+    "rsr_dev_583ba78a0256": "no",
+    "rsr_dev_5f8d3cabb4c6": "no wait",
+    "rsr_dev_0cce75ff22b6": "actually",
+    "rsr_dev_39a44e01e77a": "I mean",
+    "rsr_dev_9522be5e12da": "no",
+    "rsr_dev_b0d1d72a155f": "no wait",
+    "rsr_dev_3a50edb48a00": "actually",
+    "rsr_dev_89b333e944bd": "I mean",
+    "rsr_dev_439dd72d317e": "no",
+    "rsr_dev_70303beb6cb8": "no wait",
+    "rsr_dev_434060216464": "actually",
+    "rsr_dev_c52014b45e69": "I mean",
+    "rsr_dev_afaf182952ba": "no",
+    "rsr_dev_b19ea0f90747": "no wait",
+    "rsr_dev_53c30178581f": "actually",
+    "rsr_dev_242763ea4344": "I mean",
+    "rsr_dev_b6609b57b11c": "no",
+    "rsr_dev_1c4a0203bb02": "no wait",
+    "rsr_dev_ecc9fc8f6e07": "actually",
+    "rsr_dev_97a7e7a59950": "I mean",
+    "rsr_dev_ce8f70bc50d8": "no",
+    "rsr_dev_ee555c69dfdc": "no wait",
+    "rsr_dev_3440c5b042f2": "actually",
+    "rsr_dev_7db92b686d3c": "I mean",
+    "rsr_dev_e82300c3a486": "no",
+    "rsr_dev_167b08d50b1d": "no wait",
+    "rsr_dev_2eddbc068a52": "actually",
+    "rsr_dev_bbe5c5e718ee": "I mean",
+    "rsr_dev_f84725aa07d1": "no",
+    "rsr_dev_3ce05763009f": "no wait",
+    "rsr_dev_b19613434f61": "actually",
+    "rsr_dev_a040df8d1279": "I mean",
+    "rsr_dev_e48b52408b1c": "no",
+    "rsr_dev_feabddc4cf68": "no wait",
+    "rsr_dev_7b71945b986d": "actually",
+    "rsr_dev_45da0adb487c": "I mean",
+    "rsr_dev_cc24836ac607": "no",
+    "rsr_dev_bf4633a8a2d2": "no wait",
+    "rsr_dev_1736629ba6a8": "actually",
+    "rsr_dev_a90c6fb90f69": "I mean",
+    "rsr_dev_17ddeeff9a38": "no",
+    "rsr_dev_2ca175411a35": "no wait",
+    "rsr_dev_671a25d5517a": "actually",
+    "rsr_dev_d5f7c2589c6d": "I mean",
+    "rsr_dev_0ce469c0e22d": "no",
+    "rsr_dev_ca72d7f6893e": "no wait",
+    "rsr_dev_a3417bd37c91": "actually",
+    "rsr_dev_098c4f576c6e": "I mean",
+    "rsr_dev_5cfd6a492bac": "no",
+    "rsr_dev_26374c0d6a2d": "no wait",
+    "rsr_dev_113e26f390fe": "actually",
+    "rsr_dev_ad215c87c373": "I mean",
+    "rsr_dev_37d5c2cd60e9": "no",
+    "rsr_dev_9c14d945dc9d": "no wait",
+    "rsr_dev_d2f8a6ef5f28": "actually",
+    "rsr_dev_35433bac3a5f": "I mean",
+    "rsr_dev_edb26e6583e4": "no",
+    "rsr_dev_15cdf6494ad7": "no wait",
+    "rsr_dev_999e155cdb77": "actually",
+    "rsr_dev_fd09c5e9b1fb": "I mean",
+    "rsr_dev_788419b60176": "no",
+    "rsr_dev_3e41c7ee1ea8": "no wait",
+    "rsr_dev_55fd672b7427": "actually",
+    "rsr_dev_bc3b38302b1b": "I mean",
+    "rsr_dev_87fe2903b943": "no",
+    "rsr_dev_c30355e4e820": "no wait",
+    "rsr_dev_7449cfe077c3": "actually",
+    "rsr_dev_8ffc3e5d1466": "I mean",
+    "rsr_dev_8d53039f5a5e": "no",
+    "rsr_dev_47e0d92da730": "no wait",
+    "rsr_dev_1b9e1770f182": "actually",
+    "rsr_dev_09326baba398": "I mean",
+    "rsr_dev_607de5a7a7af": "no",
+    "rsr_dev_203527993304": "no wait",
+    "rsr_dev_bb402048132d": "actually",
+    "rsr_dev_d2c66b79aaf3": "I mean",
+    "rsr_dev_ab7d1d9a48f6": "no"
+  },
+  "input_sha256": {
+    "/Users/hongxuzhou/Documents/GitHub/lct_master_project/repair_data_gen/splits/dev/dataset/dev_rsr.base.tsv": "d0806970876f28efdf4971b5549b88d6bd7dde6647938cbbf2c79b410f8bb0b9",
+    "/Users/hongxuzhou/Documents/GitHub/lct_master_project/repair_data_gen/splits/dev/manifests/base_build.json": "94be565c875e1db5564511c331a812459c32edb97467b0a244490b88c2a51718",
+    "/Users/hongxuzhou/Documents/GitHub/lct_master_project/repair_data_gen/splits/dev/marker_policy.json": "d9615a18ada4942807cc3657c784021a732b26be0c0648f01aafa81ed49d3b79",
+    "/Users/hongxuzhou/Documents/GitHub/lct_master_project/repair_data_gen/rsr_generation/dataset/insert_editing_expressions.py": "022bdb56d68fffda27c65d935aa6a267ef23e6d055fa4982ad950773fd47ffad"
+  },
+  "code_sha256": {
+    "/Users/hongxuzhou/Documents/GitHub/lct_master_project/repair_data_gen/shared_pipeline/build_dev_marked.py": "5573dc04959a1116c603828f22999dbe781cd26a6c870828608112a0a6e0b9a5"
+  }
+}

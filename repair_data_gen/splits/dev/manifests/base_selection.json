@@ -1,0 +1,2373 @@
+{
+  "schema_version": 1,
+  "status": "confirmed base selection; dataset exports and validation pending",
+  "selected_at": "2026-10-31T21:22:51+08:00",
+  "base_items": 390,
+  "per_type": {
+    "constant_name": 60,
+    "constant_number": 60,
+    "constant_temporal": 47,
+    "content_word": 60,
+    "edge_label": 43,
+    "forwarding": 60,
+    "tense": 60
+  },
+  "temporal_policy": "one accepted representative per site; omit the two written-source groups identified in the proposal",
+  "marker_policy": {
+    "policy_file": "repair_data_gen/splits/dev/marker_policy.json",
+    "mode": "cover_identified_ambiguity",
+    "share_of_base": 0.3128205128205128,
+    "quota": 122,
+    "random_topup": false,
+    "assigned": 0
+  },
+  "items": [
+    {
+      "audit_id": "dev_e10a11857a69",
+      "request_id": "dev_base::constant_number::p76/d1751",
+      "doc_id": "p76/d1751",
+      "repair_type": "constant_number"
+    },
+    {
+      "audit_id": "dev_bf4633a8a2d2",
+      "request_id": "dev_base::content_word::p07/d2110",
+      "doc_id": "p07/d2110",
+      "repair_type": "content_word"
+    },
+    {
+      "audit_id": "dev_35433bac3a5f",
+      "request_id": "dev_base::content_word::p00/d2596",
+      "doc_id": "p00/d2596",
+      "repair_type": "content_word"
+    },
+    {
+      "audit_id": "dev_8558897268c1",
+      "request_id": "dev_base::constant_name::p42/d1383",
+      "doc_id": "p42/d1383",
+      "repair_type": "constant_name"
+    },
+    {
+      "audit_id": "dev_9913f60bdca5",
+      "request_id": "dev_base::constant_name::p87/d0855",
+      "doc_id": "p87/d0855",
+      "repair_type": "constant_name"
+    },
+    {
+      "audit_id": "dev_bbe5c5e718ee",
+      "request_id": "dev_temporal_p1::constant_temporal::p58/d2551::site_4",
+      "doc_id": "p58/d2551",
+      "repair_type": "constant_temporal"
+    },
+    {
+      "audit_id": "dev_9e85503a53cd",
+      "request_id": "dev_base::constant_name::p73/d0765",
+      "doc_id": "p73/d0765",
+      "repair_type": "constant_name"
+    },
+    {
+      "audit_id": "dev_198b5306fe85",
+      "request_id": "dev_base::content_word::p92/d2898",
+      "doc_id": "p92/d2898",
+      "repair_type": "content_word"
+    },
+    {
+      "audit_id": "dev_7e16248e3c69",
+      "request_id": "dev_base::constant_name::p20/d1666",
+      "doc_id": "p20/d1666",
+      "repair_type": "constant_name"
+    },
+    {
+      "audit_id": "dev_e48b52408b1c",
+      "request_id": "dev_base::content_word::p26/d0003",
+      "doc_id": "p26/d0003",
+      "repair_type": "content_word"
+    },
+    {
+      "audit_id": "dev_d46d761c404d",
+      "request_id": "dev_edge_direction::edge_label::p99/d0784",
+      "doc_id": "p99/d0784",
+      "repair_type": "edge_label"
+    },
+    {
+      "audit_id": "dev_085f6f1771f6",
+      "request_id": "dev_base::constant_name::p06/d0718",
+      "doc_id": "p06/d0718",
+      "repair_type": "constant_name"
+    },
+    {
+      "audit_id": "dev_2bd4b783fc51",
+      "request_id": "dev_base::tense::p84/d1388",
+      "doc_id": "p84/d1388",
+      "repair_type": "tense"
+    },
+    {
+      "audit_id": "dev_29601e04c7a6",
+      "request_id": "dev_temporal_p1::constant_temporal::p17/d0812::site_4",
+      "doc_id": "p17/d0812",
+      "repair_type": "constant_temporal"
+    },
+    {
+      "audit_id": "dev_7449cfe077c3",
+      "request_id": "dev_base::content_word::p31/d3382",
+      "doc_id": "p31/d3382",
+      "repair_type": "content_word"
+    },
+    {
+      "audit_id": "dev_258a1ea19438",
+      "request_id": "dev_base::forwarding::p40/d1466",
+      "doc_id": "p40/d1466",
+      "repair_type": "forwarding"
+    },
+    {
+      "audit_id": "dev_3a605b000975",
+      "request_id": "dev_temporal_p1::constant_temporal::p04/d1194::site_0",
+      "doc_id": "p04/d1194",
+      "repair_type": "constant_temporal"
+    },
+    {
+      "audit_id": "dev_32d70034f266",
+      "request_id": "dev_base::tense::p79/d2248",
+      "doc_id": "p79/d2248",
+      "repair_type": "tense"
+    },
+    {
+      "audit_id": "dev_da27ee399203",
+      "request_id": "dev_base::constant_number::p93/d0901",
+      "doc_id": "p93/d0901",
+      "repair_type": "constant_number"
+    },
+    {
+      "audit_id": "dev_af883d33dbb6",
+      "request_id": "dev_base::forwarding::p62/d3428",
+      "doc_id": "p62/d3428",
+      "repair_type": "forwarding"
+    },
+    {
+      "audit_id": "dev_fcbc38f9635c",
+      "request_id": "dev_edge_direction::edge_label::p84/d1177",
+      "doc_id": "p84/d1177",
+      "repair_type": "edge_label"
+    },
+    {
+      "audit_id": "dev_ecec435c10b8",
+      "request_id": "dev_base::constant_name::p00/d1775",
+      "doc_id": "p00/d1775",
+      "repair_type": "constant_name"
+    },
+    {
+      "audit_id": "dev_7bef16955db1",
+      "request_id": "dev_edge_direction::edge_label::p98/d2515",
+      "doc_id": "p98/d2515",
+      "repair_type": "edge_label"
+    },
+    {
+      "audit_id": "dev_b4695c7f8c83",
+      "request_id": "dev_base::tense::p34/d2847",
+      "doc_id": "p34/d2847",
+      "repair_type": "tense"
+    },
+    {
+      "audit_id": "dev_faf7b9f74d7d",
+      "request_id": "dev_base::tense::p26/d2674",
+      "doc_id": "p26/d2674",
+      "repair_type": "tense"
+    },
+    {
+      "audit_id": "dev_3019ba09c389",
+      "request_id": "dev_base::forwarding::p00/d3523",
+      "doc_id": "p00/d3523",
+      "repair_type": "forwarding"
+    },
+    {
+      "audit_id": "dev_b5d69a51e541",
+      "request_id": "dev_edge_direction::edge_label::p09/d2957",
+      "doc_id": "p09/d2957",
+      "repair_type": "edge_label"
+    },
+    {
+      "audit_id": "dev_b9f5d9ccf8dc",
+      "request_id": "dev_base::constant_name::p16/d1849",
+      "doc_id": "p16/d1849",
+      "repair_type": "constant_name"
+    },
+    {
+      "audit_id": "dev_e573d9737df0",
+      "request_id": "dev_base::content_word::p15/d2704",
+      "doc_id": "p15/d2704",
+      "repair_type": "content_word"
+    },
+    {
+      "audit_id": "dev_bb402048132d",
+      "request_id": "dev_base::forwarding::p29/d2775",
+      "doc_id": "p29/d2775",
+      "repair_type": "forwarding"
+    },
+    {
+      "audit_id": "dev_434060216464",
+      "request_id": "dev_base::constant_number::p04/d1194",
+      "doc_id": "p04/d1194",
+      "repair_type": "constant_number"
+    },
+    {
+      "audit_id": "dev_2679bf08f9b8",
+      "request_id": "dev_base::tense::p53/d3434",
+      "doc_id": "p53/d3434",
+      "repair_type": "tense"
+    },
+    {
+      "audit_id": "dev_a5e1a61f6457",
+      "request_id": "dev_base::forwarding::p04/d3493",
+      "doc_id": "p04/d3493",
+      "repair_type": "forwarding"
+    },
+    {
+      "audit_id": "dev_9db28389aa2e",
+      "request_id": "dev_base::constant_name::p45/d3204",
+      "doc_id": "p45/d3204",
+      "repair_type": "constant_name"
+    },
+    {
+      "audit_id": "dev_5f3c8f64e127",
+      "request_id": "dev_base::constant_number::p97/d0764",
+      "doc_id": "p97/d0764",
+      "repair_type": "constant_number"
+    },
+    {
+      "audit_id": "dev_b1f92aa7b6c1",
+      "request_id": "dev_temporal_p1::constant_temporal::p58/d1572::site_3",
+      "doc_id": "p58/d1572",
+      "repair_type": "constant_temporal"
+    },
+    {
+      "audit_id": "dev_34c4f6ddfbb2",
+      "request_id": "dev_base::tense::p98/d3055",
+      "doc_id": "p98/d3055",
+      "repair_type": "tense"
+    },
+    {
+      "audit_id": "dev_9c14d945dc9d",
+      "request_id": "dev_base::content_word::p61/d0264",
+      "doc_id": "p61/d0264",
+      "repair_type": "content_word"
+    },
+    {
+      "audit_id": "dev_b7d293bab478",
+      "request_id": "dev_base::constant_name::p03/d1397",
+      "doc_id": "p03/d1397",
+      "repair_type": "constant_name"
+    },
+    {
+      "audit_id": "dev_571090ad88d0",
+      "request_id": "dev_base::tense::p26/d3013",
+      "doc_id": "p26/d3013",
+      "repair_type": "tense"
+    },
+    {
+      "audit_id": "dev_79038943224b",
+      "request_id": "dev_base::forwarding::p05/d2795",
+      "doc_id": "p05/d2795",
+      "repair_type": "forwarding"
+    },
+    {
+      "audit_id": "dev_d5aaff934019",
+      "request_id": "dev_base::constant_number::p17/d1391",
+      "doc_id": "p17/d1391",
+      "repair_type": "constant_number"
+    },
+    {
+      "audit_id": "dev_6946f207cd08",
+      "request_id": "dev_edge_place::edge_label::p35/d1274::site_2",
+      "doc_id": "p35/d1274",
+      "repair_type": "edge_label"
+    },
+    {
+      "audit_id": "dev_54468e41ec9f",
+      "request_id": "dev_base::constant_name::p97/d1381",
+      "doc_id": "p97/d1381",
+      "repair_type": "constant_name"
+    },
+    {
+      "audit_id": "dev_c30355e4e820",
+      "request_id": "dev_base::content_word::p17/d1697",
+      "doc_id": "p17/d1697",
+      "repair_type": "content_word"
+    },
+    {
+      "audit_id": "dev_e25ecd05be17",
+      "request_id": "dev_base::content_word::p00/d0778",
+      "doc_id": "p00/d0778",
+      "repair_type": "content_word"
+    },
+    {
+      "audit_id": "dev_0f7872bd79ea",
+      "request_id": "dev_edge_direction::edge_label::p16/d3241",
+      "doc_id": "p16/d3241",
+      "repair_type": "edge_label"
+    },
+    {
+      "audit_id": "dev_a5a50f4da43a",
+      "request_id": "dev_base::constant_name::p74/d2352",
+      "doc_id": "p74/d2352",
+      "repair_type": "constant_name"
+    },
+    {
+      "audit_id": "dev_a6b4780829b2",
+      "request_id": "dev_base::tense::p14/d1723",
+      "doc_id": "p14/d1723",
+      "repair_type": "tense"
+    },
+    {
+      "audit_id": "dev_0cce75ff22b6",
+      "request_id": "dev_base::constant_number::p84/d1752",
+      "doc_id": "p84/d1752",
+      "repair_type": "constant_number"
+    },
+    {
+      "audit_id": "dev_c9934f80553f",
+      "request_id": "dev_base::tense::p70/d0862",
+      "doc_id": "p70/d0862",
+      "repair_type": "tense"
+    },
+    {
+      "audit_id": "dev_fb8e9f67ee2c",
+      "request_id": "dev_base::tense::p02/d0712",
+      "doc_id": "p02/d0712",
+      "repair_type": "tense"
+    },
+    {
+      "audit_id": "dev_f4ccc4a51d0f",
+      "request_id": "dev_temporal_p1::constant_temporal::p84/d1177::site_0",
+      "doc_id": "p84/d1177",
+      "repair_type": "constant_temporal"
+    },
+    {
+      "audit_id": "dev_b19ea0f90747",
+      "request_id": "dev_base::constant_number::p10/d1501",
+      "doc_id": "p10/d1501",
+      "repair_type": "constant_number"
+    },
+    {
+      "audit_id": "dev_0ae83e7aa3a9",
+      "request_id": "dev_base::tense::p47/d1392",
+      "doc_id": "p47/d1392",
+      "repair_type": "tense"
+    },
+    {
+      "audit_id": "dev_671a25d5517a",
+      "request_id": "dev_base::content_word::p34/d2198",
+      "doc_id": "p34/d2198",
+      "repair_type": "content_word"
+    },
+    {
+      "audit_id": "dev_aaa3c5a4d1aa",
+      "request_id": "dev_base::tense::p79/d0842",
+      "doc_id": "p79/d0842",
+      "repair_type": "tense"
+    },
+    {
+      "audit_id": "dev_fd12728df1c4",
+      "request_id": "dev_base::tense::p53/d0711",
+      "doc_id": "p53/d0711",
+      "repair_type": "tense"
+    },
+    {
+      "audit_id": "dev_6df79380766a",
+      "request_id": "dev_base::tense::p75/d0143",
+      "doc_id": "p75/d0143",
+      "repair_type": "tense"
+    },
+    {
+      "audit_id": "dev_a2debe1683bf",
+      "request_id": "dev_base::tense::p01/d2134",
+      "doc_id": "p01/d2134",
+      "repair_type": "tense"
+    },
+    {
+      "audit_id": "dev_7f77855953a2",
+      "request_id": "dev_base::forwarding::p40/d2679",
+      "doc_id": "p40/d2679",
+      "repair_type": "forwarding"
+    },
+    {
+      "audit_id": "dev_b2619e977408",
+      "request_id": "dev_temporal_p1::constant_temporal::p23/d2963::site_6",
+      "doc_id": "p23/d2963",
+      "repair_type": "constant_temporal"
+    },
+    {
+      "audit_id": "dev_9ac976c8006a",
+      "request_id": "dev_edge_direction::edge_label::p09/d2677",
+      "doc_id": "p09/d2677",
+      "repair_type": "edge_label"
+    },
+    {
+      "audit_id": "dev_959371a81c24",
+      "request_id": "dev_base::tense::p04/d1478",
+      "doc_id": "p04/d1478",
+      "repair_type": "tense"
+    },
+    {
+      "audit_id": "dev_098c4f576c6e",
+      "request_id": "dev_base::content_word::p10/d1831",
+      "doc_id": "p10/d1831",
+      "repair_type": "content_word"
+    },
+    {
+      "audit_id": "dev_b7cebd8b1977",
+      "request_id": "dev_base::tense::p14/d3035",
+      "doc_id": "p14/d3035",
+      "repair_type": "tense"
+    },
+    {
+      "audit_id": "dev_644cfb7c3e6f",
+      "request_id": "dev_base::constant_number::p86/d1382",
+      "doc_id": "p86/d1382",
+      "repair_type": "constant_number"
+    },
+    {
+      "audit_id": "dev_381d0e9f8fe8",
+      "request_id": "dev_edge_direction::edge_label::p39/d0816",
+      "doc_id": "p39/d0816",
+      "repair_type": "edge_label"
+    },
+    {
+      "audit_id": "dev_3eb161f38095",
+      "request_id": "dev_base::forwarding::p50/d1654",
+      "doc_id": "p50/d1654",
+      "repair_type": "forwarding"
+    },
+    {
+      "audit_id": "dev_3709c85419bc",
+      "request_id": "dev_base::forwarding::p66/d1528",
+      "doc_id": "p66/d1528",
+      "repair_type": "forwarding"
+    },
+    {
+      "audit_id": "dev_ed2150da90c8",
+      "request_id": "dev_base::constant_number::p19/d3468",
+      "doc_id": "p19/d3468",
+      "repair_type": "constant_number"
+    },
+    {
+      "audit_id": "dev_bb05b6696784",
+      "request_id": "dev_temporal_p1::constant_temporal::p73/d2984::site_3",
+      "doc_id": "p73/d2984",
+      "repair_type": "constant_temporal"
+    },
+    {
+      "audit_id": "dev_47d272981a0a",
+      "request_id": "dev_edge_direction::edge_label::p32/d1807",
+      "doc_id": "p32/d1807",
+      "repair_type": "edge_label"
+    },
+    {
+      "audit_id": "dev_fc19dec62af4",
+      "request_id": "dev_base::constant_name::p14/d1381",
+      "doc_id": "p14/d1381",
+      "repair_type": "constant_name"
+    },
+    {
+      "audit_id": "dev_04420763919b",
+      "request_id": "dev_base::tense::p63/d1381",
+      "doc_id": "p63/d1381",
+      "repair_type": "tense"
+    },
+    {
+      "audit_id": "dev_d33e010602b8",
+      "request_id": "dev_base::tense::p98/d3320",
+      "doc_id": "p98/d3320",
+      "repair_type": "tense"
+    },
+    {
+      "audit_id": "dev_356a2a854aeb",
+      "request_id": "dev_base::constant_name::p41/d0840",
+      "doc_id": "p41/d0840",
+      "repair_type": "constant_name"
+    },
+    {
+      "audit_id": "dev_1dc190d2f614",
+      "request_id": "dev_base::forwarding::p71/d1599",
+      "doc_id": "p71/d1599",
+      "repair_type": "forwarding"
+    },
+    {
+      "audit_id": "dev_fc41ec462be7",
+      "request_id": "dev_temporal_p1::constant_temporal::p49/d3026::site_4",
+      "doc_id": "p49/d3026",
+      "repair_type": "constant_temporal"
+    },
+    {
+      "audit_id": "dev_7425a83dea75",
+      "request_id": "dev_base::constant_number::p00/d1633",
+      "doc_id": "p00/d1633",
+      "repair_type": "constant_number"
+    },
+    {
+      "audit_id": "dev_45da0adb487c",
+      "request_id": "dev_base::content_word::p31/d2000",
+      "doc_id": "p31/d2000",
+      "repair_type": "content_word"
+    },
+    {
+      "audit_id": "dev_c552e2e2e79a",
+      "request_id": "dev_base::tense::p57/d1601",
+      "doc_id": "p57/d1601",
+      "repair_type": "tense"
+    },
+    {
+      "audit_id": "dev_9c3a75e0901e",
+      "request_id": "dev_base::constant_number::p07/d1713",
+      "doc_id": "p07/d1713",
+      "repair_type": "constant_number"
+    },
+    {
+      "audit_id": "dev_d18b875e305c",
+      "request_id": "dev_edge_direction::edge_label::p34/d2438",
+      "doc_id": "p34/d2438",
+      "repair_type": "edge_label"
+    },
+    {
+      "audit_id": "dev_c52014b45e69",
+      "request_id": "dev_base::constant_number::p40/d2234",
+      "doc_id": "p40/d2234",
+      "repair_type": "constant_number"
+    },
+    {
+      "audit_id": "dev_47e0d92da730",
+      "request_id": "dev_base::content_word::p10/d1983",
+      "doc_id": "p10/d1983",
+      "repair_type": "content_word"
+    },
+    {
+      "audit_id": "dev_afb759b1c7ef",
+      "request_id": "dev_base::constant_name::p86/d1396",
+      "doc_id": "p86/d1396",
+      "repair_type": "constant_name"
+    },
+    {
+      "audit_id": "dev_40a26380e545",
+      "request_id": "dev_base::constant_name::p46/d1384",
+      "doc_id": "p46/d1384",
+      "repair_type": "constant_name"
+    },
+    {
+      "audit_id": "dev_87fe2903b943",
+      "request_id": "dev_base::content_word::p81/d2799",
+      "doc_id": "p81/d2799",
+      "repair_type": "content_word"
+    },
+    {
+      "audit_id": "dev_55fd672b7427",
+      "request_id": "dev_base::content_word::p00/d0014",
+      "doc_id": "p00/d0014",
+      "repair_type": "content_word"
+    },
+    {
+      "audit_id": "dev_21322a95c4a7",
+      "request_id": "dev_edge_place::edge_label::p80/d2137::site_2",
+      "doc_id": "p80/d2137",
+      "repair_type": "edge_label"
+    },
+    {
+      "audit_id": "dev_657226694bb3",
+      "request_id": "dev_base::tense::p26/d2918",
+      "doc_id": "p26/d2918",
+      "repair_type": "tense"
+    },
+    {
+      "audit_id": "dev_a90c6fb90f69",
+      "request_id": "dev_base::content_word::p21/d3136",
+      "doc_id": "p21/d3136",
+      "repair_type": "content_word"
+    },
+    {
+      "audit_id": "dev_628a9ea82b00",
+      "request_id": "dev_base::constant_name::p24/d1381",
+      "doc_id": "p24/d1381",
+      "repair_type": "constant_name"
+    },
+    {
+      "audit_id": "dev_97a7e7a59950",
+      "request_id": "dev_base::constant_number::p21/d3305",
+      "doc_id": "p21/d3305",
+      "repair_type": "constant_number"
+    },
+    {
+      "audit_id": "dev_8825f53edefe",
+      "request_id": "dev_edge_direction::edge_label::p95/d2342",
+      "doc_id": "p95/d2342",
+      "repair_type": "edge_label"
+    },
+    {
+      "audit_id": "dev_3be78e5d3ba9",
+      "request_id": "dev_base::constant_name::p61/d2035",
+      "doc_id": "p61/d2035",
+      "repair_type": "constant_name"
+    },
+    {
+      "audit_id": "dev_22a809b9884e",
+      "request_id": "dev_base::constant_name::p76/d0802",
+      "doc_id": "p76/d0802",
+      "repair_type": "constant_name"
+    },
+    {
+      "audit_id": "dev_c1b016918975",
+      "request_id": "dev_temporal_p1::constant_temporal::p86/d3185::site_5",
+      "doc_id": "p86/d3185",
+      "repair_type": "constant_temporal"
+    },
+    {
+      "audit_id": "dev_d2412e659a96",
+      "request_id": "dev_edge_place::edge_label::p51/d3541::site_3",
+      "doc_id": "p51/d3541",
+      "repair_type": "edge_label"
+    },
+    {
+      "audit_id": "dev_22d40711faeb",
+      "request_id": "dev_base::forwarding::p95/d2342",
+      "doc_id": "p95/d2342",
+      "repair_type": "forwarding"
+    },
+    {
+      "audit_id": "dev_7bef0909f353",
+      "request_id": "dev_base::tense::p25/d0760",
+      "doc_id": "p25/d0760",
+      "repair_type": "tense"
+    },
+    {
+      "audit_id": "dev_b9dbb1a20e1e",
+      "request_id": "dev_base::tense::p72/d1095",
+      "doc_id": "p72/d1095",
+      "repair_type": "tense"
+    },
+    {
+      "audit_id": "dev_a0dfdc419b1b",
+      "request_id": "dev_base::tense::p84/d3469",
+      "doc_id": "p84/d3469",
+      "repair_type": "tense"
+    },
+    {
+      "audit_id": "dev_1783b97b578f",
+      "request_id": "dev_edge_place::edge_label::p22/d0761::site_1",
+      "doc_id": "p22/d0761",
+      "repair_type": "edge_label"
+    },
+    {
+      "audit_id": "dev_518f45b1a69a",
+      "request_id": "dev_base::forwarding::p29/d2011",
+      "doc_id": "p29/d2011",
+      "repair_type": "forwarding"
+    },
+    {
+      "audit_id": "dev_1de52322345b",
+      "request_id": "dev_base::tense::p97/d1240",
+      "doc_id": "p97/d1240",
+      "repair_type": "tense"
+    },
+    {
+      "audit_id": "dev_b9d7032a0e16",
+      "request_id": "dev_base::tense::p00/d2540",
+      "doc_id": "p00/d2540",
+      "repair_type": "tense"
+    },
+    {
+      "audit_id": "dev_9e1deba31919",
+      "request_id": "dev_base::forwarding::p16/d0760",
+      "doc_id": "p16/d0760",
+      "repair_type": "forwarding"
+    },
+    {
+      "audit_id": "dev_fab1a8eaa48d",
+      "request_id": "dev_base::constant_name::p02/d1382",
+      "doc_id": "p02/d1382",
+      "repair_type": "constant_name"
+    },
+    {
+      "audit_id": "dev_15cdf6494ad7",
+      "request_id": "dev_base::content_word::p01/d2567",
+      "doc_id": "p01/d2567",
+      "repair_type": "content_word"
+    },
+    {
+      "audit_id": "dev_d5f7c2589c6d",
+      "request_id": "dev_base::content_word::p44/d2573",
+      "doc_id": "p44/d2573",
+      "repair_type": "content_word"
+    },
+    {
+      "audit_id": "dev_577addd00378",
+      "request_id": "dev_base::tense::p03/d0873",
+      "doc_id": "p03/d0873",
+      "repair_type": "tense"
+    },
+    {
+      "audit_id": "dev_c9d9e9c1f079",
+      "request_id": "dev_edge_direction::edge_label::p04/d2764",
+      "doc_id": "p04/d2764",
+      "repair_type": "edge_label"
+    },
+    {
+      "audit_id": "dev_64ccdf01140b",
+      "request_id": "dev_base::constant_name::p35/d1389",
+      "doc_id": "p35/d1389",
+      "repair_type": "constant_name"
+    },
+    {
+      "audit_id": "dev_39a44e01e77a",
+      "request_id": "dev_base::constant_number::p15/d3095",
+      "doc_id": "p15/d3095",
+      "repair_type": "constant_number"
+    },
+    {
+      "audit_id": "dev_999e155cdb77",
+      "request_id": "dev_base::content_word::p29/d0779",
+      "doc_id": "p29/d0779",
+      "repair_type": "content_word"
+    },
+    {
+      "audit_id": "dev_7abb6f41e5be",
+      "request_id": "dev_edge_direction::edge_label::p41/d0840",
+      "doc_id": "p41/d0840",
+      "repair_type": "edge_label"
+    },
+    {
+      "audit_id": "dev_ebd79120610c",
+      "request_id": "dev_base::forwarding::p10/d2732",
+      "doc_id": "p10/d2732",
+      "repair_type": "forwarding"
+    },
+    {
+      "audit_id": "dev_f76e091128d7",
+      "request_id": "dev_base::constant_number::p35/d1274",
+      "doc_id": "p35/d1274",
+      "repair_type": "constant_number"
+    },
+    {
+      "audit_id": "dev_3de14197daf4",
+      "request_id": "dev_base::tense::p00/d0801",
+      "doc_id": "p00/d0801",
+      "repair_type": "tense"
+    },
+    {
+      "audit_id": "dev_7ce58e1b7ea8",
+      "request_id": "dev_temporal_p1::constant_temporal::p56/d2747::site_3",
+      "doc_id": "p56/d2747",
+      "repair_type": "constant_temporal"
+    },
+    {
+      "audit_id": "dev_26db52efb915",
+      "request_id": "dev_base::forwarding::p05/d0867",
+      "doc_id": "p05/d0867",
+      "repair_type": "forwarding"
+    },
+    {
+      "audit_id": "dev_9187635d8d10",
+      "request_id": "dev_base::constant_name::p55/d2807",
+      "doc_id": "p55/d2807",
+      "repair_type": "constant_name"
+    },
+    {
+      "audit_id": "dev_887eb4d4b85d",
+      "request_id": "dev_base::forwarding::p30/d1640",
+      "doc_id": "p30/d1640",
+      "repair_type": "forwarding"
+    },
+    {
+      "audit_id": "dev_2ea4c3b339dd",
+      "request_id": "dev_base::forwarding::p80/d3180",
+      "doc_id": "p80/d3180",
+      "repair_type": "forwarding"
+    },
+    {
+      "audit_id": "dev_67fd522eb1eb",
+      "request_id": "dev_edge_direction::edge_label::p21/d0905",
+      "doc_id": "p21/d0905",
+      "repair_type": "edge_label"
+    },
+    {
+      "audit_id": "dev_b64a80779a3f",
+      "request_id": "dev_base::forwarding::p91/d1917",
+      "doc_id": "p91/d1917",
+      "repair_type": "forwarding"
+    },
+    {
+      "audit_id": "dev_feabddc4cf68",
+      "request_id": "dev_base::content_word::p02/d3309",
+      "doc_id": "p02/d3309",
+      "repair_type": "content_word"
+    },
+    {
+      "audit_id": "dev_7db92b686d3c",
+      "request_id": "dev_base::constant_number::p38/d2939",
+      "doc_id": "p38/d2939",
+      "repair_type": "constant_number"
+    },
+    {
+      "audit_id": "dev_e536f0f5a43d",
+      "request_id": "dev_base::tense::p64/d3103",
+      "doc_id": "p64/d3103",
+      "repair_type": "tense"
+    },
+    {
+      "audit_id": "dev_b48b29c70dea",
+      "request_id": "dev_base::constant_number::p44/d2100",
+      "doc_id": "p44/d2100",
+      "repair_type": "constant_number"
+    },
+    {
+      "audit_id": "dev_604d7659a9ec",
+      "request_id": "dev_base::forwarding::p72/d0843",
+      "doc_id": "p72/d0843",
+      "repair_type": "forwarding"
+    },
+    {
+      "audit_id": "dev_b9a7a138147b",
+      "request_id": "dev_base::tense::p63/d3459",
+      "doc_id": "p63/d3459",
+      "repair_type": "tense"
+    },
+    {
+      "audit_id": "dev_869c173cfd21",
+      "request_id": "dev_temporal_p1::constant_temporal::p45/d3372::site_3",
+      "doc_id": "p45/d3372",
+      "repair_type": "constant_temporal"
+    },
+    {
+      "audit_id": "dev_e632045bcacd",
+      "request_id": "dev_edge_place::edge_label::p69/d1848::site_1",
+      "doc_id": "p69/d1848",
+      "repair_type": "edge_label"
+    },
+    {
+      "audit_id": "dev_2c787c99ab69",
+      "request_id": "dev_base::forwarding::p10/d2302",
+      "doc_id": "p10/d2302",
+      "repair_type": "forwarding"
+    },
+    {
+      "audit_id": "dev_feb137eff0f0",
+      "request_id": "dev_base::tense::p10/d3417",
+      "doc_id": "p10/d3417",
+      "repair_type": "tense"
+    },
+    {
+      "audit_id": "dev_e82300c3a486",
+      "request_id": "dev_base::constant_number::p31/d3119",
+      "doc_id": "p31/d3119",
+      "repair_type": "constant_number"
+    },
+    {
+      "audit_id": "dev_dc413fd5a19e",
+      "request_id": "dev_base::constant_name::p10/d0963",
+      "doc_id": "p10/d0963",
+      "repair_type": "constant_name"
+    },
+    {
+      "audit_id": "dev_1e2047e47a47",
+      "request_id": "dev_base::constant_name::p98/d2459",
+      "doc_id": "p98/d2459",
+      "repair_type": "constant_name"
+    },
+    {
+      "audit_id": "dev_9f3775110031",
+      "request_id": "dev_base::forwarding::p98/d2078",
+      "doc_id": "p98/d2078",
+      "repair_type": "forwarding"
+    },
+    {
+      "audit_id": "dev_e598b000e100",
+      "request_id": "dev_edge_direction::edge_label::p97/d0898",
+      "doc_id": "p97/d0898",
+      "repair_type": "edge_label"
+    },
+    {
+      "audit_id": "dev_e76d00b7ccfd",
+      "request_id": "dev_base::constant_name::p58/d1242",
+      "doc_id": "p58/d1242",
+      "repair_type": "constant_name"
+    },
+    {
+      "audit_id": "dev_c94c5e330903",
+      "request_id": "dev_base::tense::p05/d0846",
+      "doc_id": "p05/d0846",
+      "repair_type": "tense"
+    },
+    {
+      "audit_id": "dev_edb26e6583e4",
+      "request_id": "dev_base::content_word::p62/d0066",
+      "doc_id": "p62/d0066",
+      "repair_type": "content_word"
+    },
+    {
+      "audit_id": "dev_69c51d57f021",
+      "request_id": "dev_base::constant_number::p94/d0763",
+      "doc_id": "p94/d0763",
+      "repair_type": "constant_number"
+    },
+    {
+      "audit_id": "dev_a5b5c587f1e9",
+      "request_id": "dev_base::constant_name::p72/d2751",
+      "doc_id": "p72/d2751",
+      "repair_type": "constant_name"
+    },
+    {
+      "audit_id": "dev_671f9789f54e",
+      "request_id": "dev_base::content_word::p10/d2977",
+      "doc_id": "p10/d2977",
+      "repair_type": "content_word"
+    },
+    {
+      "audit_id": "dev_c6856c9f4425",
+      "request_id": "dev_base::constant_name::p10/d1382",
+      "doc_id": "p10/d1382",
+      "repair_type": "constant_name"
+    },
+    {
+      "audit_id": "dev_1a9e27031fef",
+      "request_id": "dev_base::constant_name::p78/d1403",
+      "doc_id": "p78/d1403",
+      "repair_type": "constant_name"
+    },
+    {
+      "audit_id": "dev_27f957e78b26",
+      "request_id": "dev_base::forwarding::p16/d3241",
+      "doc_id": "p16/d3241",
+      "repair_type": "forwarding"
+    },
+    {
+      "audit_id": "dev_242763ea4344",
+      "request_id": "dev_base::constant_number::p97/d2127",
+      "doc_id": "p97/d2127",
+      "repair_type": "constant_number"
+    },
+    {
+      "audit_id": "dev_583ba78a0256",
+      "request_id": "dev_base::constant_number::p35/d1427",
+      "doc_id": "p35/d1427",
+      "repair_type": "constant_number"
+    },
+    {
+      "audit_id": "dev_18d26c3a18bc",
+      "request_id": "dev_base::forwarding::p00/d3178",
+      "doc_id": "p00/d3178",
+      "repair_type": "forwarding"
+    },
+    {
+      "audit_id": "dev_86a6b9df1026",
+      "request_id": "dev_base::tense::p90/d2014",
+      "doc_id": "p90/d2014",
+      "repair_type": "tense"
+    },
+    {
+      "audit_id": "dev_55a607c1b568",
+      "request_id": "dev_temporal_p1::constant_temporal::p14/d1178::site_4",
+      "doc_id": "p14/d1178",
+      "repair_type": "constant_temporal"
+    },
+    {
+      "audit_id": "dev_760b93a74013",
+      "request_id": "dev_base::constant_name::p03/d2627",
+      "doc_id": "p03/d2627",
+      "repair_type": "constant_name"
+    },
+    {
+      "audit_id": "dev_4e5aba15f5ce",
+      "request_id": "dev_base::constant_number::p60/d3186",
+      "doc_id": "p60/d3186",
+      "repair_type": "constant_number"
+    },
+    {
+      "audit_id": "dev_cce8699fb02b",
+      "request_id": "dev_base::tense::p00/d0895",
+      "doc_id": "p00/d0895",
+      "repair_type": "tense"
+    },
+    {
+      "audit_id": "dev_473cd47bf866",
+      "request_id": "dev_base::tense::p38/d2181",
+      "doc_id": "p38/d2181",
+      "repair_type": "tense"
+    },
+    {
+      "audit_id": "dev_1aa766fd522a",
+      "request_id": "dev_base::forwarding::p22/d0761",
+      "doc_id": "p22/d0761",
+      "repair_type": "forwarding"
+    },
+    {
+      "audit_id": "dev_155c5876702d",
+      "request_id": "dev_edge_place::edge_label::p66/d0712::site_1",
+      "doc_id": "p66/d0712",
+      "repair_type": "edge_label"
+    },
+    {
+      "audit_id": "dev_13d41448244c",
+      "request_id": "dev_temporal_p1::constant_temporal::p53/d0816::site_3",
+      "doc_id": "p53/d0816",
+      "repair_type": "constant_temporal"
+    },
+    {
+      "audit_id": "dev_e323eae3ad13",
+      "request_id": "dev_base::constant_name::p37/d2812",
+      "doc_id": "p37/d2812",
+      "repair_type": "constant_name"
+    },
+    {
+      "audit_id": "dev_91ab277761c6",
+      "request_id": "dev_base::constant_name::p35/d2432",
+      "doc_id": "p35/d2432",
+      "repair_type": "constant_name"
+    },
+    {
+      "audit_id": "dev_1c7d7545f26b",
+      "request_id": "dev_temporal_p1::constant_temporal::p51/d3541::site_5",
+      "doc_id": "p51/d3541",
+      "repair_type": "constant_temporal"
+    },
+    {
+      "audit_id": "dev_0e1e31ac740f",
+      "request_id": "dev_base::constant_number::p43/d2340",
+      "doc_id": "p43/d2340",
+      "repair_type": "constant_number"
+    },
+    {
+      "audit_id": "dev_7de95e330f5c",
+      "request_id": "dev_base::constant_number::p56/d0884",
+      "doc_id": "p56/d0884",
+      "repair_type": "constant_number"
+    },
+    {
+      "audit_id": "dev_f8d4d96930d4",
+      "request_id": "dev_base::forwarding::p09/d3383",
+      "doc_id": "p09/d3383",
+      "repair_type": "forwarding"
+    },
+    {
+      "audit_id": "dev_eadfda2f4309",
+      "request_id": "dev_base::forwarding::p03/d2090",
+      "doc_id": "p03/d2090",
+      "repair_type": "forwarding"
+    },
+    {
+      "audit_id": "dev_dd91fe0fb4a9",
+      "request_id": "dev_base::content_word::p17/d2168",
+      "doc_id": "p17/d2168",
+      "repair_type": "content_word"
+    },
+    {
+      "audit_id": "dev_3440c5b042f2",
+      "request_id": "dev_base::constant_number::p59/d1633",
+      "doc_id": "p59/d1633",
+      "repair_type": "constant_number"
+    },
+    {
+      "audit_id": "dev_90eec54c57fc",
+      "request_id": "dev_base::forwarding::p17/d1611",
+      "doc_id": "p17/d1611",
+      "repair_type": "forwarding"
+    },
+    {
+      "audit_id": "dev_afaf182952ba",
+      "request_id": "dev_base::constant_number::p01/d2141",
+      "doc_id": "p01/d2141",
+      "repair_type": "constant_number"
+    },
+    {
+      "audit_id": "dev_5d35287f12ae",
+      "request_id": "dev_base::tense::p38/d3268",
+      "doc_id": "p38/d3268",
+      "repair_type": "tense"
+    },
+    {
+      "audit_id": "dev_113e26f390fe",
+      "request_id": "dev_base::content_word::p85/d1384",
+      "doc_id": "p85/d1384",
+      "repair_type": "content_word"
+    },
+    {
+      "audit_id": "dev_28205f3129fa",
+      "request_id": "dev_temporal_p1::constant_temporal::p66/d2412::site_3",
+      "doc_id": "p66/d2412",
+      "repair_type": "constant_temporal"
+    },
+    {
+      "audit_id": "dev_1c4a0203bb02",
+      "request_id": "dev_base::constant_number::p90/d2826",
+      "doc_id": "p90/d2826",
+      "repair_type": "constant_number"
+    },
+    {
+      "audit_id": "dev_f10c47edb20e",
+      "request_id": "dev_temporal_p1::constant_temporal::p86/d1382::site_7",
+      "doc_id": "p86/d1382",
+      "repair_type": "constant_temporal"
+    },
+    {
+      "audit_id": "dev_a3417bd37c91",
+      "request_id": "dev_base::content_word::p49/d2034",
+      "doc_id": "p49/d2034",
+      "repair_type": "content_word"
+    },
+    {
+      "audit_id": "dev_8d53039f5a5e",
+      "request_id": "dev_base::content_word::p91/d2345",
+      "doc_id": "p91/d2345",
+      "repair_type": "content_word"
+    },
+    {
+      "audit_id": "dev_a19731acf074",
+      "request_id": "dev_base::constant_number::p06/d0764",
+      "doc_id": "p06/d0764",
+      "repair_type": "constant_number"
+    },
+    {
+      "audit_id": "dev_d99286020f47",
+      "request_id": "dev_edge_place::edge_label::p05/d0718::site_5",
+      "doc_id": "p05/d0718",
+      "repair_type": "edge_label"
+    },
+    {
+      "audit_id": "dev_bbb537d471b3",
+      "request_id": "dev_base::constant_name::p21/d0763",
+      "doc_id": "p21/d0763",
+      "repair_type": "constant_name"
+    },
+    {
+      "audit_id": "dev_0c83573b254c",
+      "request_id": "dev_base::tense::p30/d0714",
+      "doc_id": "p30/d0714",
+      "repair_type": "tense"
+    },
+    {
+      "audit_id": "dev_05fb02428fcf",
+      "request_id": "dev_base::constant_name::p31/d1390",
+      "doc_id": "p31/d1390",
+      "repair_type": "constant_name"
+    },
+    {
+      "audit_id": "dev_cdfaab64ce09",
+      "request_id": "dev_base::forwarding::p02/d2256",
+      "doc_id": "p02/d2256",
+      "repair_type": "forwarding"
+    },
+    {
+      "audit_id": "dev_010dfd77b46b",
+      "request_id": "dev_base::constant_name::p58/d0715",
+      "doc_id": "p58/d0715",
+      "repair_type": "constant_name"
+    },
+    {
+      "audit_id": "dev_ff810228f131",
+      "request_id": "dev_base::forwarding::p66/d1777",
+      "doc_id": "p66/d1777",
+      "repair_type": "forwarding"
+    },
+    {
+      "audit_id": "dev_203527993304",
+      "request_id": "dev_base::content_word::p42/d2090",
+      "doc_id": "p42/d2090",
+      "repair_type": "content_word"
+    },
+    {
+      "audit_id": "dev_c80178de32bc",
+      "request_id": "dev_edge_place::edge_label::p88/d0035::site_2",
+      "doc_id": "p88/d0035",
+      "repair_type": "edge_label"
+    },
+    {
+      "audit_id": "dev_2c320253fbd1",
+      "request_id": "dev_base::constant_name::p01/d0926",
+      "doc_id": "p01/d0926",
+      "repair_type": "constant_name"
+    },
+    {
+      "audit_id": "dev_82d760f616f9",
+      "request_id": "dev_base::forwarding::p30/d1976",
+      "doc_id": "p30/d1976",
+      "repair_type": "forwarding"
+    },
+    {
+      "audit_id": "dev_575d807f4347",
+      "request_id": "dev_temporal_p1::constant_temporal::p97/d0764::site_5",
+      "doc_id": "p97/d0764",
+      "repair_type": "constant_temporal"
+    },
+    {
+      "audit_id": "dev_63c08c1134fb",
+      "request_id": "dev_temporal_p1::constant_temporal::p98/d2459::site_3",
+      "doc_id": "p98/d2459",
+      "repair_type": "constant_temporal"
+    },
+    {
+      "audit_id": "dev_887622f3623b",
+      "request_id": "dev_edge_place::edge_label::p97/d3541::site_1",
+      "doc_id": "p97/d3541",
+      "repair_type": "edge_label"
+    },
+    {
+      "audit_id": "dev_35e6bbcbe948",
+      "request_id": "dev_edge_direction::edge_label::p07/d3302",
+      "doc_id": "p07/d3302",
+      "repair_type": "edge_label"
+    },
+    {
+      "audit_id": "dev_cc24836ac607",
+      "request_id": "dev_base::content_word::p50/d3123",
+      "doc_id": "p50/d3123",
+      "repair_type": "content_word"
+    },
+    {
+      "audit_id": "dev_0a86692cefe9",
+      "request_id": "dev_base::constant_number::p28/d2517",
+      "doc_id": "p28/d2517",
+      "repair_type": "constant_number"
+    },
+    {
+      "audit_id": "dev_8ffc3e5d1466",
+      "request_id": "dev_base::content_word::p77/d2877",
+      "doc_id": "p77/d2877",
+      "repair_type": "content_word"
+    },
+    {
+      "audit_id": "dev_8c71d1425234",
+      "request_id": "dev_base::forwarding::p16/d0762",
+      "doc_id": "p16/d0762",
+      "repair_type": "forwarding"
+    },
+    {
+      "audit_id": "dev_8ef40561795b",
+      "request_id": "dev_base::constant_name::p59/d1390",
+      "doc_id": "p59/d1390",
+      "repair_type": "constant_name"
+    },
+    {
+      "audit_id": "dev_27c8274c0d7b",
+      "request_id": "dev_temporal_p1::constant_temporal::p08/d0857::site_3",
+      "doc_id": "p08/d0857",
+      "repair_type": "constant_temporal"
+    },
+    {
+      "audit_id": "dev_8f94080b6a2f",
+      "request_id": "dev_edge_direction::edge_label::p58/d3295",
+      "doc_id": "p58/d3295",
+      "repair_type": "edge_label"
+    },
+    {
+      "audit_id": "dev_437eb46bd106",
+      "request_id": "dev_base::constant_number::p04/d1514",
+      "doc_id": "p04/d1514",
+      "repair_type": "constant_number"
+    },
+    {
+      "audit_id": "dev_c371f1cbde31",
+      "request_id": "dev_base::constant_name::p91/d1813",
+      "doc_id": "p91/d1813",
+      "repair_type": "constant_name"
+    },
+    {
+      "audit_id": "dev_3ce05763009f",
+      "request_id": "dev_base::content_word::p74/d3405",
+      "doc_id": "p74/d3405",
+      "repair_type": "content_word"
+    },
+    {
+      "audit_id": "dev_376c7a41b8ca",
+      "request_id": "dev_base::constant_number::p02/d0964",
+      "doc_id": "p02/d0964",
+      "repair_type": "constant_number"
+    },
+    {
+      "audit_id": "dev_f84725aa07d1",
+      "request_id": "dev_temporal_p1::constant_temporal::p35/d1816::site_4",
+      "doc_id": "p35/d1816",
+      "repair_type": "constant_temporal"
+    },
+    {
+      "audit_id": "dev_30e90af5d8b9",
+      "request_id": "dev_base::tense::p03/d2553",
+      "doc_id": "p03/d2553",
+      "repair_type": "tense"
+    },
+    {
+      "audit_id": "dev_607de5a7a7af",
+      "request_id": "dev_base::content_word::p00/d1666",
+      "doc_id": "p00/d1666",
+      "repair_type": "content_word"
+    },
+    {
+      "audit_id": "dev_577f10549308",
+      "request_id": "dev_temporal_p1::constant_temporal::p17/d1862::site_1",
+      "doc_id": "p17/d1862",
+      "repair_type": "constant_temporal"
+    },
+    {
+      "audit_id": "dev_0214ae686b49",
+      "request_id": "dev_edge_direction::edge_label::p40/d2847",
+      "doc_id": "p40/d2847",
+      "repair_type": "edge_label"
+    },
+    {
+      "audit_id": "dev_170f71cc2549",
+      "request_id": "dev_base::content_word::p54/d0863",
+      "doc_id": "p54/d0863",
+      "repair_type": "content_word"
+    },
+    {
+      "audit_id": "dev_4759b4e5e8a6",
+      "request_id": "dev_base::constant_number::p08/d2725",
+      "doc_id": "p08/d2725",
+      "repair_type": "constant_number"
+    },
+    {
+      "audit_id": "dev_cb6d6bc408fe",
+      "request_id": "dev_base::forwarding::p25/d3406",
+      "doc_id": "p25/d3406",
+      "repair_type": "forwarding"
+    },
+    {
+      "audit_id": "dev_167b08d50b1d",
+      "request_id": "dev_base::constant_number::p22/d1722",
+      "doc_id": "p22/d1722",
+      "repair_type": "constant_number"
+    },
+    {
+      "audit_id": "dev_a27372965ca2",
+      "request_id": "dev_base::tense::p56/d2093",
+      "doc_id": "p56/d2093",
+      "repair_type": "tense"
+    },
+    {
+      "audit_id": "dev_ecc9fc8f6e07",
+      "request_id": "dev_base::constant_number::p96/d1536",
+      "doc_id": "p96/d1536",
+      "repair_type": "constant_number"
+    },
+    {
+      "audit_id": "dev_39f81cb8a467",
+      "request_id": "dev_base::constant_name::p97/d3541",
+      "doc_id": "p97/d3541",
+      "repair_type": "constant_name"
+    },
+    {
+      "audit_id": "dev_7b71945b986d",
+      "request_id": "dev_base::content_word::p20/d2377",
+      "doc_id": "p20/d2377",
+      "repair_type": "content_word"
+    },
+    {
+      "audit_id": "dev_2a0ea23709be",
+      "request_id": "dev_base::tense::p06/d2204",
+      "doc_id": "p06/d2204",
+      "repair_type": "tense"
+    },
+    {
+      "audit_id": "dev_74c7b713a535",
+      "request_id": "dev_base::constant_name::p65/d2750",
+      "doc_id": "p65/d2750",
+      "repair_type": "constant_name"
+    },
+    {
+      "audit_id": "dev_2ca175411a35",
+      "request_id": "dev_base::content_word::p90/d1914",
+      "doc_id": "p90/d1914",
+      "repair_type": "content_word"
+    },
+    {
+      "audit_id": "dev_1736629ba6a8",
+      "request_id": "dev_base::content_word::p48/d2803",
+      "doc_id": "p48/d2803",
+      "repair_type": "content_word"
+    },
+    {
+      "audit_id": "dev_76ee84f12675",
+      "request_id": "dev_base::constant_name::p75/d1389",
+      "doc_id": "p75/d1389",
+      "repair_type": "constant_name"
+    },
+    {
+      "audit_id": "dev_41062e07ebf3",
+      "request_id": "dev_base::forwarding::p82/d1968",
+      "doc_id": "p82/d1968",
+      "repair_type": "forwarding"
+    },
+    {
+      "audit_id": "dev_1db1d2266420",
+      "request_id": "dev_base::forwarding::p38/d1794",
+      "doc_id": "p38/d1794",
+      "repair_type": "forwarding"
+    },
+    {
+      "audit_id": "dev_fda0b4cd0dc8",
+      "request_id": "dev_base::forwarding::p00/d3506",
+      "doc_id": "p00/d3506",
+      "repair_type": "forwarding"
+    },
+    {
+      "audit_id": "dev_1dadcecac53a",
+      "request_id": "dev_base::constant_number::p14/d2823",
+      "doc_id": "p14/d2823",
+      "repair_type": "constant_number"
+    },
+    {
+      "audit_id": "dev_a34b5771636e",
+      "request_id": "dev_edge_direction::edge_label::p00/d3420",
+      "doc_id": "p00/d3420",
+      "repair_type": "edge_label"
+    },
+    {
+      "audit_id": "dev_185e896a0d07",
+      "request_id": "dev_base::content_word::p60/d2098",
+      "doc_id": "p60/d2098",
+      "repair_type": "content_word"
+    },
+    {
+      "audit_id": "dev_aaba928c95dc",
+      "request_id": "dev_base::tense::p40/d2847",
+      "doc_id": "p40/d2847",
+      "repair_type": "tense"
+    },
+    {
+      "audit_id": "dev_f56a454ef63a",
+      "request_id": "dev_base::forwarding::p74/d2877",
+      "doc_id": "p74/d2877",
+      "repair_type": "forwarding"
+    },
+    {
+      "audit_id": "dev_b0d1d72a155f",
+      "request_id": "dev_base::constant_number::p05/d2691",
+      "doc_id": "p05/d2691",
+      "repair_type": "constant_number"
+    },
+    {
+      "audit_id": "dev_c48d8c7e6ee0",
+      "request_id": "dev_temporal_p1::constant_temporal::p78/d1403::site_4",
+      "doc_id": "p78/d1403",
+      "repair_type": "constant_temporal"
+    },
+    {
+      "audit_id": "dev_a2a756f83cfc",
+      "request_id": "dev_edge_direction::edge_label::p49/d3026",
+      "doc_id": "p49/d3026",
+      "repair_type": "edge_label"
+    },
+    {
+      "audit_id": "dev_0cfd33933e6c",
+      "request_id": "dev_base::content_word::p26/d1387",
+      "doc_id": "p26/d1387",
+      "repair_type": "content_word"
+    },
+    {
+      "audit_id": "dev_122e22fcbc65",
+      "request_id": "dev_temporal_p1::constant_temporal::p20/d2647::site_4",
+      "doc_id": "p20/d2647",
+      "repair_type": "constant_temporal"
+    },
+    {
+      "audit_id": "dev_5943bd2fb14b",
+      "request_id": "dev_base::constant_number::p87/d0715",
+      "doc_id": "p87/d0715",
+      "repair_type": "constant_number"
+    },
+    {
+      "audit_id": "dev_f7041dde715e",
+      "request_id": "dev_edge_direction::edge_label::p01/d0913",
+      "doc_id": "p01/d0913",
+      "repair_type": "edge_label"
+    },
+    {
+      "audit_id": "dev_bda2625f0cbe",
+      "request_id": "dev_edge_place::edge_label::p56/d2410::site_1",
+      "doc_id": "p56/d2410",
+      "repair_type": "edge_label"
+    },
+    {
+      "audit_id": "dev_5b178bf3d116",
+      "request_id": "dev_temporal_p1::constant_temporal::p92/d1432::site_4",
+      "doc_id": "p92/d1432",
+      "repair_type": "constant_temporal"
+    },
+    {
+      "audit_id": "dev_ef9b80644519",
+      "request_id": "dev_base::tense::p62/d1558",
+      "doc_id": "p62/d1558",
+      "repair_type": "tense"
+    },
+    {
+      "audit_id": "dev_063b7bd43d18",
+      "request_id": "dev_base::tense::p53/d2912",
+      "doc_id": "p53/d2912",
+      "repair_type": "tense"
+    },
+    {
+      "audit_id": "dev_1b9e1770f182",
+      "request_id": "dev_base::content_word::p01/d2355",
+      "doc_id": "p01/d2355",
+      "repair_type": "content_word"
+    },
+    {
+      "audit_id": "dev_472e07563b84",
+      "request_id": "dev_base::forwarding::p22/d2422",
+      "doc_id": "p22/d2422",
+      "repair_type": "forwarding"
+    },
+    {
+      "audit_id": "dev_9a198452de23",
+      "request_id": "dev_edge_place::edge_label::p19/d0760::site_1",
+      "doc_id": "p19/d0760",
+      "repair_type": "edge_label"
+    },
+    {
+      "audit_id": "dev_788c0eccdf60",
+      "request_id": "dev_edge_direction::edge_label::p09/d2733",
+      "doc_id": "p09/d2733",
+      "repair_type": "edge_label"
+    },
+    {
+      "audit_id": "dev_1faf03d7b510",
+      "request_id": "dev_temporal_p1::constant_temporal::p52/d2428::site_3",
+      "doc_id": "p52/d2428",
+      "repair_type": "constant_temporal"
+    },
+    {
+      "audit_id": "dev_731b2417605d",
+      "request_id": "dev_base::constant_number::p56/d2580",
+      "doc_id": "p56/d2580",
+      "repair_type": "constant_number"
+    },
+    {
+      "audit_id": "dev_7b0b9d1f3950",
+      "request_id": "dev_base::constant_number::p68/d3432",
+      "doc_id": "p68/d3432",
+      "repair_type": "constant_number"
+    },
+    {
+      "audit_id": "dev_082aa6d9c8b1",
+      "request_id": "dev_base::forwarding::p71/d1936",
+      "doc_id": "p71/d1936",
+      "repair_type": "forwarding"
+    },
+    {
+      "audit_id": "dev_b6609b57b11c",
+      "request_id": "dev_base::constant_number::p45/d3191",
+      "doc_id": "p45/d3191",
+      "repair_type": "constant_number"
+    },
+    {
+      "audit_id": "dev_a788d781b867",
+      "request_id": "dev_base::constant_name::p97/d1873",
+      "doc_id": "p97/d1873",
+      "repair_type": "constant_name"
+    },
+    {
+      "audit_id": "dev_363f341b3ea6",
+      "request_id": "dev_edge_direction::edge_label::p66/d3306",
+      "doc_id": "p66/d3306",
+      "repair_type": "edge_label"
+    },
+    {
+      "audit_id": "dev_0c0a40e6e9b8",
+      "request_id": "dev_edge_direction::edge_label::p57/d1538",
+      "doc_id": "p57/d1538",
+      "repair_type": "edge_label"
+    },
+    {
+      "audit_id": "dev_79f8a6dbca8e",
+      "request_id": "dev_base::content_word::p02/d1387",
+      "doc_id": "p02/d1387",
+      "repair_type": "content_word"
+    },
+    {
+      "audit_id": "dev_2b19d16e87a5",
+      "request_id": "dev_base::constant_number::p07/d3302",
+      "doc_id": "p07/d3302",
+      "repair_type": "constant_number"
+    },
+    {
+      "audit_id": "dev_06a94b729642",
+      "request_id": "dev_edge_place::edge_label::p23/d1518::site_2",
+      "doc_id": "p23/d1518",
+      "repair_type": "edge_label"
+    },
+    {
+      "audit_id": "dev_f01e6e1cf3db",
+      "request_id": "dev_base::constant_name::p14/d2006",
+      "doc_id": "p14/d2006",
+      "repair_type": "constant_name"
+    },
+    {
+      "audit_id": "dev_f1abf2d44aac",
+      "request_id": "dev_edge_direction::edge_label::p35/d1816",
+      "doc_id": "p35/d1816",
+      "repair_type": "edge_label"
+    },
+    {
+      "audit_id": "dev_fd09c5e9b1fb",
+      "request_id": "dev_base::content_word::p49/d0035",
+      "doc_id": "p49/d0035",
+      "repair_type": "content_word"
+    },
+    {
+      "audit_id": "dev_ce1d6219e69d",
+      "request_id": "dev_base::forwarding::p80/d1588",
+      "doc_id": "p80/d1588",
+      "repair_type": "forwarding"
+    },
+    {
+      "audit_id": "dev_351f257e0120",
+      "request_id": "dev_base::constant_number::p48/d3229",
+      "doc_id": "p48/d3229",
+      "repair_type": "constant_number"
+    },
+    {
+      "audit_id": "dev_a71e343cf163",
+      "request_id": "dev_base::forwarding::p89/d2225",
+      "doc_id": "p89/d2225",
+      "repair_type": "forwarding"
+    },
+    {
+      "audit_id": "dev_f415055c36a6",
+      "request_id": "dev_base::tense::p83/d3507",
+      "doc_id": "p83/d3507",
+      "repair_type": "tense"
+    },
+    {
+      "audit_id": "dev_7d9a5ab02057",
+      "request_id": "dev_base::constant_name::p51/d1394",
+      "doc_id": "p51/d1394",
+      "repair_type": "constant_name"
+    },
+    {
+      "audit_id": "dev_5922bc17ea1f",
+      "request_id": "dev_base::constant_name::p00/d1957",
+      "doc_id": "p00/d1957",
+      "repair_type": "constant_name"
+    },
+    {
+      "audit_id": "dev_dcb7f392da55",
+      "request_id": "dev_base::forwarding::p89/d2562",
+      "doc_id": "p89/d2562",
+      "repair_type": "forwarding"
+    },
+    {
+      "audit_id": "dev_d2c66b79aaf3",
+      "request_id": "dev_base::forwarding::p73/d2984",
+      "doc_id": "p73/d2984",
+      "repair_type": "forwarding"
+    },
+    {
+      "audit_id": "dev_e0c6a8e6ac83",
+      "request_id": "dev_base::forwarding::p56/d1914",
+      "doc_id": "p56/d1914",
+      "repair_type": "forwarding"
+    },
+    {
+      "audit_id": "dev_cc07102ab8a8",
+      "request_id": "dev_base::content_word::p00/d0913",
+      "doc_id": "p00/d0913",
+      "repair_type": "content_word"
+    },
+    {
+      "audit_id": "dev_b90eb3a40584",
+      "request_id": "dev_base::content_word::p44/d0886",
+      "doc_id": "p44/d0886",
+      "repair_type": "content_word"
+    },
+    {
+      "audit_id": "dev_17ddeeff9a38",
+      "request_id": "dev_base::content_word::p91/d3513",
+      "doc_id": "p91/d3513",
+      "repair_type": "content_word"
+    },
+    {
+      "audit_id": "dev_f09b94dfdc77",
+      "request_id": "dev_base::constant_name::p79/d1391",
+      "doc_id": "p79/d1391",
+      "repair_type": "constant_name"
+    },
+    {
+      "audit_id": "dev_70e9e551e68a",
+      "request_id": "dev_base::tense::p74/d1889",
+      "doc_id": "p74/d1889",
+      "repair_type": "tense"
+    },
+    {
+      "audit_id": "dev_3e448a2f3dbe",
+      "request_id": "dev_base::tense::p96/d1316",
+      "doc_id": "p96/d1316",
+      "repair_type": "tense"
+    },
+    {
+      "audit_id": "dev_835d3671adeb",
+      "request_id": "dev_base::tense::p89/d1726",
+      "doc_id": "p89/d1726",
+      "repair_type": "tense"
+    },
+    {
+      "audit_id": "dev_0ce469c0e22d",
+      "request_id": "dev_base::content_word::p92/d1846",
+      "doc_id": "p92/d1846",
+      "repair_type": "content_word"
+    },
+    {
+      "audit_id": "dev_df4a855e8a21",
+      "request_id": "dev_edge_place::edge_label::p13/d3153::site_1",
+      "doc_id": "p13/d3153",
+      "repair_type": "edge_label"
+    },
+    {
+      "audit_id": "dev_ad215c87c373",
+      "request_id": "dev_base::content_word::p31/d3385",
+      "doc_id": "p31/d3385",
+      "repair_type": "content_word"
+    },
+    {
+      "audit_id": "dev_3f8fca001f3a",
+      "request_id": "dev_base::forwarding::p90/d0718",
+      "doc_id": "p90/d0718",
+      "repair_type": "forwarding"
+    },
+    {
+      "audit_id": "dev_e2a42257eaaa",
+      "request_id": "dev_base::content_word::p20/d1451",
+      "doc_id": "p20/d1451",
+      "repair_type": "content_word"
+    },
+    {
+      "audit_id": "dev_de253aa4d13f",
+      "request_id": "dev_base::forwarding::p97/d1694",
+      "doc_id": "p97/d1694",
+      "repair_type": "forwarding"
+    },
+    {
+      "audit_id": "dev_ab589969cac2",
+      "request_id": "dev_base::constant_name::p56/d3452",
+      "doc_id": "p56/d3452",
+      "repair_type": "constant_name"
+    },
+    {
+      "audit_id": "dev_c19d5d7a5d8b",
+      "request_id": "dev_temporal_p1::constant_temporal::p65/d2278::site_4",
+      "doc_id": "p65/d2278",
+      "repair_type": "constant_temporal"
+    },
+    {
+      "audit_id": "dev_4da54d4f809b",
+      "request_id": "dev_base::forwarding::p30/d0927",
+      "doc_id": "p30/d0927",
+      "repair_type": "forwarding"
+    },
+    {
+      "audit_id": "dev_3a50edb48a00",
+      "request_id": "dev_base::constant_number::p53/d1483",
+      "doc_id": "p53/d1483",
+      "repair_type": "constant_number"
+    },
+    {
+      "audit_id": "dev_b79ec479d353",
+      "request_id": "dev_base::tense::p88/d0035",
+      "doc_id": "p88/d0035",
+      "repair_type": "tense"
+    },
+    {
+      "audit_id": "dev_b2b06fb9c15f",
+      "request_id": "dev_base::tense::p10/d2435",
+      "doc_id": "p10/d2435",
+      "repair_type": "tense"
+    },
+    {
+      "audit_id": "dev_ae4f7df81a56",
+      "request_id": "dev_temporal_p1::constant_temporal::p00/d3178::site_4",
+      "doc_id": "p00/d3178",
+      "repair_type": "constant_temporal"
+    },
+    {
+      "audit_id": "dev_46b82c7d4f5e",
+      "request_id": "dev_base::tense::p14/d1178",
+      "doc_id": "p14/d1178",
+      "repair_type": "tense"
+    },
+    {
+      "audit_id": "dev_a040df8d1279",
+      "request_id": "dev_base::content_word::p03/d3218",
+      "doc_id": "p03/d3218",
+      "repair_type": "content_word"
+    },
+    {
+      "audit_id": "dev_cc1811486cff",
+      "request_id": "dev_edge_direction::edge_label::p79/d2248",
+      "doc_id": "p79/d2248",
+      "repair_type": "edge_label"
+    },
+    {
+      "audit_id": "dev_377f8de95f87",
+      "request_id": "dev_base::forwarding::p99/d2811",
+      "doc_id": "p99/d2811",
+      "repair_type": "forwarding"
+    },
+    {
+      "audit_id": "dev_e3cd00c6708e",
+      "request_id": "dev_base::constant_name::p97/d0898",
+      "doc_id": "p97/d0898",
+      "repair_type": "constant_name"
+    },
+    {
+      "audit_id": "dev_88c17ba4e9b6",
+      "request_id": "dev_base::forwarding::p30/d2630",
+      "doc_id": "p30/d2630",
+      "repair_type": "forwarding"
+    },
+    {
+      "audit_id": "dev_402543d09647",
+      "request_id": "dev_base::constant_name::p11/d1390",
+      "doc_id": "p11/d1390",
+      "repair_type": "constant_name"
+    },
+    {
+      "audit_id": "dev_439dd72d317e",
+      "request_id": "dev_base::constant_number::p48/d1618",
+      "doc_id": "p48/d1618",
+      "repair_type": "constant_number"
+    },
+    {
+      "audit_id": "dev_cc23973078a3",
+      "request_id": "dev_base::constant_name::p36/d1387",
+      "doc_id": "p36/d1387",
+      "repair_type": "constant_name"
+    },
+    {
+      "audit_id": "dev_2039e6c7513b",
+      "request_id": "dev_base::forwarding::p87/d0763",
+      "doc_id": "p87/d0763",
+      "repair_type": "forwarding"
+    },
+    {
+      "audit_id": "dev_ffd36d8ac5da",
+      "request_id": "dev_base::tense::p57/d2676",
+      "doc_id": "p57/d2676",
+      "repair_type": "tense"
+    },
+    {
+      "audit_id": "dev_f5e0d4b0d151",
+      "request_id": "dev_base::forwarding::p87/d3138",
+      "doc_id": "p87/d3138",
+      "repair_type": "forwarding"
+    },
+    {
+      "audit_id": "dev_9522be5e12da",
+      "request_id": "dev_base::constant_number::p29/d3437",
+      "doc_id": "p29/d3437",
+      "repair_type": "constant_number"
+    },
+    {
+      "audit_id": "dev_d2f8a6ef5f28",
+      "request_id": "dev_base::content_word::p06/d3008",
+      "doc_id": "p06/d3008",
+      "repair_type": "content_word"
+    },
+    {
+      "audit_id": "dev_3e41c7ee1ea8",
+      "request_id": "dev_base::content_word::p29/d1384",
+      "doc_id": "p29/d1384",
+      "repair_type": "content_word"
+    },
+    {
+      "audit_id": "dev_a59bd1666281",
+      "request_id": "dev_base::forwarding::p80/d1426",
+      "doc_id": "p80/d1426",
+      "repair_type": "forwarding"
+    },
+    {
+      "audit_id": "dev_09326baba398",
+      "request_id": "dev_base::content_word::p68/d2806",
+      "doc_id": "p68/d2806",
+      "repair_type": "content_word"
+    },
+    {
+      "audit_id": "dev_a0ac458272e4",
+      "request_id": "dev_base::constant_name::p17/d0812",
+      "doc_id": "p17/d0812",
+      "repair_type": "constant_name"
+    },
+    {
+      "audit_id": "dev_a0fc39c65690",
+      "request_id": "dev_base::constant_name::p99/d1836",
+      "doc_id": "p99/d1836",
+      "repair_type": "constant_name"
+    },
+    {
+      "audit_id": "dev_2ec50d094bca",
+      "request_id": "dev_base::tense::p37/d1470",
+      "doc_id": "p37/d1470",
+      "repair_type": "tense"
+    },
+    {
+      "audit_id": "dev_bc3b38302b1b",
+      "request_id": "dev_base::content_word::p01/d0801",
+      "doc_id": "p01/d0801",
+      "repair_type": "content_word"
+    },
+    {
+      "audit_id": "dev_6f9d54d16813",
+      "request_id": "dev_base::tense::p55/d0889",
+      "doc_id": "p55/d0889",
+      "repair_type": "tense"
+    },
+    {
+      "audit_id": "dev_1328933b927c",
+      "request_id": "dev_base::forwarding::p07/d2140",
+      "doc_id": "p07/d2140",
+      "repair_type": "forwarding"
+    },
+    {
+      "audit_id": "dev_5cfd6a492bac",
+      "request_id": "dev_base::content_word::p47/d3549",
+      "doc_id": "p47/d3549",
+      "repair_type": "content_word"
+    },
+    {
+      "audit_id": "dev_b7faba25dc06",
+      "request_id": "dev_edge_place::edge_label::p65/d2278::site_2",
+      "doc_id": "p65/d2278",
+      "repair_type": "edge_label"
+    },
+    {
+      "audit_id": "dev_9c9e4422eac3",
+      "request_id": "dev_base::tense::p60/d1471",
+      "doc_id": "p60/d1471",
+      "repair_type": "tense"
+    },
+    {
+      "audit_id": "dev_2eddbc068a52",
+      "request_id": "dev_temporal_p1::constant_temporal::p34/d2581::site_4",
+      "doc_id": "p34/d2581",
+      "repair_type": "constant_temporal"
+    },
+    {
+      "audit_id": "dev_942826d5f574",
+      "request_id": "dev_base::tense::p68/d0761",
+      "doc_id": "p68/d0761",
+      "repair_type": "tense"
+    },
+    {
+      "audit_id": "dev_30512c72a463",
+      "request_id": "dev_edge_direction::edge_label::p37/d2812",
+      "doc_id": "p37/d2812",
+      "repair_type": "edge_label"
+    },
+    {
+      "audit_id": "dev_dcc69a0a4de9",
+      "request_id": "dev_temporal_p1::constant_temporal::p53/d0711::site_3",
+      "doc_id": "p53/d0711",
+      "repair_type": "constant_temporal"
+    },
+    {
+      "audit_id": "dev_8b247bdb7076",
+      "request_id": "dev_base::tense::p06/d0847",
+      "doc_id": "p06/d0847",
+      "repair_type": "tense"
+    },
+    {
+      "audit_id": "dev_f85ebd3c4e0e",
+      "request_id": "dev_temporal_p1::constant_temporal::p50/d3343::site_3",
+      "doc_id": "p50/d3343",
+      "repair_type": "constant_temporal"
+    },
+    {
+      "audit_id": "dev_d8dec99a9440",
+      "request_id": "dev_base::constant_name::p62/d2047",
+      "doc_id": "p62/d2047",
+      "repair_type": "constant_name"
+    },
+    {
+      "audit_id": "dev_17eecfde67cd",
+      "request_id": "dev_base::tense::p18/d0891",
+      "doc_id": "p18/d0891",
+      "repair_type": "tense"
+    },
+    {
+      "audit_id": "dev_ca72d7f6893e",
+      "request_id": "dev_base::content_word::p20/d2314",
+      "doc_id": "p20/d2314",
+      "repair_type": "content_word"
+    },
+    {
+      "audit_id": "dev_788419b60176",
+      "request_id": "dev_base::content_word::p82/d0716",
+      "doc_id": "p82/d0716",
+      "repair_type": "content_word"
+    },
+    {
+      "audit_id": "dev_60448cf3142f",
+      "request_id": "dev_edge_direction::edge_label::p84/d3288",
+      "doc_id": "p84/d3288",
+      "repair_type": "edge_label"
+    },
+    {
+      "audit_id": "dev_d79d38d12357",
+      "request_id": "dev_base::forwarding::p87/d1813",
+      "doc_id": "p87/d1813",
+      "repair_type": "forwarding"
+    },
+    {
+      "audit_id": "dev_dd036d7427a0",
+      "request_id": "dev_base::constant_number::p01/d2704",
+      "doc_id": "p01/d2704",
+      "repair_type": "constant_number"
+    },
+    {
+      "audit_id": "dev_19185a015403",
+      "request_id": "dev_base::constant_name::p56/d1392",
+      "doc_id": "p56/d1392",
+      "repair_type": "constant_name"
+    },
+    {
+      "audit_id": "dev_8c00b43ba940",
+      "request_id": "dev_temporal_p1::constant_temporal::p90/d2704::site_3",
+      "doc_id": "p90/d2704",
+      "repair_type": "constant_temporal"
+    },
+    {
+      "audit_id": "dev_81ac3b2615a5",
+      "request_id": "dev_base::forwarding::p99/d0712",
+      "doc_id": "p99/d0712",
+      "repair_type": "forwarding"
+    },
+    {
+      "audit_id": "dev_9e55870ec304",
+      "request_id": "dev_base::content_word::p08/d3236",
+      "doc_id": "p08/d3236",
+      "repair_type": "content_word"
+    },
+    {
+      "audit_id": "dev_dcde16b59e84",
+      "request_id": "dev_base::constant_number::p95/d0059",
+      "doc_id": "p95/d0059",
+      "repair_type": "constant_number"
+    },
+    {
+      "audit_id": "dev_019d4e55f40b",
+      "request_id": "dev_base::constant_number::p40/d2290",
+      "doc_id": "p40/d2290",
+      "repair_type": "constant_number"
+    },
+    {
+      "audit_id": "dev_8be4a734f301",
+      "request_id": "dev_base::tense::p78/d0039",
+      "doc_id": "p78/d0039",
+      "repair_type": "tense"
+    },
+    {
+      "audit_id": "dev_8b6aeed969d6",
+      "request_id": "dev_base::constant_name::p81/d1382",
+      "doc_id": "p81/d1382",
+      "repair_type": "constant_name"
+    },
+    {
+      "audit_id": "dev_0e0721c8da67",
+      "request_id": "dev_base::constant_name::p01/d1921",
+      "doc_id": "p01/d1921",
+      "repair_type": "constant_name"
+    },
+    {
+      "audit_id": "dev_4d1a9c2c8502",
+      "request_id": "dev_base::constant_name::p57/d0762",
+      "doc_id": "p57/d0762",
+      "repair_type": "constant_name"
+    },
+    {
+      "audit_id": "dev_b19613434f61",
+      "request_id": "dev_base::content_word::p18/d2880",
+      "doc_id": "p18/d2880",
+      "repair_type": "content_word"
+    },
+    {
+      "audit_id": "dev_37d5c2cd60e9",
+      "request_id": "dev_base::content_word::p55/d1315",
+      "doc_id": "p55/d1315",
+      "repair_type": "content_word"
+    },
+    {
+      "audit_id": "dev_89b333e944bd",
+      "request_id": "dev_base::constant_number::p91/d2755",
+      "doc_id": "p91/d2755",
+      "repair_type": "constant_number"
+    },
+    {
+      "audit_id": "dev_b4ac9a9e0e1b",
+      "request_id": "dev_base::content_word::p99/d2399",
+      "doc_id": "p99/d2399",
+      "repair_type": "content_word"
+    },
+    {
+      "audit_id": "dev_d20027d5c787",
+      "request_id": "dev_base::content_word::p21/d1983",
+      "doc_id": "p21/d1983",
+      "repair_type": "content_word"
+    },
+    {
+      "audit_id": "dev_2b0e8fdab720",
+      "request_id": "dev_base::forwarding::p49/d0942",
+      "doc_id": "p49/d0942",
+      "repair_type": "forwarding"
+    },
+    {
+      "audit_id": "dev_a4905c0d2189",
+      "request_id": "dev_base::constant_number::p32/d3310",
+      "doc_id": "p32/d3310",
+      "repair_type": "constant_number"
+    },
+    {
+      "audit_id": "dev_e68813b10348",
+      "request_id": "dev_base::constant_number::p11/d1772",
+      "doc_id": "p11/d1772",
+      "repair_type": "constant_number"
+    },
+    {
+      "audit_id": "dev_26374c0d6a2d",
+      "request_id": "dev_base::content_word::p78/d1424",
+      "doc_id": "p78/d1424",
+      "repair_type": "content_word"
+    },
+    {
+      "audit_id": "dev_1ab3183e100a",
+      "request_id": "dev_base::constant_number::p90/d2483",
+      "doc_id": "p90/d2483",
+      "repair_type": "constant_number"
+    },
+    {
+      "audit_id": "dev_2b1417c5ff99",
+      "request_id": "dev_base::constant_number::p39/d1194",
+      "doc_id": "p39/d1194",
+      "repair_type": "constant_number"
+    },
+    {
+      "audit_id": "dev_8057193cef49",
+      "request_id": "dev_edge_direction::edge_label::p78/d1403",
+      "doc_id": "p78/d1403",
+      "repair_type": "edge_label"
+    },
+    {
+      "audit_id": "dev_01047c035fdf",
+      "request_id": "dev_base::forwarding::p61/d0857",
+      "doc_id": "p61/d0857",
+      "repair_type": "forwarding"
+    },
+    {
+      "audit_id": "dev_0ec8335e0a23",
+      "request_id": "dev_edge_place::edge_label::p29/d1851::site_2",
+      "doc_id": "p29/d1851",
+      "repair_type": "edge_label"
+    },
+    {
+      "audit_id": "dev_2a8dcd57495e",
+      "request_id": "dev_base::constant_name::p19/d2615",
+      "doc_id": "p19/d2615",
+      "repair_type": "constant_name"
+    },
+    {
+      "audit_id": "dev_fb7bf2890494",
+      "request_id": "dev_base::tense::p01/d3508",
+      "doc_id": "p01/d3508",
+      "repair_type": "tense"
+    },
+    {
+      "audit_id": "dev_7a70803543a3",
+      "request_id": "dev_temporal_p1::constant_temporal::p81/d1391::site_5",
+      "doc_id": "p81/d1391",
+      "repair_type": "constant_temporal"
+    },
+    {
+      "audit_id": "dev_ee727c80b1cc",
+      "request_id": "dev_base::forwarding::p02/d2479",
+      "doc_id": "p02/d2479",
+      "repair_type": "forwarding"
+    },
+    {
+      "audit_id": "dev_ab7d1d9a48f6",
+      "request_id": "dev_base::forwarding::p57/d0761",
+      "doc_id": "p57/d0761",
+      "repair_type": "forwarding"
+    },
+    {
+      "audit_id": "dev_3a2bcd5b07a6",
+      "request_id": "dev_base::constant_name::p13/d1384",
+      "doc_id": "p13/d1384",
+      "repair_type": "constant_name"
+    },
+    {
+      "audit_id": "dev_7096f0b71904",
+      "request_id": "dev_base::constant_name::p13/d1382",
+      "doc_id": "p13/d1382",
+      "repair_type": "constant_name"
+    },
+    {
+      "audit_id": "dev_4e286f809df0",
+      "request_id": "dev_base::constant_number::p54/d0761",
+      "doc_id": "p54/d0761",
+      "repair_type": "constant_number"
+    },
+    {
+      "audit_id": "dev_a20436dc7e4f",
+      "request_id": "dev_base::constant_name::p65/d1384",
+      "doc_id": "p65/d1384",
+      "repair_type": "constant_name"
+    },
+    {
+      "audit_id": "dev_5827a1bd7d15",
+      "request_id": "dev_base::forwarding::p00/d2060",
+      "doc_id": "p00/d2060",
+      "repair_type": "forwarding"
+    },
+    {
+      "audit_id": "dev_ce8f70bc50d8",
+      "request_id": "dev_base::constant_number::p26/d3121",
+      "doc_id": "p26/d3121",
+      "repair_type": "constant_number"
+    },
+    {
+      "audit_id": "dev_b5128077b92c",
+      "request_id": "dev_base::tense::p28/d1940",
+      "doc_id": "p28/d1940",
+      "repair_type": "tense"
+    },
+    {
+      "audit_id": "dev_70303beb6cb8",
+      "request_id": "dev_base::constant_number::p27/d2667",
+      "doc_id": "p27/d2667",
+      "repair_type": "constant_number"
+    },
+    {
+      "audit_id": "dev_410e8af1c66a",
+      "request_id": "dev_base::constant_name::p96/d2273",
+      "doc_id": "p96/d2273",
+      "repair_type": "constant_name"
+    },
+    {
+      "audit_id": "dev_5f8d3cabb4c6",
+      "request_id": "dev_base::constant_number::p02/d0713",
+      "doc_id": "p02/d0713",
+      "repair_type": "constant_number"
+    },
+    {
+      "audit_id": "dev_f0eab87bcb98",
+      "request_id": "dev_temporal_p2::constant_temporal::p70/d2345::site_0",
+      "doc_id": "p70/d2345",
+      "repair_type": "constant_temporal"
+    },
+    {
+      "audit_id": "dev_62defe5a1b98",
+      "request_id": "dev_temporal_p2::constant_temporal::p45/d3372::site_4",
+      "doc_id": "p45/d3372",
+      "repair_type": "constant_temporal"
+    },
+    {
+      "audit_id": "dev_acb8dcdf90b4",
+      "request_id": "dev_temporal_p2::constant_temporal::p17/d0764::site_3",
+      "doc_id": "p17/d0764",
+      "repair_type": "constant_temporal"
+    },
+    {
+      "audit_id": "dev_29bd65c8314f",
+      "request_id": "dev_temporal_p2::constant_temporal::p97/d0764::site_6",
+      "doc_id": "p97/d0764",
+      "repair_type": "constant_temporal"
+    },
+    {
+      "audit_id": "dev_c391a9b72336",
+      "request_id": "dev_temporal_p2::constant_temporal::p02/d0710::site_3",
+      "doc_id": "p02/d0710",
+      "repair_type": "constant_temporal"
+    },
+    {
+      "audit_id": "dev_63634a3ce772",
+      "request_id": "dev_temporal_p2::constant_temporal::p82/d2145::site_5",
+      "doc_id": "p82/d2145",
+      "repair_type": "constant_temporal"
+    },
+    {
+      "audit_id": "dev_ce8f169b3cb9",
+      "request_id": "dev_base::forwarding::p06/d0074",
+      "doc_id": "p06/d0074",
+      "repair_type": "forwarding"
+    },
+    {
+      "audit_id": "dev_f4dc0bc14ed7",
+      "request_id": "dev_temporal_p2::constant_temporal::p02/d0716::site_3",
+      "doc_id": "p02/d0716",
+      "repair_type": "constant_temporal"
+    },
+    {
+      "audit_id": "dev_80dfde2d2f5e",
+      "request_id": "dev_temporal_p1::constant_temporal::p23/d0143::site_3",
+      "doc_id": "p23/d0143",
+      "repair_type": "constant_temporal"
+    },
+    {
+      "audit_id": "dev_0645a37108a3",
+      "request_id": "dev_temporal_p2::constant_temporal::p12/d0347::site_5",
+      "doc_id": "p12/d0347",
+      "repair_type": "constant_temporal"
+    },
+    {
+      "audit_id": "dev_467448d85fc1",
+      "request_id": "dev_temporal_p1::constant_temporal::p13/d3497::site_3",
+      "doc_id": "p13/d3497",
+      "repair_type": "constant_temporal"
+    },
+    {
+      "audit_id": "dev_53c30178581f",
+      "request_id": "dev_base::constant_number::p62/d3296",
+      "doc_id": "p62/d3296",
+      "repair_type": "constant_number"
+    },
+    {
+      "audit_id": "dev_7eeef8abbefe",
+      "request_id": "dev_temporal_p2::constant_temporal::p93/d2799::site_1",
+      "doc_id": "p93/d2799",
+      "repair_type": "constant_temporal"
+    },
+    {
+      "audit_id": "dev_a27a5052f558",
+      "request_id": "dev_temporal_p2::constant_temporal::p30/d0714::site_4",
+      "doc_id": "p30/d0714",
+      "repair_type": "constant_temporal"
+    },
+    {
+      "audit_id": "dev_1cdb51544ec6",
+      "request_id": "dev_temporal_p2::constant_temporal::p44/d2573::site_3",
+      "doc_id": "p44/d2573",
+      "repair_type": "constant_temporal"
+    },
+    {
+      "audit_id": "dev_ee555c69dfdc",
+      "request_id": "dev_base::constant_number::p34/d1918",
+      "doc_id": "p34/d1918",
+      "repair_type": "constant_number"
+    },
+    {
+      "audit_id": "dev_0ea23d92d8ce",
+      "request_id": "dev_temporal_p2::constant_temporal::p84/d1183::site_0",
+      "doc_id": "p84/d1183",
+      "repair_type": "constant_temporal"
+    },
+    {
+      "audit_id": "dev_7140108e5a55",
+      "request_id": "dev_temporal_p2::constant_temporal::p81/d1844::site_3",
+      "doc_id": "p81/d1844",
+      "repair_type": "constant_temporal"
+    },
+    {
+      "audit_id": "dev_6f493c385c56",
+      "request_id": "dev_base::constant_number::p45/d1107",
+      "doc_id": "p45/d1107",
+      "repair_type": "constant_number"
+    }
+  ],
+  "input_sha256": {
+    "repair_data_gen/splits/dev/audit/dev_review_v1/items.tsv": "c8048c9b75ec3872a33ff6427f288df291de2bf64bfc179c8d12fa2720b61ae8",
+    "repair_data_gen/splits/dev/audit/dev_review_v1/labels.jsonl": "76c93fa52eb42c433a8d8cd3f4ffce79c7c00264a2bd4873e465d9dbc5b6d445",
+    "repair_data_gen/splits/dev/audit/dev_review_v1/curation.jsonl": "392aaa8ca7eabbfbf667192b822054a2925cfbe6193b33dc8ed8ffbeb4833a39",
+    "repair_data_gen/splits/dev/analysis/curation/remaining_types_proposal.json": "8bf6456cfdabd2c7399bc8e1811302cd43736591c1db6f167f1beb6f8d1a823b",
+    "repair_data_gen/splits/dev/marker_policy.json": "d9615a18ada4942807cc3657c784021a732b26be0c0648f01aafa81ed49d3b79"
+  }
+}

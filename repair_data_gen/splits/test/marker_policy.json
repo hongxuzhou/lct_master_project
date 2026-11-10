@@ -1,0 +1,28 @@
+{
+  "version": "test_markers_v1",
+  "mode": "paired",
+  "marked_variants_per_base": 1,
+  "retain_all_base": true,
+  "seen_markers": [
+    "I mean",
+    "no",
+    "no wait",
+    "actually"
+  ],
+  "held_out_markers": [
+    "sorry"
+  ],
+  "assignment_markers": [
+    "I mean",
+    "no",
+    "no wait",
+    "actually",
+    "sorry"
+  ],
+  "seed": 20261105,
+  "assignment": "shuffle_base_ids_within_repair_type_then_cycle_five_markers_with_global_cursor",
+  "balance": "counts_differ_by_at_most_one_globally_and_within_type",
+  "semantic_targets": "unchanged",
+  "review": "review_assigned_marked_forms_for_naturalness; record_unresolved_items_without_silent_reassignment",
+  "expansion": "additional_sorry_variants_are_a_separate_later_release"
+}

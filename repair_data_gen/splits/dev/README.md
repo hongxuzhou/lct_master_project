@@ -1,11 +1,28 @@
 # Development split workspace
 
-Status: first synthesis batch analysed; formal human-review pool prepared.
-No development dataset has been frozen.
+Status: 390 base repairs and 122 marked variants built and validated.
+The unified 1,706-row development Parquet is assembled locally with all
+1,194 fluent PMB dev documents and has passed local acceptance. It is published
+as `validation` in `Shrikes/repair-sbn` at commit
+`9b7d8812c49b4d7c6f922fd3ce996d019dc18a5c`; remote files and all rows match
+the accepted local snapshot. Results: `analysis/unified_validation/summary.json`.
+The publication receipt is `../../training_dataset/validation.publication.json`.
+Build it in the `repairsbn` environment from the repository root:
+
+```bash
+python -m repair_data_gen.training_dataset.build_dev
+```
+
+Output: `../../training_dataset/data/validation.parquet`, with the same
+20-column schema as train. Its build record is
+`../../training_dataset/validation.manifest.json`.
 
 The source is all 1,194 documents in PMB 5.1.0 English standard dev. The
-working design caps accepted base RSR items at 60 per repair type, retains all
-accepted base inputs, and appends marked variants for 30% of accepted sites.
+working design caps accepted base RSR items at 60 per repair type and retains
+all selected base inputs. The current `marker_policy.json` appends variants
+for all 122 identified multiple-reading items (31.3% of the 390-item base),
+with no random top-up. This supersedes the nominal 30% share in the immutable
+historical generation config.
 The four seen markers are `I mean`, `no`, `no wait` and `actually`; `sorry`
 is excluded for the held-out test probe.
 
@@ -38,7 +55,9 @@ not an active exclusion rule under this review policy.
 Use the `repairsbn` Python environment from the repository root:
 
 ```bash
-python -m repair_data_gen.shared_pipeline.prepare_dev_review
+python -m repair_data_gen.shared_pipeline.prepare_dev_review \
+  --analysis repair_data_gen/splits/dev/analysis/first_pass_rechecked \
+  --analysis repair_data_gen/splits/dev/analysis/followup
 python repair_data_gen/rsr_generation/audit.py serve \
   repair_data_gen/splits/dev/audit/dev_review_v1 --annotator hz --port 8766
 ```

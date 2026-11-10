@@ -70,3 +70,30 @@ these is the playground README at git tag `rsr-train-base-log`.
 | 10-24 | Select 30% globally: 1,047 base items; include all 482 ambiguous items, then sample 565 proportionally to remaining per-type pools (largest remainders, seed 20261024) | Per-type 30% cannot cover all ambiguous name and number items |
 | 10-24 | Append 1,047 scripted marked variants to all 3,489 base rows, including ambiguous unmarked rows; archive the replacement mixture | Simple additive construction: fluent, base RSR, then marked RSR with unchanged targets. Selected items receive extra row weight; 30% is relative to base items (23.1% of augmented RSR) |
 | 10-24 | Publish one unified Parquet with `editing_expression`, not the component TSV files; build the 9,486 fluent rows directly from PMB train gold through `holdout.load()` | One typed table prevents schema drift and makes the C1/C2/C3 target choice explicit; the frozen base keeps its legacy source column only to preserve its hash |
+
+
+## PMB test synthesis
+
+| date | decision | why |
+|---|---|---|
+| 11-03 | Use the seven-type LLM pipeline; review every machine-eligible base repair locally | Matches the implemented train/dev method; evaluation targets require full review |
+| 11-03 | Every accepted base receives one marked counterpart (2N); balance four seen expressions and held-out `sorry` | Paired marker effects without requiring an expanded sorry probe |
+| 11-03 | Replacement-pair overlap with train/dev is report-only; verify source IDs and exact text separation | Pair overlap in a different context is not sample leakage; unseen-pair generalisation is not the main claim |
+| 11-03 | Keep discourse challenges and non-RSR hard negatives separate from the basic PMB RSR test | They require distinct construction and later dataset configurations |
+| 11-03 | Initial batch: 507 requests; acceptance cap 60 per type, with shortfalls allowed and no reroll of answered failures | Reuse dev-scale quotas within actual test source availability without relaxing quality checks |
+| 11-09 | Use the same admission standard as train/dev. An ordinary alternative reading is an annotation, not a reason to exclude a plausible repair with a faithful SBN | The text-only test measures recovery of the intended synthetic repair, not which reading a listener would prefer |
+| 11-09 | Aim for 60 accepted bases per type during sampling; retain every eligible base. Report per-type results and an equal-weight mean across the seven types | Fill gaps in coverage without discarding good examples or making common types dominate the main score |
+| 11-09 | Leave reading preferences under controlled changes to speech or other non-text cues to a separate study | The current text pairs vary the editing expression, not prosody, pause length, or gesture |
+| 11-10 | Accept all 559 eligible bases and their assigned marked counterparts after a surface spot-check and full pairing checks | A cap of 60 would remove 144 eligible pairs; equal-weight aggregation preserves the seven-type comparison. No item-level naturalness claims are made for the marked variants |
+| 11-10 | Retain every eligible hard negative from the 66 held-out documents; verify the English and its non-RSR reading against scorable gold SBN, and report the original categories | The hold-out already defines the candidate pool. Perceived difficulty is not a second selection gate, and excluded evaluation items remain outside training |
+
+## Fluent split-reference integration (2026-11-05)
+
+| Decision | Reason |
+| --- | --- |
+| Append the 240 user-reviewed formal fluent documents as 200 train and 40 validation rows; exclude earlier pilots and challenge controls | Teach ordinary first-time plural group construction while retaining independent evaluation material |
+| Keep seven construction classes in both splits, with approximately matching proportions; preserve family, introductory-clause and near-template isolation | Integer quotas must not break related source groups; the largest train/dev construction-proportion gap is two percentage points |
+| Preserve all existing PMB/RSR fields and row order, and the exact previous published snapshot | The addition must not alter frozen RSR data or invalidate reproducibility of earlier experiments |
+| Add `fluent_split_reference` as a distinct variant and `data_origin`, `construction_type`, `family_id`, `partition_unit` as provenance fields | Synthetic fluent examples are neither PMB gold nor RSR; construction labels must not overload `repair_type` |
+| Map each new SBN to both target columns; include both fluent variants in C1 and all rows in C2/C3 | All conditions need identical ordinary-reference supervision, with the established condition-specific target policy |
+| Keep the new dataset local until publication and readback; use an explicit local model protocol | A local checksum-verified build is not a new Hub commit and must not silently replace old experiment revisions |
