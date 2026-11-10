@@ -1,0 +1,41 @@
+{
+  "status": "published and verified",
+  "repo_id": "Shrikes/repair-sbn",
+  "revision": "9b7d8812c49b4d7c6f922fd3ce996d019dc18a5c",
+  "commit_url": "https://huggingface.co/datasets/Shrikes/repair-sbn/commit/9b7d8812c49b4d7c6f922fd3ce996d019dc18a5c",
+  "private": false,
+  "rows": {
+    "train": 14022,
+    "validation": 1706
+  },
+  "variants": {
+    "train": {
+      "pmb_fluent": 9486,
+      "rsr_base": 3489,
+      "rsr_editing_expression": 1047
+    },
+    "validation": {
+      "pmb_fluent": 1194,
+      "rsr_base": 390,
+      "rsr_editing_expression": 122
+    }
+  },
+  "files_sha256": {
+    "README.md": "79c6a20db8a55a6941b71831752925fcaf002e3c198201d5f9509c919cf575b5",
+    "data/validation.parquet": "4da3ccd41ca52ae9af8fbec918b9adb4be8a5037bbf5d200fe8dd78ca90f5418",
+    "validation.manifest.json": "f5d81122d22e9281b6196ca6ed05f4524b1ee8132df74144af2058bfac54b828",
+    "validation.acceptance.json": "b35bd4791f98338628bcb5db791014dca01849f1f69b133d7dc6f73b78971a84",
+    "data/train.parquet": "42b4776c73019afa117a0b19f628081a038d143cb7bf5ff9bd09de98cd778144",
+    "manifest.json": "347709be619a412e663e3248780007b2f994542055ac1d69bd87d36e766ca14e"
+  },
+  "uploaded_files": [
+    "README.md",
+    "data/validation.parquet",
+    "validation.manifest.json",
+    "validation.acceptance.json"
+  ],
+  "readback": "exact file bytes and all rows match local; schemas match across splits",
+  "train_unchanged": true,
+  "test_published": false,
+  "verifier_sha256": "eb360794d0a1848d3e5940df63adb736eb6373405b09a0317209167129a8bf62"
+}

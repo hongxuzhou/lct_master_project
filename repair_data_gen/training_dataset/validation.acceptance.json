@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "split": "validation",
+  "file": "data/validation.parquet",
+  "sha256": "50438c041dc6b6611fba574b02d116a070598b6552f4a8882000bffd2592fd97",
+  "rows": 1746,
+  "report": "integration.acceptance.json",
+  "report_sha256": "af471429134b99150c413d350890d1d9f194ab369cb5768b7cf70111235a18b4"
+}

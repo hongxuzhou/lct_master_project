@@ -1,7 +1,9 @@
 {
+  "dataset_version": "fluent-groups-v1",
+  "schema_version": 2,
   "file": "data/train.parquet",
-  "sha256": "42b4776c73019afa117a0b19f628081a038d143cb7bf5ff9bd09de98cd778144",
-  "rows": 14022,
+  "sha256": "ea4c7ec28daa4d117444f0d1bd9ea183c11a7a36cc77853f28e61264455cdea5",
+  "rows": 14222,
   "columns": [
     "example_id",
     "item_id",
@@ -22,12 +24,31 @@
     "strategy",
     "wn_relation",
     "label_source",
-    "source"
+    "source",
+    "data_origin",
+    "construction_type",
+    "family_id",
+    "partition_unit"
   ],
   "variants": {
     "pmb_fluent": 9486,
     "rsr_base": 3489,
-    "rsr_editing_expression": 1047
+    "rsr_editing_expression": 1047,
+    "fluent_split_reference": 200
+  },
+  "origins": {
+    "pmb": 9486,
+    "synthetic_rsr": 4536,
+    "synthetic_fluent": 200
+  },
+  "fluent_construction_types": {
+    "same_clause": 66,
+    "separate_objects": 34,
+    "existential": 33,
+    "possession": 25,
+    "stative_contrast": 17,
+    "distinguished_same_noun": 8,
+    "separate_subjects": 17
   },
   "distinct_pmb_documents": 9486,
   "distinct_rsr_source_documents": 3165,
@@ -51,11 +72,23 @@
     },
     "builder": {
       "path": "repair_data_gen/training_dataset/build.py",
-      "sha256": "7223836e8254fd6f978b0509255e15b1e3de06a011727da7965e6fdbd6b447e4"
+      "sha256": "6920cad130bf35349d33ee421c4d67a8218b6ba478f657b85334cdf898f1185f"
+    },
+    "fluent_group_acceptance": {
+      "path": "repair_data_gen/training_dataset/fluent_group.acceptance.json",
+      "sha256": "08f7a970cde1442c03a269b2307297c93d7b776a825485e3bc3cb520b28942ae"
+    },
+    "fluent_group_source": {
+      "path": "repair_data_gen/fluent_group_synthesis_v1/train.candidates.jsonl",
+      "sha256": "318cf0d4884552ebcd3191bf42163d168b2a47824e9acde4f1d059560bad7f7b"
+    },
+    "fluent_group_adapter": {
+      "path": "repair_data_gen/training_dataset/fluent_groups.py",
+      "sha256": "4043c5b017870f8d806531144f4bbe296cbc8e86642962e72845eff174c51d66"
     }
   },
   "targets": {
-    "C1": "variant == 'pmb_fluent'; target = sbn_clean",
+    "C1": "variant in {'pmb_fluent', 'fluent_split_reference'}; target = sbn_clean",
     "C2": "all rows; target = sbn_clean",
     "C3": "all rows; target = sbn_repair"
   }

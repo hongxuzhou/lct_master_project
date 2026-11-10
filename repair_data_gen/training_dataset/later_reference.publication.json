@@ -1,0 +1,43 @@
+{
+  "status": "published_and_verified",
+  "repo_id": "Shrikes/repair-sbn",
+  "revision": "bd96edaa219521b1c04e304a67c4832370c1bbc8",
+  "parent_revision": "e0275f6c80dc07505440c0f76bb9269a637fb37c",
+  "files_sha256": {
+    "README.md": "927283298c95345404a35a1ec99a89ec6f76b90adea138cd36e2f5c1b39e29c4",
+    "SCHEMA.md": "b2819be08de6086cc9062ce3fc0d2bc858ef8ec73f976327573e6fda3480a116",
+    "later_reference/README.md": "eff8fe3e1567cf588582a9950bace5a7ee7415b21019792a64a4ccdb9f8ba5e3",
+    "later_reference/adjudications.json": "347c87fb95e58a41caad3b677994d32d94f880f02c9d1dfb1c3dd29f69ab0275",
+    "later_reference/manifest.json": "120be79ab13ae7e345060cfbdae8a0b8642a3bdd67ad7ba497103853bd41a6ba",
+    "later_reference/test.parquet": "6c4ca3ed53ddbb37134b1d0fec0ca0c425b6a8c5e405eaa58b737caa3c4c18de",
+    "later_reference/validation.json": "0cdf0ee13266a4cbfe8cfcbffab444c524159e47548c51b16a12d615e9677d4b"
+  },
+  "config": "later_reference",
+  "split": "test",
+  "dataset_version": "later-reference-v1",
+  "rows": 208,
+  "pairs": 104,
+  "schema_fields": 18,
+  "commit_url": "https://huggingface.co/datasets/Shrikes/repair-sbn/commit/bd96edaa219521b1c04e304a67c4832370c1bbc8",
+  "verified_files_sha256": {
+    ".gitattributes": "9e75dd981de037ec3769f24f790e126bc5a160b6871f510214e68dc70649aeeb",
+    "README.md": "927283298c95345404a35a1ec99a89ec6f76b90adea138cd36e2f5c1b39e29c4",
+    "SCHEMA.md": "b2819be08de6086cc9062ce3fc0d2bc858ef8ec73f976327573e6fda3480a116",
+    "data/train.parquet": "ea4c7ec28daa4d117444f0d1bd9ea183c11a7a36cc77853f28e61264455cdea5",
+    "data/validation.parquet": "50438c041dc6b6611fba574b02d116a070598b6552f4a8882000bffd2592fd97",
+    "fluent_group.acceptance.json": "08f7a970cde1442c03a269b2307297c93d7b776a825485e3bc3cb520b28942ae",
+    "integration.acceptance.json": "af471429134b99150c413d350890d1d9f194ab369cb5768b7cf70111235a18b4",
+    "later_reference/README.md": "eff8fe3e1567cf588582a9950bace5a7ee7415b21019792a64a4ccdb9f8ba5e3",
+    "later_reference/adjudications.json": "347c87fb95e58a41caad3b677994d32d94f880f02c9d1dfb1c3dd29f69ab0275",
+    "later_reference/manifest.json": "120be79ab13ae7e345060cfbdae8a0b8642a3bdd67ad7ba497103853bd41a6ba",
+    "later_reference/test.parquet": "6c4ca3ed53ddbb37134b1d0fec0ca0c425b6a8c5e405eaa58b737caa3c4c18de",
+    "later_reference/validation.json": "0cdf0ee13266a4cbfe8cfcbffab444c524159e47548c51b16a12d615e9677d4b",
+    "manifest.json": "9d346f54f7f402066e90e3be51277537a2f4854d760a463fc18e096d11d081f1",
+    "validation.acceptance.json": "3c56d2ed173608bf660fb331a384c612d2faf81a6f26d57ba2c7a7987bfcf3cd",
+    "validation.manifest.json": "ff5975b7abb65cf0bae831c5b7e3aca21e004686d58e781153f5b98aded2e75c"
+  },
+  "all_preexisting_non_document_files_unchanged": true,
+  "hf_config_discovery_verified": true,
+  "hf_dataset_load_exact_readback": true,
+  "publisher_sha256": "f138c8a23a1c134e0f926d27cd7c7ef4e81b403947ab7256117fbea440c3df1c"
+}

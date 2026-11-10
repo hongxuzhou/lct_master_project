@@ -1,0 +1,475 @@
+{
+  "status": "passed",
+  "split": "validation",
+  "file": "data/validation.parquet",
+  "sha256": "4da3ccd41ca52ae9af8fbec918b9adb4be8a5037bbf5d200fe8dd78ca90f5418",
+  "rows": 1706,
+  "assembly_manifest_sha256": "f5d81122d22e9281b6196ca6ed05f4524b1ee8132df74144af2058bfac54b828",
+  "local_acceptance_report": "repair_data_gen/splits/dev/analysis/unified_validation/summary.json",
+  "local_acceptance_report_sha256": "56dfc0d8725c2d58dcfdb8a3782594a7e359d9e3f9b1d67f673c96ae4b36aed0",
+  "checks": {
+    "schema_and_counts": {
+      "rows": 1706,
+      "columns": 20,
+      "variants": {
+        "pmb_fluent": 1194,
+        "rsr_base": 390,
+        "rsr_editing_expression": 122
+      },
+      "null_counts": {
+        "example_id": 0,
+        "item_id": 1194,
+        "doc_id": 0,
+        "variant": 0,
+        "text": 0,
+        "sbn_clean": 0,
+        "sbn_repair": 0,
+        "repair_type": 1194,
+        "editing_expression": 1584,
+        "ambiguity_type": 1462,
+        "repair_onset": 1194,
+        "reparandum_surface": 1194,
+        "reparandum_synset": 1194,
+        "reparandum_value": 1357,
+        "repair_synset": 1194,
+        "site_index": 1194,
+        "strategy": 1194,
+        "wn_relation": 1601,
+        "label_source": 0,
+        "source": 0
+      }
+    },
+    "source_and_pairs": {
+      "fluent_exact": 1194,
+      "rsr_exact": 512,
+      "base_items": 390,
+      "marked_pairs": 122,
+      "marker_counts": {
+        "no wait": 30,
+        "I mean": 31,
+        "no": 31,
+        "actually": 30
+      }
+    },
+    "isolation": {
+      "train_document_overlap": 0,
+      "train_example_id_overlap": 0,
+      "hard_negative_overlap": 0,
+      "exact_input_overlap_with_train": 0,
+      "source_surface_overlap_with_train_gold": 0,
+      "duplicate_dev_inputs": 0
+    },
+    "condition_views": {
+      "C1_rows": 1194,
+      "C2_rows": 1706,
+      "C3_rows": 1706,
+      "C2_input_digest": "e47b7cc09ac0622fb2b266b68ecb2eee30a8d9c00828b7fa87e33f831efdb109",
+      "C3_input_digest": "e47b7cc09ac0622fb2b266b68ecb2eee30a8d9c00828b7fa87e33f831efdb109",
+      "target_fields": {
+        "C1": "sbn_clean",
+        "C2": "sbn_clean",
+        "C3": "sbn_repair"
+      }
+    },
+    "semantics": {
+      "sbn_clean": 1706,
+      "sbn_repair": 1706,
+      "rsr_withdraw_untouched_wordnet": 512
+    },
+    "local_datasets_readback": "passed"
+  },
+  "tokenization": {
+    "instruction": "Please parse the following sentence to discourse representation structure:",
+    "user_content": "instruction + '\\n' + text",
+    "instruction_source": "documentation/model_experiment_pipeline.md, section 3.2",
+    "user_content_source": "colloquium_prep/data_prep_scripts/lora_data_prep/lora_data_gen.py",
+    "enable_thinking": false,
+    "training_max_length": 1024,
+    "generation_max_new_tokens": 512,
+    "loss": "assistant suffix only, including EOS",
+    "template_status": "formal-design audit format; formal trainer integration pending",
+    "models": {
+      "2B": {
+        "model_id": "Qwen/Qwen3.5-2B",
+        "revision": "15852e8c16360a2fea060d615a32b45270f8a8fc",
+        "tokenizer_files": {
+          "chat_template.jinja": "273d8e0e683b885071fb17e08d71e5f2a5ddfb5309756181681de4f5a1822d80",
+          "merges.txt": "a9d356d7bdf1ef4949e3e748e95b8e10ad9d4e2e838eddc38a0a7b6b94d1db8d",
+          "tokenizer.json": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+          "tokenizer_config.json": "49e2b6e395f959f077f1e992b338919c0d4a9732fc6e613995e06557f843500c",
+          "vocab.json": "ce99b4cb2983d118806ce0a8b777a35b093e2000a503ebde25853284c9dfa003"
+        },
+        "conditions": {
+          "C1": {
+            "rows": 1194,
+            "prompt_tokens": {
+              "min": 26,
+              "p50": 30,
+              "p95": 36,
+              "p99": 43,
+              "max": 50
+            },
+            "sequence_tokens": {
+              "min": 49,
+              "p50": 75,
+              "p95": 114,
+              "p99": 140,
+              "max": 219
+            },
+            "supervised_tokens": {
+              "min": 20,
+              "p50": 45,
+              "p95": 79,
+              "p99": 101,
+              "max": 176
+            },
+            "truncated_at_1024": 0,
+            "target_exceeds_512": 0,
+            "longest_example_ids": [
+              "pmb_dev::p80/d1147"
+            ]
+          },
+          "C2": {
+            "rows": 1706,
+            "prompt_tokens": {
+              "min": 26,
+              "p50": 31,
+              "p95": 40,
+              "p99": 46,
+              "max": 56
+            },
+            "sequence_tokens": {
+              "min": 49,
+              "p50": 78,
+              "p95": 117,
+              "p99": 136,
+              "max": 219
+            },
+            "supervised_tokens": {
+              "min": 20,
+              "p50": 46,
+              "p95": 80,
+              "p99": 97,
+              "max": 176
+            },
+            "truncated_at_1024": 0,
+            "target_exceeds_512": 0,
+            "longest_example_ids": [
+              "pmb_dev::p80/d1147"
+            ]
+          },
+          "C3": {
+            "rows": 1706,
+            "prompt_tokens": {
+              "min": 26,
+              "p50": 31,
+              "p95": 40,
+              "p99": 46,
+              "max": 56
+            },
+            "sequence_tokens": {
+              "min": 49,
+              "p50": 84,
+              "p95": 136,
+              "p99": 161,
+              "max": 219
+            },
+            "supervised_tokens": {
+              "min": 20,
+              "p50": 52,
+              "p95": 99,
+              "p99": 120,
+              "max": 176
+            },
+            "truncated_at_1024": 0,
+            "target_exceeds_512": 0,
+            "longest_example_ids": [
+              "pmb_dev::p80/d1147"
+            ]
+          }
+        },
+        "lengths_digest": "4dbdf60d647cb8cee71117b4bb8467c2f5679fa77fcd8a10a0417403cede0bc6"
+      },
+      "9B": {
+        "model_id": "Qwen/Qwen3.5-9B",
+        "revision": "c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+        "tokenizer_files": {
+          "chat_template.jinja": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715",
+          "merges.txt": "a9d356d7bdf1ef4949e3e748e95b8e10ad9d4e2e838eddc38a0a7b6b94d1db8d",
+          "tokenizer.json": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+          "tokenizer_config.json": "316230d6a809701f4db5ea8f8fc862bc3a6f3229c937c174e674ff3ca0a64ac8",
+          "vocab.json": "ce99b4cb2983d118806ce0a8b777a35b093e2000a503ebde25853284c9dfa003"
+        },
+        "conditions": {
+          "C1": {
+            "rows": 1194,
+            "prompt_tokens": {
+              "min": 26,
+              "p50": 30,
+              "p95": 36,
+              "p99": 43,
+              "max": 50
+            },
+            "sequence_tokens": {
+              "min": 49,
+              "p50": 75,
+              "p95": 114,
+              "p99": 140,
+              "max": 219
+            },
+            "supervised_tokens": {
+              "min": 20,
+              "p50": 45,
+              "p95": 79,
+              "p99": 101,
+              "max": 176
+            },
+            "truncated_at_1024": 0,
+            "target_exceeds_512": 0,
+            "longest_example_ids": [
+              "pmb_dev::p80/d1147"
+            ]
+          },
+          "C2": {
+            "rows": 1706,
+            "prompt_tokens": {
+              "min": 26,
+              "p50": 31,
+              "p95": 40,
+              "p99": 46,
+              "max": 56
+            },
+            "sequence_tokens": {
+              "min": 49,
+              "p50": 78,
+              "p95": 117,
+              "p99": 136,
+              "max": 219
+            },
+            "supervised_tokens": {
+              "min": 20,
+              "p50": 46,
+              "p95": 80,
+              "p99": 97,
+              "max": 176
+            },
+            "truncated_at_1024": 0,
+            "target_exceeds_512": 0,
+            "longest_example_ids": [
+              "pmb_dev::p80/d1147"
+            ]
+          },
+          "C3": {
+            "rows": 1706,
+            "prompt_tokens": {
+              "min": 26,
+              "p50": 31,
+              "p95": 40,
+              "p99": 46,
+              "max": 56
+            },
+            "sequence_tokens": {
+              "min": 49,
+              "p50": 84,
+              "p95": 136,
+              "p99": 161,
+              "max": 219
+            },
+            "supervised_tokens": {
+              "min": 20,
+              "p50": 52,
+              "p95": 99,
+              "p99": 120,
+              "max": 176
+            },
+            "truncated_at_1024": 0,
+            "target_exceeds_512": 0,
+            "longest_example_ids": [
+              "pmb_dev::p80/d1147"
+            ]
+          }
+        },
+        "lengths_digest": "4dbdf60d647cb8cee71117b4bb8467c2f5679fa77fcd8a10a0417403cede0bc6"
+      },
+      "27B": {
+        "model_id": "Qwen/Qwen3.5-27B",
+        "revision": "fc05daec18b0a78c049392ed2e771dde82bdf654",
+        "tokenizer_files": {
+          "chat_template.jinja": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715",
+          "merges.txt": "a9d356d7bdf1ef4949e3e748e95b8e10ad9d4e2e838eddc38a0a7b6b94d1db8d",
+          "tokenizer.json": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+          "tokenizer_config.json": "316230d6a809701f4db5ea8f8fc862bc3a6f3229c937c174e674ff3ca0a64ac8",
+          "vocab.json": "ce99b4cb2983d118806ce0a8b777a35b093e2000a503ebde25853284c9dfa003"
+        },
+        "conditions": {
+          "C1": {
+            "rows": 1194,
+            "prompt_tokens": {
+              "min": 26,
+              "p50": 30,
+              "p95": 36,
+              "p99": 43,
+              "max": 50
+            },
+            "sequence_tokens": {
+              "min": 49,
+              "p50": 75,
+              "p95": 114,
+              "p99": 140,
+              "max": 219
+            },
+            "supervised_tokens": {
+              "min": 20,
+              "p50": 45,
+              "p95": 79,
+              "p99": 101,
+              "max": 176
+            },
+            "truncated_at_1024": 0,
+            "target_exceeds_512": 0,
+            "longest_example_ids": [
+              "pmb_dev::p80/d1147"
+            ]
+          },
+          "C2": {
+            "rows": 1706,
+            "prompt_tokens": {
+              "min": 26,
+              "p50": 31,
+              "p95": 40,
+              "p99": 46,
+              "max": 56
+            },
+            "sequence_tokens": {
+              "min": 49,
+              "p50": 78,
+              "p95": 117,
+              "p99": 136,
+              "max": 219
+            },
+            "supervised_tokens": {
+              "min": 20,
+              "p50": 46,
+              "p95": 80,
+              "p99": 97,
+              "max": 176
+            },
+            "truncated_at_1024": 0,
+            "target_exceeds_512": 0,
+            "longest_example_ids": [
+              "pmb_dev::p80/d1147"
+            ]
+          },
+          "C3": {
+            "rows": 1706,
+            "prompt_tokens": {
+              "min": 26,
+              "p50": 31,
+              "p95": 40,
+              "p99": 46,
+              "max": 56
+            },
+            "sequence_tokens": {
+              "min": 49,
+              "p50": 84,
+              "p95": 136,
+              "p99": 161,
+              "max": 219
+            },
+            "supervised_tokens": {
+              "min": 20,
+              "p50": 52,
+              "p95": 99,
+              "p99": 120,
+              "max": 176
+            },
+            "truncated_at_1024": 0,
+            "target_exceeds_512": 0,
+            "longest_example_ids": [
+              "pmb_dev::p80/d1147"
+            ]
+          }
+        },
+        "lengths_digest": "4dbdf60d647cb8cee71117b4bb8467c2f5679fa77fcd8a10a0417403cede0bc6"
+      }
+    }
+  },
+  "versions": {
+    "pyarrow": "24.0.0",
+    "datasets": "5.1.0",
+    "transformers": "5.20.2",
+    "tokenizers": "0.23.3"
+  },
+  "limitations": {
+    "known_surface_holds": [
+      {
+        "request_id": "dev_base::constant_name::p10/d0963",
+        "repair_part": "rest of the sentence changed: repair part is not the end of the gold sentence"
+      }
+    ],
+    "lexical_pair_overlap_policy": "report_only; not an exclusion criterion",
+    "context_near_duplicate_checks": "not part of this acceptance; previously deferred"
+  },
+  "sources": {
+    "pmb_dev_standard": {
+      "path": "data/pmb-5.1.0/split/en/dev/standard.sbn",
+      "sha256": "111167f3a42b5c61db3567205ed2c1463e01d93f4e06b8c2aae8c0c6217b1770"
+    },
+    "rsr_base": {
+      "path": "repair_data_gen/splits/dev/dataset/dev_rsr.base.tsv",
+      "sha256": "d0806970876f28efdf4971b5549b88d6bd7dde6647938cbbf2c79b410f8bb0b9"
+    },
+    "rsr_augmented": {
+      "path": "repair_data_gen/splits/dev/dataset/dev_rsr.augmented.tsv",
+      "sha256": "d265032c8a3ecf704abf29f766c11ee7abb581081dc90f72b74a0bd2d7fd6525"
+    },
+    "base_manifest": {
+      "path": "repair_data_gen/splits/dev/manifests/base_build.json",
+      "sha256": "94be565c875e1db5564511c331a812459c32edb97467b0a244490b88c2a51718"
+    },
+    "marked_manifest": {
+      "path": "repair_data_gen/splits/dev/manifests/marked_build.json",
+      "sha256": "d5dd37dc42a2083da4ec9f1a0802b813052e43300a84a99b35bb6e914d1008ed"
+    },
+    "marker_policy": {
+      "path": "repair_data_gen/splits/dev/marker_policy.json",
+      "sha256": "d9615a18ada4942807cc3657c784021a732b26be0c0648f01aafa81ed49d3b79"
+    },
+    "train_schema_reference": {
+      "path": "repair_data_gen/training_dataset/data/train.parquet",
+      "sha256": "42b4776c73019afa117a0b19f628081a038d143cb7bf5ff9bd09de98cd778144"
+    },
+    "train_manifest": {
+      "path": "repair_data_gen/training_dataset/manifest.json",
+      "sha256": "347709be619a412e663e3248780007b2f994542055ac1d69bd87d36e766ca14e"
+    },
+    "hard_negative_holdout": {
+      "path": "repair_data_gen/hard_negatives/train_holdout.tsv",
+      "sha256": "9a29eab567953f7e1df42194328e8ebbf58690314c2f118dd3612546bce91f7d"
+    },
+    "builder": {
+      "path": "repair_data_gen/training_dataset/build_dev.py",
+      "sha256": "b36a7a5e3e6f855a6bc308a9639b94303d7f7430172eaa1ec9584f2c872f0a9b"
+    },
+    "shared_schema_and_helpers": {
+      "path": "repair_data_gen/training_dataset/build.py",
+      "sha256": "7223836e8254fd6f978b0509255e15b1e3de06a011727da7965e6fdbd6b447e4"
+    },
+    "pmb_reader": {
+      "path": "repair_data_gen/sbn_lin.py",
+      "sha256": "ab6843ef057754d03a5f01dc1609dd1d895af9c663ec702421cf50b18c1343cb"
+    },
+    "holdout_loader": {
+      "path": "repair_data_gen/hard_negatives/holdout.py",
+      "sha256": "4b1c3fcc91baa1428c7910c3ace65a3a42c9fbc2a0d5f9965e9beb990bc27c20"
+    }
+  },
+  "acceptance_validator": {
+    "path": "repair_data_gen/training_dataset/validate_dev.py",
+    "sha256": "fb4ec107f8e9440eeb04f254000f0319f2e8a398f6fe290872e60d491be38490"
+  },
+  "release_preparer": {
+    "path": "repair_data_gen/training_dataset/prepare_dev_release.py",
+    "sha256": "ad779a7ab4930f50b935af7f5e0843a35b0ad00f78e030bdfdd04c5597388664"
+  }
+}

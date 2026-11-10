@@ -1,0 +1,62 @@
+{
+  "file": "data/train.parquet",
+  "sha256": "42b4776c73019afa117a0b19f628081a038d143cb7bf5ff9bd09de98cd778144",
+  "rows": 14022,
+  "columns": [
+    "example_id",
+    "item_id",
+    "doc_id",
+    "variant",
+    "text",
+    "sbn_clean",
+    "sbn_repair",
+    "repair_type",
+    "editing_expression",
+    "ambiguity_type",
+    "repair_onset",
+    "reparandum_surface",
+    "reparandum_synset",
+    "reparandum_value",
+    "repair_synset",
+    "site_index",
+    "strategy",
+    "wn_relation",
+    "label_source",
+    "source"
+  ],
+  "variants": {
+    "pmb_fluent": 9486,
+    "rsr_base": 3489,
+    "rsr_editing_expression": 1047
+  },
+  "distinct_pmb_documents": 9486,
+  "distinct_rsr_source_documents": 3165,
+  "hard_negative_holdout": {
+    "documents": 66,
+    "sha256": "9a29eab567953f7e1df42194328e8ebbf58690314c2f118dd3612546bce91f7d",
+    "overlap": 0
+  },
+  "sources": {
+    "pmb_train_gold": {
+      "path": "data/pmb-5.1.0/split/en/train/gold.sbn",
+      "sha256": "a93a9ef831935d4164959c4bfeb66e19317e8beb47b62394cbb2919a9aa0f893"
+    },
+    "rsr_augmented": {
+      "path": "repair_data_gen/rsr_generation/dataset/train_rsr.augmented.tsv",
+      "sha256": "5ecf035d705d2f0ebe31a2ff41654599ffec5c3c9a47325644a831816a69f75e"
+    },
+    "editing_manifest": {
+      "path": "repair_data_gen/rsr_generation/dataset/train_rsr.editing.manifest.json",
+      "sha256": "f31c2c57e481d62cd4ac83d9c1c60c390001a09a2ea1d95d9ec01355ad5a0d14"
+    },
+    "builder": {
+      "path": "repair_data_gen/training_dataset/build.py",
+      "sha256": "7223836e8254fd6f978b0509255e15b1e3de06a011727da7965e6fdbd6b447e4"
+    }
+  },
+  "targets": {
+    "C1": "variant == 'pmb_fluent'; target = sbn_clean",
+    "C2": "all rows; target = sbn_clean",
+    "C3": "all rows; target = sbn_repair"
+  }
+}

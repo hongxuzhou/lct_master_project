@@ -1,0 +1,30 @@
+{
+  "status": "passed",
+  "config": "default",
+  "split": "test",
+  "file": "data/test.parquet",
+  "base_items": 559,
+  "rows": 1118,
+  "source_documents": 505,
+  "schema_fields": 24,
+  "per_type": {
+    "constant_name": 118,
+    "constant_number": 70,
+    "constant_temporal": 67,
+    "content_word": 110,
+    "edge_label": 55,
+    "forwarding": 69,
+    "tense": 70
+  },
+  "marker_counts": {
+    "no wait": 112,
+    "actually": 112,
+    "sorry": 111,
+    "I mean": 112,
+    "no": 112
+  },
+  "marked_naturalness": "author spot-check only; exhaustive item-level review waived",
+  "scoring": "equal weight across repair types; compare variants grouped by source document",
+  "paired_tsv_sha256": "af64ef16e7f630ee3223af1d7ccc0ea47ab9bbe6a2ded9cfcefb93aa8c9da71b",
+  "parquet_sha256": "eff44618dccda91e71d067c9920d2065070a60fe26dd7c0f6e23068e7f4b983e"
+}

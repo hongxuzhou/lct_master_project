@@ -1,0 +1,144 @@
+{
+  "status": "passed",
+  "dataset_version": "fluent-groups-v1",
+  "schema_version": 2,
+  "columns": [
+    "example_id",
+    "item_id",
+    "doc_id",
+    "variant",
+    "text",
+    "sbn_clean",
+    "sbn_repair",
+    "repair_type",
+    "editing_expression",
+    "ambiguity_type",
+    "repair_onset",
+    "reparandum_surface",
+    "reparandum_synset",
+    "reparandum_value",
+    "repair_synset",
+    "site_index",
+    "strategy",
+    "wn_relation",
+    "label_source",
+    "source",
+    "data_origin",
+    "construction_type",
+    "family_id",
+    "partition_unit"
+  ],
+  "splits": {
+    "train": {
+      "rows": 14222,
+      "baseline_rows_unchanged": 14022,
+      "appended": 200,
+      "variants": {
+        "pmb_fluent": 9486,
+        "rsr_base": 3489,
+        "rsr_editing_expression": 1047,
+        "fluent_split_reference": 200
+      },
+      "origins": {
+        "pmb": 9486,
+        "synthetic_rsr": 4536,
+        "synthetic_fluent": 200
+      },
+      "conditions": {
+        "C1": 9686,
+        "C2": 14222,
+        "C3": 14222
+      },
+      "sha256": "ea4c7ec28daa4d117444f0d1bd9ea183c11a7a36cc77853f28e61264455cdea5"
+    },
+    "validation": {
+      "rows": 1746,
+      "baseline_rows_unchanged": 1706,
+      "appended": 40,
+      "variants": {
+        "pmb_fluent": 1194,
+        "rsr_base": 390,
+        "rsr_editing_expression": 122,
+        "fluent_split_reference": 40
+      },
+      "origins": {
+        "pmb": 1194,
+        "synthetic_rsr": 512,
+        "synthetic_fluent": 40
+      },
+      "conditions": {
+        "C1": 1234,
+        "C2": 1746,
+        "C3": 1746
+      },
+      "sha256": "50438c041dc6b6611fba574b02d116a070598b6552f4a8882000bffd2592fd97"
+    }
+  },
+  "fluent_construction_counts": {
+    "train": {
+      "same_clause": 66,
+      "separate_objects": 34,
+      "existential": 33,
+      "possession": 25,
+      "stative_contrast": 17,
+      "distinguished_same_noun": 8,
+      "separate_subjects": 17
+    },
+    "validation": {
+      "same_clause": 14,
+      "separate_objects": 6,
+      "existential": 7,
+      "possession": 5,
+      "stative_contrast": 3,
+      "distinguished_same_noun": 2,
+      "separate_subjects": 3
+    }
+  },
+  "max_construction_proportion_gap": 0.020000000000000018,
+  "isolation": "example, document, family and partition unit IDs are disjoint across train/validation",
+  "tokenization": {
+    "scope": "240 appended rows; baseline rows preserved exactly from published snapshot",
+    "instruction": "Please parse the following sentence into Simplified Box Notation (SBN):",
+    "models": {
+      "2B": {
+        "revision": "15852e8c16360a2fea060d615a32b45270f8a8fc",
+        "appended_rows": 240,
+        "sequence_max": 190,
+        "supervised_suffix_max": 139,
+        "truncated": 0,
+        "assistant_boundary_and_eos": "passed"
+      },
+      "9B": {
+        "revision": "c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+        "appended_rows": 240,
+        "sequence_max": 190,
+        "supervised_suffix_max": 139,
+        "truncated": 0,
+        "assistant_boundary_and_eos": "passed"
+      },
+      "27B": {
+        "revision": "fc05daec18b0a78c049392ed2e771dde82bdf654",
+        "appended_rows": 240,
+        "sequence_max": 190,
+        "supervised_suffix_max": 139,
+        "truncated": 0,
+        "assistant_boundary_and_eos": "passed"
+      }
+    }
+  },
+  "old_published_snapshot": "preserved and verified",
+  "publication_at_validation": "not performed",
+  "acceptance_source": "fluent_group.acceptance.json",
+  "model_protocol": "model/lora/protocols/fluent_groups_v1.json",
+  "input_sha256": {
+    "repair_data_gen/training_dataset/build.py": "6920cad130bf35349d33ee421c4d67a8218b6ba478f657b85334cdf898f1185f",
+    "repair_data_gen/training_dataset/build_dev.py": "36162d48262cb7cc1bb5277b07ff28c14a8252481e0f84ac5ab445282bf49081",
+    "repair_data_gen/training_dataset/fluent_groups.py": "4043c5b017870f8d806531144f4bbe296cbc8e86642962e72845eff174c51d66",
+    "repair_data_gen/training_dataset/validate_integrated.py": "d9b0b2e160ff3082ce778365b92280e7fce22ec3a85dd546c7394204ddf11b16",
+    "model/lora/data.py": "c1fe422e07773991d1eb202e122ff099bcba9edc190c3921d47a91de3ac1ddfe",
+    "model/lora/train.py": "043111b8f0c23f11a52aa3a7a0a90f23002680ef7fcab6a8aa0b2e437ef72ca6",
+    "model/lora/tuning/build_subset.py": "ae0a61254d7eae871a40be44f3654223c9f2cc4081dcd60965908df6e1a8fde9",
+    "model/lora/protocols/fluent_groups_v1.json": "c2f970a07ffd7225fbf982609b821c746f3c1b28ec26ecc712d7a01a89cf7ccd",
+    "repair_data_gen/training_dataset/fluent_group.acceptance.json": "08f7a970cde1442c03a269b2307297c93d7b776a825485e3bc3cb520b28942ae"
+  }
+}

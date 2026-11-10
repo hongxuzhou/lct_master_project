@@ -1,0 +1,113 @@
+{
+  "status": "assembled locally; final validation and freezing pending",
+  "split": "validation",
+  "pmb_split": "dev_standard",
+  "file": "data/validation.parquet",
+  "sha256": "4da3ccd41ca52ae9af8fbec918b9adb4be8a5037bbf5d200fe8dd78ca90f5418",
+  "rows": 1706,
+  "columns": [
+    "example_id",
+    "item_id",
+    "doc_id",
+    "variant",
+    "text",
+    "sbn_clean",
+    "sbn_repair",
+    "repair_type",
+    "editing_expression",
+    "ambiguity_type",
+    "repair_onset",
+    "reparandum_surface",
+    "reparandum_synset",
+    "reparandum_value",
+    "repair_synset",
+    "site_index",
+    "strategy",
+    "wn_relation",
+    "label_source",
+    "source"
+  ],
+  "variants": {
+    "pmb_fluent": 1194,
+    "rsr_base": 390,
+    "rsr_editing_expression": 122
+  },
+  "distinct_pmb_documents": 1194,
+  "distinct_rsr_source_documents": 358,
+  "row_order": "PMB source order, then augmented RSR source order; no shuffle",
+  "targets": {
+    "C1": "variant == 'pmb_fluent'; target = sbn_clean",
+    "C2": "all rows; target = sbn_clean",
+    "C3": "all rows; target = sbn_repair"
+  },
+  "assembly_checks": {
+    "source_component_hashes": "passed",
+    "train_schema_match": true,
+    "rsr_clean_source_matches_pmb_dev": 512,
+    "unique_example_ids": 1706,
+    "hard_negative_overlap": 0,
+    "parquet_roundtrip": "passed",
+    "inputs_unchanged": true
+  },
+  "pending": [
+    "final assembled-split validation",
+    "model-template token-length audit",
+    "freeze",
+    "Hugging Face publication and readback"
+  ],
+  "sources": {
+    "pmb_dev_standard": {
+      "path": "data/pmb-5.1.0/split/en/dev/standard.sbn",
+      "sha256": "111167f3a42b5c61db3567205ed2c1463e01d93f4e06b8c2aae8c0c6217b1770"
+    },
+    "rsr_base": {
+      "path": "repair_data_gen/splits/dev/dataset/dev_rsr.base.tsv",
+      "sha256": "d0806970876f28efdf4971b5549b88d6bd7dde6647938cbbf2c79b410f8bb0b9"
+    },
+    "rsr_augmented": {
+      "path": "repair_data_gen/splits/dev/dataset/dev_rsr.augmented.tsv",
+      "sha256": "d265032c8a3ecf704abf29f766c11ee7abb581081dc90f72b74a0bd2d7fd6525"
+    },
+    "base_manifest": {
+      "path": "repair_data_gen/splits/dev/manifests/base_build.json",
+      "sha256": "94be565c875e1db5564511c331a812459c32edb97467b0a244490b88c2a51718"
+    },
+    "marked_manifest": {
+      "path": "repair_data_gen/splits/dev/manifests/marked_build.json",
+      "sha256": "d5dd37dc42a2083da4ec9f1a0802b813052e43300a84a99b35bb6e914d1008ed"
+    },
+    "marker_policy": {
+      "path": "repair_data_gen/splits/dev/marker_policy.json",
+      "sha256": "d9615a18ada4942807cc3657c784021a732b26be0c0648f01aafa81ed49d3b79"
+    },
+    "train_schema_reference": {
+      "path": "repair_data_gen/training_dataset/data/train.parquet",
+      "sha256": "42b4776c73019afa117a0b19f628081a038d143cb7bf5ff9bd09de98cd778144"
+    },
+    "train_manifest": {
+      "path": "repair_data_gen/training_dataset/manifest.json",
+      "sha256": "347709be619a412e663e3248780007b2f994542055ac1d69bd87d36e766ca14e"
+    },
+    "hard_negative_holdout": {
+      "path": "repair_data_gen/hard_negatives/train_holdout.tsv",
+      "sha256": "9a29eab567953f7e1df42194328e8ebbf58690314c2f118dd3612546bce91f7d"
+    },
+    "builder": {
+      "path": "repair_data_gen/training_dataset/build_dev.py",
+      "sha256": "b36a7a5e3e6f855a6bc308a9639b94303d7f7430172eaa1ec9584f2c872f0a9b"
+    },
+    "shared_schema_and_helpers": {
+      "path": "repair_data_gen/training_dataset/build.py",
+      "sha256": "7223836e8254fd6f978b0509255e15b1e3de06a011727da7965e6fdbd6b447e4"
+    },
+    "pmb_reader": {
+      "path": "repair_data_gen/sbn_lin.py",
+      "sha256": "ab6843ef057754d03a5f01dc1609dd1d895af9c663ec702421cf50b18c1343cb"
+    },
+    "holdout_loader": {
+      "path": "repair_data_gen/hard_negatives/holdout.py",
+      "sha256": "4b1c3fcc91baa1428c7910c3ace65a3a42c9fbc2a0d5f9965e9beb990bc27c20"
+    }
+  },
+  "pyarrow_version": "24.0.0"
+}

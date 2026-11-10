@@ -1,0 +1,9 @@
+{
+  "README.md": "79c6a20db8a55a6941b71831752925fcaf002e3c198201d5f9509c919cf575b5",
+  "data/train.parquet": "42b4776c73019afa117a0b19f628081a038d143cb7bf5ff9bd09de98cd778144",
+  "data/validation.parquet": "4da3ccd41ca52ae9af8fbec918b9adb4be8a5037bbf5d200fe8dd78ca90f5418",
+  "manifest.json": "347709be619a412e663e3248780007b2f994542055ac1d69bd87d36e766ca14e",
+  "validation.manifest.json": "f5d81122d22e9281b6196ca6ed05f4524b1ee8132df74144af2058bfac54b828",
+  "validation.acceptance.json": "b35bd4791f98338628bcb5db791014dca01849f1f69b133d7dc6f73b78971a84",
+  "validation.publication.json": "4fda0c21c5680ad87747c04615822bd207a7e37e30f156fec1043d2b6c3533ef"
+}

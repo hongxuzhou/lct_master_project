@@ -1,0 +1,41 @@
+{
+  "status": "passed",
+  "validation_scope": "local_prepublication",
+  "config": "later_reference",
+  "split": "test",
+  "rows": 208,
+  "pairs": 104,
+  "schema_fields": 18,
+  "marker_counts": {
+    "no": 23,
+    "I mean": 31,
+    "no wait": 12,
+    "actually": 10,
+    "sorry": 28
+  },
+  "current_export_failed_graphs": 0,
+  "normalised_full_input_overlap": [],
+  "train_validation_preserved_sha256": {
+    "data/train.parquet": "ea4c7ec28daa4d117444f0d1bd9ea183c11a7a36cc77853f28e61264455cdea5",
+    "data/validation.parquet": "50438c041dc6b6611fba574b02d116a070598b6552f4a8882000bffd2592fd97"
+  },
+  "id_family_partition_overlap": 0,
+  "parquet_exact_readback": true,
+  "hf_datasets_local_load_exact_readback": true,
+  "metadata_config_check": true,
+  "input_sha256": {
+    "repair_data_gen/later_reference_challenge_marked_v1/objects.json": "64ad2dc585619c435f94eccf4eb82cf11024581312968fb54014a083a403d306",
+    "repair_data_gen/later_reference_challenge_marked_v1/subjects.json": "bdcd5e7e779cf0ee0b7585ca66aabb89d3e9aab8b9216788957397e4e67899fe",
+    "repair_data_gen/later_reference_challenge_marked_v1/names.json": "089274bf62d2d34863cef60fae03bd16758348add5a4a3f14fd90ac158489f7e",
+    "repair_data_gen/later_reference_challenge_marked_v1/derived/annotations.jsonl": "1d522cb17daa80a24646eefeea32e5d136e4f5a92fac17349a4090c1d6fe269d",
+    "repair_data_gen/later_reference_challenge_marked_v1/derived/graphs.json": "28990ea8447f91cbc222940ed4636289a330a9eb50774b81265ea1be8cefe98c",
+    "repair_data_gen/later_reference_challenge_marked_v1/adjudications.json": "347c87fb95e58a41caad3b677994d32d94f880f02c9d1dfb1c3dd29f69ab0275",
+    "repair_data_gen/later_reference_challenge_marked_v1/derived/fresh_validation.json": "b4828ae4e9ce74ec5180a9af353930d4cd0f593be7362165b0e26f9648daa70b",
+    "repair_data_gen/training_dataset/prepare_later_reference.py": "23a08d49582e38abb4f2774b60370f4cf5d3c42141dc8af96f3cf9240a38ad72"
+  },
+  "parquet_sha256": "6c4ca3ed53ddbb37134b1d0fec0ca0c425b6a8c5e405eaa58b737caa3c4c18de",
+  "limitations": [
+    "No semantic decontamination claim.",
+    "Remote publication verification is recorded separately."
+  ]
+}

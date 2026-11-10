@@ -1,0 +1,18 @@
+{
+  "status": "user_reviewed_and_authorised_for_integration",
+  "date": "2026-11-05",
+  "scope": "240 formal fluent split-reference documents, excluding the 66 pilot documents",
+  "evidence": "User read the fluent split-reference data in this chat, found no problems, and explicitly requested integration into existing train/dev splits.",
+  "files": {
+    "train": {
+      "path": "repair_data_gen/fluent_group_synthesis_v1/train.candidates.jsonl",
+      "sha256": "318cf0d4884552ebcd3191bf42163d168b2a47824e9acde4f1d059560bad7f7b",
+      "rows": 200
+    },
+    "dev": {
+      "path": "repair_data_gen/fluent_group_synthesis_v1/dev.candidates.jsonl",
+      "sha256": "4c59f1238fa4525245cccbc157d23a47d2a9bc1073d474862d9f6a0902b7611d",
+      "rows": 40
+    }
+  }
+}

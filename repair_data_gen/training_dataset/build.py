@@ -22,6 +22,7 @@ import pyarrow.parquet as pq
 HERE = Path(__file__).resolve().parent
 SCRIPT = Path(__file__).resolve()
 ROOT = HERE.parents[1]
+sys.path.insert(0, str(ROOT))
 REPAIR = ROOT / "repair_data_gen"
 RSR = REPAIR / "rsr_generation" / "dataset"
 sys.path.insert(0, str(REPAIR))
@@ -29,6 +30,7 @@ sys.path.insert(0, str(REPAIR / "hard_negatives"))
 
 import holdout  # noqa: E402
 from sbn_lin import SPLITS, read_split  # noqa: E402
+from repair_data_gen.training_dataset.fluent_groups import accepted_rows, provenance  # noqa: E402
 
 PMB = ROOT / SPLITS["train"]
 RSR_DATA = RSR / "train_rsr.augmented.tsv"
@@ -42,7 +44,8 @@ EXPECTED = {
     "pmb_fluent": 9486,
     "rsr_base": 3489,
     "rsr_editing_expression": 1047,
-    "total": 14022,
+    "fluent_split_reference": 200,
+    "total": 14222,
 }
 
 SCHEMA = pa.schema([
@@ -66,6 +69,10 @@ SCHEMA = pa.schema([
     ("wn_relation", pa.string()),
     ("label_source", pa.string()),
     ("source", pa.string()),
+    ("data_origin", pa.string()),
+    ("construction_type", pa.string()),
+    ("family_id", pa.string()),
+    ("partition_unit", pa.string()),
 ])
 
 
@@ -105,7 +112,7 @@ def fluent_rows() -> list[dict]:
         raise ValueError(f"expected 9,486 eligible fluent rows, found {len(rows)}")
     if {r["doc_id"] for r in rows} & held:
         raise ValueError("hard-negative document remains in fluent rows")
-    return rows
+    return [provenance(row) for row in rows]
 
 
 def rsr_rows() -> list[dict]:
@@ -138,7 +145,7 @@ def rsr_rows() -> list[dict]:
             raise ValueError(f"unexpected {variant} count: {counts[variant]}")
     if {r["doc_id"] for r in rows} & held:
         raise ValueError("hard-negative document remains in RSR rows")
-    return rows
+    return [provenance(row) for row in rows]
 
 
 def main() -> None:
@@ -150,9 +157,10 @@ def main() -> None:
 
     fluent = fluent_rows()
     rsr = rsr_rows()
-    rows = fluent + rsr
+    supplemental = accepted_rows('train', SCHEMA)
+    rows = fluent + rsr + supplemental
     if len(rows) != EXPECTED["total"]:
-        raise ValueError(f"expected 14,022 total rows, found {len(rows)}")
+        raise ValueError(f"expected {EXPECTED['total']:,} total rows, found {len(rows)}")
     if len({r["example_id"] for r in rows}) != len(rows):
         raise ValueError("example_id is not unique")
 
@@ -166,11 +174,14 @@ def main() -> None:
 
     counts = dict(Counter(rows[i]["variant"] for i in range(len(rows))))
     manifest = {
+        "dataset_version": "fluent-groups-v1", "schema_version": 2,
         "file": str(OUT.relative_to(HERE)),
         "sha256": sha256(OUT),
         "rows": len(rows),
         "columns": SCHEMA.names,
         "variants": counts,
+        "origins": dict(Counter(r['data_origin'] for r in rows)),
+        "fluent_construction_types": dict(Counter(r['construction_type'] for r in supplemental)),
         "distinct_pmb_documents": len({r["doc_id"] for r in fluent}),
         "distinct_rsr_source_documents": len({r["doc_id"] for r in rsr}),
         "hard_negative_holdout": {
@@ -187,9 +198,15 @@ def main() -> None:
                                  "sha256": sha256(EDITING_MANIFEST)},
             "builder": {"path": str(SCRIPT.relative_to(ROOT)),
                         "sha256": sha256(SCRIPT)},
+            "fluent_group_acceptance": {"path": str((HERE/'fluent_group.acceptance.json').relative_to(ROOT)),
+                                         "sha256": sha256(HERE/'fluent_group.acceptance.json')},
+            "fluent_group_source": {"path": 'repair_data_gen/fluent_group_synthesis_v1/train.candidates.jsonl',
+                                     "sha256": sha256(REPAIR/'fluent_group_synthesis_v1/train.candidates.jsonl')},
+            "fluent_group_adapter": {"path": str((HERE/'fluent_groups.py').relative_to(ROOT)),
+                                      "sha256": sha256(HERE/'fluent_groups.py')},
         },
         "targets": {
-            "C1": "variant == 'pmb_fluent'; target = sbn_clean",
+            "C1": "variant in {'pmb_fluent', 'fluent_split_reference'}; target = sbn_clean",
             "C2": "all rows; target = sbn_clean",
             "C3": "all rows; target = sbn_repair",
         },

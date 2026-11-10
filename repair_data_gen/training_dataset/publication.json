@@ -1,0 +1,27 @@
+{
+  "status": "published_and_verified",
+  "repo_id": "Shrikes/repair-sbn",
+  "revision": "d1ed13ec46823a7ddabdfe449e6ffe265d7d4a5b",
+  "parent_revision": "9b7d8812c49b4d7c6f922fd3ce996d019dc18a5c",
+  "files_sha256": {
+    "README.md": "4e956c1483d6df915688c0c2021305353897965d54744856297ae90950897260",
+    "SCHEMA.md": "dd540cad5ca971695338b815b9885e2b45489f4d26e5ff598793e1d47cf317f9",
+    "data/train.parquet": "ea4c7ec28daa4d117444f0d1bd9ea183c11a7a36cc77853f28e61264455cdea5",
+    "data/validation.parquet": "50438c041dc6b6611fba574b02d116a070598b6552f4a8882000bffd2592fd97",
+    "manifest.json": "9d346f54f7f402066e90e3be51277537a2f4854d760a463fc18e096d11d081f1",
+    "validation.manifest.json": "ff5975b7abb65cf0bae831c5b7e3aca21e004686d58e781153f5b98aded2e75c",
+    "integration.acceptance.json": "af471429134b99150c413d350890d1d9f194ab369cb5768b7cf70111235a18b4",
+    "validation.acceptance.json": "3c56d2ed173608bf660fb331a384c612d2faf81a6f26d57ba2c7a7987bfcf3cd",
+    "fluent_group.acceptance.json": "08f7a970cde1442c03a269b2307297c93d7b776a825485e3bc3cb520b28942ae"
+  },
+  "commit_url": "https://huggingface.co/datasets/Shrikes/repair-sbn/commit/d1ed13ec46823a7ddabdfe449e6ffe265d7d4a5b",
+  "dataset_version": "fluent-groups-v1",
+  "schema_version": 2,
+  "rows": {
+    "train": 14222,
+    "validation": 1746
+  },
+  "verification": "all staged file bytes and complete Parquet schemas/rows match local",
+  "source_acceptance": "fluent_group.acceptance.json",
+  "publisher_sha256": "aef00fefc7ef8075ca7b498b3bed9337cb18599ba5ec8d05461b9315f8718d9b"
+}

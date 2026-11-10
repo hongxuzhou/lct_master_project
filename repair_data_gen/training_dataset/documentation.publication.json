@@ -1,0 +1,17 @@
+{
+  "status": "published_and_verified",
+  "repo_id": "Shrikes/repair-sbn",
+  "revision": "ae9fd3d1b261a5fe0ca9ae2fe09b3e6d99a41947",
+  "parent_revision": "bd96edaa219521b1c04e304a67c4832370c1bbc8",
+  "data_release_revision": "d1ed13ec46823a7ddabdfe449e6ffe265d7d4a5b",
+  "documentation_sha256": {
+    "README.md": "0ae293074dff48235f0a46013b4f0fe27d9be2d24dac7c7dfbe8a6c8d869c4c6",
+    "SCHEMA.md": "96bbd387c80b66ae26ff50b5182be25e3b3f60a2b7d0251ed87f105760b87ffb"
+  },
+  "commit_url": "https://huggingface.co/datasets/Shrikes/repair-sbn/commit/ae9fd3d1b261a5fe0ca9ae2fe09b3e6d99a41947",
+  "verified_files": 17,
+  "data_files_unchanged": false,
+  "train_validation_unchanged": true,
+  "added_split": "default/test",
+  "test_publication": "test.publication.json"
+}

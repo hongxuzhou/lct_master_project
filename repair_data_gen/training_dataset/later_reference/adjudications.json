@@ -1,0 +1,22 @@
+{
+  "OBJ003": {
+    "date": "2026-11-05",
+    "status": "user_approved",
+    "decision": "Retain NL/SBN. Material-reference readings do not establish a conflicting graph condition; both licenses Quantity 2. Remove the unsupported requirement for particular samples."
+  },
+  "OBJ016": {
+    "date": "2026-11-05",
+    "status": "user_approved",
+    "decision": "Replace ripe continuation with They are my favourite vegetables. Adopt implicit kind reference to the vegetable kinds corresponding to the concrete antecedents. Preserve the two Sub links; no dedicated kind-shift operator is introduced."
+  },
+  "OBJ026": {
+    "date": "2026-11-05",
+    "status": "user_approved",
+    "decision": "Retain NL/SBN. Concrete material reading supported by touched/cold. Agent/Theme attested for touch.v.01 in PMB p04/d2820 (dev) and p27/d0842 (train gold)."
+  },
+  "OBJ030": {
+    "date": "2026-11-05",
+    "status": "user_approved",
+    "decision": "Retain NL/SBN. Patient directly attested for mend.v.01 in PMB p39/d1702; Agent inferred for the intentional active subject, supported by active repair.v.01 Agent/Patient in p83/d1420."
+  }
+}
