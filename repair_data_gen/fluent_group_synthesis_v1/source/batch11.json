@@ -1,0 +1,782 @@
+[
+  {
+    "id": "FLG0201",
+    "construction": "stative_contrast",
+    "a": {
+      "concept": "cupboard.n.01",
+      "surface": "the cupboard",
+      "determiner": "the",
+      "predicate": "open.a.01",
+      "role": "AttributeOf",
+      "past": true
+    },
+    "b": {
+      "concept": "trunk.n.02",
+      "surface": "the trunk",
+      "determiner": "the",
+      "predicate": "closed.a.01",
+      "role": "AttributeOf",
+      "past": true
+    },
+    "sentence": "The cupboard was open, but the trunk was closed. I photographed them.",
+    "continuation": "I photographed them.",
+    "tail": {
+      "predicate": "photograph.v.01",
+      "role": "Theme",
+      "form": "transitive"
+    },
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "introduction_relation": "CONTRAST",
+    "family_id": "family-05c4662da999",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0202",
+    "construction": "stative_contrast",
+    "a": {
+      "concept": "bottle.n.01",
+      "surface": "the bottle",
+      "determiner": "the",
+      "predicate": "full.a.01",
+      "role": "AttributeOf",
+      "past": true
+    },
+    "b": {
+      "concept": "pitcher.n.02",
+      "surface": "the pitcher",
+      "determiner": "the",
+      "predicate": "empty.a.01",
+      "role": "AttributeOf",
+      "past": true
+    },
+    "sentence": "The bottle was full, but the pitcher was empty. I washed both containers.",
+    "continuation": "I washed both containers.",
+    "tail": {
+      "predicate": "wash.v.03",
+      "role": "Source",
+      "form": "transitive"
+    },
+    "quantity": 2,
+    "group_concept": "container.n.01",
+    "group_word": "containers",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "introduction_relation": "CONTRAST",
+    "family_id": "family-3930a29ae18f",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0203",
+    "construction": "stative_contrast",
+    "a": {
+      "concept": "quilt.n.01",
+      "surface": "the quilt",
+      "determiner": "the",
+      "predicate": "wet.a.01",
+      "role": "AttributeOf",
+      "past": true
+    },
+    "b": {
+      "concept": "sheet.n.03",
+      "surface": "the sheet",
+      "determiner": "the",
+      "predicate": "dry.a.01",
+      "role": "AttributeOf",
+      "past": true
+    },
+    "sentence": "The quilt was wet, but the sheet was dry. I washed both.",
+    "continuation": "I washed both.",
+    "tail": {
+      "predicate": "wash.v.03",
+      "role": "Source",
+      "form": "transitive"
+    },
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "introduction_relation": "CONTRAST",
+    "family_id": "family-0f664823ab79",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0204",
+    "construction": "stative_contrast",
+    "a": {
+      "concept": "sandal.n.01",
+      "surface": "the sandal",
+      "determiner": "the",
+      "predicate": "dirty.a.01",
+      "role": "AttributeOf",
+      "past": true
+    },
+    "b": {
+      "concept": "boot.n.01",
+      "surface": "the boot",
+      "determiner": "the",
+      "predicate": "clean.a.01",
+      "role": "AttributeOf",
+      "past": true
+    },
+    "sentence": "The sandal was dirty, but the boot was clean. I photographed them.",
+    "continuation": "I photographed them.",
+    "tail": {
+      "predicate": "photograph.v.01",
+      "role": "Theme",
+      "form": "transitive"
+    },
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "introduction_relation": "CONTRAST",
+    "family_id": "family-819d64f107d8",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0205",
+    "construction": "stative_contrast",
+    "a": {
+      "concept": "glove.n.02",
+      "surface": "the glove",
+      "determiner": "the",
+      "predicate": "wet.a.01",
+      "role": "AttributeOf",
+      "past": true
+    },
+    "b": {
+      "concept": "cap.n.01",
+      "surface": "the cap",
+      "determiner": "the",
+      "predicate": "dry.a.01",
+      "role": "AttributeOf",
+      "past": true
+    },
+    "sentence": "The glove was wet, but the cap was dry. I packed both.",
+    "continuation": "I packed both.",
+    "tail": {
+      "predicate": "pack.v.01",
+      "role": "Theme",
+      "form": "transitive"
+    },
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "introduction_relation": "CONTRAST",
+    "family_id": "family-74e8f3a4e8ce",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0206",
+    "construction": "stative_contrast",
+    "a": {
+      "concept": "viola.n.03",
+      "surface": "the viola",
+      "determiner": "the",
+      "predicate": "damaged.a.01",
+      "role": "AttributeOf",
+      "past": true
+    },
+    "b": {
+      "concept": "clarinet.n.01",
+      "surface": "the clarinet",
+      "determiner": "the",
+      "predicate": "dirty.a.01",
+      "role": "AttributeOf",
+      "past": true
+    },
+    "sentence": "The viola was damaged, but the clarinet was dirty. I photographed both instruments.",
+    "continuation": "I photographed both instruments.",
+    "tail": {
+      "predicate": "photograph.v.01",
+      "role": "Theme",
+      "form": "transitive"
+    },
+    "quantity": 2,
+    "group_concept": "musical_instrument.n.01",
+    "group_word": "instruments",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "introduction_relation": "CONTRAST",
+    "family_id": "family-49d3af2eea6c",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0207",
+    "construction": "stative_contrast",
+    "a": {
+      "concept": "ladle.n.01",
+      "surface": "the ladle",
+      "determiner": "the",
+      "predicate": "dirty.a.01",
+      "role": "AttributeOf",
+      "past": true
+    },
+    "b": {
+      "concept": "whisk.n.01",
+      "surface": "the whisk",
+      "determiner": "the",
+      "predicate": "clean.a.01",
+      "role": "AttributeOf",
+      "past": true
+    },
+    "sentence": "The ladle was dirty, but the whisk was clean. I washed both utensils.",
+    "continuation": "I washed both utensils.",
+    "tail": {
+      "predicate": "wash.v.03",
+      "role": "Source",
+      "form": "transitive"
+    },
+    "quantity": 2,
+    "group_concept": "utensil.n.01",
+    "group_word": "utensils",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "introduction_relation": "CONTRAST",
+    "family_id": "family-436b58f373a4",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0208",
+    "construction": "stative_contrast",
+    "a": {
+      "concept": "jar.n.01",
+      "surface": "the jar",
+      "determiner": "the",
+      "predicate": "empty.a.01",
+      "role": "AttributeOf",
+      "past": true
+    },
+    "b": {
+      "concept": "bowl.n.01",
+      "surface": "the bowl",
+      "determiner": "the",
+      "predicate": "full.a.01",
+      "role": "AttributeOf",
+      "past": true
+    },
+    "sentence": "The jar was empty, but the bowl was full. I photographed them.",
+    "continuation": "I photographed them.",
+    "tail": {
+      "predicate": "photograph.v.01",
+      "role": "Theme",
+      "form": "transitive"
+    },
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "introduction_relation": "CONTRAST",
+    "family_id": "family-09915b7d93e4",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0209",
+    "construction": "stative_contrast",
+    "a": {
+      "concept": "toolbox.n.01",
+      "surface": "the toolbox",
+      "determiner": "the",
+      "predicate": "heavy.a.01",
+      "role": "AttributeOf",
+      "past": true
+    },
+    "b": {
+      "concept": "satchel.n.01",
+      "surface": "the satchel",
+      "determiner": "the",
+      "predicate": "light.a.01",
+      "role": "AttributeOf",
+      "past": true
+    },
+    "sentence": "The toolbox was heavy, but the satchel was light. I carried both.",
+    "continuation": "I carried both.",
+    "tail": {
+      "predicate": "carry.v.01",
+      "role": "Theme",
+      "form": "transitive"
+    },
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "introduction_relation": "CONTRAST",
+    "family_id": "family-12cda670972e",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0210",
+    "construction": "stative_contrast",
+    "a": {
+      "concept": "flowerpot.n.01",
+      "surface": "the flowerpot",
+      "determiner": "the",
+      "predicate": "dirty.a.01",
+      "role": "AttributeOf",
+      "past": true
+    },
+    "b": {
+      "concept": "watering_can.n.01",
+      "surface": "the watering can",
+      "determiner": "the",
+      "predicate": "clean.a.01",
+      "role": "AttributeOf",
+      "past": true
+    },
+    "sentence": "The flowerpot was dirty, but the watering can was clean. I photographed them.",
+    "continuation": "I photographed them.",
+    "tail": {
+      "predicate": "photograph.v.01",
+      "role": "Theme",
+      "form": "transitive"
+    },
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "introduction_relation": "CONTRAST",
+    "family_id": "family-2dac2b6146e7",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0211",
+    "construction": "distinguished_same_noun",
+    "a": {
+      "concept": "satchel.n.01",
+      "surface": "the red satchel",
+      "determiner": "the",
+      "colour": "red.a.01",
+      "predicate": "dirty.a.01",
+      "role": "AttributeOf",
+      "past": true
+    },
+    "b": {
+      "concept": "satchel.n.01",
+      "surface": "the blue satchel",
+      "determiner": "the",
+      "colour": "blue.a.01",
+      "predicate": "clean.a.01",
+      "role": "AttributeOf",
+      "past": true
+    },
+    "sentence": "The red satchel was dirty. The blue satchel was clean. Are they both heavy?",
+    "continuation": "Are they both heavy?",
+    "tail": {
+      "predicate": "heavy.a.01",
+      "role": "AttributeOf",
+      "form": "question",
+      "past": false
+    },
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "family_id": "family-673adbf2e856",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0212",
+    "construction": "distinguished_same_noun",
+    "a": {
+      "concept": "cap.n.01",
+      "surface": "the black cap",
+      "determiner": "the",
+      "colour": "black.a.01",
+      "predicate": "wet.a.01",
+      "role": "AttributeOf",
+      "past": true
+    },
+    "b": {
+      "concept": "cap.n.01",
+      "surface": "the white cap",
+      "determiner": "the",
+      "colour": "white.a.01",
+      "predicate": "dry.a.01",
+      "role": "AttributeOf",
+      "past": true
+    },
+    "sentence": "The black cap was wet. The white cap was dry. Are they both damaged?",
+    "continuation": "Are they both damaged?",
+    "tail": {
+      "predicate": "damaged.a.01",
+      "role": "AttributeOf",
+      "form": "question",
+      "past": false
+    },
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "family_id": "family-2c9c555b1dd3",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0213",
+    "construction": "distinguished_same_noun",
+    "a": {
+      "concept": "pillow.n.01",
+      "surface": "the red pillow",
+      "determiner": "the",
+      "colour": "red.a.01",
+      "predicate": "soft.a.01",
+      "role": "AttributeOf",
+      "past": true
+    },
+    "b": {
+      "concept": "pillow.n.01",
+      "surface": "the green pillow",
+      "determiner": "the",
+      "colour": "green.a.01",
+      "predicate": "hard.a.03",
+      "role": "AttributeOf",
+      "past": true
+    },
+    "sentence": "The red pillow was soft. The green pillow was hard. Are they both clean?",
+    "continuation": "Are they both clean?",
+    "tail": {
+      "predicate": "clean.a.01",
+      "role": "AttributeOf",
+      "form": "question",
+      "past": false
+    },
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "family_id": "family-efd327047312",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0214",
+    "construction": "distinguished_same_noun",
+    "a": {
+      "concept": "envelope.n.01",
+      "surface": "the yellow envelope",
+      "determiner": "the",
+      "colour": "yellow.a.01",
+      "predicate": "open.a.01",
+      "role": "AttributeOf",
+      "past": true
+    },
+    "b": {
+      "concept": "envelope.n.01",
+      "surface": "the blue envelope",
+      "determiner": "the",
+      "colour": "blue.a.01",
+      "predicate": "closed.a.01",
+      "role": "AttributeOf",
+      "past": true
+    },
+    "sentence": "The yellow envelope was open. The blue envelope was closed. Are they both useful?",
+    "continuation": "Are they both useful?",
+    "tail": {
+      "predicate": "useful.a.01",
+      "role": "AttributeOf",
+      "form": "question",
+      "past": false
+    },
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "family_id": "family-1d77dab82123",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0215",
+    "construction": "distinguished_same_noun",
+    "a": {
+      "concept": "kettle.n.01",
+      "surface": "the white kettle",
+      "determiner": "the",
+      "colour": "white.a.01",
+      "predicate": "full.a.01",
+      "role": "AttributeOf",
+      "past": true
+    },
+    "b": {
+      "concept": "kettle.n.01",
+      "surface": "the blue kettle",
+      "determiner": "the",
+      "colour": "blue.a.01",
+      "predicate": "empty.a.01",
+      "role": "AttributeOf",
+      "past": true
+    },
+    "sentence": "The white kettle was full. The blue kettle was empty. Are they both clean?",
+    "continuation": "Are they both clean?",
+    "tail": {
+      "predicate": "clean.a.01",
+      "role": "AttributeOf",
+      "form": "question",
+      "past": false
+    },
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "family_id": "family-36b30b202e02",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0216",
+    "construction": "distinguished_same_noun",
+    "a": {
+      "concept": "bench.n.01",
+      "surface": "the green bench",
+      "determiner": "the",
+      "colour": "green.a.01",
+      "predicate": "wet.a.01",
+      "role": "AttributeOf",
+      "past": true
+    },
+    "b": {
+      "concept": "bench.n.01",
+      "surface": "the brown bench",
+      "determiner": "the",
+      "colour": "brown.a.01",
+      "predicate": "dry.a.01",
+      "role": "AttributeOf",
+      "past": true
+    },
+    "sentence": "The green bench was wet. The brown bench was dry. Are they both old?",
+    "continuation": "Are they both old?",
+    "tail": {
+      "predicate": "old.a.02",
+      "role": "AttributeOf",
+      "form": "question",
+      "past": false
+    },
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "family_id": "family-ae9c8cdddc37",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0217",
+    "construction": "distinguished_same_noun",
+    "a": {
+      "concept": "stool.n.01",
+      "surface": "the black stool",
+      "determiner": "the",
+      "colour": "black.a.01",
+      "predicate": "heavy.a.01",
+      "role": "AttributeOf",
+      "past": true
+    },
+    "b": {
+      "concept": "stool.n.01",
+      "surface": "the white stool",
+      "determiner": "the",
+      "colour": "white.a.01",
+      "predicate": "light.a.01",
+      "role": "AttributeOf",
+      "past": true
+    },
+    "sentence": "The black stool was heavy. The white stool was light. Are they both dirty?",
+    "continuation": "Are they both dirty?",
+    "tail": {
+      "predicate": "dirty.a.01",
+      "role": "AttributeOf",
+      "form": "question",
+      "past": false
+    },
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "family_id": "family-a1f9ea250337",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0218",
+    "construction": "distinguished_same_noun",
+    "a": {
+      "concept": "flowerpot.n.01",
+      "surface": "the red flowerpot",
+      "determiner": "the",
+      "colour": "red.a.01",
+      "predicate": "damaged.a.01",
+      "role": "AttributeOf",
+      "past": true
+    },
+    "b": {
+      "concept": "flowerpot.n.01",
+      "surface": "the yellow flowerpot",
+      "determiner": "the",
+      "colour": "yellow.a.01",
+      "predicate": "dirty.a.01",
+      "role": "AttributeOf",
+      "past": true
+    },
+    "sentence": "The red flowerpot was damaged. The yellow flowerpot was dirty. Are they both valuable?",
+    "continuation": "Are they both valuable?",
+    "tail": {
+      "predicate": "valuable.a.01",
+      "role": "AttributeOf",
+      "form": "question",
+      "past": false
+    },
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "family_id": "family-e924647ab41c",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0219",
+    "construction": "distinguished_same_noun",
+    "a": {
+      "concept": "mattress.n.01",
+      "surface": "the white mattress",
+      "determiner": "the",
+      "colour": "white.a.01",
+      "predicate": "soft.a.01",
+      "role": "AttributeOf",
+      "past": true
+    },
+    "b": {
+      "concept": "mattress.n.01",
+      "surface": "the blue mattress",
+      "determiner": "the",
+      "colour": "blue.a.01",
+      "predicate": "hard.a.03",
+      "role": "AttributeOf",
+      "past": true
+    },
+    "sentence": "The white mattress was soft. The blue mattress was hard. Are they both clean?",
+    "continuation": "Are they both clean?",
+    "tail": {
+      "predicate": "clean.a.01",
+      "role": "AttributeOf",
+      "form": "question",
+      "past": false
+    },
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "family_id": "family-bc916f10a94d",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0220",
+    "construction": "distinguished_same_noun",
+    "a": {
+      "concept": "crate.n.01",
+      "surface": "the green crate",
+      "determiner": "the",
+      "colour": "green.a.01",
+      "predicate": "empty.a.01",
+      "role": "AttributeOf",
+      "past": true
+    },
+    "b": {
+      "concept": "crate.n.01",
+      "surface": "the brown crate",
+      "determiner": "the",
+      "colour": "brown.a.01",
+      "predicate": "full.a.01",
+      "role": "AttributeOf",
+      "past": true
+    },
+    "sentence": "The green crate was empty. The brown crate was full. Are they both heavy?",
+    "continuation": "Are they both heavy?",
+    "tail": {
+      "predicate": "heavy.a.01",
+      "role": "AttributeOf",
+      "form": "question",
+      "past": false
+    },
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "family_id": "family-d019c90d005d",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  }
+]

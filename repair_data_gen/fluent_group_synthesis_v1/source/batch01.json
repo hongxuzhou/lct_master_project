@@ -1,0 +1,768 @@
+[
+  {
+    "id": "FLG0001",
+    "construction": "same_clause",
+    "a": {
+      "concept": "person.n.01",
+      "surface": "the teacher",
+      "determiner": "the",
+      "profession": "teacher.n.01"
+    },
+    "b": {
+      "concept": "person.n.01",
+      "surface": "a student",
+      "determiner": "a",
+      "profession": "student.n.01"
+    },
+    "sentence": "The teacher helped a student. They both smiled.",
+    "continuation": "They both smiled.",
+    "tail": {
+      "predicate": "smile.v.01",
+      "role": "Agent",
+      "form": "declarative",
+      "past": true
+    },
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "relation": {
+      "concept": "help.v.01",
+      "subject_role": "Agent",
+      "object_role": "Beneficiary"
+    },
+    "family_id": "family-96c476149024",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0002",
+    "construction": "same_clause",
+    "a": {
+      "concept": "person.n.01",
+      "surface": "the nurse",
+      "determiner": "the",
+      "profession": "nurse.n.01"
+    },
+    "b": {
+      "concept": "person.n.01",
+      "surface": "a doctor",
+      "determiner": "a",
+      "profession": "doctor.n.01"
+    },
+    "sentence": "The nurse greeted a doctor. I waved to them.",
+    "continuation": "I waved to them.",
+    "tail": {
+      "predicate": "wave.v.01",
+      "role": "Recipient",
+      "form": "transitive"
+    },
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "relation": {
+      "concept": "greet.v.01",
+      "subject_role": "Agent",
+      "object_role": "Theme"
+    },
+    "family_id": "family-8a5878a4d737",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0003",
+    "construction": "same_clause",
+    "a": {
+      "concept": "person.n.01",
+      "surface": "the singer",
+      "determiner": "the",
+      "profession": "singer.n.01"
+    },
+    "b": {
+      "concept": "person.n.01",
+      "surface": "a dancer",
+      "determiner": "a",
+      "profession": "dancer.n.01"
+    },
+    "sentence": "The singer met a dancer. I spoke to them.",
+    "continuation": "I spoke to them.",
+    "tail": {
+      "predicate": "speak.v.02",
+      "role": "Co-Agent",
+      "form": "transitive"
+    },
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "relation": {
+      "concept": "meet.v.01",
+      "subject_role": "Agent",
+      "object_role": "Co-Agent"
+    },
+    "family_id": "family-309e52c89eb6",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0004",
+    "construction": "same_clause",
+    "a": {
+      "concept": "person.n.01",
+      "surface": "the baker",
+      "determiner": "the",
+      "profession": "baker.n.01"
+    },
+    "b": {
+      "concept": "person.n.01",
+      "surface": "a driver",
+      "determiner": "a",
+      "profession": "driver.n.01"
+    },
+    "sentence": "The baker thanked a driver. They both laughed.",
+    "continuation": "They both laughed.",
+    "tail": {
+      "predicate": "laugh.v.01",
+      "role": "Agent",
+      "form": "declarative",
+      "past": true
+    },
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "relation": {
+      "concept": "thank.v.01",
+      "subject_role": "Agent",
+      "object_role": "Theme"
+    },
+    "family_id": "family-5aa72e0d5b23",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0005",
+    "construction": "same_clause",
+    "a": {
+      "concept": "person.n.01",
+      "surface": "the guide",
+      "determiner": "the",
+      "profession": "guide.n.01"
+    },
+    "b": {
+      "concept": "person.n.01",
+      "surface": "a tourist",
+      "determiner": "a",
+      "profession": "tourist.n.01"
+    },
+    "sentence": "The guide followed a tourist. They stopped.",
+    "continuation": "They stopped.",
+    "tail": {
+      "predicate": "stop.v.01",
+      "role": "Theme",
+      "form": "declarative",
+      "past": true
+    },
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "relation": {
+      "concept": "follow.v.01",
+      "subject_role": "Agent",
+      "object_role": "Theme"
+    },
+    "family_id": "family-4373171ec34d",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0006",
+    "construction": "same_clause",
+    "a": {
+      "concept": "person.n.01",
+      "surface": "the painter",
+      "determiner": "the",
+      "profession": "painter.n.01"
+    },
+    "b": {
+      "concept": "person.n.01",
+      "surface": "a carpenter",
+      "determiner": "a",
+      "profession": "carpenter.n.01"
+    },
+    "sentence": "The painter hugged a carpenter. I photographed them.",
+    "continuation": "I photographed them.",
+    "tail": {
+      "predicate": "photograph.v.01",
+      "role": "Theme",
+      "form": "transitive"
+    },
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "relation": {
+      "concept": "hug.v.01",
+      "subject_role": "Agent",
+      "object_role": "Co-Agent"
+    },
+    "family_id": "family-57c0ea36de2d",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0007",
+    "construction": "same_clause",
+    "a": {
+      "concept": "person.n.01",
+      "surface": "the gardener",
+      "determiner": "the",
+      "profession": "gardener.n.01"
+    },
+    "b": {
+      "concept": "person.n.01",
+      "surface": "a farmer",
+      "determiner": "a",
+      "profession": "farmer.n.01"
+    },
+    "sentence": "The gardener visited a farmer. I spoke to them.",
+    "continuation": "I spoke to them.",
+    "tail": {
+      "predicate": "speak.v.02",
+      "role": "Co-Agent",
+      "form": "transitive"
+    },
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "relation": {
+      "concept": "visit.v.03",
+      "subject_role": "Agent",
+      "object_role": "Theme"
+    },
+    "family_id": "family-93baaf63378a",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0008",
+    "construction": "same_clause",
+    "a": {
+      "concept": "person.n.01",
+      "surface": "the mechanic",
+      "determiner": "the",
+      "profession": "mechanic.n.02"
+    },
+    "b": {
+      "concept": "person.n.01",
+      "surface": "a cyclist",
+      "determiner": "a",
+      "profession": "cyclist.n.01"
+    },
+    "sentence": "The mechanic helped a cyclist. Both were tired.",
+    "continuation": "Both were tired.",
+    "tail": {
+      "predicate": "tired.a.01",
+      "role": "Experiencer",
+      "form": "declarative",
+      "past": true
+    },
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "relation": {
+      "concept": "help.v.01",
+      "subject_role": "Agent",
+      "object_role": "Beneficiary"
+    },
+    "family_id": "family-08b3d8f7f7ed",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0009",
+    "construction": "same_clause",
+    "a": {
+      "concept": "person.n.01",
+      "surface": "the waiter",
+      "determiner": "the",
+      "profession": "waiter.n.01"
+    },
+    "b": {
+      "concept": "person.n.01",
+      "surface": "a guest",
+      "determiner": "a",
+      "profession": "guest.n.01"
+    },
+    "sentence": "The waiter greeted a guest. I photographed them.",
+    "continuation": "I photographed them.",
+    "tail": {
+      "predicate": "photograph.v.01",
+      "role": "Theme",
+      "form": "transitive"
+    },
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "relation": {
+      "concept": "greet.v.01",
+      "subject_role": "Agent",
+      "object_role": "Theme"
+    },
+    "family_id": "family-b44fef3e72ad",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0010",
+    "construction": "same_clause",
+    "a": {
+      "concept": "person.n.01",
+      "surface": "the librarian",
+      "determiner": "the",
+      "profession": "librarian.n.01"
+    },
+    "b": {
+      "concept": "person.n.01",
+      "surface": "a reader",
+      "determiner": "a",
+      "profession": "reader.n.01"
+    },
+    "sentence": "The librarian met a reader. They both smiled.",
+    "continuation": "They both smiled.",
+    "tail": {
+      "predicate": "smile.v.01",
+      "role": "Agent",
+      "form": "declarative",
+      "past": true
+    },
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "relation": {
+      "concept": "meet.v.01",
+      "subject_role": "Agent",
+      "object_role": "Co-Agent"
+    },
+    "family_id": "family-d754dc11806b",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0011",
+    "construction": "same_clause",
+    "a": {
+      "concept": "person.n.01",
+      "surface": "the chef",
+      "determiner": "the",
+      "profession": "chef.n.01"
+    },
+    "b": {
+      "concept": "person.n.01",
+      "surface": "an assistant",
+      "determiner": "an",
+      "profession": "assistant.n.01"
+    },
+    "sentence": "The chef thanked an assistant. I waved to them.",
+    "continuation": "I waved to them.",
+    "tail": {
+      "predicate": "wave.v.01",
+      "role": "Recipient",
+      "form": "transitive"
+    },
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "relation": {
+      "concept": "thank.v.01",
+      "subject_role": "Agent",
+      "object_role": "Theme"
+    },
+    "family_id": "family-519547b84818",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0012",
+    "construction": "same_clause",
+    "a": {
+      "concept": "boy.n.01",
+      "surface": "a boy",
+      "determiner": "a"
+    },
+    "b": {
+      "concept": "girl.n.02",
+      "surface": "a girl",
+      "determiner": "a"
+    },
+    "sentence": "A boy hugged a girl. They both laughed.",
+    "continuation": "They both laughed.",
+    "tail": {
+      "predicate": "laugh.v.01",
+      "role": "Agent",
+      "form": "declarative",
+      "past": true
+    },
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "relation": {
+      "concept": "hug.v.01",
+      "subject_role": "Agent",
+      "object_role": "Co-Agent"
+    },
+    "family_id": "family-83370111045a",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0013",
+    "construction": "same_clause",
+    "a": {
+      "concept": "woman.n.01",
+      "surface": "a woman",
+      "determiner": "a"
+    },
+    "b": {
+      "concept": "person.n.01",
+      "surface": "a sailor",
+      "determiner": "a",
+      "profession": "sailor.n.01"
+    },
+    "sentence": "A woman rescued a sailor. Both were wet.",
+    "continuation": "Both were wet.",
+    "tail": {
+      "predicate": "wet.a.01",
+      "role": "AttributeOf",
+      "form": "declarative",
+      "past": true
+    },
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "relation": {
+      "concept": "rescue.v.01",
+      "subject_role": "Agent",
+      "object_role": "Theme"
+    },
+    "family_id": "family-7bd6e93a5a89",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0014",
+    "construction": "same_clause",
+    "a": {
+      "concept": "man.n.01",
+      "surface": "a man",
+      "determiner": "a"
+    },
+    "b": {
+      "concept": "visitor.n.01",
+      "surface": "a visitor",
+      "determiner": "a"
+    },
+    "sentence": "A man followed a visitor. They stopped.",
+    "continuation": "They stopped.",
+    "tail": {
+      "predicate": "stop.v.01",
+      "role": "Theme",
+      "form": "declarative",
+      "past": true
+    },
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "relation": {
+      "concept": "follow.v.01",
+      "subject_role": "Agent",
+      "object_role": "Theme"
+    },
+    "family_id": "family-fb6102fdaa77",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0015",
+    "construction": "same_clause",
+    "a": {
+      "concept": "child.n.01",
+      "surface": "a child",
+      "determiner": "a"
+    },
+    "b": {
+      "concept": "person.n.01",
+      "surface": "a teacher",
+      "determiner": "a",
+      "profession": "teacher.n.01"
+    },
+    "sentence": "A child greeted a teacher. I photographed them.",
+    "continuation": "I photographed them.",
+    "tail": {
+      "predicate": "photograph.v.01",
+      "role": "Theme",
+      "form": "transitive"
+    },
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "relation": {
+      "concept": "greet.v.01",
+      "subject_role": "Agent",
+      "object_role": "Theme"
+    },
+    "family_id": "family-56a23702e02d",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0016",
+    "construction": "same_clause",
+    "a": {
+      "concept": "person.n.01",
+      "name": "Olivia",
+      "surface": "Olivia",
+      "determiner": "name"
+    },
+    "b": {
+      "concept": "person.n.01",
+      "name": "Noah",
+      "surface": "Noah",
+      "determiner": "name"
+    },
+    "sentence": "Olivia met Noah. They laughed.",
+    "continuation": "They laughed.",
+    "tail": {
+      "predicate": "laugh.v.01",
+      "role": "Agent",
+      "form": "declarative",
+      "past": true
+    },
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "relation": {
+      "concept": "meet.v.01",
+      "subject_role": "Agent",
+      "object_role": "Co-Agent"
+    },
+    "family_id": "family-cd273d31bd8e",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0017",
+    "construction": "same_clause",
+    "a": {
+      "concept": "person.n.01",
+      "name": "Ella",
+      "surface": "Ella",
+      "determiner": "name"
+    },
+    "b": {
+      "concept": "person.n.01",
+      "name": "Isaac",
+      "surface": "Isaac",
+      "determiner": "name"
+    },
+    "sentence": "Ella helped Isaac. Both were tired.",
+    "continuation": "Both were tired.",
+    "tail": {
+      "predicate": "tired.a.01",
+      "role": "Experiencer",
+      "form": "declarative",
+      "past": true
+    },
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "relation": {
+      "concept": "help.v.01",
+      "subject_role": "Agent",
+      "object_role": "Beneficiary"
+    },
+    "family_id": "family-a05551f99ffb",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0018",
+    "construction": "same_clause",
+    "a": {
+      "concept": "person.n.01",
+      "name": "Mia",
+      "surface": "Mia",
+      "determiner": "name"
+    },
+    "b": {
+      "concept": "person.n.01",
+      "name": "Leo",
+      "surface": "Leo",
+      "determiner": "name"
+    },
+    "sentence": "Mia thanked Leo. They smiled.",
+    "continuation": "They smiled.",
+    "tail": {
+      "predicate": "smile.v.01",
+      "role": "Agent",
+      "form": "declarative",
+      "past": true
+    },
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "relation": {
+      "concept": "thank.v.01",
+      "subject_role": "Agent",
+      "object_role": "Theme"
+    },
+    "family_id": "family-b4444a064b69",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0019",
+    "construction": "same_clause",
+    "a": {
+      "concept": "person.n.01",
+      "name": "Grace",
+      "surface": "Grace",
+      "determiner": "name"
+    },
+    "b": {
+      "concept": "person.n.01",
+      "name": "Theo",
+      "surface": "Theo",
+      "determiner": "name"
+    },
+    "sentence": "Grace followed Theo. They waited.",
+    "continuation": "They waited.",
+    "tail": {
+      "predicate": "wait.v.01",
+      "role": "Theme",
+      "form": "declarative",
+      "past": true
+    },
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "relation": {
+      "concept": "follow.v.01",
+      "subject_role": "Agent",
+      "object_role": "Theme"
+    },
+    "family_id": "family-fa0ca4bfb470",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0020",
+    "construction": "same_clause",
+    "a": {
+      "concept": "person.n.01",
+      "name": "Ada",
+      "surface": "Ada",
+      "determiner": "name"
+    },
+    "b": {
+      "concept": "person.n.01",
+      "name": "Finn",
+      "surface": "Finn",
+      "determiner": "name"
+    },
+    "sentence": "Ada greeted Finn. I waved to them.",
+    "continuation": "I waved to them.",
+    "tail": {
+      "predicate": "wave.v.01",
+      "role": "Recipient",
+      "form": "transitive"
+    },
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "relation": {
+      "concept": "greet.v.01",
+      "subject_role": "Agent",
+      "object_role": "Theme"
+    },
+    "family_id": "family-96da1952e3c5",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  }
+]

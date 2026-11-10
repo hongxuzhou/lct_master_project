@@ -1,0 +1,746 @@
+[
+  {
+    "id": "FLG0041",
+    "construction": "same_clause",
+    "a": {
+      "concept": "person.n.01",
+      "surface": "the veterinarian",
+      "determiner": "the",
+      "profession": "veterinarian.n.01"
+    },
+    "b": {
+      "concept": "kitten.n.01",
+      "surface": "a kitten",
+      "determiner": "a"
+    },
+    "sentence": "The veterinarian held a kitten. I photographed them.",
+    "continuation": "I photographed them.",
+    "tail": {
+      "predicate": "photograph.v.01",
+      "role": "Theme",
+      "form": "transitive"
+    },
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "relation": {
+      "concept": "hold.v.02",
+      "subject_role": "Agent",
+      "object_role": "Theme"
+    },
+    "family_id": "family-af4dff0e6123",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0042",
+    "construction": "same_clause",
+    "a": {
+      "concept": "person.n.01",
+      "surface": "the farmer",
+      "determiner": "the",
+      "profession": "farmer.n.01"
+    },
+    "b": {
+      "concept": "calf.n.01",
+      "surface": "a calf",
+      "determiner": "a"
+    },
+    "sentence": "The farmer rescued a calf. Both were wet.",
+    "continuation": "Both were wet.",
+    "tail": {
+      "predicate": "wet.a.01",
+      "role": "AttributeOf",
+      "form": "declarative",
+      "past": true
+    },
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "relation": {
+      "concept": "rescue.v.01",
+      "subject_role": "Agent",
+      "object_role": "Theme"
+    },
+    "family_id": "family-039252be6d6f",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0043",
+    "construction": "same_clause",
+    "a": {
+      "concept": "boy.n.01",
+      "surface": "a boy",
+      "determiner": "a"
+    },
+    "b": {
+      "concept": "puppy.n.01",
+      "surface": "a puppy",
+      "determiner": "a"
+    },
+    "sentence": "A boy carried a puppy. Both were tired.",
+    "continuation": "Both were tired.",
+    "tail": {
+      "predicate": "tired.a.01",
+      "role": "Experiencer",
+      "form": "declarative",
+      "past": true
+    },
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "relation": {
+      "concept": "carry.v.01",
+      "subject_role": "Agent",
+      "object_role": "Theme"
+    },
+    "family_id": "family-d1852f889ddc",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0044",
+    "construction": "same_clause",
+    "a": {
+      "concept": "girl.n.02",
+      "surface": "a girl",
+      "determiner": "a"
+    },
+    "b": {
+      "concept": "rabbit.n.01",
+      "surface": "a rabbit",
+      "determiner": "a"
+    },
+    "sentence": "A girl hugged a rabbit. I photographed them.",
+    "continuation": "I photographed them.",
+    "tail": {
+      "predicate": "photograph.v.01",
+      "role": "Theme",
+      "form": "transitive"
+    },
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "relation": {
+      "concept": "hug.v.01",
+      "subject_role": "Agent",
+      "object_role": "Co-Agent"
+    },
+    "family_id": "family-ae0e37b483be",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0045",
+    "construction": "same_clause",
+    "a": {
+      "concept": "woman.n.01",
+      "surface": "a woman",
+      "determiner": "a"
+    },
+    "b": {
+      "concept": "duck.n.01",
+      "surface": "a duck",
+      "determiner": "a"
+    },
+    "sentence": "A woman rescued a duck. Both were wet.",
+    "continuation": "Both were wet.",
+    "tail": {
+      "predicate": "wet.a.01",
+      "role": "AttributeOf",
+      "form": "declarative",
+      "past": true
+    },
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "relation": {
+      "concept": "rescue.v.01",
+      "subject_role": "Agent",
+      "object_role": "Theme"
+    },
+    "family_id": "family-96ab6e760bd0",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0046",
+    "construction": "same_clause",
+    "a": {
+      "concept": "man.n.01",
+      "surface": "a man",
+      "determiner": "a"
+    },
+    "b": {
+      "concept": "dog.n.01",
+      "surface": "a dog",
+      "determiner": "a"
+    },
+    "sentence": "A man followed a dog. They stopped.",
+    "continuation": "They stopped.",
+    "tail": {
+      "predicate": "stop.v.01",
+      "role": "Theme",
+      "form": "declarative",
+      "past": true
+    },
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "relation": {
+      "concept": "follow.v.01",
+      "subject_role": "Agent",
+      "object_role": "Theme"
+    },
+    "family_id": "family-c4446057bbcf",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0047",
+    "construction": "same_clause",
+    "a": {
+      "concept": "child.n.01",
+      "surface": "a child",
+      "determiner": "a"
+    },
+    "b": {
+      "concept": "hamster.n.01",
+      "surface": "a hamster",
+      "determiner": "a"
+    },
+    "sentence": "A child watched a hamster. I photographed them.",
+    "continuation": "I photographed them.",
+    "tail": {
+      "predicate": "photograph.v.01",
+      "role": "Theme",
+      "form": "transitive"
+    },
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "relation": {
+      "concept": "watch.v.01",
+      "subject_role": "Agent",
+      "object_role": "Theme"
+    },
+    "family_id": "family-3d4d1823f292",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0048",
+    "construction": "same_clause",
+    "a": {
+      "concept": "person.n.01",
+      "surface": "the ranger",
+      "determiner": "the",
+      "profession": "ranger.n.02"
+    },
+    "b": {
+      "concept": "deer.n.01",
+      "surface": "a deer",
+      "determiner": "a"
+    },
+    "sentence": "The ranger saw a deer. I photographed them.",
+    "continuation": "I photographed them.",
+    "tail": {
+      "predicate": "photograph.v.01",
+      "role": "Theme",
+      "form": "transitive"
+    },
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "relation": {
+      "concept": "see.v.01",
+      "subject_role": "Experiencer",
+      "object_role": "Stimulus"
+    },
+    "family_id": "family-b8ed19076b91",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0049",
+    "construction": "same_clause",
+    "a": {
+      "concept": "person.n.01",
+      "surface": "the keeper",
+      "determiner": "the",
+      "profession": "keeper.n.02"
+    },
+    "b": {
+      "concept": "pony.n.05",
+      "surface": "a pony",
+      "determiner": "a"
+    },
+    "sentence": "The keeper followed a pony. They waited.",
+    "continuation": "They waited.",
+    "tail": {
+      "predicate": "wait.v.01",
+      "role": "Theme",
+      "form": "declarative",
+      "past": true
+    },
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "relation": {
+      "concept": "follow.v.01",
+      "subject_role": "Agent",
+      "object_role": "Theme"
+    },
+    "family_id": "family-b1d6f132b7f8",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0050",
+    "construction": "same_clause",
+    "a": {
+      "concept": "person.n.01",
+      "surface": "the rider",
+      "determiner": "the",
+      "profession": "rider.n.01"
+    },
+    "b": {
+      "concept": "horse.n.01",
+      "surface": "a horse",
+      "determiner": "a"
+    },
+    "sentence": "The rider hugged a horse. I photographed them.",
+    "continuation": "I photographed them.",
+    "tail": {
+      "predicate": "photograph.v.01",
+      "role": "Theme",
+      "form": "transitive"
+    },
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "relation": {
+      "concept": "hug.v.01",
+      "subject_role": "Agent",
+      "object_role": "Co-Agent"
+    },
+    "family_id": "family-21b1c5cde4ef",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0051",
+    "construction": "same_clause",
+    "a": {
+      "concept": "person.n.01",
+      "surface": "the hunter",
+      "determiner": "the",
+      "profession": "hunter.n.01"
+    },
+    "b": {
+      "concept": "fox.n.01",
+      "surface": "a fox",
+      "determiner": "a"
+    },
+    "sentence": "The hunter followed a fox. They ran.",
+    "continuation": "They ran.",
+    "tail": {
+      "predicate": "run.v.01",
+      "role": "Theme",
+      "form": "declarative",
+      "past": true
+    },
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "relation": {
+      "concept": "follow.v.01",
+      "subject_role": "Agent",
+      "object_role": "Theme"
+    },
+    "family_id": "family-50b044bd6ef9",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0052",
+    "construction": "same_clause",
+    "a": {
+      "concept": "person.n.01",
+      "surface": "the diver",
+      "determiner": "the",
+      "profession": "diver.n.01"
+    },
+    "b": {
+      "concept": "turtle.n.02",
+      "surface": "a turtle",
+      "determiner": "a"
+    },
+    "sentence": "The diver rescued a turtle. Both were wet.",
+    "continuation": "Both were wet.",
+    "tail": {
+      "predicate": "wet.a.01",
+      "role": "AttributeOf",
+      "form": "declarative",
+      "past": true
+    },
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "relation": {
+      "concept": "rescue.v.01",
+      "subject_role": "Agent",
+      "object_role": "Theme"
+    },
+    "family_id": "family-767dbcbd5d7d",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0053",
+    "construction": "same_clause",
+    "a": {
+      "concept": "person.n.01",
+      "surface": "the swimmer",
+      "determiner": "the",
+      "profession": "swimmer.n.01"
+    },
+    "b": {
+      "concept": "otter.n.02",
+      "surface": "an otter",
+      "determiner": "an"
+    },
+    "sentence": "The swimmer saw an otter. I photographed them.",
+    "continuation": "I photographed them.",
+    "tail": {
+      "predicate": "photograph.v.01",
+      "role": "Theme",
+      "form": "transitive"
+    },
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "relation": {
+      "concept": "see.v.01",
+      "subject_role": "Experiencer",
+      "object_role": "Stimulus"
+    },
+    "family_id": "family-7140fde07198",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0054",
+    "construction": "same_clause",
+    "a": {
+      "concept": "person.n.01",
+      "surface": "the porter",
+      "determiner": "the",
+      "profession": "porter.n.01"
+    },
+    "b": {
+      "concept": "cat.n.01",
+      "surface": "a cat",
+      "determiner": "a"
+    },
+    "sentence": "The porter carried a cat. Both were tired.",
+    "continuation": "Both were tired.",
+    "tail": {
+      "predicate": "tired.a.01",
+      "role": "Experiencer",
+      "form": "declarative",
+      "past": true
+    },
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "relation": {
+      "concept": "carry.v.01",
+      "subject_role": "Agent",
+      "object_role": "Theme"
+    },
+    "family_id": "family-bed68e310c85",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0055",
+    "construction": "same_clause",
+    "a": {
+      "concept": "person.n.01",
+      "surface": "the keeper",
+      "determiner": "the",
+      "profession": "keeper.n.02"
+    },
+    "b": {
+      "concept": "monkey.n.01",
+      "surface": "a monkey",
+      "determiner": "a"
+    },
+    "sentence": "The keeper watched a monkey. I photographed them.",
+    "continuation": "I photographed them.",
+    "tail": {
+      "predicate": "photograph.v.01",
+      "role": "Theme",
+      "form": "transitive"
+    },
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "relation": {
+      "concept": "watch.v.01",
+      "subject_role": "Agent",
+      "object_role": "Theme"
+    },
+    "family_id": "family-1b48bb3f2171",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0056",
+    "construction": "same_clause",
+    "a": {
+      "concept": "person.n.01",
+      "surface": "the driver",
+      "determiner": "the",
+      "profession": "driver.n.01"
+    },
+    "b": {
+      "concept": "hedgehog.n.02",
+      "surface": "a hedgehog",
+      "determiner": "a"
+    },
+    "sentence": "The driver rescued a hedgehog. I photographed them.",
+    "continuation": "I photographed them.",
+    "tail": {
+      "predicate": "photograph.v.01",
+      "role": "Theme",
+      "form": "transitive"
+    },
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "relation": {
+      "concept": "rescue.v.01",
+      "subject_role": "Agent",
+      "object_role": "Theme"
+    },
+    "family_id": "family-5a45a43c28f9",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0057",
+    "construction": "same_clause",
+    "a": {
+      "concept": "person.n.01",
+      "surface": "the teacher",
+      "determiner": "the",
+      "profession": "teacher.n.01"
+    },
+    "b": {
+      "concept": "chick.n.01",
+      "surface": "a chick",
+      "determiner": "a"
+    },
+    "sentence": "The teacher held a chick. I photographed them.",
+    "continuation": "I photographed them.",
+    "tail": {
+      "predicate": "photograph.v.01",
+      "role": "Theme",
+      "form": "transitive"
+    },
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "relation": {
+      "concept": "hold.v.02",
+      "subject_role": "Agent",
+      "object_role": "Theme"
+    },
+    "family_id": "family-3a0e4f7d0e19",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0058",
+    "construction": "same_clause",
+    "a": {
+      "concept": "person.n.01",
+      "surface": "the scientist",
+      "determiner": "the",
+      "profession": "scientist.n.01"
+    },
+    "b": {
+      "concept": "rat.n.01",
+      "surface": "a rat",
+      "determiner": "a"
+    },
+    "sentence": "The scientist watched a rat. I photographed them.",
+    "continuation": "I photographed them.",
+    "tail": {
+      "predicate": "photograph.v.01",
+      "role": "Theme",
+      "form": "transitive"
+    },
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "relation": {
+      "concept": "watch.v.01",
+      "subject_role": "Agent",
+      "object_role": "Theme"
+    },
+    "family_id": "family-25416a1e5e7a",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0059",
+    "construction": "same_clause",
+    "a": {
+      "concept": "person.n.01",
+      "surface": "the gardener",
+      "determiner": "the",
+      "profession": "gardener.n.01"
+    },
+    "b": {
+      "concept": "badger.n.02",
+      "surface": "a badger",
+      "determiner": "a"
+    },
+    "sentence": "The gardener saw a badger. I photographed them.",
+    "continuation": "I photographed them.",
+    "tail": {
+      "predicate": "photograph.v.01",
+      "role": "Theme",
+      "form": "transitive"
+    },
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "relation": {
+      "concept": "see.v.01",
+      "subject_role": "Experiencer",
+      "object_role": "Stimulus"
+    },
+    "family_id": "family-40c350ffe0f2",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0060",
+    "construction": "same_clause",
+    "a": {
+      "concept": "person.n.01",
+      "surface": "the photographer",
+      "determiner": "the",
+      "profession": "photographer.n.01"
+    },
+    "b": {
+      "concept": "squirrel.n.01",
+      "surface": "a squirrel",
+      "determiner": "a"
+    },
+    "sentence": "The photographer followed a squirrel. They stopped.",
+    "continuation": "They stopped.",
+    "tail": {
+      "predicate": "stop.v.01",
+      "role": "Theme",
+      "form": "declarative",
+      "past": true
+    },
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "relation": {
+      "concept": "follow.v.01",
+      "subject_role": "Agent",
+      "object_role": "Theme"
+    },
+    "family_id": "family-28b440520bb5",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  }
+]

@@ -1,0 +1,2288 @@
+[
+  {
+    "id": "N001",
+    "family_id": "names_situation_001",
+    "builder": "object",
+    "fluent": "I interviewed Alice. I interviewed Beth. Both are calm.",
+    "rsr": "I interviewed Alice, Beth. Both are calm.",
+    "continuation_text": "Both are calm.",
+    "a": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Alice\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Beth\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "event": "interview.v.01",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_predicate",
+        "concept": "calm.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "rationale": "Two independently named particulars remain available for an unrelated plural predication; the continuation does not assert the initial event of either member.",
+    "declared_differences": [
+      "Fluent asserts separate initial events for a and b; RSR withdraws the role of a in the shared initial event.",
+      "Fluent repeats the first-person subject and finite predicate, adding a sentence; mention order and continuation remain identical.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_person",
+    "provenance": {
+      "kind": "hand_authored_independent_situation",
+      "source_document": null,
+      "authoring_notes": "WordNet senses checked locally; PMB train role inventories consulted as annotation-pattern references, not as situation sources."
+    },
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "N002",
+    "family_id": "names_situation_002",
+    "builder": "object",
+    "fluent": "I telephoned Clara. I telephoned Diana. They are busy.",
+    "rsr": "I telephoned Clara, Diana. They are busy.",
+    "continuation_text": "They are busy.",
+    "a": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Clara\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Diana\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "event": "telephone.v.01",
+    "actor_role": "Agent",
+    "role": "Recipient",
+    "tense": "TPR",
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_predicate",
+        "concept": "busy.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "rationale": "Two independently named particulars remain available for an unrelated plural predication; the continuation does not assert the initial event of either member.",
+    "declared_differences": [
+      "Fluent asserts separate initial events for a and b; RSR withdraws the role of a in the shared initial event.",
+      "Fluent repeats the first-person subject and finite predicate, adding a sentence; mention order and continuation remain identical.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_person",
+    "provenance": {
+      "kind": "hand_authored_independent_situation",
+      "source_document": null,
+      "authoring_notes": "WordNet senses checked locally; PMB train role inventories consulted as annotation-pattern references, not as situation sources."
+    },
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "N003",
+    "family_id": "names_situation_003",
+    "builder": "object",
+    "fluent": "I invited Evan. I invited Felix. Both are friendly.",
+    "rsr": "I invited Evan, Felix. Both are friendly.",
+    "continuation_text": "Both are friendly.",
+    "a": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Evan\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Felix\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "event": "invite.v.02",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_predicate",
+        "concept": "friendly.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "rationale": "Two independently named particulars remain available for an unrelated plural predication; the continuation does not assert the initial event of either member.",
+    "declared_differences": [
+      "Fluent asserts separate initial events for a and b; RSR withdraws the role of a in the shared initial event.",
+      "Fluent repeats the first-person subject and finite predicate, adding a sentence; mention order and continuation remain identical.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_person",
+    "provenance": {
+      "kind": "hand_authored_independent_situation",
+      "source_document": null,
+      "authoring_notes": "WordNet senses checked locally; PMB train role inventories consulted as annotation-pattern references, not as situation sources."
+    },
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "N004",
+    "family_id": "names_situation_004",
+    "builder": "object",
+    "fluent": "I helped Grace. I helped Hannah. They are patient.",
+    "rsr": "I helped Grace, Hannah. They are patient.",
+    "continuation_text": "They are patient.",
+    "a": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Grace\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Hannah\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "event": "help.v.01",
+    "actor_role": "Agent",
+    "role": "Beneficiary",
+    "tense": "TPR",
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_predicate",
+        "concept": "patient.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "rationale": "Two independently named particulars remain available for an unrelated plural predication; the continuation does not assert the initial event of either member.",
+    "declared_differences": [
+      "Fluent asserts separate initial events for a and b; RSR withdraws the role of a in the shared initial event.",
+      "Fluent repeats the first-person subject and finite predicate, adding a sentence; mention order and continuation remain identical.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_person",
+    "provenance": {
+      "kind": "hand_authored_independent_situation",
+      "source_document": null,
+      "authoring_notes": "WordNet senses checked locally; PMB train role inventories consulted as annotation-pattern references, not as situation sources."
+    },
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "N005",
+    "family_id": "names_situation_005",
+    "builder": "object",
+    "fluent": "I thanked Isaac. I thanked Jonah. Both are generous.",
+    "rsr": "I thanked Isaac, Jonah. Both are generous.",
+    "continuation_text": "Both are generous.",
+    "a": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Isaac\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Jonah\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "event": "thank.v.01",
+    "actor_role": "Agent",
+    "role": "Recipient",
+    "tense": "TPR",
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_predicate",
+        "concept": "generous.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "rationale": "Two independently named particulars remain available for an unrelated plural predication; the continuation does not assert the initial event of either member.",
+    "declared_differences": [
+      "Fluent asserts separate initial events for a and b; RSR withdraws the role of a in the shared initial event.",
+      "Fluent repeats the first-person subject and finite predicate, adding a sentence; mention order and continuation remain identical.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_person",
+    "provenance": {
+      "kind": "hand_authored_independent_situation",
+      "source_document": null,
+      "authoring_notes": "WordNet senses checked locally; PMB train role inventories consulted as annotation-pattern references, not as situation sources."
+    },
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "N006",
+    "family_id": "names_situation_006",
+    "builder": "object",
+    "fluent": "I greeted Kiran. I greeted Leo. They are polite.",
+    "rsr": "I greeted Kiran, Leo. They are polite.",
+    "continuation_text": "They are polite.",
+    "a": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Kiran\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Leo\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "event": "greet.v.01",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_predicate",
+        "concept": "polite.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "rationale": "Two independently named particulars remain available for an unrelated plural predication; the continuation does not assert the initial event of either member.",
+    "declared_differences": [
+      "Fluent asserts separate initial events for a and b; RSR withdraws the role of a in the shared initial event.",
+      "Fluent repeats the first-person subject and finite predicate, adding a sentence; mention order and continuation remain identical.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_person",
+    "provenance": {
+      "kind": "hand_authored_independent_situation",
+      "source_document": null,
+      "authoring_notes": "WordNet senses checked locally; PMB train role inventories consulted as annotation-pattern references, not as situation sources."
+    },
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "N007",
+    "family_id": "names_situation_007",
+    "builder": "object",
+    "fluent": "I praised Maya. I praised Nora. Both are talented.",
+    "rsr": "I praised Maya, Nora. Both are talented.",
+    "continuation_text": "Both are talented.",
+    "a": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Maya\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Nora\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "event": "praise.v.01",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_predicate",
+        "concept": "talented.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "rationale": "Two independently named particulars remain available for an unrelated plural predication; the continuation does not assert the initial event of either member.",
+    "declared_differences": [
+      "Fluent asserts separate initial events for a and b; RSR withdraws the role of a in the shared initial event.",
+      "Fluent repeats the first-person subject and finite predicate, adding a sentence; mention order and continuation remain identical.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_person",
+    "provenance": {
+      "kind": "hand_authored_independent_situation",
+      "source_document": null,
+      "authoring_notes": "WordNet senses checked locally; PMB train role inventories consulted as annotation-pattern references, not as situation sources."
+    },
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "N008",
+    "family_id": "names_situation_008",
+    "builder": "object",
+    "fluent": "I hired Owen. I hired Peter. They are experienced.",
+    "rsr": "I hired Owen, Peter. They are experienced.",
+    "continuation_text": "They are experienced.",
+    "a": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Owen\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Peter\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "event": "hire.v.01",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_predicate",
+        "concept": "experienced.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "rationale": "Two independently named particulars remain available for an unrelated plural predication; the continuation does not assert the initial event of either member.",
+    "declared_differences": [
+      "Fluent asserts separate initial events for a and b; RSR withdraws the role of a in the shared initial event.",
+      "Fluent repeats the first-person subject and finite predicate, adding a sentence; mention order and continuation remain identical.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_person",
+    "provenance": {
+      "kind": "hand_authored_independent_situation",
+      "source_document": null,
+      "authoring_notes": "WordNet senses checked locally; PMB train role inventories consulted as annotation-pattern references, not as situation sources."
+    },
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "N009",
+    "family_id": "names_situation_009",
+    "builder": "object",
+    "fluent": "I contacted Rita. I contacted Sara. Both are reliable.",
+    "rsr": "I contacted Rita, Sara. Both are reliable.",
+    "continuation_text": "Both are reliable.",
+    "a": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Rita\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Sara\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "event": "contact.v.01",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_predicate",
+        "concept": "reliable.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "rationale": "Two independently named particulars remain available for an unrelated plural predication; the continuation does not assert the initial event of either member.",
+    "declared_differences": [
+      "Fluent asserts separate initial events for a and b; RSR withdraws the role of a in the shared initial event.",
+      "Fluent repeats the first-person subject and finite predicate, adding a sentence; mention order and continuation remain identical.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_person",
+    "provenance": {
+      "kind": "hand_authored_independent_situation",
+      "source_document": null,
+      "authoring_notes": "WordNet senses checked locally; PMB train role inventories consulted as annotation-pattern references, not as situation sources."
+    },
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "N010",
+    "family_id": "names_situation_010",
+    "builder": "object",
+    "fluent": "I consulted Theo. I consulted Victor. They are helpful.",
+    "rsr": "I consulted Theo, Victor. They are helpful.",
+    "continuation_text": "They are helpful.",
+    "a": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Theo\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Victor\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "event": "consult.v.01",
+    "actor_role": "Agent",
+    "role": "Recipient",
+    "tense": "TPR",
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_predicate",
+        "concept": "helpful.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "rationale": "Two independently named particulars remain available for an unrelated plural predication; the continuation does not assert the initial event of either member.",
+    "declared_differences": [
+      "Fluent asserts separate initial events for a and b; RSR withdraws the role of a in the shared initial event.",
+      "Fluent repeats the first-person subject and finite predicate, adding a sentence; mention order and continuation remain identical.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_person",
+    "provenance": {
+      "kind": "hand_authored_independent_situation",
+      "source_document": null,
+      "authoring_notes": "WordNet senses checked locally; PMB train role inventories consulted as annotation-pattern references, not as situation sources."
+    },
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "N011",
+    "family_id": "names_situation_011",
+    "builder": "object",
+    "fluent": "I followed Wendy. I followed Yasmin. Both are tired.",
+    "rsr": "I followed Wendy, Yasmin. Both are tired.",
+    "continuation_text": "Both are tired.",
+    "a": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Wendy\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Yasmin\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "event": "follow.v.01",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_predicate",
+        "concept": "tired.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "rationale": "Two independently named particulars remain available for an unrelated plural predication; the continuation does not assert the initial event of either member.",
+    "declared_differences": [
+      "Fluent asserts separate initial events for a and b; RSR withdraws the role of a in the shared initial event.",
+      "Fluent repeats the first-person subject and finite predicate, adding a sentence; mention order and continuation remain identical.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_person",
+    "provenance": {
+      "kind": "hand_authored_independent_situation",
+      "source_document": null,
+      "authoring_notes": "WordNet senses checked locally; PMB train role inventories consulted as annotation-pattern references, not as situation sources."
+    },
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "N012",
+    "family_id": "names_situation_012",
+    "builder": "object",
+    "fluent": "I admired Amir. I admired Basil. They are honest.",
+    "rsr": "I admired Amir, Basil. They are honest.",
+    "continuation_text": "They are honest.",
+    "a": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Amir\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Basil\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "event": "admire.v.01",
+    "actor_role": "Experiencer",
+    "role": "Stimulus",
+    "tense": "TPR",
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_predicate",
+        "concept": "honest.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "rationale": "Two independently named particulars remain available for an unrelated plural predication; the continuation does not assert the initial event of either member.",
+    "declared_differences": [
+      "Fluent asserts separate initial events for a and b; RSR withdraws the role of a in the shared initial event.",
+      "Fluent repeats the first-person subject and finite predicate, adding a sentence; mention order and continuation remain identical.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_person",
+    "provenance": {
+      "kind": "hand_authored_independent_situation",
+      "source_document": null,
+      "authoring_notes": "WordNet senses checked locally; PMB train role inventories consulted as annotation-pattern references, not as situation sources."
+    },
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "N013",
+    "family_id": "names_situation_013",
+    "builder": "object",
+    "fluent": "I photographed Celia. I photographed Dora. They are both musicians.",
+    "rsr": "I photographed Celia, Dora. They are both musicians.",
+    "continuation_text": "They are both musicians.",
+    "a": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Celia\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Dora\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "event": "photograph.v.01",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_be",
+        "concept": "be.v.01",
+        "roles": [
+          [
+            "Theme",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ],
+          [
+            "Co-Theme",
+            "@tail_person"
+          ]
+        ]
+      },
+      {
+        "id": "tail_person",
+        "concept": "person.n.01",
+        "roles": [
+          [
+            "Role",
+            "@tail_role"
+          ]
+        ]
+      },
+      {
+        "id": "tail_role",
+        "concept": "musician.n.01",
+        "roles": []
+      }
+    ],
+    "rationale": "Two independently named particulars remain available for an unrelated plural predication; the continuation does not assert the initial event of either member.",
+    "declared_differences": [
+      "Fluent asserts separate initial events for a and b; RSR withdraws the role of a in the shared initial event.",
+      "Fluent repeats the first-person subject and finite predicate, adding a sentence; mention order and continuation remain identical.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_person",
+    "provenance": {
+      "kind": "hand_authored_independent_situation",
+      "source_document": null,
+      "authoring_notes": "WordNet senses checked locally; PMB train role inventories consulted as annotation-pattern references, not as situation sources."
+    },
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "N014",
+    "family_id": "names_situation_014",
+    "builder": "object",
+    "fluent": "I remembered Eli. I remembered Farid. They are teachers.",
+    "rsr": "I remembered Eli, Farid. They are teachers.",
+    "continuation_text": "They are teachers.",
+    "a": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Eli\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Farid\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "event": "remember.v.01",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_be",
+        "concept": "be.v.01",
+        "roles": [
+          [
+            "Theme",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ],
+          [
+            "Co-Theme",
+            "@tail_person"
+          ]
+        ]
+      },
+      {
+        "id": "tail_person",
+        "concept": "person.n.01",
+        "roles": [
+          [
+            "Role",
+            "@tail_role"
+          ]
+        ]
+      },
+      {
+        "id": "tail_role",
+        "concept": "teacher.n.01",
+        "roles": []
+      }
+    ],
+    "rationale": "Two independently named particulars remain available for an unrelated plural predication; the continuation does not assert the initial event of either member.",
+    "declared_differences": [
+      "Fluent asserts separate initial events for a and b; RSR withdraws the role of a in the shared initial event.",
+      "Fluent repeats the first-person subject and finite predicate, adding a sentence; mention order and continuation remain identical.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_person",
+    "provenance": {
+      "kind": "hand_authored_independent_situation",
+      "source_document": null,
+      "authoring_notes": "WordNet senses checked locally; PMB train role inventories consulted as annotation-pattern references, not as situation sources."
+    },
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "N015",
+    "family_id": "names_situation_015",
+    "builder": "object",
+    "fluent": "I recommended Gita. I recommended Hugo. They are both engineers.",
+    "rsr": "I recommended Gita, Hugo. They are both engineers.",
+    "continuation_text": "They are both engineers.",
+    "a": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Gita\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Hugo\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "event": "recommend.v.02",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_be",
+        "concept": "be.v.01",
+        "roles": [
+          [
+            "Theme",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ],
+          [
+            "Co-Theme",
+            "@tail_person"
+          ]
+        ]
+      },
+      {
+        "id": "tail_person",
+        "concept": "person.n.01",
+        "roles": [
+          [
+            "Role",
+            "@tail_role"
+          ]
+        ]
+      },
+      {
+        "id": "tail_role",
+        "concept": "engineer.n.01",
+        "roles": []
+      }
+    ],
+    "rationale": "Two independently named particulars remain available for an unrelated plural predication; the continuation does not assert the initial event of either member.",
+    "declared_differences": [
+      "Fluent asserts separate initial events for a and b; RSR withdraws the role of a in the shared initial event.",
+      "Fluent repeats the first-person subject and finite predicate, adding a sentence; mention order and continuation remain identical.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_person",
+    "provenance": {
+      "kind": "hand_authored_independent_situation",
+      "source_document": null,
+      "authoring_notes": "WordNet senses checked locally; PMB train role inventories consulted as annotation-pattern references, not as situation sources."
+    },
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "N016",
+    "family_id": "names_situation_016",
+    "builder": "object",
+    "fluent": "I missed Ida. I missed Jules. They are architects.",
+    "rsr": "I missed Ida, Jules. They are architects.",
+    "continuation_text": "They are architects.",
+    "a": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Ida\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Jules\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "event": "miss.v.02",
+    "actor_role": "Experiencer",
+    "role": "Stimulus",
+    "tense": "TPR",
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_be",
+        "concept": "be.v.01",
+        "roles": [
+          [
+            "Theme",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ],
+          [
+            "Co-Theme",
+            "@tail_person"
+          ]
+        ]
+      },
+      {
+        "id": "tail_person",
+        "concept": "person.n.01",
+        "roles": [
+          [
+            "Role",
+            "@tail_role"
+          ]
+        ]
+      },
+      {
+        "id": "tail_role",
+        "concept": "architect.n.01",
+        "roles": []
+      }
+    ],
+    "rationale": "Two independently named particulars remain available for an unrelated plural predication; the continuation does not assert the initial event of either member.",
+    "declared_differences": [
+      "Fluent asserts separate initial events for a and b; RSR withdraws the role of a in the shared initial event.",
+      "Fluent repeats the first-person subject and finite predicate, adding a sentence; mention order and continuation remain identical.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_person",
+    "provenance": {
+      "kind": "hand_authored_independent_situation",
+      "source_document": null,
+      "authoring_notes": "WordNet senses checked locally; PMB train role inventories consulted as annotation-pattern references, not as situation sources."
+    },
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "N017",
+    "family_id": "names_situation_017",
+    "builder": "object",
+    "fluent": "I visited Bristol. I visited York. Both are beautiful.",
+    "rsr": "I visited Bristol, York. Both are beautiful.",
+    "continuation_text": "Both are beautiful.",
+    "a": {
+      "concept": "city.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Bristol\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "city.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"York\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "event": "visit.v.01",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_predicate",
+        "concept": "beautiful.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "rationale": "Two independently named particulars remain available for an unrelated plural predication; the continuation does not assert the initial event of either member.",
+    "declared_differences": [
+      "Fluent asserts separate initial events for a and b; RSR withdraws the role of a in the shared initial event.",
+      "Fluent repeats the first-person subject and finite predicate, adding a sentence; mention order and continuation remain identical.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_place",
+    "provenance": {
+      "kind": "hand_authored_independent_situation",
+      "source_document": null,
+      "authoring_notes": "WordNet senses checked locally; PMB train role inventories consulted as annotation-pattern references, not as situation sources."
+    },
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "N018",
+    "family_id": "names_situation_018",
+    "builder": "object",
+    "fluent": "I explored Lisbon. I explored Porto. They are hilly.",
+    "rsr": "I explored Lisbon, Porto. They are hilly.",
+    "continuation_text": "They are hilly.",
+    "a": {
+      "concept": "city.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Lisbon\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "city.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Porto\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "event": "explore.v.02",
+    "actor_role": "Agent",
+    "role": "Location",
+    "tense": "TPR",
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_predicate",
+        "concept": "hilly.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "rationale": "Two independently named particulars remain available for an unrelated plural predication; the continuation does not assert the initial event of either member.",
+    "declared_differences": [
+      "Fluent asserts separate initial events for a and b; RSR withdraws the role of a in the shared initial event.",
+      "Fluent repeats the first-person subject and finite predicate, adding a sentence; mention order and continuation remain identical.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_place",
+    "provenance": {
+      "kind": "hand_authored_independent_situation",
+      "source_document": null,
+      "authoring_notes": "WordNet senses checked locally; PMB train role inventories consulted as annotation-pattern references, not as situation sources."
+    },
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "N019",
+    "family_id": "names_situation_019",
+    "builder": "object",
+    "fluent": "I photographed Prague. I photographed Vienna. Both are crowded.",
+    "rsr": "I photographed Prague, Vienna. Both are crowded.",
+    "continuation_text": "Both are crowded.",
+    "a": {
+      "concept": "city.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Prague\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "city.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Vienna\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "event": "photograph.v.01",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_predicate",
+        "concept": "crowded.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "rationale": "Two independently named particulars remain available for an unrelated plural predication; the continuation does not assert the initial event of either member.",
+    "declared_differences": [
+      "Fluent asserts separate initial events for a and b; RSR withdraws the role of a in the shared initial event.",
+      "Fluent repeats the first-person subject and finite predicate, adding a sentence; mention order and continuation remain identical.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_place",
+    "provenance": {
+      "kind": "hand_authored_independent_situation",
+      "source_document": null,
+      "authoring_notes": "WordNet senses checked locally; PMB train role inventories consulted as annotation-pattern references, not as situation sources."
+    },
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "N020",
+    "family_id": "names_situation_020",
+    "builder": "object",
+    "fluent": "I mentioned Oslo. I mentioned Bergen. They are expensive.",
+    "rsr": "I mentioned Oslo, Bergen. They are expensive.",
+    "continuation_text": "They are expensive.",
+    "a": {
+      "concept": "city.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Oslo\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "city.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Bergen\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "event": "mention.v.01",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_predicate",
+        "concept": "expensive.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "rationale": "Two independently named particulars remain available for an unrelated plural predication; the continuation does not assert the initial event of either member.",
+    "declared_differences": [
+      "Fluent asserts separate initial events for a and b; RSR withdraws the role of a in the shared initial event.",
+      "Fluent repeats the first-person subject and finite predicate, adding a sentence; mention order and continuation remain identical.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_place",
+    "provenance": {
+      "kind": "hand_authored_independent_situation",
+      "source_document": null,
+      "authoring_notes": "WordNet senses checked locally; PMB train role inventories consulted as annotation-pattern references, not as situation sources."
+    },
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "N021",
+    "family_id": "names_situation_021",
+    "builder": "object",
+    "fluent": "I recommended Utrecht. I recommended Leiden. Both are peaceful.",
+    "rsr": "I recommended Utrecht, Leiden. Both are peaceful.",
+    "continuation_text": "Both are peaceful.",
+    "a": {
+      "concept": "city.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Utrecht\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "city.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Leiden\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "event": "recommend.v.02",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_predicate",
+        "concept": "peaceful.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "rationale": "Two independently named particulars remain available for an unrelated plural predication; the continuation does not assert the initial event of either member.",
+    "declared_differences": [
+      "Fluent asserts separate initial events for a and b; RSR withdraws the role of a in the shared initial event.",
+      "Fluent repeats the first-person subject and finite predicate, adding a sentence; mention order and continuation remain identical.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_place",
+    "provenance": {
+      "kind": "hand_authored_independent_situation",
+      "source_document": null,
+      "authoring_notes": "WordNet senses checked locally; PMB train role inventories consulted as annotation-pattern references, not as situation sources."
+    },
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "N022",
+    "family_id": "names_situation_022",
+    "builder": "object",
+    "fluent": "I liked Ghent. I liked Bruges. They are popular.",
+    "rsr": "I liked Ghent, Bruges. They are popular.",
+    "continuation_text": "They are popular.",
+    "a": {
+      "concept": "city.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Ghent\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "city.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Bruges\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "event": "like.v.02",
+    "actor_role": "Experiencer",
+    "role": "Stimulus",
+    "tense": "TPR",
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_predicate",
+        "concept": "popular.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "rationale": "Two independently named particulars remain available for an unrelated plural predication; the continuation does not assert the initial event of either member.",
+    "declared_differences": [
+      "Fluent asserts separate initial events for a and b; RSR withdraws the role of a in the shared initial event.",
+      "Fluent repeats the first-person subject and finite predicate, adding a sentence; mention order and continuation remain identical.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_place",
+    "provenance": {
+      "kind": "hand_authored_independent_situation",
+      "source_document": null,
+      "authoring_notes": "WordNet senses checked locally; PMB train role inventories consulted as annotation-pattern references, not as situation sources."
+    },
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "N023",
+    "family_id": "names_situation_023",
+    "builder": "object",
+    "fluent": "I visited Northgate Museum. I visited Westgate Museum. Both are large.",
+    "rsr": "I visited Northgate Museum, Westgate Museum. Both are large.",
+    "continuation_text": "Both are large.",
+    "a": {
+      "concept": "museum.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Northgate Museum\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "museum.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Westgate Museum\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "event": "visit.v.01",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_predicate",
+        "concept": "large.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "rationale": "Two independently named particulars remain available for an unrelated plural predication; the continuation does not assert the initial event of either member.",
+    "declared_differences": [
+      "Fluent asserts separate initial events for a and b; RSR withdraws the role of a in the shared initial event.",
+      "Fluent repeats the first-person subject and finite predicate, adding a sentence; mention order and continuation remain identical.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_place",
+    "provenance": {
+      "kind": "hand_authored_independent_situation",
+      "source_document": null,
+      "authoring_notes": "WordNet senses checked locally; PMB train role inventories consulted as annotation-pattern references, not as situation sources."
+    },
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "N024",
+    "family_id": "names_situation_024",
+    "builder": "object",
+    "fluent": "I photographed Eastbank Bridge. I photographed Westbank Bridge. They are damaged.",
+    "rsr": "I photographed Eastbank Bridge, Westbank Bridge. They are damaged.",
+    "continuation_text": "They are damaged.",
+    "a": {
+      "concept": "bridge.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Eastbank Bridge\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "bridge.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Westbank Bridge\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "event": "photograph.v.01",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_predicate",
+        "concept": "damaged.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "rationale": "Two independently named particulars remain available for an unrelated plural predication; the continuation does not assert the initial event of either member.",
+    "declared_differences": [
+      "Fluent asserts separate initial events for a and b; RSR withdraws the role of a in the shared initial event.",
+      "Fluent repeats the first-person subject and finite predicate, adding a sentence; mention order and continuation remain identical.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_place",
+    "provenance": {
+      "kind": "hand_authored_independent_situation",
+      "source_document": null,
+      "authoring_notes": "WordNet senses checked locally; PMB train role inventories consulted as annotation-pattern references, not as situation sources."
+    },
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "N025",
+    "family_id": "names_situation_025",
+    "builder": "object",
+    "fluent": "I recommended the Seaview Hotel. I recommended the Hillcrest Hotel. Both are comfortable.",
+    "rsr": "I recommended the Seaview Hotel, the Hillcrest Hotel. Both are comfortable.",
+    "continuation_text": "Both are comfortable.",
+    "a": {
+      "concept": "hotel.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Seaview Hotel\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "hotel.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Hillcrest Hotel\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "event": "recommend.v.02",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_predicate",
+        "concept": "comfortable.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "rationale": "Two independently named particulars remain available for an unrelated plural predication; the continuation does not assert the initial event of either member.",
+    "declared_differences": [
+      "Fluent asserts separate initial events for a and b; RSR withdraws the role of a in the shared initial event.",
+      "Fluent repeats the first-person subject and finite predicate, adding a sentence; mention order and continuation remain identical.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_place",
+    "provenance": {
+      "kind": "hand_authored_independent_situation",
+      "source_document": null,
+      "authoring_notes": "WordNet senses checked locally; PMB train role inventories consulted as annotation-pattern references, not as situation sources."
+    },
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "N026",
+    "family_id": "names_situation_026",
+    "builder": "object",
+    "fluent": "I explored Luma Island. I explored Neri Island. They are hilly.",
+    "rsr": "I explored Luma Island, Neri Island. They are hilly.",
+    "continuation_text": "They are hilly.",
+    "a": {
+      "concept": "island.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Luma Island\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "island.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Neri Island\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "event": "explore.v.02",
+    "actor_role": "Agent",
+    "role": "Location",
+    "tense": "TPR",
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_predicate",
+        "concept": "hilly.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "rationale": "Two independently named particulars remain available for an unrelated plural predication; the continuation does not assert the initial event of either member.",
+    "declared_differences": [
+      "Fluent asserts separate initial events for a and b; RSR withdraws the role of a in the shared initial event.",
+      "Fluent repeats the first-person subject and finite predicate, adding a sentence; mention order and continuation remain identical.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_place",
+    "provenance": {
+      "kind": "hand_authored_independent_situation",
+      "source_document": null,
+      "authoring_notes": "WordNet senses checked locally; PMB train role inventories consulted as annotation-pattern references, not as situation sources."
+    },
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "N027",
+    "family_id": "names_situation_027",
+    "builder": "object",
+    "fluent": "I mentioned the Arcadia Theatre. I mentioned the Lyric Theatre. Both are famous.",
+    "rsr": "I mentioned the Arcadia Theatre, the Lyric Theatre. Both are famous.",
+    "continuation_text": "Both are famous.",
+    "a": {
+      "concept": "theater.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Arcadia Theatre\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "theater.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Lyric Theatre\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "event": "mention.v.01",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_predicate",
+        "concept": "famous.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "rationale": "Two independently named particulars remain available for an unrelated plural predication; the continuation does not assert the initial event of either member.",
+    "declared_differences": [
+      "Fluent asserts separate initial events for a and b; RSR withdraws the role of a in the shared initial event.",
+      "Fluent repeats the first-person subject and finite predicate, adding a sentence; mention order and continuation remain identical.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_place",
+    "provenance": {
+      "kind": "hand_authored_independent_situation",
+      "source_document": null,
+      "authoring_notes": "WordNet senses checked locally; PMB train role inventories consulted as annotation-pattern references, not as situation sources."
+    },
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "N028",
+    "family_id": "names_situation_028",
+    "builder": "object",
+    "fluent": "I visited Saltwater Harbour. I visited Bluewater Harbour. They are noisy.",
+    "rsr": "I visited Saltwater Harbour, Bluewater Harbour. They are noisy.",
+    "continuation_text": "They are noisy.",
+    "a": {
+      "concept": "harbor.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Saltwater Harbour\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "harbor.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Bluewater Harbour\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "event": "visit.v.01",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_predicate",
+        "concept": "noisy.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "rationale": "Two independently named particulars remain available for an unrelated plural predication; the continuation does not assert the initial event of either member.",
+    "declared_differences": [
+      "Fluent asserts separate initial events for a and b; RSR withdraws the role of a in the shared initial event.",
+      "Fluent repeats the first-person subject and finite predicate, adding a sentence; mention order and continuation remain identical.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_place",
+    "provenance": {
+      "kind": "hand_authored_independent_situation",
+      "source_document": null,
+      "authoring_notes": "WordNet senses checked locally; PMB train role inventories consulted as annotation-pattern references, not as situation sources."
+    },
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "N029",
+    "family_id": "names_situation_029",
+    "builder": "object",
+    "fluent": "I photographed the Aurora. I photographed the Meridian. Both ships are damaged.",
+    "rsr": "I photographed the Aurora, the Meridian. Both ships are damaged.",
+    "continuation_text": "Both ships are damaged.",
+    "a": {
+      "concept": "ship.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Aurora\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "ship.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Meridian\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "event": "photograph.v.01",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": 2,
+    "group_concept": "ship.n.01",
+    "tail": [
+      {
+        "id": "tail_predicate",
+        "concept": "damaged.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "rationale": "Two independently named particulars remain available for an unrelated plural predication; the continuation does not assert the initial event of either member.",
+    "declared_differences": [
+      "Fluent asserts separate initial events for a and b; RSR withdraws the role of a in the shared initial event.",
+      "Fluent repeats the first-person subject and finite predicate, adding a sentence; mention order and continuation remain identical.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_object",
+    "provenance": {
+      "kind": "hand_authored_independent_situation",
+      "source_document": null,
+      "authoring_notes": "WordNet senses checked locally; PMB train role inventories consulted as annotation-pattern references, not as situation sources."
+    },
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "N030",
+    "family_id": "names_situation_030",
+    "builder": "object",
+    "fluent": "I chose the painting Winter Sun. I chose the painting Summer Rain. They are valuable.",
+    "rsr": "I chose the painting Winter Sun, the painting Summer Rain. They are valuable.",
+    "continuation_text": "They are valuable.",
+    "a": {
+      "concept": "painting.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Winter Sun\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "painting.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Summer Rain\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "event": "choose.v.01",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_predicate",
+        "concept": "valuable.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "rationale": "Two independently named particulars remain available for an unrelated plural predication; the continuation does not assert the initial event of either member.",
+    "declared_differences": [
+      "Fluent asserts separate initial events for a and b; RSR withdraws the role of a in the shared initial event.",
+      "Fluent repeats the first-person subject and finite predicate, adding a sentence; mention order and continuation remain identical.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_object",
+    "provenance": {
+      "kind": "hand_authored_independent_situation",
+      "source_document": null,
+      "authoring_notes": "WordNet senses checked locally; PMB train role inventories consulted as annotation-pattern references, not as situation sources."
+    },
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "N031",
+    "family_id": "names_situation_031",
+    "builder": "object",
+    "fluent": "I admired the painting Morning Light. I admired the painting Evening Glow. Both are colorful.",
+    "rsr": "I admired the painting Morning Light, the painting Evening Glow. Both are colorful.",
+    "continuation_text": "Both are colorful.",
+    "a": {
+      "concept": "painting.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Morning Light\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "painting.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Evening Glow\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "event": "admire.v.01",
+    "actor_role": "Experiencer",
+    "role": "Stimulus",
+    "tense": "TPR",
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_predicate",
+        "concept": "colorful.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "rationale": "Two independently named particulars remain available for an unrelated plural predication; the continuation does not assert the initial event of either member.",
+    "declared_differences": [
+      "Fluent asserts separate initial events for a and b; RSR withdraws the role of a in the shared initial event.",
+      "Fluent repeats the first-person subject and finite predicate, adding a sentence; mention order and continuation remain identical.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_object",
+    "provenance": {
+      "kind": "hand_authored_independent_situation",
+      "source_document": null,
+      "authoring_notes": "WordNet senses checked locally; PMB train role inventories consulted as annotation-pattern references, not as situation sources."
+    },
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "N032",
+    "family_id": "names_situation_032",
+    "builder": "object",
+    "fluent": "I mentioned the Hope statue. I mentioned the Courage statue. They are heavy.",
+    "rsr": "I mentioned the Hope statue, the Courage statue. They are heavy.",
+    "continuation_text": "They are heavy.",
+    "a": {
+      "concept": "statue.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Hope\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "statue.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Courage\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "event": "mention.v.01",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_predicate",
+        "concept": "heavy.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "rationale": "Two independently named particulars remain available for an unrelated plural predication; the continuation does not assert the initial event of either member.",
+    "declared_differences": [
+      "Fluent asserts separate initial events for a and b; RSR withdraws the role of a in the shared initial event.",
+      "Fluent repeats the first-person subject and finite predicate, adding a sentence; mention order and continuation remain identical.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_object",
+    "provenance": {
+      "kind": "hand_authored_independent_situation",
+      "source_document": null,
+      "authoring_notes": "WordNet senses checked locally; PMB train role inventories consulted as annotation-pattern references, not as situation sources."
+    },
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "N033",
+    "family_id": "names_situation_033",
+    "builder": "object",
+    "fluent": "I saw the Falcon. I saw the Swift. Both ships are large.",
+    "rsr": "I saw the Falcon, the Swift. Both ships are large.",
+    "continuation_text": "Both ships are large.",
+    "a": {
+      "concept": "ship.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Falcon\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "ship.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Swift\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "event": "see.v.01",
+    "actor_role": "Experiencer",
+    "role": "Stimulus",
+    "tense": "TPR",
+    "quantity": 2,
+    "group_concept": "ship.n.01",
+    "tail": [
+      {
+        "id": "tail_predicate",
+        "concept": "large.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "rationale": "Two independently named particulars remain available for an unrelated plural predication; the continuation does not assert the initial event of either member.",
+    "declared_differences": [
+      "Fluent asserts separate initial events for a and b; RSR withdraws the role of a in the shared initial event.",
+      "Fluent repeats the first-person subject and finite predicate, adding a sentence; mention order and continuation remain identical.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_object",
+    "provenance": {
+      "kind": "hand_authored_independent_situation",
+      "source_document": null,
+      "authoring_notes": "WordNet senses checked locally; PMB train role inventories consulted as annotation-pattern references, not as situation sources."
+    },
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "N034",
+    "family_id": "names_situation_034",
+    "builder": "object",
+    "fluent": "I recommended the Orchard Hotel. I recommended the Willow Hotel. They are expensive.",
+    "rsr": "I recommended the Orchard Hotel, the Willow Hotel. They are expensive.",
+    "continuation_text": "They are expensive.",
+    "a": {
+      "concept": "hotel.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Orchard Hotel\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "hotel.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Willow Hotel\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "event": "recommend.v.02",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_predicate",
+        "concept": "expensive.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "rationale": "Two independently named particulars remain available for an unrelated plural predication; the continuation does not assert the initial event of either member.",
+    "declared_differences": [
+      "Fluent asserts separate initial events for a and b; RSR withdraws the role of a in the shared initial event.",
+      "Fluent repeats the first-person subject and finite predicate, adding a sentence; mention order and continuation remain identical.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_place",
+    "provenance": {
+      "kind": "hand_authored_independent_situation",
+      "source_document": null,
+      "authoring_notes": "WordNet senses checked locally; PMB train role inventories consulted as annotation-pattern references, not as situation sources."
+    },
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  }
+]

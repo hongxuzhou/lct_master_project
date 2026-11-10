@@ -1,0 +1,690 @@
+[
+  {
+    "id": "FGS041",
+    "family_id": "fgs-situation-041",
+    "sentence": "There was a ruler on the desk. I found an eraser. I put both in the drawer.",
+    "continuation": "I put both in the drawer.",
+    "a": {
+      "concept": "ruler.n.02",
+      "predicate": "be.v.03",
+      "role": "AttributeOf",
+      "past": true,
+      "determiner": "a",
+      "identifiability": "new discourse referent",
+      "existential": true,
+      "location": "desk.n.01"
+    },
+    "b": {
+      "concept": "eraser.n.01",
+      "predicate": "find.v.01",
+      "role": "Theme",
+      "past": true,
+      "determiner": "an",
+      "identifiability": "new discourse referent",
+      "object_event": true,
+      "actor_name": null
+    },
+    "tail": {
+      "predicate": "put.v.01",
+      "role": "Theme",
+      "form": "transitive",
+      "destination": "drawer.n.01"
+    },
+    "design": "Existential then object introduction; group as Theme, drawer as Destination.",
+    "introduction_relation": "CONTINUATION",
+    "quantity": 2,
+    "group_concept": "entity.n.01"
+  },
+  {
+    "id": "FGS042",
+    "family_id": "fgs-situation-042",
+    "sentence": "Tom has a telescope. I brought a microscope. I photographed both instruments.",
+    "continuation": "I photographed both instruments.",
+    "a": {
+      "concept": "telescope.n.01",
+      "predicate": "have.v.04",
+      "role": "Theme",
+      "past": false,
+      "determiner": "a",
+      "identifiability": "new discourse referent",
+      "object_event": true,
+      "actor_name": "Tom",
+      "actor_role": "Pivot"
+    },
+    "b": {
+      "concept": "microscope.n.01",
+      "predicate": "bring.v.01",
+      "role": "Theme",
+      "past": true,
+      "determiner": "a",
+      "identifiability": "new discourse referent",
+      "object_event": true,
+      "actor_name": null
+    },
+    "tail": {
+      "predicate": "photograph.v.01",
+      "role": "Theme",
+      "form": "transitive"
+    },
+    "design": "Possession then transported object; typed group excludes the human participants.",
+    "introduction_relation": "CONTINUATION",
+    "quantity": 2,
+    "group_concept": "instrument.n.01"
+  },
+  {
+    "id": "FGS043",
+    "family_id": "fgs-situation-043",
+    "sentence": "A robin landed. A blackbird chirped. A cat stared at them.",
+    "continuation": "A cat stared at them.",
+    "a": {
+      "concept": "robin.n.01",
+      "predicate": "land.v.01",
+      "role": "Theme",
+      "past": true,
+      "determiner": "a",
+      "identifiability": "new discourse referent"
+    },
+    "b": {
+      "concept": "blackbird.n.02",
+      "predicate": "chirp.v.01",
+      "role": "Agent",
+      "past": true,
+      "determiner": "a",
+      "identifiability": "new discourse referent"
+    },
+    "tail": {
+      "predicate": "stare.v.01",
+      "role": "Theme",
+      "form": "transitive",
+      "actor_concept": "cat.n.01"
+    },
+    "design": "A third animate subject observes the two birds; at-them is Theme.",
+    "introduction_relation": "CONTINUATION",
+    "quantity": null,
+    "group_concept": "entity.n.01"
+  },
+  {
+    "id": "FGS044",
+    "family_id": "fgs-situation-044",
+    "sentence": "There was a hammer on the shelf. I bought a chisel. I cleaned both tools.",
+    "continuation": "I cleaned both tools.",
+    "a": {
+      "concept": "hammer.n.02",
+      "predicate": "be.v.03",
+      "role": "AttributeOf",
+      "past": true,
+      "determiner": "a",
+      "identifiability": "new discourse referent",
+      "existential": true,
+      "location": "shelf.n.01"
+    },
+    "b": {
+      "concept": "chisel.n.01",
+      "predicate": "buy.v.01",
+      "role": "Theme",
+      "past": true,
+      "determiner": "a",
+      "identifiability": "new discourse referent",
+      "object_event": true,
+      "actor_name": null
+    },
+    "tail": {
+      "predicate": "clean.v.01",
+      "role": "Source",
+      "form": "transitive"
+    },
+    "design": "Existential tool then acquired tool; cleaning group uses PMB Source.",
+    "introduction_relation": "CONTINUATION",
+    "quantity": 2,
+    "group_concept": "tool.n.01"
+  },
+  {
+    "id": "FGS045",
+    "family_id": "fgs-situation-045",
+    "sentence": "Anna has a kayak. Ben owns a canoe. I photographed both boats.",
+    "continuation": "I photographed both boats.",
+    "a": {
+      "concept": "kayak.n.01",
+      "predicate": "have.v.04",
+      "role": "Theme",
+      "past": false,
+      "determiner": "a",
+      "identifiability": "new discourse referent",
+      "object_event": true,
+      "actor_name": "Anna",
+      "actor_role": "Pivot"
+    },
+    "b": {
+      "concept": "canoe.n.01",
+      "predicate": "own.v.01",
+      "role": "Theme",
+      "past": false,
+      "determiner": "a",
+      "identifiability": "new discourse referent",
+      "object_event": true,
+      "actor_name": "Ben",
+      "actor_role": "Pivot"
+    },
+    "tail": {
+      "predicate": "photograph.v.01",
+      "role": "Theme",
+      "form": "transitive"
+    },
+    "design": "Two separate owners; both boats selects possessions rather than people.",
+    "introduction_relation": "CONTINUATION",
+    "quantity": 2,
+    "group_concept": "boat.n.01"
+  },
+  {
+    "id": "FGS046",
+    "family_id": "fgs-situation-046",
+    "sentence": "Nora arrived. Owen waited. I waved to them.",
+    "continuation": "I waved to them.",
+    "a": {
+      "concept": "person.n.01",
+      "predicate": "arrive.v.01",
+      "role": "Theme",
+      "past": true,
+      "determiner": "name",
+      "identifiability": "named individual",
+      "name": "Nora"
+    },
+    "b": {
+      "concept": "person.n.01",
+      "predicate": "wait.v.01",
+      "role": "Theme",
+      "past": true,
+      "determiner": "name",
+      "identifiability": "named individual",
+      "name": "Owen"
+    },
+    "tail": {
+      "predicate": "wave.v.01",
+      "role": "Recipient",
+      "form": "transitive"
+    },
+    "design": "Plural group as Recipient of a gesture.",
+    "introduction_relation": "CONTINUATION",
+    "quantity": null,
+    "group_concept": "entity.n.01"
+  },
+  {
+    "id": "FGS047",
+    "family_id": "fgs-situation-047",
+    "sentence": "There is a violin in the cupboard. A trumpet is damaged. Both instruments are valuable.",
+    "continuation": "Both instruments are valuable.",
+    "a": {
+      "concept": "violin.n.01",
+      "predicate": "be.v.03",
+      "role": "AttributeOf",
+      "past": false,
+      "determiner": "a",
+      "identifiability": "new discourse referent",
+      "existential": true,
+      "location": "cupboard.n.01"
+    },
+    "b": {
+      "concept": "trumpet.n.01",
+      "predicate": "damaged.a.01",
+      "role": "AttributeOf",
+      "past": false,
+      "determiner": "a",
+      "identifiability": "new discourse referent"
+    },
+    "tail": {
+      "predicate": "valuable.a.01",
+      "role": "AttributeOf",
+      "form": "declarative"
+    },
+    "design": "Existential plus stative introduction; subject group.",
+    "introduction_relation": "CONTINUATION",
+    "quantity": 2,
+    "group_concept": "musical_instrument.n.01"
+  },
+  {
+    "id": "FGS048",
+    "family_id": "fgs-situation-048",
+    "sentence": "Tom had a tent. I bought a caravan. I stood beside them.",
+    "continuation": "I stood beside them.",
+    "a": {
+      "concept": "tent.n.01",
+      "predicate": "have.v.04",
+      "role": "Theme",
+      "past": true,
+      "determiner": "a",
+      "identifiability": "new discourse referent",
+      "object_event": true,
+      "actor_name": "Tom",
+      "actor_role": "Pivot"
+    },
+    "b": {
+      "concept": "caravan.n.02",
+      "predicate": "buy.v.01",
+      "role": "Theme",
+      "past": true,
+      "determiner": "a",
+      "identifiability": "new discourse referent",
+      "object_event": true,
+      "actor_name": null
+    },
+    "tail": {
+      "predicate": "stand.v.01",
+      "role": "Theme",
+      "form": "locative",
+      "actor_role": "Theme",
+      "spatial_relation": "SY1"
+    },
+    "design": "Plural group anchors a beside-location; neither possession is the standing Theme.",
+    "introduction_relation": "CONTINUATION",
+    "quantity": null,
+    "group_concept": "entity.n.01"
+  },
+  {
+    "id": "FGS049",
+    "family_id": "fgs-situation-049",
+    "sentence": "I found a red bucket. The blue bucket was dusty. I washed both buckets.",
+    "continuation": "I washed both buckets.",
+    "a": {
+      "concept": "bucket.n.01",
+      "predicate": "find.v.01",
+      "role": "Theme",
+      "past": true,
+      "determiner": "a",
+      "identifiability": "new discourse referent",
+      "object_event": true,
+      "actor_name": null,
+      "colour": "red.a.01"
+    },
+    "b": {
+      "concept": "bucket.n.01",
+      "predicate": "dusty.a.01",
+      "role": "AttributeOf",
+      "past": true,
+      "determiner": "the",
+      "identifiability": "situationally identifiable individual",
+      "colour": "blue.a.01"
+    },
+    "tail": {
+      "predicate": "wash.v.03",
+      "role": "Source",
+      "form": "transitive"
+    },
+    "design": "Same-noun objects distinguished by colour; object group.",
+    "introduction_relation": "CONTINUATION",
+    "quantity": 2,
+    "group_concept": "bucket.n.01"
+  },
+  {
+    "id": "FGS050",
+    "family_id": "fgs-situation-050",
+    "sentence": "Lea smiled. Sam laughed. I spoke to them.",
+    "continuation": "I spoke to them.",
+    "a": {
+      "concept": "person.n.01",
+      "predicate": "smile.v.01",
+      "role": "Agent",
+      "past": true,
+      "determiner": "name",
+      "identifiability": "named individual",
+      "name": "Lea"
+    },
+    "b": {
+      "concept": "person.n.01",
+      "predicate": "laugh.v.01",
+      "role": "Agent",
+      "past": true,
+      "determiner": "name",
+      "identifiability": "named individual",
+      "name": "Sam"
+    },
+    "tail": {
+      "predicate": "speak.v.02",
+      "role": "Co-Agent",
+      "form": "transitive"
+    },
+    "design": "To-them is Co-Agent under the observed PMB speak frame.",
+    "introduction_relation": "CONTINUATION",
+    "quantity": null,
+    "group_concept": "entity.n.01"
+  },
+  {
+    "id": "FGS051",
+    "family_id": "fgs-situation-051",
+    "sentence": "There was a bench in the garden. A stool was broken. I stood beside both seats.",
+    "continuation": "I stood beside both seats.",
+    "a": {
+      "concept": "bench.n.01",
+      "predicate": "be.v.03",
+      "role": "AttributeOf",
+      "past": true,
+      "determiner": "a",
+      "identifiability": "new discourse referent",
+      "existential": true,
+      "location": "garden.n.01"
+    },
+    "b": {
+      "concept": "stool.n.01",
+      "predicate": "broken.a.01",
+      "role": "AttributeOf",
+      "past": true,
+      "determiner": "a",
+      "identifiability": "new discourse referent"
+    },
+    "tail": {
+      "predicate": "stand.v.01",
+      "role": "Theme",
+      "form": "locative",
+      "actor_role": "Theme",
+      "spatial_relation": "SY1"
+    },
+    "design": "Spatial complement of beside; target group contains furniture, not the garden.",
+    "introduction_relation": "CONTINUATION",
+    "quantity": 2,
+    "group_concept": "seat.n.03"
+  },
+  {
+    "id": "FGS052",
+    "family_id": "fgs-situation-052",
+    "sentence": "A dog barked. A goat slept. A child photographed them.",
+    "continuation": "A child photographed them.",
+    "a": {
+      "concept": "dog.n.01",
+      "predicate": "bark.v.04",
+      "role": "Agent",
+      "past": true,
+      "determiner": "a",
+      "identifiability": "new discourse referent"
+    },
+    "b": {
+      "concept": "goat.n.01",
+      "predicate": "sleep.v.01",
+      "role": "Agent",
+      "past": true,
+      "determiner": "a",
+      "identifiability": "new discourse referent"
+    },
+    "tail": {
+      "predicate": "photograph.v.01",
+      "role": "Theme",
+      "form": "transitive",
+      "actor_concept": "child.n.01"
+    },
+    "design": "New third participant; target group consists of the two animals.",
+    "introduction_relation": "CONTINUATION",
+    "quantity": null,
+    "group_concept": "entity.n.01"
+  },
+  {
+    "id": "FGS053",
+    "family_id": "fgs-situation-053",
+    "sentence": "I bought a lantern. Sara has a torch. I packed both.",
+    "continuation": "I packed both.",
+    "a": {
+      "concept": "lantern.n.01",
+      "predicate": "buy.v.01",
+      "role": "Theme",
+      "past": true,
+      "determiner": "a",
+      "identifiability": "new discourse referent",
+      "object_event": true,
+      "actor_name": null
+    },
+    "b": {
+      "concept": "torch.n.03",
+      "predicate": "have.v.04",
+      "role": "Theme",
+      "past": false,
+      "determiner": "a",
+      "identifiability": "new discourse referent",
+      "object_event": true,
+      "actor_name": "Sara",
+      "actor_role": "Pivot"
+    },
+    "tail": {
+      "predicate": "pack.v.01",
+      "role": "Theme",
+      "form": "transitive"
+    },
+    "design": "Acquisition and possession; packing provides an object-oriented group use.",
+    "introduction_relation": "CONTINUATION",
+    "quantity": 2,
+    "group_concept": "entity.n.01"
+  },
+  {
+    "id": "FGS054",
+    "family_id": "fgs-situation-054",
+    "sentence": "There was a bottle in the cupboard. I brought a flask. I filled both containers.",
+    "continuation": "I filled both containers.",
+    "a": {
+      "concept": "bottle.n.01",
+      "predicate": "be.v.03",
+      "role": "AttributeOf",
+      "past": true,
+      "determiner": "a",
+      "identifiability": "new discourse referent",
+      "existential": true,
+      "location": "cupboard.n.01"
+    },
+    "b": {
+      "concept": "flask.n.01",
+      "predicate": "bring.v.01",
+      "role": "Theme",
+      "past": true,
+      "determiner": "a",
+      "identifiability": "new discourse referent",
+      "object_event": true,
+      "actor_name": null
+    },
+    "tail": {
+      "predicate": "fill.v.01",
+      "role": "Destination",
+      "form": "transitive"
+    },
+    "design": "Group is Destination of filling under PMB usage.",
+    "introduction_relation": "CONTINUATION",
+    "quantity": 2,
+    "group_concept": "container.n.01"
+  },
+  {
+    "id": "FGS055",
+    "family_id": "fgs-situation-055",
+    "sentence": "A woman cooked. A man cleaned. I thanked them.",
+    "continuation": "I thanked them.",
+    "a": {
+      "concept": "woman.n.01",
+      "predicate": "cook.v.01",
+      "role": "Agent",
+      "past": true,
+      "determiner": "a",
+      "identifiability": "new discourse referent"
+    },
+    "b": {
+      "concept": "man.n.01",
+      "predicate": "clean.v.01",
+      "role": "Agent",
+      "past": true,
+      "determiner": "a",
+      "identifiability": "new discourse referent"
+    },
+    "tail": {
+      "predicate": "thank.v.01",
+      "role": "Theme",
+      "form": "transitive"
+    },
+    "design": "Meal preparation and cleaning motivate gratitude; group as Theme of thanking.",
+    "introduction_relation": "CONTINUATION",
+    "quantity": null,
+    "group_concept": "entity.n.01"
+  },
+  {
+    "id": "FGS056",
+    "family_id": "fgs-situation-056",
+    "sentence": "I had a red suitcase. A basket was empty. I carried both.",
+    "continuation": "I carried both.",
+    "a": {
+      "concept": "suitcase.n.01",
+      "predicate": "have.v.04",
+      "role": "Theme",
+      "past": true,
+      "determiner": "a",
+      "identifiability": "new discourse referent",
+      "object_event": true,
+      "actor_name": null,
+      "colour": "red.a.01",
+      "actor_role": "Pivot"
+    },
+    "b": {
+      "concept": "basket.n.01",
+      "predicate": "empty.a.01",
+      "role": "AttributeOf",
+      "past": true,
+      "determiner": "a",
+      "identifiability": "new discourse referent"
+    },
+    "tail": {
+      "predicate": "carry.v.01",
+      "role": "Theme",
+      "form": "transitive"
+    },
+    "design": "Modified possessed object and separate basket; group Theme.",
+    "introduction_relation": "CONTINUATION",
+    "quantity": 2,
+    "group_concept": "entity.n.01"
+  },
+  {
+    "id": "FGS057",
+    "family_id": "fgs-situation-057",
+    "sentence": "There is a lemon in the bowl. A plum is unripe. Both fruits are fresh.",
+    "continuation": "Both fruits are fresh.",
+    "a": {
+      "concept": "lemon.n.01",
+      "predicate": "be.v.03",
+      "role": "AttributeOf",
+      "past": false,
+      "determiner": "a",
+      "identifiability": "new discourse referent",
+      "existential": true,
+      "location": "bowl.n.01"
+    },
+    "b": {
+      "concept": "plum.n.02",
+      "predicate": "unripe.a.01",
+      "role": "AttributeOf",
+      "past": false,
+      "determiner": "a",
+      "identifiability": "new discourse referent"
+    },
+    "tail": {
+      "predicate": "fresh.a.01",
+      "role": "AttributeOf",
+      "form": "declarative"
+    },
+    "design": "Existential and stative fruit introductions; freshness does not entail ripeness.",
+    "introduction_relation": "CONTINUATION",
+    "quantity": 2,
+    "group_concept": "fruit.n.01"
+  },
+  {
+    "id": "FGS058",
+    "family_id": "fgs-situation-058",
+    "sentence": "I washed a blanket. Dana dried a quilt. Both were clean.",
+    "continuation": "Both were clean.",
+    "a": {
+      "concept": "blanket.n.01",
+      "predicate": "wash.v.03",
+      "role": "Source",
+      "past": true,
+      "determiner": "a",
+      "identifiability": "new discourse referent",
+      "object_event": true,
+      "actor_name": null,
+      "actor_role": "Agent"
+    },
+    "b": {
+      "concept": "quilt.n.01",
+      "predicate": "dry.v.01",
+      "role": "Patient",
+      "past": true,
+      "determiner": "a",
+      "identifiability": "new discourse referent",
+      "object_event": true,
+      "actor_name": "Dana",
+      "actor_role": "Agent"
+    },
+    "tail": {
+      "predicate": "clean.a.01",
+      "role": "AttributeOf",
+      "form": "declarative",
+      "past": true
+    },
+    "design": "Two cleaning events with different actors motivate the subject-group property.",
+    "introduction_relation": "CONTINUATION",
+    "quantity": 2,
+    "group_concept": "entity.n.01"
+  },
+  {
+    "id": "FGS059",
+    "family_id": "fgs-situation-059",
+    "sentence": "Nina fell. Hugo stumbled. Ada helped them.",
+    "continuation": "Ada helped them.",
+    "a": {
+      "concept": "person.n.01",
+      "predicate": "fall.v.01",
+      "role": "Theme",
+      "past": true,
+      "determiner": "name",
+      "identifiability": "named individual",
+      "name": "Nina"
+    },
+    "b": {
+      "concept": "person.n.01",
+      "predicate": "stumble.v.01",
+      "role": "Theme",
+      "past": true,
+      "determiner": "name",
+      "identifiability": "named individual",
+      "name": "Hugo"
+    },
+    "tail": {
+      "predicate": "help.v.01",
+      "role": "Beneficiary",
+      "form": "transitive",
+      "actor_name": "Ada"
+    },
+    "design": "Two movement difficulties motivate assistance; group as Beneficiary.",
+    "introduction_relation": "CONTINUATION",
+    "quantity": null,
+    "group_concept": "entity.n.01"
+  },
+  {
+    "id": "FGS060",
+    "family_id": "fgs-situation-060",
+    "sentence": "The toolbox is heavy, but the briefcase is light. I carried both.",
+    "continuation": "I carried both.",
+    "a": {
+      "concept": "toolbox.n.01",
+      "predicate": "heavy.a.01",
+      "role": "AttributeOf",
+      "past": false,
+      "determiner": "the",
+      "identifiability": "situationally identifiable individual"
+    },
+    "b": {
+      "concept": "briefcase.n.01",
+      "predicate": "light.a.01",
+      "role": "AttributeOf",
+      "past": false,
+      "determiner": "the",
+      "identifiability": "situationally identifiable individual"
+    },
+    "tail": {
+      "predicate": "carry.v.01",
+      "role": "Theme",
+      "form": "transitive"
+    },
+    "design": "Situationally identifiable work items; contrast motivates joint carrying.",
+    "introduction_relation": "CONTRAST",
+    "quantity": 2,
+    "group_concept": "entity.n.01"
+  }
+]

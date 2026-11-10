@@ -1,0 +1,667 @@
+[
+  {
+    "id": "FGS021",
+    "family_id": "fgs-situation-021",
+    "sentence": "The kettle is hot, but the saucepan is cold. Are they both clean?",
+    "continuation": "Are they both clean?",
+    "a": {
+      "concept": "kettle.n.01",
+      "predicate": "hot.a.01",
+      "role": "AttributeOf",
+      "past": false,
+      "determiner": "the",
+      "identifiability": "situationally identifiable; no prior joint group"
+    },
+    "b": {
+      "concept": "saucepan.n.01",
+      "predicate": "cold.a.01",
+      "role": "AttributeOf",
+      "past": false,
+      "determiner": "the",
+      "identifiability": "situationally identifiable; no prior joint group"
+    },
+    "tail": {
+      "predicate": "clean.a.01",
+      "form": "question",
+      "role": "AttributeOf",
+      "past": false
+    },
+    "design": "Situationally identifiable cookware; thermal contrast; explicit both.",
+    "introduction_relation": "CONTRAST",
+    "quantity": 2,
+    "group_concept": "entity.n.01"
+  },
+  {
+    "id": "FGS022",
+    "family_id": "fgs-situation-022",
+    "sentence": "I found a coin. The padlock was rusty. Put them in the drawer.",
+    "continuation": "Put them in the drawer.",
+    "a": {
+      "concept": "coin.n.01",
+      "predicate": "find.v.01",
+      "role": "AttributeOf",
+      "past": false,
+      "determiner": "a",
+      "identifiability": "new discourse referent",
+      "found": true
+    },
+    "b": {
+      "concept": "padlock.n.01",
+      "predicate": "rusty.a.01",
+      "role": "AttributeOf",
+      "past": true,
+      "determiner": "the",
+      "identifiability": "situationally identifiable; no prior joint group"
+    },
+    "tail": {
+      "predicate": "put.v.01",
+      "form": "imperative",
+      "role": "Theme",
+      "past": false,
+      "destination": "drawer.n.01"
+    },
+    "design": "New object and identifiable object; group is Theme, drawer is Destination.",
+    "introduction_relation": "CONTINUATION",
+    "quantity": null,
+    "group_concept": "entity.n.01"
+  },
+  {
+    "id": "FGS023",
+    "family_id": "fgs-situation-023",
+    "sentence": "The drummer laughed. A singer smiled. They bowed.",
+    "continuation": "They bowed.",
+    "a": {
+      "concept": "person.n.01",
+      "predicate": "laugh.v.01",
+      "role": "Agent",
+      "past": true,
+      "determiner": "the",
+      "identifiability": "situationally identifiable; no prior joint group",
+      "profession": "drummer.n.01"
+    },
+    "b": {
+      "concept": "person.n.01",
+      "predicate": "smile.v.01",
+      "role": "Agent",
+      "past": true,
+      "determiner": "a",
+      "identifiability": "new discourse referent",
+      "profession": "singer.n.01"
+    },
+    "tail": {
+      "predicate": "bow.v.01",
+      "form": "declarative",
+      "role": "Agent",
+      "past": true
+    },
+    "design": "Definite and indefinite occupational descriptions; group links people, not professions.",
+    "introduction_relation": "CONTINUATION",
+    "quantity": null,
+    "group_concept": "entity.n.01"
+  },
+  {
+    "id": "FGS024",
+    "family_id": "fgs-situation-024",
+    "sentence": "The red cushion is soft, whereas the blue cushion is hard. Are they clean?",
+    "continuation": "Are they clean?",
+    "a": {
+      "concept": "cushion.n.03",
+      "predicate": "soft.a.01",
+      "role": "AttributeOf",
+      "past": false,
+      "determiner": "the",
+      "identifiability": "identified by red colour",
+      "colour": "red.a.01"
+    },
+    "b": {
+      "concept": "cushion.n.03",
+      "predicate": "hard.a.03",
+      "role": "AttributeOf",
+      "past": false,
+      "determiner": "the",
+      "identifiability": "identified by blue colour",
+      "colour": "blue.a.01"
+    },
+    "tail": {
+      "predicate": "clean.a.01",
+      "form": "question",
+      "role": "AttributeOf",
+      "past": false
+    },
+    "design": "Same-noun antecedents have explicit colour distinctions in SBN.",
+    "introduction_relation": "CONTRAST",
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "revision": "round03: explicit distinguishing modifiers"
+  },
+  {
+    "id": "FGS025",
+    "family_id": "fgs-situation-025",
+    "sentence": "The red folder fell. The blue folder was dusty. Both folders are dirty.",
+    "continuation": "Both folders are dirty.",
+    "a": {
+      "concept": "folder.n.02",
+      "predicate": "fall.v.01",
+      "role": "Theme",
+      "past": true,
+      "determiner": "the",
+      "identifiability": "situationally identifiable; no prior joint group",
+      "colour": "red.a.01"
+    },
+    "b": {
+      "concept": "folder.n.02",
+      "predicate": "dusty.a.01",
+      "role": "AttributeOf",
+      "past": true,
+      "determiner": "the",
+      "identifiability": "situationally identifiable; no prior joint group",
+      "colour": "blue.a.01"
+    },
+    "tail": {
+      "predicate": "dirty.a.01",
+      "form": "declarative",
+      "role": "AttributeOf",
+      "past": false
+    },
+    "design": "Separate definite colour descriptions; protective-covering folder sense.",
+    "introduction_relation": "CONTINUATION",
+    "quantity": 2,
+    "group_concept": "folder.n.02"
+  },
+  {
+    "id": "FGS026",
+    "family_id": "fgs-situation-026",
+    "sentence": "I opened the cupboard. The window creaked. Close them.",
+    "continuation": "Close them.",
+    "a": {
+      "concept": "cupboard.n.01",
+      "predicate": "open.v.01",
+      "role": "Patient",
+      "past": true,
+      "determiner": "the",
+      "identifiability": "situationally identifiable; no prior joint group",
+      "object_event": true
+    },
+    "b": {
+      "concept": "window.n.01",
+      "predicate": "creak.v.01",
+      "role": "Theme",
+      "past": true,
+      "determiner": "the",
+      "identifiability": "situationally identifiable; no prior joint group"
+    },
+    "tail": {
+      "predicate": "close.v.01",
+      "form": "imperative",
+      "role": "Patient",
+      "past": false
+    },
+    "design": "Object then subject introductions; opening and closing use PMB Patient.",
+    "introduction_relation": "CONTINUATION",
+    "quantity": null,
+    "group_concept": "entity.n.01"
+  },
+  {
+    "id": "FGS027",
+    "family_id": "fgs-situation-027",
+    "sentence": "The violinist arrived, whereas the pianist waited. They were both tired.",
+    "continuation": "They were both tired.",
+    "a": {
+      "concept": "person.n.01",
+      "predicate": "arrive.v.01",
+      "role": "Theme",
+      "past": true,
+      "determiner": "the",
+      "identifiability": "situationally identifiable; no prior joint group",
+      "profession": "violinist.n.01"
+    },
+    "b": {
+      "concept": "person.n.01",
+      "predicate": "wait.v.01",
+      "role": "Theme",
+      "past": true,
+      "determiner": "the",
+      "identifiability": "situationally identifiable; no prior joint group",
+      "profession": "pianist.n.01"
+    },
+    "tail": {
+      "predicate": "tired.a.01",
+      "form": "declarative",
+      "role": "Experiencer",
+      "past": true
+    },
+    "design": "Occupational people; later experiential group predicate.",
+    "introduction_relation": "CONTRAST",
+    "quantity": 2,
+    "group_concept": "entity.n.01"
+  },
+  {
+    "id": "FGS028",
+    "family_id": "fgs-situation-028",
+    "sentence": "An apple rolled. The strawberry fell. Both fruits are dirty.",
+    "continuation": "Both fruits are dirty.",
+    "a": {
+      "concept": "apple.n.01",
+      "predicate": "roll.v.01",
+      "role": "Theme",
+      "past": true,
+      "determiner": "an",
+      "identifiability": "new discourse referent"
+    },
+    "b": {
+      "concept": "strawberry.n.01",
+      "predicate": "fall.v.01",
+      "role": "Theme",
+      "past": true,
+      "determiner": "the",
+      "identifiability": "situationally identifiable; no prior joint group"
+    },
+    "tail": {
+      "predicate": "dirty.a.01",
+      "form": "declarative",
+      "role": "AttributeOf",
+      "past": false
+    },
+    "design": "Mixed indefinite and definite fruit introductions; particular objects.",
+    "introduction_relation": "CONTINUATION",
+    "quantity": 2,
+    "group_concept": "fruit.n.01"
+  },
+  {
+    "id": "FGS029",
+    "family_id": "fgs-situation-029",
+    "sentence": "The printer is dusty. The scanner is dirty. I cleaned both machines.",
+    "continuation": "I cleaned both machines.",
+    "a": {
+      "concept": "printer.n.02",
+      "predicate": "dusty.a.01",
+      "role": "AttributeOf",
+      "past": false,
+      "determiner": "the",
+      "identifiability": "situationally identifiable office machine"
+    },
+    "b": {
+      "concept": "scanner.n.02",
+      "predicate": "dirty.a.01",
+      "role": "AttributeOf",
+      "past": false,
+      "determiner": "the",
+      "identifiability": "separate situationally identifiable office machine"
+    },
+    "tail": {
+      "predicate": "clean.v.01",
+      "role": "Source",
+      "form": "transitive"
+    },
+    "design": "Two independent office machines; cleaning provides a coherent object-group use.",
+    "introduction_relation": "CONTINUATION",
+    "quantity": 2,
+    "group_concept": "machine.n.01",
+    "revision": "round03: replace whole-part ambiguity with separate machines"
+  },
+  {
+    "id": "FGS030",
+    "family_id": "fgs-situation-030",
+    "sentence": "The vase is damaged. The jug is dusty. Both vessels are valuable.",
+    "continuation": "Both vessels are valuable.",
+    "a": {
+      "concept": "vase.n.01",
+      "predicate": "damaged.a.01",
+      "role": "AttributeOf",
+      "past": false,
+      "determiner": "the",
+      "identifiability": "situationally identifiable vessel"
+    },
+    "b": {
+      "concept": "jug.n.01",
+      "predicate": "dusty.a.01",
+      "role": "AttributeOf",
+      "past": false,
+      "determiner": "the",
+      "identifiability": "separate situationally identifiable vessel"
+    },
+    "tail": {
+      "predicate": "valuable.a.01",
+      "form": "declarative",
+      "role": "AttributeOf",
+      "past": false
+    },
+    "design": "Two situationally identifiable vessels; no unexplained article alternation.",
+    "introduction_relation": "CONTINUATION",
+    "quantity": 2,
+    "group_concept": "vessel.n.03",
+    "revision": "round03: coherent definite introductions"
+  },
+  {
+    "id": "FGS031",
+    "family_id": "fgs-situation-031",
+    "sentence": "The clock stopped, but the timer rang. They are both old.",
+    "continuation": "They are both old.",
+    "a": {
+      "concept": "clock.n.01",
+      "predicate": "stop.v.01",
+      "role": "Theme",
+      "past": true,
+      "determiner": "the",
+      "identifiability": "situationally identifiable; no prior joint group"
+    },
+    "b": {
+      "concept": "timer.n.01",
+      "predicate": "ring.v.01",
+      "role": "Theme",
+      "past": true,
+      "determiner": "the",
+      "identifiability": "situationally identifiable; no prior joint group"
+    },
+    "tail": {
+      "predicate": "old.a.02",
+      "form": "declarative",
+      "role": "AttributeOf",
+      "past": false
+    },
+    "design": "Contrasting device events; sonorous ringing and not-new senses.",
+    "introduction_relation": "CONTRAST",
+    "quantity": 2,
+    "group_concept": "entity.n.01"
+  },
+  {
+    "id": "FGS032",
+    "family_id": "fgs-situation-032",
+    "sentence": "The baker sat. The florist stood. They talked.",
+    "continuation": "They talked.",
+    "a": {
+      "concept": "person.n.01",
+      "predicate": "sit.v.01",
+      "role": "Theme",
+      "past": true,
+      "determiner": "the",
+      "identifiability": "situationally identifiable; no prior joint group",
+      "profession": "baker.n.01"
+    },
+    "b": {
+      "concept": "person.n.01",
+      "predicate": "stand.v.01",
+      "role": "Theme",
+      "past": true,
+      "determiner": "the",
+      "identifiability": "situationally identifiable; no prior joint group",
+      "profession": "florist.n.01"
+    },
+    "tail": {
+      "predicate": "talk.v.02",
+      "form": "declarative",
+      "role": "Agent",
+      "past": true
+    },
+    "design": "Separate identifiable people through occupational roles; eventive continuation.",
+    "introduction_relation": "CONTINUATION",
+    "quantity": null,
+    "group_concept": "entity.n.01"
+  },
+  {
+    "id": "FGS033",
+    "family_id": "fgs-situation-033",
+    "sentence": "I repaired a stool. The chair was broken. Both seats are old.",
+    "continuation": "Both seats are old.",
+    "a": {
+      "concept": "stool.n.01",
+      "predicate": "repair.v.01",
+      "role": "Patient",
+      "past": true,
+      "determiner": "a",
+      "identifiability": "new discourse referent",
+      "object_event": true
+    },
+    "b": {
+      "concept": "chair.n.01",
+      "predicate": "broken.a.01",
+      "role": "AttributeOf",
+      "past": true,
+      "determiner": "the",
+      "identifiability": "situationally identifiable; no prior joint group"
+    },
+    "tail": {
+      "predicate": "old.a.02",
+      "form": "declarative",
+      "role": "AttributeOf",
+      "past": false
+    },
+    "design": "Object then subject; seat denotes furniture rather than a reserved space.",
+    "introduction_relation": "CONTINUATION",
+    "quantity": 2,
+    "group_concept": "seat.n.03"
+  },
+  {
+    "id": "FGS034",
+    "family_id": "fgs-situation-034",
+    "sentence": "The lamp is dim, but this torch is bright. Switch them off.",
+    "continuation": "Switch them off.",
+    "a": {
+      "concept": "lamp.n.01",
+      "predicate": "dim.a.01",
+      "role": "AttributeOf",
+      "past": false,
+      "determiner": "the",
+      "identifiability": "situationally identifiable; no prior joint group"
+    },
+    "b": {
+      "concept": "torch.n.03",
+      "predicate": "bright.a.01",
+      "role": "AttributeOf",
+      "past": false,
+      "determiner": "this",
+      "identifiability": "deictically identifiable individual"
+    },
+    "tail": {
+      "predicate": "switch_off.v.01",
+      "form": "imperative",
+      "role": "Patient",
+      "past": false
+    },
+    "design": "Situational definite and demonstrative; torch is a battery-powered lamp.",
+    "introduction_relation": "CONTRAST",
+    "quantity": null,
+    "group_concept": "entity.n.01"
+  },
+  {
+    "id": "FGS035",
+    "family_id": "fgs-situation-035",
+    "sentence": "A pigeon landed. The sparrow chirped. They flew.",
+    "continuation": "They flew.",
+    "a": {
+      "concept": "pigeon.n.01",
+      "predicate": "land.v.01",
+      "role": "Theme",
+      "past": true,
+      "determiner": "a",
+      "identifiability": "new discourse referent"
+    },
+    "b": {
+      "concept": "sparrow.n.01",
+      "predicate": "chirp.v.01",
+      "role": "Agent",
+      "past": true,
+      "determiner": "the",
+      "identifiability": "situationally identifiable; no prior joint group"
+    },
+    "tail": {
+      "predicate": "fly.v.01",
+      "form": "declarative",
+      "role": "Theme",
+      "past": true
+    },
+    "design": "Separate birds; lexical predicates have different participant roles.",
+    "introduction_relation": "CONTINUATION",
+    "quantity": null,
+    "group_concept": "entity.n.01"
+  },
+  {
+    "id": "FGS036",
+    "family_id": "fgs-situation-036",
+    "sentence": "The suitcase is closed. A trunk is open. Are they empty?",
+    "continuation": "Are they empty?",
+    "a": {
+      "concept": "suitcase.n.01",
+      "predicate": "closed.a.01",
+      "role": "AttributeOf",
+      "past": false,
+      "determiner": "the",
+      "identifiability": "situationally identifiable; no prior joint group"
+    },
+    "b": {
+      "concept": "trunk.n.02",
+      "predicate": "open.a.01",
+      "role": "AttributeOf",
+      "past": false,
+      "determiner": "a",
+      "identifiability": "new discourse referent"
+    },
+    "tail": {
+      "predicate": "empty.a.01",
+      "form": "question",
+      "role": "AttributeOf",
+      "past": false
+    },
+    "design": "Mixed articles; trunk is luggage rather than a tree part.",
+    "introduction_relation": "CONTINUATION",
+    "quantity": null,
+    "group_concept": "entity.n.01"
+  },
+  {
+    "id": "FGS037",
+    "family_id": "fgs-situation-037",
+    "sentence": "Tom has a compass. I found a map. I packed both.",
+    "continuation": "I packed both.",
+    "a": {
+      "concept": "compass.n.01",
+      "predicate": "have.v.04",
+      "role": "Theme",
+      "past": false,
+      "determiner": "a",
+      "identifiability": "new discourse referent",
+      "object_event": true,
+      "actor_name": "Tom",
+      "actor_role": "Pivot"
+    },
+    "b": {
+      "concept": "map.n.01",
+      "predicate": "find.v.01",
+      "role": "Theme",
+      "past": true,
+      "determiner": "a",
+      "identifiability": "new discourse referent",
+      "object_event": true,
+      "actor_name": null,
+      "actor_role": "Agent"
+    },
+    "tail": {
+      "predicate": "pack.v.01",
+      "role": "Theme",
+      "form": "transitive"
+    },
+    "design": "Possessed compass and found map; packing gives a concrete use for the group.",
+    "introduction_relation": "CONTINUATION",
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "revision": "round03: possession and ordinary object continuation"
+  },
+  {
+    "id": "FGS038",
+    "family_id": "fgs-situation-038",
+    "sentence": "The nurse arrived. The doctor smiled. They worked.",
+    "continuation": "They worked.",
+    "a": {
+      "concept": "person.n.01",
+      "predicate": "arrive.v.01",
+      "role": "Theme",
+      "past": true,
+      "determiner": "the",
+      "identifiability": "situationally identifiable; no prior joint group",
+      "profession": "nurse.n.01"
+    },
+    "b": {
+      "concept": "person.n.01",
+      "predicate": "smile.v.01",
+      "role": "Agent",
+      "past": true,
+      "determiner": "the",
+      "identifiability": "situationally identifiable; no prior joint group",
+      "profession": "doctor.n.01"
+    },
+    "tail": {
+      "predicate": "work.v.01",
+      "form": "declarative",
+      "role": "Agent",
+      "past": true
+    },
+    "design": "Occupational people; mixed introduction predicates and group Agent.",
+    "introduction_relation": "CONTINUATION",
+    "quantity": null,
+    "group_concept": "entity.n.01"
+  },
+  {
+    "id": "FGS039",
+    "family_id": "fgs-situation-039",
+    "sentence": "The boot is wet. A glove is dirty. Dry them.",
+    "continuation": "Dry them.",
+    "a": {
+      "concept": "boot.n.01",
+      "predicate": "wet.a.01",
+      "role": "AttributeOf",
+      "past": false,
+      "determiner": "the",
+      "identifiability": "situationally identifiable; no prior joint group"
+    },
+    "b": {
+      "concept": "glove.n.02",
+      "predicate": "dirty.a.01",
+      "role": "AttributeOf",
+      "past": false,
+      "determiner": "a",
+      "identifiability": "new discourse referent"
+    },
+    "tail": {
+      "predicate": "dry.v.01",
+      "form": "imperative",
+      "role": "Patient",
+      "past": false
+    },
+    "design": "Mixed articles; glove denotes ordinary handwear.",
+    "introduction_relation": "CONTINUATION",
+    "quantity": null,
+    "group_concept": "entity.n.01"
+  },
+  {
+    "id": "FGS040",
+    "family_id": "fgs-situation-040",
+    "sentence": "The fossil is dirty. A seashell is damaged. I photographed them because they are unusual.",
+    "continuation": "I photographed them because they are unusual.",
+    "a": {
+      "concept": "fossil.n.02",
+      "predicate": "dirty.a.01",
+      "role": "AttributeOf",
+      "past": false,
+      "determiner": "the",
+      "identifiability": "situationally identifiable; no prior joint group"
+    },
+    "b": {
+      "concept": "seashell.n.01",
+      "predicate": "damaged.a.01",
+      "role": "AttributeOf",
+      "past": false,
+      "determiner": "a",
+      "identifiability": "new discourse referent"
+    },
+    "tail": {
+      "predicate": "photograph.v.01",
+      "form": "transitive",
+      "role": "Theme",
+      "past": false,
+      "explanation": "unusual.a.01"
+    },
+    "design": "Group first introduced as object; subsequent identity reference uses ANA.",
+    "introduction_relation": "CONTINUATION",
+    "quantity": null,
+    "group_concept": "entity.n.01"
+  }
+]

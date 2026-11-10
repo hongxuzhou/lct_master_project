@@ -1,0 +1,2554 @@
+[
+  {
+    "id": "S001",
+    "family_id": "hand_subject_S001",
+    "builder": "subject",
+    "fluent": "Alice slept. Beth slept. They are both students.",
+    "rsr": "Alice, Beth slept. They are both students.",
+    "continuation_text": "They are both students.",
+    "a": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Alice\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Beth\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "event": "sleep.v.01",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_be",
+        "concept": "be.v.01",
+        "roles": [
+          [
+            "Theme",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ],
+          [
+            "Co-Theme",
+            "@tail_pred"
+          ]
+        ]
+      },
+      {
+        "id": "tail_pred",
+        "concept": "person.n.01",
+        "roles": [
+          [
+            "Role",
+            "@tail_role"
+          ]
+        ]
+      },
+      {
+        "id": "tail_role",
+        "concept": "student.n.01",
+        "roles": []
+      }
+    ],
+    "referent_type": "particular_people",
+    "provenance": "Independently hand-authored by ChatGPT; WordNet sense inventory checked locally; no source document rewritten.",
+    "rationale": "Named candidates are individually identifiable; the later property predicate groups them without asserting the withdrawn event.",
+    "declared_differences": [
+      "Fluent asserts the event separately of both people; RSR withdraws the first person as the shared event participant.",
+      "Fluent has one extra assertion and sentence; no temporal ordering beyond discourse sequence is stipulated.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "review_notes": "Provisional ChatGPT self-review: bare intransitive event natural; continuation property does not reinstate the event. Subject links must target a/b, never the shared anchor.",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "S002",
+    "family_id": "hand_subject_S002",
+    "builder": "subject",
+    "fluent": "Clara sneezed. Diana sneezed. They are nurses.",
+    "rsr": "Clara, Diana sneezed. They are nurses.",
+    "continuation_text": "They are nurses.",
+    "a": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Clara\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Diana\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "event": "sneeze.v.01",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_be",
+        "concept": "be.v.01",
+        "roles": [
+          [
+            "Theme",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ],
+          [
+            "Co-Theme",
+            "@tail_pred"
+          ]
+        ]
+      },
+      {
+        "id": "tail_pred",
+        "concept": "person.n.01",
+        "roles": [
+          [
+            "Role",
+            "@tail_role"
+          ]
+        ]
+      },
+      {
+        "id": "tail_role",
+        "concept": "nurse.n.01",
+        "roles": []
+      }
+    ],
+    "referent_type": "particular_people",
+    "provenance": "Independently hand-authored by ChatGPT; WordNet sense inventory checked locally; no source document rewritten.",
+    "rationale": "Named candidates are individually identifiable; the later property predicate groups them without asserting the withdrawn event.",
+    "declared_differences": [
+      "Fluent asserts the event separately of both people; RSR withdraws the first person as the shared event participant.",
+      "Fluent has one extra assertion and sentence; no temporal ordering beyond discourse sequence is stipulated.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "review_notes": "Provisional ChatGPT self-review: bare intransitive event natural; continuation property does not reinstate the event. Subject links must target a/b, never the shared anchor.",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "S003",
+    "family_id": "hand_subject_S003",
+    "builder": "subject",
+    "fluent": "Elias coughed. Felix coughed. They are both young.",
+    "rsr": "Elias, Felix coughed. They are both young.",
+    "continuation_text": "They are both young.",
+    "a": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Elias\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Felix\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "event": "cough.v.01",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_pred",
+        "concept": "young.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "referent_type": "particular_people",
+    "provenance": "Independently hand-authored by ChatGPT; WordNet sense inventory checked locally; no source document rewritten.",
+    "rationale": "Named candidates are individually identifiable; the later property predicate groups them without asserting the withdrawn event.",
+    "declared_differences": [
+      "Fluent asserts the event separately of both people; RSR withdraws the first person as the shared event participant.",
+      "Fluent has one extra assertion and sentence; no temporal ordering beyond discourse sequence is stipulated.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "review_notes": "Provisional ChatGPT self-review: bare intransitive event natural; continuation property does not reinstate the event. Subject links must target a/b, never the shared anchor.",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "S004",
+    "family_id": "hand_subject_S004",
+    "builder": "subject",
+    "fluent": "Grace smiled. Hannah smiled. They are teachers.",
+    "rsr": "Grace, Hannah smiled. They are teachers.",
+    "continuation_text": "They are teachers.",
+    "a": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Grace\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Hannah\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "event": "smile.v.01",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_be",
+        "concept": "be.v.01",
+        "roles": [
+          [
+            "Theme",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ],
+          [
+            "Co-Theme",
+            "@tail_pred"
+          ]
+        ]
+      },
+      {
+        "id": "tail_pred",
+        "concept": "person.n.01",
+        "roles": [
+          [
+            "Role",
+            "@tail_role"
+          ]
+        ]
+      },
+      {
+        "id": "tail_role",
+        "concept": "teacher.n.01",
+        "roles": []
+      }
+    ],
+    "referent_type": "particular_people",
+    "provenance": "Independently hand-authored by ChatGPT; WordNet sense inventory checked locally; no source document rewritten.",
+    "rationale": "Named candidates are individually identifiable; the later property predicate groups them without asserting the withdrawn event.",
+    "declared_differences": [
+      "Fluent asserts the event separately of both people; RSR withdraws the first person as the shared event participant.",
+      "Fluent has one extra assertion and sentence; no temporal ordering beyond discourse sequence is stipulated.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "review_notes": "Provisional ChatGPT self-review: bare intransitive event natural; continuation property does not reinstate the event. Subject links must target a/b, never the shared anchor.",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "S005",
+    "family_id": "hand_subject_S005",
+    "builder": "subject",
+    "fluent": "Isaac laughed. Jonas laughed. They are both doctors.",
+    "rsr": "Isaac, Jonas laughed. They are both doctors.",
+    "continuation_text": "They are both doctors.",
+    "a": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Isaac\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Jonas\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "event": "laugh.v.01",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_be",
+        "concept": "be.v.01",
+        "roles": [
+          [
+            "Theme",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ],
+          [
+            "Co-Theme",
+            "@tail_pred"
+          ]
+        ]
+      },
+      {
+        "id": "tail_pred",
+        "concept": "person.n.01",
+        "roles": [
+          [
+            "Role",
+            "@tail_role"
+          ]
+        ]
+      },
+      {
+        "id": "tail_role",
+        "concept": "doctor.n.01",
+        "roles": []
+      }
+    ],
+    "referent_type": "particular_people",
+    "provenance": "Independently hand-authored by ChatGPT; WordNet sense inventory checked locally; no source document rewritten.",
+    "rationale": "Named candidates are individually identifiable; the later property predicate groups them without asserting the withdrawn event.",
+    "declared_differences": [
+      "Fluent asserts the event separately of both people; RSR withdraws the first person as the shared event participant.",
+      "Fluent has one extra assertion and sentence; no temporal ordering beyond discourse sequence is stipulated.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "review_notes": "Provisional ChatGPT self-review: bare intransitive event natural; continuation property does not reinstate the event. Subject links must target a/b, never the shared anchor.",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "S006",
+    "family_id": "hand_subject_S006",
+    "builder": "subject",
+    "fluent": "Kira danced. Lena danced. They are engineers.",
+    "rsr": "Kira, Lena danced. They are engineers.",
+    "continuation_text": "They are engineers.",
+    "a": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Kira\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Lena\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "event": "dance.v.01",
+    "actor_role": "Theme",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_be",
+        "concept": "be.v.01",
+        "roles": [
+          [
+            "Theme",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ],
+          [
+            "Co-Theme",
+            "@tail_pred"
+          ]
+        ]
+      },
+      {
+        "id": "tail_pred",
+        "concept": "person.n.01",
+        "roles": [
+          [
+            "Role",
+            "@tail_role"
+          ]
+        ]
+      },
+      {
+        "id": "tail_role",
+        "concept": "engineer.n.01",
+        "roles": []
+      }
+    ],
+    "referent_type": "particular_people",
+    "provenance": "Independently hand-authored by ChatGPT; WordNet sense inventory checked locally; no source document rewritten.",
+    "rationale": "Named candidates are individually identifiable; the later property predicate groups them without asserting the withdrawn event.",
+    "declared_differences": [
+      "Fluent asserts the event separately of both people; RSR withdraws the first person as the shared event participant.",
+      "Fluent has one extra assertion and sentence; no temporal ordering beyond discourse sequence is stipulated.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "review_notes": "Provisional ChatGPT self-review: bare intransitive event natural; continuation property does not reinstate the event. Subject links must target a/b, never the shared anchor.",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "S007",
+    "family_id": "hand_subject_S007",
+    "builder": "subject",
+    "fluent": "Marco swam. Niko swam. They are both friendly.",
+    "rsr": "Marco, Niko swam. They are both friendly.",
+    "continuation_text": "They are both friendly.",
+    "a": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Marco\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Niko\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "event": "swim.v.01",
+    "actor_role": "Theme",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_pred",
+        "concept": "friendly.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "referent_type": "particular_people",
+    "provenance": "Independently hand-authored by ChatGPT; WordNet sense inventory checked locally; no source document rewritten.",
+    "rationale": "Named candidates are individually identifiable; the later property predicate groups them without asserting the withdrawn event.",
+    "declared_differences": [
+      "Fluent asserts the event separately of both people; RSR withdraws the first person as the shared event participant.",
+      "Fluent has one extra assertion and sentence; no temporal ordering beyond discourse sequence is stipulated.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "review_notes": "Provisional ChatGPT self-review: bare intransitive event natural; continuation property does not reinstate the event. Subject links must target a/b, never the shared anchor.",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "S008",
+    "family_id": "hand_subject_S008",
+    "builder": "subject",
+    "fluent": "Nora sang. Ruth sang. They are librarians.",
+    "rsr": "Nora, Ruth sang. They are librarians.",
+    "continuation_text": "They are librarians.",
+    "a": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Nora\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Ruth\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "event": "sing.v.01",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_be",
+        "concept": "be.v.01",
+        "roles": [
+          [
+            "Theme",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ],
+          [
+            "Co-Theme",
+            "@tail_pred"
+          ]
+        ]
+      },
+      {
+        "id": "tail_pred",
+        "concept": "person.n.01",
+        "roles": [
+          [
+            "Role",
+            "@tail_role"
+          ]
+        ]
+      },
+      {
+        "id": "tail_role",
+        "concept": "librarian.n.01",
+        "roles": []
+      }
+    ],
+    "referent_type": "particular_people",
+    "provenance": "Independently hand-authored by ChatGPT; WordNet sense inventory checked locally; no source document rewritten.",
+    "rationale": "Named candidates are individually identifiable; the later property predicate groups them without asserting the withdrawn event.",
+    "declared_differences": [
+      "Fluent asserts the event separately of both people; RSR withdraws the first person as the shared event participant.",
+      "Fluent has one extra assertion and sentence; no temporal ordering beyond discourse sequence is stipulated.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "review_notes": "Provisional ChatGPT self-review: bare intransitive event natural; continuation property does not reinstate the event. Subject links must target a/b, never the shared anchor.",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "S009",
+    "family_id": "hand_subject_S009",
+    "builder": "subject",
+    "fluent": "Sara arrived. Tessa arrived. They are both chefs.",
+    "rsr": "Sara, Tessa arrived. They are both chefs.",
+    "continuation_text": "They are both chefs.",
+    "a": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Sara\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Tessa\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "event": "arrive.v.01",
+    "actor_role": "Theme",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_be",
+        "concept": "be.v.01",
+        "roles": [
+          [
+            "Theme",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ],
+          [
+            "Co-Theme",
+            "@tail_pred"
+          ]
+        ]
+      },
+      {
+        "id": "tail_pred",
+        "concept": "person.n.01",
+        "roles": [
+          [
+            "Role",
+            "@tail_role"
+          ]
+        ]
+      },
+      {
+        "id": "tail_role",
+        "concept": "chef.n.01",
+        "roles": []
+      }
+    ],
+    "referent_type": "particular_people",
+    "provenance": "Independently hand-authored by ChatGPT; WordNet sense inventory checked locally; no source document rewritten.",
+    "rationale": "Named candidates are individually identifiable; the later property predicate groups them without asserting the withdrawn event.",
+    "declared_differences": [
+      "Fluent asserts the event separately of both people; RSR withdraws the first person as the shared event participant.",
+      "Fluent has one extra assertion and sentence; no temporal ordering beyond discourse sequence is stipulated.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "review_notes": "Provisional ChatGPT self-review: bare intransitive event natural; continuation property does not reinstate the event. Subject links must target a/b, never the shared anchor.",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "S010",
+    "family_id": "hand_subject_S010",
+    "builder": "subject",
+    "fluent": "Uma left. Vera left. They are polite.",
+    "rsr": "Uma, Vera left. They are polite.",
+    "continuation_text": "They are polite.",
+    "a": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Uma\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Vera\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "event": "leave.v.01",
+    "actor_role": "Theme",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_pred",
+        "concept": "polite.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "referent_type": "particular_people",
+    "provenance": "Independently hand-authored by ChatGPT; WordNet sense inventory checked locally; no source document rewritten.",
+    "rationale": "Named candidates are individually identifiable; the later property predicate groups them without asserting the withdrawn event.",
+    "declared_differences": [
+      "Fluent asserts the event separately of both people; RSR withdraws the first person as the shared event participant.",
+      "Fluent has one extra assertion and sentence; no temporal ordering beyond discourse sequence is stipulated.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "review_notes": "Provisional ChatGPT self-review: bare intransitive event natural; continuation property does not reinstate the event. Subject links must target a/b, never the shared anchor.",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "S011",
+    "family_id": "hand_subject_S011",
+    "builder": "subject",
+    "fluent": "William ran. Xavier ran. They are both drivers.",
+    "rsr": "William, Xavier ran. They are both drivers.",
+    "continuation_text": "They are both drivers.",
+    "a": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"William\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Xavier\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "event": "run.v.01",
+    "actor_role": "Theme",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_be",
+        "concept": "be.v.01",
+        "roles": [
+          [
+            "Theme",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ],
+          [
+            "Co-Theme",
+            "@tail_pred"
+          ]
+        ]
+      },
+      {
+        "id": "tail_pred",
+        "concept": "person.n.01",
+        "roles": [
+          [
+            "Role",
+            "@tail_role"
+          ]
+        ]
+      },
+      {
+        "id": "tail_role",
+        "concept": "driver.n.01",
+        "roles": []
+      }
+    ],
+    "referent_type": "particular_people",
+    "provenance": "Independently hand-authored by ChatGPT; WordNet sense inventory checked locally; no source document rewritten.",
+    "rationale": "Named candidates are individually identifiable; the later property predicate groups them without asserting the withdrawn event.",
+    "declared_differences": [
+      "Fluent asserts the event separately of both people; RSR withdraws the first person as the shared event participant.",
+      "Fluent has one extra assertion and sentence; no temporal ordering beyond discourse sequence is stipulated.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "review_notes": "Provisional ChatGPT self-review: bare intransitive event natural; continuation property does not reinstate the event. Subject links must target a/b, never the shared anchor.",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "S012",
+    "family_id": "hand_subject_S012",
+    "builder": "subject",
+    "fluent": "Yasmin waited. Zoe waited. They are students.",
+    "rsr": "Yasmin, Zoe waited. They are students.",
+    "continuation_text": "They are students.",
+    "a": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Yasmin\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Zoe\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "event": "wait.v.01",
+    "actor_role": "Theme",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_be",
+        "concept": "be.v.01",
+        "roles": [
+          [
+            "Theme",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ],
+          [
+            "Co-Theme",
+            "@tail_pred"
+          ]
+        ]
+      },
+      {
+        "id": "tail_pred",
+        "concept": "person.n.01",
+        "roles": [
+          [
+            "Role",
+            "@tail_role"
+          ]
+        ]
+      },
+      {
+        "id": "tail_role",
+        "concept": "student.n.01",
+        "roles": []
+      }
+    ],
+    "referent_type": "particular_people",
+    "provenance": "Independently hand-authored by ChatGPT; WordNet sense inventory checked locally; no source document rewritten.",
+    "rationale": "Named candidates are individually identifiable; the later property predicate groups them without asserting the withdrawn event.",
+    "declared_differences": [
+      "Fluent asserts the event separately of both people; RSR withdraws the first person as the shared event participant.",
+      "Fluent has one extra assertion and sentence; no temporal ordering beyond discourse sequence is stipulated.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "review_notes": "Provisional ChatGPT self-review: bare intransitive event natural; continuation property does not reinstate the event. Subject links must target a/b, never the shared anchor.",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "S013",
+    "family_id": "hand_subject_S013",
+    "builder": "subject",
+    "fluent": "Adrian fainted. Bruno fainted. They are both teachers.",
+    "rsr": "Adrian, Bruno fainted. They are both teachers.",
+    "continuation_text": "They are both teachers.",
+    "a": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Adrian\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Bruno\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "event": "faint.v.01",
+    "actor_role": "Patient",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_be",
+        "concept": "be.v.01",
+        "roles": [
+          [
+            "Theme",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ],
+          [
+            "Co-Theme",
+            "@tail_pred"
+          ]
+        ]
+      },
+      {
+        "id": "tail_pred",
+        "concept": "person.n.01",
+        "roles": [
+          [
+            "Role",
+            "@tail_role"
+          ]
+        ]
+      },
+      {
+        "id": "tail_role",
+        "concept": "teacher.n.01",
+        "roles": []
+      }
+    ],
+    "referent_type": "particular_people",
+    "provenance": "Independently hand-authored by ChatGPT; WordNet sense inventory checked locally; no source document rewritten.",
+    "rationale": "Named candidates are individually identifiable; the later property predicate groups them without asserting the withdrawn event.",
+    "declared_differences": [
+      "Fluent asserts the event separately of both people; RSR withdraws the first person as the shared event participant.",
+      "Fluent has one extra assertion and sentence; no temporal ordering beyond discourse sequence is stipulated.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "review_notes": "Provisional ChatGPT self-review: bare intransitive event natural; continuation property does not reinstate the event. Subject links must target a/b, never the shared anchor.",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "S014",
+    "family_id": "hand_subject_S014",
+    "builder": "subject",
+    "fluent": "Oliver resigned. Patrick resigned. They are patient.",
+    "rsr": "Oliver, Patrick resigned. They are patient.",
+    "continuation_text": "They are patient.",
+    "a": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Oliver\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Patrick\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "event": "resign.v.01",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_pred",
+        "concept": "patient.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "referent_type": "particular_people",
+    "provenance": "Independently hand-authored by ChatGPT; WordNet sense inventory checked locally; no source document rewritten.",
+    "rationale": "Named candidates are individually identifiable; the later property predicate groups them without asserting the withdrawn event.",
+    "declared_differences": [
+      "Fluent asserts the event separately of both people; RSR withdraws the first person as the shared event participant.",
+      "Fluent has one extra assertion and sentence; no temporal ordering beyond discourse sequence is stipulated.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "review_notes": "Provisional ChatGPT self-review: bare intransitive event natural; continuation property does not reinstate the event. Subject links must target a/b, never the shared anchor.",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "S015",
+    "family_id": "hand_subject_S015",
+    "builder": "subject",
+    "fluent": "Maya hesitated. Leila hesitated. They are both doctors.",
+    "rsr": "Maya, Leila hesitated. They are both doctors.",
+    "continuation_text": "They are both doctors.",
+    "a": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Maya\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Leila\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "event": "hesitate.v.01",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_be",
+        "concept": "be.v.01",
+        "roles": [
+          [
+            "Theme",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ],
+          [
+            "Co-Theme",
+            "@tail_pred"
+          ]
+        ]
+      },
+      {
+        "id": "tail_pred",
+        "concept": "person.n.01",
+        "roles": [
+          [
+            "Role",
+            "@tail_role"
+          ]
+        ]
+      },
+      {
+        "id": "tail_role",
+        "concept": "doctor.n.01",
+        "roles": []
+      }
+    ],
+    "referent_type": "particular_people",
+    "provenance": "Independently hand-authored by ChatGPT; WordNet sense inventory checked locally; no source document rewritten.",
+    "rationale": "Named candidates are individually identifiable; the later property predicate groups them without asserting the withdrawn event.",
+    "declared_differences": [
+      "Fluent asserts the event separately of both people; RSR withdraws the first person as the shared event participant.",
+      "Fluent has one extra assertion and sentence; no temporal ordering beyond discourse sequence is stipulated.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "review_notes": "Provisional ChatGPT self-review: bare intransitive event natural; continuation property does not reinstate the event. Subject links must target a/b, never the shared anchor.",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "S016",
+    "family_id": "hand_subject_S016",
+    "builder": "subject",
+    "fluent": "Samuel competed. Tobias competed. They are musicians.",
+    "rsr": "Samuel, Tobias competed. They are musicians.",
+    "continuation_text": "They are musicians.",
+    "a": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Samuel\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "person.n.01",
+      "roles": [
+        [
+          "Name",
+          "\"Tobias\""
+        ]
+      ],
+      "modifiers": []
+    },
+    "event": "compete.v.01",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_be",
+        "concept": "be.v.01",
+        "roles": [
+          [
+            "Theme",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ],
+          [
+            "Co-Theme",
+            "@tail_pred"
+          ]
+        ]
+      },
+      {
+        "id": "tail_pred",
+        "concept": "person.n.01",
+        "roles": [
+          [
+            "Role",
+            "@tail_role"
+          ]
+        ]
+      },
+      {
+        "id": "tail_role",
+        "concept": "musician.n.01",
+        "roles": []
+      }
+    ],
+    "referent_type": "particular_people",
+    "provenance": "Independently hand-authored by ChatGPT; WordNet sense inventory checked locally; no source document rewritten.",
+    "rationale": "Named candidates are individually identifiable; the later property predicate groups them without asserting the withdrawn event.",
+    "declared_differences": [
+      "Fluent asserts the event separately of both people; RSR withdraws the first person as the shared event participant.",
+      "Fluent has one extra assertion and sentence; no temporal ordering beyond discourse sequence is stipulated.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "review_notes": "Provisional ChatGPT self-review: bare intransitive event natural; continuation property does not reinstate the event. Subject links must target a/b, never the shared anchor.",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "S017",
+    "family_id": "hand_modified_S017",
+    "builder": "object",
+    "fluent": "I bought the red mug. I bought the blue mug. They are both fragile.",
+    "rsr": "I bought the red mug, the blue mug. They are both fragile.",
+    "continuation_text": "They are both fragile.",
+    "a": {
+      "concept": "mug.n.04",
+      "roles": [],
+      "modifiers": [
+        {
+          "id": "a_modifier",
+          "concept": "red.a.01",
+          "roles": [
+            [
+              "ColourOf",
+              "@a"
+            ]
+          ]
+        }
+      ]
+    },
+    "b": {
+      "concept": "mug.n.04",
+      "roles": [],
+      "modifiers": [
+        {
+          "id": "b_modifier",
+          "concept": "blue.a.01",
+          "roles": [
+            [
+              "ColourOf",
+              "@b"
+            ]
+          ]
+        }
+      ]
+    },
+    "event": "buy.v.01",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_pred",
+        "concept": "fragile.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "referent_type": "particular_modified_objects",
+    "provenance": "Independently hand-authored by ChatGPT; WordNet sense inventory checked locally; no source document rewritten.",
+    "rationale": "The repeated noun heads denote distinct colour-identified objects; continuation predicates a property of both without reasserting the withdrawn event.",
+    "declared_differences": [
+      "Fluent independently asserts the event for both objects; RSR withdraws the first event-object relation.",
+      "Fluent has one extra event assertion and sentence; neither antecedent is coordinated into a group.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "review_notes": "Provisional ChatGPT self-review: colour descriptions presuppose two contextually available objects. Quantity counts objects, not colours; Sub must reach noun heads.",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "S018",
+    "family_id": "hand_modified_S018",
+    "builder": "object",
+    "fluent": "I borrowed the black coat. I borrowed the white coat. They are warm.",
+    "rsr": "I borrowed the black coat, the white coat. They are warm.",
+    "continuation_text": "They are warm.",
+    "a": {
+      "concept": "coat.n.01",
+      "roles": [],
+      "modifiers": [
+        {
+          "id": "a_modifier",
+          "concept": "black.a.01",
+          "roles": [
+            [
+              "ColourOf",
+              "@a"
+            ]
+          ]
+        }
+      ]
+    },
+    "b": {
+      "concept": "coat.n.01",
+      "roles": [],
+      "modifiers": [
+        {
+          "id": "b_modifier",
+          "concept": "white.a.01",
+          "roles": [
+            [
+              "ColourOf",
+              "@b"
+            ]
+          ]
+        }
+      ]
+    },
+    "event": "borrow.v.01",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_pred",
+        "concept": "warm.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "referent_type": "particular_modified_objects",
+    "provenance": "Independently hand-authored by ChatGPT; WordNet sense inventory checked locally; no source document rewritten.",
+    "rationale": "The repeated noun heads denote distinct colour-identified objects; continuation predicates a property of both without reasserting the withdrawn event.",
+    "declared_differences": [
+      "Fluent independently asserts the event for both objects; RSR withdraws the first event-object relation.",
+      "Fluent has one extra event assertion and sentence; neither antecedent is coordinated into a group.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "review_notes": "Provisional ChatGPT self-review: colour descriptions presuppose two contextually available objects. Quantity counts objects, not colours; Sub must reach noun heads.",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "S019",
+    "family_id": "hand_modified_S019",
+    "builder": "object",
+    "fluent": "I opened the green door. I opened the blue door. They are both heavy.",
+    "rsr": "I opened the green door, the blue door. They are both heavy.",
+    "continuation_text": "They are both heavy.",
+    "a": {
+      "concept": "door.n.01",
+      "roles": [],
+      "modifiers": [
+        {
+          "id": "a_modifier",
+          "concept": "green.a.01",
+          "roles": [
+            [
+              "ColourOf",
+              "@a"
+            ]
+          ]
+        }
+      ]
+    },
+    "b": {
+      "concept": "door.n.01",
+      "roles": [],
+      "modifiers": [
+        {
+          "id": "b_modifier",
+          "concept": "blue.a.01",
+          "roles": [
+            [
+              "ColourOf",
+              "@b"
+            ]
+          ]
+        }
+      ]
+    },
+    "event": "open.v.01",
+    "actor_role": "Agent",
+    "role": "Patient",
+    "tense": "TPR",
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_pred",
+        "concept": "heavy.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "referent_type": "particular_modified_objects",
+    "provenance": "Independently hand-authored by ChatGPT; WordNet sense inventory checked locally; no source document rewritten.",
+    "rationale": "The repeated noun heads denote distinct colour-identified objects; continuation predicates a property of both without reasserting the withdrawn event.",
+    "declared_differences": [
+      "Fluent independently asserts the event for both objects; RSR withdraws the first event-object relation.",
+      "Fluent has one extra event assertion and sentence; neither antecedent is coordinated into a group.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "review_notes": "Provisional ChatGPT self-review: colour descriptions presuppose two contextually available objects. Quantity counts objects, not colours; Sub must reach noun heads.",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "S020",
+    "family_id": "hand_modified_S020",
+    "builder": "object",
+    "fluent": "I moved the red chair. I moved the green chair. They are comfortable.",
+    "rsr": "I moved the red chair, the green chair. They are comfortable.",
+    "continuation_text": "They are comfortable.",
+    "a": {
+      "concept": "chair.n.01",
+      "roles": [],
+      "modifiers": [
+        {
+          "id": "a_modifier",
+          "concept": "red.a.01",
+          "roles": [
+            [
+              "ColourOf",
+              "@a"
+            ]
+          ]
+        }
+      ]
+    },
+    "b": {
+      "concept": "chair.n.01",
+      "roles": [],
+      "modifiers": [
+        {
+          "id": "b_modifier",
+          "concept": "green.a.01",
+          "roles": [
+            [
+              "ColourOf",
+              "@b"
+            ]
+          ]
+        }
+      ]
+    },
+    "event": "move.v.02",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_pred",
+        "concept": "comfortable.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "referent_type": "particular_modified_objects",
+    "provenance": "Independently hand-authored by ChatGPT; WordNet sense inventory checked locally; no source document rewritten.",
+    "rationale": "The repeated noun heads denote distinct colour-identified objects; continuation predicates a property of both without reasserting the withdrawn event.",
+    "declared_differences": [
+      "Fluent independently asserts the event for both objects; RSR withdraws the first event-object relation.",
+      "Fluent has one extra event assertion and sentence; neither antecedent is coordinated into a group.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "review_notes": "Provisional ChatGPT self-review: colour descriptions presuppose two contextually available objects. Quantity counts objects, not colours; Sub must reach noun heads.",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "S021",
+    "family_id": "hand_modified_S021",
+    "builder": "object",
+    "fluent": "I borrowed the blue book. I borrowed the black book. They are both valuable.",
+    "rsr": "I borrowed the blue book, the black book. They are both valuable.",
+    "continuation_text": "They are both valuable.",
+    "a": {
+      "concept": "book.n.02",
+      "roles": [],
+      "modifiers": [
+        {
+          "id": "a_modifier",
+          "concept": "blue.a.01",
+          "roles": [
+            [
+              "ColourOf",
+              "@a"
+            ]
+          ]
+        }
+      ]
+    },
+    "b": {
+      "concept": "book.n.02",
+      "roles": [],
+      "modifiers": [
+        {
+          "id": "b_modifier",
+          "concept": "black.a.01",
+          "roles": [
+            [
+              "ColourOf",
+              "@b"
+            ]
+          ]
+        }
+      ]
+    },
+    "event": "borrow.v.01",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_pred",
+        "concept": "valuable.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "referent_type": "particular_modified_objects",
+    "provenance": "Independently hand-authored by ChatGPT; WordNet sense inventory checked locally; no source document rewritten.",
+    "rationale": "The repeated noun heads denote distinct colour-identified objects; continuation predicates a property of both without reasserting the withdrawn event.",
+    "declared_differences": [
+      "Fluent independently asserts the event for both objects; RSR withdraws the first event-object relation.",
+      "Fluent has one extra event assertion and sentence; neither antecedent is coordinated into a group.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "review_notes": "Provisional ChatGPT self-review: colour descriptions presuppose two contextually available objects. Quantity counts objects, not colours; Sub must reach noun heads.",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "S022",
+    "family_id": "hand_modified_S022",
+    "builder": "object",
+    "fluent": "I washed the white shirt. I washed the blue shirt. They are dry.",
+    "rsr": "I washed the white shirt, the blue shirt. They are dry.",
+    "continuation_text": "They are dry.",
+    "a": {
+      "concept": "shirt.n.01",
+      "roles": [],
+      "modifiers": [
+        {
+          "id": "a_modifier",
+          "concept": "white.a.01",
+          "roles": [
+            [
+              "ColourOf",
+              "@a"
+            ]
+          ]
+        }
+      ]
+    },
+    "b": {
+      "concept": "shirt.n.01",
+      "roles": [],
+      "modifiers": [
+        {
+          "id": "b_modifier",
+          "concept": "blue.a.01",
+          "roles": [
+            [
+              "ColourOf",
+              "@b"
+            ]
+          ]
+        }
+      ]
+    },
+    "event": "wash.v.01",
+    "actor_role": "Agent",
+    "role": "Patient",
+    "tense": "TPR",
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_pred",
+        "concept": "dry.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "referent_type": "particular_modified_objects",
+    "provenance": "Independently hand-authored by ChatGPT; WordNet sense inventory checked locally; no source document rewritten.",
+    "rationale": "The repeated noun heads denote distinct colour-identified objects; continuation predicates a property of both without reasserting the withdrawn event.",
+    "declared_differences": [
+      "Fluent independently asserts the event for both objects; RSR withdraws the first event-object relation.",
+      "Fluent has one extra event assertion and sentence; neither antecedent is coordinated into a group.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "review_notes": "Provisional ChatGPT self-review: colour descriptions presuppose two contextually available objects. Quantity counts objects, not colours; Sub must reach noun heads.",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "S023",
+    "family_id": "hand_modified_S023",
+    "builder": "object",
+    "fluent": "I repaired the red bicycle. I repaired the black bicycle. They are both expensive.",
+    "rsr": "I repaired the red bicycle, the black bicycle. They are both expensive.",
+    "continuation_text": "They are both expensive.",
+    "a": {
+      "concept": "bicycle.n.01",
+      "roles": [],
+      "modifiers": [
+        {
+          "id": "a_modifier",
+          "concept": "red.a.01",
+          "roles": [
+            [
+              "ColourOf",
+              "@a"
+            ]
+          ]
+        }
+      ]
+    },
+    "b": {
+      "concept": "bicycle.n.01",
+      "roles": [],
+      "modifiers": [
+        {
+          "id": "b_modifier",
+          "concept": "black.a.01",
+          "roles": [
+            [
+              "ColourOf",
+              "@b"
+            ]
+          ]
+        }
+      ]
+    },
+    "event": "repair.v.01",
+    "actor_role": "Agent",
+    "role": "Patient",
+    "tense": "TPR",
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_pred",
+        "concept": "expensive.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "referent_type": "particular_modified_objects",
+    "provenance": "Independently hand-authored by ChatGPT; WordNet sense inventory checked locally; no source document rewritten.",
+    "rationale": "The repeated noun heads denote distinct colour-identified objects; continuation predicates a property of both without reasserting the withdrawn event.",
+    "declared_differences": [
+      "Fluent independently asserts the event for both objects; RSR withdraws the first event-object relation.",
+      "Fluent has one extra event assertion and sentence; neither antecedent is coordinated into a group.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "review_notes": "Provisional ChatGPT self-review: colour descriptions presuppose two contextually available objects. Quantity counts objects, not colours; Sub must reach noun heads.",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "S024",
+    "family_id": "hand_modified_S024",
+    "builder": "object",
+    "fluent": "I chose the green bag. I chose the white bag. They are empty.",
+    "rsr": "I chose the green bag, the white bag. They are empty.",
+    "continuation_text": "They are empty.",
+    "a": {
+      "concept": "bag.n.01",
+      "roles": [],
+      "modifiers": [
+        {
+          "id": "a_modifier",
+          "concept": "green.a.01",
+          "roles": [
+            [
+              "ColourOf",
+              "@a"
+            ]
+          ]
+        }
+      ]
+    },
+    "b": {
+      "concept": "bag.n.01",
+      "roles": [],
+      "modifiers": [
+        {
+          "id": "b_modifier",
+          "concept": "white.a.01",
+          "roles": [
+            [
+              "ColourOf",
+              "@b"
+            ]
+          ]
+        }
+      ]
+    },
+    "event": "choose.v.01",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_pred",
+        "concept": "empty.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "referent_type": "particular_modified_objects",
+    "provenance": "Independently hand-authored by ChatGPT; WordNet sense inventory checked locally; no source document rewritten.",
+    "rationale": "The repeated noun heads denote distinct colour-identified objects; continuation predicates a property of both without reasserting the withdrawn event.",
+    "declared_differences": [
+      "Fluent independently asserts the event for both objects; RSR withdraws the first event-object relation.",
+      "Fluent has one extra event assertion and sentence; neither antecedent is coordinated into a group.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "review_notes": "Provisional ChatGPT self-review: colour descriptions presuppose two contextually available objects. Quantity counts objects, not colours; Sub must reach noun heads.",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "S025",
+    "family_id": "hand_modified_S025",
+    "builder": "object",
+    "fluent": "I opened the blue box. I opened the red box. They are both small.",
+    "rsr": "I opened the blue box, the red box. They are both small.",
+    "continuation_text": "They are both small.",
+    "a": {
+      "concept": "box.n.01",
+      "roles": [],
+      "modifiers": [
+        {
+          "id": "a_modifier",
+          "concept": "blue.a.01",
+          "roles": [
+            [
+              "ColourOf",
+              "@a"
+            ]
+          ]
+        }
+      ]
+    },
+    "b": {
+      "concept": "box.n.01",
+      "roles": [],
+      "modifiers": [
+        {
+          "id": "b_modifier",
+          "concept": "red.a.01",
+          "roles": [
+            [
+              "ColourOf",
+              "@b"
+            ]
+          ]
+        }
+      ]
+    },
+    "event": "open.v.01",
+    "actor_role": "Agent",
+    "role": "Patient",
+    "tense": "TPR",
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_pred",
+        "concept": "small.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "referent_type": "particular_modified_objects",
+    "provenance": "Independently hand-authored by ChatGPT; WordNet sense inventory checked locally; no source document rewritten.",
+    "rationale": "The repeated noun heads denote distinct colour-identified objects; continuation predicates a property of both without reasserting the withdrawn event.",
+    "declared_differences": [
+      "Fluent independently asserts the event for both objects; RSR withdraws the first event-object relation.",
+      "Fluent has one extra event assertion and sentence; neither antecedent is coordinated into a group.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "review_notes": "Provisional ChatGPT self-review: colour descriptions presuppose two contextually available objects. Quantity counts objects, not colours; Sub must reach noun heads.",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "S026",
+    "family_id": "hand_modified_S026",
+    "builder": "object",
+    "fluent": "I brought the white plate. I brought the green plate. They are beautiful.",
+    "rsr": "I brought the white plate, the green plate. They are beautiful.",
+    "continuation_text": "They are beautiful.",
+    "a": {
+      "concept": "plate.n.04",
+      "roles": [],
+      "modifiers": [
+        {
+          "id": "a_modifier",
+          "concept": "white.a.01",
+          "roles": [
+            [
+              "ColourOf",
+              "@a"
+            ]
+          ]
+        }
+      ]
+    },
+    "b": {
+      "concept": "plate.n.04",
+      "roles": [],
+      "modifiers": [
+        {
+          "id": "b_modifier",
+          "concept": "green.a.01",
+          "roles": [
+            [
+              "ColourOf",
+              "@b"
+            ]
+          ]
+        }
+      ]
+    },
+    "event": "bring.v.01",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_pred",
+        "concept": "beautiful.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "referent_type": "particular_modified_objects",
+    "provenance": "Independently hand-authored by ChatGPT; WordNet sense inventory checked locally; no source document rewritten.",
+    "rationale": "The repeated noun heads denote distinct colour-identified objects; continuation predicates a property of both without reasserting the withdrawn event.",
+    "declared_differences": [
+      "Fluent independently asserts the event for both objects; RSR withdraws the first event-object relation.",
+      "Fluent has one extra event assertion and sentence; neither antecedent is coordinated into a group.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "review_notes": "Provisional ChatGPT self-review: colour descriptions presuppose two contextually available objects. Quantity counts objects, not colours; Sub must reach noun heads.",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "S027",
+    "family_id": "hand_modified_S027",
+    "builder": "object",
+    "fluent": "I found the red key. I found the blue key. They are both useful.",
+    "rsr": "I found the red key, the blue key. They are both useful.",
+    "continuation_text": "They are both useful.",
+    "a": {
+      "concept": "key.n.01",
+      "roles": [],
+      "modifiers": [
+        {
+          "id": "a_modifier",
+          "concept": "red.a.01",
+          "roles": [
+            [
+              "ColourOf",
+              "@a"
+            ]
+          ]
+        }
+      ]
+    },
+    "b": {
+      "concept": "key.n.01",
+      "roles": [],
+      "modifiers": [
+        {
+          "id": "b_modifier",
+          "concept": "blue.a.01",
+          "roles": [
+            [
+              "ColourOf",
+              "@b"
+            ]
+          ]
+        }
+      ]
+    },
+    "event": "find.v.01",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_pred",
+        "concept": "useful.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "referent_type": "particular_modified_objects",
+    "provenance": "Independently hand-authored by ChatGPT; WordNet sense inventory checked locally; no source document rewritten.",
+    "rationale": "The repeated noun heads denote distinct colour-identified objects; continuation predicates a property of both without reasserting the withdrawn event.",
+    "declared_differences": [
+      "Fluent independently asserts the event for both objects; RSR withdraws the first event-object relation.",
+      "Fluent has one extra event assertion and sentence; neither antecedent is coordinated into a group.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "review_notes": "Provisional ChatGPT self-review: colour descriptions presuppose two contextually available objects. Quantity counts objects, not colours; Sub must reach noun heads.",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "S028",
+    "family_id": "hand_modified_S028",
+    "builder": "object",
+    "fluent": "I photographed the black car. I photographed the white car. They are new.",
+    "rsr": "I photographed the black car, the white car. They are new.",
+    "continuation_text": "They are new.",
+    "a": {
+      "concept": "car.n.01",
+      "roles": [],
+      "modifiers": [
+        {
+          "id": "a_modifier",
+          "concept": "black.a.01",
+          "roles": [
+            [
+              "ColourOf",
+              "@a"
+            ]
+          ]
+        }
+      ]
+    },
+    "b": {
+      "concept": "car.n.01",
+      "roles": [],
+      "modifiers": [
+        {
+          "id": "b_modifier",
+          "concept": "white.a.01",
+          "roles": [
+            [
+              "ColourOf",
+              "@b"
+            ]
+          ]
+        }
+      ]
+    },
+    "event": "photograph.v.01",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_pred",
+        "concept": "new.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "referent_type": "particular_modified_objects",
+    "provenance": "Independently hand-authored by ChatGPT; WordNet sense inventory checked locally; no source document rewritten.",
+    "rationale": "The repeated noun heads denote distinct colour-identified objects; continuation predicates a property of both without reasserting the withdrawn event.",
+    "declared_differences": [
+      "Fluent independently asserts the event for both objects; RSR withdraws the first event-object relation.",
+      "Fluent has one extra event assertion and sentence; neither antecedent is coordinated into a group.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "review_notes": "Provisional ChatGPT self-review: colour descriptions presuppose two contextually available objects. Quantity counts objects, not colours; Sub must reach noun heads.",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "S029",
+    "family_id": "hand_modified_S029",
+    "builder": "object",
+    "fluent": "I washed the green bowl. I washed the red bowl. They are both large.",
+    "rsr": "I washed the green bowl, the red bowl. They are both large.",
+    "continuation_text": "They are both large.",
+    "a": {
+      "concept": "bowl.n.01",
+      "roles": [],
+      "modifiers": [
+        {
+          "id": "a_modifier",
+          "concept": "green.a.01",
+          "roles": [
+            [
+              "ColourOf",
+              "@a"
+            ]
+          ]
+        }
+      ]
+    },
+    "b": {
+      "concept": "bowl.n.01",
+      "roles": [],
+      "modifiers": [
+        {
+          "id": "b_modifier",
+          "concept": "red.a.01",
+          "roles": [
+            [
+              "ColourOf",
+              "@b"
+            ]
+          ]
+        }
+      ]
+    },
+    "event": "wash.v.01",
+    "actor_role": "Agent",
+    "role": "Patient",
+    "tense": "TPR",
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_pred",
+        "concept": "large.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "referent_type": "particular_modified_objects",
+    "provenance": "Independently hand-authored by ChatGPT; WordNet sense inventory checked locally; no source document rewritten.",
+    "rationale": "The repeated noun heads denote distinct colour-identified objects; continuation predicates a property of both without reasserting the withdrawn event.",
+    "declared_differences": [
+      "Fluent independently asserts the event for both objects; RSR withdraws the first event-object relation.",
+      "Fluent has one extra event assertion and sentence; neither antecedent is coordinated into a group.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "review_notes": "Provisional ChatGPT self-review: colour descriptions presuppose two contextually available objects. Quantity counts objects, not colours; Sub must reach noun heads.",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "S030",
+    "family_id": "hand_modified_S030",
+    "builder": "object",
+    "fluent": "I borrowed the blue umbrella. I borrowed the green umbrella. They are wet.",
+    "rsr": "I borrowed the blue umbrella, the green umbrella. They are wet.",
+    "continuation_text": "They are wet.",
+    "a": {
+      "concept": "umbrella.n.01",
+      "roles": [],
+      "modifiers": [
+        {
+          "id": "a_modifier",
+          "concept": "blue.a.01",
+          "roles": [
+            [
+              "ColourOf",
+              "@a"
+            ]
+          ]
+        }
+      ]
+    },
+    "b": {
+      "concept": "umbrella.n.01",
+      "roles": [],
+      "modifiers": [
+        {
+          "id": "b_modifier",
+          "concept": "green.a.01",
+          "roles": [
+            [
+              "ColourOf",
+              "@b"
+            ]
+          ]
+        }
+      ]
+    },
+    "event": "borrow.v.01",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_pred",
+        "concept": "wet.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "referent_type": "particular_modified_objects",
+    "provenance": "Independently hand-authored by ChatGPT; WordNet sense inventory checked locally; no source document rewritten.",
+    "rationale": "The repeated noun heads denote distinct colour-identified objects; continuation predicates a property of both without reasserting the withdrawn event.",
+    "declared_differences": [
+      "Fluent independently asserts the event for both objects; RSR withdraws the first event-object relation.",
+      "Fluent has one extra event assertion and sentence; neither antecedent is coordinated into a group.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "review_notes": "Provisional ChatGPT self-review: colour descriptions presuppose two contextually available objects. Quantity counts objects, not colours; Sub must reach noun heads.",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "S031",
+    "family_id": "hand_modified_S031",
+    "builder": "object",
+    "fluent": "I chose the red scarf. I chose the white scarf. They are both warm.",
+    "rsr": "I chose the red scarf, the white scarf. They are both warm.",
+    "continuation_text": "They are both warm.",
+    "a": {
+      "concept": "scarf.n.01",
+      "roles": [],
+      "modifiers": [
+        {
+          "id": "a_modifier",
+          "concept": "red.a.01",
+          "roles": [
+            [
+              "ColourOf",
+              "@a"
+            ]
+          ]
+        }
+      ]
+    },
+    "b": {
+      "concept": "scarf.n.01",
+      "roles": [],
+      "modifiers": [
+        {
+          "id": "b_modifier",
+          "concept": "white.a.01",
+          "roles": [
+            [
+              "ColourOf",
+              "@b"
+            ]
+          ]
+        }
+      ]
+    },
+    "event": "choose.v.01",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_pred",
+        "concept": "warm.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "referent_type": "particular_modified_objects",
+    "provenance": "Independently hand-authored by ChatGPT; WordNet sense inventory checked locally; no source document rewritten.",
+    "rationale": "The repeated noun heads denote distinct colour-identified objects; continuation predicates a property of both without reasserting the withdrawn event.",
+    "declared_differences": [
+      "Fluent independently asserts the event for both objects; RSR withdraws the first event-object relation.",
+      "Fluent has one extra event assertion and sentence; neither antecedent is coordinated into a group.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "review_notes": "Provisional ChatGPT self-review: colour descriptions presuppose two contextually available objects. Quantity counts objects, not colours; Sub must reach noun heads.",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "S032",
+    "family_id": "hand_modified_S032",
+    "builder": "object",
+    "fluent": "I photographed the black lamp. I photographed the blue lamp. They are bright.",
+    "rsr": "I photographed the black lamp, the blue lamp. They are bright.",
+    "continuation_text": "They are bright.",
+    "a": {
+      "concept": "lamp.n.02",
+      "roles": [],
+      "modifiers": [
+        {
+          "id": "a_modifier",
+          "concept": "black.a.01",
+          "roles": [
+            [
+              "ColourOf",
+              "@a"
+            ]
+          ]
+        }
+      ]
+    },
+    "b": {
+      "concept": "lamp.n.02",
+      "roles": [],
+      "modifiers": [
+        {
+          "id": "b_modifier",
+          "concept": "blue.a.01",
+          "roles": [
+            [
+              "ColourOf",
+              "@b"
+            ]
+          ]
+        }
+      ]
+    },
+    "event": "photograph.v.01",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_pred",
+        "concept": "bright.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "referent_type": "particular_modified_objects",
+    "provenance": "Independently hand-authored by ChatGPT; WordNet sense inventory checked locally; no source document rewritten.",
+    "rationale": "The repeated noun heads denote distinct colour-identified objects; continuation predicates a property of both without reasserting the withdrawn event.",
+    "declared_differences": [
+      "Fluent independently asserts the event for both objects; RSR withdraws the first event-object relation.",
+      "Fluent has one extra event assertion and sentence; neither antecedent is coordinated into a group.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "review_notes": "Provisional ChatGPT self-review: colour descriptions presuppose two contextually available objects. Quantity counts objects, not colours; Sub must reach noun heads.",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "S033",
+    "family_id": "hand_modified_S033",
+    "builder": "object",
+    "fluent": "I chose the green cup. I chose the white cup. They are both clean.",
+    "rsr": "I chose the green cup, the white cup. They are both clean.",
+    "continuation_text": "They are both clean.",
+    "a": {
+      "concept": "cup.n.01",
+      "roles": [],
+      "modifiers": [
+        {
+          "id": "a_modifier",
+          "concept": "green.a.01",
+          "roles": [
+            [
+              "ColourOf",
+              "@a"
+            ]
+          ]
+        }
+      ]
+    },
+    "b": {
+      "concept": "cup.n.01",
+      "roles": [],
+      "modifiers": [
+        {
+          "id": "b_modifier",
+          "concept": "white.a.01",
+          "roles": [
+            [
+              "ColourOf",
+              "@b"
+            ]
+          ]
+        }
+      ]
+    },
+    "event": "choose.v.01",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_pred",
+        "concept": "clean.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "referent_type": "particular_modified_objects",
+    "provenance": "Independently hand-authored by ChatGPT; WordNet sense inventory checked locally; no source document rewritten.",
+    "rationale": "The repeated noun heads denote distinct colour-identified objects; continuation predicates a property of both without reasserting the withdrawn event.",
+    "declared_differences": [
+      "Fluent independently asserts the event for both objects; RSR withdraws the first event-object relation.",
+      "Fluent has one extra event assertion and sentence; neither antecedent is coordinated into a group.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "review_notes": "Provisional ChatGPT self-review: colour descriptions presuppose two contextually available objects. Quantity counts objects, not colours; Sub must reach noun heads.",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "S034",
+    "family_id": "hand_modified_S034",
+    "builder": "object",
+    "fluent": "I brought the white towel. I brought the blue towel. They are dry.",
+    "rsr": "I brought the white towel, the blue towel. They are dry.",
+    "continuation_text": "They are dry.",
+    "a": {
+      "concept": "towel.n.01",
+      "roles": [],
+      "modifiers": [
+        {
+          "id": "a_modifier",
+          "concept": "white.a.01",
+          "roles": [
+            [
+              "ColourOf",
+              "@a"
+            ]
+          ]
+        }
+      ]
+    },
+    "b": {
+      "concept": "towel.n.01",
+      "roles": [],
+      "modifiers": [
+        {
+          "id": "b_modifier",
+          "concept": "blue.a.01",
+          "roles": [
+            [
+              "ColourOf",
+              "@b"
+            ]
+          ]
+        }
+      ]
+    },
+    "event": "bring.v.01",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_pred",
+        "concept": "dry.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "referent_type": "particular_modified_objects",
+    "provenance": "Independently hand-authored by ChatGPT; WordNet sense inventory checked locally; no source document rewritten.",
+    "rationale": "The repeated noun heads denote distinct colour-identified objects; continuation predicates a property of both without reasserting the withdrawn event.",
+    "declared_differences": [
+      "Fluent independently asserts the event for both objects; RSR withdraws the first event-object relation.",
+      "Fluent has one extra event assertion and sentence; neither antecedent is coordinated into a group.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "review_notes": "Provisional ChatGPT self-review: colour descriptions presuppose two contextually available objects. Quantity counts objects, not colours; Sub must reach noun heads.",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  }
+]

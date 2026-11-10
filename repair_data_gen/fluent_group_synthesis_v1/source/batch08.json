@@ -1,0 +1,819 @@
+[
+  {
+    "id": "FLG0141",
+    "construction": "existential",
+    "a": {
+      "concept": "wrench.n.03",
+      "surface": "a wrench",
+      "determiner": "a",
+      "predicate": "be.v.03",
+      "past": true,
+      "existential": true,
+      "location": "drawer.n.01"
+    },
+    "b": {
+      "concept": "screwdriver.n.01",
+      "surface": "a screwdriver",
+      "determiner": "a",
+      "predicate": "find.v.01",
+      "role": "Theme",
+      "past": true,
+      "object_event": true,
+      "actor_name": null,
+      "actor_role": "Agent"
+    },
+    "sentence": "There was a wrench in the drawer. I found a screwdriver. I put both tools in the box.",
+    "continuation": "I put both tools in the box.",
+    "tail": {
+      "predicate": "put.v.01",
+      "role": "Theme",
+      "form": "transitive",
+      "destination": "box.n.01"
+    },
+    "quantity": 2,
+    "group_concept": "tool.n.01",
+    "group_word": "tools",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "family_id": "family-67e004637b5c",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0142",
+    "construction": "existential",
+    "a": {
+      "concept": "file.n.04",
+      "surface": "a file",
+      "determiner": "a",
+      "predicate": "be.v.03",
+      "past": true,
+      "existential": true,
+      "location": "shelf.n.01"
+    },
+    "b": {
+      "concept": "saw.n.02",
+      "surface": "a saw",
+      "determiner": "a",
+      "predicate": "buy.v.01",
+      "role": "Theme",
+      "past": true,
+      "object_event": true,
+      "actor_name": null,
+      "actor_role": "Agent"
+    },
+    "sentence": "There was a file on the shelf. I bought a saw. I cleaned both tools.",
+    "continuation": "I cleaned both tools.",
+    "tail": {
+      "predicate": "clean.v.01",
+      "role": "Source",
+      "form": "transitive"
+    },
+    "quantity": 2,
+    "group_concept": "tool.n.01",
+    "group_word": "tools",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "family_id": "family-8ecc069249db",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0143",
+    "construction": "existential",
+    "a": {
+      "concept": "ladder.n.01",
+      "surface": "a ladder",
+      "determiner": "a",
+      "predicate": "be.v.03",
+      "past": true,
+      "existential": true,
+      "location": "shed.n.01"
+    },
+    "b": {
+      "concept": "stool.n.01",
+      "surface": "a stool",
+      "determiner": "a",
+      "predicate": "dirty.a.01",
+      "role": "AttributeOf",
+      "past": true
+    },
+    "sentence": "There was a ladder in the shed. A stool was dirty. I stood beside both.",
+    "continuation": "I stood beside both.",
+    "tail": {
+      "predicate": "stand.v.01",
+      "actor_role": "Theme",
+      "form": "locative",
+      "spatial_relation": "SY1"
+    },
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "family_id": "family-0e7633a52ab9",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0144",
+    "construction": "existential",
+    "a": {
+      "concept": "bench.n.01",
+      "surface": "a bench",
+      "determiner": "a",
+      "predicate": "be.v.03",
+      "past": true,
+      "existential": true,
+      "location": "garden.n.01"
+    },
+    "b": {
+      "concept": "deck_chair.n.01",
+      "surface": "a deck chair",
+      "determiner": "a",
+      "predicate": "empty.a.01",
+      "role": "AttributeOf",
+      "past": true
+    },
+    "sentence": "There was a bench in the garden. A deck chair was empty. I stood beside both seats.",
+    "continuation": "I stood beside both seats.",
+    "tail": {
+      "predicate": "stand.v.01",
+      "actor_role": "Theme",
+      "form": "locative",
+      "spatial_relation": "SY1"
+    },
+    "quantity": 2,
+    "group_concept": "seat.n.03",
+    "group_word": "seats",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "family_id": "family-a7db49d51b1b",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0145",
+    "construction": "existential",
+    "a": {
+      "concept": "statue.n.01",
+      "surface": "a statue",
+      "determiner": "a",
+      "predicate": "be.v.03",
+      "past": true,
+      "existential": true,
+      "location": "garden.n.01"
+    },
+    "b": {
+      "concept": "sundial.n.01",
+      "surface": "a sundial",
+      "determiner": "a",
+      "predicate": "buy.v.01",
+      "role": "Theme",
+      "past": true,
+      "object_event": true,
+      "actor_name": null,
+      "actor_role": "Agent"
+    },
+    "sentence": "There was a statue in the garden. I bought a sundial. I photographed them.",
+    "continuation": "I photographed them.",
+    "tail": {
+      "predicate": "photograph.v.01",
+      "role": "Theme",
+      "form": "transitive"
+    },
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "family_id": "family-18dd22c4a7df",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0146",
+    "construction": "existential",
+    "a": {
+      "concept": "flowerpot.n.01",
+      "surface": "a flowerpot",
+      "determiner": "a",
+      "predicate": "be.v.03",
+      "past": true,
+      "existential": true,
+      "location": "porch.n.01"
+    },
+    "b": {
+      "concept": "vase.n.01",
+      "surface": "a vase",
+      "determiner": "a",
+      "predicate": "bring.v.01",
+      "role": "Theme",
+      "past": true,
+      "object_event": true,
+      "actor_name": null,
+      "actor_role": "Agent"
+    },
+    "sentence": "There was a flowerpot on the porch. I brought a vase. I photographed them.",
+    "continuation": "I photographed them.",
+    "tail": {
+      "predicate": "photograph.v.01",
+      "role": "Theme",
+      "form": "transitive"
+    },
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "family_id": "family-cefff9850ec3",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0147",
+    "construction": "existential",
+    "a": {
+      "concept": "fern.n.01",
+      "surface": "a fern",
+      "determiner": "a",
+      "predicate": "be.v.03",
+      "past": true,
+      "existential": true,
+      "location": "windowsill.n.01"
+    },
+    "b": {
+      "concept": "orchid.n.01",
+      "surface": "an orchid",
+      "determiner": "an",
+      "predicate": "buy.v.01",
+      "role": "Theme",
+      "past": true,
+      "object_event": true,
+      "actor_name": null,
+      "actor_role": "Agent"
+    },
+    "sentence": "There was a fern on the windowsill. I bought an orchid. I photographed them.",
+    "continuation": "I photographed them.",
+    "tail": {
+      "predicate": "photograph.v.01",
+      "role": "Theme",
+      "form": "transitive"
+    },
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "family_id": "family-054364de81e5",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0148",
+    "construction": "existential",
+    "a": {
+      "concept": "rose.n.01",
+      "surface": "a rose",
+      "determiner": "a",
+      "predicate": "be.v.03",
+      "past": true,
+      "existential": true,
+      "location": "garden.n.01"
+    },
+    "b": {
+      "concept": "daisy.n.01",
+      "surface": "a daisy",
+      "determiner": "a",
+      "predicate": "bring.v.01",
+      "role": "Theme",
+      "past": true,
+      "object_event": true,
+      "actor_name": null,
+      "actor_role": "Agent"
+    },
+    "sentence": "There was a rose in the garden. I brought a daisy. I photographed them.",
+    "continuation": "I photographed them.",
+    "tail": {
+      "predicate": "photograph.v.01",
+      "role": "Theme",
+      "form": "transitive"
+    },
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "family_id": "family-95ee94a530ea",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0149",
+    "construction": "existential",
+    "a": {
+      "concept": "tulip.n.01",
+      "surface": "a tulip",
+      "determiner": "a",
+      "predicate": "be.v.03",
+      "past": true,
+      "existential": true,
+      "location": "garden.n.01"
+    },
+    "b": {
+      "concept": "daffodil.n.01",
+      "surface": "a daffodil",
+      "determiner": "a",
+      "predicate": "buy.v.01",
+      "role": "Theme",
+      "past": true,
+      "object_event": true,
+      "actor_name": null,
+      "actor_role": "Agent"
+    },
+    "sentence": "There was a tulip in the garden. I bought a daffodil. I photographed them.",
+    "continuation": "I photographed them.",
+    "tail": {
+      "predicate": "photograph.v.01",
+      "role": "Theme",
+      "form": "transitive"
+    },
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "group_word": "",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "family_id": "family-12f56790620e",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0150",
+    "construction": "existential",
+    "a": {
+      "concept": "lemon.n.01",
+      "surface": "a lemon",
+      "determiner": "a",
+      "predicate": "be.v.03",
+      "past": true,
+      "existential": true,
+      "location": "basket.n.01"
+    },
+    "b": {
+      "concept": "lime.n.06",
+      "surface": "a lime",
+      "determiner": "a",
+      "predicate": "buy.v.01",
+      "role": "Theme",
+      "past": true,
+      "object_event": true,
+      "actor_name": null,
+      "actor_role": "Agent"
+    },
+    "sentence": "There was a lemon in the basket. I bought a lime. I washed both fruits.",
+    "continuation": "I washed both fruits.",
+    "tail": {
+      "predicate": "wash.v.03",
+      "role": "Source",
+      "form": "transitive"
+    },
+    "quantity": 2,
+    "group_concept": "fruit.n.01",
+    "group_word": "fruits",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "family_id": "family-15a415e653e7",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0151",
+    "construction": "existential",
+    "a": {
+      "concept": "orange.n.01",
+      "surface": "an orange",
+      "determiner": "an",
+      "predicate": "be.v.03",
+      "past": true,
+      "existential": true,
+      "location": "bowl.n.01"
+    },
+    "b": {
+      "concept": "grapefruit.n.02",
+      "surface": "a grapefruit",
+      "determiner": "a",
+      "predicate": "bring.v.01",
+      "role": "Theme",
+      "past": true,
+      "object_event": true,
+      "actor_name": null,
+      "actor_role": "Agent"
+    },
+    "sentence": "There was an orange in the bowl. I brought a grapefruit. I photographed both fruits.",
+    "continuation": "I photographed both fruits.",
+    "tail": {
+      "predicate": "photograph.v.01",
+      "role": "Theme",
+      "form": "transitive"
+    },
+    "quantity": 2,
+    "group_concept": "fruit.n.01",
+    "group_word": "fruits",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "family_id": "family-fd0b566f27b7",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0152",
+    "construction": "existential",
+    "a": {
+      "concept": "apricot.n.02",
+      "surface": "an apricot",
+      "determiner": "an",
+      "predicate": "be.v.03",
+      "past": true,
+      "existential": true,
+      "location": "bowl.n.01"
+    },
+    "b": {
+      "concept": "nectarine.n.02",
+      "surface": "a nectarine",
+      "determiner": "a",
+      "predicate": "buy.v.01",
+      "role": "Theme",
+      "past": true,
+      "object_event": true,
+      "actor_name": null,
+      "actor_role": "Agent"
+    },
+    "sentence": "There was an apricot in the bowl. I bought a nectarine. I washed both fruits.",
+    "continuation": "I washed both fruits.",
+    "tail": {
+      "predicate": "wash.v.03",
+      "role": "Source",
+      "form": "transitive"
+    },
+    "quantity": 2,
+    "group_concept": "fruit.n.01",
+    "group_word": "fruits",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "family_id": "family-cdc1a1518970",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0153",
+    "construction": "existential",
+    "a": {
+      "concept": "apple.n.01",
+      "surface": "an apple",
+      "determiner": "an",
+      "predicate": "be.v.03",
+      "past": true,
+      "existential": true,
+      "location": "basket.n.01"
+    },
+    "b": {
+      "concept": "quince.n.02",
+      "surface": "a quince",
+      "determiner": "a",
+      "predicate": "find.v.01",
+      "role": "Theme",
+      "past": true,
+      "object_event": true,
+      "actor_name": null,
+      "actor_role": "Agent"
+    },
+    "sentence": "There was an apple in the basket. I found a quince. I photographed both fruits.",
+    "continuation": "I photographed both fruits.",
+    "tail": {
+      "predicate": "photograph.v.01",
+      "role": "Theme",
+      "form": "transitive"
+    },
+    "quantity": 2,
+    "group_concept": "fruit.n.01",
+    "group_word": "fruits",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "family_id": "family-2bf212aebbd3",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0154",
+    "construction": "existential",
+    "a": {
+      "concept": "pear.n.01",
+      "surface": "a pear",
+      "determiner": "a",
+      "predicate": "be.v.03",
+      "past": true,
+      "existential": true,
+      "location": "bowl.n.01"
+    },
+    "b": {
+      "concept": "fig.n.04",
+      "surface": "a fig",
+      "determiner": "a",
+      "predicate": "buy.v.01",
+      "role": "Theme",
+      "past": true,
+      "object_event": true,
+      "actor_name": null,
+      "actor_role": "Agent"
+    },
+    "sentence": "There was a pear in the bowl. I bought a fig. I photographed both fruits.",
+    "continuation": "I photographed both fruits.",
+    "tail": {
+      "predicate": "photograph.v.01",
+      "role": "Theme",
+      "form": "transitive"
+    },
+    "quantity": 2,
+    "group_concept": "fruit.n.01",
+    "group_word": "fruits",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "family_id": "family-229883ccaa1e",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0155",
+    "construction": "existential",
+    "a": {
+      "concept": "peach.n.03",
+      "surface": "a peach",
+      "determiner": "a",
+      "predicate": "be.v.03",
+      "past": true,
+      "existential": true,
+      "location": "basket.n.01"
+    },
+    "b": {
+      "concept": "cherry.n.03",
+      "surface": "a cherry",
+      "determiner": "a",
+      "predicate": "bring.v.01",
+      "role": "Theme",
+      "past": true,
+      "object_event": true,
+      "actor_name": null,
+      "actor_role": "Agent"
+    },
+    "sentence": "There was a peach in the basket. I brought a cherry. I washed both fruits.",
+    "continuation": "I washed both fruits.",
+    "tail": {
+      "predicate": "wash.v.03",
+      "role": "Source",
+      "form": "transitive"
+    },
+    "quantity": 2,
+    "group_concept": "fruit.n.01",
+    "group_word": "fruits",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "family_id": "family-bd92ca3e4572",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0156",
+    "construction": "existential",
+    "a": {
+      "concept": "plum.n.02",
+      "surface": "a plum",
+      "determiner": "a",
+      "predicate": "be.v.03",
+      "past": true,
+      "existential": true,
+      "location": "bowl.n.01"
+    },
+    "b": {
+      "concept": "mango.n.02",
+      "surface": "a mango",
+      "determiner": "a",
+      "predicate": "buy.v.01",
+      "role": "Theme",
+      "past": true,
+      "object_event": true,
+      "actor_name": null,
+      "actor_role": "Agent"
+    },
+    "sentence": "There was a plum in the bowl. I bought a mango. I photographed both fruits.",
+    "continuation": "I photographed both fruits.",
+    "tail": {
+      "predicate": "photograph.v.01",
+      "role": "Theme",
+      "form": "transitive"
+    },
+    "quantity": 2,
+    "group_concept": "fruit.n.01",
+    "group_word": "fruits",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "family_id": "family-3c5dab3d4a2d",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0157",
+    "construction": "existential",
+    "a": {
+      "concept": "viola.n.03",
+      "surface": "a viola",
+      "determiner": "a",
+      "predicate": "be.v.03",
+      "past": true,
+      "existential": true,
+      "location": "cupboard.n.01"
+    },
+    "b": {
+      "concept": "violin.n.01",
+      "surface": "a violin",
+      "determiner": "a",
+      "predicate": "borrow.v.01",
+      "role": "Theme",
+      "past": true,
+      "object_event": true,
+      "actor_name": null,
+      "actor_role": "Agent"
+    },
+    "sentence": "There was a viola in the cupboard. I borrowed a violin. I photographed both instruments.",
+    "continuation": "I photographed both instruments.",
+    "tail": {
+      "predicate": "photograph.v.01",
+      "role": "Theme",
+      "form": "transitive"
+    },
+    "quantity": 2,
+    "group_concept": "musical_instrument.n.01",
+    "group_word": "instruments",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "family_id": "family-bca3b8d27d93",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0158",
+    "construction": "existential",
+    "a": {
+      "concept": "flute.n.01",
+      "surface": "a flute",
+      "determiner": "a",
+      "predicate": "be.v.03",
+      "past": true,
+      "existential": true,
+      "location": "cupboard.n.01"
+    },
+    "b": {
+      "concept": "clarinet.n.01",
+      "surface": "a clarinet",
+      "determiner": "a",
+      "predicate": "bring.v.01",
+      "role": "Theme",
+      "past": true,
+      "object_event": true,
+      "actor_name": null,
+      "actor_role": "Agent"
+    },
+    "sentence": "There was a flute in the cupboard. I brought a clarinet. I photographed both instruments.",
+    "continuation": "I photographed both instruments.",
+    "tail": {
+      "predicate": "photograph.v.01",
+      "role": "Theme",
+      "form": "transitive"
+    },
+    "quantity": 2,
+    "group_concept": "musical_instrument.n.01",
+    "group_word": "instruments",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "family_id": "family-7d6a131ea0ee",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0159",
+    "construction": "existential",
+    "a": {
+      "concept": "accordion.n.01",
+      "surface": "an accordion",
+      "determiner": "an",
+      "predicate": "be.v.03",
+      "past": true,
+      "existential": true,
+      "location": "cupboard.n.01"
+    },
+    "b": {
+      "concept": "harmonica.n.01",
+      "surface": "a harmonica",
+      "determiner": "a",
+      "predicate": "borrow.v.01",
+      "role": "Theme",
+      "past": true,
+      "object_event": true,
+      "actor_name": null,
+      "actor_role": "Agent"
+    },
+    "sentence": "There was an accordion in the cupboard. I borrowed a harmonica. I photographed both instruments.",
+    "continuation": "I photographed both instruments.",
+    "tail": {
+      "predicate": "photograph.v.01",
+      "role": "Theme",
+      "form": "transitive"
+    },
+    "quantity": 2,
+    "group_concept": "musical_instrument.n.01",
+    "group_word": "instruments",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "family_id": "family-47c06d97b291",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  },
+  {
+    "id": "FLG0160",
+    "construction": "existential",
+    "a": {
+      "concept": "cymbal.n.01",
+      "surface": "a cymbal",
+      "determiner": "a",
+      "predicate": "be.v.03",
+      "past": true,
+      "existential": true,
+      "location": "cupboard.n.01"
+    },
+    "b": {
+      "concept": "triangle.n.05",
+      "surface": "a triangle",
+      "determiner": "a",
+      "predicate": "find.v.01",
+      "role": "Theme",
+      "past": true,
+      "object_event": true,
+      "actor_name": null,
+      "actor_role": "Agent"
+    },
+    "sentence": "There was a cymbal in the cupboard. I found a triangle. I photographed both instruments.",
+    "continuation": "I photographed both instruments.",
+    "tail": {
+      "predicate": "photograph.v.01",
+      "role": "Theme",
+      "form": "transitive"
+    },
+    "quantity": 2,
+    "group_concept": "musical_instrument.n.01",
+    "group_word": "instruments",
+    "provenance": "independently authored synthetic situation",
+    "review_status": "assistant_review_pending",
+    "family_id": "family-2de942c2ac0f",
+    "annotation_status": "assistant_authored_candidate; not human accepted",
+    "referent_type": "particular_individuals_or_objects",
+    "article_policy": "Use new indefinites, situational definites, names and distinguishing modifiers according to each situation; no article quota.",
+    "design": "First plural group constructed at the continuation; members are separately introduced and no prior joint group is built."
+  }
+]

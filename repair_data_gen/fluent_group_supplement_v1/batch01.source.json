@@ -1,0 +1,653 @@
+[
+  {
+    "id": "FGS001",
+    "family_id": "fgs-situation-001",
+    "sentence": "A parcel arrived. A suitcase fell. Both are heavy.",
+    "continuation": "Both are heavy.",
+    "a": {
+      "concept": "parcel.n.01",
+      "predicate": "arrive.v.01",
+      "role": "Theme",
+      "past": true,
+      "determiner": "a",
+      "identifiability": "new discourse referent"
+    },
+    "b": {
+      "concept": "suitcase.n.01",
+      "predicate": "fall.v.01",
+      "role": "Theme",
+      "past": true,
+      "determiner": "a",
+      "identifiability": "new discourse referent"
+    },
+    "tail": {
+      "predicate": "heavy.a.01",
+      "form": "declarative",
+      "role": "AttributeOf",
+      "past": false
+    },
+    "design": "Different intransitive events; explicit quantity.",
+    "introduction_relation": "CONTINUATION",
+    "quantity": 2,
+    "group_concept": "entity.n.01"
+  },
+  {
+    "id": "FGS002",
+    "family_id": "fgs-situation-002",
+    "sentence": "A lantern is bright, but a candle is dim. Photograph them.",
+    "continuation": "Photograph them.",
+    "a": {
+      "concept": "lantern.n.01",
+      "predicate": "bright.a.01",
+      "role": "AttributeOf",
+      "past": false,
+      "determiner": "a",
+      "identifiability": "new discourse referent"
+    },
+    "b": {
+      "concept": "candle.n.01",
+      "predicate": "dim.a.01",
+      "role": "AttributeOf",
+      "past": false,
+      "determiner": "a",
+      "identifiability": "new discourse referent"
+    },
+    "tail": {
+      "predicate": "photograph.v.01",
+      "form": "imperative",
+      "role": "Theme",
+      "past": false
+    },
+    "design": "Contrast between light sources; object group follows imperative verb.",
+    "introduction_relation": "CONTRAST",
+    "quantity": null,
+    "group_concept": "entity.n.01"
+  },
+  {
+    "id": "FGS003",
+    "family_id": "fgs-situation-003",
+    "sentence": "A red jar was empty. A blue jar was full. Are both jars clean?",
+    "continuation": "Are both jars clean?",
+    "a": {
+      "concept": "jar.n.01",
+      "predicate": "empty.a.01",
+      "role": "AttributeOf",
+      "past": true,
+      "colour": "red.a.01",
+      "determiner": "a",
+      "identifiability": "new discourse referent"
+    },
+    "b": {
+      "concept": "jar.n.01",
+      "predicate": "full.a.01",
+      "role": "AttributeOf",
+      "past": true,
+      "colour": "blue.a.01",
+      "determiner": "a",
+      "identifiability": "new discourse referent"
+    },
+    "tail": {
+      "predicate": "clean.a.01",
+      "form": "question",
+      "role": "AttributeOf",
+      "past": false
+    },
+    "design": "Same noun with colour modifiers; polar question; members are jars.",
+    "introduction_relation": "CONTINUATION",
+    "quantity": 2,
+    "group_concept": "jar.n.01"
+  },
+  {
+    "id": "FGS004",
+    "family_id": "fgs-situation-004",
+    "sentence": "Mira sat, whereas Jonas stood. They waited.",
+    "continuation": "They waited.",
+    "a": {
+      "concept": "person.n.01",
+      "predicate": "sit.v.01",
+      "role": "Theme",
+      "past": true,
+      "name": "Mira",
+      "determiner": "name",
+      "identifiability": "named individual"
+    },
+    "b": {
+      "concept": "person.n.01",
+      "predicate": "stand.v.01",
+      "role": "Theme",
+      "past": true,
+      "name": "Jonas",
+      "determiner": "name",
+      "identifiability": "named individual"
+    },
+    "tail": {
+      "predicate": "wait.v.01",
+      "form": "declarative",
+      "role": "Theme",
+      "past": true
+    },
+    "design": "Named people; contrasting postures followed by an event.",
+    "introduction_relation": "CONTRAST",
+    "quantity": null,
+    "group_concept": "entity.n.01"
+  },
+  {
+    "id": "FGS005",
+    "family_id": "fgs-situation-005",
+    "sentence": "A drum is expensive, but a flute is cheap. Both instruments are damaged.",
+    "continuation": "Both instruments are damaged.",
+    "a": {
+      "concept": "drum.n.01",
+      "predicate": "expensive.a.01",
+      "role": "AttributeOf",
+      "past": false,
+      "determiner": "a",
+      "identifiability": "new discourse referent"
+    },
+    "b": {
+      "concept": "flute.n.01",
+      "predicate": "cheap.a.01",
+      "role": "AttributeOf",
+      "past": false,
+      "determiner": "a",
+      "identifiability": "new discourse referent"
+    },
+    "tail": {
+      "predicate": "damaged.a.01",
+      "form": "declarative",
+      "role": "AttributeOf",
+      "past": false
+    },
+    "design": "Price contrast; typed musical-instrument group.",
+    "introduction_relation": "CONTRAST",
+    "quantity": 2,
+    "group_concept": "musical_instrument.n.01"
+  },
+  {
+    "id": "FGS006",
+    "family_id": "fgs-situation-006",
+    "sentence": "A peach is ripe, but a pear is unripe. Photograph both fruits.",
+    "continuation": "Photograph both fruits.",
+    "a": {
+      "concept": "peach.n.03",
+      "predicate": "ripe.a.01",
+      "role": "AttributeOf",
+      "past": false,
+      "determiner": "a",
+      "identifiability": "new discourse referent"
+    },
+    "b": {
+      "concept": "pear.n.01",
+      "predicate": "unripe.a.01",
+      "role": "AttributeOf",
+      "past": false,
+      "determiner": "a",
+      "identifiability": "new discourse referent"
+    },
+    "tail": {
+      "predicate": "photograph.v.01",
+      "form": "imperative",
+      "role": "Theme",
+      "past": false
+    },
+    "design": "Individual fruits with contrasting maturity; typed object group.",
+    "introduction_relation": "CONTRAST",
+    "quantity": 2,
+    "group_concept": "fruit.n.01"
+  },
+  {
+    "id": "FGS007",
+    "family_id": "fgs-situation-007",
+    "sentence": "I found a bracelet. A necklace glittered. Photograph them.",
+    "continuation": "Photograph them.",
+    "a": {
+      "concept": "bracelet.n.02",
+      "predicate": "find.v.01",
+      "role": "AttributeOf",
+      "past": false,
+      "found": true,
+      "determiner": "a",
+      "identifiability": "new discourse referent"
+    },
+    "b": {
+      "concept": "necklace.n.01",
+      "predicate": "glitter.v.01",
+      "role": "Theme",
+      "past": true,
+      "determiner": "a",
+      "identifiability": "new discourse referent"
+    },
+    "tail": {
+      "predicate": "photograph.v.01",
+      "form": "imperative",
+      "role": "Theme",
+      "past": false
+    },
+    "design": "Object then subject introduction; decorative bracelet sense.",
+    "introduction_relation": "CONTINUATION",
+    "quantity": null,
+    "group_concept": "entity.n.01"
+  },
+  {
+    "id": "FGS008",
+    "family_id": "fgs-situation-008",
+    "sentence": "A blanket is wet, but a towel is dry. Wash them.",
+    "continuation": "Wash them.",
+    "a": {
+      "concept": "blanket.n.01",
+      "predicate": "wet.a.01",
+      "role": "AttributeOf",
+      "past": false,
+      "determiner": "a",
+      "identifiability": "new discourse referent"
+    },
+    "b": {
+      "concept": "towel.n.01",
+      "predicate": "dry.a.01",
+      "role": "AttributeOf",
+      "past": false,
+      "determiner": "a",
+      "identifiability": "new discourse referent"
+    },
+    "tail": {
+      "predicate": "wash.v.03",
+      "form": "imperative",
+      "role": "Source",
+      "past": false
+    },
+    "design": "Moisture contrast; cleaning with water.",
+    "introduction_relation": "CONTRAST",
+    "quantity": null,
+    "group_concept": "entity.n.01"
+  },
+  {
+    "id": "FGS009",
+    "family_id": "fgs-situation-009",
+    "sentence": "A gate is open. A door is closed. Are they heavy?",
+    "continuation": "Are they heavy?",
+    "a": {
+      "concept": "gate.n.01",
+      "predicate": "open.a.01",
+      "role": "AttributeOf",
+      "past": false,
+      "determiner": "a",
+      "identifiability": "new discourse referent"
+    },
+    "b": {
+      "concept": "door.n.01",
+      "predicate": "closed.a.01",
+      "role": "AttributeOf",
+      "past": false,
+      "determiner": "a",
+      "identifiability": "new discourse referent"
+    },
+    "tail": {
+      "predicate": "heavy.a.01",
+      "form": "question",
+      "role": "AttributeOf",
+      "past": false
+    },
+    "design": "Separate access barriers; plain plural question without Quantity.",
+    "introduction_relation": "CONTINUATION",
+    "quantity": null,
+    "group_concept": "entity.n.01"
+  },
+  {
+    "id": "FGS010",
+    "family_id": "fgs-situation-010",
+    "sentence": "A swan swam. A duck slept. They were hungry.",
+    "continuation": "They were hungry.",
+    "a": {
+      "concept": "swan.n.01",
+      "predicate": "swim.v.01",
+      "role": "Theme",
+      "past": true,
+      "determiner": "a",
+      "identifiability": "new discourse referent"
+    },
+    "b": {
+      "concept": "duck.n.01",
+      "predicate": "sleep.v.01",
+      "role": "Agent",
+      "past": true,
+      "determiner": "a",
+      "identifiability": "new discourse referent"
+    },
+    "tail": {
+      "predicate": "hungry.a.01",
+      "form": "declarative",
+      "role": "Experiencer",
+      "past": true
+    },
+    "design": "Different animal events; experiential continuation.",
+    "introduction_relation": "CONTINUATION",
+    "quantity": null,
+    "group_concept": "entity.n.01"
+  },
+  {
+    "id": "FGS011",
+    "family_id": "fgs-situation-011",
+    "sentence": "A train arrived. A bus stopped. Both vehicles were crowded.",
+    "continuation": "Both vehicles were crowded.",
+    "a": {
+      "concept": "train.n.01",
+      "predicate": "arrive.v.01",
+      "role": "Theme",
+      "past": true,
+      "determiner": "a",
+      "identifiability": "new discourse referent"
+    },
+    "b": {
+      "concept": "bus.n.01",
+      "predicate": "stop.v.01",
+      "role": "Theme",
+      "past": true,
+      "determiner": "a",
+      "identifiability": "new discourse referent"
+    },
+    "tail": {
+      "predicate": "crowded.a.01",
+      "form": "declarative",
+      "role": "AttributeOf",
+      "past": true
+    },
+    "design": "Public transport arrivals; typed vehicle group.",
+    "introduction_relation": "CONTINUATION",
+    "quantity": 2,
+    "group_concept": "vehicle.n.01"
+  },
+  {
+    "id": "FGS012",
+    "family_id": "fgs-situation-012",
+    "sentence": "A crate is heavy, whereas a basket is light. Carry them.",
+    "continuation": "Carry them.",
+    "a": {
+      "concept": "crate.n.01",
+      "predicate": "heavy.a.01",
+      "role": "AttributeOf",
+      "past": false,
+      "determiner": "a",
+      "identifiability": "new discourse referent"
+    },
+    "b": {
+      "concept": "basket.n.01",
+      "predicate": "light.a.01",
+      "role": "AttributeOf",
+      "past": false,
+      "determiner": "a",
+      "identifiability": "new discourse referent"
+    },
+    "tail": {
+      "predicate": "carry.v.01",
+      "form": "imperative",
+      "role": "Theme",
+      "past": false
+    },
+    "design": "Weight contrast; imperative Theme group.",
+    "introduction_relation": "CONTRAST",
+    "quantity": null,
+    "group_concept": "entity.n.01"
+  },
+  {
+    "id": "FGS013",
+    "family_id": "fgs-situation-013",
+    "sentence": "A piano is dusty. A harp is dirty. Clean both instruments.",
+    "continuation": "Clean both instruments.",
+    "a": {
+      "concept": "piano.n.01",
+      "predicate": "dusty.a.01",
+      "role": "AttributeOf",
+      "past": false,
+      "determiner": "a",
+      "identifiability": "new discourse referent"
+    },
+    "b": {
+      "concept": "harp.n.01",
+      "predicate": "dirty.a.01",
+      "role": "AttributeOf",
+      "past": false,
+      "determiner": "a",
+      "identifiability": "new discourse referent"
+    },
+    "tail": {
+      "predicate": "clean.v.01",
+      "form": "imperative",
+      "role": "Source",
+      "past": false
+    },
+    "design": "Cleaning uses PMB Source role for the surface being cleaned.",
+    "introduction_relation": "CONTINUATION",
+    "quantity": 2,
+    "group_concept": "musical_instrument.n.01"
+  },
+  {
+    "id": "FGS014",
+    "family_id": "fgs-situation-014",
+    "sentence": "A black helmet fell. A white helmet rolled. Both helmets are damaged.",
+    "continuation": "Both helmets are damaged.",
+    "a": {
+      "concept": "helmet.n.01",
+      "predicate": "fall.v.01",
+      "role": "Theme",
+      "past": true,
+      "colour": "black.a.01",
+      "determiner": "a",
+      "identifiability": "new discourse referent"
+    },
+    "b": {
+      "concept": "helmet.n.01",
+      "predicate": "roll.v.01",
+      "role": "Theme",
+      "past": true,
+      "colour": "white.a.01",
+      "determiner": "a",
+      "identifiability": "new discourse referent"
+    },
+    "tail": {
+      "predicate": "damaged.a.01",
+      "form": "declarative",
+      "role": "AttributeOf",
+      "past": false
+    },
+    "design": "Repeated noun distinguished by colour; different movement events.",
+    "introduction_relation": "CONTINUATION",
+    "quantity": 2,
+    "group_concept": "helmet.n.01"
+  },
+  {
+    "id": "FGS015",
+    "family_id": "fgs-situation-015",
+    "sentence": "A bottle is empty, but a jug is full. Are they fragile?",
+    "continuation": "Are they fragile?",
+    "a": {
+      "concept": "bottle.n.01",
+      "predicate": "empty.a.01",
+      "role": "AttributeOf",
+      "past": false,
+      "determiner": "a",
+      "identifiability": "new discourse referent"
+    },
+    "b": {
+      "concept": "jug.n.01",
+      "predicate": "full.a.01",
+      "role": "AttributeOf",
+      "past": false,
+      "determiner": "a",
+      "identifiability": "new discourse referent"
+    },
+    "tail": {
+      "predicate": "fragile.a.01",
+      "form": "question",
+      "role": "AttributeOf",
+      "past": false
+    },
+    "design": "Container contrast; question concerns a shared property.",
+    "introduction_relation": "CONTRAST",
+    "quantity": null,
+    "group_concept": "entity.n.01"
+  },
+  {
+    "id": "FGS016",
+    "family_id": "fgs-situation-016",
+    "sentence": "I found a vase. A cup was dirty. Both are old.",
+    "continuation": "Both are old.",
+    "a": {
+      "concept": "vase.n.01",
+      "predicate": "find.v.01",
+      "role": "AttributeOf",
+      "past": false,
+      "found": true,
+      "determiner": "a",
+      "identifiability": "new discourse referent"
+    },
+    "b": {
+      "concept": "cup.n.01",
+      "predicate": "dirty.a.01",
+      "role": "AttributeOf",
+      "past": true,
+      "determiner": "a",
+      "identifiability": "new discourse referent"
+    },
+    "tail": {
+      "predicate": "old.a.02",
+      "form": "declarative",
+      "role": "AttributeOf",
+      "past": false
+    },
+    "design": "Mixed object/subject introduction; old means not new.",
+    "introduction_relation": "CONTINUATION",
+    "quantity": 2,
+    "group_concept": "entity.n.01"
+  },
+  {
+    "id": "FGS017",
+    "family_id": "fgs-situation-017",
+    "sentence": "A puppy barked because a kitten hissed. They were both hungry.",
+    "continuation": "They were both hungry.",
+    "a": {
+      "concept": "puppy.n.01",
+      "predicate": "bark.v.04",
+      "role": "Agent",
+      "past": true,
+      "determiner": "a",
+      "identifiability": "new discourse referent"
+    },
+    "b": {
+      "concept": "kitten.n.01",
+      "predicate": "hiss.v.01",
+      "role": "Agent",
+      "past": true,
+      "determiner": "a",
+      "identifiability": "new discourse referent"
+    },
+    "tail": {
+      "predicate": "hungry.a.01",
+      "form": "declarative",
+      "role": "Experiencer",
+      "past": true
+    },
+    "design": "Causal relation between introductions; later group spans both contexts.",
+    "introduction_relation": "EXPLANATION",
+    "quantity": 2,
+    "group_concept": "entity.n.01"
+  },
+  {
+    "id": "FGS018",
+    "family_id": "fgs-situation-018",
+    "sentence": "Mara laughed because Theo danced. Were they happy?",
+    "continuation": "Were they happy?",
+    "a": {
+      "concept": "person.n.01",
+      "predicate": "laugh.v.01",
+      "role": "Agent",
+      "past": true,
+      "name": "Mara",
+      "determiner": "name",
+      "identifiability": "named individual"
+    },
+    "b": {
+      "concept": "person.n.01",
+      "predicate": "dance.v.01",
+      "role": "Theme",
+      "past": true,
+      "name": "Theo",
+      "determiner": "name",
+      "identifiability": "named individual"
+    },
+    "tail": {
+      "predicate": "happy.a.01",
+      "form": "question",
+      "role": "Experiencer",
+      "past": true
+    },
+    "design": "Named people in a causal discourse; experiential polar question.",
+    "introduction_relation": "EXPLANATION",
+    "quantity": null,
+    "group_concept": "entity.n.01"
+  },
+  {
+    "id": "FGS019",
+    "family_id": "fgs-situation-019",
+    "sentence": "A scarf was wet. A hat was dirty. I cleaned them.",
+    "continuation": "I cleaned them.",
+    "a": {
+      "concept": "scarf.n.01",
+      "predicate": "wet.a.01",
+      "role": "AttributeOf",
+      "past": true,
+      "determiner": "a",
+      "identifiability": "new discourse referent"
+    },
+    "b": {
+      "concept": "hat.n.01",
+      "predicate": "dirty.a.01",
+      "role": "AttributeOf",
+      "past": true,
+      "determiner": "a",
+      "identifiability": "new discourse referent"
+    },
+    "tail": {
+      "predicate": "clean.v.01",
+      "form": "transitive",
+      "role": "Source",
+      "past": false
+    },
+    "design": "First group mention as object in an independently tensed clause.",
+    "introduction_relation": "CONTINUATION",
+    "quantity": null,
+    "group_concept": "entity.n.01"
+  },
+  {
+    "id": "FGS020",
+    "family_id": "fgs-situation-020",
+    "sentence": "An oboe is damaged. A bassoon is dusty. I photographed them because they are valuable.",
+    "continuation": "I photographed them because they are valuable.",
+    "a": {
+      "concept": "oboe.n.01",
+      "predicate": "damaged.a.01",
+      "role": "AttributeOf",
+      "past": false,
+      "determiner": "a",
+      "identifiability": "new discourse referent"
+    },
+    "b": {
+      "concept": "bassoon.n.01",
+      "predicate": "dusty.a.01",
+      "role": "AttributeOf",
+      "past": false,
+      "determiner": "a",
+      "identifiability": "new discourse referent"
+    },
+    "tail": {
+      "predicate": "photograph.v.01",
+      "form": "transitive",
+      "role": "Theme",
+      "past": false,
+      "explanation": "valuable.a.01"
+    },
+    "design": "First group as object; subsequent ANA refers to that established group inside an explanation.",
+    "introduction_relation": "CONTINUATION",
+    "quantity": null,
+    "group_concept": "entity.n.01"
+  }
+]

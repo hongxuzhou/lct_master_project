@@ -1,0 +1,1944 @@
+[
+  {
+    "id": "OBJ001",
+    "family_id": "obj_situation_001",
+    "builder": "object",
+    "fluent": "I borrowed the coat. I borrowed the jacket. They are both warm.",
+    "rsr": "I borrowed the coat, the jacket. They are both warm.",
+    "continuation_text": "They are both warm.",
+    "a": {
+      "concept": "coat.n.01",
+      "roles": [],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "jacket.n.01",
+      "roles": [],
+      "modifiers": []
+    },
+    "event": "borrow.v.01",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_predicate",
+        "concept": "warm.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "rationale": "Both definite alternatives are discourse-given candidates. The later predicate applies independently to them and does not assert that the withdrawn action occurred.",
+    "declared_differences": [
+      "Fluent asserts two ordinary event instances in two sentences; RSR asserts one event with only the second candidate accepted.",
+      "Fluent repeats the speaker and tense specification; RSR shares them.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_objects",
+    "provenance": "Independently authored ChatGPT scenario; not extracted or extended from an existing RSR item or PMB train/dev sentence.",
+    "review_status": "author_reviewed_candidate",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "OBJ002",
+    "family_id": "obj_situation_002",
+    "builder": "object",
+    "fluent": "I photographed the violin. I photographed the cello. They are dusty.",
+    "rsr": "I photographed the violin, the cello. They are dusty.",
+    "continuation_text": "They are dusty.",
+    "a": {
+      "concept": "violin.n.01",
+      "roles": [],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "cello.n.01",
+      "roles": [],
+      "modifiers": []
+    },
+    "event": "photograph.v.01",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_predicate",
+        "concept": "dusty.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "rationale": "Both definite alternatives are discourse-given candidates. The later predicate applies independently to them and does not assert that the withdrawn action occurred.",
+    "declared_differences": [
+      "Fluent asserts two ordinary event instances in two sentences; RSR asserts one event with only the second candidate accepted.",
+      "Fluent repeats the speaker and tense specification; RSR shares them.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_objects",
+    "provenance": "Independently authored ChatGPT scenario; not extracted or extended from an existing RSR item or PMB train/dev sentence.",
+    "review_status": "author_reviewed_candidate",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "OBJ003",
+    "family_id": "obj_situation_003",
+    "builder": "object",
+    "fluent": "I chose the wool. I chose the silk. They are both soft.",
+    "rsr": "I chose the wool, the silk. They are both soft.",
+    "continuation_text": "They are both soft.",
+    "a": {
+      "concept": "wool.n.01",
+      "roles": [],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "silk.n.01",
+      "roles": [],
+      "modifiers": []
+    },
+    "event": "choose.v.01",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_predicate",
+        "concept": "soft.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "rationale": "Both definite alternatives are discourse-given candidates. The later predicate applies independently to them and does not assert that the withdrawn action occurred.",
+    "declared_differences": [
+      "Fluent asserts two ordinary event instances in two sentences; RSR asserts one event with only the second candidate accepted.",
+      "Fluent repeats the speaker and tense specification; RSR shares them.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_material_or_food_portions",
+    "provenance": "Independently authored ChatGPT scenario; not extracted or extended from an existing RSR item or PMB train/dev sentence.",
+    "review_status": "hold",
+    "review_flags": [
+      "Material samples versus kinds are not sufficiently individuated in the NL; explicit quantity must not be accepted until the reading is settled."
+    ],
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "OBJ004",
+    "family_id": "obj_situation_004",
+    "builder": "object",
+    "fluent": "I bought the camera. I bought the telescope. They are expensive.",
+    "rsr": "I bought the camera, the telescope. They are expensive.",
+    "continuation_text": "They are expensive.",
+    "a": {
+      "concept": "camera.n.01",
+      "roles": [],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "telescope.n.01",
+      "roles": [],
+      "modifiers": []
+    },
+    "event": "buy.v.01",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_predicate",
+        "concept": "expensive.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "rationale": "Both definite alternatives are discourse-given candidates. The later predicate applies independently to them and does not assert that the withdrawn action occurred.",
+    "declared_differences": [
+      "Fluent asserts two ordinary event instances in two sentences; RSR asserts one event with only the second candidate accepted.",
+      "Fluent repeats the speaker and tense specification; RSR shares them.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_objects",
+    "provenance": "Independently authored ChatGPT scenario; not extracted or extended from an existing RSR item or PMB train/dev sentence.",
+    "review_status": "author_reviewed_candidate",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "OBJ005",
+    "family_id": "obj_situation_005",
+    "builder": "object",
+    "fluent": "I repaired the bicycle. I repaired the scooter. They are both heavy.",
+    "rsr": "I repaired the bicycle, the scooter. They are both heavy.",
+    "continuation_text": "They are both heavy.",
+    "a": {
+      "concept": "bicycle.n.01",
+      "roles": [],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "scooter.n.03",
+      "roles": [],
+      "modifiers": []
+    },
+    "event": "repair.v.01",
+    "actor_role": "Agent",
+    "role": "Patient",
+    "tense": "TPR",
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_predicate",
+        "concept": "heavy.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "rationale": "Both definite alternatives are discourse-given candidates. The later predicate applies independently to them and does not assert that the withdrawn action occurred.",
+    "declared_differences": [
+      "Fluent asserts two ordinary event instances in two sentences; RSR asserts one event with only the second candidate accepted.",
+      "Fluent repeats the speaker and tense specification; RSR shares them.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_objects",
+    "provenance": "Independently authored ChatGPT scenario; not extracted or extended from an existing RSR item or PMB train/dev sentence.",
+    "review_status": "author_reviewed_candidate",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "OBJ006",
+    "family_id": "obj_situation_006",
+    "builder": "object",
+    "fluent": "I washed the cup. I washed the plate. They are white.",
+    "rsr": "I washed the cup, the plate. They are white.",
+    "continuation_text": "They are white.",
+    "a": {
+      "concept": "cup.n.01",
+      "roles": [],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "plate.n.04",
+      "roles": [],
+      "modifiers": []
+    },
+    "event": "wash.v.01",
+    "actor_role": "Agent",
+    "role": "Patient",
+    "tense": "TPR",
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_predicate",
+        "concept": "white.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "rationale": "Both definite alternatives are discourse-given candidates. The later predicate applies independently to them and does not assert that the withdrawn action occurred.",
+    "declared_differences": [
+      "Fluent asserts two ordinary event instances in two sentences; RSR asserts one event with only the second candidate accepted.",
+      "Fluent repeats the speaker and tense specification; RSR shares them.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_objects",
+    "provenance": "Independently authored ChatGPT scenario; not extracted or extended from an existing RSR item or PMB train/dev sentence.",
+    "review_status": "author_reviewed_candidate",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "OBJ007",
+    "family_id": "obj_situation_007",
+    "builder": "object",
+    "fluent": "I found the key. I found the coin. They are both small.",
+    "rsr": "I found the key, the coin. They are both small.",
+    "continuation_text": "They are both small.",
+    "a": {
+      "concept": "key.n.01",
+      "roles": [],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "coin.n.01",
+      "roles": [],
+      "modifiers": []
+    },
+    "event": "find.v.01",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_predicate",
+        "concept": "small.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "rationale": "Both definite alternatives are discourse-given candidates. The later predicate applies independently to them and does not assert that the withdrawn action occurred.",
+    "declared_differences": [
+      "Fluent asserts two ordinary event instances in two sentences; RSR asserts one event with only the second candidate accepted.",
+      "Fluent repeats the speaker and tense specification; RSR shares them.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_objects",
+    "provenance": "Independently authored ChatGPT scenario; not extracted or extended from an existing RSR item or PMB train/dev sentence.",
+    "review_status": "author_reviewed_candidate",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "OBJ008",
+    "family_id": "obj_situation_008",
+    "builder": "object",
+    "fluent": "I carried the box. I carried the basket. They are empty.",
+    "rsr": "I carried the box, the basket. They are empty.",
+    "continuation_text": "They are empty.",
+    "a": {
+      "concept": "box.n.01",
+      "roles": [],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "basket.n.01",
+      "roles": [],
+      "modifiers": []
+    },
+    "event": "carry.v.01",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_predicate",
+        "concept": "empty.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "rationale": "Both definite alternatives are discourse-given candidates. The later predicate applies independently to them and does not assert that the withdrawn action occurred.",
+    "declared_differences": [
+      "Fluent asserts two ordinary event instances in two sentences; RSR asserts one event with only the second candidate accepted.",
+      "Fluent repeats the speaker and tense specification; RSR shares them.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_objects",
+    "provenance": "Independently authored ChatGPT scenario; not extracted or extended from an existing RSR item or PMB train/dev sentence.",
+    "review_status": "author_reviewed_candidate",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "OBJ009",
+    "family_id": "obj_situation_009",
+    "builder": "object",
+    "fluent": "I opened the bottle. I opened the jar. They are both containers.",
+    "rsr": "I opened the bottle, the jar. They are both containers.",
+    "continuation_text": "They are both containers.",
+    "a": {
+      "concept": "bottle.n.01",
+      "roles": [],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "jar.n.01",
+      "roles": [],
+      "modifiers": []
+    },
+    "event": "open.v.01",
+    "actor_role": "Agent",
+    "role": "Patient",
+    "tense": "TPR",
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_copula",
+        "concept": "be.v.01",
+        "roles": [
+          [
+            "Theme",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ],
+          [
+            "Co-Theme",
+            "@tail_predicate"
+          ]
+        ]
+      },
+      {
+        "id": "tail_predicate",
+        "concept": "container.n.01",
+        "roles": []
+      }
+    ],
+    "rationale": "Both definite alternatives are discourse-given candidates. The later predicate applies independently to them and does not assert that the withdrawn action occurred.",
+    "declared_differences": [
+      "Fluent asserts two ordinary event instances in two sentences; RSR asserts one event with only the second candidate accepted.",
+      "Fluent repeats the speaker and tense specification; RSR shares them.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_objects",
+    "provenance": "Independently authored ChatGPT scenario; not extracted or extended from an existing RSR item or PMB train/dev sentence.",
+    "review_status": "author_reviewed_candidate",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "OBJ010",
+    "family_id": "obj_situation_010",
+    "builder": "object",
+    "fluent": "I read the novel. I read the biography. They are interesting.",
+    "rsr": "I read the novel, the biography. They are interesting.",
+    "continuation_text": "They are interesting.",
+    "a": {
+      "concept": "novel.n.01",
+      "roles": [],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "biography.n.01",
+      "roles": [],
+      "modifiers": []
+    },
+    "event": "read.v.01",
+    "actor_role": "Experiencer",
+    "role": "Stimulus",
+    "tense": "TPR",
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_predicate",
+        "concept": "interesting.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "rationale": "Both definite alternatives are discourse-given candidates. The later predicate applies independently to them and does not assert that the withdrawn action occurred.",
+    "declared_differences": [
+      "Fluent asserts two ordinary event instances in two sentences; RSR asserts one event with only the second candidate accepted.",
+      "Fluent repeats the speaker and tense specification; RSR shares them.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_objects",
+    "provenance": "Independently authored ChatGPT scenario; not extracted or extended from an existing RSR item or PMB train/dev sentence.",
+    "review_status": "author_reviewed_candidate",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "OBJ011",
+    "family_id": "obj_situation_011",
+    "builder": "object",
+    "fluent": "I ordered the soup. I ordered the salad. They are both delicious.",
+    "rsr": "I ordered the soup, the salad. They are both delicious.",
+    "continuation_text": "They are both delicious.",
+    "a": {
+      "concept": "soup.n.01",
+      "roles": [],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "salad.n.01",
+      "roles": [],
+      "modifiers": []
+    },
+    "event": "order.v.02",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_predicate",
+        "concept": "delicious.a.02",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "rationale": "Both definite alternatives are discourse-given candidates. The later predicate applies independently to them and does not assert that the withdrawn action occurred.",
+    "declared_differences": [
+      "Fluent asserts two ordinary event instances in two sentences; RSR asserts one event with only the second candidate accepted.",
+      "Fluent repeats the speaker and tense specification; RSR shares them.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_objects",
+    "provenance": "Independently authored ChatGPT scenario; not extracted or extended from an existing RSR item or PMB train/dev sentence.",
+    "review_status": "author_reviewed_candidate",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "OBJ012",
+    "family_id": "obj_situation_012",
+    "builder": "object",
+    "fluent": "I ate the peach. I ate the plum. They are sweet.",
+    "rsr": "I ate the peach, the plum. They are sweet.",
+    "continuation_text": "They are sweet.",
+    "a": {
+      "concept": "peach.n.03",
+      "roles": [],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "plum.n.02",
+      "roles": [],
+      "modifiers": []
+    },
+    "event": "eat.v.01",
+    "actor_role": "Agent",
+    "role": "Patient",
+    "tense": "TPR",
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_predicate",
+        "concept": "sweet.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "rationale": "Both definite alternatives are discourse-given candidates. The later predicate applies independently to them and does not assert that the withdrawn action occurred.",
+    "declared_differences": [
+      "Fluent asserts two ordinary event instances in two sentences; RSR asserts one event with only the second candidate accepted.",
+      "Fluent repeats the speaker and tense specification; RSR shares them.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_objects",
+    "provenance": "Independently authored ChatGPT scenario; not extracted or extended from an existing RSR item or PMB train/dev sentence.",
+    "review_status": "author_reviewed_candidate",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "OBJ013",
+    "family_id": "obj_situation_013",
+    "builder": "object",
+    "fluent": "I peeled the potato. I peeled the carrot. They are both fresh.",
+    "rsr": "I peeled the potato, the carrot. They are both fresh.",
+    "continuation_text": "They are both fresh.",
+    "a": {
+      "concept": "potato.n.01",
+      "roles": [],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "carrot.n.01",
+      "roles": [],
+      "modifiers": []
+    },
+    "event": "peel.v.01",
+    "actor_role": "Agent",
+    "role": "Source",
+    "tense": "TPR",
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_predicate",
+        "concept": "fresh.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "rationale": "Both definite alternatives are discourse-given candidates. The later predicate applies independently to them and does not assert that the withdrawn action occurred.",
+    "declared_differences": [
+      "Fluent asserts two ordinary event instances in two sentences; RSR asserts one event with only the second candidate accepted.",
+      "Fluent repeats the speaker and tense specification; RSR shares them.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_objects",
+    "provenance": "Independently authored ChatGPT scenario; not extracted or extended from an existing RSR item or PMB train/dev sentence.",
+    "review_status": "author_reviewed_candidate",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "OBJ014",
+    "family_id": "obj_situation_014",
+    "builder": "object",
+    "fluent": "I bought the bread. I bought the cheese. They are stale.",
+    "rsr": "I bought the bread, the cheese. They are stale.",
+    "continuation_text": "They are stale.",
+    "a": {
+      "concept": "bread.n.01",
+      "roles": [],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "cheese.n.01",
+      "roles": [],
+      "modifiers": []
+    },
+    "event": "buy.v.01",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_predicate",
+        "concept": "stale.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "rationale": "Both definite alternatives are discourse-given candidates. The later predicate applies independently to them and does not assert that the withdrawn action occurred.",
+    "declared_differences": [
+      "Fluent asserts two ordinary event instances in two sentences; RSR asserts one event with only the second candidate accepted.",
+      "Fluent repeats the speaker and tense specification; RSR shares them.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_material_or_food_portions",
+    "provenance": "Independently authored ChatGPT scenario; not extracted or extended from an existing RSR item or PMB train/dev sentence.",
+    "review_status": "author_reviewed_candidate",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "OBJ015",
+    "family_id": "obj_situation_015",
+    "builder": "object",
+    "fluent": "I baked the cookie. I baked the brownie. They are both delicious.",
+    "rsr": "I baked the cookie, the brownie. They are both delicious.",
+    "continuation_text": "They are both delicious.",
+    "a": {
+      "concept": "cookie.n.01",
+      "roles": [],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "brownie.n.03",
+      "roles": [],
+      "modifiers": []
+    },
+    "event": "bake.v.02",
+    "actor_role": "Agent",
+    "role": "Product",
+    "tense": "TPR",
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_predicate",
+        "concept": "delicious.a.02",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "rationale": "Both definite alternatives are discourse-given candidates. The later predicate applies independently to them and does not assert that the withdrawn action occurred.",
+    "declared_differences": [
+      "Fluent asserts two ordinary event instances in two sentences; RSR asserts one event with only the second candidate accepted.",
+      "Fluent repeats the speaker and tense specification; RSR shares them.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_objects",
+    "provenance": "Independently authored ChatGPT scenario; not extracted or extended from an existing RSR item or PMB train/dev sentence.",
+    "review_status": "author_reviewed_candidate",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "OBJ016",
+    "family_id": "obj_situation_016",
+    "builder": "object",
+    "fluent": "I roasted the pepper. I roasted the aubergine. They are ripe.",
+    "rsr": "I roasted the pepper, the aubergine. They are ripe.",
+    "continuation_text": "They are ripe.",
+    "a": {
+      "concept": "pepper.n.04",
+      "roles": [],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "aubergine.n.02",
+      "roles": [],
+      "modifiers": []
+    },
+    "event": "roast.v.01",
+    "actor_role": "Agent",
+    "role": "Patient",
+    "tense": "TPR",
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_predicate",
+        "concept": "ripe.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "rationale": "Both definite alternatives are discourse-given candidates. The later predicate applies independently to them and does not assert that the withdrawn action occurred.",
+    "declared_differences": [
+      "Fluent asserts two ordinary event instances in two sentences; RSR asserts one event with only the second candidate accepted.",
+      "Fluent repeats the speaker and tense specification; RSR shares them.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_objects",
+    "provenance": "Independently authored ChatGPT scenario; not extracted or extended from an existing RSR item or PMB train/dev sentence.",
+    "review_status": "author_reviewed_candidate",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "OBJ017",
+    "family_id": "obj_situation_017",
+    "builder": "object",
+    "fluent": "I tasted the tea. I tasted the coffee. They are both bitter.",
+    "rsr": "I tasted the tea, the coffee. They are both bitter.",
+    "continuation_text": "They are both bitter.",
+    "a": {
+      "concept": "tea.n.01",
+      "roles": [],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "coffee.n.01",
+      "roles": [],
+      "modifiers": []
+    },
+    "event": "taste.v.03",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_predicate",
+        "concept": "bitter.a.06",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "rationale": "Both definite alternatives are discourse-given candidates. The later predicate applies independently to them and does not assert that the withdrawn action occurred.",
+    "declared_differences": [
+      "Fluent asserts two ordinary event instances in two sentences; RSR asserts one event with only the second candidate accepted.",
+      "Fluent repeats the speaker and tense specification; RSR shares them.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_material_or_food_portions",
+    "provenance": "Independently authored ChatGPT scenario; not extracted or extended from an existing RSR item or PMB train/dev sentence.",
+    "review_status": "author_reviewed_candidate",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "OBJ018",
+    "family_id": "obj_situation_018",
+    "builder": "object",
+    "fluent": "I served the rice. I served the pasta. They are hot.",
+    "rsr": "I served the rice, the pasta. They are hot.",
+    "continuation_text": "They are hot.",
+    "a": {
+      "concept": "rice.n.01",
+      "roles": [],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "pasta.n.02",
+      "roles": [],
+      "modifiers": []
+    },
+    "event": "serve.v.06",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_predicate",
+        "concept": "hot.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "rationale": "Both definite alternatives are discourse-given candidates. The later predicate applies independently to them and does not assert that the withdrawn action occurred.",
+    "declared_differences": [
+      "Fluent asserts two ordinary event instances in two sentences; RSR asserts one event with only the second candidate accepted.",
+      "Fluent repeats the speaker and tense specification; RSR shares them.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_material_or_food_portions",
+    "provenance": "Independently authored ChatGPT scenario; not extracted or extended from an existing RSR item or PMB train/dev sentence.",
+    "review_status": "author_reviewed_candidate",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "OBJ019",
+    "family_id": "obj_situation_019",
+    "builder": "object",
+    "fluent": "I smelled the rose. I smelled the lily. They are both fragrant.",
+    "rsr": "I smelled the rose, the lily. They are both fragrant.",
+    "continuation_text": "They are both fragrant.",
+    "a": {
+      "concept": "rose.n.01",
+      "roles": [],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "lily.n.01",
+      "roles": [],
+      "modifiers": []
+    },
+    "event": "smell.v.01",
+    "actor_role": "Experiencer",
+    "role": "Stimulus",
+    "tense": "TPR",
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_predicate",
+        "concept": "fragrant.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "rationale": "Both definite alternatives are discourse-given candidates. The later predicate applies independently to them and does not assert that the withdrawn action occurred.",
+    "declared_differences": [
+      "Fluent asserts two ordinary event instances in two sentences; RSR asserts one event with only the second candidate accepted.",
+      "Fluent repeats the speaker and tense specification; RSR shares them.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_objects",
+    "provenance": "Independently authored ChatGPT scenario; not extracted or extended from an existing RSR item or PMB train/dev sentence.",
+    "review_status": "author_reviewed_candidate",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "OBJ020",
+    "family_id": "obj_situation_020",
+    "builder": "object",
+    "fluent": "I planted the oak. I planted the birch. They are trees.",
+    "rsr": "I planted the oak, the birch. They are trees.",
+    "continuation_text": "They are trees.",
+    "a": {
+      "concept": "oak.n.02",
+      "roles": [],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "birch.n.02",
+      "roles": [],
+      "modifiers": []
+    },
+    "event": "plant.v.01",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_copula",
+        "concept": "be.v.01",
+        "roles": [
+          [
+            "Theme",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ],
+          [
+            "Co-Theme",
+            "@tail_predicate"
+          ]
+        ]
+      },
+      {
+        "id": "tail_predicate",
+        "concept": "tree.n.01",
+        "roles": []
+      }
+    ],
+    "rationale": "Both definite alternatives are discourse-given candidates. The later predicate applies independently to them and does not assert that the withdrawn action occurred.",
+    "declared_differences": [
+      "Fluent asserts two ordinary event instances in two sentences; RSR asserts one event with only the second candidate accepted.",
+      "Fluent repeats the speaker and tense specification; RSR shares them.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_objects",
+    "provenance": "Independently authored ChatGPT scenario; not extracted or extended from an existing RSR item or PMB train/dev sentence.",
+    "review_status": "author_reviewed_candidate",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "OBJ021",
+    "family_id": "obj_situation_021",
+    "builder": "object",
+    "fluent": "I watered the fern. I watered the cactus. They are both green.",
+    "rsr": "I watered the fern, the cactus. They are both green.",
+    "continuation_text": "They are both green.",
+    "a": {
+      "concept": "fern.n.01",
+      "roles": [],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "cactus.n.01",
+      "roles": [],
+      "modifiers": []
+    },
+    "event": "water.v.01",
+    "actor_role": "Agent",
+    "role": "Destination",
+    "tense": "TPR",
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_predicate",
+        "concept": "green.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "rationale": "Both definite alternatives are discourse-given candidates. The later predicate applies independently to them and does not assert that the withdrawn action occurred.",
+    "declared_differences": [
+      "Fluent asserts two ordinary event instances in two sentences; RSR asserts one event with only the second candidate accepted.",
+      "Fluent repeats the speaker and tense specification; RSR shares them.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_objects",
+    "provenance": "Independently authored ChatGPT scenario; not extracted or extended from an existing RSR item or PMB train/dev sentence.",
+    "review_status": "author_reviewed_candidate",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "OBJ022",
+    "family_id": "obj_situation_022",
+    "builder": "object",
+    "fluent": "I moved the chair. I moved the table. They are wooden.",
+    "rsr": "I moved the chair, the table. They are wooden.",
+    "continuation_text": "They are wooden.",
+    "a": {
+      "concept": "chair.n.01",
+      "roles": [],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "table.n.02",
+      "roles": [],
+      "modifiers": []
+    },
+    "event": "move.v.02",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_predicate",
+        "concept": "wooden.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "rationale": "Both definite alternatives are discourse-given candidates. The later predicate applies independently to them and does not assert that the withdrawn action occurred.",
+    "declared_differences": [
+      "Fluent asserts two ordinary event instances in two sentences; RSR asserts one event with only the second candidate accepted.",
+      "Fluent repeats the speaker and tense specification; RSR shares them.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_objects",
+    "provenance": "Independently authored ChatGPT scenario; not extracted or extended from an existing RSR item or PMB train/dev sentence.",
+    "review_status": "author_reviewed_candidate",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "OBJ023",
+    "family_id": "obj_situation_023",
+    "builder": "object",
+    "fluent": "I painted the door. I painted the window. They are both large.",
+    "rsr": "I painted the door, the window. They are both large.",
+    "continuation_text": "They are both large.",
+    "a": {
+      "concept": "door.n.01",
+      "roles": [],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "window.n.01",
+      "roles": [],
+      "modifiers": []
+    },
+    "event": "paint.v.02",
+    "actor_role": "Agent",
+    "role": "Patient",
+    "tense": "TPR",
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_predicate",
+        "concept": "large.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "rationale": "Both definite alternatives are discourse-given candidates. The later predicate applies independently to them and does not assert that the withdrawn action occurred.",
+    "declared_differences": [
+      "Fluent asserts two ordinary event instances in two sentences; RSR asserts one event with only the second candidate accepted.",
+      "Fluent repeats the speaker and tense specification; RSR shares them.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_objects",
+    "provenance": "Independently authored ChatGPT scenario; not extracted or extended from an existing RSR item or PMB train/dev sentence.",
+    "review_status": "author_reviewed_candidate",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "OBJ024",
+    "family_id": "obj_situation_024",
+    "builder": "object",
+    "fluent": "I bought the curtain. I bought the carpet. They are long.",
+    "rsr": "I bought the curtain, the carpet. They are long.",
+    "continuation_text": "They are long.",
+    "a": {
+      "concept": "curtain.n.01",
+      "roles": [],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "carpet.n.01",
+      "roles": [],
+      "modifiers": []
+    },
+    "event": "buy.v.01",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_predicate",
+        "concept": "long.a.02",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "rationale": "Both definite alternatives are discourse-given candidates. The later predicate applies independently to them and does not assert that the withdrawn action occurred.",
+    "declared_differences": [
+      "Fluent asserts two ordinary event instances in two sentences; RSR asserts one event with only the second candidate accepted.",
+      "Fluent repeats the speaker and tense specification; RSR shares them.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_objects",
+    "provenance": "Independently authored ChatGPT scenario; not extracted or extended from an existing RSR item or PMB train/dev sentence.",
+    "review_status": "author_reviewed_candidate",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "OBJ025",
+    "family_id": "obj_situation_025",
+    "builder": "object",
+    "fluent": "I photographed the statue. I photographed the fountain. They are both ancient.",
+    "rsr": "I photographed the statue, the fountain. They are both ancient.",
+    "continuation_text": "They are both ancient.",
+    "a": {
+      "concept": "statue.n.01",
+      "roles": [],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "fountain.n.01",
+      "roles": [],
+      "modifiers": []
+    },
+    "event": "photograph.v.01",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_predicate",
+        "concept": "ancient.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "rationale": "Both definite alternatives are discourse-given candidates. The later predicate applies independently to them and does not assert that the withdrawn action occurred.",
+    "declared_differences": [
+      "Fluent asserts two ordinary event instances in two sentences; RSR asserts one event with only the second candidate accepted.",
+      "Fluent repeats the speaker and tense specification; RSR shares them.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_objects",
+    "provenance": "Independently authored ChatGPT scenario; not extracted or extended from an existing RSR item or PMB train/dev sentence.",
+    "review_status": "author_reviewed_candidate",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "OBJ026",
+    "family_id": "obj_situation_026",
+    "builder": "object",
+    "fluent": "I touched the marble. I touched the granite. They are cold.",
+    "rsr": "I touched the marble, the granite. They are cold.",
+    "continuation_text": "They are cold.",
+    "a": {
+      "concept": "marble.n.01",
+      "roles": [],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "granite.n.01",
+      "roles": [],
+      "modifiers": []
+    },
+    "event": "touch.v.01",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_predicate",
+        "concept": "cold.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "rationale": "Both definite alternatives are discourse-given candidates. The later predicate applies independently to them and does not assert that the withdrawn action occurred.",
+    "declared_differences": [
+      "Fluent asserts two ordinary event instances in two sentences; RSR asserts one event with only the second candidate accepted.",
+      "Fluent repeats the speaker and tense specification; RSR shares them.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_material_or_food_portions",
+    "provenance": "Independently authored ChatGPT scenario; not extracted or extended from an existing RSR item or PMB train/dev sentence.",
+    "review_status": "hold",
+    "review_flags": [
+      "Semantic-role choice requires independent review; direct matching PMB pattern absent or inconclusive.",
+      "Material samples versus kinds are not sufficiently individuated in the NL; explicit quantity must not be accepted until the reading is settled."
+    ],
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "OBJ027",
+    "family_id": "obj_situation_027",
+    "builder": "object",
+    "fluent": "I lifted the hammer. I lifted the drill. They are both tools.",
+    "rsr": "I lifted the hammer, the drill. They are both tools.",
+    "continuation_text": "They are both tools.",
+    "a": {
+      "concept": "hammer.n.02",
+      "roles": [],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "drill.n.01",
+      "roles": [],
+      "modifiers": []
+    },
+    "event": "lift.v.01",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_copula",
+        "concept": "be.v.01",
+        "roles": [
+          [
+            "Theme",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ],
+          [
+            "Co-Theme",
+            "@tail_predicate"
+          ]
+        ]
+      },
+      {
+        "id": "tail_predicate",
+        "concept": "tool.n.01",
+        "roles": []
+      }
+    ],
+    "rationale": "Both definite alternatives are discourse-given candidates. The later predicate applies independently to them and does not assert that the withdrawn action occurred.",
+    "declared_differences": [
+      "Fluent asserts two ordinary event instances in two sentences; RSR asserts one event with only the second candidate accepted.",
+      "Fluent repeats the speaker and tense specification; RSR shares them.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_objects",
+    "provenance": "Independently authored ChatGPT scenario; not extracted or extended from an existing RSR item or PMB train/dev sentence.",
+    "review_status": "author_reviewed_candidate",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "OBJ028",
+    "family_id": "obj_situation_028",
+    "builder": "object",
+    "fluent": "I unlocked the cabinet. I unlocked the cupboard. They are old.",
+    "rsr": "I unlocked the cabinet, the cupboard. They are old.",
+    "continuation_text": "They are old.",
+    "a": {
+      "concept": "cabinet.n.01",
+      "roles": [],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "cupboard.n.01",
+      "roles": [],
+      "modifiers": []
+    },
+    "event": "unlock.v.01",
+    "actor_role": "Agent",
+    "role": "Patient",
+    "tense": "TPR",
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_predicate",
+        "concept": "old.a.02",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "rationale": "Both definite alternatives are discourse-given candidates. The later predicate applies independently to them and does not assert that the withdrawn action occurred.",
+    "declared_differences": [
+      "Fluent asserts two ordinary event instances in two sentences; RSR asserts one event with only the second candidate accepted.",
+      "Fluent repeats the speaker and tense specification; RSR shares them.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_objects",
+    "provenance": "Independently authored ChatGPT scenario; not extracted or extended from an existing RSR item or PMB train/dev sentence.",
+    "review_status": "author_reviewed_candidate",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "OBJ029",
+    "family_id": "obj_situation_029",
+    "builder": "object",
+    "fluent": "I folded the scarf. I folded the towel. They are both dry.",
+    "rsr": "I folded the scarf, the towel. They are both dry.",
+    "continuation_text": "They are both dry.",
+    "a": {
+      "concept": "scarf.n.01",
+      "roles": [],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "towel.n.01",
+      "roles": [],
+      "modifiers": []
+    },
+    "event": "fold.v.01",
+    "actor_role": "Agent",
+    "role": "Patient",
+    "tense": "TPR",
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_predicate",
+        "concept": "dry.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "rationale": "Both definite alternatives are discourse-given candidates. The later predicate applies independently to them and does not assert that the withdrawn action occurred.",
+    "declared_differences": [
+      "Fluent asserts two ordinary event instances in two sentences; RSR asserts one event with only the second candidate accepted.",
+      "Fluent repeats the speaker and tense specification; RSR shares them.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_objects",
+    "provenance": "Independently authored ChatGPT scenario; not extracted or extended from an existing RSR item or PMB train/dev sentence.",
+    "review_status": "author_reviewed_candidate",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "OBJ030",
+    "family_id": "obj_situation_030",
+    "builder": "object",
+    "fluent": "I mended the sock. I mended the glove. They are garments.",
+    "rsr": "I mended the sock, the glove. They are garments.",
+    "continuation_text": "They are garments.",
+    "a": {
+      "concept": "sock.n.01",
+      "roles": [],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "glove.n.02",
+      "roles": [],
+      "modifiers": []
+    },
+    "event": "mend.v.01",
+    "actor_role": "Agent",
+    "role": "Patient",
+    "tense": "TPR",
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_copula",
+        "concept": "be.v.01",
+        "roles": [
+          [
+            "Theme",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ],
+          [
+            "Co-Theme",
+            "@tail_predicate"
+          ]
+        ]
+      },
+      {
+        "id": "tail_predicate",
+        "concept": "garment.n.01",
+        "roles": []
+      }
+    ],
+    "rationale": "Both definite alternatives are discourse-given candidates. The later predicate applies independently to them and does not assert that the withdrawn action occurred.",
+    "declared_differences": [
+      "Fluent asserts two ordinary event instances in two sentences; RSR asserts one event with only the second candidate accepted.",
+      "Fluent repeats the speaker and tense specification; RSR shares them.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_objects",
+    "provenance": "Independently authored ChatGPT scenario; not extracted or extended from an existing RSR item or PMB train/dev sentence.",
+    "review_status": "author_reviewed_candidate",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "OBJ031",
+    "family_id": "obj_situation_031",
+    "builder": "object",
+    "fluent": "I polished the trumpet. I polished the flute. They are both musical instruments.",
+    "rsr": "I polished the trumpet, the flute. They are both musical instruments.",
+    "continuation_text": "They are both musical instruments.",
+    "a": {
+      "concept": "trumpet.n.01",
+      "roles": [],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "flute.n.01",
+      "roles": [],
+      "modifiers": []
+    },
+    "event": "polish.v.01",
+    "actor_role": "Agent",
+    "role": "Source",
+    "tense": "TPR",
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_copula",
+        "concept": "be.v.01",
+        "roles": [
+          [
+            "Theme",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ],
+          [
+            "Co-Theme",
+            "@tail_predicate"
+          ]
+        ]
+      },
+      {
+        "id": "tail_predicate",
+        "concept": "musical_instrument.n.01",
+        "roles": []
+      }
+    ],
+    "rationale": "Both definite alternatives are discourse-given candidates. The later predicate applies independently to them and does not assert that the withdrawn action occurred.",
+    "declared_differences": [
+      "Fluent asserts two ordinary event instances in two sentences; RSR asserts one event with only the second candidate accepted.",
+      "Fluent repeats the speaker and tense specification; RSR shares them.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_objects",
+    "provenance": "Independently authored ChatGPT scenario; not extracted or extended from an existing RSR item or PMB train/dev sentence.",
+    "review_status": "author_reviewed_candidate",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "OBJ032",
+    "family_id": "obj_situation_032",
+    "builder": "object",
+    "fluent": "I wrapped the vase. I wrapped the bowl. They are fragile.",
+    "rsr": "I wrapped the vase, the bowl. They are fragile.",
+    "continuation_text": "They are fragile.",
+    "a": {
+      "concept": "vase.n.01",
+      "roles": [],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "bowl.n.01",
+      "roles": [],
+      "modifiers": []
+    },
+    "event": "wrap.v.01",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_predicate",
+        "concept": "fragile.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "rationale": "Both definite alternatives are discourse-given candidates. The later predicate applies independently to them and does not assert that the withdrawn action occurred.",
+    "declared_differences": [
+      "Fluent asserts two ordinary event instances in two sentences; RSR asserts one event with only the second candidate accepted.",
+      "Fluent repeats the speaker and tense specification; RSR shares them.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_objects",
+    "provenance": "Independently authored ChatGPT scenario; not extracted or extended from an existing RSR item or PMB train/dev sentence.",
+    "review_status": "author_reviewed_candidate",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "OBJ033",
+    "family_id": "obj_situation_033",
+    "builder": "object",
+    "fluent": "I borrowed the dictionary. I borrowed the atlas. They are both useful.",
+    "rsr": "I borrowed the dictionary, the atlas. They are both useful.",
+    "continuation_text": "They are both useful.",
+    "a": {
+      "concept": "dictionary.n.01",
+      "roles": [],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "atlas.n.02",
+      "roles": [],
+      "modifiers": []
+    },
+    "event": "borrow.v.01",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_predicate",
+        "concept": "useful.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "rationale": "Both definite alternatives are discourse-given candidates. The later predicate applies independently to them and does not assert that the withdrawn action occurred.",
+    "declared_differences": [
+      "Fluent asserts two ordinary event instances in two sentences; RSR asserts one event with only the second candidate accepted.",
+      "Fluent repeats the speaker and tense specification; RSR shares them.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_objects",
+    "provenance": "Independently authored ChatGPT scenario; not extracted or extended from an existing RSR item or PMB train/dev sentence.",
+    "review_status": "author_reviewed_candidate",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "OBJ034",
+    "family_id": "obj_situation_034",
+    "builder": "object",
+    "fluent": "I sold the piano. I sold the guitar. They are musical instruments.",
+    "rsr": "I sold the piano, the guitar. They are musical instruments.",
+    "continuation_text": "They are musical instruments.",
+    "a": {
+      "concept": "piano.n.01",
+      "roles": [],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "guitar.n.01",
+      "roles": [],
+      "modifiers": []
+    },
+    "event": "sell.v.01",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_copula",
+        "concept": "be.v.01",
+        "roles": [
+          [
+            "Theme",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ],
+          [
+            "Co-Theme",
+            "@tail_predicate"
+          ]
+        ]
+      },
+      {
+        "id": "tail_predicate",
+        "concept": "musical_instrument.n.01",
+        "roles": []
+      }
+    ],
+    "rationale": "Both definite alternatives are discourse-given candidates. The later predicate applies independently to them and does not assert that the withdrawn action occurred.",
+    "declared_differences": [
+      "Fluent asserts two ordinary event instances in two sentences; RSR asserts one event with only the second candidate accepted.",
+      "Fluent repeats the speaker and tense specification; RSR shares them.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_objects",
+    "provenance": "Independently authored ChatGPT scenario; not extracted or extended from an existing RSR item or PMB train/dev sentence.",
+    "review_status": "author_reviewed_candidate",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "OBJ035",
+    "family_id": "obj_situation_035",
+    "builder": "object",
+    "fluent": "I donated the suitcase. I donated the backpack. They are both blue.",
+    "rsr": "I donated the suitcase, the backpack. They are both blue.",
+    "continuation_text": "They are both blue.",
+    "a": {
+      "concept": "suitcase.n.01",
+      "roles": [],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "backpack.n.01",
+      "roles": [],
+      "modifiers": []
+    },
+    "event": "donate.v.01",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": 2,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_predicate",
+        "concept": "blue.a.01",
+        "roles": [
+          [
+            "AttributeOf",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ]
+        ]
+      }
+    ],
+    "rationale": "Both definite alternatives are discourse-given candidates. The later predicate applies independently to them and does not assert that the withdrawn action occurred.",
+    "declared_differences": [
+      "Fluent asserts two ordinary event instances in two sentences; RSR asserts one event with only the second candidate accepted.",
+      "Fluent repeats the speaker and tense specification; RSR shares them.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_objects",
+    "provenance": "Independently authored ChatGPT scenario; not extracted or extended from an existing RSR item or PMB train/dev sentence.",
+    "review_status": "author_reviewed_candidate",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  },
+  {
+    "id": "OBJ036",
+    "family_id": "obj_situation_036",
+    "builder": "object",
+    "fluent": "I bought the apple. I bought the pear. They are fruit.",
+    "rsr": "I bought the apple, the pear. They are fruit.",
+    "continuation_text": "They are fruit.",
+    "a": {
+      "concept": "apple.n.01",
+      "roles": [],
+      "modifiers": []
+    },
+    "b": {
+      "concept": "pear.n.01",
+      "roles": [],
+      "modifiers": []
+    },
+    "event": "buy.v.01",
+    "actor_role": "Agent",
+    "role": "Theme",
+    "tense": "TPR",
+    "quantity": null,
+    "group_concept": "entity.n.01",
+    "tail": [
+      {
+        "id": "tail_copula",
+        "concept": "be.v.01",
+        "roles": [
+          [
+            "Theme",
+            "@group"
+          ],
+          [
+            "Time",
+            "@tail_time"
+          ],
+          [
+            "Co-Theme",
+            "@tail_predicate"
+          ]
+        ]
+      },
+      {
+        "id": "tail_predicate",
+        "concept": "fruit.n.01",
+        "roles": []
+      }
+    ],
+    "rationale": "Both definite alternatives are discourse-given candidates. The later predicate applies independently to them and does not assert that the withdrawn action occurred.",
+    "declared_differences": [
+      "Fluent asserts two ordinary event instances in two sentences; RSR asserts one event with only the second candidate accepted.",
+      "Fluent repeats the speaker and tense specification; RSR shares them.",
+      "Base RSR has no editing expression; unmarked replacement interpretation requires fresh surface review."
+    ],
+    "referent_type": "particular_objects",
+    "provenance": "Independently authored ChatGPT scenario; not extracted or extended from an existing RSR item or PMB train/dev sentence.",
+    "review_status": "author_reviewed_candidate",
+    "surface_variant": "base",
+    "editing_expression": null,
+    "base_surface_review_pending": true
+  }
+]
