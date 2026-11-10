@@ -3,6 +3,8 @@ data/pmb-5.1.0/src/ccg/standard/
 data/pmb-5.1.0/split
 data/pmb-5.1.0/lora_data
 .DS_Store
+# Local HPC documentation and scaffolding; unrelated to research outputs.
+/hpc_reference/
 repair_data_gen/reference
 
 !repair_data_gen/reference/two_page_rp.tex
