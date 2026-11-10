@@ -1,0 +1,68 @@
+---
+title: "Fine-tuning plan for the RSR parsing experiments"
+subtitle: "For discussion with Michael"
+author: "Hongxu Zhou"
+date: 2026-11-02
+lang: en-GB
+format:
+  html:
+    theme: default
+    toc: true
+    toc-depth: 1
+    number-sections: false
+    embed-resources: true
+---
+
+Hi Michael,
+
+The development split is now complete and checked. Following the short LoRA runs I mentioned last week, I plan to run complete 2B development experiments for the fluent-only, normalisation (natural language with RSR -> fluent SBN) and repair-aware conditions. Before extending this to the full experiment matrix, I would like your advice on the tuning approach and the starting configuration below.
+
+# The tuning question
+
+The relevant question from my RP is: “How well can LLM-based semantic parsers learn this representation from synthesised meaning-banked data, and what errors remain?”
+
+I see two main ways to approach the training:
+
+- **Share settings across conditions within each model size.** The three 2B conditions would use one configuration, the three 9B conditions another, and the three 27B conditions another. Configurations could differ between sizes.
+- **Tune each model and condition separately.** For example, the 2B normalisation and repair-aware models could end up using different learning rates or LoRA ranks.
+
+The first approach keeps the training settings consistent when comparing supervision targets within a model size and requires fewer development runs. The second gives each condition more opportunity to find suitable settings, but adds tuning work across nine model–condition combinations. The final results would then reflect both the supervision and the tuning done for each system.
+
+# My proposed approach
+
+I currently favour sharing settings within each model size. My main interest is how the supervision target affects what the parser learns, so I would like to keep the training settings consistent for that comparison. This also keeps the development work manageable.
+
+For each size, I would use the same learning rate, LoRA rank, effective batch size, schedule and maximum number of epochs across the three conditions. I would still select a checkpoint separately for each run, using its own development targets. The best checkpoints could therefore come from different points in training.
+
+I would allow the settings to differ between 2B, 9B and 27B. The 2B configuration could be a starting point for the larger models, with adjustments if their development runs indicate a need.
+
+The part I am unsure about is how to choose a shared configuration when the three conditions respond differently. For example, if one learning rate works well for normalisation but less well for repair-aware parsing, how should I weigh those results? I would appreciate your advice on this.
+
+# Starting configuration
+
+I plan to start the 2B development runs with the following settings:
+
+| Component | Starting value |
+| --- | --- |
+| LoRA rank / alpha | 16 / 32 |
+| LoRA placement | Attention and MLP projections |
+| LoRA dropout | 0.05 |
+| Optimiser | AdamW; weight decay 0 |
+| Peak learning rate | 2 × 10⁻⁴ |
+| Effective batch size | 16 examples |
+| Schedule | Cosine decay; 3% warmup |
+| Training budget | Three epochs; no early stopping |
+| Checkpoint selection | Lowest development loss on the target SBN |
+
+Each run would train for three passes through its training data, with development evaluation during training. I would then use the checkpoint with the lowest development loss. The learning rate and three-epoch budget are the choices on which I would particularly welcome feedback.
+
+# Next step
+
+I plan to complete the three 2B development runs first. I will inspect the training and development loss curves, check the generated SBNs for repetition, incomplete outputs and repair errors, and record runtime and memory use. This should give me a clearer picture of whether the starting settings work and where an adjustment may be needed. I would also check the larger models through development runs before starting their formal experiments.
+
+My two main questions are:
+
+1. Does sharing settings within each model size seem appropriate for this thesis, or would you recommend tuning each condition separately?
+2. With shared settings, how would you use the development results across the three conditions to choose a configuration, and how much tuning would you consider worthwhile before the formal runs?
+
+Thank you very much for your help! 

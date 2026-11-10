@@ -1,0 +1,17 @@
+{
+  "name": "lr-rank-v2",
+  "protocol": "protocols/fluent_groups_v1.published.json",
+  "subset": "tuning/subsets/train10_fluent_groups_v1_s20261103/manifest.json",
+  "seed": 17,
+  "candidates": {
+    "lr1e-4-r16": [0.0001, 16],
+    "lr1e-4-r32": [0.0001, 32],
+    "lr2e-4-r16": [0.0002, 16],
+    "lr2e-4-r32": [0.0002, 32],
+    "lr3e-4-r16": [0.0003, 16],
+    "lr3e-4-r32": [0.0003, 32],
+    "lr4e-4-r32": [0.0004, 32],
+    "lr3e-4-r64": [0.0003, 64],
+    "lr4e-4-r64": [0.0004, 64]
+  }
+}

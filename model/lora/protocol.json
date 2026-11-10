@@ -1,0 +1,31 @@
+{
+  "status": "development_only; formal configurations and seeds are not frozen",
+  "dataset": {
+    "id": "Shrikes/repair-sbn",
+    "revision": "9b7d8812c49b4d7c6f922fd3ce996d019dc18a5c",
+    "files": {
+      "train": {"path": "data/train.parquet", "sha256": "42b4776c73019afa117a0b19f628081a038d143cb7bf5ff9bd09de98cd778144"},
+      "validation": {"path": "data/validation.parquet", "sha256": "4da3ccd41ca52ae9af8fbec918b9adb4be8a5037bbf5d200fe8dd78ca90f5418"}
+    },
+    "variants": {
+      "train": {"pmb_fluent": 9486, "rsr_base": 3489, "rsr_editing_expression": 1047},
+      "validation": {"pmb_fluent": 1194, "rsr_base": 390, "rsr_editing_expression": 122}
+    }
+  },
+  "models": {
+    "2B": {"id": "Qwen/Qwen3.5-2B", "revision": "15852e8c16360a2fea060d615a32b45270f8a8fc", "modules": 150, "trainable_parameters": 15630336},
+    "9B": {"id": "Qwen/Qwen3.5-9B", "revision": "c202236235762e1c871ad0ccb60c8ee5ba337b9a", "modules": 200, "trainable_parameters": 40108032},
+    "27B": {"id": "Qwen/Qwen3.5-27B", "revision": "fc05daec18b0a78c049392ed2e771dde82bdf654", "modules": 400, "trainable_parameters": 108789760}
+  },
+  "instruction": "Please parse the following sentence to discourse representation structure:",
+  "lora": {
+    "r": 16, "lora_alpha": 32, "lora_dropout": 0.05, "bias": "none",
+    "target_modules": ["q_proj", "k_proj", "v_proj", "o_proj", "in_proj_qkv", "in_proj_z", "out_proj", "gate_proj", "up_proj", "down_proj"]
+  },
+  "candidate": {
+    "learning_rate": 0.0002, "epochs": 3, "effective_batch_size": 16,
+    "max_length": 1024, "generation_max_new_tokens": 512,
+    "warmup_ratio": 0.03, "weight_decay": 0.0, "max_grad_norm": 1.0
+  },
+  "wandb": {"entity": "hxzhou-research", "project": "qwen35-rsr-lora", "base_url": "https://api.forge.coreweave.com"}
+}

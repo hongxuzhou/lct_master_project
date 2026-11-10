@@ -1,0 +1,199 @@
+{
+  "source": {
+    "rows": 14022,
+    "source_documents": 9486,
+    "variants": {
+      "pmb_fluent": 9486,
+      "rsr_base": 3489,
+      "rsr_editing_expression": 1047
+    },
+    "repair_types_base": {
+      "constant_name": 500,
+      "constant_number": 500,
+      "constant_temporal": 500,
+      "content_word": 500,
+      "edge_label": 489,
+      "forwarding": 500,
+      "tense": 500
+    },
+    "repair_types_marked": {
+      "constant_name": 259,
+      "constant_number": 305,
+      "constant_temporal": 109,
+      "content_word": 94,
+      "edge_label": 92,
+      "forwarding": 94,
+      "tense": 94
+    },
+    "editing_expressions": {
+      "I mean": 262,
+      "actually": 261,
+      "no": 262,
+      "no wait": 262
+    },
+    "input_words": {
+      "p50": 6,
+      "p90": 10,
+      "max": 22
+    }
+  },
+  "subset": {
+    "rows": 1403,
+    "source_documents": 1269,
+    "variants": {
+      "pmb_fluent": 949,
+      "rsr_base": 349,
+      "rsr_editing_expression": 105
+    },
+    "repair_types_base": {
+      "constant_name": 50,
+      "constant_number": 50,
+      "constant_temporal": 50,
+      "content_word": 51,
+      "edge_label": 49,
+      "forwarding": 50,
+      "tense": 49
+    },
+    "repair_types_marked": {
+      "constant_name": 26,
+      "constant_number": 31,
+      "constant_temporal": 11,
+      "content_word": 10,
+      "edge_label": 9,
+      "forwarding": 9,
+      "tense": 9
+    },
+    "editing_expressions": {
+      "I mean": 30,
+      "actually": 31,
+      "no": 24,
+      "no wait": 20
+    },
+    "input_words": {
+      "p50": 6,
+      "p90": 10,
+      "max": 21
+    }
+  },
+  "fraction_actual": 0.10005705320211097,
+  "strata": [
+    {
+      "category": "base_only",
+      "repair_type": "content_word",
+      "source_groups": 406,
+      "selected_groups": 41
+    },
+    {
+      "category": "base_only",
+      "repair_type": "constant_name",
+      "source_groups": 241,
+      "selected_groups": 24
+    },
+    {
+      "category": "base_only",
+      "repair_type": "constant_number",
+      "source_groups": 195,
+      "selected_groups": 19
+    },
+    {
+      "category": "base_only",
+      "repair_type": "constant_temporal",
+      "source_groups": 391,
+      "selected_groups": 39
+    },
+    {
+      "category": "base_only",
+      "repair_type": "tense",
+      "source_groups": 406,
+      "selected_groups": 40
+    },
+    {
+      "category": "base_only",
+      "repair_type": "forwarding",
+      "source_groups": 406,
+      "selected_groups": 41
+    },
+    {
+      "category": "base_only",
+      "repair_type": "edge_label",
+      "source_groups": 397,
+      "selected_groups": 40
+    },
+    {
+      "category": "fluent",
+      "repair_type": "all",
+      "source_groups": 9486,
+      "selected_groups": 949
+    },
+    {
+      "category": "paired",
+      "repair_type": "content_word",
+      "source_groups": 94,
+      "selected_groups": 10
+    },
+    {
+      "category": "paired",
+      "repair_type": "constant_name",
+      "source_groups": 259,
+      "selected_groups": 26
+    },
+    {
+      "category": "paired",
+      "repair_type": "constant_number",
+      "source_groups": 305,
+      "selected_groups": 31
+    },
+    {
+      "category": "paired",
+      "repair_type": "constant_temporal",
+      "source_groups": 109,
+      "selected_groups": 11
+    },
+    {
+      "category": "paired",
+      "repair_type": "tense",
+      "source_groups": 94,
+      "selected_groups": 9
+    },
+    {
+      "category": "paired",
+      "repair_type": "forwarding",
+      "source_groups": 94,
+      "selected_groups": 9
+    },
+    {
+      "category": "paired",
+      "repair_type": "edge_label",
+      "source_groups": 92,
+      "selected_groups": 9
+    }
+  ],
+  "checks": {
+    "unique_ids": true,
+    "hard_negative_documents": 0,
+    "dev_documents": 0,
+    "complete_repair_groups": true
+  },
+  "conditions": {
+    "C1": {
+      "train_rows": 949,
+      "validation_rows": 1194,
+      "input_digest": "505f33a35e4dadc093b1329680eab1eeab69ffb25e435f55ecdf90ec4b61961f"
+    },
+    "C2": {
+      "train_rows": 1403,
+      "validation_rows": 1706,
+      "input_digest": "60edaace64ec1f7e5bb6e8fcc26f77d48519593cfca7e9e8e7b85720fd18f998"
+    },
+    "C3": {
+      "train_rows": 1403,
+      "validation_rows": 1706,
+      "input_digest": "60edaace64ec1f7e5bb6e8fcc26f77d48519593cfca7e9e8e7b85720fd18f998"
+    }
+  },
+  "builder_sha256": "06140e1c170b7b81c265f48e3b0a3569277afe7f6fc2069f1f3b268413642f2a",
+  "limitations": [
+    "No document-group sampling across different repair items or fluent/repair views.",
+    "Input lengths are reported, not stratified; word counts are not tokenizer lengths."
+  ]
+}

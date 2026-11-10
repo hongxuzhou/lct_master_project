@@ -1,0 +1,92 @@
+{
+  "status": "verified_published_dataset; model settings remain provisional",
+  "dataset": {
+    "id": "Shrikes/repair-sbn",
+    "revision": "d1ed13ec46823a7ddabdfe449e6ffe265d7d4a5b",
+    "files": {
+      "train": {
+        "path": "data/train.parquet",
+        "sha256": "ea4c7ec28daa4d117444f0d1bd9ea183c11a7a36cc77853f28e61264455cdea5"
+      },
+      "validation": {
+        "path": "data/validation.parquet",
+        "sha256": "50438c041dc6b6611fba574b02d116a070598b6552f4a8882000bffd2592fd97"
+      }
+    },
+    "variants": {
+      "train": {
+        "pmb_fluent": 9486,
+        "rsr_base": 3489,
+        "rsr_editing_expression": 1047,
+        "fluent_split_reference": 200
+      },
+      "validation": {
+        "pmb_fluent": 1194,
+        "rsr_base": 390,
+        "rsr_editing_expression": 122,
+        "fluent_split_reference": 40
+      }
+    },
+    "publication_status": "published_and_verified",
+    "schema_version": 2,
+    "fluent_variants": [
+      "pmb_fluent",
+      "fluent_split_reference"
+    ]
+  },
+  "models": {
+    "2B": {
+      "id": "Qwen/Qwen3.5-2B",
+      "revision": "15852e8c16360a2fea060d615a32b45270f8a8fc",
+      "modules": 150,
+      "trainable_parameters": 15630336
+    },
+    "9B": {
+      "id": "Qwen/Qwen3.5-9B",
+      "revision": "c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+      "modules": 200,
+      "trainable_parameters": 40108032
+    },
+    "27B": {
+      "id": "Qwen/Qwen3.5-27B",
+      "revision": "fc05daec18b0a78c049392ed2e771dde82bdf654",
+      "modules": 400,
+      "trainable_parameters": 108789760
+    }
+  },
+  "instruction": "Please parse the following sentence into Simplified Box Notation (SBN):",
+  "lora": {
+    "r": 16,
+    "lora_alpha": 32,
+    "lora_dropout": 0.05,
+    "bias": "none",
+    "target_modules": [
+      "q_proj",
+      "k_proj",
+      "v_proj",
+      "o_proj",
+      "in_proj_qkv",
+      "in_proj_z",
+      "out_proj",
+      "gate_proj",
+      "up_proj",
+      "down_proj"
+    ]
+  },
+  "candidate": {
+    "learning_rate": 0.0002,
+    "epochs": 3,
+    "effective_batch_size": 16,
+    "max_length": 1024,
+    "generation_max_new_tokens": 512,
+    "warmup_ratio": 0.03,
+    "weight_decay": 0.0,
+    "max_grad_norm": 1.0
+  },
+  "wandb": {
+    "entity": "hxzhou-research",
+    "project": "qwen35-rsr-lora",
+    "base_url": "https://api.forge.coreweave.com"
+  },
+  "instruction_version": "sbn_v2"
+}

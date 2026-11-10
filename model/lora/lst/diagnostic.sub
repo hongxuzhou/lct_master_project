@@ -1,0 +1,17 @@
+universe = vanilla
+initialdir = /nethome/honzhou
+executable = /bin/bash
+arguments = /nethome/honzhou/thesis_zone/lst-canary-20261105/lora/lst/diagnostic.sh $(ClusterId)
+request_cpus = 4
+request_memory = 48G
+request_disk = 8G
+request_gpus = 1
+requirements = (TARGET.UidDomain == "coli.uni-saarland.de") && (GPUs_Capability >= 8.0) && (GPUs_GlobalMemoryMb > 39000) && (GPUs_GlobalMemoryMb <= 41000)
++MaxWallTime = 10800
+output = /scratch/hongxuzhou/logs/lst_canary.$(ClusterId).out
+error = /scratch/hongxuzhou/logs/lst_canary.$(ClusterId).err
+log = /scratch/hongxuzhou/logs/lst_canary.$(ClusterId).log
+should_transfer_files = NO
+notification = Never
+getenv = WANDB_API_KEY,NETRC
+queue 1

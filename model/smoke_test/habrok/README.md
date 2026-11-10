@@ -20,6 +20,9 @@ safetensors 0.8.0
 
 The CUDA build must include `sm_80`. Do not run this workflow on a V100.
 
+The validated `thesis` environment intentionally remains the fallback baseline.
+Optional compiled kernels are installed in a separate `thesis-kernels` clone.
+
 ## Prepare the offline caches
 
 Activate the environment, then cache the first model and dataset:
@@ -89,3 +92,44 @@ tail -f logs/qwen35-lora-smoke-JOB_ID.out
 Static validation of these files does not prove Habrok execution. A smoke test
 passes only when training, adapter save, clean base-plus-adapter reload, and
 post-reload generation all complete and `summary.json` reports `passed`.
+
+## Add the optional Qwen3.5 kernels
+
+Run the installer on a Habrok compute node. It clones `thesis` instead of
+modifying it, then installs the pinned packages and checks their imports:
+
+```bash
+cd /path/to/lct_master_project/model/smoke_test/habrok
+chmod +x install_optional_kernels.sh
+./install_optional_kernels.sh
+```
+
+The pinned optional packages are:
+
+```text
+causal-conv1d 1.7.0
+fla-core 0.5.2
+flash-linear-attention 0.5.2
+```
+
+If an interrupted installation left the intended clone in place, inspect it
+before explicitly continuing:
+
+```bash
+./install_optional_kernels.sh --reuse-existing
+```
+
+Do not use this flag for an unrelated existing environment.
+
+The import check is not GPU validation. Submit the dedicated A100 job next:
+
+```bash
+mkdir -p logs
+sbatch qwen35_lora_kernel_check.sbatch
+```
+
+The job first runs a CUDA forward/backward check for `causal-conv1d`, then runs
+the full 2B repair smoke test with the cloned environment. Accept the accelerated
+environment only if the job exits normally, stderr contains no optional-kernel
+fallback warning, and the new `summary.json` reports `passed`. Keep using
+`thesis` if installation or validation fails.

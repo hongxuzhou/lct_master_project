@@ -1,0 +1,13 @@
+{
+  "name": "lr-rank-v1",
+  "program": "tuning/run_sweep.py",
+  "method": "grid",
+  "metric": {"name": "best_eval_loss", "goal": "minimize"},
+  "run_cap": 6,
+  "command": ["${env}", "${interpreter}", "${program}"],
+  "parameters": {
+    "learning_rate": {"values": [0.0001, 0.0002, 0.0003]},
+    "lora_rank": {"values": [16, 32]},
+    "seed": {"value": 17}
+  }
+}

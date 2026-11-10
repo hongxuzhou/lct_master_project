@@ -1,0 +1,17 @@
+# Submit from this directory after preparation succeeds on a CPU worker.
+universe = vanilla
+initialdir = /nethome/honzhou
+executable = /bin/bash
+arguments = /nethome/honzhou/thesis_zone/lora/lst/canary.sh $(ClusterId)
+output = /scratch/hongxuzhou/logs/qwen35_dev_canary.$(ClusterId).out
+error = /scratch/hongxuzhou/logs/qwen35_dev_canary.$(ClusterId).err
+log = /scratch/hongxuzhou/logs/qwen35_dev_canary.$(ClusterId).log
+request_cpus = 4
+request_memory = 48G
+request_gpus = 1
+requirements = (TARGET.UidDomain == "coli.uni-saarland.de") && (GPUs_Capability >= 8.0) && (GPUs_GlobalMemoryMb >= 39000) && (GPUs_GlobalMemoryMb <= 41000)
++MaxWallTime = 10800
+notification = Never
+should_transfer_files = NO
+getenv = PYTHON,MODEL_CACHE,DATASET_DIR,RUN_ROOT,WANDB_*,HF_TOKEN_PATH
+queue 1

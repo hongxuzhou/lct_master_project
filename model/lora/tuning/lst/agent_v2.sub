@@ -1,0 +1,17 @@
+# Use tuning/lst/submit_v2.sh; all uppercase macros are supplied there.
+universe = vanilla
+initialdir = /nethome/honzhou
+executable = /bin/bash
+arguments = $(LORA_DIR)/tuning/agent_v2.sh lst $(MODEL_SIZE) $(REGISTRY) $(CONDITION) $(COUNT) $(MODE)
+output = /scratch/hongxuzhou/logs/qwen35-tune-v2-$(MODEL_SIZE)-$(CONDITION).$(ClusterId).out
+error = /scratch/hongxuzhou/logs/qwen35-tune-v2-$(MODEL_SIZE)-$(CONDITION).$(ClusterId).err
+log = /scratch/hongxuzhou/logs/qwen35-tune-v2-$(MODEL_SIZE)-$(CONDITION).$(ClusterId).log
+request_cpus = $(CPUS)
+request_memory = $(HOST_RAM)
+request_gpus = 1
+requirements = (TARGET.UidDomain == "coli.uni-saarland.de") && (GPUs_Capability == $(CAPABILITY)) && (GPUs_GlobalMemoryMb >= $(MIN_GPU_MB)) && (GPUs_GlobalMemoryMb <= $(MAX_GPU_MB))
++MaxWallTime = $(WALL_SECONDS)
+notification = Never
+should_transfer_files = NO
+getenv = PYTHON,MODEL_CACHE,DATASET_DIR,TUNING_RUN_ROOT,WANDB_API_KEY,HF_TOKEN_PATH
+queue 1

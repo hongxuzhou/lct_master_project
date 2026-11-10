@@ -1,0 +1,324 @@
+{
+  "source": {
+    "rows": 14222,
+    "source_documents": 9686,
+    "variants": {
+      "fluent_split_reference": 200,
+      "pmb_fluent": 9486,
+      "rsr_base": 3489,
+      "rsr_editing_expression": 1047
+    },
+    "repair_types_base": {
+      "constant_name": 500,
+      "constant_number": 500,
+      "constant_temporal": 500,
+      "content_word": 500,
+      "edge_label": 489,
+      "forwarding": 500,
+      "tense": 500
+    },
+    "repair_types_marked": {
+      "constant_name": 259,
+      "constant_number": 305,
+      "constant_temporal": 109,
+      "content_word": 94,
+      "edge_label": 92,
+      "forwarding": 94,
+      "tense": 94
+    },
+    "editing_expressions": {
+      "I mean": 262,
+      "actually": 261,
+      "no": 262,
+      "no wait": 262
+    },
+    "input_words": {
+      "p50": 6,
+      "p90": 10,
+      "max": 22
+    }
+  },
+  "subset": {
+    "rows": 1423,
+    "source_documents": 1289,
+    "variants": {
+      "fluent_split_reference": 20,
+      "pmb_fluent": 949,
+      "rsr_base": 349,
+      "rsr_editing_expression": 105
+    },
+    "repair_types_base": {
+      "constant_name": 50,
+      "constant_number": 50,
+      "constant_temporal": 50,
+      "content_word": 51,
+      "edge_label": 49,
+      "forwarding": 50,
+      "tense": 49
+    },
+    "repair_types_marked": {
+      "constant_name": 26,
+      "constant_number": 31,
+      "constant_temporal": 11,
+      "content_word": 10,
+      "edge_label": 9,
+      "forwarding": 9,
+      "tense": 9
+    },
+    "editing_expressions": {
+      "I mean": 30,
+      "actually": 31,
+      "no": 24,
+      "no wait": 20
+    },
+    "input_words": {
+      "p50": 6,
+      "p90": 10,
+      "max": 21
+    }
+  },
+  "fraction_actual": 0.10005625087891998,
+  "strata": [
+    {
+      "category": "base_only",
+      "repair_type": "content_word",
+      "source_groups": 406,
+      "selected_groups": 41
+    },
+    {
+      "category": "base_only",
+      "repair_type": "constant_name",
+      "source_groups": 241,
+      "selected_groups": 24
+    },
+    {
+      "category": "base_only",
+      "repair_type": "constant_number",
+      "source_groups": 195,
+      "selected_groups": 19
+    },
+    {
+      "category": "base_only",
+      "repair_type": "constant_temporal",
+      "source_groups": 391,
+      "selected_groups": 39
+    },
+    {
+      "category": "base_only",
+      "repair_type": "tense",
+      "source_groups": 406,
+      "selected_groups": 40
+    },
+    {
+      "category": "base_only",
+      "repair_type": "forwarding",
+      "source_groups": 406,
+      "selected_groups": 41
+    },
+    {
+      "category": "base_only",
+      "repair_type": "edge_label",
+      "source_groups": 397,
+      "selected_groups": 40
+    },
+    {
+      "category": "fluent",
+      "repair_type": "all",
+      "source_groups": 9486,
+      "selected_groups": 949
+    },
+    {
+      "category": "paired",
+      "repair_type": "content_word",
+      "source_groups": 94,
+      "selected_groups": 10
+    },
+    {
+      "category": "paired",
+      "repair_type": "constant_name",
+      "source_groups": 259,
+      "selected_groups": 26
+    },
+    {
+      "category": "paired",
+      "repair_type": "constant_number",
+      "source_groups": 305,
+      "selected_groups": 31
+    },
+    {
+      "category": "paired",
+      "repair_type": "constant_temporal",
+      "source_groups": 109,
+      "selected_groups": 11
+    },
+    {
+      "category": "paired",
+      "repair_type": "tense",
+      "source_groups": 94,
+      "selected_groups": 9
+    },
+    {
+      "category": "paired",
+      "repair_type": "forwarding",
+      "source_groups": 94,
+      "selected_groups": 9
+    },
+    {
+      "category": "paired",
+      "repair_type": "edge_label",
+      "source_groups": 92,
+      "selected_groups": 9
+    },
+    {
+      "category": "synthetic_fluent",
+      "repair_type": null,
+      "construction_types": [
+        "same_clause"
+      ],
+      "source_groups": 53,
+      "selected_groups": 5
+    },
+    {
+      "category": "synthetic_fluent",
+      "repair_type": null,
+      "construction_types": [
+        "same_clause",
+        "separate_subjects"
+      ],
+      "source_groups": 2,
+      "selected_groups": 0
+    },
+    {
+      "category": "synthetic_fluent",
+      "repair_type": null,
+      "construction_types": [
+        "separate_objects"
+      ],
+      "source_groups": 18,
+      "selected_groups": 2
+    },
+    {
+      "category": "synthetic_fluent",
+      "repair_type": null,
+      "construction_types": [
+        "separate_objects",
+        "stative_contrast"
+      ],
+      "source_groups": 3,
+      "selected_groups": 0
+    },
+    {
+      "category": "synthetic_fluent",
+      "repair_type": null,
+      "construction_types": [
+        "existential",
+        "separate_objects"
+      ],
+      "source_groups": 4,
+      "selected_groups": 1
+    },
+    {
+      "category": "synthetic_fluent",
+      "repair_type": null,
+      "construction_types": [
+        "possession",
+        "separate_objects"
+      ],
+      "source_groups": 3,
+      "selected_groups": 0
+    },
+    {
+      "category": "synthetic_fluent",
+      "repair_type": null,
+      "construction_types": [
+        "existential"
+      ],
+      "source_groups": 15,
+      "selected_groups": 2
+    },
+    {
+      "category": "synthetic_fluent",
+      "repair_type": null,
+      "construction_types": [
+        "existential",
+        "stative_contrast"
+      ],
+      "source_groups": 1,
+      "selected_groups": 0
+    },
+    {
+      "category": "synthetic_fluent",
+      "repair_type": null,
+      "construction_types": [
+        "possession",
+        "stative_contrast"
+      ],
+      "source_groups": 1,
+      "selected_groups": 0
+    },
+    {
+      "category": "synthetic_fluent",
+      "repair_type": null,
+      "construction_types": [
+        "possession"
+      ],
+      "source_groups": 17,
+      "selected_groups": 2
+    },
+    {
+      "category": "synthetic_fluent",
+      "repair_type": null,
+      "construction_types": [
+        "stative_contrast"
+      ],
+      "source_groups": 12,
+      "selected_groups": 1
+    },
+    {
+      "category": "synthetic_fluent",
+      "repair_type": null,
+      "construction_types": [
+        "distinguished_same_noun"
+      ],
+      "source_groups": 8,
+      "selected_groups": 1
+    },
+    {
+      "category": "synthetic_fluent",
+      "repair_type": null,
+      "construction_types": [
+        "separate_subjects"
+      ],
+      "source_groups": 12,
+      "selected_groups": 1
+    }
+  ],
+  "checks": {
+    "unique_ids": true,
+    "hard_negative_documents": 0,
+    "dev_documents": 0,
+    "complete_repair_groups": true
+  },
+  "conditions": {
+    "C1": {
+      "train_rows": 969,
+      "validation_rows": 1234,
+      "input_digest": "8389615ed4a289e4780a1e1ba11d49752a43bfe8fae324bec6b42879af2a5a96"
+    },
+    "C2": {
+      "train_rows": 1423,
+      "validation_rows": 1746,
+      "input_digest": "7b6cd09f357541b1ada4ee97baa2f5896230e1cd6ce26bd222dd726b59f25193"
+    },
+    "C3": {
+      "train_rows": 1423,
+      "validation_rows": 1746,
+      "input_digest": "7b6cd09f357541b1ada4ee97baa2f5896230e1cd6ce26bd222dd726b59f25193"
+    }
+  },
+  "builder_sha256": "ae0a61254d7eae871a40be44f3654223c9f2cc4081dcd60965908df6e1a8fde9",
+  "limitations": [
+    "No document-group sampling across different repair items or fluent/repair views.",
+    "Input lengths are reported, not stratified; word counts are not tokenizer lengths."
+  ]
+}
