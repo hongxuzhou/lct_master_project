@@ -200,7 +200,7 @@ class SBNGraph(BaseGraph):
                     # Chunliu's code, available at \
                     # https://github.com/wangchunliu/SBN-evaluation-tool/blob/main/1.evaluation-tool-overall/ud_boxer/sbn.py
                     box_index = str(tokens.pop(0))
-                    if SBNSpec.INDEX_PATTERN.match(box_index):
+                    if SBNSpec.INDEX_PATTERN.fullmatch(box_index):
                         index = box_index.replace("<", "-").replace(">", "+")
                         idx = self._try_parse_idx(index)
 
@@ -225,6 +225,8 @@ class SBNGraph(BaseGraph):
                                 token,
                             )
                             edges.append(box_edge)
+                    else:
+                        raise SBNError(f"Invalid box index '{box_index}' in line: {sbn_line}")
 
                 elif (is_role := token in SBNSpec.ROLES) or (
                         token in SBNSpec.DRS_OPERATORS
@@ -247,10 +249,10 @@ class SBNGraph(BaseGraph):
                         edge_type = SBN_EDGE_TYPE.DRS_OPERATOR
 
 
-                    if index_match := SBNSpec.INDEX_PATTERN.match(target):
+                    if SBNSpec.INDEX_PATTERN.fullmatch(target):
                         if edge_type == SBN_EDGE_TYPE.ROLE or edge_type == SBN_EDGE_TYPE.DRS_OPERATOR:
                             # if it's syn to syn connection
-                            idx = self._try_parse_idx(index_match.group(0))
+                            idx = self._try_parse_idx(target)
                             active_id = self._active_synset_id
                             target_idx = active_id[1] + idx
                             to_id = (active_id[0], target_idx)

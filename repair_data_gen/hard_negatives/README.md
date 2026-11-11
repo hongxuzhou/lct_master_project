@@ -57,15 +57,34 @@ No vocatives ("Jason, ...") occur in train, dev or test gold.
 
 ## Diagnostic acceptance
 
-63 of the 66 original gold graphs pass the structural checks. The other
-three are `p17/d2285` (unresolved index), `p23/d1469` (index overflow), and
-`p69/d1719` (cycle and index overflow). The pass count does not establish
-text and graph fidelity. Record any defects and validated fixes in a
-separate evaluation record. Items not ready to score remain held out of
-training.
+Run `python3 repair_data_gen/hard_negatives/check_gold.py` from the repository
+root. With the full index reader, 64 of 66 original gold graphs pass the
+structural checks and export to PENMAN. The reader resolves the four
+`Co-Theme +11` links in `p23/d1469` and no longer introduces a cycle when
+reading `ANA -10` in `p69/d1719`.
 
-The diagnostic export still needs text and meaning verification. A
-`test_standard` supplement may be evaluated as a separate subset; dev
+Two documents still have unresolved targets: `p05/d0919` (continuations
+refer to box −1) and `p17/d2285` (`AttributeOf +2` points past the concepts).
+Structural checks do not establish text and graph fidelity. Record any
+defects and validated fixes in a separate evaluation record. Items not
+ready to score remain held out of training.
+
+The [local diagnostic](diagnostic_v2/annotations.tsv) has 66 scorable
+non-RSR items. The two invalid gold graphs were corrected in this copy, and
+`p05/d2605` has one English typo fixed. In `p40/d1979`, the dollar alternative
+uses `Asset`, matching yen, and remains under `NEGATION`. The
+[manifest](diagnostic_v2/manifest.json) records the four changes.
+The earlier 65-item snapshot remains in `diagnostic_v1/`. Rebuild and check
+from the repository root in the `repairsbn` environment:
+
+```bash
+python repair_data_gen/hard_negatives/build_diagnostic.py
+python evaluation/build_gold.py --strict \
+  -i repair_data_gen/hard_negatives/diagnostic_v2/annotations.tsv \
+  -o /tmp/hard-negative-gold-v2.parquet
+```
+
+A `test_standard` supplement may be evaluated as a separate subset; dev
 is not used. The 66-document training hold-out remains fixed.
 
 ## Files
@@ -75,3 +94,5 @@ is not used. The 66-document training hold-out remains fixed.
 | `train_comma_labels.tsv` | all 352 candidates with label (the authored record) |
 | `train_holdout.tsv` | the 66 held-out documents (built from the labels) |
 | `holdout.py` | `build`, `check`, and `load()` for builders |
+| `check_gold.py` | read-only structural and PENMAN checks on the held-out gold graphs |
+| `build_diagnostic.py` | build the scoring inputs and record the evaluation-only fixes |

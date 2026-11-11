@@ -35,7 +35,7 @@ from sbn_lin import (
     serialise,
 )
 
-MAX_INDEX_MAGNITUDE = 9  # SBNSpec.INDEX_PATTERN matches a single digit only
+MAX_INDEX_MAGNITUDE = 9  # Retain the historical RSR dataset policy.
 ANCHOR_SYNSET = "entity.n.01"
 
 

@@ -226,8 +226,8 @@ class SBNGraph(BaseGraph):
                         else SBN_EDGE_TYPE.DRS_OPERATOR
                     )
 
-                    if index_match := SBNSpec.INDEX_PATTERN.match(target):
-                        idx = self._try_parse_idx(index_match.group(0))
+                    if SBNSpec.INDEX_PATTERN.fullmatch(target):
+                        idx = self._try_parse_idx(target)
                         active_id = self._active_synset_id
                         target_idx = active_id[1] + idx
                         to_id = (active_id[0], target_idx)

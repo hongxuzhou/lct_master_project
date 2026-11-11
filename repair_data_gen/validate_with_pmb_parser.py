@@ -10,8 +10,8 @@ Checks per SBN string, in `check()`:
   index      -- every index resolves to a concept.  The reader does not drop
                 an out-of-range index: it turns `Theme +3` into an edge to a
                 constant node "+3", so this has to be looked for explicitly
-  magnitude  -- no index of 10 or more; SBNSpec.INDEX_PATTERN reads one digit
-                only, so `-12` is silently read as `-1`
+  magnitude  -- historical RSR dataset rule: no index of 10 or more, even
+                though the current reader supports multi-digit indices
   edges      -- distinct (source, target) edges written == edges in the graph
                 (two roles between the same pair collapse into one edge in a
                 DiGraph; that happens in gold too, e.g. p12/d3490, so pairs,

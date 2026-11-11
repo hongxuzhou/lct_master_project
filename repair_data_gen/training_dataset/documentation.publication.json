@@ -1,17 +1,16 @@
 {
   "status": "published_and_verified",
   "repo_id": "Shrikes/repair-sbn",
-  "revision": "ae9fd3d1b261a5fe0ca9ae2fe09b3e6d99a41947",
-  "parent_revision": "bd96edaa219521b1c04e304a67c4832370c1bbc8",
+  "revision": "4c174377797bc2ca09f2b08e9f291ca3072027b8",
+  "parent_revision": "ae9fd3d1b261a5fe0ca9ae2fe09b3e6d99a41947",
   "data_release_revision": "d1ed13ec46823a7ddabdfe449e6ffe265d7d4a5b",
   "documentation_sha256": {
-    "README.md": "0ae293074dff48235f0a46013b4f0fe27d9be2d24dac7c7dfbe8a6c8d869c4c6",
-    "SCHEMA.md": "96bbd387c80b66ae26ff50b5182be25e3b3f60a2b7d0251ed87f105760b87ffb"
+    "README.md": "8db9d601a71c61657b2b53e2a1a3ec147fe8b9b8c7a52f59ee02a7349eb6832e",
+    "SCHEMA.md": "eee7962931ed639c2cf3a50d33361653491ad1885e0393fc57de23bd3b983e58"
   },
-  "commit_url": "https://huggingface.co/datasets/Shrikes/repair-sbn/commit/ae9fd3d1b261a5fe0ca9ae2fe09b3e6d99a41947",
-  "verified_files": 17,
+  "commit_url": "https://huggingface.co/datasets/Shrikes/repair-sbn/commit/4c174377797bc2ca09f2b08e9f291ca3072027b8",
+  "verified_files": 19,
   "data_files_unchanged": false,
-  "train_validation_unchanged": true,
-  "added_split": "default/test",
-  "test_publication": "test.publication.json"
+  "added_configuration": "hard_negative",
+  "hard_negative_publication": "hard_negative.publication.json"
 }

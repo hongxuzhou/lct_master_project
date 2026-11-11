@@ -1,0 +1,79 @@
+{
+  "version": "hard_negative_diagnostic_v2",
+  "config": "hard_negative",
+  "split": "test",
+  "rows": 66,
+  "source": "PMB 5.1.0 English train gold, held out before fine-tuning",
+  "categories": {
+    "apposition": 24,
+    "contrast_correction": 7,
+    "borderline": 5,
+    "list": 25,
+    "asyndetic": 5
+  },
+  "changes": {
+    "p05/d0919": {
+      "category": "list",
+      "status": "ready",
+      "changes": [
+        {
+          "field": "sbn_repair",
+          "original": "cow.n.01 moo.v.01 Agent -1 Time +1 time.n.08 EQU now CONTINUATION <1 rooster.n.01 crow.v.03 Agent -1 Time +1 time.n.08 EQU now CONTINUATION <3 pig.n.01 oink.v.01 Agent -1 Time +1 time.n.08 EQU now CONTINUATION <1 duck.n.01 quack.v.01 Agent -1 Time +1 time.n.08 EQU now CONTINUATION <5 cat.n.01 meow.v.01 Agent -1 Time +1 time.n.08 EQU now",
+          "evaluation": "cow.n.01 moo.v.01 Agent -1 Time +1 time.n.08 EQU now CONTINUATION <1 rooster.n.01 crow.v.03 Agent -1 Time +1 time.n.08 EQU now CONTINUATION <2 pig.n.01 oink.v.01 Agent -1 Time +1 time.n.08 EQU now CONTINUATION <1 duck.n.01 quack.v.01 Agent -1 Time +1 time.n.08 EQU now CONTINUATION <4 cat.n.01 meow.v.01 Agent -1 Time +1 time.n.08 EQU now"
+        }
+      ]
+    },
+    "p05/d2605": {
+      "category": "list",
+      "status": "ready",
+      "changes": [
+        {
+          "field": "sentence",
+          "original": "Mike entered the room, took off the coat and put in on the chair.",
+          "evaluation": "Mike entered the room, took off the coat and put it on the chair."
+        }
+      ]
+    },
+    "p17/d2285": {
+      "category": "list",
+      "status": "ready",
+      "changes": [
+        {
+          "field": "sbn_repair",
+          "original": "rice.n.01 noodle.n.01 entity.n.01 Sub -2 Sub -1 Sub +1 potato.n.01 be.v.01 Theme -2 Time +1 Co-Theme +3 time.n.08 EQU now typical.a.01 AttributeOf +2 side_dish.n.01",
+          "evaluation": "rice.n.01 noodle.n.01 entity.n.01 Sub -2 Sub -1 Sub +1 potato.n.01 be.v.01 Theme -2 Time +1 Co-Theme +3 time.n.08 EQU now typical.a.01 AttributeOf +1 side_dish.n.01"
+        }
+      ]
+    },
+    "p40/d1979": {
+      "category": "contrast_correction",
+      "status": "ready",
+      "changes": [
+        {
+          "field": "sbn_repair",
+          "original": "transaction.n.01 time.n.08 TPR now carry_out.v.01 Theme -2 Time -1 Asset +1 yen.n.02 NEGATION <1 entity.n.01 EQU -2 Instrument +1 united_states_dollar.n.01",
+          "evaluation": "transaction.n.01 time.n.08 TPR now carry_out.v.01 Theme -2 Time -1 Asset +1 yen.n.02 NEGATION <1 entity.n.01 EQU -2 Asset +1 united_states_dollar.n.01"
+        }
+      ],
+      "adjudication": {
+        "reason": "The two currencies fill the same role in the transaction. Keep the original Asset role for yen and use it for the negated US dollar alternative.",
+        "references": [
+          "https://doi.org/10.1109/ICSC.2011.57",
+          "https://pmb.let.rug.nl/roles.php"
+        ]
+      }
+    }
+  },
+  "validation": {
+    "non_repair_gold_exports": 66,
+    "train_validation_overlap": 0
+  },
+  "parser_sha256": {
+    "sbn_spec.py": "a14f959e8cd45089b6bff6bf8ea3545f7ef2a147663fe32db3e64365df8c7d36",
+    "sbn_smatch.py": "6c217ed55cd2ab7943b2f3a2bbf007867fe2f506d2d451884902204896f17ff5",
+    "graph_base.py": "af44144c71da6456f32d4465fa84158ee7df9796c9b9131567292a8ac99afe7a",
+    "penman_model.py": "9a5119a2e8437f9719fff76486dbdf1e818c00466221d24b57fd75b4b4447483"
+  },
+  "annotations_sha256": "2f78708307cf2a21d2b49a27a192a1a98aca5b2641249744200138dff57fdbf8",
+  "parquet_sha256": "74ab043009eee391ed0a2c7af89fc0278106d88e6b692f0ff07abcabbb4bb504"
+}

@@ -1,0 +1,382 @@
+{
+  "version": "hard_negative_diagnostic_v1",
+  "source": "PMB 5.1.0 English train gold, held out before fine-tuning",
+  "held_out_documents": 66,
+  "scoring_rows": 65,
+  "pending_semantic_review": 1,
+  "scoring_rows_by_category": {
+    "apposition": 24,
+    "contrast_correction": 6,
+    "borderline": 5,
+    "list": 25,
+    "asyndetic": 5
+  },
+  "validation": {
+    "non_repair_gold_exports": 66,
+    "train_validation_overlap": 0
+  },
+  "input_sha256": {
+    "repair_data_gen/hard_negatives/train_holdout.tsv": "9a29eab567953f7e1df42194328e8ebbf58690314c2f118dd3612546bce91f7d",
+    "data/pmb-5.1.0/split/en/train/gold.sbn": "a93a9ef831935d4164959c4bfeb66e19317e8beb47b62394cbb2919a9aa0f893",
+    "repair_data_gen/training_dataset/data/train.parquet": "ea4c7ec28daa4d117444f0d1bd9ea183c11a7a36cc77853f28e61264455cdea5",
+    "repair_data_gen/training_dataset/data/validation.parquet": "50438c041dc6b6611fba574b02d116a070598b6552f4a8882000bffd2592fd97"
+  },
+  "parser_sha256": {
+    "sbn_spec.py": "a14f959e8cd45089b6bff6bf8ea3545f7ef2a147663fe32db3e64365df8c7d36",
+    "sbn_smatch.py": "6c217ed55cd2ab7943b2f3a2bbf007867fe2f506d2d451884902204896f17ff5",
+    "graph_base.py": "af44144c71da6456f32d4465fa84158ee7df9796c9b9131567292a8ac99afe7a",
+    "penman_model.py": "9a5119a2e8437f9719fff76486dbdf1e818c00466221d24b57fd75b4b4447483"
+  },
+  "annotations_sha256": "5e96ef2e337b80fdae131aa8da985e6ca5d25d29c845520f46908953d8e0ce2a",
+  "records": {
+    "p00/d0317": {
+      "category": "apposition",
+      "status": "ready",
+      "changes": []
+    },
+    "p01/d1880": {
+      "category": "apposition",
+      "status": "ready",
+      "changes": []
+    },
+    "p02/d0795": {
+      "category": "contrast_correction",
+      "status": "ready",
+      "changes": []
+    },
+    "p02/d1144": {
+      "category": "borderline",
+      "status": "ready",
+      "changes": []
+    },
+    "p02/d2856": {
+      "category": "borderline",
+      "status": "ready",
+      "changes": []
+    },
+    "p05/d0919": {
+      "category": "list",
+      "status": "ready",
+      "changes": [
+        {
+          "field": "sbn_repair",
+          "original": "cow.n.01 moo.v.01 Agent -1 Time +1 time.n.08 EQU now CONTINUATION <1 rooster.n.01 crow.v.03 Agent -1 Time +1 time.n.08 EQU now CONTINUATION <3 pig.n.01 oink.v.01 Agent -1 Time +1 time.n.08 EQU now CONTINUATION <1 duck.n.01 quack.v.01 Agent -1 Time +1 time.n.08 EQU now CONTINUATION <5 cat.n.01 meow.v.01 Agent -1 Time +1 time.n.08 EQU now",
+          "evaluation": "cow.n.01 moo.v.01 Agent -1 Time +1 time.n.08 EQU now CONTINUATION <1 rooster.n.01 crow.v.03 Agent -1 Time +1 time.n.08 EQU now CONTINUATION <2 pig.n.01 oink.v.01 Agent -1 Time +1 time.n.08 EQU now CONTINUATION <1 duck.n.01 quack.v.01 Agent -1 Time +1 time.n.08 EQU now CONTINUATION <4 cat.n.01 meow.v.01 Agent -1 Time +1 time.n.08 EQU now"
+        }
+      ]
+    },
+    "p05/d2534": {
+      "category": "apposition",
+      "status": "ready",
+      "changes": []
+    },
+    "p05/d2605": {
+      "category": "list",
+      "status": "ready",
+      "changes": [
+        {
+          "field": "sentence",
+          "original": "Mike entered the room, took off the coat and put in on the chair.",
+          "evaluation": "Mike entered the room, took off the coat and put it on the chair."
+        }
+      ]
+    },
+    "p05/d3380": {
+      "category": "apposition",
+      "status": "ready",
+      "changes": []
+    },
+    "p08/d3109": {
+      "category": "apposition",
+      "status": "ready",
+      "changes": []
+    },
+    "p10/d2978": {
+      "category": "list",
+      "status": "ready",
+      "changes": []
+    },
+    "p13/d1260": {
+      "category": "borderline",
+      "status": "ready",
+      "changes": []
+    },
+    "p13/d2857": {
+      "category": "contrast_correction",
+      "status": "ready",
+      "changes": []
+    },
+    "p14/d1811": {
+      "category": "list",
+      "status": "ready",
+      "changes": []
+    },
+    "p17/d2285": {
+      "category": "list",
+      "status": "ready",
+      "changes": [
+        {
+          "field": "sbn_repair",
+          "original": "rice.n.01 noodle.n.01 entity.n.01 Sub -2 Sub -1 Sub +1 potato.n.01 be.v.01 Theme -2 Time +1 Co-Theme +3 time.n.08 EQU now typical.a.01 AttributeOf +2 side_dish.n.01",
+          "evaluation": "rice.n.01 noodle.n.01 entity.n.01 Sub -2 Sub -1 Sub +1 potato.n.01 be.v.01 Theme -2 Time +1 Co-Theme +3 time.n.08 EQU now typical.a.01 AttributeOf +1 side_dish.n.01"
+        }
+      ]
+    },
+    "p17/d2808": {
+      "category": "contrast_correction",
+      "status": "ready",
+      "changes": []
+    },
+    "p19/d0130": {
+      "category": "apposition",
+      "status": "ready",
+      "changes": []
+    },
+    "p19/d2498": {
+      "category": "list",
+      "status": "ready",
+      "changes": []
+    },
+    "p19/d2717": {
+      "category": "borderline",
+      "status": "ready",
+      "changes": []
+    },
+    "p20/d1760": {
+      "category": "contrast_correction",
+      "status": "ready",
+      "changes": []
+    },
+    "p21/d1909": {
+      "category": "apposition",
+      "status": "ready",
+      "changes": []
+    },
+    "p23/d1469": {
+      "category": "list",
+      "status": "ready",
+      "changes": []
+    },
+    "p23/d3033": {
+      "category": "contrast_correction",
+      "status": "ready",
+      "changes": []
+    },
+    "p25/d3277": {
+      "category": "list",
+      "status": "ready",
+      "changes": []
+    },
+    "p29/d0264": {
+      "category": "asyndetic",
+      "status": "ready",
+      "changes": []
+    },
+    "p29/d0709": {
+      "category": "list",
+      "status": "ready",
+      "changes": []
+    },
+    "p30/d0317": {
+      "category": "apposition",
+      "status": "ready",
+      "changes": []
+    },
+    "p30/d1945": {
+      "category": "list",
+      "status": "ready",
+      "changes": []
+    },
+    "p32/d2805": {
+      "category": "list",
+      "status": "ready",
+      "changes": []
+    },
+    "p34/d3200": {
+      "category": "list",
+      "status": "ready",
+      "changes": []
+    },
+    "p36/d1389": {
+      "category": "apposition",
+      "status": "ready",
+      "changes": []
+    },
+    "p36/d2203": {
+      "category": "apposition",
+      "status": "ready",
+      "changes": []
+    },
+    "p38/d2805": {
+      "category": "list",
+      "status": "ready",
+      "changes": []
+    },
+    "p40/d1979": {
+      "category": "contrast_correction",
+      "status": "pending_semantic_review",
+      "changes": [],
+      "reason": "Confirm the Asset/Instrument difference across the yen and US dollar alternatives."
+    },
+    "p43/d1493": {
+      "category": "apposition",
+      "status": "ready",
+      "changes": []
+    },
+    "p44/d1443": {
+      "category": "apposition",
+      "status": "ready",
+      "changes": []
+    },
+    "p47/d2419": {
+      "category": "list",
+      "status": "ready",
+      "changes": []
+    },
+    "p50/d1916": {
+      "category": "apposition",
+      "status": "ready",
+      "changes": []
+    },
+    "p54/d3533": {
+      "category": "apposition",
+      "status": "ready",
+      "changes": []
+    },
+    "p56/d3086": {
+      "category": "list",
+      "status": "ready",
+      "changes": []
+    },
+    "p60/d2533": {
+      "category": "apposition",
+      "status": "ready",
+      "changes": []
+    },
+    "p62/d2653": {
+      "category": "list",
+      "status": "ready",
+      "changes": []
+    },
+    "p64/d3510": {
+      "category": "list",
+      "status": "ready",
+      "changes": []
+    },
+    "p69/d1719": {
+      "category": "asyndetic",
+      "status": "ready",
+      "changes": []
+    },
+    "p69/d3332": {
+      "category": "apposition",
+      "status": "ready",
+      "changes": []
+    },
+    "p70/d1727": {
+      "category": "asyndetic",
+      "status": "ready",
+      "changes": []
+    },
+    "p71/d0885": {
+      "category": "list",
+      "status": "ready",
+      "changes": []
+    },
+    "p74/d0312": {
+      "category": "apposition",
+      "status": "ready",
+      "changes": []
+    },
+    "p77/d1664": {
+      "category": "list",
+      "status": "ready",
+      "changes": []
+    },
+    "p77/d2204": {
+      "category": "apposition",
+      "status": "ready",
+      "changes": []
+    },
+    "p78/d2303": {
+      "category": "apposition",
+      "status": "ready",
+      "changes": []
+    },
+    "p79/d2997": {
+      "category": "list",
+      "status": "ready",
+      "changes": []
+    },
+    "p82/d1623": {
+      "category": "contrast_correction",
+      "status": "ready",
+      "changes": []
+    },
+    "p88/d1847": {
+      "category": "apposition",
+      "status": "ready",
+      "changes": []
+    },
+    "p89/d1260": {
+      "category": "borderline",
+      "status": "ready",
+      "changes": []
+    },
+    "p93/d2681": {
+      "category": "list",
+      "status": "ready",
+      "changes": []
+    },
+    "p95/d1388": {
+      "category": "apposition",
+      "status": "ready",
+      "changes": []
+    },
+    "p95/d1491": {
+      "category": "apposition",
+      "status": "ready",
+      "changes": []
+    },
+    "p96/d0127": {
+      "category": "apposition",
+      "status": "ready",
+      "changes": []
+    },
+    "p96/d1502": {
+      "category": "list",
+      "status": "ready",
+      "changes": []
+    },
+    "p96/d2500": {
+      "category": "asyndetic",
+      "status": "ready",
+      "changes": []
+    },
+    "p96/d3019": {
+      "category": "apposition",
+      "status": "ready",
+      "changes": []
+    },
+    "p97/d1948": {
+      "category": "asyndetic",
+      "status": "ready",
+      "changes": []
+    },
+    "p97/d3141": {
+      "category": "list",
+      "status": "ready",
+      "changes": []
+    },
+    "p98/d3255": {
+      "category": "list",
+      "status": "ready",
+      "changes": []
+    },
+    "p99/d2111": {
+      "category": "list",
+      "status": "ready",
+      "changes": []
+    }
+  }
+}

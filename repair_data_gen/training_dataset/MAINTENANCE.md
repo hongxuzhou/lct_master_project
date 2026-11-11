@@ -86,3 +86,16 @@ action checks the recorded Hub parent, commits that allowlist, and reads
 back all files. It also checks exact loading through HF Datasets. Train,
 validation and the separate later-reference configuration keep their data.
 `test.publication.json` records the verified revision.
+
+The merged release appends the original PMB English standard test to those
+frozen RSR rows. Retrieve the RSR-only `data/test.parquet` at the revision
+in `test.publication.json`, then run:
+
+```bash
+python -m repair_data_gen.training_dataset.merge_fluent_test \
+  --rsr-parquet /path/to/rsr-only/test.parquet --stage-dir /path/to/new-stage
+```
+
+The merged `default/test` uses `variant` to route fluent and RSR evaluation.
+The original PMB records are preserved even when a scoring parser rejects
+the gold. The merged publication has its own receipt.

@@ -4,8 +4,8 @@
   "split": "test",
   "file": "data/test.parquet",
   "base_items": 559,
-  "rows": 1118,
-  "source_documents": 505,
+  "rows": 2312,
+  "source_documents": 1194,
   "schema_fields": 24,
   "per_type": {
     "constant_name": 118,
@@ -26,5 +26,15 @@
   "marked_naturalness": "author spot-check only; exhaustive item-level review waived",
   "scoring": "equal weight across repair types; compare variants grouped by source document",
   "paired_tsv_sha256": "af64ef16e7f630ee3223af1d7ccc0ea47ab9bbe6a2ded9cfcefb93aa8c9da71b",
-  "parquet_sha256": "eff44618dccda91e71d067c9920d2065070a60fe26dd7c0f6e23068e7f4b983e"
+  "parquet_sha256": "c5bb948a4e32395caa4dc6b392963963859edcfefc8017823341f97e99a9d135",
+  "variant_counts": {
+    "rsr_base": 559,
+    "rsr_editing_expression": 559,
+    "pmb_fluent": 1194
+  },
+  "rsr_source_documents": 505,
+  "pmb_source": "data/pmb-5.1.0/split/en/test/standard.sbn",
+  "pmb_source_sha256": "602183b2c06bd4d22130cafcc5eaa7572b8f95dc6ae0381b1eec9de82bdda546",
+  "rsr_release_revision": "ae9fd3d1b261a5fe0ca9ae2fe09b3e6d99a41947",
+  "rsr_parquet_sha256": "eff44618dccda91e71d067c9920d2065070a60fe26dd7c0f6e23068e7f4b983e"
 }

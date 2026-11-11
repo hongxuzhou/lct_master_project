@@ -100,3 +100,12 @@ their corresponding purposes. `pair_id` links the fluent/RSR partners.
 partner. Reference indices are zero-based positions among SBN concept nodes,
 excluding separators, and apply to each row's own gold SBN. They are evaluation
 metadata, not input features or indices into model predictions.
+
+## Hard-negative test configuration
+
+`hard_negative/test` uses six string fields. `example_id` uniquely
+identifies the diagnostic row; `doc_id` identifies its PMB source.
+`text` is the complete English input. `sbn_clean` and `sbn_repair`
+contain the same ordinary SBN, since the input has no replacement
+self-repair. `category` preserves the original hold-out label:
+`apposition`, `list`, `asyndetic`, `contrast_correction` or `borderline`.

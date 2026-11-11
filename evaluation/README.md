@@ -142,14 +142,21 @@ Override with `$SBN_SRC` on HPC. `colloquium_prep/pilot_eval/sbn_lib/` is a
 frozen snapshot kept only so the pilot's published numbers stay reproducible;
 do not point new code at it.
 
+The current reader consumes whole index tokens, including multi-digit
+concept offsets. Rebuild gold PENMAN with `build_gold.py` before scoring with
+this reader; use the same PMB module revision for gold and predictions.
+Record that revision, including the resolved `SBN_SRC` if overridden, with
+formal results.
+
 ## Tests
 
 ```bash
 python3 tests/test_repair_strip.py -v   # 16 cases
 python3 tests/test_repair_metrics.py    # 8 cases
+python3 tests/test_sbn_indices.py       # index resolution across PMB readers
 ```
 
-Both are driven by the worked examples in
+The two repair suites are driven by the worked examples in
 `documentation/knowledge_base/repair_sbn_notation.qmd` and double as a
 regression check on the notation itself. The stripper suite asserts that
 stripping a repair-aware annotation reproduces the *natural fluent-sentence*
