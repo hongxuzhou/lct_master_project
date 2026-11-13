@@ -9,12 +9,12 @@ import pandas as pd
 __all__ = ["read_table", "write_table"]
 
 
-def read_table(path) -> pd.DataFrame:
+def read_table(path, *, keep_default_na=True) -> pd.DataFrame:
     path = Path(path)
     if path.suffix == ".parquet":
         return pd.read_parquet(path)
     sep = "\t" if path.suffix in (".tsv", ".txt") else ","
-    return pd.read_csv(path, sep=sep, dtype=str)
+    return pd.read_csv(path, sep=sep, dtype=str, keep_default_na=keep_default_na)
 
 
 def write_table(df: pd.DataFrame, path) -> None:

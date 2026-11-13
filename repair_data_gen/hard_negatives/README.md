@@ -79,7 +79,7 @@ from the repository root in the `repairsbn` environment:
 
 ```bash
 python repair_data_gen/hard_negatives/build_diagnostic.py
-python evaluation/build_gold.py --strict \
+PYTHONPATH=evaluation python archive/evaluation_metric_ab/build_gold.py --strict \
   -i repair_data_gen/hard_negatives/diagnostic_v2/annotations.tsv \
   -o /tmp/hard-negative-gold-v2.parquet
 ```

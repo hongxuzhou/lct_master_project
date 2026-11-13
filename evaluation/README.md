@@ -1,194 +1,129 @@
-# Evaluation — repair-aware SBN parsing
+# Standalone basic scoring
 
-Scoring for the main project. Two metrics, because a repair-aware parser can
-fail in two unrelated ways and one number cannot separate them.
+`score_basic.py` checks graph validity and scores complete graphs with
+SMATCH++. It does not select references or apply dataset-specific checks.
 
-| | question it answers | module |
-|---|---|---|
-| **Metric A** | Did the parser find the repair, quarantine the right material, and merge into the right context? | `repair_metrics.py` |
-| **Metric B** | With the repair scaffolding stripped, does the speaker's final semantics match? | `repair_strip.py` |
+| Input | Required columns |
+|---|---|
+| References | `example_id`, `condition`, `gold_sbn` |
+| Predictions | `example_id`, `condition`, `pred_sbn` |
 
-Why both: a parser that silently normalises the disfluency away scores **A = 0
-and B = 1.0** — it understood the sentence but never noticed the repair. A
-parser that flags the repair but garbles the content scores the reverse. Plain
-smatch on the repair-aware graphs conflates the two into one middling number.
-The example fixture reproduces exactly this (see *Worked example* below).
-
-The two are **not independent**. Mislabelling a cross-turn denial as an
-intra-turn repair is penalised in A, and again in B because stripping then
-deletes content the speaker did commit to. Say so when reporting.
-
-## Pipeline
-
-```
-annotations.tsv  --build_gold.py-->  gold.parquet
-                                          |
-predictions.tsv  --evaluate_repair.py-----+-->  scored.parquet + summary
-```
+Both inputs accept TSV, CSV or Parquet. Select the appropriate gold before
+running the scorer. Each key must occur at most once per input. Run each
+model/seed separately; reuse the same reference table where applicable.
 
 ```bash
-python3 build_gold.py -i annotations.tsv -o gold.parquet --strict
-python3 evaluate_repair.py -i preds_long.parquet -g gold.parquet \
-    -o preds_scored.parquet --solver ilp
+python evaluation/score_basic.py --references refs.tsv \
+  --predictions preds.tsv --output basic.jsonl
 ```
 
-`--solver ilp` = exact alignment (deterministic, recommended); `hillclimber` =
-fast approximation.
+The output has one row per reference key. Precision, recall and F1 use the
+same full-graph alignment. Precision and recall are null when no alignment
+was run. A blank or invalid prediction
+and an absent prediction row have separate `pred_status` values. Both get
+F1 zero when the reference is valid. An invalid reference or scorer error
+gets a null F1 and an explanation. A valid pair with F1 below one is still
+`scored`. The original input strings can be retrieved by key.
+
+For the archived pilot TSV, use `id` as `example_id`, the four variant
+names (`head`, `mid`, `tail`, `interrug`) as conditions, `mr` as the
+reference, and the corresponding `repair_*_sbn` as predictions. This
+measures agreement with the fluent target only.
+
+## Reader and scoring dependencies
+
+The basic scorer calls the project's PMB-derived `SBNGraph.from_string()`
+through `formal_graph.py`. The reader resolves concept and box indices using
+`sbn_spec.py` and `graph_base.py`. `sbn_env.py` locates that reader;
+`SBN_SRC` can point to the same reader revision on another machine.
+
+The project checks graph validity and builds complete triples in
+`formal_graph.py`. The external `smatchpp` package performs alignment and
+triple matching with its ILP solver. The old PMB scoring, projection and
+Penman export scripts are not called by basic scoring. However,
+`sbn_smatch.py` imports `penman_model.py` and the legacy `smatch.py`
+(which imports `amr.py`) when the reader loads. These are still needed to
+import the current reader, even though basic scoring does not call their
+scoring or export functions. Table I/O uses
+pandas, with PyArrow for Parquet. Use the `repairsbn` environment.
+
+## Which files to read
+
+| Role | Files |
+|---|---|
+| Current basic scoring | `score_basic.py` is the entry point. It uses `formal_graph.py` for parsing and SMATCH++, `sbn_env.py` to locate the reader, and `tables.py` to read inputs. |
+| Local checks under development | `formal_local.py` checks a supplied pattern; `formal_gold.py` extracts patterns from supported gold. Neither is needed for basic scoring. |
+| Combined prototype | `score_formal.py` combines basic and local scoring. It still supports the original acceptance tests; it is not the entry point for the standalone workflow. |
+| Historical Metrics A/B | [Archived scripts and tests](../archive/evaluation_metric_ab/README.md) reproduce the earlier scoring and pruning workflow. |
 
 ---
 
-## The data contract
+# Combined RepairSBN prototype
 
-**This is what the synthesis script has to produce.** Everything else is
-derived — deriving rather than annotating is the point, because gold and
-prediction then pass through byte-identical code and any difference between
-them is the parser's, not two annotators'
-### 1. Annotate these three columns
+This prototype records the evaluation design. Use `score_basic.py` for
+standalone basic scoring. To reproduce the combined prototype, supply the
+released test tables and one prediction per
+`(example_id, condition)`. Predictions can be Parquet, TSV or CSV and must
+include `pred_sbn`. The selected gold tables and conditions define the panel;
+missing prediction rows are visible and count as incomplete when the gold
+supports the check.
 
-| column | type | notes |
+```bash
+python evaluation/score_formal.py \
+  --default repair_data_gen/training_dataset/data/test.parquet \
+  --hard-negative repair_data_gen/training_dataset/hard_negative/test.parquet \
+  --later-reference repair_data_gen/training_dataset/later_reference/test.parquet \
+  --predictions predictions.parquet --output items.jsonl --summary summary.json
+```
+
+Pass only the gold files you intend to score and use `--conditions` to restrict
+the panel. `--core-c1` includes the optional C1 comparison on core RSR.
+The summary records input and reader hashes, per-slice denominators, and
+paired outcomes keyed by core `item_id` or later-reference `pair_id`.
+
+| Slice | Full graph | Targeted checks |
 |---|---|---|
-| `id` | str | unique; duplicates are a hard error |
-| `sentence` | str | the disfluent utterance, **byte-identical to what the parser will be fed** |
-| `sbn_repair` | str | gold repair-aware SBN, **single line** |
+| Fluent PMB and hard negatives | Ordinary gold for C1–C3 | False repairs among valid outputs; hard negatives also report gold relation recall |
+| Core RSR | C2 uses `sbn_clean`; C3 uses `sbn_repair` | C3 repair correctness |
+| Later reference, both sides | Each side's own `sbn_repair` for C2 and C3 | Exact member recovery for both; C3 RSR additionally checks repair and their joint correctness |
 
-`sbn_repair` is parsed with `is_single_line=True`, so newlines are neither
-needed nor wanted. Inline ` % ` comments do survive — `split_single` inserts
-the line breaks first, so a comment lands on the separator it follows, exactly
-as the notation prescribes. The `%` still needs whitespace on **both** sides or
-it is tokenised as SBN and aborts the parse.
+Full scoring uses SMATCH++ with ILP on the whole graph. Relation recall counts
+gold semantic and discourse relations recovered under that same alignment,
+excluding node labels, box membership and the root bookkeeping triple.
+Local checks use a separate correspondence and preserve the scope of each
+condition, including inverted roles. An invalid prediction gets full F1 zero
+when the full gold is usable; it is an incomplete local task when that gold
+pattern is usable. It receives no false-repair judgement or relation recall.
+`review` reasons distinguish gold coverage, gold errors, ambiguous output
+correspondences and scorer errors. Review counts are separate from evaluable
+denominators. In the false-repair check, `fail` means a false repair is present,
+so the summary reports the failure rate for that check.
 
-### 2. Add whatever you will slice on
+Automatic core patterns cover simple lexical or value replacements where one
+concept in each repair box isolates the contributions, metadata agrees with
+the graph, and required links stay within supported scopes. Other constructions
+need reviewed requirements. Supply those through `--reviewed-repairs` as a JSON
+object keyed by `example_id`. Each entry contains `gold_sha256` (hash of the
+UTF-8 gold SBN string), `concept_indices` (zero-based gold concept positions),
+and `relations` (triples of gold source index, canonical role, and target
+index or string constant). The scorer recovers condition scope from gold and
+validates the pattern against it. These indices never address predictions.
 
-Passed through untouched; the analysis notebook groups by these.
+Later-reference extraction uses each row's gold group and antecedent
+indices. Member identity uses synsets, names and supported descriptive
+modifiers without requiring any particular repair status. The later
+predicate helps identify the group. If several candidates remain or the
+group cannot be identified, the result goes to review. Quantity is outside
+the exact-membership criterion. Automatic joint checking supports the
+shared-event and anchored-subject repair constructions.
 
-| column | example |
-|---|---|
-| `repair_type` | `subject` `verb` `object` `adjunct` `preposition` `tense` `none` |
-| `device` | `1`–`4`, which repair-toolkit device the annotation uses |
-| `interregnum` | `"I mean"`, empty when absent — **keep it as its own column**, not only in an SBN comment, so it can be sliced on |
-| `position`, `condition`, … | whatever the experimental design varies |
+In a release audit (four base rows per core repair type), 8 of 28 core
+patterns were ready and 20 needed review: 12 unsupported constructions,
+7 cases where the boxes included continuation material, and 1 attachment
+outside the supported scopes. Six later-reference pairs sampled across both
+construction types supported all 12 member checks and all six RSR repair
+patterns. These are sample counts, not release-wide coverage estimates.
 
-### 3. Never annotate these — `build_gold.py` derives them
-
-| column | meaning |
-|---|---|
-| `penman_repair` | gold graph in Penman; reference for the repair-aware baseline |
-| `penman_clean` | gold graph with the repair stripped; reference for Metric B |
-| `partition` | `core` (both metrics) or `challenge` (Metric A only) |
-| `strip_reason` | which gate sent it to the challenge set |
-| `n_repairs` | intra-turn repairs found |
-| `gold_status` | `ok` / `parse_error` / `strip_error` |
-
-Two consequences worth knowing before you generate data:
-
-- **The clean reference is Penman, not SBN.** Stripping happens on the graph,
-  where `+n`/`-n` indices have already been resolved to node references, so
-  nothing needs renumbering. Serialising back to SBN *would* require
-  recomputing every index and is deliberately out of scope.
-- **`partition` is a property of the dataset, fixed at build time.** If the
-  stripper's gates ever change, that shows up as a diff in the gold table —
-  which is what you want — instead of silently moving items between metrics.
-  Watch the challenge-set count while generating: it tells you how much of the
-  data only gets one metric.
-
-### 4. Predictions
-
-LONG format, one row per (item, condition):
-
-| column | notes |
-|---|---|
-| `id` | must match the gold table |
-| `condition` | optional; drives the per-condition breakdown |
-| `pred_sbn` | raw parser output, single line |
-
----
-
-## Output columns
-
-`evaluate_repair.py` writes the prediction rows plus:
-
-| column | meaning |
-|---|---|
-| `parse_status` | `success` / `ill_formed` / `parse_error` / `no_gold` |
-| `partition` | copied from gold |
-| `a_gold_n`, `a_pred_n`, `a_detected` | Metric A, detection |
-| `a_token_*`, `a_span_*`, `a_merge_*` | Metric A raw counts — micro-averaging needs them, so any slice can be re-aggregated without re-scoring |
-| `a_token_f1`, `a_span_f1` | per-item, for macro averages |
-| `b_status`, `b_f1` | Metric B; `b_f1` is NaN unless `b_status == success` |
-| `full_status`, `full_f1` | plain repair-aware graph score, no stripping — the obvious baseline, reported so nobody has to ask |
-
-**Reparandum extent is reported twice on purpose.** `token` is a
-position-blind multiset, `span` is `(concept index, token)`. Token alone cannot
-tell a correct parse from one that swapped reparandum and repair — in a
-tense/aspect repair both contain exactly `time.n.08` and `go.v.01`. Span alone
-is brittle: one dropped concept earlier in the sentence shifts every index.
-Read them as a pair — high token with low span means *right material, wrong
-place*.
-
-**Metric B failure policy.** A prediction that will not parse, or whose own
-structure falls outside the stripper's domain, gets `b_f1 = NaN` and a status
-saying which. The summary prints both means; quote the **penalised** one
-(failures = 0) as the headline. The success-only mean silently rewards a parser
-for failing loudly.
-
-## Where the SBN modules come from
-
-There is exactly one authoritative copy, `data/pmb-5.1.0/src/sbn/`, resolved by
-`sbn_env.py`. Nothing here vendors a second one: `sbn_spec.py` carries the
-project's own `CORRECTION` separator, extra roles and `INVERTIBLE_ROLES`
-additions, and a duplicate drifts the moment a role is added to one copy and
-not the other — with a silent scoring difference, not an error, as the symptom.
-Override with `$SBN_SRC` on HPC. `colloquium_prep/pilot_eval/sbn_lib/` is a
-frozen snapshot kept only so the pilot's published numbers stay reproducible;
-do not point new code at it.
-
-The current reader consumes whole index tokens, including multi-digit
-concept offsets. Rebuild gold PENMAN with `build_gold.py` before scoring with
-this reader; use the same PMB module revision for gold and predictions.
-Record that revision, including the resolved `SBN_SRC` if overridden, with
-formal results.
-
-## Tests
-
-```bash
-python3 tests/test_repair_strip.py -v   # 16 cases
-python3 tests/test_repair_metrics.py    # 8 cases
-python3 tests/test_sbn_indices.py       # index resolution across PMB readers
-```
-
-The two repair suites are driven by the worked examples in
-`documentation/knowledge_base/repair_sbn_notation.qmd` and double as a
-regression check on the notation itself. The stripper suite asserts that
-stripping a repair-aware annotation reproduces the *natural fluent-sentence*
-SBN **exactly** (F1 = 1.00 on all 11 single-sentence cases) — that is the claim
-Metric B rests on. The metrics suite is built entirely from predictions that
-parse cleanly but mean something else, since those are the failures a
-parse-success check cannot see.
-
-## Worked example
-
-`tests/fixtures/` holds a runnable six-item dataset in the contract format
-above, plus predictions exercising each failure mode.
-
-```bash
-python3 build_gold.py -i tests/fixtures/annotations_example.tsv -o /tmp/gold.tsv
-python3 evaluate_repair.py -i tests/fixtures/predictions_example.tsv \
-    -g /tmp/gold.tsv -o /tmp/scored.tsv
-```
-
-The `missed_repair` condition is the one to look at: **Metric A F1 = 0.00,
-Metric B F1 = 1.00**, repair-aware baseline 0.67. The parser normalised the
-disfluency away — perfect final semantics, zero repair structure — and only the
-two-metric split makes that visible.
-
-## Open decisions
-
-- **Dangling anaphora into the reparandum (clarification C4).** When an anaphor
-  picks up both reparandum and repair, stripping leaves a dangling edge and
-  there is no uncontroversial clean reading. Currently every such item is gated
-  to the challenge set. Revisit once the synthesised data shows how often it
-  actually occurs.
-
-## Deps
-
-`pip install smatchpp penman networkx pandas pyarrow`
+Run the worked acceptance cards with
+`python -m unittest discover -s evaluation/tests`. Use the `repairsbn`
+environment or install the dependencies above, including an ILP backend.

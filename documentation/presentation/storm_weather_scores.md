@@ -44,8 +44,8 @@ Inputs are the SBN strings above, written to `annotations.tsv` (`id, sentence, s
 and `predictions.tsv` (`id, condition, pred_sbn`).
 
 ```bash
-python3 evaluation/build_gold.py -i annotations.tsv -o gold.tsv --strict
-python3 evaluation/evaluate_repair.py -i predictions.tsv -g gold.tsv -o scored.tsv --solver ilp
+PYTHONPATH=evaluation python3 archive/evaluation_metric_ab/build_gold.py -i annotations.tsv -o gold.tsv --strict
+PYTHONPATH=evaluation python3 archive/evaluation_metric_ab/evaluate_repair.py -i predictions.tsv -g gold.tsv -o scored.tsv --solver ilp
 ```
 
 Full prediction strings:
