@@ -25,6 +25,11 @@ class BasicScoreTests(unittest.TestCase):
         self.assertLess(different["f1"], 1)
         self.assertEqual(different["precision"], 1)
         self.assertLess(different["recall"], 1)
+        self.assertEqual((same["relation_matched"], same["relation_total"], same["relation_recall"]),
+                         (1, 1, 1))
+        self.assertEqual((different["relation_matched"], different["relation_total"],
+                          different["relation_recall"]), (0, 1, 0))
+        self.assertIsNone(blank["relation_total"])
         self.assertIsNone(blank["precision"])
         self.assertIsNone(blank["recall"])
         self.assertEqual((blank["pred_status"], blank["f1"]), ("invalid", 0))

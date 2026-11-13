@@ -73,7 +73,8 @@ def score_rows(references, predictions, scorer):
                                          else (None, "missing", "prediction row absent"))
         # Check the gold and prediction separately so both problems remain
         # visible if both inputs are invalid.
-        metrics = dict(precision=None, recall=None, f1=None)
+        metrics = dict(precision=None, recall=None, f1=None,
+                       relation_matched=None, relation_total=None, relation_recall=None)
         score_reason = None
         # Score policy: unusable gold or scorer error -> no metric.
         # Usable gold but missing/invalid prediction -> F1 penalty only.
@@ -88,14 +89,15 @@ def score_rows(references, predictions, scorer):
             score_status, score_reason = pred_status, pred_reason
         else:
             try:
-                metrics = full_score(scorer, gold, pred)
+                # Count gold relations on the same alignment used for F1.
+                metrics = full_score(scorer, gold, pred, relation_recall=True)
                 score_status = "scored"
             except Exception as exc:
                 score_status = "scorer_error"
                 score_reason = f"{type(exc).__name__}: {exc}"
         yield dict(zip(KEY, key)) | dict(
             gold_status=gold_status, gold_reason=gold_reason,
-            pred_status=pred_status, pred_reason=pred_reason,
+            pred_sbn=pred_sbn, pred_status=pred_status, pred_reason=pred_reason,
             score_status=score_status, score_reason=score_reason, **metrics)
 
 

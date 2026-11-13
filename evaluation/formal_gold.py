@@ -1,5 +1,6 @@
 """Conservative gold extraction for released RepairSBN slices."""
 
+from dataclasses import replace
 from numbers import Integral
 
 from formal_graph import Node
@@ -71,6 +72,16 @@ def core_pattern(g, row):
         expected = row.get("reparandum_value")
         if not isinstance(expected, str) or not any(v == value(expected) for _, v in lv - rv) or not rv - lv:
             raise NeedsReview("value contrast cannot be isolated from gold and metadata")
+    # If both alternatives fill the same role of a shared predicate, its
+    # explicitly shared Agent/Experiencer must remain in the shared scope.
+    # Do not import the predicate's entire neighbourhood into the repair.
+    parent = pair[0]
+    left_roles = {(a, r) for a, r, b, _ in relations if b == x and g.box[a] == parent}
+    right_roles = {(a, r) for a, r, b, _ in relations if b == y and g.box[a] == parent}
+    shared = {a for a, _ in left_roles & right_roles}
+    relations.extend(e for e in g.relations
+                     if e[0] in shared and e[1] in {"Agent", "Experiencer"}
+                     and g.box.get(e[2]) == parent and e[3] == parent)
     return _pattern(g, pair, (x, y), relations)
 
 
@@ -156,7 +167,7 @@ def annotated_pattern(g, annotation):
     try:
         nodes = [_gold_node(g, i) for i in annotation["concept_indices"]]
         edges = []
-        for src, role, target in annotation["relations"]:
+        def gold_edge(src, role, target):
             a = _gold_node(g, src)
             if isinstance(target, str):
                 matches = [e for e in g.relations if e[:2] == (a, role)
@@ -165,12 +176,30 @@ def annotated_pattern(g, annotation):
                 b = _gold_node(g, target)
                 matches = [e for e in g.relations if e[:3] == (a, role, b)]
             _require(len(matches) == 1, "reviewed relation is absent or ambiguous in gold")
-            edges.extend(matches)
+            return matches[0]
+
+        edges = [gold_edge(*relation) for relation in annotation["relations"]]
         _require(nodes and edges, "reviewed pattern needs concepts and relations")
         pair = pairs[0]
         covered = set(nodes) | {n for x, _, y, _ in edges for n in (x, y) if n in g.box}
         _require(set(pair[1:]) <= {g.box[n] for n in covered},
                  "reviewed pattern must identify both repair contributions")
-        return validate_pattern(g, _pattern(g, pair, nodes, edges))
+        pattern = _pattern(g, pair, nodes, edges)
+
+        def endpoint(n):
+            if n in pattern.nodes:
+                return n
+            if n[0] == Node.CONSTANT:
+                return value(g.labels[n])
+            _require(n[0] == Node.SYNSET, "protected edge endpoint must be a concept or value")
+            return ("optional_synset", g.labels[n])
+
+        protected = []
+        for relation in annotation.get("protected_relations", ()):
+            a, role, b, _ = gold_edge(*relation)
+            _require(a in pattern.nodes or b in pattern.nodes,
+                     "protected relation needs a required anchor node")
+            protected.append((endpoint(a), role, endpoint(b)))
+        return validate_pattern(g, replace(pattern, protected_edges=tuple(protected)))
     except (KeyError, TypeError, ValueError) as exc:
         raise GoldError(str(exc)) from exc

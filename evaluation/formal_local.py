@@ -25,6 +25,9 @@ class Pattern:
     scope: tuple
     # (source, role, target, owner scope); string constants use ("value", value).
     edges: tuple
+    # Optional conditions that must not be withdrawn. An endpoint can be a
+    # required node key, a constant, or ("optional_synset", label) for an optional node.
+    protected_edges: tuple = ()
 
 
 def value(token):
@@ -50,6 +53,34 @@ def scope_path(g, box):
             steps.append(((None, r, g.labels[a]), box))
             box = box_owner
     return tuple(reversed(steps))
+
+
+def _withdraws_protected_edge(g, edges, pattern, binding, withdrawn):
+    # Nested contexts inside CORRECTION are withdrawn too.
+    inside = {withdrawn}
+    pending = [withdrawn]
+    children = {}
+    for parent, _, child in g.box_links:
+        children.setdefault(parent, set()).add(child)
+    for source, _, target, owner in g.relations:
+        if target[0] == Node.BOX:
+            children.setdefault(owner, set()).add(target)
+    while pending:
+        nested = children.get(pending.pop(), set()) - inside
+        inside.update(nested)
+        pending.extend(nested)
+
+    def matches(expected, actual):
+        if isinstance(expected, tuple) and expected[0] == "optional_synset":
+            return actual in g.box and g.labels[actual] == expected[1]
+        return binding.get(expected, expected) == actual
+
+    return any(
+        role == required_role and matches(src, a) and matches(dst, b)
+        and (owner in inside or g.box.get(a) in inside or g.box.get(b) in inside)
+        for src, required_role, dst in pattern.protected_edges
+        for a, role, b, owner in edges
+    )
 
 
 def check_repair(g, pattern):
@@ -110,6 +141,11 @@ def check_repair(g, pattern):
                        for a, r, b, o in edges):
                     stage = max(stage, 5)
                     continue
+                if pattern.protected_edges and _withdraws_protected_edge(
+                    g, edges, pattern, binding, withdrawn
+                ):
+                    stage = max(stage, 6)
+                    continue
                 hits.append(binding)
                 if len(hits) > 1:
                     return Result("review", "multiple matching repair correspondences"), hits
@@ -122,6 +158,7 @@ def check_repair(g, pattern):
         "required objects cannot be distinguished",
         "required relation or value absent in its expected scope",
         "withdrawn relation also occurs outside the withdrawn box",
+        "protected relation is inside the withdrawn scope",
     )[stage]), []
 
 
@@ -135,9 +172,11 @@ class Reference:
     modifiers: dict | None = None  # member key -> (direction, role, synset) conditions
 
 
-def check_reference(g, spec):
+def inspect_reference(g, spec):
+    """Return a verdict, exact correspondence, and partial member evidence."""
+    evidence = dict(member_recovered=[None, None], extra_members=None, sub_targets=None)
     if spec is None:
-        return Result("review", "group or antecedent gold requirements unavailable"), []
+        return Result("review", "group or antecedent gold requirements unavailable"), [], evidence
     forward, role, predicate = spec.anchor
     groups = set()
     for a, r, b, _ in g.relations:
@@ -147,14 +186,19 @@ def check_reference(g, spec):
             groups.add(group)
     if not groups:
         if any(r == "Sub" and g.labels[a] == spec.group_label for a, r, _, _ in g.relations):
-            return Result("review", "a group is present but the later predicate does not identify it"), []
-        return Result("fail", "no later group with the expected concept and links"), []
+            return Result("review", "a group is present but the later predicate does not identify it"), [], evidence
+        evidence["member_recovered"] = [False] * len(spec.members)
+        return Result("fail", "no later group with the expected concept and links"), [], evidence
     if len(groups) != 1:
-        return Result("review", "multiple groups linked to the later predicate"), []
+        return Result("review", "multiple groups linked to the later predicate"), [], evidence
     group = groups.pop()
     actual = {b for a, r, b, _ in g.relations if a == group and r == "Sub"}
-    if len(actual) != len(spec.members):
-        return Result("fail", "later group has a different number of members"), []
+    evidence["sub_targets"] = [
+        dict(index=n[1] if n in g.box else None, label=g.labels[n],
+             box=g.box[n][1] if n in g.box else None,
+             box_relation=g.parents.get(g.box.get(n), (None, None))[1])
+        for n in sorted(actual)
+    ]
     attrs = {(a, r, value(g.labels[b])) for a, r, b, _ in g.relations
              if b[0] == Node.CONSTANT}
     modifiers = set()
@@ -166,15 +210,29 @@ def check_reference(g, spec):
                 and all((n, *m) in modifiers for m in (spec.modifiers or {}).get(key, ()))]
                for key, (label, conditions) in spec.members.items()]
     # Establish identity independently of which Sub edges were predicted.
+    # Keep one-to-one identity where it is unique, even if Sub is incomplete.
+    # If a gold member has no candidate, still check the other member.
+    keys = tuple(spec.members)
     mappings = []
-    for ns in product(*domains):
-        if len(set(ns)) == len(ns):
-            mappings.append(dict(zip(spec.members, ns)))
+    for ns in product(*(domain or [None] for domain in domains)):
+        assigned = [n for n in ns if n is not None]
+        if len(set(assigned)) == len(assigned):
+            mappings.append(dict(zip(keys, ns)))
             if len(mappings) > 1:
-                return Result("review", "member identities have multiple correspondences"), []
-    if not mappings or set(mappings[0].values()) != actual:
-        return Result("fail", "later group does not link to exactly the intended members"), []
-    return PASS, mappings
+                return Result("review", "member identities have multiple correspondences"), [], evidence
+    if not mappings:
+        return Result("review", "member identities cannot be distinguished"), [], evidence
+    binding = mappings[0]
+    evidence["member_recovered"] = [binding[k] in actual for k in keys]
+    evidence["extra_members"] = len(actual - set(binding.values()))
+    if not all(evidence["member_recovered"]) or evidence["extra_members"]:
+        return Result("fail", "later group does not link to exactly the intended members"), [], evidence
+    return PASS, mappings, evidence
+
+
+def check_reference(g, spec):
+    result, bindings, _ = inspect_reference(g, spec)
+    return result, bindings
 
 
 def joint(repair, reference):
