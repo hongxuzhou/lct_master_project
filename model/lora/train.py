@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Single-GPU Qwen3.5 development runner; formal runs await frozen configs."""
+"""Single-GPU Qwen3.5 LoRA trainer for development and formal runs."""
 from __future__ import annotations
 
 import argparse
@@ -208,7 +208,7 @@ def parse_args(argv=None):
                         help="Versioned protocol; default preserves the original canary instruction")
     parser.add_argument("--model-size", choices=("2B", "9B", "27B"), required=True)
     parser.add_argument("--condition", choices=("C1", "C2", "C3"), required=True)
-    parser.add_argument("--purpose", choices=("canary", "calibration", "tuning"), default="canary")
+    parser.add_argument("--purpose", choices=("canary", "calibration", "tuning", "formal"), default="canary")
     parser.add_argument("--seed", type=int, default=17, help="Development seed; not the formal seed list")
     parser.add_argument("--max-steps", type=int, default=30, help="Use 0 for the full three-epoch development budget")
     parser.add_argument("--eval-every", type=int, default=10)
@@ -239,6 +239,8 @@ def parse_args(argv=None):
         parser.error('LoRA rank and alpha must be positive')
     if args.purpose == 'tuning' and (not args.train_subset or args.max_steps != 0):
         parser.error('tuning requires a subset and max-steps 0')
+    if args.purpose == "formal" and (args.train_subset or args.max_steps != 0):
+        parser.error("formal runs require the full training split and max-steps 0")
     if args.purpose == "canary" and not (1 <= args.max_steps <= 50):
         parser.error("canary requires 1–50 steps; use calibration for a longer development run")
     if args.tokenizer_dir and not args.preflight_only:
@@ -284,6 +286,8 @@ def run_training(args, wandb_run=None):
         revision=spec["revision"], cache_dir=str(args.model_cache), local_files_only=True, use_fast=True)
     if tokenizer.pad_token_id is None:
         tokenizer.pad_token = tokenizer.eos_token
+    # The protocol pins train and validation by hash. Tokenisation masks the
+    # prompt so the loss only teaches the assistant's SBN answer, including EOS.
     rows = load_rows(args.dataset_dir, protocol)
     subset_info = None
     if args.train_subset:
@@ -347,6 +351,9 @@ def run_training(args, wandb_run=None):
                 local_files_only=True, torch_dtype=torch.bfloat16, device_map={"": "cuda:0"},
                 low_cpu_mem_usage=True, attn_implementation="sdpa")
 
+        # Each condition and seed starts from the original frozen base. PEFT
+        # adds low-rank updates to selected linear layers; AdamW only sees those
+        # new weights. The base weights never become optimizer parameters.
         base = load_base()
         candidates = [(name, module) for name, module in base.named_modules()
                       if isinstance(module, torch.nn.Linear) and name.rsplit(".", 1)[-1] in protocol["lora"]["target_modules"]]
@@ -380,6 +387,8 @@ def run_training(args, wandb_run=None):
         train_seconds, eval_seconds, checkpoint_seconds = 0.0, 0.0, 0.0
         log.log("run_start", steps=total_steps, full_budget_steps=budget, effective_batch=16,
                 gradient_accumulation=accumulation, trainable_parameters=parameter_count)
+        # One optimizer update collects multiple microbatches so the effective
+        # batch can be 16 without placing all 16 examples in GPU memory at once.
         for epoch in range(protocol["candidate"]["epochs"]):
             generator = torch.Generator().manual_seed(args.seed + epoch)
             order = torch.randperm(len(encoded["train"]), generator=generator).tolist()
@@ -411,6 +420,8 @@ def run_training(args, wandb_run=None):
                     save_started = time.perf_counter()
                     path = save_checkpoint(model, tokenizer, optimizer, scheduler, output, state)
                     paths.append(path)
+                    # Compare teacher-forced loss on the same full dev split
+                    # each time. A strict comparison keeps the first exact tie.
                     if metrics["eval_loss"] < best_loss:
                         best_loss, best_path = metrics["eval_loss"], path
                     write_json(output / "selection.json", {"rule": "minimum global assistant-target dev loss; earliest exact tie",
@@ -442,7 +453,9 @@ def run_training(args, wandb_run=None):
             generated = generate(reloaded, tokenizer, condition_rows(rows["validation"], args.condition),
                                  protocol, device, args.generation_examples)
             write_json(output / "dev_generations.json", generated)
-        summary = {"status": "development_passed", "purpose": args.purpose, "formal_run": False,
+        formal = args.purpose == "formal"
+        summary = {"status": "formal_passed" if formal else "development_passed",
+                   "purpose": args.purpose, "formal_run": formal,
                    "steps": step, "best_checkpoint": best_path.name, "best_eval_loss": best_loss,
                    'best_step': int(best_path.name.split('-')[-1]),
                    'train_seconds': train_seconds, 'eval_seconds': eval_seconds,

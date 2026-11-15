@@ -1,0 +1,17 @@
+# The submit wrapper supplies resource and run macros; one queue entry per run.
+universe = vanilla
+initialdir = /nethome/honzhou
+executable = /bin/bash
+arguments = $(LORA_DIR)/formal/worker.sh lst $(SIZE) $(CONDITION) $(SEED) $(ClusterId)-$(ProcId)
+output = $(LOG_DIR)/qwen35-formal-$(SIZE)-$(CONDITION)-s$(SEED).$(ClusterId).out
+error = $(LOG_DIR)/qwen35-formal-$(SIZE)-$(CONDITION)-s$(SEED).$(ClusterId).err
+log = $(LOG_DIR)/qwen35-formal-$(SIZE)-$(CONDITION)-s$(SEED).$(ClusterId).log
+request_cpus = $(CPUS)
+request_memory = $(RAM)
+request_gpus = 1
+requirements = (TARGET.UidDomain == "coli.uni-saarland.de") && (GPUs_Capability == $(CAPABILITY)) && (GPUs_GlobalMemoryMb >= $(MIN_GPU_MB)) && (GPUs_GlobalMemoryMb <= $(MAX_GPU_MB))
++MaxWallTime = $(WALL_SECONDS)
+notification = Never
+should_transfer_files = NO
+getenv = PYTHON,MODEL_CACHE,DATASET_DIR,FORMAL_RUN_ROOT,WANDB_API_KEY
+queue 1

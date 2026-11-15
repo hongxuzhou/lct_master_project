@@ -9,9 +9,9 @@ argument can be supplied for subsequent development jobs. This helper still
 defaults to the existing 30-step canary; it is not the full-training submission.
 
 One single-GPU runner serves both clusters. It reads the accepted train and
-validation Parquets without rewriting them. `protocol.json` pins the published
-dataset and model revisions. This is a development entry point: it deliberately
-does not offer a formal-run mode before configuration calibration and freezing.
+validation Parquets without rewriting them. The development commands below
+remain available. For the full-data experiment, use the
+[formal submission wrapper](formal/README.md) and its pinned protocol.
 
 The published fluent-reference version uses the explicit protocol
 `protocols/fluent_groups_v1.published.json` and dataset directory
