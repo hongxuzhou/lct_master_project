@@ -4,7 +4,7 @@ from collections import Counter
 
 import networkx as nx
 from smatchpp import Smatchpp, solvers
-from smatchpp.formalism.generic.tools import GenericStandardizer
+from smatchpp.formalism.generic.tools import DoNothingStandardizer
 
 from sbn_env import ensure_on_path
 
@@ -76,10 +76,34 @@ class Graph:
             elif label == "CONJUNCTION" and parent in by_parent:
                 yield parent, by_parent.pop(parent), box
 
+    @staticmethod
+    def var(n):
+        return f"{n[0].value[0]}{n[1]}"
+
+    def condition_scope(self, box):
+        """Bos (2023), Appendix A: CONJUNCTION adds to its target DRS."""
+        while box in self.parents and self.parents[box][1] == "CONJUNCTION":
+            box = self.parents[box][0]
+        return box
+
+    def relation_facts(self, prefix=""):
+        """One fact per original relation, retaining scope and literal case."""
+        var = lambda n: prefix + self.var(n)
+        facts = [(None, var(a), label, var(b)) for a, label, b in self.box_links]
+        for a, label, b, owner in self.relations:
+            target = ('"' + self.labels[b].strip('"') + '"'
+                      if b[0] == Node.CONSTANT else var(b))
+            facts.append((var(self.condition_scope(owner)), var(a), label, target))
+        return facts
+
     def triples(self):
-        """Same graph vocabulary as PMB PENMAN, without a lossy serialisation."""
-        def var(n):
-            return f"{n[0].value[0]}{n[1]}"
+        """Encode scoped conditions; inversion never changes their owner.
+
+        Hooks/anchors enter their host context's conditions (Bos 2023,
+        Appendix A). A condition node retains this after role inversion.
+        These are scoring nodes, not additions to the SBN notation.
+        """
+        var = self.var
 
         triples = [("ROOT_OF_GRAPH", ":root", var(self.root))]
         for n, label in self.labels.items():
@@ -89,21 +113,22 @@ class Graph:
                 triples.append((var(n), ":instance", '"' + label + '"'))
         triples.extend((var(box), ":member", var(n)) for n, box in self.box.items())
         triples.extend((var(a), f":{r}", var(b)) for a, r, b in self.box_links)
-        for a, label, b, _ in self.relations:
+        for i, (a, label, b, owner) in enumerate(self.relations):
+            condition = f"r{i}"
+            triples.extend(((condition, ":instance", '"relation:' + label + '"'),
+                            (condition, ":source", var(a)),
+                            (condition, ":scope", var(self.condition_scope(owner)))))
             if b[0] == Node.CONSTANT:
                 value = self.labels[b]
-                triples.append((var(a), f":{label}", '"' + value.strip('"') + '"'))
+                triples.append((condition, ":target", '"' + value.strip('"') + '"'))
             else:
-                triples.append((var(a), f":{label}", var(b)))
+                triples.append((condition, ":target", var(b)))
         return triples
-
-
-_STRUCTURAL = {":instance", ":member", ":root"}
 
 
 def make_scorer():
     return Smatchpp(alignmentsolver=solvers.ILP(),
-                    graph_standardizer=GenericStandardizer())
+                    graph_standardizer=DoNothingStandardizer())
 
 
 def full_score(scorer, gold, pred, relation_recall=False):
@@ -121,9 +146,11 @@ def full_score(scorer, gold, pred, relation_recall=False):
         # SMATCH++ namespaces second-graph variables as bb_.
         target = {i: v for v, i in indices.items() if v in vb}
         mapping = {v: target.get(alignment[i], v) for v, i in indices.items() if v in va}
-        ar = Counter((mapping.get(x, x), r, mapping.get(y, y))
-                     for x, r, y in a if r not in _STRUCTURAL)
-        br = Counter(t for t in b if t[1] not in _STRUCTURAL)
+        # Count original semantic/discourse relations, not the four encoding
+        # triples for each condition. Reuse the full graph's node alignment.
+        ar = Counter(tuple(mapping.get(v, v) for v in fact)
+                     for fact in gold.relation_facts("aa_"))
+        br = Counter(pred.relation_facts("bb_"))
         total = ar.total()
         hit = (ar & br).total()
         result.update(relation_matched=hit, relation_total=total,

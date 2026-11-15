@@ -186,7 +186,7 @@ def inspect_reference(g, spec):
             groups.add(group)
     if not groups:
         if any(r == "Sub" and g.labels[a] == spec.group_label for a, r, _, _ in g.relations):
-            return Result("review", "a group is present but the later predicate does not identify it"), [], evidence
+            return Result("fail", "group lacks the expected later predicate connection"), [], evidence
         evidence["member_recovered"] = [False] * len(spec.members)
         return Result("fail", "no later group with the expected concept and links"), [], evidence
     if len(groups) != 1:
@@ -238,6 +238,8 @@ def check_reference(g, spec):
 def joint(repair, reference):
     rr, repairs = repair
     mr, members = reference
+    if any(x.status == "fail" for x in (rr, mr)):
+        return Result("fail", "repair and exact group membership are not both present")
     if any(x.status == "review" for x in (rr, mr)):
         return Result("review", "repair or member correspondence needs review")
     if any(x.status != "pass" for x in (rr, mr)):

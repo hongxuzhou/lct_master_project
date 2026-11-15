@@ -1,0 +1,278 @@
+{
+  "basic": {
+    "pmb_fluent": {
+      "rows": 1194,
+      "pred_status": {
+        "valid": 1164,
+        "invalid": 30
+      },
+      "score_status": {
+        "scored": 1163,
+        "incomplete": 30,
+        "gold_error": 1
+      },
+      "mean_item_f1_available": 0.9140076711603071,
+      "f1_denominator": 1193,
+      "invalid_reasons": {
+        "unresolved relative index": 22,
+        "cyclic graph": 4,
+        "Invalid token found 'home' in line: time.n.08 EQU now home": 1,
+        "Missing target for 'DayOfWeek' in line time.n.08 DayOfWeek": 1,
+        "Invalid token found 'Condition' in line: go.v.01 Theme -2 Time -1 Condition +1": 1,
+        "Invalid token found '(SPD)' in line: male.n.02 Name \"Matthaeus-Mayer\" (SPD)": 1
+      }
+    },
+    "core_rsr": {
+      "rows": 1118,
+      "pred_status": {
+        "valid": 1068,
+        "invalid": 50
+      },
+      "score_status": {
+        "scored": 1068,
+        "incomplete": 50
+      },
+      "mean_item_f1_available": 0.8928022284894807,
+      "f1_denominator": 1118,
+      "invalid_reasons": {
+        "unresolved relative index": 32,
+        "cyclic graph": 13,
+        "Invalid token found 'Condition' in line: go.v.01 Theme -3 Time -2 Condition +1": 2,
+        "Invalid token found 'e112' in line: wind_powerplant.n.01 Order 1 EQU -2 e112": 1,
+        "Invalid token found '(SPD)' in line: male.n.02 Name \"Matthaeus-Mayer\" (SPD)": 1,
+        "Invalid token found 'e112' in line: wind_powerplant.n.01 Order 1 EQU -2 e112 wind power": 1
+      }
+    },
+    "hard_negative": {
+      "rows": 66,
+      "pred_status": {
+        "valid": 57,
+        "invalid": 9
+      },
+      "score_status": {
+        "scored": 57,
+        "incomplete": 9
+      },
+      "mean_item_f1_available": 0.5958039332456981,
+      "f1_denominator": 66,
+      "invalid_reasons": {
+        "unresolved relative index": 2,
+        "cyclic graph": 4,
+        "Missing target for 'Name' in line city.n.01 Name": 1,
+        "Invalid token found 'have' in line: CONJUNCTION <2 have": 1,
+        "Invalid token found 'ItemOf' in line: toaster.n.01 ItemOf -2": 1
+      }
+    },
+    "later_reference": {
+      "rows": 208,
+      "pred_status": {
+        "valid": 178,
+        "invalid": 30
+      },
+      "score_status": {
+        "scored": 178,
+        "incomplete": 30
+      },
+      "mean_item_f1_available": 0.7660287715842302,
+      "f1_denominator": 208,
+      "invalid_reasons": {
+        "unresolved relative index": 29,
+        "Invalid token found 'CONCONTINUATION' in line: city.n.01 Name \"Vienna\" EQU -1 CONCONTINUATION <1": 1
+      }
+    }
+  },
+  "cycle_diagnostic_only": [
+    {
+      "slice": "pmb_fluent",
+      "example_id": "pmb_test::p12/d1366",
+      "acyclic_after_inverse_normalization": true
+    },
+    {
+      "slice": "pmb_fluent",
+      "example_id": "pmb_test::p85/d3438",
+      "acyclic_after_inverse_normalization": false
+    },
+    {
+      "slice": "pmb_fluent",
+      "example_id": "pmb_test::p40/d1384",
+      "acyclic_after_inverse_normalization": true
+    },
+    {
+      "slice": "pmb_fluent",
+      "example_id": "pmb_test::p03/d1626",
+      "acyclic_after_inverse_normalization": false
+    },
+    {
+      "slice": "core_rsr",
+      "example_id": "rsr_test_0090.base",
+      "acyclic_after_inverse_normalization": false
+    },
+    {
+      "slice": "core_rsr",
+      "example_id": "rsr_test_0179.base",
+      "acyclic_after_inverse_normalization": true
+    },
+    {
+      "slice": "core_rsr",
+      "example_id": "rsr_test_0277.base",
+      "acyclic_after_inverse_normalization": true
+    },
+    {
+      "slice": "core_rsr",
+      "example_id": "rsr_test_0307.base",
+      "acyclic_after_inverse_normalization": false
+    },
+    {
+      "slice": "core_rsr",
+      "example_id": "rsr_test_0343.base",
+      "acyclic_after_inverse_normalization": false
+    },
+    {
+      "slice": "core_rsr",
+      "example_id": "rsr_test_0447.base",
+      "acyclic_after_inverse_normalization": false
+    },
+    {
+      "slice": "core_rsr",
+      "example_id": "rsr_test_sup0051.base",
+      "acyclic_after_inverse_normalization": false
+    },
+    {
+      "slice": "core_rsr",
+      "example_id": "rsr_test_0090.marked",
+      "acyclic_after_inverse_normalization": false
+    },
+    {
+      "slice": "core_rsr",
+      "example_id": "rsr_test_0232.marked",
+      "acyclic_after_inverse_normalization": true
+    },
+    {
+      "slice": "core_rsr",
+      "example_id": "rsr_test_0277.marked",
+      "acyclic_after_inverse_normalization": true
+    },
+    {
+      "slice": "core_rsr",
+      "example_id": "rsr_test_0343.marked",
+      "acyclic_after_inverse_normalization": false
+    },
+    {
+      "slice": "core_rsr",
+      "example_id": "rsr_test_0447.marked",
+      "acyclic_after_inverse_normalization": false
+    },
+    {
+      "slice": "core_rsr",
+      "example_id": "rsr_test_sup0051.marked",
+      "acyclic_after_inverse_normalization": false
+    },
+    {
+      "slice": "hard_negative",
+      "example_id": "hard_negative::p30/d1945",
+      "acyclic_after_inverse_normalization": true
+    },
+    {
+      "slice": "hard_negative",
+      "example_id": "hard_negative::p64/d3510",
+      "acyclic_after_inverse_normalization": false
+    },
+    {
+      "slice": "hard_negative",
+      "example_id": "hard_negative::p74/d0312",
+      "acyclic_after_inverse_normalization": true
+    },
+    {
+      "slice": "hard_negative",
+      "example_id": "hard_negative::p96/d2500",
+      "acyclic_after_inverse_normalization": true
+    }
+  ],
+  "later_review_reasons": {
+    "fluent": {
+      "a group is present but the later predicate does not identify it": 22
+    },
+    "rsr": {
+      "a group is present but the later predicate does not identify it": 25
+    }
+  },
+  "later_gold_selfcheck": [
+    {
+      "condition": "C3",
+      "language_condition": "fluent",
+      "expected": 104,
+      "cc_valid": 104,
+      "cc_present": 0,
+      "false_positive": {
+        "count": 0,
+        "denominator": 104,
+        "rate": 0.0
+      },
+      "false_negative": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null
+      },
+      "members": {
+        "counts": {
+          "pass": 104
+        },
+        "denominator": 104,
+        "rate": 1.0
+      },
+      "joint": {
+        "counts": {
+          "not_run": 104
+        },
+        "denominator": 0,
+        "rate": null
+      }
+    },
+    {
+      "condition": "C3",
+      "language_condition": "rsr",
+      "expected": 104,
+      "cc_valid": 104,
+      "cc_present": 104,
+      "false_positive": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null
+      },
+      "false_negative": {
+        "count": 0,
+        "denominator": 104,
+        "rate": 0.0
+      },
+      "members": {
+        "counts": {
+          "pass": 104
+        },
+        "denominator": 104,
+        "rate": 1.0
+      },
+      "joint": {
+        "counts": {
+          "pass": 104
+        },
+        "denominator": 104,
+        "rate": 1.0
+      }
+    }
+  ],
+  "bugs": {
+    "inverse_role_validity": {
+      "rejected": "entity.n.01 SubOf +1 entity.n.01 ANA -1",
+      "accepted_equivalent": "entity.n.01 entity.n.01 Sub -1 ANA -1"
+    },
+    "panel_completeness": {
+      "later_empty_panel_accepted": true,
+      "false_positive_empty_panel_accepted": true
+    }
+  },
+  "limits": [
+    "Scores are from unchanged current code; validity bug not fixed.",
+    "Inference-side test-hashes.json and run config were not present in imported batch; local gold hashes captured but remote version equality not established.",
+    "Mean item F1 excludes null metrics; no zero imputation for gold/scorer errors."
+  ]
+}

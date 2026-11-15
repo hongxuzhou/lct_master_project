@@ -1,0 +1,66 @@
+{
+  "python": "/Users/hongxuzhou/miniconda3/envs/repairsbn/bin/python",
+  "python_version": "3.11.15",
+  "versions": {
+    "smatchpp": "1.8.0",
+    "mip": "1.17.6",
+    "networkx": "3.6.1",
+    "pandas": "3.0.2",
+    "pyarrow": "24.0.0"
+  },
+  "prediction_sha256": "66c9d593d65173634ae985ccb01734cc01d2782e34189b6d2a74afb321d42383",
+  "rows": 2586,
+  "ended_with_eos": {
+    "True": 2586
+  },
+  "tokens": {
+    "min": 18,
+    "max": 187
+  },
+  "gold_sha256": {
+    "data/test.parquet": "c5bb948a4e32395caa4dc6b392963963859edcfefc8017823341f97e99a9d135",
+    "later_reference/test.parquet": "6c4ca3ed53ddbb37134b1d0fec0ca0c425b6a8c5e405eaa58b737caa3c4c18de",
+    "hard_negative/test.parquet": "74ab043009eee391ed0a2c7af89fc0278106d88e6b692f0ff07abcabbb4bb504"
+  },
+  "scoring_sha256": {
+    "check_later_reference.py": "a752d3542c4dbc091e7d2e38702de0fd4f96520304883d2dd4627e9bbf9bf106",
+    "check_hard_negatives.py": "bdf0e6ae0e5e813763401afa5d01f8bfb858c3336e0c9ef6adfb23b2877db7e0",
+    "score_formal.py": "b2f06db62665550504807a11ef10ef338afb12e56b90d56d86bfbeca46e3c21a",
+    "formal_gold.py": "54c3fecc1f7d6cdd850d9539f7b0b18503ba4f2901332139ffdb32ab23e0058e",
+    "formal_local.py": "fd60bd7512e3095aa7c2e05adff196c3142338ada54c35759459db57989ea391",
+    "prepare_references.py": "fdbe6f47cbbcd2b6721f49c48ce6c8d88ccaaaca97758b1de3abc96d4b053220",
+    "check_core_repair.py": "81f93b7e186c7347a98d0fdb2964c528739a13c2436644058e0d05fca50fbd7b",
+    "formal_graph.py": "f6c837a386ad71e1cfa42c5469d3f2758134d2fb344ba5000e3a0e42fb84f370",
+    "tables.py": "ae88366be109db1714f9813d91a199d591e52eaf953e35cc1ebe815265c3d20a",
+    "score_basic.py": "de6514333aa6e1ee2c947d67fec74b69e117931475335e61b4b49c96bdcb5ced",
+    "sbn_env.py": "a7e371a5cc9517a1eeb903cba17ac8825b0f7423724669033bdec94c70426b43"
+  },
+  "reader_dir": "/Users/hongxuzhou/Documents/GitHub/lct_master_project/data/pmb-5.1.0/src/sbn",
+  "reader_sha256": {
+    "graph_base.py": "af44144c71da6456f32d4465fa84158ee7df9796c9b9131567292a8ac99afe7a",
+    "boundary_test_dialogue.py": "8cc5191af96eb842504cab7d39b69cb4c27cee0b1f7cf9b1a8a5c4adf6cc5180",
+    "sbn2penman.py": "61f1ae55c010eb699c5d943bd7f5218023a83b80e02c2c04114c3dded42d86c1",
+    "postprocess_truncation.py": "34d765f3c7e7f9874cf8c8c58ec35733168f526ee36264bb80553d8f135db9b8",
+    "project_repair.py": "0155119601b40d466bb5b32c96e4060472b100581451a09a6c90ba873a832c4b",
+    "sbn_smatch.py": "6c217ed55cd2ab7943b2f3a2bbf007867fe2f506d2d451884902204896f17ff5",
+    "sbn_smatch_fine_grained.py": "d8b16081030e4ab46d9943237dec1a6a89450752b3369003f4ed29498116b108",
+    "sbn_spec.py": "a14f959e8cd45089b6bff6bf8ea3545f7ef2a147663fe32db3e64365df8c7d36",
+    "smatch.py": "498000621ddbe76c1486fbbdd5275d485be141a0d335136699e5a39921e07816",
+    "verify_conjunction.py": "520cf89c341919f274710f5459a2f6ef7ad9dbc359ccfd30512ade642801690e",
+    "test_project_repair.py": "5a8396ef7ddc447f7c712a50866bd3e697fbf38bd8b499f9cb45a394e77455d1",
+    "single_viz.py": "7c0e75912aac17f153af1822c88dd09645c21ef93d7ab7569f4546a3cb494658",
+    "utils.py": "7ad7a250b6725406b2b33ddb6d2833dd332cb68cda4ba6959efa78ac591edaf4",
+    "amr.py": "5e7b6d619a26eb1196792dc5d4744e73f533f6d855fe1f6bf7bd88d26d277953",
+    "truncation_detect.py": "c4887fe8d78e7e6d49e53cff9396e5680b0756058d277a3fef3874023794485a",
+    "evaluate_repair_smatch.py": "2ed18f27c6b5a8723ee7080513838e0d74114ae2cabdccd88f1a4788ced1881c",
+    "long.py": "c2ffdf588ed6080a1aa1213b330bca1d4f49e4f226b59c8f5540e414902fdd7d",
+    "penman_model.py": "9a5119a2e8437f9719fff76486dbdf1e818c00466221d24b57fd75b4b4447483",
+    "smatch_fromlists.py": "2eb38940ac51178ad18b0d3f3e27af727822f98041b71249238fe8549cbfa7ea"
+  },
+  "slices": {
+    "pmb_fluent": 1194,
+    "core_rsr": 1118,
+    "hard_negative": 66,
+    "later_reference": 208
+  }
+}

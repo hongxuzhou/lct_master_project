@@ -1,0 +1,226 @@
+{
+  "score_version": "scoped_sbn_v2",
+  "slices": {
+    "pmb_fluent": {
+      "rows": 1193,
+      "pred_status": {
+        "valid": 1163,
+        "invalid": 30
+      },
+      "score_status": {
+        "scored": 1163,
+        "incomplete": 30
+      }
+    },
+    "core_rsr": {
+      "rows": 1118,
+      "pred_status": {
+        "valid": 1068,
+        "invalid": 50
+      },
+      "score_status": {
+        "scored": 1068,
+        "incomplete": 50
+      }
+    },
+    "hard_negative": {
+      "rows": 66,
+      "pred_status": {
+        "valid": 57,
+        "invalid": 9
+      },
+      "score_status": {
+        "scored": 57,
+        "incomplete": 9
+      }
+    },
+    "later_reference": {
+      "rows": 208,
+      "pred_status": {
+        "valid": 178,
+        "invalid": 30
+      },
+      "score_status": {
+        "scored": 178,
+        "incomplete": 30
+      }
+    }
+  },
+  "later_transitions": {
+    "members": {
+      "fail -> fail": 131,
+      "incomplete -> incomplete": 30,
+      "review -> fail": 47
+    },
+    "joint": {
+      "not_run -> not_run": 104,
+      "incomplete -> incomplete": 18,
+      "fail -> fail": 61,
+      "review -> fail": 25
+    }
+  },
+  "instance_role_count_corrections": [
+    {
+      "example_id": "pmb_test::p25/d1879",
+      "old_total": 5,
+      "new_total": 6
+    },
+    {
+      "example_id": "pmb_test::p81/d1902",
+      "old_total": 6,
+      "new_total": 7
+    },
+    {
+      "example_id": "pmb_test::p23/d0211",
+      "old_total": 6,
+      "new_total": 7
+    },
+    {
+      "example_id": "pmb_test::p01/d0887",
+      "old_total": 5,
+      "new_total": 6
+    },
+    {
+      "example_id": "pmb_test::p32/d2306",
+      "old_total": 6,
+      "new_total": 7
+    },
+    {
+      "example_id": "pmb_test::p61/d2747",
+      "old_total": 8,
+      "new_total": 9
+    },
+    {
+      "example_id": "pmb_test::p32/d2646",
+      "old_total": 8,
+      "new_total": 9
+    },
+    {
+      "example_id": "pmb_test::p34/d2027",
+      "old_total": 8,
+      "new_total": 9
+    },
+    {
+      "example_id": "pmb_test::p82/d1975",
+      "old_total": 7,
+      "new_total": 8
+    },
+    {
+      "example_id": "pmb_test::p14/d1574",
+      "old_total": 8,
+      "new_total": 9
+    },
+    {
+      "example_id": "rsr_test_0071.base",
+      "old_total": 10,
+      "new_total": 11
+    },
+    {
+      "example_id": "rsr_test_0232.base",
+      "old_total": 10,
+      "new_total": 12
+    },
+    {
+      "example_id": "rsr_test_sup0075.base",
+      "old_total": 10,
+      "new_total": 12
+    },
+    {
+      "example_id": "rsr_test_0071.marked",
+      "old_total": 10,
+      "new_total": 11
+    },
+    {
+      "example_id": "rsr_test_sup0075.marked",
+      "old_total": 10,
+      "new_total": 12
+    },
+    {
+      "example_id": "hard_negative::p02/d2856",
+      "old_total": 2,
+      "new_total": 3
+    },
+    {
+      "example_id": "hard_negative::p47/d2419",
+      "old_total": 7,
+      "new_total": 8
+    }
+  ],
+  "later_summary": [
+    {
+      "condition": "C3",
+      "language_condition": "fluent",
+      "expected": 104,
+      "cc_valid": 92,
+      "cc_present": 0,
+      "false_positive": {
+        "count": 0,
+        "denominator": 92,
+        "rate": 0.0
+      },
+      "false_negative": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null
+      },
+      "members": {
+        "counts": {
+          "fail": 92,
+          "incomplete": 12
+        },
+        "denominator": 104,
+        "rate": 0.0
+      },
+      "joint": {
+        "counts": {
+          "not_run": 104
+        },
+        "denominator": 0,
+        "rate": null
+      }
+    },
+    {
+      "condition": "C3",
+      "language_condition": "rsr",
+      "expected": 104,
+      "cc_valid": 86,
+      "cc_present": 85,
+      "false_positive": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null
+      },
+      "false_negative": {
+        "count": 1,
+        "denominator": 86,
+        "rate": 0.011627906976744186
+      },
+      "members": {
+        "counts": {
+          "incomplete": 18,
+          "fail": 86
+        },
+        "denominator": 104,
+        "rate": 0.0
+      },
+      "joint": {
+        "counts": {
+          "incomplete": 18,
+          "fail": 86
+        },
+        "denominator": 104,
+        "rate": 0.0
+      }
+    }
+  ],
+  "verification": {
+    "all_retained_rows_present": true,
+    "no_gold_or_scorer_errors": true,
+    "prediction_validity_unchanged": true,
+    "relation_counts_equal_original_semantic_and_discourse_relations": true,
+    "core_withdrawal_verdicts_unchanged": true,
+    "false_positive_counts_unchanged": true,
+    "regression_tests_passed": 28
+  },
+  "approx_wall_seconds": 719.8
+}

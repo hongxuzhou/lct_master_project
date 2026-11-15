@@ -1,0 +1,3 @@
+["/Users/hongxuzhou/miniconda3/envs/repairsbn/bin/python", "check_hard_negatives.py", "--basic", "/Users/hongxuzhou/Documents/GitHub/lct_master_project/evaluation/runs/formal-test-20261113/2B/C3/seed42/scores/hard_negative.basic.jsonl", "--output", "/Users/hongxuzhou/Documents/GitHub/lct_master_project/evaluation/runs/formal-test-20261113/2B/C3/seed42/scores/hard_negative.checks.json"]
+
+EXIT 0

@@ -12,6 +12,8 @@ import pyarrow.parquet as pq
 from formal_gold import GoldError, NeedsReview, later_pattern, later_spec, validate_pattern
 from formal_graph import Graph, InvalidGraph
 from formal_local import Result, check_repair, inspect_reference, joint
+from score_basic import require_panel
+from tables import read_table
 
 
 def assess(row, gold):
@@ -143,13 +145,20 @@ def summarise(items):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--basic", required=True, type=Path, help="later-reference basic scoring JSONL")
+    parser.add_argument("--references", required=True, type=Path, help="complete slice reference table")
     parser.add_argument("--gold", required=True, type=Path, help="released later_reference/test.parquet")
     parser.add_argument("--output", required=True, type=Path, help="new JSON report")
     args = parser.parse_args()
     try:
         with args.basic.open(encoding="utf-8") as source:
-            items = list(check_rows((json.loads(line) for line in source if line.strip()),
-                                    pq.read_table(args.gold).to_pylist()))
+            rows = [json.loads(line) for line in source if line.strip()]
+        references = read_table(args.references, keep_default_na=False).to_dict("records")
+        require_panel(rows, references)
+        gold_rows = pq.read_table(args.gold).to_pylist()
+        gold_ids = {r["example_id"] for r in gold_rows}
+        if {r["example_id"] for r in references} != gold_ids:
+            raise ValueError("Reference IDs do not cover the complete later-reference gold")
+        items = list(check_rows(rows, gold_rows))
         with args.output.open("x", encoding="utf-8") as target:
             json.dump(dict(summary=summarise(items), items=items), target, ensure_ascii=False, indent=2)
             target.write("\n")

@@ -6,6 +6,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from check_later_reference import check_rows, summarise
+from formal_local import Result, joint
 
 GOLD = ("person.n.01 EQU speaker time.n.08 TPR now borrow.v.01 Agent -2 Time -1 "
         "CORRECTION <1 coat.n.01 ThemeOf -1 CONJUNCTION <2 jacket.n.01 ThemeOf -2 "
@@ -62,3 +63,16 @@ class LaterReferenceTests(unittest.TestCase):
         row = self.evaluate(duplicate)
         self.assertEqual(row["members"]["status"], "review")
         self.assertEqual(row["joint"]["status"], "review")
+
+    def test_wrong_later_connection_is_failure_not_review(self):
+        row = self.evaluate(GOLD.replace("AttributeOf", "ColourOf"))
+        self.assertEqual(row["members"]["status"], "fail")
+        self.assertEqual(row["joint"]["status"], "fail")
+        # Without a unique identified group, don't invent per-member evidence.
+        self.assertEqual(row["member_recovered"], [None, None])
+
+    def test_joint_failure_cannot_be_overridden_by_review(self):
+        failed = (Result("fail", "missing repair"), [])
+        review = (Result("review", "ambiguous members"), [])
+        self.assertEqual(joint(failed, review).status, "fail")
+        self.assertEqual(joint(review, failed).status, "fail")

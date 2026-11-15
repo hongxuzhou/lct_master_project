@@ -1,0 +1,37 @@
+{
+  "input_rows": 2586,
+  "unique_target_strings_checked": 2023,
+  "statuses": {
+    "retain": 2585,
+    "exclude": 1
+  },
+  "slices": {
+    "pmb_fluent": {
+      "retain": 1193,
+      "exclude": 1
+    },
+    "core_rsr": {
+      "retain": 1118
+    },
+    "hard_negative": {
+      "retain": 66
+    },
+    "later_reference": {
+      "retain": 208
+    }
+  },
+  "references": {
+    "pmb_fluent.C1": 1193,
+    "pmb_fluent.C2": 1193,
+    "pmb_fluent.C3": 1193,
+    "core_rsr.C2": 1118,
+    "core_rsr.C3": 1118,
+    "hard_negative.C1": 66,
+    "hard_negative.C2": 66,
+    "hard_negative.C3": 66,
+    "later_reference.C2": 208,
+    "later_reference.C3": 208
+  },
+  "rule": "Current PMB reader and evaluation Graph constraints, including raw DAG; no rewrites.",
+  "scope": "Graph validity, full-score self-check, target/metadata and pair consistency; not a fresh human semantic review."
+}

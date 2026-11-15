@@ -1,0 +1,6 @@
+["/Users/hongxuzhou/miniconda3/envs/repairsbn/bin/python", "score_basic.py", "--references", "/Users/hongxuzhou/Documents/GitHub/lct_master_project/evaluation/runs/formal-test-20261113/2B/C3/seed42/scores/pmb_fluent.references.tsv", "--predictions", "/Users/hongxuzhou/Documents/GitHub/lct_master_project/evaluation/runs/formal-test-20261113/2B/C3/seed42/scores/pmb_fluent.predictions.tsv", "--output", "/Users/hongxuzhou/Documents/GitHub/lct_master_project/evaluation/runs/formal-test-20261113/2B/C3/seed42/scores/pmb_fluent.basic.jsonl"]
+1194 rows written to /Users/hongxuzhou/Documents/GitHub/lct_master_project/evaluation/runs/formal-test-20261113/2B/C3/seed42/scores/pmb_fluent.basic.jsonl
+pred_status: {'valid': 1164, 'invalid': 30}
+score_status: {'scored': 1163, 'incomplete': 30, 'gold_error': 1}
+
+EXIT 0

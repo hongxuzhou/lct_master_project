@@ -11,6 +11,8 @@ from collections import defaultdict
 from pathlib import Path
 
 from formal_graph import Graph, InvalidGraph
+from score_basic import require_panel
+from tables import read_table
 
 
 def check_rows(basic_rows):
@@ -58,11 +60,14 @@ def summarise(results):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--basic", required=True, type=Path, help="hard-negative basic scoring JSONL")
+    parser.add_argument("--references", required=True, type=Path, help="complete slice reference table")
     parser.add_argument("--output", required=True, type=Path, help="new JSON report (items and summary)")
     args = parser.parse_args()
     try:
         with args.basic.open(encoding="utf-8") as source:
-            results = check_rows(json.loads(line) for line in source if line.strip())
+            rows = [json.loads(line) for line in source if line.strip()]
+        require_panel(rows, read_table(args.references, keep_default_na=False).to_dict("records"))
+        results = check_rows(rows)
         report = dict(summary=summarise(results), items=results)
         with args.output.open("x", encoding="utf-8") as target:
             json.dump(report, target, ensure_ascii=False, indent=2)

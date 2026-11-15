@@ -1,0 +1,3 @@
+["/Users/hongxuzhou/miniconda3/envs/repairsbn/bin/python", "check_hard_negatives.py", "--basic", "/Users/hongxuzhou/Documents/GitHub/lct_master_project/evaluation/runs/formal-test-20261113/2B/C3/seed42/scores-scoped-v2/hard_negative.basic.jsonl", "--output", "/Users/hongxuzhou/Documents/GitHub/lct_master_project/evaluation/runs/formal-test-20261113/2B/C3/seed42/scores-scoped-v2/hard_negative.checks.json", "--references", "/Users/hongxuzhou/Documents/GitHub/lct_master_project/evaluation/runs/gold-audit-20261115/references/hard_negative.C3.tsv"]
+
+EXIT 0

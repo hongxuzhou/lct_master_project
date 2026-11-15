@@ -81,6 +81,28 @@ columns.
 The pair `(example_id, condition)` identifies each result and must be unique
 within each input table. Evaluate each model and seed separately.
 
+### Audit test gold
+
+Before scoring, audit all three test files, both core target columns and
+comparison pairs. The audit uses the current reader's DAG constraint and
+checks full-graph self-scores, repair structure and reference metadata.
+It does not replace human review of sentence meaning.
+
+```bash
+python evaluation/audit_test_gold.py \
+  --test-root repair_data_gen/training_dataset \
+  --output evaluation/runs/gold-audit-20261115
+```
+
+Use a new output directory for each audit. `summary.json` records counts;
+`items.jsonl` records every verdict. `exclude.tsv` and `hold.tsv` retain
+reasons. Only passing rows enter `retained/`, with complete comparison pairs
+and unchanged row values. Originals are preserved. The audit also writes
+reference TSVs for every applicable slice and condition under `references/`.
+Use the retained test root for reference selection and targeted gold checks.
+Select prediction rows by the retained reference keys; preserve the original
+prediction files and earlier scores.
+
 ### Prepare references
 
 Select the slice and condition using `prepare_references.py`. For example,
@@ -88,7 +110,7 @@ to prepare the core RSR references for the repair-aware parser:
 
 ```bash
 python evaluation/prepare_references.py \
-  --test-root repair_data_gen/training_dataset \
+  --test-root evaluation/runs/gold-audit-20261115/retained \
   --slice core_rsr --condition C3 --output core-c3-refs.tsv
 ```
 
@@ -135,6 +157,30 @@ Relation recall measures recovery of gold semantic and discourse relations,
 excluding concept labels, box membership and the root triple. It is null when
 the aligned gold contains no relations.
 
+### Scope in full-graph scoring
+
+`score_version: scoped_sbn_v2` retains each condition's role, source, target
+and context. Bos (2023), [Appendix A](https://aclanthology.org/2023.iwcs-1.20.pdf),
+places a concept's hooks and anchors in that concept's DRS; `CONJUNCTION`
+adds conditions to its target DRS. The project's
+[repair notation](../documentation/knowledge_base/repair_sbn_notation.qmd)
+applies this mechanism to withdrawn and accepted material.
+
+Role inversion normalises the endpoints but retains the condition's context.
+For scoring, a condition becomes a node with a role label and three edges:
+source, target and scope. Scope follows `CONJUNCTION` links to their target;
+`CORRECTION` remains separate. Original boxes and concept membership are
+retained, so F1 measures the complete encoded structure rather than logical
+equivalence across arbitrary rewrites. Constants retain case.
+
+This encoding changes F1's triple counts; old and new F1 values must not be
+pooled. Relation recall still counts each original relation once, including
+its scope and using the full alignment. Encoding edges are not separate
+semantic relations. This is a project scoring encoding, not a new SBN rule.
+The condition labels also separate the semantic role `Instance` from
+SMATCH++'s reserved `:instance` declaration; the old lowercased encoding
+confused these and omitted `Instance` from relation recall counts.
+
 ## Targeted checks
 
 ### Core RSR: repair presence and withdrawal matching
@@ -148,7 +194,7 @@ subgraph with gold for C3 core RSR outputs.
 
 ```bash
 python evaluation/check_core_repair.py \
-  --gold repair_data_gen/training_dataset/data/test.parquet \
+  --gold evaluation/runs/gold-audit-20261115/retained/data/test.parquet \
   --basic core-c3-basic.jsonl --output core-withdrawal.json
 ```
 
@@ -186,12 +232,17 @@ then run:
 ```bash
 python evaluation/check_later_reference.py \
   --basic later-c3-basic.jsonl \
-  --gold repair_data_gen/training_dataset/later_reference/test.parquet \
+  --references later-c3-refs.tsv \
+  --gold evaluation/runs/gold-audit-20261115/retained/later_reference/test.parquet \
   --output later-c3-checks.json
 ```
 
 Both C2 and C3 undergo the same exact-membership check on both partners.
 C3 RSR outputs additionally undergo repair and joint correctness checks.
+An absent or incorrect required later-predicate connection is a failure;
+ambiguous correspondences remain `review`. Per-member evidence remains null
+when no unique group is identified. A definite component failure makes the
+joint check fail even when the other component requires review.
 
 | Outcome | Meaning |
 |---|---|
@@ -225,11 +276,14 @@ then run:
 ```bash
 python evaluation/check_hard_negatives.py \
   --basic hard-negative-c3-basic.jsonl \
+  --references hard-negative-c3-refs.tsv \
   --output hard-negative-c3-checks.json
 ```
 
 The same checker accepts basic results for `pmb_fluent`. Keep the two slices’
 reports separate. Both slices support C1, C2 and C3.
+Both this checker and the later-reference checker require the complete
+reference table and reject missing, extra or duplicate basic result keys.
 
 The report records whether each valid prediction contains a
 `CORRECTION-CONJUNCTION` configuration and summarises the false-positive count
@@ -248,6 +302,7 @@ workflow.
 | Role | Files |
 |---|---|
 | Reference selection | `prepare_references.py` |
+| Test gold audit and retained panels | `audit_test_gold.py` |
 | Graph validity and full-graph scoring | `score_basic.py`, `formal_graph.py` |
 | Targeted checks | `check_core_repair.py`, `check_later_reference.py`, `check_hard_negatives.py` |
 | Local matching and gold requirements | `formal_local.py`, `formal_gold.py` |

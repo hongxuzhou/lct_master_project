@@ -22,6 +22,19 @@ from formal_graph import Graph, InvalidGraph, full_score, make_scorer
 from tables import read_table
 
 KEY = ("example_id", "condition")
+SCORE_VERSION = "scoped_sbn_v2"
+
+
+def require_panel(rows, references):
+    """A basic result file must contain exactly the expected reference keys."""
+    actual = index_rows(rows, "basic results")
+    expected = index_rows(references, "references")
+    if not expected:
+        raise ValueError("Empty reference panel")
+    if actual.keys() != expected.keys():
+        missing, extra = expected.keys() - actual.keys(), actual.keys() - expected.keys()
+        raise ValueError(f"Incomplete or mismatched basic panel: missing {len(missing)}, "
+                         f"extra {len(extra)}; examples {sorted(missing)[:2]}, {sorted(extra)[:2]}")
 
 
 def index_rows(rows, name):
@@ -96,6 +109,7 @@ def score_rows(references, predictions, scorer):
                 score_status = "scorer_error"
                 score_reason = f"{type(exc).__name__}: {exc}"
         yield dict(zip(KEY, key)) | dict(
+            score_version=SCORE_VERSION,
             gold_status=gold_status, gold_reason=gold_reason,
             pred_sbn=pred_sbn, pred_status=pred_status, pred_reason=pred_reason,
             score_status=score_status, score_reason=score_reason, **metrics)

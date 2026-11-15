@@ -1,0 +1,7 @@
+["/Users/hongxuzhou/miniconda3/envs/repairsbn/bin/python", "check_later_reference.py", "--basic", "/Users/hongxuzhou/Documents/GitHub/lct_master_project/evaluation/runs/formal-test-20261113/2B/C3/seed42/scores-scoped-v2/later_reference.basic.jsonl", "--output", "/Users/hongxuzhou/Documents/GitHub/lct_master_project/evaluation/runs/formal-test-20261113/2B/C3/seed42/scores-scoped-v2/later_reference.checks.json", "--references", "/Users/hongxuzhou/Documents/GitHub/lct_master_project/evaluation/runs/gold-audit-20261115/references/later_reference.C3.tsv", "--gold", "/Users/hongxuzhou/Documents/GitHub/lct_master_project/evaluation/runs/gold-audit-20261115/retained/later_reference/test.parquet"]
+/Users/runner/work/crossbow/crossbow/arrow/cpp/src/arrow/util/cpu_info.cc:242: IOError: sysctlbyname failed for 'hw.l1dcachesize'. Detail: [errno 1] Operation not permitted
+/Users/runner/work/crossbow/crossbow/arrow/cpp/src/arrow/util/cpu_info.cc:242: IOError: sysctlbyname failed for 'hw.l2cachesize'. Detail: [errno 1] Operation not permitted
+/Users/runner/work/crossbow/crossbow/arrow/cpp/src/arrow/util/cpu_info.cc:242: IOError: sysctlbyname failed for 'hw.l3cachesize'. Detail: [errno 1] Operation not permitted
+/Users/runner/work/crossbow/crossbow/arrow/cpp/src/arrow/util/cpu_info.cc:242: IOError: sysctlbyname failed for 'hw.optional.neon'. Detail: [errno 1] Operation not permitted
+
+EXIT 0
