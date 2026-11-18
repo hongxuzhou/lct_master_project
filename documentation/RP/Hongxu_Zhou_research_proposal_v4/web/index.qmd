@@ -1,0 +1,47 @@
+---
+title: "Representing and Parsing Replacement Self-Repair in Formal Meaning Representations"
+subtitle: "Research proposal v4"
+author: "Hongxu Zhou"
+lang: en-GB
+bibliography: references.bib
+csl: references.csl
+link-citations: true
+filters:
+  - filters/sbn.lua
+format:
+  html:
+    theme: litera
+    css: styles.css
+    toc: true
+    toc-location: left-body
+    toc-title: "On this page"
+    toc-depth: 2
+    number-sections: true
+    html-math-method: mathjax
+    embed-resources: true
+    code-copy: true
+    code-overflow: scroll
+    anchor-sections: true
+    link-external-newwindow: true
+    grid:
+      body-width: 1050px
+      sidebar-width: 240px
+      margin-width: 0px
+---
+
+{{< include sections/_0intro.qmd >}}
+
+{{< include sections/_1related_work.qmd >}}
+
+{{< include sections/_2formalism.qmd >}}
+
+{{< include sections/_3methodology.qmd >}}
+
+{{< include sections/_4timeline.qmd >}}
+
+# References {.unnumbered #references}
+
+::: {#refs}
+:::
+
+{{< include sections/_5appendix.qmd >}}

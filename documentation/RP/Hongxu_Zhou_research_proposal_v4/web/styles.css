@@ -1,0 +1,98 @@
+:root {
+  --sbn-ink: #253041;
+  --sbn-border: #d5dce3;
+}
+
+body {
+  color: #28323d;
+  line-height: 1.7;
+}
+
+#title-block-header { margin-bottom: 2rem; }
+#title-block-header .title { font-size: clamp(1.65rem, 2.5vw, 2.35rem); }
+#title-block-header .subtitle { color: #617080; font-size: 1rem; }
+
+h1 { margin-top: 2.6rem; }
+h2 { margin-top: 2.1rem; }
+p code { white-space: normal; overflow-wrap: anywhere; color: #334b66; }
+
+.sbn-comparison { margin: 1.8rem 0; }
+.sbn-panels {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1rem;
+}
+.sbn-panel { min-width: 0; }
+.sbn-panel > p:first-child { color: #334b66; margin-bottom: .5rem; }
+.sbn-panel > p:nth-child(2) { min-height: 3.4em; font-size: .9rem; }
+.sbn-block { position: relative; min-width: 0; margin: 1rem 0; }
+.sbn-panel .sbn-block { margin-top: .75rem; }
+pre.sbn {
+  padding: 1rem;
+  margin: 0;
+  border: 1px solid var(--sbn-border);
+  border-radius: 5px;
+  background: #f7f9fb;
+  color: var(--sbn-ink);
+  overflow-x: auto;
+  white-space: pre;
+  font-size: .8rem;
+  line-height: 1.75;
+  tab-size: 4;
+}
+pre.sbn code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: inherit;
+  white-space: pre;
+  color: inherit;
+  background: transparent;
+  padding: 0;
+}
+pre.sbn:focus-visible { outline: 2px solid #4578a8; outline-offset: 2px; }
+.sbn-comment { color: #627184; }
+.sbn-separator {
+  background: #e0ecf9;
+  color: #184a7b;
+  font-weight: 700;
+  border-radius: 2px;
+}
+.quarto-float-caption { font-size: .88rem; line-height: 1.5; color: #586675; }
+#refs { font-size: .92rem; }
+.sbn-error { background: #fff0b2; color: #493b0a; border-radius: 2px; }
+.underline { text-decoration: underline; text-underline-offset: 2px; }
+
+/* Keep wide tables within the article and preserve grouped headers. */
+.quarto-float-tbl { margin: 1.8rem 0; }
+.quarto-float-tbl .cell-output-display,
+.quarto-float-tbl > div { max-width: 100%; overflow-x: auto; }
+.table-scroll { max-width: 100%; overflow-x: auto; }
+.table-scroll:focus-visible { outline: 2px solid #4578a8; outline-offset: 2px; }
+.rp-complex-table .record-group th { padding-top: 1rem; background: #f1f5f9; }
+table { font-size: .88rem; line-height: 1.5; }
+table th { vertical-align: bottom; }
+table td { vertical-align: top; }
+table code { white-space: normal; overflow-wrap: anywhere; }
+#tbl-worked-record table { min-width: 620px; }
+#tbl-worked-record td:first-child { white-space: nowrap; }
+#tbl-worked-record td:nth-child(2) code { overflow-wrap: normal; }
+#tbl-pilot-full table, #tbl-ablation table, #tbl-devices-coverage table,
+#tbl-position-pairwise table { min-width: 750px; }
+
+#fig-paired-transformation img { width: min(100%, 760px); height: auto; }
+#fig-siri-repair img { max-width: 100%; height: auto; }
+nav[role="doc-toc"] { max-height: calc(100vh - 3rem); overflow-y: auto; }
+/* Keep the in-body fallback visible when Quarto hides floating navigation. */
+#TOC-body { display: block; max-height: none; overflow: visible; margin-bottom: 2rem; }
+@media (min-width: 992px) {
+  #TOC-body { display: none; }
+}
+
+@media (max-width: 900px) {
+  .sbn-panels { grid-template-columns: minmax(0, 1fr); gap: .6rem; }
+  .sbn-panel > p:nth-child(2) { min-height: 0; }
+}
+
+@media print {
+  .sbn-panels { grid-template-columns: minmax(0, 1fr); }
+  pre.sbn { white-space: pre-wrap; overflow-wrap: anywhere; }
+}

@@ -1,0 +1,85 @@
+# Formalism (Completed) {#sec-formalism}
+
+The proposed representation has three requirements. It must retain the reparandum without asserting it as part of the speaker's final commitment, identify the repair as accepted content and connect both candidates to the structure they share. Meeting these requirements depends on SBN's treatment of semantic roles, contexts and accessibility. @sec-sbn-brief introduces only the notation needed for this account; readers familiar with SBN contexts and accessibility may begin with @sec-paired-configuration. @sec-formalism-coverage separates the representation's coverage from the narrower scope implemented in the main experiment.
+
+## SBN Requirements for the Representation {#sec-sbn-brief}
+
+SBN represents meaning as a sequence of concepts and their relations [@bosSequenceNotationCatching2023]. Concepts introduce entities, events or properties. Their labels record type and sense. In @fig-weather-rsr-comparison(a), `city.n.01` introduces a city concept and `Name "Dublin"` records its name. Roles connect concepts by relative indices: `Location +1` points forward to the city, while `Theme -1` points back to `weather.n.01`. Expressions such as `EQU now` assign a value. The sequence therefore describes the request without using explicit variables.
+
+:::::: {.sbn-comparison #fig-weather-rsr-comparison}
+::::: {.sbn-panels}
+:::: {.sbn-panel}
+**(a) No RSR**
+
+*“What is the weather like in Dublin?”*
+
+```{.sbn}
+entity.n.01 EQU ?                                   % What
+time.n.08 EQU now                                   % is
+weather.n.01                                        % the weather
+like.a.01 Co-Theme -3 Time -2 Theme -1 Location +1  % like
+city.n.01 Name "Dublin"                             % in Dublin?
+```
+::::
+
+:::: {.sbn-panel}
+**(b) Replacement self-repair**
+
+*“What is the weather like in Berlin, in Dublin?”*
+
+```{.sbn}
+entity.n.01 EQU ?                       % What
+time.n.08 EQU now                       % is
+weather.n.01                            % the weather
+like.a.01 Co-Theme -3 Time -2 Theme -1  % like
+    CORRECTION <1
+city.n.01 Name "Berlin" LocationOf -1   % in Berlin
+    CONJUNCTION <2                    % I mean,
+city.n.01 Name "Dublin" LocationOf -2   % in Dublin?
+```
+::::
+
+:::::
+
+Fluent and repair-aware SBNs for the weather example. The highlighted separators introduce the withdrawn Berlin material and the accepted Dublin material.
+::::::
+
+The fluent request occupies one *context*, which groups concepts with the conditions that describe them. A *separator* starts a new context when part of the meaning requires separate interpretation. Its *connector* points to the context to which the new one relates. SBN has no closing separator, so subsequent concepts remain in the new context until another separator occurs or the sequence ends. For example, `NEGATION` places the buying event and car in a context whose content is denied, while John remains in the enclosing context [@bosVariablefreeDiscourseRepresentation2021]:
+
+```{.sbn}
+male.n.02 Name "John"                  % John
+    NEGATION <1                        % did not
+time.n.08 TPR now
+buy.v.01 Agent -2 Time -1 Theme +1     % buy
+car.n.01                               % a car
+```
+
+The `Agent -2` link reaches out from the negated context to John. A link in the opposite direction cannot directly reach the car introduced only inside that context. These *accessibility* restrictions determine which concepts can be linked across context boundaries. They are central to RSR because the reparandum must connect to shared content without becoming part of the accepted proposition.
+
+## The Paired RSR Configuration {#sec-paired-configuration}
+
+I propose a representation that pairs the existing separators `CORRECTION` and `CONJUNCTION`; it introduces no new separator.[^1] In @fig-weather-rsr-comparison(b), `CORRECTION` introduces the context containing Berlin, while `CONJUNCTION` introduces the context containing Dublin. The two connectors point to the initial context containing the shared request. Berlin and Dublin therefore occupy separate contexts with the same parent.
+
+The second separator is necessary because SBN does not close a context automatically. Without it, Dublin and the continuation would remain inside the withdrawn context. `CONJUNCTION` starts the accepted context and merges its content with the shared parent [@bosSequenceNotationCatching2023]. Following the treatment of corrected content as denied in SDRT [@lascaridesAgreementDisputesCommitments2009], I give the `CORRECTION` context an implicit negative interpretation. Berlin is withdrawn; Dublin is accepted.
+
+Both cities remain connected to the weather request. Berlin carries `LocationOf -1` from the withdrawn context, and Dublin carries `LocationOf -2` from the accepted context. These links identify the role being revised. Berlin's location relation remains inside the withdrawn content, so it does not entail that Berlin is the requested location. Dublin's relation contributes to the accepted proposition. The representation thus preserves the two candidates and records the change in their discourse status.
+
+The paired configuration is realised through three constructions: the direct, anchor and movement constructions. The direct construction requires each candidate to carry a suitable link to shared content. A bare-subject RSR such as *"Josh, I mean, Mary bought a cake"* lacks such a link on the subject concept itself. The *anchor construction* places a neutral `entity.n.01` in the shared context and links Josh and Mary to it with `EQU`. The buying event keeps one agent; Josh is withdrawn as its identification and Mary is accepted. The PMB already uses neutral entity concepts for underspecified participants [@abzianidzeParallelMeaningBank2017]. [Appendix E.1](#app-devices-anchor) gives the full construction.
+
+A different problem occurs when the repair concept points forward to an argument. In *"Tom opened, no, broke the window"*, a copy of the verb inside the withdrawn context cannot reach forward through both separators to *the window*. The *movement construction* places the window before the paired RSR contexts, allowing both verbs to link back to it. This preserves the shared argument but departs from surface word order. Direct construction is tried first. Where it fails, referential nouns can use the anchor construction, while properties and events use the movement construction when their arguments can be moved safely. [Appendix E](#app-devices) gives the listings and selection rules.
+
+The treatment also supports later reference to accessible withdrawn referents. Proper names can be interpreted outside the scope of negation through presupposition [@bosVariablefreeDiscourseRepresentation2021, Section 7]. Berlin and Dublin can therefore serve as antecedents for *these two cities*, while Berlin's location role remains withdrawn. Later reference does not restore Berlin as the accepted location. [Appendix D](#app-later-reference) gives the complete `ANA` links. The same account does not make every item inside a withdrawn context accessible; the challenge set is restricted to referents for which the formal account licenses access.
+
+Following @maschlerMetalanguagingDiscourseMarkers1994, *I mean* is treated as a metalinguistic marker when it functions as an editing expression. It is excluded from the propositional content under repair and recorded in a `%` comment on the `CONJUNCTION` line, as illustrated in @fig-weather-rsr-comparison(b).
+
+## Coverage, Implementation and Remaining Validation {#sec-formalism-coverage}
+
+The configuration can represent replacement of content expressed by SBN concepts or roles, provided that the two candidates can connect to a shared parent without violating accessibility. This includes replacements inside an existing context such as negation. The corpus used in the main experiment has a narrower implemented scope: it transforms aligned noun, verb and adjective concepts. Role replacement is part of the representational account but is not included in the present training data.
+
+The paired configuration does not cover replacement of an SBN separator. Under the current SBN rules, separators organise relations between contexts rather than contribute content within them, so the `CORRECTION`--`CONJUNCTION` structure cannot embed competing separators as the reparandum and repair. Representing such cases would require modifying SBN itself and falls outside the scope of the proposed thesis. This limitation applies to changes in modality, such as *must* to *might*, and changes in discourse relation, such as *when* to *even though*, because they revise the structures that organise the contexts. Tense and aspect replacements can also require several coordinated concept changes and are excluded from the current corpus.
+
+Timing sets a further boundary. The configuration covers an immediate RSR, where the repair follows before the speaker commits intervening material. Consider *"I bought three apples from Lidl yesterday---actually, four."* Starting the withdrawn context at *three* would also place the location and time inside it. Moving that committed span before the context would depart too far from the utterance order. Delayed self-repairs of this kind, including corrections made after a completed clause, fall outside the scope of the proposed thesis. They could be forced into the current notation only by moving intervening committed material across contexts, at the cost of a substantial departure from word order and SBN's preference for alignment with the natural-language input.
+
+The paired configuration and the direct, anchor and movement constructions have been proposed and implemented. The completed corpus pass in @sec-data initially tests their structural applicability. The thesis will complete the answer to the first research question stated in @sec-introduction by validating the retained corpus, examining where the constructions succeed or fail and consolidating the resulting coverage and limitation account. The parsing experiment then tests whether models can learn the distinctions that the representation makes explicit.
+
+[^1]: A fuller specification and additional examples are available at <https://hongxuzhou-notation-design--representing-rsr.share.connect.posit.cloud/>.

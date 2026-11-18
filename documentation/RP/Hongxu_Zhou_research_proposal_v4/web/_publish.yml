@@ -1,0 +1,4 @@
+- source: index.qmd
+  posit-connect-cloud:
+    - id: 01a1ecab-d244-5937-4f59-0b17fb33389c
+      url: https://connect.posit.cloud/hongxuzhou/content/01a1ecab-d244-5937-4f59-0b17fb33389c

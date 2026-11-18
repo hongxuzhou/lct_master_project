@@ -1,0 +1,17 @@
+# Timeline {#sec-timeline}
+
+@tbl-timeline records progress and remaining work as of 23 September 2026, followed by final submission on 14 December. Each row describes one period, with tasks in the same period proceeding in parallel where possible.
+
+  **Period**               **Status, work and milestones**
+  ------------------------ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  24 August--6 September   **Completed:** implement and run the single-concept noun, verb and adjective transformations; record structural coverage and blockers.
+  7--20 September          **Completed:** structural generation and validation of the candidate pool.
+  21 September--4 October  **In progress:** calibrate and freeze the linguistic filters, apply them to the candidate pool, prepare the independent audit sample and generate marker variants. Complete the two challenge sets and the evaluation toolkit.
+  5 October--1 November    Run the 27 predefined Qwen3.5 adaptations and begin evaluation as runs finish.
+  26 October--15 November  Complete evaluation of repair-aware parsing, editing-expression effects and performance on unmodified PMB data. Conduct the first error analysis by RSR construction.
+  16--29 November          Complete the error analysis and analyse the hand-written generalisation cases. Consolidate the representation coverage report, dataset documentation and experimental results in the thesis.
+  30 November--6 December  Complete the full thesis draft and integrate the results across the representation, data and parsing chapters.
+  7--13 December           Revise and proofread the thesis, check figures, tables and references, and prepare the submission files.
+  14 December              Submit the final thesis.
+
+  : Project progress, remaining work and final submission schedule. {#tbl-timeline}

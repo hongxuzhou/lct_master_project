@@ -1,0 +1,593 @@
+# A Pilot Materials and Detailed Results {.unnumbered #app-pilot-results}
+
+This appendix presents the illustrative inputs, condition-level results and representative outputs that support the pilot summary in @sec-pilot.
+
+## A.1 Pilot Training Configuration {.unnumbered #app-pilot-training}
+
+The pilot parser used `google/gemma-2-9b-it` as its base model, with LoRA fine-tuning on the fluent sentence--SBN pairs in PMB 5.1.0. The training and development files were `train_gold.json` and `dev_standard.json`, respectively. Tables [-@tbl-pilot-lora] and [-@tbl-pilot-optimisation] record the training configuration used.
+
+  Setting                             Value
+  ----------------------------------- -----------------------------------------------------------------------------
+  Base model                          `google/gemma-2-9b-it`
+  Precision                           `bf16`
+  Attention implementation            `eager`
+  LoRA rank                           32
+  LoRA scaling parameter ($\alpha$)   64
+  LoRA dropout                        0.05
+  Bias adaptation                     None (`bias = "none"`)
+  Target modules                      `q_proj`, `k_proj`, `v_proj`, `o_proj`, `gate_proj`, `up_proj`, `down_proj`
+
+  : Base-model and LoRA configuration. Adaptation covers both the listed attention and MLP projections. {#tbl-pilot-lora}
+
+  Setting                            Value
+  ---------------------------------- ------------------------------------------------------------
+  Learning rate                      $2\times10^{-4}$
+  Per-device batch size              4
+  Gradient accumulation steps        4
+  Reported effective batch size      16
+  Training epochs                    3.0
+  Maximum sequence length            1024 (updated from 512)
+  Warm-up ratio                      0.03
+  Weight decay                       0.0
+  Learning-rate scheduler            Cosine
+  Optimiser                          `adamw_torch`
+  Maximum gradient norm              1.0
+  Random seed                        42
+  Gradient checkpointing             Enabled; `use_reentrant = False`
+  Loss masking                       Assistant SBN output only; prompt tokens excluded
+  Sequence packing                   Disabled
+  Evaluation and checkpoint saving   Every 200 steps
+  Checkpoint retention limit         3
+  Final checkpoint selection         Load the best checkpoint by development loss (`eval_loss`)
+
+  : Reported optimisation and training settings. {#tbl-pilot-optimisation}
+
+## A.2 Input Conditions {.unnumbered}
+
+@tbl-pilot-input-conditions illustrates the fluent source sentence, three RSR variants and their corresponding versions with an editing expression. Bold text marks the inserted reparandum, underlined text marks the repair retained from the source sentence, and italics mark the editing expression.
+
+  **Input version**                **Example input**
+  -------------------------------- -----------------------------------------------------------------------------------------------
+  Fluent                           She chatted with her friends about the baseball game.
+  RSR variant 1                    **He**, [she]{.underline} chatted with her friends about the baseball game.
+  RSR variant 2                    She chatted with her **coworkers**, [friends]{.underline} about the baseball game.
+  RSR variant 3                    She chatted with her friends about the **basketball**, [baseball]{.underline} game.
+  Variant 1 + editing expression   **He**, *I mean*, [she]{.underline} chatted with her friends about the baseball game.
+  Variant 2 + editing expression   She chatted with her **coworkers**, *I mean*, [friends]{.underline} about the baseball game.
+  Variant 3 + editing expression   She chatted with her friends about the **basketball**, *I mean*, [baseball]{.underline} game.
+
+  : The seven input versions derived from one source sentence. The three RSR variants are pooled within one condition in the main analysis; their versions with an editing expression form the second RSR condition. {#tbl-pilot-input-conditions}
+
+## A.3 Outcomes by Condition {.unnumbered}
+
+@tbl-pilot-full separates the two ways an output can fail to be scored. An *ill-formed* output cannot be read as SBN at all, whereas a *parse error* is produced when the sequence reads but yields an unscoreable graph, typically through a cycle introduced by the model's own index arithmetic.
+
+  condition                          $N$   success %   F1 (succ.)   F1 (failure-pen.)   ill-formed   parse error
+  -------------------------------- ----- ----------- ------------ ------------------- ------------ -------------
+  Fluent                             833        97.5        0.975               0.950           14             7
+  unmarked RSR, head                 833        95.8        0.842               0.807           23            12
+  unmarked RSR, mid                  833        92.3        0.827               0.763           36            28
+  unmarked RSR, tail                 833        95.6        0.825               0.788           15            22
+  RSR + editing expression, head     833        86.9        0.805               0.700           20            89
+  RSR + editing expression, mid      833        71.8        0.779               0.559           30           205
+  RSR + editing expression, tail     833        70.7        0.803               0.568           14           230
+
+  : Per-condition pilot results. F1 (succ.) averages over scoreable outputs only; F1 (failure-pen.) assigns a failed output 0 and averages over all inputs. The two rightmost columns count sentences. {#tbl-pilot-full}
+
+The F1-among-successes and failure-penalised columns are both retained so that generation failure remains visible.
+
+## A.4 Position Effects {.unnumbered}
+
+The unmarked-RSR and RSR-with-editing-expression groups are tested separately. Every sentence appears at all three positions within its group, so the tests are paired: Cochran's $Q$ with pairwise McNemar tests for parse success, and Friedman with pairwise Wilcoxon tests for F1 among successes. Holm correction is applied to the three pairwise comparisons within each group, at $\alpha = 0.05$. The F1 tests use complete triplets: 722 of 833 sentences for unmarked RSR and 408 for the editing-expression conditions.
+
+  group                      outcome                $N$ omnibus test      statistic                  $p$
+  -------------------------- -------------------- ----- --------------- ----------- --------------------
+  unmarked RSR               parse success          833 Cochran's $Q$         14.85               0.0006
+  unmarked RSR               F1 among successes     722 Friedman              26.14   $2.1\times10^{-6}$
+  RSR + editing expression   parse success          833 Cochran's $Q$         84.61           $<10^{-6}$
+  RSR + editing expression   F1 among successes     408 Friedman              18.02               0.0001
+
+  : Omnibus tests for an effect of reparandum position. All four are significant at $\alpha = 0.05$. {#tbl-position-omnibus}
+
+@tbl-position-pairwise gives the corresponding corrected pairwise comparisons.
+
+:::: {#tbl-position-pairwise}
+
+<div class="table-scroll" tabindex="0" role="region" aria-label="Detailed results table">
+<table class="table rp-complex-table">
+<thead>
+<tr>
+<th scope="col"></th>
+<th scope="col"></th>
+<th colspan="3" scope="colgroup">Holm-corrected <span class="math inline"><em>p</em></span></th>
+<th scope="col"></th>
+</tr>
+<tr>
+<th scope="col">group</th>
+<th scope="col">outcome</th>
+<th scope="col">head–mid</th>
+<th scope="col">head–tail</th>
+<th scope="col">mid–tail</th>
+<th scope="col">separates</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>unmarked RSR</td>
+<td>parse success</td>
+<td>0.0037</td>
+<td>0.897</td>
+<td>0.0061</td>
+<td>mid (lower)</td>
+</tr>
+<tr>
+<td>unmarked RSR</td>
+<td>F1</td>
+<td><span class="math inline">1.9 × 10<sup>−5</sup></span></td>
+<td><span class="math inline">3.0 × 10<sup>−6</sup></span></td>
+<td>0.439</td>
+<td>head (higher)</td>
+</tr>
+<tr>
+<td>RSR + editing expression</td>
+<td>parse success</td>
+<td><span class="math inline"> ∼ 0</span></td>
+<td><span class="math inline"> ∼ 0</span></td>
+<td>0.633</td>
+<td>head (higher)</td>
+</tr>
+<tr>
+<td>RSR + editing expression</td>
+<td>F1</td>
+<td>0.0001</td>
+<td>0.763</td>
+<td>0.0005</td>
+<td>mid (lower)</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+Pairwise position comparisons. McNemar for parse success, Wilcoxon signed-rank for F1, Holm-corrected within each group.
+::::
+
+The F1 comparisons use only sentences with a scoreable output at all three positions; this exclusion is reflected in the smaller $N$ values in @tbl-position-omnibus.
+
+## A.5 Representative Outputs {.unnumbered}
+
+### A.5.1 Editing-expression reification in the goat--cow example {.unnumbered #app-pilot-goat-cow}
+
+The example discussed in @sec-pilot receives the following output for the RSR input *"A goat, I mean, a cow gave birth to a calf with two heads"*:
+
+```{.sbn}
+% SPURIOUS: editing-expression material reified as content
+goat.n.01                                    % goat
+person.n.01 EQU speaker                      % I
+mean.v.01 Theme -2 Agent -1 Time +1          % mean
+time.n.08 EQU now
+% GOLD-EQUIVALENT: the actual proposition
+cow.n.01                                     % cow
+give_birth.v.01 Agent -1 Time +1 Patient +2  % gave birth
+time.n.08 TPR now                            % gave
+calf.n.01 Part +2                            % calf
+quantity.n.01 EQU 2                          % two
+head.n.01 Quantity -1                        % heads
+```
+
+For comparison, the parser produces the following gold-equivalent output for the fluent input *"A cow gave birth to a calf with two heads"*:
+
+```{.sbn}
+cow.n.01                                     % cow
+give_birth.v.01 Agent -1 Time +1 Patient +2  % gave birth
+time.n.08 TPR now
+calf.n.01 Part +2                            % calf
+quantity.n.01 EQU 2                          % two
+head.n.01 Quantity -1                        % heads
+```
+
+### A.5.2 Retention and loss of replacement candidates {.unnumbered}
+
+The following outputs document two error patterns behind the aggregate scores. They are drawn from a purposive sample and are not used to estimate error frequency. Both come from *p07/d1400*, whose gold sentence is *"Is it true that you are in love with me?"* and whose fluent-input parse the model recovers exactly:
+
+```{.sbn}
+time.n.08 EQU now
+entity.n.01
+true.a.01 Time -2 Proposition >1 EQU -1
+    CONTINUATION <0
+person.n.01 EQU hearer                        % you
+time.n.08 EQU now
+in_love.a.01 Experiencer -2 Time -1 Stimulus +1
+person.n.01 EQU speaker                       % me
+```
+
+For the uncued input *"Is it true that I am, you are in love with me?"*, both candidates remain in the output:
+
+```{.sbn}
+% ... as above, up to the CONTINUATION
+person.n.01 EQU speaker
+time.n.08 EQU now
+in_love.a.01 Experiencer -2 Time -1 Stimulus +1
+person.n.01 EQU hearer
+    CONTINUATION <1                           % the reparandum reading, retained
+person.n.01 EQU hearer
+time.n.08 EQU now
+in_love.a.01 Experiencer -2 Time -1 Stimulus +1
+person.n.01 EQU speaker
+```
+
+The output scores 0.743 against the fluent reference graph. When *"I mean"* is inserted, the output retains only the reparandum reading and scores 0.926:
+
+```{.sbn}
+time.n.08 EQU now
+entity.n.01
+true.a.01 Time -2 Proposition >1 EQU -1
+    CONTINUATION <0
+person.n.01 EQU speaker                       % "I", the withdrawn candidate
+time.n.08 EQU now
+in_love.a.01 Experiencer -2 Time -1 Stimulus +1
+person.n.01 EQU hearer                        % "me", now resolved to the hearer
+```
+
+These examples supplement the shorter output shown in @sec-pilot. Together, they show that high graph overlap can coexist with retention of asserted reparandum material or loss of the accepted repair.
+
+## A.6 Recognition Probe Results {.unnumbered}
+
+That the parser fails to represent the RSR does not show the RSR was invisible to it. A separate probe put the question to the base model, without the adapter, which was asked to mark the reparandum, editing expression and repair in plain text. Span scores are computed over sentences that were detected and carry a true RSR.
+
+  condition                          $N$   detected %   off-template %   scored   reparandum F1   repair F1
+  -------------------------------- ----- ------------ ---------------- -------- --------------- -----------
+  unmarked RSR, head                 833         30.7              0.0      254           0.667       0.487
+  unmarked RSR, mid                  833         39.0              0.0      324           0.503       0.420
+  unmarked RSR, tail                 833         64.2              0.7      536           0.489       0.340
+  RSR + editing expression, head     833        100.0              0.6      831           0.900       0.862
+  RSR + editing expression, mid      833        100.0              4.9      832           0.822       0.775
+  RSR + editing expression, tail     833        100.0             19.3      831           0.627       0.662
+
+  : Base-model detection of self-repair in plain text. Off-template counts outputs that did not follow the requested response format. {#tbl-ablation}
+
+These figures report the condition-level values summarised in @sec-pilot. Detection rate and span F1 are reported separately because identifying the presence of an RSR does not guarantee correct segmentation of its components.
+
+# B Corpus Selection and Audit {.unnumbered #app-corpus-selection}
+
+This appendix records how structurally legal candidates are filtered and sampled before model training. All boundaries and sampling decisions are frozen before any main-experiment test output is inspected.
+
+## B.1 Linguistic Calibration {.unnumbered}
+
+A 200-item calibration sample is drawn from the structurally legal pool, stratified by noun, verb and adjective replacements and by the available direct, anchor and movement constructions. Each item receives separate binary judgements for semantic contrast and contextual plausibility. A replacement such as *"couch, I mean, sofa"* lacks sufficient contrast, whereas *"cake, I mean, carburettor, for his wedding"* lacks contextual plausibility despite the lexical contrast.
+
+Bidirectional NLI scores are calibrated against the contrast judgements, and the mean token surprisal of the reparandum conditioned on its left context is calibrated against the plausibility judgements. Each boundary, including the upper surprisal threshold, is selected on the calibration sample and then held fixed for the full candidate pool. Items that fail either criterion are removed. After filtering, a separate 200-item sample receives the same manual judgements. Its results estimate the retained corpus's rates of semantic contrast, contextual plausibility and joint validity; this audit sample does not alter the thresholds.
+
+## B.2 Sampling and Split Audit {.unnumbered}
+
+All generated variants retain the PMB split and document identifier of their source. A split audit verifies that no identifier occurs in more than one of the training, development and test partitions. The final sample contains at most two replacement sites from one source document. Where a document contains more eligible sites, selection uses a fixed random seed and is stratified by part of speech and construction. The realised corpus counts are frozen before training and shared by the normalising and repair-aware conditions.
+
+Every unmarked base form is retained. Marked variants are appended for 1,047 base items (30%, rounded), including all 482 items flagged as potentially ambiguous without a marker. The remaining 565 are sampled proportionally to the non-ambiguous pool sizes by repair type, using largest remainders and seed 20261024. Marker assignment uses seed 20261025 and balances the four expressions within each type and across the selected set. Ambiguity flags are heuristic; retaining the unmarked forms leaves textual ambiguity as a limitation. Each surface variant has a unique identifier and retains its base-item and source-document identifiers. Test sites retain their paired marked and unmarked forms under the same source identifier, allowing them to be aggregated before statistical comparison.
+
+## B.3 Challenge-Set Selection {.unnumbered}
+
+The non-RSR hold-out begins with 105 candidate PMB training documents, which are removed from both the fluent training component and the RSR source pool before fine-tuning. This leaves 9,447 PMB training documents. Manual screening retains lists, appositions and coordination structures that resemble the generated RSR surface pattern but carry no replacement reading. Comparable items from the standard PMB test partition are added without changing their fluent gold SBNs.
+
+The discourse challenge set is assembled after the main sentence-level data are frozen. Selected PMB documents and hand-written cases cover fluent multi-sentence controls, later reference to accepted content, reference to both replacement candidates and correction between discourse turns. Only referents licensed as accessible by @sec-paired-configuration are used in targets that refer back to withdrawn content.
+
+# C Model and Evaluation Specifications {.unnumbered #app-model-evaluation}
+
+This appendix records the implementation and scoring decisions for the model experiment in @sec-model. The main text states the comparisons and the evidence needed to answer the research question; the details below make those decisions reproducible.
+
+## C.1 Model Configurations and Run Matrix {.unnumbered #app-model-config}
+
+Each of the 2B, 9B and 27B models receives three matched-seed runs under each condition: fluent only, RSR normalisation and repair-aware. The full design therefore contains 27 runs. Matching seed values across conditions within each model size reduces avoidable variation in the normalising--repair-aware comparison.
+
+Every run uses the same parsing instruction and LoRA adaptation method. The prompt asks for an SBN sequence but does not label the input as fluent or RSR-containing. Within each model size, the fluent data, RSR inputs, training steps and optimisation settings are held constant wherever the conditions permit. The development checkpoint with the lowest development loss is selected without consulting test outputs. The final experiment record will include the model checkpoint, prompt, LoRA targets, rank and scaling, optimiser settings, batch construction, sequence limit, seed and selected checkpoint for every run.
+
+## C.2 Repair-Aware Evaluation Metrics {.unnumbered #app-model-metrics}
+
+RSR-structure accuracy is a binary score for each generated RSR item. A prediction receives one point only when all four requirements hold:
+
+1.  the SBN sequence can be converted into a well-formed graph;
+
+2.  the output contains the paired `CORRECTION` and `CONJUNCTION` contexts required by the target;
+
+3.  the target reparandum is in the withdrawn context and the target repair is in the accepted context; and
+
+4.  both parts have the semantic-role links to shared content required by the gold graph.
+
+The four requirements are also reported separately. These component scores distinguish a missing configuration from reversed status or incorrect attachment. Failure-penalised SMATCH++ assigns zero to an output that cannot be scored and otherwise measures overlap with the complete repair-aware graph. Results grouped by the direct, anchor and movement constructions show whether the construction used affects parsing difficulty.
+
+Accepted-meaning evaluation projects a prediction onto the speaker's final meaning. The withdrawn context and the RSR-specific operators are removed, while the accepted content and the surrounding graph are retained. The projected graph is compared with the fluent gold PMB graph. On the unmodified PMB test partition, the evaluation reports failure-penalised SMATCH++, graph validity and the proportion of outputs that introduce an RSR configuration.
+
+## C.3 Worked Scoring Example {.unnumbered #app-model-scoring}
+
+Consider *"Let's stand, I mean, sit in the shade"*. The target marks *stand* as withdrawn and *sit* as accepted, with both events connected to the shared participants and time. An output that places both verbs in ordinary asserted content may retain much of the target graph and receive partial SMATCH++ credit. Its RSR-structure accuracy is nevertheless zero because it does not express the replacement. An output receives full RSR-structure credit only when the contexts, status assignments and shared links are all correct. Removing its withdrawn context should then yield the fluent meaning of *"Let's sit in the shade"* for accepted-meaning evaluation.
+
+## C.4 Error Annotation Guidelines {.unnumbered #app-model-errors}
+
+The diagnostic categories are fixed before the main test outputs are inspected. They distinguish a missing RSR configuration, reversed withdrawn and accepted status, an incorrect link to shared content, a reparandum left in accepted content, an editing expression represented as ordinary semantic content, a spurious RSR analysis on fluent input and malformed SBN. Categories may co-occur when they describe separate faults in one output. Any pattern first identified from the main test outputs will be reported as a post-hoc observation and excluded from the planned comparison.
+
+## C.5 Statistical Comparisons {.unnumbered #app-model-statistics}
+
+All variants derived from one PMB source document are averaged before a comparison, making the source document the unit of observation. For each model size and matched seed, paired document-level differences are reported with 95% confidence intervals from 10,000 paired bootstrap samples. Within each model size, the mean and range of the three seed-specific differences summarise training variation. A result is interpreted as stable only when all three differences have the same direction. Holm correction is applied within each family of secondary comparisons.
+
+# D A Later-Reference Challenge Example {.unnumbered #app-later-reference}
+
+The following hand-written target extends the Berlin--Dublin replacement from the introduction with a second utterance that refers to both cities. It illustrates the type of later-reference case reserved for the test-only challenge set in @sec-data.
+
+```{.sbn}
+% Utterance 1: What's the weather like in Berlin, I mean, in Dublin?
+entity.n.01 EQU ?                              % what
+be.v.01 Theme -1 Time +1 Co-Theme +2           % 's ... like
+time.n.08 EQU now
+weather.n.01                                   % the weather
+    CORRECTION <1
+city.n.01 Name "Berlin" LocationOf -1          % [reparandum] in Berlin
+    CONJUNCTION <2                             % I mean,
+city.n.01 Name "Dublin" LocationOf -2          % [repair] in Dublin
+% Utterance 2: Show me the airports of these two cities.
+    CONTINUATION <1
+person.n.01 EQU hearer                         % imperative addressee
+show.v.04 Agent -1 Recipient +1 Theme +2       % show
+person.n.01 EQU speaker                        % me
+airport.n.01 Location +2                       % the airports of
+quantity.n.01 EQU 2                            % two
+city.n.01 ANA -7 ANA -6 Quantity -1            % these ... cities
+```
+
+Here, `CONTINUATION <1` opens the context for the second utterance and links it to the accepted context. The two `ANA` links encode Berlin and Dublin as the intended plural antecedent. This hand-written target operationalises the challenge case.
+
+# E RSR Constructions and Transformation Coverage {.unnumbered #app-devices}
+
+This appendix details the three constructions introduced in @sec-paired-configuration, states which one applies to a given site, and reports the coverage of the concept-replacement operator over the PMB training partition.
+
+## E.1 The anchor construction {.unnumbered #app-devices-anchor}
+
+The paired configuration attaches both replacement candidates to the content they share. Where the reparandum carries a role of its own, as `Berlin` does in @fig-weather-rsr-comparison(b), that role does the work. A subject concept selected as the repair has no such role. Taking *"Josh bought a cake"* as the source,
+
+```{.sbn}
+male.n.02 Name "Josh"                  % Josh
+time.n.08 TPR now                      % (past)
+buy.v.01 Agent -2 Time -1 Theme +1     % bought
+cake.n.01                              % a cake
+```
+
+moving `male.n.02` into a `CORRECTION` context would leave it with no link at all, since its only connection to the sequence is the `Agent` role that the buying event points at it. The anchor construction inserts a neutral `entity.n.01` concept before the `CORRECTION`, redirects the inbound role onto it, and attaches both candidates with `EQU`:
+
+```{.sbn}
+entity.n.01                            % (anchor)
+    CORRECTION <1
+male.n.02 Name "Josh" EQU -1           % Josh
+    CONJUNCTION <2
+female.n.02 Name "Mary" EQU -2         % I mean, Mary
+time.n.08 TPR now
+buy.v.01 Agent -4 Time -1 Theme +1     % bought
+cake.n.01                              % a cake
+```
+
+The buying event now takes the anchor as its `Agent`, and the two candidates each assert an identity with it from inside their own context. The withdrawn content is the identification of that individual as Josh, and the accepted content is the identification as Mary. Neither `EQU` link crosses a boundary in a forbidden direction, since both are negative indices reaching outward to a concept in the parent context.
+
+## E.2 The movement construction {.unnumbered #app-devices-movement}
+
+A positive index may not cross from a `CORRECTION` context into the repair that follows it, which creates a problem whenever the repair concept points forward. In *"Tom broke the window"*,
+
+```{.sbn}
+male.n.02 Name "Tom"                   % Tom
+time.n.08 TPR now                      % (past)
+break.v.01 Agent -2 Time -1 Theme +1   % broke
+window.n.01                            % the window
+```
+
+a reparandum copy of `break.v.01` placed before the `CORRECTION` would need `Theme +1` to reach `window.n.01`, and that index would run through both separators. The window is moved in front of the `CORRECTION` instead, so that both copies reach it backwards:
+
+```{.sbn}
+male.n.02 Name "Tom"                   % Tom
+time.n.08 TPR now
+window.n.01                            % (moved from the end)
+    CORRECTION <1
+open.v.01 Agent -3 Time -2 Theme -1    % opened
+    CONJUNCTION <2
+break.v.01 Agent -4 Time -3 Theme -2   % I mean, broke
+```
+
+The movement construction changes the order of the representation: *the window* is uttered last but represented third. This is the departure from word order noted in @sec-formalism-coverage, and it is accepted because the alternative is to quarantine material the speaker kept. The move is confined to arguments of the repair concept itself. Material that was uttered and committed between the reparandum and the repair, as in the Lidl example, would have to be carried past both separators, and that case is left outside the configuration.
+
+## E.3 Which construction applies {.unnumbered #app-devices-order}
+
+The direct construction is tried first at every site, since it changes neither the inventory of concepts nor their order. Where it fails, the choice between the anchor and movement constructions follows from the type of the repair concept. The anchor construction asserts `entity.n.01 EQU` $c$ for each candidate $c$, which reads correctly only when $c$ denotes a referent. Equating an entity with a property or an event is not what the subject-RSR case supports, so for adjectives, adverbs and verbs the movement construction is tried before the anchor, even though it costs surface order. For nouns the order is reversed. @tbl-devices-coverage shows the resulting distribution. Nouns take the anchor construction at about the rate they take the direct construction, while nearly all of the movement cases are adjectives.
+
+## E.4 Coverage by part of speech {.unnumbered #app-devices-coverage}
+
+@tbl-devices-coverage breaks down the funnel of @tbl-coverage-funnel by the part of speech of the repair concept and by the construction the site ended up needing.
+
+:::: {#tbl-devices-coverage}
+
+<div class="table-scroll" tabindex="0" role="region" aria-label="Detailed results table">
+<table class="table rp-complex-table">
+<thead>
+<tr>
+<th scope="col"></th>
+<th scope="col"></th>
+<th scope="col"></th>
+<th scope="col"></th>
+<th scope="col"></th>
+<th colspan="3" scope="colgroup">Construction used</th>
+</tr>
+<tr>
+<th scope="col">POS</th>
+<th scope="col">Lexical</th>
+<th scope="col">Aligned</th>
+<th scope="col">Usable</th>
+<th scope="col">Legal</th>
+<th scope="col">Direct</th>
+<th scope="col">Anchor</th>
+<th scope="col">Movement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Noun</td>
+<td>11,781</td>
+<td>10,060</td>
+<td>9,560</td>
+<td>9,525</td>
+<td>4,576</td>
+<td>4,949</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Verb</td>
+<td>8,609</td>
+<td>5,091</td>
+<td>4,229</td>
+<td>4,221</td>
+<td>4,170</td>
+<td>7</td>
+<td>44</td>
+</tr>
+<tr>
+<td>Adjective</td>
+<td>2,842</td>
+<td>2,735</td>
+<td>2,692</td>
+<td>2,679</td>
+<td>2,050</td>
+<td>148</td>
+<td>481</td>
+</tr>
+<tr>
+<td>Total</td>
+<td>23,232</td>
+<td>17,886</td>
+<td>16,481</td>
+<td>16,425</td>
+<td>10,796</td>
+<td>5,104</td>
+<td>525</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+Candidate sites and transformation outcomes over the 9,552 English gold documents of the PMB training partition. *Aligned* counts concepts that can be tied to an uttered word, *usable* those for which WordNet contains an eligible reparandum candidate, and *legal* those where the transformation produces a well-formed graph.
+::::
+
+Two of the drops deserve comment. Some 23% of lexical concepts cannot be aligned to an uttered word, and verbs account for most of that loss; a concept with no surface expression cannot be given a competing expression either. A further 6% survive alignment but have no WordNet reparandum available, which mainly affects senses with no co-hyponyms of the right part of speech.
+
+## E.5 Why transformations fail {.unnumbered #app-devices-blockers}
+
+Of the 16,481 usable sites, 56 produce no legal graph under any of the three options. Three conditions account for them, and they overlap, since a site may be rejected differently by each option tried:
+
+- **Index overflow** (45 sites). The PMB's released index pattern matches a single digit, so a role index may not exceed nine positions in either direction. Inserting two contexts pushes some existing indices past that ceiling. The limit belongs to the released tooling rather than to the notation, and it would disappear if the pattern were widened.
+
+- **No attachment for the reparandum** (23 sites). Neither the original role nor the anchor construction leaves the withdrawn concept connected to the rest of the graph.
+
+- **Movement unavailable** (50 sites). The repair concept has forward arguments that cannot be brought in front of the `CORRECTION` without moving material that belongs elsewhere.
+
+Two further checks, for cycles and for collisions between the inserted separators and those already present, reject individual attempts rather than whole sites. Every site that triggered one was rescued by another option, so neither appears in the tally above.
+
+## E.6 Example Generated Corpus Record {.unnumbered #app-generated-record}
+
+@tbl-worked-record shows the complete record stored for one generated replacement. The fields retain the PMB source, the choices made by the transformation operator, both surface forms, the repair-aware SBN and the outputs used for structural and linguistic validation. They are grouped by function so that the generated training pair can be read separately from the metadata retained for tracing and filtering it.
+
+:::: {#tbl-worked-record}
+
+<div class="table-scroll" tabindex="0" role="region" aria-label="Complete generated corpus record">
+<table class="table rp-complex-table">
+<thead>
+<tr>
+<th scope="col">Field</th>
+<th scope="col">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="record-group">
+<th colspan="2"><em>PMB source</em></th>
+</tr>
+<tr>
+<td><code>doc_id</code></td>
+<td><code>p42/d1468</code></td>
+</tr>
+<tr>
+<td><code>split</code></td>
+<td><code>train</code></td>
+</tr>
+<tr>
+<td><code>nl_clean</code></td>
+<td>Let’s sit in the shade.</td>
+</tr>
+<tr>
+<td><code>sbn_clean</code></td>
+<td><code>time.n.08 TSU now person.n.01 EQU speaker sit.v.01 Time -2 Theme -1 Location +1 shade.n.01</code></td>
+</tr>
+<tr class="record-group">
+<th colspan="2"><em>Repair selection and transformation</em></th>
+</tr>
+<tr>
+<td><code>concept_pos</code></td>
+<td><code>2</code> (the repair concept is the third in the sequence; positions are counted from zero)</td>
+</tr>
+<tr>
+<td><code>repair_synset</code></td>
+<td><code>sit.v.01</code></td>
+</tr>
+<tr>
+<td><code>reparandum_synset</code></td>
+<td><code>stand.v.01</code></td>
+</tr>
+<tr>
+<td><code>reparandum_surface</code></td>
+<td>stand</td>
+</tr>
+<tr>
+<td><code>strategy</code></td>
+<td><code>inplace</code></td>
+</tr>
+<tr>
+<td><code>devices</code></td>
+<td><code>d1_drop_role</code></td>
+</tr>
+<tr>
+<td><code>blockers</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>max_abs_index</code></td>
+<td><code>3</code> (the largest role index in the output, taken without its sign; the ceiling is nine)</td>
+</tr>
+<tr class="record-group">
+<th colspan="2"><em>Generated pair</em></th>
+</tr>
+<tr>
+<td><code>nl_repair</code></td>
+<td>Let’s stand, sit in the shade.</td>
+</tr>
+<tr>
+<td><code>nl_repair_interr</code></td>
+<td>Let’s stand, I mean, sit in the shade.</td>
+</tr>
+<tr>
+<td><code>sbn_repair</code></td>
+<td><code>time.n.08 TSU now person.n.01 EQU speaker CORRECTION &lt;1 stand.v.01 Time -2 Theme -1 CONJUNCTION &lt;2 sit.v.01 Time -3 Theme -2 Location +1 shade.n.01</code></td>
+</tr>
+<tr class="record-group">
+<th colspan="2"><em>Validation and filtering</em></th>
+</tr>
+<tr>
+<td><code>legal</code></td>
+<td><code>1</code>, meaning the transformation produced a well-formed graph. Items recorded as <code>0</code> are dropped before any further filtering</td>
+</tr>
+<tr>
+<td><code>entail_fwd</code></td>
+<td>0.0005</td>
+</tr>
+<tr>
+<td><code>entail_bwd</code></td>
+<td>0.0005</td>
+</tr>
+<tr>
+<td><code>synonymy</code></td>
+<td>0.0005</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+A complete record produced by the current corpus-construction pipeline. The ceiling on `max_abs_index` is the single-digit index pattern described in [Appendix E.5](#app-devices-blockers); a transformation that exceeds it is recorded as `legal 0` with `index_overflow` among its blockers.
+::::

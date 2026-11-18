@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="280" viewBox="0 0 800 280" role="img" aria-labelledby="title desc">
+  <title id="title">Parallel construction of an RSR utterance and repair-aware target</title>
+  <desc id="desc">A four-node square. The fluent sentence becomes the RSR utterance by inserting a reparandum. The fluent gold SBN becomes the repair-aware SBN through an RSR transformation. PMB gold links the fluent sentence to its SBN. A dashed arrow with a question mark links the RSR utterance to the repair-aware SBN.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 1 1 L 9 5 L 1 9" fill="none" stroke="#334b66" stroke-width="1.5"/>
+    </marker>
+  </defs>
+  <rect width="800" height="280" fill="#ffffff"/>
+  <g fill="#28323d" font-family="Georgia, 'Times New Roman', serif" font-size="22" text-anchor="middle">
+    <text x="160" y="66">fluent sentence</text>
+    <text x="640" y="66">RSR utterance</text>
+    <text x="160" y="226">fluent gold SBN</text>
+    <text x="640" y="226">repair-aware SBN</text>
+  </g>
+  <g fill="none" stroke="#334b66" stroke-width="1.8" marker-end="url(#arrow)">
+    <path d="M 270 58 H 530"/>
+    <path d="M 270 218 H 530"/>
+    <path d="M 160 86 V 188"/>
+    <path d="M 640 86 V 188" stroke-dasharray="7 6"/>
+  </g>
+  <g fill="#516174" font-family="Georgia, 'Times New Roman', serif" font-size="18">
+    <text x="400" y="38" text-anchor="middle">insert reparandum</text>
+    <text x="400" y="256" text-anchor="middle">RSR transformation</text>
+    <text x="140" y="144" text-anchor="end">PMB gold</text>
+    <text x="660" y="144">?</text>
+  </g>
+</svg>
