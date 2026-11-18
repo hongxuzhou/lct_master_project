@@ -59,3 +59,21 @@ Keep missing, invalid and non-EOS predictions in the evaluation.
 | 9B | C3 | 24 | `formal-habrok-9B-C3-s24-34265910` |
 | 9B | C3 | 42 | `formal-habrok-9B-C3-s42-34265909` |
 | 9B | C3 | 4224 | `formal-habrok-9B-C3-s4224-34265911` |
+
+## Imported LST runs
+
+| Size | Condition | Seed | Original run ID |
+|---|---|---|---|
+| 27B | C1 | 24 | `formal-lst-27B-C1-s24-127157-0` |
+| 27B | C1 | 42 | `formal-lst-27B-C1-s42-127156-0` |
+| 27B | C1 | 4224 | `formal-lst-27B-C1-s4224-127158-0` |
+| 27B | C2 | 24 | `formal-lst-27B-C2-s24-127160-0` |
+| 27B | C2 | 42 | `formal-lst-27B-C2-s42-127159-0` |
+| 27B | C2 | 4224 | `formal-lst-27B-C2-s4224-127161-0` |
+| 27B | C3 | 24 | `formal-lst-27B-C3-s24-127163-0` |
+| 27B | C3 | 42 | `formal-lst-27B-C3-s42-127162-0` |
+| 27B | C3 | 4224 | `formal-lst-27B-C3-s4224-127164-0` |
+
+`test-hashes.json` retains the original three test-table hashes. The 27B
+C1/seed42 prediction `pmb_test::p99/d0760` reached 512 tokens without EOS;
+it remains unchanged in the predictions and scored panel.

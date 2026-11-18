@@ -1,0 +1,5 @@
+{
+  "data/test.parquet": "c5bb948a4e32395caa4dc6b392963963859edcfefc8017823341f97e99a9d135",
+  "hard_negative/test.parquet": "74ab043009eee391ed0a2c7af89fc0278106d88e6b692f0ff07abcabbb4bb504",
+  "later_reference/test.parquet": "6c4ca3ed53ddbb37134b1d0fec0ca0c425b6a8c5e405eaa58b737caa3c4c18de"
+}
