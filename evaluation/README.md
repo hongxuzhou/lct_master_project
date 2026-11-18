@@ -27,9 +27,10 @@ tables. Missing and invalid predictions remain in the results, although only
 valid graphs undergo structural checks.
 
 The scripts produce per-item scores and verdicts, together with basic
-summaries. Comparisons across paired inputs, parser conditions and random
-seeds will use these outputs in a separate statistical workflow, which has
-not yet been added.
+summaries. `score_batch.py` completes and verifies the imported 2B/9B/27B panel;
+`analyse_batch.py` saves aggregate tables and selected document-paired
+comparisons. [The formal results report](formal_results.qmd) reads these
+saved tables and separates seed variation from within-seed bootstrap intervals.
 
 ## Test slices and references
 

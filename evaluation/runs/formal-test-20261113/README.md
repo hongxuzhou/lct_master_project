@@ -37,6 +37,38 @@ Create `scores/` within each seed directory when scoring starts. Use
 `<slice>.basic.jsonl` and `<slice>.checks.json` for per-slice outputs.
 Keep missing, invalid and non-EOS predictions in the evaluation.
 
+## Scoped evaluation
+
+The current analysis covers all 27 imported 2B/9B/27B runs, using the audited
+`../gold-audit-20261115/retained/` panel and `scoped_sbn_v2` only. Each run has
+1,259 retained C1 inputs or 2,585 retained C2/C3 inputs. The original prediction
+TSVs and historical `scores/` are preserved. Per-slice scores and targeted
+verdicts live in `scores-scoped-v2/`. Selected prediction copies, command logs
+and per-slice verification files are rebuildable local intermediates.
+
+From the repository root, in the `repairsbn` environment:
+
+```bash
+python evaluation/score_batch.py --workers 6
+python evaluation/analyse_batch.py --output /tmp/repairsbn-analysis-review
+QUARTO_PYTHON="$CONDA_PREFIX/bin/python" quarto render evaluation/formal_results.qmd
+```
+
+`score_batch.py` resumes verified existing results without replacing them.
+`analyse_batch.py` requires a new output directory (default
+`analysis-scoped-v2-all-sizes/`); its `items.parquet` preserves every retained run/input
+observation. `summary.tsv` contains per-seed metrics and denominators. `paired_units.parquet` and
+`paired_effects.tsv` retain the source-document or authored-pair observations
+and within-seed bootstrap intervals. `comparisons.tsv` summarises the three
+seed differences. `manifest.json` records source and derived-file hashes.
+
+See [the report](../../formal_results.qmd) for targets, comparison boundaries,
+statistical units and interpretation. Earlier two-size and standalone 27B
+snapshots are kept locally and are not required by the report.
+The complete snapshot contains 27 runs, 90 run/slice panels and 57,861 retained
+observations. Analysis snapshots require a new output directory and are never
+overwritten. The optional `--update-index` creates a local batch-root summary copy.
+
 ## Imported Hábrók runs
 
 | Size | Condition | Seed | Original run ID |

@@ -1,0 +1,507 @@
+---
+title: "Learning repair-aware SBN: formal test results"
+subtitle: "2B, 9B and 27B · three seeds · scoped_sbn_v2"
+author: "Hongxu Zhou"
+date: 2026-11-16
+lang: en-GB
+format:
+  html:
+    theme: default
+    toc: true
+    toc-depth: 2
+    number-sections: false
+    embed-resources: true
+execute:
+  echo: false
+  warning: false
+  error: false
+jupyter: repairsbn
+---
+
+```{python}
+from pathlib import Path
+import hashlib
+import json
+import html
+import numpy as np
+import pandas as pd
+from IPython.display import display, HTML, Markdown
+
+ROOT = Path.cwd()
+if not (ROOT / 'runs').is_dir():
+    ROOT = ROOT / 'evaluation'
+DATA = ROOT / 'runs/formal-test-20261113/analysis-scoped-v2-all-sizes'
+manifest = json.loads((DATA / 'manifest.json').read_text())
+for name, expected in manifest['output_sha256'].items():
+    assert hashlib.sha256((DATA / name).read_bytes()).hexdigest() == expected, name
+items = pd.read_parquet(DATA / 'items.parquet')
+summary = pd.read_csv(DATA / 'summary.tsv', sep='\t')
+contrasts = pd.read_csv(DATA / 'comparisons.tsv', sep='\t')
+effects = pd.read_csv(DATA / 'paired_effects.tsv', sep='\t')
+diag = pd.read_csv(DATA / 'core_diagnostics.tsv', sep='\t')
+assert len(items) == 57861
+assert manifest['runs'] == 27 and manifest['panels'] == 90
+assert set(items['size']) == {'2B', '9B', '27B'}
+assert set(items.score_version) == {'scoped_sbn_v2'}
+assert set(items.score_status) <= {'scored', 'incomplete'}
+
+def table(d):
+    for column in ['size', 'Model', 'Size']:
+        if column in d and set(d[column].dropna()) <= {'2B', '9B', '27B'}:
+            d = d.sort_values(column, key=lambda v: v.map({'2B':0, '9B':1, '27B':2}), kind='stable')
+            break
+    display(HTML('<div class="table-responsive">' + d.to_html(index=False, border=0, na_rep='—', escape=True,
+                                                        classes=['table','table-sm']) + '</div>'))
+
+def span(v, percent=False):
+    v = pd.Series(v).dropna()
+    if v.empty:
+        return '—'
+    factor, spec = (100, '.1f') if percent else (1, '.3f')
+    return f'{format(v.mean()*factor, spec)} [{format(v.min()*factor, spec)}, {format(v.max()*factor, spec)}]'
+
+def seed_table(d, keys, metrics):
+    rows = []
+    for key, g in d.groupby(keys, sort=True):
+        if not isinstance(key, tuple): key = (key,)
+        r = dict(zip(keys, key))
+        r['N per seed'] = str(int(g.n.iloc[0]))
+        for label, (column, percent) in metrics.items():
+            r[label] = span(g[column], percent)
+        rows.append(r)
+    return pd.DataFrame(rows).rename(columns={'size':'Model','condition':'Condition','slice':'Panel',
+                                             'gold_column':'Target','part':'Partner'})
+
+def show_effects(d):
+    rows=[]
+    for _, r in d.iterrows():
+        rows.append({'Comparison':r.comparison, 'Metric':r.metric, 'Size':r['size'], 'Condition':r.condition,
+                     'Units':int(r.min_units) if r.min_units == r.max_units else f'{int(r.min_units)}–{int(r.max_units)}',
+                     'Difference, pp':f'{100*r.mean_difference:.2f} [{100*r.min_difference:.2f}, {100*r.max_difference:.2f}]',
+                     'Direction': 'all zero' if r.all_zero else ('consistent' if r.direction_consistent else 'mixed')})
+    table(pd.DataFrame(rows))
+```
+
+```{python}
+display(Markdown(f"**Coverage.** All {manifest['runs']} runs and {manifest['panels']} run/slice panels are complete, "
+                 f"with {len(items):,} retained run/input observations: "
+                 f"{items.score_status.eq('scored').sum():,} successfully scored and "
+                 f"{items.score_status.eq('incomplete').sum():,} invalid/missing predictions assigned zero F1. "
+                 "There are no gold/scorer errors and no approximate-alignment fallback."))
+```
+
+C3 withdrawal matching improves from 2B to 9B and again to 27B in every matched seed, while mean core full-graph F1 is almost unchanged between 9B and 27B. False repairs remain frequent on hard negatives. Later-reference joint success rises at 27B but is concentrated in one seed. These outcomes separate producing a repair configuration, recovering its withdrawn contribution and using that contribution in later reference.
+
+# Question and evaluation contract
+
+The parsing question in the [research proposal](../documentation/RP/Hongxu_Zhou_research_proposal_v4/sections/0intro.tex) is how well LLM-based parsers learn a representation that retains withdrawn content, and what errors remain. The tests ask whether C3 learns the repair configuration and its semantic connections, whether retention supports later reference to both candidates, and what happens to ordinary parsing and false repairs.
+
+This report covers all 27 imported runs: 2B, 9B and 27B, C1/C2/C3, seeds 24/42/4224. Earlier 2B/9B and standalone 27B snapshots are retained locally; this report uses the complete three-size snapshot. C1 has fluent supervision; C2 and C3 receive the same RSR inputs but learn normalised and repair-aware targets respectively. C3–C1 differences combine added training data and changed targets. Model-size differences describe these trained systems; they do not isolate parameter count from size-specific training settings.
+
+| Panel | Inputs per run | Target | Necessary comparison |
+|---|---:|---|---|
+| PMB fluent | 1,193 | Ordinary SBN, all conditions | C3 versus C1/C2; all three sizes within condition |
+| Core RSR | 1,118: 559 unmarked/marked pairs | C2 `sbn_clean`; C3 `sbn_repair` | Size within condition; marked versus its own unmarked partner |
+| Later reference | 208: 104 fluent/RSR pairs | Each partner's own `sbn_repair` | Exact membership C3 versus C2; fluent/RSR within C3 |
+| Hard negative | 66 | Ordinary SBN, all conditions | Descriptive F1, validity and false repairs |
+
+The [test-gold audit](runs/gold-audit-20261115/summary.json) retained 2,585 of 2,586 rows. Its only exclusion, `pmb_test::p32/d1803`, violates the current reader's DAG constraint. It remains in the unchanged raw predictions and audit record. Core and later-reference pairs remain complete. Structural self-consistency is not a new human semantic review.
+
+Generation `tokens` and `ended_with_eos` are retained in the item table and are not used to filter the panel. The 27B C1/seed42 prediction `pmb_test::p99/d0760` reached 512 tokens without EOS and remains in scoring. Missing and malformed predictions remain in the denominators specified below.
+
+**Departure from the RP.** The implemented core check compares the complete withdrawn subgraph, including its scoped relations and boundary connections. It does not separately establish all accepted-side requirements in the RP's binary *RSR-structure accuracy*. We call it **withdrawal match**, and retain full-graph F1 as complementary evidence. Accepted-meaning projection and cross-turn correction are outside the current evaluation. The later-reference panel specifically tests two-member groups; it does not cover every discourse-reference subtype proposed in the RP. These limits prevent claims about final-intention recovery or comprehensive discourse competence.
+
+## Metrics and statistical units
+
+All full-graph scores use `scoped_sbn_v2`: relation role, endpoints and scope are retained; `CONJUNCTION` supplies conditions to its target context while `CORRECTION` remains separate, following the [project notation](../documentation/knowledge_base/repair_sbn_notation.qmd). The scoring encoding preserves graph structure rather than proving arbitrary logical equivalence. Old `scores/` F1 values are not used.
+
+- **Failure-penalised F1:** arithmetic mean over every expected input; invalid or missing predictions receive zero. All successful alignments must be certified optimal. Gold/scorer errors would stop aggregation.
+- **Validity:** valid predictions divided by the complete panel.
+- **Relation recall:** the mean over successfully aligned rows with at least one gold relation. It is conditional on alignment, excludes invalid predictions, and counts original relations once. Precision, recall, aligned relation counts and micro recall are also saved in the tables.
+- **Withdrawal/member/joint rates:** pass divided by pass + fail + incomplete. Invalid/missing predictions are incomplete. Review counts remain explicit and outside this denominator.
+- **False repairs:** C–C configurations divided by valid predictions. Reported together with valid counts, these are conditional rates rather than whole-panel success rates.
+
+Tables report the mean of three seed-specific metrics and their **[minimum, maximum]**; percentages are marked `%`. These ranges describe training variation, not confidence intervals. Basic tables weight input rows equally. Paired effects first average all relevant variants within a PMB source document and then weight documents equally. The core panel contains multiple sites in some documents; 559 pairs are not 559 independent documents. Fluent and core outcomes from the same source are not pooled as independent evidence. Later-reference items were independently authored and have no PMB source document; their 104 pair IDs are the statistical units, with generalisation limited to this authored challenge.
+
+Each comparison pairs matching units **within each seed**. We report 10,000 paired bootstrap samples and percentile 95% intervals per seed; no seed is treated as an extra document. The mean and range of the three differences are separate from these intervals. A direction is called consistent only if all three seed differences have the same strict sign. These are selected descriptive effect estimates, not a family of significance tests: intervals are marginal, no corrected significance claims are made, and the RP's Holm-testing stage is not performed here. Comparisons were selected after one checkpoint's results were already available, and the size comparisons were extended when 27B was imported, so this report is not a new preregistered analysis. Size effects include 9B−2B, 27B−9B and 27B−2B, always within the same condition and target. Later-reference size effects pair the same authored units and exclude unresolved pairs explicitly.
+
+Targeted `review` outcomes are unresolved, not observed failures. Rate denominators and review counts are shown explicitly. A paired effect excludes a source document/pair if either side has an unresolved component, including any of that document's relevant variants; the excluded count is saved per seed. Fixed-panel lower/upper bounds additionally assign every review failure/success respectively, keeping invalid and missing predictions as failures. These bounds are sensitivity limits, not confidence intervals.
+
+# Ordinary parsing and false repairs
+
+```{python}
+controls = summary[summary.part.eq('all') & summary.slice.isin(['pmb_fluent', 'hard_negative'])]
+table(seed_table(controls, ['slice','size','condition'], {
+    'Valid %':('valid_rate',True), 'F1':('f1_mean',False),
+    'Relation recall, aligned %':('relation_recall_aligned_mean',True),
+    'False repair % of valid':('false_positive_rate',True)}))
+```
+
+The false-repair numerator and valid denominator for each seed are retained below. A low conditional false-repair rate alongside invalid outputs is not evidence that every input was handled correctly.
+
+::: {.callout-note collapse="true"}
+## Per-seed false-repair counts
+
+```{python}
+table(controls[['slice','size','condition','seed','n','n_valid','false_positive_n','false_positive_denominator']])
+```
+:::
+
+```{python}
+show_effects(contrasts[contrasts.comparison.str.startswith('fluent_C3_minus_')])
+```
+
+The hard-negative result is a central specificity check: fluent PMB performance alone would give a much more favourable impression. The following descriptive breakdown retains all five released categories, including `borderline`; it does not redefine the primary 66-item panel. In particular, false repairs also occur frequently on the list and apposition categories.
+
+```{python}
+h = items[items.slice.eq('hard_negative') & items.condition.eq('C3')]
+category = h.groupby(['size','seed','category']).agg(n=('example_id','size'),
+    valid=('pred_status', lambda x: x.eq('valid').sum()),
+    false_repairs=('false_positive', lambda x: x.eq(True).sum())).reset_index()
+category['false_repair_rate'] = category.false_repairs / category.valid
+rows=[]
+for (size, label), g in category.groupby(['size','category']):
+    rows.append({'Model':size, 'Category':label, 'N per seed':int(g.n.iloc[0]),
+                 'Valid, mean [range]':span(g.valid),
+                 'False repairs % of valid':span(g.false_repair_rate,True)})
+table(pd.DataFrame(rows))
+```
+
+# Core RSR: configuration versus semantic fidelity
+
+C2 and C3 solve different target tasks on the same core utterances. Their absolute F1 values are presented in separate target-labelled rows, and are not subtracted to rank the conditions.
+
+```{python}
+core = summary[summary.slice.eq('core_rsr') & summary.part.eq('all')]
+table(seed_table(core, ['size','condition','gold_column'], {
+    'Valid %':('valid_rate',True), 'F1':('f1_mean',False),
+    'Relation recall, aligned %':('relation_recall_aligned_mean',True),
+    'C–C % of valid':('cc_present_rate',True),
+    'Withdrawal match %':('withdrawal_rate',True)}))
+core_counts = core[core.condition.eq('C3')]
+table(core_counts[['size','seed','n','n_units','n_valid','cc_present_n','withdrawal_pass','withdrawal_fail','withdrawal_incomplete','withdrawal_review','withdrawal_denominator']])
+show_effects(contrasts[contrasts.comparison.str.startswith(('scale_core_', 'scale_pmb_fluent_'))])
+```
+
+```{python}
+#| label: fig-core-components
+#| fig-cap: "C3 core outcomes by seed. Each point is one seed; horizontal marks show the three-seed mean. C–C presence is conditional on valid predictions; other measures use the complete input panel."
+import matplotlib.pyplot as plt
+fig, axes = plt.subplots(1, 3, figsize=(14, 3.7), sharey=True)
+columns = ['valid_rate', 'f1_mean', 'cc_present_rate', 'withdrawal_rate']
+labels = ['Valid', 'Full-graph F1', 'C–C / valid', 'Withdrawal match']
+for ax, size in zip(axes, ['2B','9B','27B']):
+    g = core_counts[core_counts['size'].eq(size)].sort_values('seed')
+    for i, column in enumerate(columns):
+        ax.scatter(i+np.array([-.09,0,.09]), 100*g[column].to_numpy(), s=28, color='#235789')
+        ax.plot([i-.2,i+.2], [100*g[column].mean()]*2, color='#d1495b', lw=2)
+    ax.set(title=size, ylim=(0,103), xticks=range(4), xticklabels=labels)
+    ax.tick_params(axis='x', rotation=25)
+    ax.grid(axis='y', alpha=.2)
+axes[0].set_ylabel('Score / rate (%)')
+fig.tight_layout()
+(ROOT / 'figures').mkdir(exist_ok=True)
+fig.savefig(ROOT / 'figures/formal-core-components.svg', bbox_inches='tight')
+fig.savefig(ROOT / 'figures/formal-core-components.png', dpi=180, bbox_inches='tight')
+plt.show()
+```
+
+## Editing expressions
+
+Each marked item is paired with its own unmarked version, preserving the repair content and target. The overall marker effect averages the assigned markers, rather than estimating a universal causal effect of a particular expression. For the held-out *sorry*, the comparison uses only its own unmarked partners. Markers were editorially assigned, so an unpaired *sorry* versus seen-marker difference would also change item composition.
+
+```{python}
+show_effects(contrasts[contrasts.comparison.str.startswith('core_')])
+marked = summary[summary.slice.eq('core_rsr') & summary.condition.eq('C3') & ~summary.part.eq('all')]
+table(seed_table(marked, ['size','part'], {'F1':('f1_mean',False), 'Withdrawal match %':('withdrawal_rate',True)}))
+```
+
+### Precision, recall and output validity
+
+The following descriptive differences are marked minus base, in percentage points, averaged over the three seeds. Each version contains 559 inputs per seed. Precision and recall average successfully aligned graphs only, whereas F1 includes invalid predictions as zero. Their populations can therefore differ between versions: a positive precision or recall difference alongside a negative F1 difference is possible. These are input-weighted summaries; the paired effects above first average within each of the 505 source documents and are not numerically identical.
+
+```{python}
+marker_summary = summary[summary.slice.eq('core_rsr') & ~summary.part.eq('all')]
+marker_keys = ['size', 'condition', 'seed']
+base_summary = marker_summary[marker_summary.part.eq('rsr_base')].set_index(marker_keys)
+phrase_summary = marker_summary[marker_summary.part.eq('rsr_editing_expression')].set_index(marker_keys)
+marker_columns = ['precision_aligned_mean', 'recall_aligned_mean', 'f1_mean',
+                  'valid_rate', 'relation_recall_aligned_mean', 'withdrawal_rate']
+marker_delta = 100 * (phrase_summary[marker_columns] - base_summary[marker_columns])
+marker_delta = marker_delta.groupby(['size', 'condition']).mean().reset_index()
+table(marker_delta.round(3).rename(columns={
+    'precision_aligned_mean':'Δ Precision, aligned pp',
+    'recall_aligned_mean':'Δ Recall, aligned pp', 'f1_mean':'Δ F1, pp',
+    'valid_rate':'Δ Valid, pp', 'relation_recall_aligned_mean':'Δ Relation recall, aligned pp',
+    'withdrawal_rate':'Δ Withdrawal, pp'}))
+```
+
+C3 F1 decreases in every seed at 2B and 9B, with smaller, mixed changes at 27B. C2 has no consistent F1 direction across seeds. Of the 18 existing size/condition/seed paired F1 intervals, only 2B/C3/seed4224 lies entirely below zero; the others include zero. This supports a small negative tendency in the smaller C3 systems, rather than a universal editing-expression penalty or evidence of equivalence.
+
+### Post-hoc diagnosis: stability and selective disruption
+
+The formal protocol uses the instruction “Please parse the following sentence into Simplified Box Notation (SBN):”, followed by the input. It gives no editing-expression list or explicit repair cue. Supervised marked examples nevertheless expose the model to *no*, *no wait*, *I mean* and *actually*; *sorry* is held out from marked training examples. Absence of a prompt explanation does not mean absence of learned cue associations.
+
+The following diagnosis focuses on 2B/C3. It pairs the saved predictions by seed and item ID, with identical gold targets. The 1,677 observations are 559 input pairs evaluated under three fitted seeds, not 1,677 independent sentences. No predictions or scoring rules are changed.
+
+```{python}
+small_core = items[items['size'].eq('2B') & items.condition.eq('C3') & items.slice.eq('core_rsr')]
+pair_keys = ['seed', 'item_id']
+small_base = small_core[small_core.variant.eq('rsr_base')].set_index(pair_keys)
+small_marked = small_core[small_core.variant.eq('rsr_editing_expression')].set_index(pair_keys)
+assert small_base.index.is_unique and small_marked.index.is_unique
+assert set(small_base.index) == set(small_marked.index)
+marker_pairs = small_base.add_suffix('_base').join(small_marked.add_suffix('_marked'))
+assert marker_pairs.gold_sbn_base.eq(marker_pairs.gold_sbn_marked).all()
+marker_pairs['delta'] = marker_pairs.f1_marked - marker_pairs.f1_base
+base_valid = marker_pairs.pred_status_base.eq('valid')
+marked_valid = marker_pairs.pred_status_marked.eq('valid')
+both_valid = base_valid & marked_valid
+new_invalid = base_valid & ~marked_valid
+recovered_valid = ~base_valid & marked_valid
+same_output = marker_pairs.pred_sbn_base.eq(marker_pairs.pred_sbn_marked)
+display(Markdown(
+    f"**Output stability.** {same_output.sum():,}/{len(marker_pairs):,} pairs "
+    f"({100*same_output.mean():.1f}%) have exactly identical prediction strings. "
+    f"F1 decreases in {marker_pairs.delta.lt(-1e-9).sum()} observations, increases in "
+    f"{marker_pairs.delta.gt(1e-9).sum()}, and is unchanged in "
+    f"{marker_pairs.delta.abs().le(1e-9).sum()}. "
+    f"There are {new_invalid.sum()} valid-to-invalid transitions and {recovered_valid.sum()} invalid-to-valid transitions."))
+components = [
+    ('Validity transitions, net', new_invalid | recovered_valid),
+    ('Both outputs valid', both_valid),
+    ('Both outputs invalid', ~base_valid & ~marked_valid),
+]
+contributions = pd.DataFrame([
+    {'Component':name, 'Paired observations':int(mask.sum()),
+     'Contribution to whole-panel Δ F1, pp':100*marker_pairs.loc[mask, 'delta'].sum()/len(marker_pairs)}
+    for name, mask in components])
+assert abs(contributions['Contribution to whole-panel Δ F1, pp'].sum()
+           - 100*marker_pairs.delta.mean()) < 1e-10
+table(contributions.round(3))
+both = marker_pairs[both_valid]
+cc_gained = both.cc_present_base.eq(False) & both.cc_present_marked.eq(True)
+cc_lost = both.cc_present_base.eq(True) & both.cc_present_marked.eq(False)
+display(Markdown(
+    f"**Configuration stability.** Among the {len(both):,} pairs with two valid graphs, "
+    f"C–C presence changes from absent to present in {cc_gained.sum()} cases and "
+    f"from present to absent in {cc_lost.sum()}. Invalid graphs have no C–C judgement. "
+    "Most of the net F1 loss comes from validity transitions; errors inside otherwise valid graphs contribute a smaller loss."))
+```
+
+These observations do not support a general account in which the parser mechanically copies editing expressions into semantic content. They show substantial output stability alongside selective disruption. Identical output may reflect correct handling or ignoring the inserted expression; it does not establish understanding or an internal resistance mechanism. Base repair detection is already near ceiling, so lack of an aggregate gain also does not establish that editing expressions are unused as surface cues. Here, *limited robustness* means observable output stability, not a causal claim about internal processing.
+
+### Selected negative pairs
+
+These five pairs were selected after inspecting decreases, to illustrate different failure forms. They are not a random sample or estimates of error-type prevalence. All come from 2B/C3; base outputs need not be wholly correct. F1 and withdrawal verdicts below are read from the saved scores.
+
+```{python}
+negative_cases = [
+    (4224, 'rsr_test_sup0088', 'Relative-index failure'),
+    (42, 'rsr_test_0061', 'Possessive and referent links lost'),
+    (4224, 'rsr_test_0117', 'Withdrawn content duplicated outside correction'),
+    (4224, 'rsr_test_sup0007', 'Editing expression encoded as content'),
+    (42, 'rsr_test_0498', 'Names replaced by invented concept labels'),
+]
+case_rows = []
+for seed, item_id, description in negative_cases:
+    r = marker_pairs.loc[(seed, item_id)]
+    assert r.delta < 0
+    case_rows.append({'Item':item_id, 'Seed':seed, 'Expression':r.editing_expression_marked,
+                     'Observed change':description, 'Base F1':r.f1_base,
+                     'Marked F1':r.f1_marked, 'Base withdrawal':r.withdrawal_status_base,
+                     'Marked withdrawal':r.withdrawal_status_marked})
+table(pd.DataFrame(case_rows).round(3))
+```
+
+- **Relative indices — `rsr_test_sup0088`, seed4224.** “John, David can speak French fluently.” becomes “John, sorry, David can speak French fluently.” The base prediction matches gold. The marked prediction retains the repair framework but changes `speak.v.03` from `Theme +1 Manner +2` to `Theme +2 Manner +3`, with no corresponding added concept. An unresolved index makes the graph invalid and gives F1 zero. This is a formal generation failure, not disappearance of the repair configuration.
+- **Relations — `rsr_test_0061`, seed42.** In “Where's your dad, I mean, your mom?”, the marked output retains dad-to-mom correction but drops the shared person node and the `RoleOf`/`Of` links present in the base output, using `ThemeOf` links instead. The possessive/referent structure is no longer preserved; withdrawal changes from pass to fail.
+- **Scope — `rsr_test_0117`, seed4224.** For “I am convinced that I am wrong, actually, right.”, the marked output places a `wrong` predicate before the correction box and another inside it, with duplicated time material. Withdrawn content therefore also survives outside the correction scope. The base already has an incorrect accepted-side sense of *right*; the marked output adds a distinct scope/content problem.
+- **Lexical intrusion — `rsr_test_sup0007`, seed4224.** In “I am really tired, sorry, lazy.”, the marked output introduces `sorry.a.01` after `CONJUNCTION`, retains *lazy*, and changes the withdrawn *tired* relation from `AttributeOf` to `Experiencer`. This is a direct example of treating the editing expression as semantic content, accompanied by other changes. Since *sorry* is held out from marked training examples, it illustrates a generalisation failure rather than a failure on a seen editing expression.
+- **Entity names — `rsr_test_0498`, seed42.** In “Who wrote \"Animal Farm\", I mean, \"Gulag Archipelago\"?”, the base has `book.n.01 Name \"Animal Farm\"` and the corresponding second book. The marked output replaces these with `animal_farm.n.01` and `gullargarchipelago.n.01`. It retains the repair framework but loses the book-plus-name representation. The graph passes the current structural reader; that does not certify the invented concept labels as correct lexical senses.
+
+::: {.callout-note collapse="true"}
+## Full saved predictions for the selected pairs
+
+```{python}
+for seed, item_id, description in negative_cases:
+    r = marker_pairs.loc[(seed, item_id)]
+    display(Markdown(f"**{item_id}, seed {seed}: {description}**"))
+    for label, column in [('Base input', 'text_base'), ('Marked input', 'text_marked'),
+                          ('Gold, both versions', 'gold_sbn_base'),
+                          ('Base prediction', 'pred_sbn_base'), ('Marked prediction', 'pred_sbn_marked')]:
+        display(HTML(f'<p><strong>{html.escape(label)}</strong></p>'
+                     f'<pre style="white-space:pre-wrap">{html.escape(str(r[column]))}</pre>'))
+```
+:::
+
+The supported interpretation is that editing expressions provide no stable net improvement on this panel and can perturb several parts of a smaller parser's output. The parser often preserves the repair framework while failing to preserve content, relations, scope or formal validity. This is more specific than either “the model ignores editing expressions” or “editing expressions are simply copied into the graph”. The analysis compares independently generated outputs for complete inputs; it does not observe online semantic updating or isolate an internal mechanism.
+
+## Where withdrawal matching fails
+
+These repair-type summaries are descriptive error localisation. They are not independent hypothesis tests, and the seven released repair types should not be relabelled as the RP's direct/anchor/movement construction categories.
+
+```{python}
+rows=[]
+for (size, value), g in diag[diag.diagnostic.eq('repair_type')].groupby(['size','value']):
+    rows.append({'Size':size,'Repair type':value,'N per seed':int(g.n.iloc[0]),
+                 'F1':span(g.f1_mean),'Withdrawal match %':span(g.withdrawal_pass/g.n,True),
+                 'Review, total across seeds':int(g.withdrawal_review.sum())})
+table(pd.DataFrame(rows))
+```
+
+# Later reference: retention does not guarantee use
+
+Exact membership requires the two intended antecedents, no unintended members, and the required later-predicate connection. C3 RSR additionally requires repair correctness and membership using consistent referents. C2 is evaluated for membership without requiring a repair configuration. A C2 RSR full-graph score against a repair-aware target is diagnostic overlap, not C2's own normalisation objective and not the primary C2–C3 comparison.
+
+```{python}
+later = summary[summary.slice.eq('later_reference') & ~summary.part.eq('all')]
+table(seed_table(later, ['size','condition','part'], {
+    'Valid %':('valid_rate',True), 'F1, diagnostic':('f1_mean',False),
+    'Exact members %':('members_rate',True), 'Repair %':('repair_rate',True), 'Joint %':('joint_rate',True)}))
+```
+
+::: {.callout-note collapse="true"}
+## Per-seed membership and joint counts
+
+```{python}
+table(later[['size','condition','seed','part','n','n_valid','members_pass','members_fail','members_incomplete','members_review','members_denominator','joint_pass','joint_review','joint_denominator']])
+```
+:::
+
+```{python}
+show_effects(contrasts[contrasts.comparison.str.startswith(('later_', 'scale_later_'))])
+unresolved = later[later.members_review.gt(0)]
+if not unresolved.empty:
+    table(unresolved[['size','condition','seed','part','n','members_pass','members_review','members_fixed_panel_lower','members_fixed_panel_upper']])
+```
+
+The fluent partner already supplies both antecedents, so its outcome helps distinguish a general group-reference failure from a failure specific to withdrawn material. Even a C3 advantage on membership would require joint correctness to show that reference preserves the withdrawn/accepted distinction. Failure on both partners cannot be attributed solely to the RSR representation.
+
+## A resolved reference error
+
+One concrete fluent case illustrates why full-graph overlap and exact reference are separate. For “I borrowed the coat. I borrowed the jacket. They are both warm.”, 2B/C3/seed42 generates the two objects and the later group but links its `Sub` relations to the two `person.n.01` speaker nodes. Gold links them to `coat.n.01` and `jacket.n.01`. This is an endpoint error in a valid graph, before any withdrawal-specific requirement is imposed. It is an illustration, not an estimate of the prevalence of this exact error.
+
+```{python}
+example = items[items['size'].eq('2B') & items.condition.eq('C3') & items.seed.eq(42)
+                & items.example_id.eq('later_reference_v1::OBJ001_fluent')]
+assert len(example) == 1
+table(example[['example_id','pred_status','f1','members_status','members_reason']])
+```
+
+# Interpretation and limits
+
+```{python}
+def panel(size, condition, slice_name, part='all'):
+    return summary[summary['size'].eq(size) & summary.condition.eq(condition)
+                   & summary.slice.eq(slice_name) & summary.part.eq(part)].sort_values('seed')
+
+def effect(name, metric, size, condition):
+    d = contrasts[contrasts.comparison.eq(name) & contrasts.metric.eq(metric)
+                  & contrasts['size'].eq(size) & contrasts.condition.eq(condition)]
+    assert len(d) == 1
+    return d.iloc[0]
+
+sizes = ['2B', '9B', '27B']
+core_values = []
+for size in sizes:
+    d = panel(size, 'C3', 'core_rsr')
+    core_values.append(f"{size}: C–C {span(d.cc_present_rate,True)}% of valid, "
+                       f"F1 {span(d.f1_mean)}, withdrawal {span(d.withdrawal_rate,True)}%")
+display(Markdown("**Observed: configuration presence and semantic fidelity remain different outcomes.** "
+                 + '; '.join(core_values) + '. '
+                 "Withdrawal matching checks withdrawn content and its scoped connections; "
+                 "neither C–C presence nor partial graph overlap establishes every accepted-side requirement in the RP."))
+
+nine = panel('9B', 'C3', 'core_rsr')
+twenty_seven = panel('27B', 'C3', 'core_rsr')
+display(Markdown(f"**The largest size does not improve every metric.** Mean C3 core F1 is "
+                 f"{nine.f1_mean.mean():.4f} at 9B and {twenty_seven.f1_mean.mean():.4f} at 27B, "
+                 "while withdrawal matching improves. Partial full-graph overlap and exact local fidelity therefore "
+                 "give different information about scaling."))
+
+for smaller, larger in [('2B','9B'), ('9B','27B'), ('2B','27B')]:
+    e = effect(f'scale_core_{larger}_minus_{smaller}', 'withdrawal', f'{smaller}_to_{larger}', 'C3')
+    per_seed = effects[effects.comparison.eq(e.comparison) & effects.metric.eq('withdrawal')
+                       & effects['size'].eq(e['size']) & effects.condition.eq('C3')]
+    direction = 'positive in every seed' if e.min_difference > 0 else ('negative in every seed' if e.max_difference < 0 else 'mixed or zero across seeds')
+    above = int(per_seed.ci_low.gt(0).sum())
+    display(Markdown(f"**{larger}−{smaller}, withdrawal:** {100*e.mean_difference:.2f} percentage points "
+                     f"[{100*e.min_difference:.2f}, {100*e.max_difference:.2f}], {direction}; "
+                     f"{above}/3 marginal within-seed bootstrap intervals are entirely above zero. "
+                     "These comparisons describe the trained systems, including size-specific settings."))
+
+specificity = []
+for size in sizes:
+    h = panel(size, 'C3', 'hard_negative')
+    f = panel(size, 'C3', 'pmb_fluent')
+    specificity.append(f"{size}: {span(h.false_positive_rate,True)}% on hard negatives versus "
+                       f"{span(f.false_positive_rate,True)}% on fluent PMB")
+display(Markdown("**Observed: ordinary fluent averages do not establish specificity on repair-like inputs.** "
+                 + '; '.join(specificity) + '. '
+                 "False-repair rates are conditional on valid graphs; F1 and validity above retain the wider failure picture. "
+                 "Overapplication is an observed output behaviour, while its training cause is not isolated here."))
+
+joint_values = []
+for size in sizes:
+    d = panel(size, 'C3', 'later_reference', 'rsr')
+    counts = ', '.join(map(str, d.joint_pass.astype(int)))
+    joint_values.append(f"{size}: {counts}")
+display(Markdown("**Observed: later-reference use requires a separate functional test.** "
+                 "C3 joint successes out of 104 RSR inputs per seed are " + '; '.join(joint_values)
+                 + ' (seeds 24, 42, 4224). '
+                 "The membership and joint tables distinguish general group-reference errors from repair-specific errors. "
+                 "Size and C3–C2 membership effects use authored pairs; review exclusions and fixed-panel bounds remain explicit. "
+                 "The 27B gain is concentrated in seed4224 (40 successes), versus 0 and 1 in the other seeds. An occasional strong seed does not establish stable functional generalisation."))
+
+marker_values = []
+fluent_values = []
+for size in sizes:
+    m = effect('core_marked_minus_unmarked','withdrawal',size,'C3')
+    f = effect('fluent_C3_minus_C1','f1',size,'C1_to_C3')
+    marker_values.append(f"{size}: {100*m.mean_difference:.2f} pp [{100*m.min_difference:.2f}, {100*m.max_difference:.2f}]")
+    fluent_values.append(f"{size}: {100*f.mean_difference:.2f} pp [{100*f.min_difference:.2f}, {100*f.max_difference:.2f}]")
+display(Markdown("**Controls:** source-document paired C3−C1 fluent F1 is " + '; '.join(fluent_values)
+                 + '. Marked−unmarked withdrawal matching is ' + '; '.join(marker_values)
+                 + '. The marker contrasts compare each assigned marker with its own unmarked partner; '
+                 "held-out *sorry* uses only its own partners. Marginal intervals and seed directions above "
+                 "do not establish marker equivalence or a universal causal effect."))
+```
+
+The observations above evaluate learning on the released synthetic panels. They do not establish coverage of naturally occurring repairs, prove the representation's theoretical adequacy, identify a causal internal mechanism. Train/dev auditing remains outside this analysis. A failed later-reference challenge can limit the empirical motivation achieved by these parsers without showing that the representation itself cannot express the intended reference.
+
+# Reproduction and saved evidence
+
+Run from the repository root in the `repairsbn` environment:
+
+```bash
+python evaluation/score_batch.py --workers 6
+python evaluation/analyse_batch.py --output /tmp/repairsbn-analysis-review
+QUARTO_PYTHON="$CONDA_PREFIX/bin/python" quarto render evaluation/formal_results.qmd
+```
+
+Scoring resumes only from existing files that pass key, version and prediction checks; it never replaces raw predictions or the historical `scores/`. Each slice retains basic JSONL scores and applicable targeted JSON verdicts under `scores-scoped-v2/`. Selected prediction copies, command logs and per-slice verification files are rebuildable local intermediates and are not versioned. The aggregate command defaults to `analysis-scoped-v2-all-sizes/` and requires a new output directory; use `--output <new-directory>` to rebuild for comparison while preserving this snapshot. Rendering reads the saved tables and verifies their hashes; it does not rerun scoring.
+
+| Artifact in `runs/formal-test-20261113/analysis-scoped-v2-all-sizes/` | Use |
+|---|---|
+| `items.parquet` | All 57,861 run/input observations, target, source/pair identity, raw prediction, metrics, verdicts and failure reasons |
+| `summary.tsv` | Per-run panel/partner metrics, all numerators and denominators |
+| `seed_summary.tsv` | Three-seed mean and range |
+| `paired_units.parquet` | Each comparison's paired unit values, inclusion flag and difference |
+| `paired_effects.tsv` | Matched-seed differences and 10,000-sample bootstrap intervals |
+| `comparisons.tsv` | Mean/range and direction of the three matched-seed differences |
+| `core_diagnostics.tsv` | Limited repair-type and assigned-marker summaries |
+| `manifest.json` | Source/output SHA-256 values and panel verification totals |
+
+::: {.callout-note collapse="true"}
+## Per-seed paired effects
+
+Intervals below describe document/pair sampling within one fitted seed. They do not include training uncertainty or adjust for multiple comparisons.
+
+```{python}
+e = effects.copy()
+for c in ['left_mean','right_mean','difference','ci_low','ci_high']:
+    e[c] = (100*e[c]).round(3)
+table(e[['comparison','metric','size','condition','seed','n_units','excluded_review_units','left_mean','right_mean','difference','ci_low','ci_high']])
+```
+:::
