@@ -1,0 +1,185 @@
+---
+title: "Learning repair-aware SBN: test results"
+author: "Hongxu Zhou"
+date: 2026-11-16
+lang: en-GB
+format:
+  html:
+    theme: litera
+    css: ../knowledge_base/styles.css
+    toc: true
+    toc-depth: 2
+    number-sections: false
+    embed-resources: true
+---
+
+# Overview
+
+- **The parsers learned to represent replacement self-repair, with larger models preserving withdrawn meaning more accurately.** Across the 2B, 9B and 27B Qwen3.5 models, almost all valid outputs on the core repair test contained the repair structure. Exact recovery of the withdrawn content and its semantic connections averaged 62%, 68% and 70%, respectively, across three training seeds.
+
+- **Ordinary parsing remained strong, while repair-like inputs frequently triggered false repairs.** Performance on ordinary PMB sentences remained close to the fluent-only baselines. On the 66 non-repair sentences selected for their resemblance to repairs, the parsers incorrectly introduced repair structure in 77%, 56% and 49% of valid outputs at 2B, 9B and 27B, respectively.
+
+- **Later reference to both the withdrawn and replacement referents remained unreliable.** On the 104 repair inputs with a subsequent plural reference, one 27B seed correctly represented both the repair and the reference in 40 cases; the other two seeds succeeded in zero and one case. Smaller models rarely succeeded. Group reference was also difficult on the fluent counterparts.
+
+# Experiment summary
+
+I fine-tuned Qwen3.5 models at three sizes, 2B, 9B and 27B, using LoRA. Each size was trained under three conditions with three random seeds, giving 27 adapters. The 2B and 9B models were trained and tested on A100 GPUs at Hábrók; the 27B models used H100 GPUs at LST. All runs followed the same training procedure, with configurations selected during development. Each adapter was selected by its lowest development loss before testing.
+
+## What the three parsers learn
+
+The training conditions differ in their exposure to self-repair and their target representation.
+
+| Parser | Training inputs | Target |
+|---|---|---|
+| Fluent-only baseline | Fluent sentences | Ordinary SBN |
+| Normalising parser | Fluent sentences and self-repairs | Ordinary SBN expressing the final intended meaning |
+| Repair-aware parser | The same inputs as the normalising parser | SBN retaining the withdrawn content, the replacement and their repair relation |
+
+All three conditions included 9,486 fluent PMB examples and 200 additional fluent examples of group reference. The normalising and repair-aware conditions also included 3,489 unmarked self-repairs and 1,047 versions with editing expressions.
+
+## What the tests measure
+
+The evaluation covers four types of input:
+
+| Test | Inputs | Main question |
+|---|---:|---|
+| Ordinary PMB sentences | 1,193 | How well is ordinary meaning preserved, and are false repairs introduced? |
+| Core self-repairs | 559 unmarked–marked pairs | Is the repair represented, including the withdrawn content and its semantic connections? |
+| Repair-like non-repairs | 66 | Does the parser distinguish repairs from lists, appositions and other similar constructions? |
+| Later reference | 104 fluent–repair pairs | Does a subsequent plural reference recover both intended referents, with their repair status preserved? |
+
+Each core pair has the same meaning representation with and without an editing expression. Each later-reference pair shares a continuation referring to two antecedents: the fluent version introduces them separately, while the repair version introduces one through withdrawal and replacement.
+
+## How outputs are evaluated
+
+```{mermaid}
+flowchart TD
+    A[Predicted SBN and gold reference] --> B[Check graph validity]
+    B --> C[Measure full-graph agreement]
+    C --> D[Core repairs: check repair structure<br/>and exact withdrawal match]
+    C --> E[Non-repair inputs:<br/>check for false repairs]
+    C --> F[Later reference: check group members<br/>and joint repair–reference correctness]
+```
+
+Full-graph agreement is measured with SMATCH++ F1. Invalid or missing predictions receive zero F1. The withdrawal check requires the withdrawn subgraph and its connections to match the reference exactly. The later-reference check requires the intended group members and their connection to the continuation; joint correctness additionally requires the repair to be represented correctly.
+
+Results are summarised across the three training seeds. Reported seed ranges show variation between training runs. False-repair rates use valid outputs as their denominator.
+
+# Results and discussion
+
+## Learning the repair structure and preserving withdrawn meaning
+
+The repair-aware parsers learned to generate the repair structure reliably. Accurately preserving the withdrawn content and its semantic connections was more difficult, with performance improving as model size increased.
+
+| Core repair test, mean across three seeds | 2B | 9B | 27B |
+|---|---:|---:|---:|
+| Repair structure present, % of valid outputs | 99.8 | 99.9 | 99.6 |
+| Exact withdrawal match, % of all inputs | 62.3 | 68.4 | 69.7 |
+| Full-graph F1 | 0.913 | 0.936 | 0.936 |
+
+Generating `CORRECTION` and `CONJUNCTION` establishes the repair framework. Withdrawal matching asks whether the content placed within that framework is correct. It checks the withdrawn concepts, values and relations, including their scope and connections to the rest of the sentence. For example, in *“I ordered tea, no, coffee”*, retaining *tea* in the correction box is only part of the task: the graph must also preserve its role as the object of *ordered*.
+
+This distinction reveals a substantial gap between producing the framework and recovering the withdrawn contribution exactly. Repair structure appeared in almost every valid output at all three sizes. Exact withdrawal matching increased from 62.3% at 2B to 68.4% at 9B and 69.7% at 27B, with improvements in every matched seed.
+
+The gains were smaller between 9B and 27B. Mean full-graph F1 remained almost unchanged, while exact withdrawal matching continued to improve.
+
+## Editing expressions and parsing stability
+
+Editing expressions brought no consistent improvement on the core repair test. Adding them slightly reduced full-graph F1 and withdrawal matching at 2B and 9B. Changes at 27B were smaller and varied across seeds.
+
+Training included 1,047 marked versions alongside the 3,489 unmarked repairs. These used *I mean*, *no*, *no wait* and *actually*. The core test paired each of its 559 unmarked repairs with a marked version sharing the same gold graph. Test markers also included *sorry*, which was held out from the training and development marker assignments.
+
+The formal experiments used the instruction *“Please parse the following sentence into Simplified Box Notation (SBN):”*, without an explanation of editing expressions or a list of repair cues. The parsers encountered the four training markers through supervision.
+
+I assign a withdrawal score of 1 when the contents of the `CORRECTION` box and their connections to the rest of the graph **exactly** match the reference, and 0 otherwise, including for invalid or missing outputs. I then compare the proportions of successful matches with and without an editing expression. The changes below are small: withdrawal matching decreases by less than one percentage point at 2B and 9B and increases by less than one point at 27B.
+
+| Marked minus unmarked, difference on the 0–1 scale | 2B | 9B | 27B |
+|---|---:|---:|---:|
+| Full-graph F1 | −0.0076 | −0.0053 | −0.0018 |
+| Exact withdrawal match | −0.0064 | −0.0067 | +0.0063 |
+
+The table shows the average change across three seeds. Differences were first averaged within each source document. Both measures decreased in every seed at 2B and 9B; the direction varied at 27B.
+
+Inspection of the 2B predictions shows several ways in which adding an editing expression could change the output. For *“John, David can speak French fluently”*, one seed produced the correct graph without a marker. Adding *sorry* led it to change relative indices without adding the corresponding concepts, making the graph invalid. The repair framework remained present.
+
+Other changes affected meaning within a valid graph. For *“I am really tired, sorry, lazy”*, one prediction introduced `sorry.a.01` as semantic content and changed the relation attached to the withdrawn *tired*. In other inspected cases, adding a marker altered possessive relations, entity names or the scope of withdrawn content. The observed errors therefore extend beyond copying an editing expression into the graph.
+
+The tired–lazy example also permits an asyndetic coordination reading if *sorry* is understood as a parenthetical apology. A graph faithfully expressing that reading would be linguistically valid, although the current single-reference scoring could penalise it. I recorded identified alternative readings for base RSR examples, but did not systematically check the marked versions; these annotations have not been independently checked. The scores therefore measure agreement with the designated readings. Whether this particular prediction expresses a valid alternative requires inspection of its graph; introducing `sorry.a.01` alone does not establish a coordination analysis.
+
+## Ordinary parsing and false repairs
+
+Ordinary semantic parsing remained close to the fluent-only baselines after repair-aware training. On the standard PMB test sentences, mean full-graph F1 differed by about one percentage point or less at each model size.
+
+| Ordinary PMB sentences, mean across three seeds | 2B | 9B | 27B |
+|---|---:|---:|---:|
+| Fluent-only baseline F1 | 0.941 | 0.950 | 0.961 |
+| Repair-aware parser F1 | 0.930 | 0.952 | 0.955 |
+
+False repairs were uncommon on these ordinary sentences. The repair-aware parsers introduced repair structure in approximately 1% of valid outputs. These graphs passed the structural validity check but incorrectly represented a repair.
+
+The 66 repair-like non-repair sentences produced a different pattern. These held-out examples include lists, appositions, asyndetic coordination and explicit contrasts. Their wording or punctuation can resemble self-repair, although their gold representations contain no repair structure.
+
+| False repairs, % of valid outputs; mean across three seeds | 2B | 9B | 27B |
+|---|---:|---:|---:|
+| Ordinary PMB sentences | 1.4 | 1.1 | 0.7 |
+| Repair-like non-repair sentences | 77.1 | 56.2 | 49.3 |
+
+False repairs occurred frequently in lists and appositions as well as explicit contrasts. In these constructions, introducing a correction can wrongly treat content as withdrawn when it should remain part of the sentence’s meaning.
+
+The mean false-repair rate decreased with model size, from 77.1% at 2B to 49.3% at 27B. Even the largest parser therefore introduced repair structure in roughly half of its valid outputs on this diagnostic set. The distinction between repair and superficially similar constructions remained a substantial source of error.
+
+These distinctions can be difficult to recover from text alone. Spoken repairs can carry prosodic cues that help identify the correction and its relation to the preceding material ([Levelt and Cutler, 1983](https://www.mpi.nl/publications/item68694/prosodic-marking-speech-repair)). The present parsers receive only text, so these cues are unavailable, potentially making some repair and non-repair readings harder to distinguish.
+
+## Later reference to reparandum and repair referents
+
+A central motivation in the my research proposal (and this whole project) was to keep the reparandum available for later reference. This challenge tests whether the trained parsers can represent that reference while preserving the repair structure.
+
+The training data included 200 fluent examples of group reference, such as:
+
+> The teacher helped a student. They both smiled.
+
+The gold graph constructs a group with two `Sub` links, one to the teacher and one to the student, and makes that group the agent of *smiled*. These examples provided supervision for group reference alongside the separate supervision for repair. The challenge tested whether the parsers could combine the two.
+
+The test contains 104 fluent–repair quasi-minimal pairs. For example:
+
+| Version | Input |
+|---|---|
+| Fluent | I borrowed the coat. I borrowed the jacket. They are both warm. |
+| Repair | I borrowed the coat—no, the jacket. They are both warm. |
+
+Both versions require *they* to refer to the coat and jacket. The repair version additionally requires the graph to preserve the semantic roles and repair status of the referents introduced by the reparandum (*the coat*) and the repair (*the jacket*). Joint correctness checks whether the repair and later reference are both represented correctly using the same referents.
+
+Group reference was already a major difficulty on the fluent controls. Across the three seeds, the repair-aware parsers recovered the intended group and its connection to the continuation in 0 cases at 2B, 0–3 cases at 9B and 3–16 cases at 27B, out of 104 fluent inputs per seed. In the coat–jacket example, the 2B parser in seed 42 generated both objects and a group, but linked the group’s `Sub` relations to the two speaker nodes instead of the coat and jacket.
+
+On the repair inputs, correctly representing both the repair and the subsequent plural reference remained unreliable. The 27B model achieved substantially more successes in one seed, with large differences between training runs.
+
+| Jointly correct outputs out of 104 repair inputs | Seed 24 | Seed 42 | Seed 4224 |
+|---|---:|---:|---:|
+| 2B | 1 | 0 | 0 |
+| 9B | 0 | 0 | 9 |
+| 27B | 0 | 1 | 40 |
+
+The 27B result shows a marked improvement in seed 4224, reaching 40 successful outputs. Success remained sparse in the other seeds and at smaller sizes. The intended test of combining repair and group reference therefore also revealed a difficulty with group reference itself: the 200 training examples had not produced reliable recovery of the intended antecedents on the fluent challenge inputs.
+
+These results motivate a closer look at structural generalisation: how well the parsers transfer the group-reference structures seen in training to the challenge inputs, and how repair affects that transfer. [Yao and Koller’s (2022)](https://aclanthology.org/2022.emnlp-main.337/) findings on generalisation to unseen linguistic structures provide a useful starting point for this analysis.
+
+# Next steps
+
+I plan to investigate two questions using the existing parsers, drawing on saved predictions for the editing-expression analysis.
+
+**What evidence leads the parser to interpret an input as a repair?** Inspired by [*When Only Time Will Tell* (Madureira et al., 2024)](https://aclanthology.org/2024.acl-long.260/), I plan a small behavioural probing study. Inputs will share an initial fragment and then develop into repairs or fluent non-repairs. The table illustrates two paths, with each cell showing the cumulative input at a selected point.
+
+| Version | Shared prefix | Step 1 | Step 2 | Complete input |
+|---|---|---|---|---|
+| RSR | I ordered tea, | I ordered tea, no, | I ordered tea, no, coffee | I ordered tea, no, coffee. |
+| Fluent list | I ordered tea, | I ordered tea, coffee | I ordered tea, coffee and | I ordered tea, coffee and milk. |
+
+I will parse each input independently and compare the resulting graphs. The initial fragment leaves both continuations open. In the completed RSR, *tea* should be withdrawn and *coffee* accepted; in the completed list, all three drinks should remain part of the order. I will examine where the outputs begin to distinguish these readings and whether non-repair evidence prevents false withdrawal. For example, withdrawing *tea* even after *“and milk”* would reveal a failure to use the list continuation appropriately. These comparisons will show how outputs depend on available evidence; because each input is parsed afresh, they will not establish that an earlier interpretation caused a later error.
+
+Following [Madureira and Schlangen (2020)](https://aclanthology.org/2020.emnlp-main.26/), I will test parsers trained on complete inputs with successively extended prefixes. At selected checkpoints, I will track which referents and relations fall within the `CORRECTION` and `CONJUNCTION` scopes, without requiring a shorter input's graph to be a subgraph of a longer input's graph. I will include an unmarked RSR path and ordinary fluent continuations to distinguish marker effects from changes associated with extending the input. Identical prefixes will share predictions. I will record analyses of unfinished prefixes without assigning a unique gold reading, and check graph validity to assess whether fragment outputs are interpretable.
+
+**Why do editing expressions sometimes disrupt an otherwise correct graph?** I will first inspect a small sample of existing paired predictions for unmarked RSR and RSR with an editing expression, which share the same gold graph. I will examine both improvements and deteriorations, recording changes in graph validity, whether the marker is represented as content, and changes to repair status, word senses, entity names, semantic roles and scope. For each pair, I will check which errors occur in both predictions, which appear only with the editing expression, and which disappear when it is added. This analysis will include 27B pairs where withdrawal matching changes from failure to success or vice versa, to investigate its small positive average marker effect and the differences across seeds.
+
+---
+
+<small>Drafted by me, polished and formatted with assistance from ChatGPT.</small>
