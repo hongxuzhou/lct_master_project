@@ -1,0 +1,38 @@
+{
+  "family_id": "tea_coffee_v1",
+  "fixed_prefix": "I ordered",
+  "tracked_surface_forms": ["tea", "coffee", "milk"],
+  "interpretation": "Exploratory reading preferences; no unique gold for ambiguous inputs or unfinished prefixes.",
+  "checkpoints": [
+    {"id": "S01", "parent": null, "added": "I ordered tea", "text": "I ordered tea"},
+    {"id": "C01", "parent": "S01", "added": ".", "text": "I ordered tea."},
+    {"id": "S02", "parent": "S01", "added": ",", "text": "I ordered tea,"},
+    {"id": "U01", "parent": "S02", "added": " coffee", "text": "I ordered tea, coffee"},
+    {"id": "U02", "parent": "U01", "added": ".", "text": "I ordered tea, coffee."},
+    {"id": "R01", "parent": "S02", "added": " no", "text": "I ordered tea, no"},
+    {"id": "R02", "parent": "R01", "added": ",", "text": "I ordered tea, no,"},
+    {"id": "R03", "parent": "R02", "added": " coffee", "text": "I ordered tea, no, coffee"},
+    {"id": "R04", "parent": "R03", "added": ".", "text": "I ordered tea, no, coffee."},
+    {"id": "L01", "parent": "U01", "added": " and", "text": "I ordered tea, coffee and"},
+    {"id": "L02", "parent": "L01", "added": " milk", "text": "I ordered tea, coffee and milk"},
+    {"id": "L03", "parent": "L02", "added": ".", "text": "I ordered tea, coffee and milk."},
+    {"id": "O01", "parent": "U01", "added": ",", "text": "I ordered tea, coffee,"},
+    {"id": "O02", "parent": "O01", "added": " and", "text": "I ordered tea, coffee, and"},
+    {"id": "O03", "parent": "O02", "added": " milk", "text": "I ordered tea, coffee, and milk"},
+    {"id": "O04", "parent": "O03", "added": ".", "text": "I ordered tea, coffee, and milk."}
+  ],
+  "paths": {
+    "short_control": ["S01", "C01"],
+    "unmarked_ambiguous": ["S01", "S02", "U01", "U02"],
+    "marked_repair": ["S01", "S02", "R01", "R02", "R03", "R04"],
+    "listing": ["S01", "S02", "U01", "L01", "L02", "L03"],
+    "listing_oxford": ["S01", "S02", "U01", "O01", "O02", "O03", "O04"]
+  },
+  "paired_comparisons": [
+    {"from": "U01", "to": "R03", "feature": "insert no and following comma"},
+    {"from": "U02", "to": "R04", "feature": "insert no and following comma"},
+    {"from": "L01", "to": "O02", "feature": "Oxford comma"},
+    {"from": "L02", "to": "O03", "feature": "Oxford comma"},
+    {"from": "L03", "to": "O04", "feature": "Oxford comma"}
+  ]
+}

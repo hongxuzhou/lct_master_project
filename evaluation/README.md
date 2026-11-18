@@ -1,5 +1,8 @@
 # Evaluation
 
+For the separate 16-input behavioural prefix pilot, see the
+[tea–coffee restart probe](probing/tea_coffee_v1/README.md).
+
 The evaluation workflow checks how well model predictions recover the semantic
 content and repair structure of the test inputs. Each run takes predictions
 from one model and seed, together with gold references selected for the test

@@ -1,0 +1,19 @@
+# One A100 allocation runs all three seeds sequentially.
+BUNDLE = /nethome/honzhou/repairsbn-restart-probe-v1
+universe = vanilla
+initialdir = /nethome/honzhou
+executable = /bin/bash
+arguments = $(BUNDLE)/evaluation/probing/tea_coffee_v1/lst_worker.sh $(BUNDLE) $(ClusterId)-$(ProcId)
+output = $(BUNDLE)/logs/probe.$(ClusterId).out
+error = $(BUNDLE)/logs/probe.$(ClusterId).err
+log = $(BUNDLE)/logs/probe.$(ClusterId).log
+request_cpus = 4
+request_memory = 64G
+request_gpus = 1
+requirements = (TARGET.UidDomain == "coli.uni-saarland.de") && (GPUs_Capability == 8.0) && (GPUs_GlobalMemoryMb >= 39000) && (GPUs_GlobalMemoryMb <= 85000)
++MaxWallTime = 10800
+notification = Never
+should_transfer_files = NO
+getenv = False
+environment = "PATH=/usr/bin:/bin:/usr/sbin:/sbin"
+queue 1
