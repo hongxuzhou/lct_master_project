@@ -1,0 +1,540 @@
+{
+  "summary": {
+    "C2": {
+      "expected": 66,
+      "checked": 64,
+      "false_positives": 0,
+      "false_positive_rate": 0.0
+    }
+  },
+  "items": [
+    {
+      "example_id": "hard_negative::p00/d0317",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p01/d1880",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p02/d0795",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p02/d1144",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p02/d2856",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p05/d0919",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p05/d2534",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p05/d2605",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p05/d3380",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p08/d3109",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p10/d2978",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p13/d1260",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p13/d2857",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p14/d1811",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p17/d2285",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p17/d2808",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p19/d0130",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p19/d2498",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p19/d2717",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p20/d1760",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p21/d1909",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p23/d1469",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p23/d3033",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p25/d3277",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p29/d0264",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p29/d0709",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p30/d0317",
+      "condition": "C2",
+      "pred_status": "invalid",
+      "status": "not_run",
+      "reason": "invalid",
+      "false_positive": null
+    },
+    {
+      "example_id": "hard_negative::p30/d1945",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p32/d2805",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p34/d3200",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p36/d1389",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p36/d2203",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p38/d2805",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p40/d1979",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p43/d1493",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p44/d1443",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p47/d2419",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p50/d1916",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p54/d3533",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p56/d3086",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p60/d2533",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p62/d2653",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p64/d3510",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p69/d1719",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p69/d3332",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p70/d1727",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p71/d0885",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p74/d0312",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p77/d1664",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p77/d2204",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p78/d2303",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p79/d2997",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p82/d1623",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p88/d1847",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p89/d1260",
+      "condition": "C2",
+      "pred_status": "invalid",
+      "status": "not_run",
+      "reason": "invalid",
+      "false_positive": null
+    },
+    {
+      "example_id": "hard_negative::p93/d2681",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p95/d1388",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p95/d1491",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p96/d0127",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p96/d1502",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p96/d2500",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p96/d3019",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p97/d1948",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p97/d3141",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p98/d3255",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    },
+    {
+      "example_id": "hard_negative::p99/d2111",
+      "condition": "C2",
+      "pred_status": "valid",
+      "status": "checked",
+      "reason": null,
+      "false_positive": false
+    }
+  ]
+}

@@ -33,3 +33,20 @@ repair_data_gen/splits/*/results/raw/*/*
 
 # Fixed pass pool, rebuilt by freeze/apply_fixes.py (5.6 MB)
 repair_data_gen/rsr_generation/dataset/pool_fixed.tsv
+
+# Local research notes and rendered technical report.
+/research_notes/
+/evaluation/formal_results.html
+
+# Local operational helpers for the completed formal inference run.
+/model/lora/formal/check_test_progress.sh
+/model/lora/formal/import_lst_predictions.sh
+
+# Rebuildable scoring intermediates and local analysis snapshots.
+/evaluation/runs/formal-test-20261113/**/scores-scoped-v2/*.log
+/evaluation/runs/formal-test-20261113/**/scores-scoped-v2/*.predictions.tsv
+/evaluation/runs/formal-test-20261113/**/scores-scoped-v2/*.verification.json
+/evaluation/runs/formal-test-20261113/*.log
+/evaluation/runs/formal-test-20261113/summary.tsv
+/evaluation/runs/formal-test-20261113/analysis-scoped-v2/
+/evaluation/runs/formal-test-20261113/analysis-scoped-v2-27b/

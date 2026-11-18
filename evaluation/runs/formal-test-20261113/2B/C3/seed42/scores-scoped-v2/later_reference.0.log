@@ -1,6 +1,0 @@
-["/Users/hongxuzhou/miniconda3/envs/repairsbn/bin/python", "score_basic.py", "--references", "/Users/hongxuzhou/Documents/GitHub/lct_master_project/evaluation/runs/gold-audit-20261115/references/later_reference.C3.tsv", "--predictions", "/Users/hongxuzhou/Documents/GitHub/lct_master_project/evaluation/runs/formal-test-20261113/2B/C3/seed42/scores-scoped-v2/later_reference.predictions.tsv", "--output", "/Users/hongxuzhou/Documents/GitHub/lct_master_project/evaluation/runs/formal-test-20261113/2B/C3/seed42/scores-scoped-v2/later_reference.basic.jsonl"]
-208 rows written to /Users/hongxuzhou/Documents/GitHub/lct_master_project/evaluation/runs/formal-test-20261113/2B/C3/seed42/scores-scoped-v2/later_reference.basic.jsonl
-pred_status: {'valid': 178, 'invalid': 30}
-score_status: {'scored': 178, 'incomplete': 30}
-
-EXIT 0
